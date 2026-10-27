@@ -318,7 +318,7 @@
           },
           {
             "kind": "context",
-            "detail": "sunny urban park with a lake, pedal boats, a green footbridge, and tall city buildings behind palm trees"
+            "detail": "sunny urban park with lake, pedal boats, green footbridge, palm trees, grassy banks with people, and city skyline with elevated roadway as described in caption and description"
           }
         ],
         "confidence": 0.92
@@ -332,7 +332,10 @@
       "Exact time of day beyond daytime cannot be determined",
       "Species of trees and plants cannot be confirmed",
       "Details of clothing, facial features, and individual activities are not discernible at this distance",
-      "No visible text to confirm location; specific high-rise building with blue glass and gold accents, clock-tower building, and elevated roadway cannot be named from image alone; exact position within park cannot be determined"
+      "No visible text to confirm location; specific high-rise building with blue glass and gold accents, clock-tower building, and elevated roadway cannot be named from image alone; exact position within park cannot be determined",
+      "No visible_text to confirm location",
+      "Specific names of background high-rise building with blue glass and gold accents, beige clock-tower building, and light-colored elevated roadway cannot be determined from image alone and are not named",
+      "Exact position within park cannot be determined"
     ],
     "place": {
       "name": "Uhuru Park",
@@ -350,7 +353,7 @@
         },
         {
           "kind": "context",
-          "detail": "urban park lake with pedal boats and green metal pedestrian bridge bordered by grassy banks, palm trees and city skyline"
+          "detail": "foreground calm brownish lake with two pedal boats, green metal pedestrian bridge, grassy stone-edged banks, palm trees and giraffe sculptures, with modern high-rise and clock-tower building and elevated roadway in background"
         }
       ],
       "confidence": 0.92
@@ -382,9 +385,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:53:33+00:00",
+        "run_at": "2026-10-27T21:39:28+00:00",
         "raw_output_path": "data/annotations/raw/park_023_passB_attempt1.txt",
-        "tokens": 6315
+        "tokens": 5337
       }
     ],
     "human_review": {

@@ -280,9 +280,13 @@
           {
             "kind": "provided_title",
             "detail": "Ngong' Hills, Nairobi, Kenya"
+          },
+          {
+            "kind": "context",
+            "detail": "distant blue-hued low hazy hills visible on horizon behind savanna shrubland with scattered flat-topped acacia trees"
           }
         ],
-        "confidence": 0.85
+        "confidence": 0.62
       }
     ],
     "place_candidates": [],
@@ -294,7 +298,8 @@
       "Weather conditions beyond visible clouds cannot be determined",
       "Visual content alone shows generic savanna shrubland with distant blue-hued hills and flat-topped acacia trees; specific identification as Ngong Hills relies solely on provided_title",
       "Exact geographic location, scale, and distance to hills cannot be determined from image alone",
-      "No visible text, architecture, or human activity to independently confirm location"
+      "No visible text, architecture, or human activity to independently confirm location",
+      "Visual content alone shows generic savanna shrubland with distant hills; specific identification as Ngong Hills relies solely on provided_title"
     ],
     "place": {
       "name": "Ngong Hills",
@@ -309,9 +314,13 @@
         {
           "kind": "provided_title",
           "detail": "Ngong' Hills, Nairobi, Kenya"
+        },
+        {
+          "kind": "context",
+          "detail": "expansive savanna shrubland with dense green shrubs, scattered flat-topped acacia trees, and distant blue-hued hills under partly cloudy sky"
         }
       ],
-      "confidence": 0.85
+      "confidence": 0.6
     },
     "place_key": "kenya/kajiado/ngong-hills",
     "taken_from": null,
@@ -340,9 +349,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:48:01+00:00",
+        "run_at": "2026-10-27T21:34:21+00:00",
         "raw_output_path": "data/annotations/raw/hills_008_passB_attempt1.txt",
-        "tokens": 4339
+        "tokens": 5013
       }
     ],
     "human_review": {

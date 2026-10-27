@@ -314,12 +314,12 @@
             "detail": "CBK PENSION TOWERS"
           },
           {
-            "kind": "architecture",
-            "detail": "tall modern glass skyscraper with gold lattice crowns and blue glass facade"
-          },
-          {
             "kind": "provided_title",
             "detail": "CBK Pension Tower 015"
+          },
+          {
+            "kind": "architecture",
+            "detail": "tall modern skyscraper with blue glass facade and gold-colored lattice structures at the top dominates the center of the image"
           }
         ],
         "confidence": 0.98
@@ -341,7 +341,7 @@
       "hierarchy": [
         "Kenya",
         "Nairobi",
-        "Nairobi CBD"
+        "CBD"
       ],
       "key": "kenya/nairobi/cbd/cbk-pension-towers",
       "status": "confirmed",
@@ -356,7 +356,7 @@
         },
         {
           "kind": "architecture",
-          "detail": "tall modern glass skyscraper with gold lattice crowns and blue glass facade"
+          "detail": "tall modern skyscraper with blue glass facade and gold-colored lattice structures at the top dominates the center of the image"
         }
       ],
       "confidence": 0.97
@@ -388,9 +388,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:44:18+00:00",
+        "run_at": "2026-10-27T21:32:52+00:00",
         "raw_output_path": "data/annotations/raw/cbd_002_passB_attempt1.txt",
-        "tokens": 8041
+        "tokens": 5404
       }
     ],
     "human_review": {

@@ -305,7 +305,28 @@
   },
   "inferred": {
     "landmarks": [],
-    "place_candidates": [],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Aerial view of the Nairobi skyline from the KICC rooftop at golden hour"
+          },
+          {
+            "kind": "context",
+            "detail": "dense urban area with high-rise and mid-rise buildings extending to low-rise sprawl to hazy horizon"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
     "uncertainties": [
       "Exact city and building names cannot be determined from visible evidence alone",
       "Text on distant billboards, rooftop signs, and building logos is not legible due to distance and blur and is therefore not transcribed",
@@ -313,7 +334,9 @@
       "Exact number of vehicles, windows, and distant buildings cannot be determined due to scale and haze",
       "Presence of people on streets or in buildings cannot be determined at this distance and resolution",
       "Exact identities of individual high-rise buildings cannot be determined from visible evidence alone",
-      "Whether the warm golden hour light is sunrise or sunset cannot be determined from the image alone"
+      "Whether the warm golden hour light is sunrise or sunset cannot be determined from the image alone",
+      "Text on distant billboards, rooftop signs, and building logos is not legible due to distance and blur",
+      "Whether warm golden hour light is sunrise or sunset cannot be determined"
     ],
     "place": {
       "name": "Nairobi CBD",
@@ -331,10 +354,10 @@
         },
         {
           "kind": "context",
-          "detail": "Elevated wide view of a dense city center with clustered high-rise buildings under a pale blue sky"
+          "detail": "elevated panoramic view over dense urban area with numerous high-rise and mid-rise buildings and dense city center with clustered high-rise buildings"
         }
       ],
-      "confidence": 0.9
+      "confidence": 0.87
     },
     "place_key": "kenya/nairobi/cbd",
     "taken_from": {
@@ -353,14 +376,14 @@
         },
         {
           "kind": "architecture",
-          "detail": "weathered concrete rooftop parapet runs across the bottom edge - rough dark concrete ledge spanning the entire bottom of the image"
+          "detail": "weathered concrete rooftop parapet runs across bottom edge in foreground"
         },
         {
           "kind": "context",
-          "detail": "elevated very_high viewpoint looking across the city toward the horizon"
+          "detail": "elevated very_high viewpoint with wide framing across city toward horizon"
         }
       ],
-      "confidence": 0.92
+      "confidence": 0.9
     },
     "cultural_context": []
   },
@@ -387,9 +410,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:44:08+00:00",
+        "run_at": "2026-10-27T21:33:03+00:00",
         "raw_output_path": "data/annotations/raw/cbd_001_passB_attempt1.txt",
-        "tokens": 5136
+        "tokens": 9135
       }
     ],
     "human_review": {

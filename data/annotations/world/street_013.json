@@ -386,10 +386,10 @@
           },
           {
             "kind": "context",
-            "detail": "wide asphalt road stretches through a city center lined with multi-story buildings with moderate traffic at urban intersection"
+            "detail": "wide asphalt road stretches through city center lined with multi-story buildings with moderate traffic and pedestrians"
           }
         ],
-        "confidence": 0.92
+        "confidence": 0.88
       },
       {
         "name": "UAP Towers",
@@ -399,10 +399,10 @@
         "evidence": [
           {
             "kind": "architecture",
-            "detail": "tall blue-glass high-rise in the background center with blue-tinted glass facade and UAP logo on top"
+            "detail": "tall blue-tinted glass facade high-rise in background center"
           }
         ],
-        "confidence": 0.82
+        "confidence": 0.86
       }
     ],
     "place_candidates": [
@@ -417,15 +417,15 @@
         "status": "candidate",
         "evidence": [
           {
-            "kind": "context",
-            "detail": "city center lined with multi-story buildings including tall blue-glass high-rise in background center"
-          },
-          {
             "kind": "provided_title",
             "detail": "Kenyatta Avenue, Nairobi, 2025 (04)"
+          },
+          {
+            "kind": "context",
+            "detail": "city center lined with multi-story buildings"
           }
         ],
-        "confidence": 0.88
+        "confidence": 0.82
       },
       {
         "name": "Nairobi",
@@ -439,13 +439,9 @@
           {
             "kind": "provided_title",
             "detail": "Kenyatta Avenue, Nairobi, 2025 (04)"
-          },
-          {
-            "kind": "context",
-            "detail": "tags include Nairobi and urban intersection with matatu buses"
           }
         ],
-        "confidence": 0.92
+        "confidence": 0.85
       }
     ],
     "uncertainties": [
@@ -477,10 +473,10 @@
         },
         {
           "kind": "context",
-          "detail": "wide asphalt road through city center lined with multi-story buildings including tall blue-glass high-rise and red-brick building with green trees along both sides"
+          "detail": "wide asphalt road stretches through city center lined with multi-story buildings including tall blue-glass high-rise in background center and red-brick building on right"
         }
       ],
-      "confidence": 0.9
+      "confidence": 0.88
     },
     "place_key": "kenya/nairobi/cbd/kenyatta-avenue",
     "taken_from": null,
@@ -489,7 +485,7 @@
         "term": "matatu",
         "local_name": "matatu",
         "language": "Swahili",
-        "evidence": "tags include matatu bus and description shows large orange and white Isuzu bus with BROOK and gray and orange bus with SHAYANI in moderate urban traffic"
+        "evidence": "orange and white Isuzu bus with BROOK and gray and orange bus with SHAYANI in moderate traffic identified as matatu bus in tags"
       }
     ]
   },
@@ -516,9 +512,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:54:38+00:00",
+        "run_at": "2026-10-27T21:40:29+00:00",
         "raw_output_path": "data/annotations/raw/street_013_passB_attempt1.txt",
-        "tokens": 5914
+        "tokens": 7469
       }
     ],
     "human_review": {

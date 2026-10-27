@@ -319,7 +319,7 @@
             "detail": "lily-covered pond in an urban park with tall city buildings and trees in the background under a pale evening sky"
           }
         ],
-        "confidence": 0.96
+        "confidence": 0.92
       }
     ],
     "place_candidates": [],
@@ -330,7 +330,8 @@
       "Exact time of day and weather conditions beyond visible lighting",
       "Details of buildings beyond general color and height due to distance",
       "No visible text available to identify background buildings; tall yellow-brown high-rise buildings cannot be named from description alone",
-      "Exact identities of distant buildings and tree species cannot be determined"
+      "Exact identities of distant buildings and tree species cannot be determined",
+      "Exact number of people near bridge unclear due to small size and distance"
     ],
     "place": {
       "name": "Uhuru Park",
@@ -348,10 +349,10 @@
         },
         {
           "kind": "context",
-          "detail": "grassy bank leading to a pond partially covered with lily pads with scattered trees and turquoise footbridge, with tall high-rise buildings rising above treeline in background"
+          "detail": "grassy bank leading to pond partially covered with lily pads with turquoise footbridge and tall yellow-brown high-rise buildings beyond treeline"
         }
       ],
-      "confidence": 0.96
+      "confidence": 0.92
     },
     "place_key": "kenya/nairobi/uhuru-park",
     "taken_from": null,
@@ -380,9 +381,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:51:55+00:00",
-        "raw_output_path": "data/annotations/raw/park_001_passB_attempt2.txt",
-        "tokens": 4407
+        "run_at": "2026-10-27T21:37:24+00:00",
+        "raw_output_path": "data/annotations/raw/park_001_passB_attempt1.txt",
+        "tokens": 5086
       }
     ],
     "human_review": {

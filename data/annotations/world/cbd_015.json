@@ -357,7 +357,8 @@
       "Specific street within Nairobi CBD cannot be determined from visible evidence",
       "Visible text POST, OFFICE, KIYOYO on billboard does not identify a specific landmark in the allowed list",
       "Background building details obscured by trees and distance, exact building identity cannot be determined",
-      "No owner_note available to indicate camera location"
+      "No owner_note available to indicate camera location",
+      "Identity of beige multi-story building behind trees cannot be determined due to obstruction and distance"
     ],
     "place": {
       "name": "Nairobi CBD",
@@ -372,13 +373,9 @@
         {
           "kind": "provided_title",
           "detail": "A green post box in the central business district of Nairobi"
-        },
-        {
-          "kind": "context",
-          "detail": "outdoor urban street scene with paved sidewalk, asphalt street, parked cars, multi-story building and billboard consistent with central business district setting"
         }
       ],
-      "confidence": 0.88
+      "confidence": 0.9
     },
     "place_key": "kenya/nairobi/cbd",
     "taken_from": null,
@@ -407,9 +404,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:47:11+00:00",
+        "run_at": "2026-10-27T21:33:41+00:00",
         "raw_output_path": "data/annotations/raw/cbd_015_passB_attempt1.txt",
-        "tokens": 4634
+        "tokens": 5554
       }
     ],
     "human_review": {

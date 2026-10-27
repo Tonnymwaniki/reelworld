@@ -333,7 +333,7 @@
           },
           {
             "kind": "context",
-            "detail": "large still lake with grassy shoreline, palm trees and people along shore with city skyline of high-rise buildings beyond"
+            "detail": "A calm lake in a park with palm trees and people along the shore, with a city skyline of high-rise buildings in the background"
           }
         ],
         "confidence": 0.97
@@ -347,33 +347,12 @@
           {
             "kind": "provided_title",
             "detail": "Skyline of Nairobi city as seen from the lake in Uhuru Park"
-          },
-          {
-            "kind": "context",
-            "detail": "city skyline of high-rise buildings beyond park and elevated roadway"
           }
         ],
-        "confidence": 0.96
+        "confidence": 0.92
       }
     ],
     "place_candidates": [
-      {
-        "name": "Nairobi CBD",
-        "hierarchy": [
-          "Kenya",
-          "Nairobi",
-          "CBD"
-        ],
-        "key": "kenya/nairobi/cbd",
-        "status": "candidate",
-        "evidence": [
-          {
-            "kind": "context",
-            "detail": "distant city skyline of high-rise buildings including tall brown glass tower, blue glass twin towers and cylindrical tower beyond park"
-          }
-        ],
-        "confidence": 0.72
-      },
       {
         "name": "Nairobi",
         "hierarchy": [
@@ -386,6 +365,10 @@
           {
             "kind": "provided_title",
             "detail": "Skyline of Nairobi city as seen from the lake in Uhuru Park"
+          },
+          {
+            "kind": "context",
+            "detail": "city skyline of high-rise buildings beyond park"
           }
         ],
         "confidence": 0.9
@@ -400,7 +383,10 @@
       "purpose of white temporary structures on left side of park is unclear",
       "specific names or identities of high-rise buildings in skyline cannot be determined from image alone",
       "text on tall brown building is blurry and unreadable",
-      "exact number and details of people along shore uncertain due to distance"
+      "exact number and details of people along shore uncertain due to distance",
+      "Specific names or identities of high-rise buildings in skyline cannot be determined from image alone",
+      "Text on tall brown building is blurry and unreadable",
+      "Exact number and details of people along shore uncertain due to distance"
     ],
     "place": {
       "name": "Uhuru Park",
@@ -418,13 +404,33 @@
         },
         {
           "kind": "context",
-          "detail": "calm lake in park with palm trees and people along shore, with city skyline of high-rise buildings in background"
+          "detail": "large still lake with grassy shoreline, palm trees and people along water's edge in foreground with city skyline beyond"
         }
       ],
       "confidence": 0.96
     },
     "place_key": "kenya/nairobi/uhuru-park",
-    "taken_from": null,
+    "taken_from": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Skyline of Nairobi city as seen from the lake in Uhuru Park"
+        },
+        {
+          "kind": "context",
+          "detail": "viewpoint ground_level across the lake toward the city skyline"
+        }
+      ],
+      "confidence": 0.96
+    },
     "cultural_context": []
   },
   "privacy": {
@@ -450,9 +456,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:53:17+00:00",
+        "run_at": "2026-10-27T21:39:17+00:00",
         "raw_output_path": "data/annotations/raw/park_016_passB_attempt2.txt",
-        "tokens": 5053
+        "tokens": 7057
       }
     ],
     "human_review": {

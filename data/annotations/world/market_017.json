@@ -316,15 +316,15 @@
             "detail": "MARKET INSPECTOR'S OFFICE"
           },
           {
-            "kind": "architecture",
-            "detail": "outdoor market courtyard with weathered beige concrete staircase with black metal handrails leading to upper balcony densely packed with colorful merchandise including patterned dresses hanging on the railing"
-          },
-          {
             "kind": "context",
             "detail": "outdoor market courtyard with vending and browsing at market stall displaying patterned dresses, bags, hats and paintings"
+          },
+          {
+            "kind": "architecture",
+            "detail": "weathered beige concrete staircase with black metal handrails leading to upper balcony densely packed with colorful merchandise"
           }
         ],
-        "confidence": 0.93
+        "confidence": 0.88
       }
     ],
     "place_candidates": [],
@@ -335,7 +335,8 @@
       "Time of day beyond daylight and weather conditions",
       "Identities, ages, or names of the individuals visible",
       "Exact geographic location cannot be independently verified from image alone beyond provided title",
-      "Identities, ages, or names of the individuals visible cannot be determined"
+      "Identities, ages, or names of the individuals visible cannot be determined",
+      "Time of day beyond daylight and weather conditions cannot be determined"
     ],
     "place": {
       "name": "City Market",
@@ -357,10 +358,10 @@
         },
         {
           "kind": "context",
-          "detail": "outdoor market courtyard with colorful market stall displaying patterned dresses, bags, and hats, with paintings leaning on the steps"
+          "detail": "outdoor market courtyard with vending and browsing at market stall displaying patterned dresses, bags, hats and paintings"
         }
       ],
-      "confidence": 0.92
+      "confidence": 0.88
     },
     "place_key": "unknown/city-market",
     "taken_from": null,
@@ -389,9 +390,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:51:01+00:00",
+        "run_at": "2026-10-27T21:36:59+00:00",
         "raw_output_path": "data/annotations/raw/market_017_passB_attempt1.txt",
-        "tokens": 5024
+        "tokens": 5905
       }
     ],
     "human_review": {

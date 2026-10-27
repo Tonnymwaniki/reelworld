@@ -328,13 +328,9 @@
           {
             "kind": "visible_text",
             "detail": "ICRAF"
-          },
-          {
-            "kind": "context",
-            "detail": "long straight asphalt road receding to horizon with ICRAF directional sign at intersection"
           }
         ],
-        "confidence": 0.88
+        "confidence": 0.95
       }
     ],
     "place_candidates": [],
@@ -347,15 +343,21 @@
       "Purpose of traffic cones and whether road is open or closed cannot be determined",
       "Species of trees and crops cannot be confirmed from image alone",
       "Details of partially visible white vehicle behind fence cannot be determined",
-      "Exact geographic location cannot be determined from photo alone beyond provided title; visible text only shows ICRAF and partial ATURE TRA; species of trees and crops, purpose of traffic cones, and details of small building signage cannot be determined"
+      "Exact geographic location cannot be determined from photo alone beyond provided title; visible text only shows ICRAF and partial ATURE TRA; species of trees and crops, purpose of traffic cones, and details of small building signage cannot be determined",
+      "Exact geographic coordinates cannot be determined from photo alone beyond provided title",
+      "Partial visible text 'ATURE TRA' on building is insufficient to identify place",
+      "Species of flat-topped trees and tall green crops behind fence cannot be confirmed",
+      "Purpose of orange traffic cones and whether road is open or closed cannot be determined",
+      "Content of small white sign near fence and text on speed limit/warning signs not legible"
     ],
     "place": {
-      "name": "Nairobi",
+      "name": "ICRAF Road",
       "hierarchy": [
         "Kenya",
-        "Nairobi"
+        "Nairobi",
+        "ICRAF Road"
       ],
-      "key": "kenya/nairobi",
+      "key": "unknown/icraf-road",
       "status": "confirmed",
       "evidence": [
         {
@@ -365,15 +367,11 @@
         {
           "kind": "visible_text",
           "detail": "ICRAF"
-        },
-        {
-          "kind": "context",
-          "detail": "paved intersection with long straight asphalt road lined with utility poles and flat-topped trees"
         }
       ],
-      "confidence": 0.86
+      "confidence": 0.92
     },
-    "place_key": "kenya/nairobi",
+    "place_key": "unknown/icraf-road",
     "taken_from": null,
     "cultural_context": []
   },
@@ -400,9 +398,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:54:24+00:00",
+        "run_at": "2026-10-27T21:40:07+00:00",
         "raw_output_path": "data/annotations/raw/street_009_passB_attempt1.txt",
-        "tokens": 7548
+        "tokens": 4758
       }
     ],
     "human_review": {

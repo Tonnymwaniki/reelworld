@@ -329,15 +329,11 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [
+    "landmarks": [
       {
-        "name": "Nairobi",
-        "hierarchy": [
-          "Kenya",
-          "Nairobi"
-        ],
-        "key": "kenya/nairobi",
+        "name": "Kenyatta Avenue",
+        "key": "kenya/nairobi/cbd/kenyatta-avenue",
+        "type": "street",
         "status": "candidate",
         "evidence": [
           {
@@ -346,25 +342,9 @@
           }
         ],
         "confidence": 0.9
-      },
-      {
-        "name": "Nairobi CBD",
-        "hierarchy": [
-          "Kenya",
-          "Nairobi",
-          "CBD"
-        ],
-        "key": "kenya/nairobi/cbd",
-        "status": "candidate",
-        "evidence": [
-          {
-            "kind": "context",
-            "detail": "downtown avenue with tall buildings, moderate crowd, street setting"
-          }
-        ],
-        "confidence": 0.82
       }
     ],
+    "place_candidates": [],
     "uncertainties": [
       "Exact number of people is uncertain due to distance, occlusion and small size in background",
       "Text on several distant or blurry signs and storefronts cannot be read, including blue rooftop sign in center background and small shop signs on right",
@@ -373,7 +353,9 @@
       "Exact time of day and weather conditions beyond cloud cover cannot be determined",
       "Specific building names, functions and street name cannot be determined from visible details beyond provided title",
       "Text on several distant or blurry signs and storefronts cannot be read including blue rooftop sign in center background",
-      "Exact number of people and vehicle details not legible due to distance and occlusion"
+      "Exact number of people and vehicle details not legible due to distance and occlusion",
+      "Street name and specific building names/functions cannot be determined from visible details alone beyond provided_title; visible_text (YARD GLASSES, TECNO) does not identify street or buildings",
+      "Tall glass skyscraper with antenna and white multi-story building with balconies are visible but not identifiable to a named landmark without evidence"
     ],
     "place": {
       "name": "Kenyatta Avenue",
@@ -388,13 +370,9 @@
         {
           "kind": "provided_title",
           "detail": "Kenyatta Avenue, Nairobi, 2025 (09)"
-        },
-        {
-          "kind": "context",
-          "detail": "wide asphalt street lined with multi-story buildings and mature trees, described as busy urban downtown avenue with pedestrians and vehicles"
         }
       ],
-      "confidence": 0.88
+      "confidence": 0.92
     },
     "place_key": "kenya/nairobi/cbd/kenyatta-avenue",
     "taken_from": null,
@@ -423,9 +401,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:55:11+00:00",
+        "run_at": "2026-10-27T21:40:49+00:00",
         "raw_output_path": "data/annotations/raw/street_018_passB_attempt1.txt",
-        "tokens": 7704
+        "tokens": 4875
       }
     ],
     "human_review": {

@@ -368,13 +368,47 @@
           },
           {
             "kind": "context",
-            "detail": "paved urban street with reddish dirt shoulder in foreground and center with buses, cars and pedestrians"
+            "detail": "paved urban street with reddish dirt shoulder, white and blue shuttle bus and pedestrians facing toward Kahawa House building"
           }
         ],
-        "confidence": 0.92
+        "confidence": 0.94
       }
     ],
-    "place_candidates": [],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Haile Selassie Avenue (Nairobi), 2025 (07)"
+          }
+        ],
+        "confidence": 0.9
+      },
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "Nairobi CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "context",
+            "detail": "urban street with multiple high-rise buildings with green, beige and white facades and commercial activity"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
     "uncertainties": [
       "exact number of people inside the bus and in distant background due to occlusion and small size",
       "exact license plate numbers on buses and cars due to distance and blur",
@@ -383,28 +417,35 @@
       "exact destination or route information on bus windshield in small red lettering",
       "exact number of people inside bus and in distant background not determinable due to occlusion and small size",
       "license plate numbers on buses and cars not legible due to distance and blur",
-      "text on distant billboards and small signs not legible"
+      "text on distant billboards and small signs not legible",
+      "Exact block or intersection along Haile Selassie Avenue not determinable from image",
+      "Identities of flanking high-rise buildings (green/beige and white grid-pattern) and stone building with tiled roof not legible",
+      "License plates and small red destination text on bus windshield not legible due to distance and blur"
     ],
     "place": {
       "name": "Haile Selassie Avenue",
       "hierarchy": [
         "Kenya",
         "Nairobi",
-        "CBD"
+        "Nairobi CBD"
       ],
       "key": "kenya/nairobi/haile-selassie-avenue",
-      "status": "candidate",
+      "status": "confirmed",
       "evidence": [
         {
           "kind": "provided_title",
           "detail": "Haile Selassie Avenue (Nairobi), 2025 (07)"
         },
         {
+          "kind": "visible_text",
+          "detail": "KAHAWA HOUSE"
+        },
+        {
           "kind": "context",
-          "detail": "paved urban street with reddish dirt shoulder and high-rise buildings including Kahawa House in background with buses and pedestrians"
+          "detail": "paved urban street scene with high-rise commercial buildings, shuttle bus and pedestrians"
         }
       ],
-      "confidence": 0.92
+      "confidence": 0.93
     },
     "place_key": "kenya/nairobi/haile-selassie-avenue",
     "taken_from": null,
@@ -413,7 +454,7 @@
         "term": "matatu",
         "local_name": "matatu",
         "language": "Swahili",
-        "evidence": "white and blue shuttle bus labeled REMBO SHUTTLE parked on road with pedestrians; tags include matatu"
+        "evidence": "tags include 'matatu' and photo shows white and blue shuttle bus (REMBO SHUTTLE) operating on urban street with pedestrians"
       }
     ]
   },
@@ -440,9 +481,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:54:26+00:00",
+        "run_at": "2026-10-27T21:40:15+00:00",
         "raw_output_path": "data/annotations/raw/street_008_passB_attempt1.txt",
-        "tokens": 8148
+        "tokens": 7866
       }
     ],
     "human_review": {

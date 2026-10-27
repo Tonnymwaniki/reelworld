@@ -419,11 +419,7 @@
           },
           {
             "kind": "architecture",
-            "detail": "twin-tower high-rise building with beige facade, vertical window strips, flat roof with antenna on multi-story podium with curved facade and horizontal balconies"
-          },
-          {
-            "kind": "context",
-            "detail": "viewed from paved street intersection with vehicles, sidewalks, metal fence, traffic signal poles and double-arm streetlight pole in bright daylight"
+            "detail": "tall beige twin-tower building with vertical window strips dominating center on multi-story podium with curved facade and horizontal balconies"
           }
         ],
         "confidence": 0.97
@@ -438,7 +434,9 @@
       "Interior details of building and activity inside are not visible",
       "Exact street intersection name not determinable from provided information",
       "Visible text 'REHANI HOUSE' is partially legible and not used as landmark due to uncertainty",
-      "Interior details of building, vehicle makes/models, and small banner text not determinable"
+      "Interior details of building, vehicle makes/models, and small banner text not determinable",
+      "REHANI HOUSE visible_text is partially legible and not used as landmark due to uncertainty",
+      "Small banner text and interior building details not fully legible/visible"
     ],
     "place": {
       "name": "Teleposta Towers",
@@ -456,7 +454,7 @@
         },
         {
           "kind": "architecture",
-          "detail": "tall beige twin-tower building with vertical window strips dominating center on multi-story podium with curved facade and horizontal balconies"
+          "detail": "tall beige twin-tower building with vertical window strips on multi-story podium with curved facade and horizontal balconies viewed from street intersection"
         }
       ],
       "confidence": 0.96
@@ -468,7 +466,7 @@
         "term": "kiosk",
         "local_name": "kiosk",
         "language": "English",
-        "evidence": "description states 'A small dark kiosk stands on the sidewalk near the center' and entity labeled 'kiosk pillar' on sidewalk island"
+        "evidence": "small dark kiosk stands on the sidewalk near the center"
       }
     ]
   },
@@ -495,9 +493,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:46:43+00:00",
+        "run_at": "2026-10-27T21:33:18+00:00",
         "raw_output_path": "data/annotations/raw/cbd_008_passB_attempt1.txt",
-        "tokens": 6421
+        "tokens": 7405
       }
     ],
     "human_review": {

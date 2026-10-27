@@ -314,18 +314,22 @@
         "name": "Marikiti Market",
         "key": "kenya/nairobi/marikiti-market",
         "type": "market",
-        "status": "candidate",
+        "status": "confirmed",
         "evidence": [
           {
             "kind": "provided_title",
             "detail": "A section of Wakulima Market, Nairobi Kenya, May 2023"
           },
           {
+            "kind": "architecture",
+            "detail": "large covered market hall with vaulted concrete roofing supported by thick concrete pillars"
+          },
+          {
             "kind": "context",
-            "detail": "interior of large covered market hall with vaulted concrete roof, concrete pillars, and produce stalls with watermelons"
+            "detail": "interior market hall with large piles of green striped watermelons, red mesh sacks, and trays of produce with shoppers browsing stalls"
           }
         ],
-        "confidence": 0.9
+        "confidence": 0.85
       }
     ],
     "place_candidates": [],
@@ -336,7 +340,11 @@
       "Exact time of day beyond daylight and weather conditions outside the hall",
       "Location or name of the market cannot be determined from the image",
       "Visual features alone do not independently identify the market; location relies on provided_title equating Wakulima Market with Marikiti Market",
-      "Exact variety of foreground bulbous produce, text on packaging, and number of background figures not determinable from image"
+      "Exact variety of foreground bulbous produce, text on packaging, and number of background figures not determinable from image",
+      "Exact number of people in blurred background cannot be determined",
+      "Specific variety of bulbous produce in foreground trays and baskets not determinable beyond general appearance",
+      "Text on blue box and other packaging on right not legible due to blur and distance",
+      "Exact time of day beyond daytime and weather conditions outside hall not determinable"
     ],
     "place": {
       "name": "Marikiti Market",
@@ -353,10 +361,10 @@
         },
         {
           "kind": "context",
-          "detail": "covered market hall with vaulted concrete roofing and piles of watermelons and produce, consistent with market setting"
+          "detail": "caption and description describe interior of large covered market with vaulted concrete roof and produce stalls consistent with market hall"
         }
       ],
-      "confidence": 0.9
+      "confidence": 0.85
     },
     "place_key": "kenya/nairobi/marikiti-market",
     "taken_from": null,
@@ -385,9 +393,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:50:01+00:00",
+        "run_at": "2026-10-27T21:35:56+00:00",
         "raw_output_path": "data/annotations/raw/market_001_passB_attempt1.txt",
-        "tokens": 7438
+        "tokens": 4970
       }
     ],
     "human_review": {

@@ -260,7 +260,11 @@
       "Exact geographic location and type of indoor venue cannot be determined",
       "Occasion or event taking place cannot be determined",
       "No distinctive architectural features or visible text to identify a landmark",
-      "Provided title does not provide location evidence"
+      "Provided title does not provide location evidence",
+      "exact location and type of indoor venue cannot be determined",
+      "occasion or event taking place cannot be determined",
+      "no distinctive architectural features or visible text to identify a landmark",
+      "provided title does not provide location evidence"
     ],
     "place": {
       "name": "Unknown",
@@ -271,19 +275,23 @@
       "status": "confirmed",
       "evidence": [
         {
-          "kind": "architecture",
-          "detail": "blurred indoor background with warm-toned wooden architectural elements is out of focus and non-distinctive"
+          "kind": "context",
+          "detail": "scene is indoor building setting with warm indoor lighting and sparse crowd, no geographic identifiers"
         },
         {
-          "kind": "provided_title",
-          "detail": "provided_title is 'Takudzwa Ngwenya 2011' which does not denote a geographic place or landmark"
+          "kind": "architecture",
+          "detail": "blurred indoor background with warm-toned wooden architectural elements is generic and not distinctive"
         },
         {
           "kind": "context",
-          "detail": "scene is indoor building with warm indoor lighting and sparse crowd, insufficient to determine geographic location"
+          "detail": "visible_text is empty, no sign text to identify location"
+        },
+        {
+          "kind": "provided_title",
+          "detail": "Takudzwa Ngwenya 2011"
         }
       ],
-      "confidence": 1.0
+      "confidence": 0.0
     },
     "place_key": "unknown/unknown",
     "taken_from": null,
@@ -312,9 +320,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:46:51+00:00",
+        "run_at": "2026-10-27T21:33:31+00:00",
         "raw_output_path": "data/annotations/raw/cbd_010_passB_attempt1.txt",
-        "tokens": 5421
+        "tokens": 6063
       }
     ],
     "human_review": {

@@ -294,10 +294,10 @@
           },
           {
             "kind": "context",
-            "detail": "dry grassy hilltop with two weathered concrete benches and table overlooking vast arid valley plain to hazy horizon with distant mountain range"
+            "detail": "dry grassy hilltop with concrete benches and table overlooking vast arid valley"
           }
         ],
-        "confidence": 0.88
+        "confidence": 0.85
       }
     ],
     "place_candidates": [],
@@ -308,7 +308,8 @@
       "Details of distant valley floor due to haze and distance",
       "Whether the overlook is part of a public park or other property",
       "No visible text in image to independently confirm location; location inferred solely from provided_title Benches@NgongHills",
-      "Visual features alone show generic arid hilltop overlook; exact position within Ngong Hills and property status not determinable from image"
+      "Visual features alone show generic arid hilltop overlook; exact position within Ngong Hills and property status not determinable from image",
+      "Exact geographic location cannot be determined from photo beyond title"
     ],
     "place": {
       "name": "Ngong Hills",
@@ -325,32 +326,13 @@
         },
         {
           "kind": "context",
-          "detail": "hilltop overlook with concrete benches and table facing expansive arid valley plain"
+          "detail": "hilltop overlook with weathered concrete benches and table facing arid valley panorama under clear blue sky"
         }
       ],
-      "confidence": 0.88
+      "confidence": 0.85
     },
     "place_key": "kenya/kajiado/ngong-hills",
-    "taken_from": {
-      "name": "Ngong Hills",
-      "hierarchy": [
-        "Kenya",
-        "Ngong Hills"
-      ],
-      "key": "kenya/kajiado/ngong-hills",
-      "status": "candidate",
-      "evidence": [
-        {
-          "kind": "provided_title",
-          "detail": "Benches@NgongHills"
-        },
-        {
-          "kind": "context",
-          "detail": "camera viewpoint elevated on hilltop facing across valley from benches"
-        }
-      ],
-      "confidence": 0.88
-    },
+    "taken_from": null,
     "cultural_context": []
   },
   "privacy": {
@@ -376,9 +358,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:47:43+00:00",
+        "run_at": "2026-10-27T21:34:06+00:00",
         "raw_output_path": "data/annotations/raw/hills_001_passB_attempt1.txt",
-        "tokens": 7205
+        "tokens": 5771
       }
     ],
     "human_review": {

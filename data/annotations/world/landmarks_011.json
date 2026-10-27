@@ -274,11 +274,11 @@
             "detail": "HARAMBEE"
           },
           {
-            "kind": "context",
-            "detail": "golden coat of arms with two lions holding spears flanking central shield with rooster holding axe on rough gray stone pillar"
+            "kind": "architecture",
+            "detail": "rough speckled gray stone pillar with pointed top mounting weathered golden metallic emblem with two rearing lions holding spears flanking central shield"
           }
         ],
-        "confidence": 0.92
+        "confidence": 0.88
       }
     ],
     "place_candidates": [],
@@ -288,7 +288,8 @@
       "Full context or purpose of the building entrance in background",
       "Details of people in background due to blur and partial visibility",
       "Date and time photo was taken beyond daytime lighting",
-      "Exact position of stone pillar within KICC grounds not determinable from close-up framing; background building facade is blurred and not distinctive"
+      "Exact position of stone pillar within KICC grounds not determinable from close-up framing; background building facade is blurred and not distinctive",
+      "Material composition, date and full context of building entrance not determinable beyond natural daylight"
     ],
     "place": {
       "name": "Kenyatta International Convention Centre",
@@ -309,20 +310,20 @@
           "detail": "HARAMBEE"
         },
         {
-          "kind": "context",
-          "detail": "close-up of golden coat of arms emblem with two lions, shield, crossed spears and ribbon banner mounted on stone pillar"
+          "kind": "architecture",
+          "detail": "weathered golden metallic emblem with two rearing lions holding spears flanking central shield displaying rooster holding axe on rough speckled gray stone pillar"
         }
       ],
-      "confidence": 0.9
+      "confidence": 0.87
     },
     "place_key": "kenya/nairobi/cbd/kicc",
     "taken_from": null,
     "cultural_context": [
       {
         "term": "harambee",
-        "local_name": "Harambee",
+        "local_name": "harambee",
         "language": "Swahili",
-        "evidence": "visible_text HARAMBEE on ribbon banner below shield"
+        "evidence": "visible_text 'HARAMBEE' on ribbon banner below shield"
       }
     ]
   },
@@ -349,9 +350,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:50:05+00:00",
-        "raw_output_path": "data/annotations/raw/landmarks_011_passB_attempt2.txt",
-        "tokens": 4670
+        "run_at": "2026-10-27T21:35:58+00:00",
+        "raw_output_path": "data/annotations/raw/landmarks_011_passB_attempt1.txt",
+        "tokens": 6310
       }
     ],
     "human_review": {

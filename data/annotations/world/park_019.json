@@ -296,10 +296,10 @@
           },
           {
             "kind": "architecture",
-            "detail": "tall stone obelisk tower with arched base, bronze statue group raising flag on stepped stone platform, and sculpted hand holding a dove visible through arch"
+            "detail": "tall stone obelisk tower with arched openings at base, bronze statue group raising flag on tiered stone platform, sculpted hand holding dove visible through arch in open paved plaza"
           }
         ],
-        "confidence": 0.88
+        "confidence": 0.92
       }
     ],
     "place_candidates": [],
@@ -310,7 +310,11 @@
       "Exact location, name, and historical meaning of the monument cannot be determined from image alone",
       "Precise time of day beyond daylight with low sun angle cannot be determined",
       "Exact text on small white sign on platform is not fully legible",
-      "Historical meaning of the monument cannot be determined from image alone"
+      "Historical meaning of the monument cannot be determined from image alone",
+      "Exact colors and pattern details of flag are not clearly distinguishable",
+      "Identities, ages and genders of people cannot be determined",
+      "Historical meaning of monument cannot be determined from image alone",
+      "Precise time of day beyond daylight with low-angle warm sunlight cannot be determined"
     ],
     "place": {
       "name": "Uhuru Gardens",
@@ -328,10 +332,14 @@
         },
         {
           "kind": "architecture",
-          "detail": "tall stone monument with bronze statues raising a flag and sculpted hand holding a dove stands on a stepped platform in an open plaza"
+          "detail": "tall stone obelisk tower with arched base, bronze statues raising flag on stepped platform, sculpted hand holding dove in open plaza"
+        },
+        {
+          "kind": "context",
+          "detail": "outdoor paved plaza with low hedges and scattered trees under clear blue sky, sparse visitors on monument steps"
         }
       ],
-      "confidence": 0.88
+      "confidence": 0.9
     },
     "place_key": "unknown/uhuru-gardens",
     "taken_from": null,
@@ -360,9 +368,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:53:07+00:00",
+        "run_at": "2026-10-27T21:39:14+00:00",
         "raw_output_path": "data/annotations/raw/park_019_passB_attempt1.txt",
-        "tokens": 5497
+        "tokens": 5240
       }
     ],
     "human_review": {

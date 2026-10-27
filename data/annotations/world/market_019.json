@@ -294,30 +294,13 @@
           },
           {
             "kind": "architecture",
-            "detail": "multi-story building facade with large weathered white rectangular sign in the center displaying brown lettering and colorful murals covering the walls"
+            "detail": "multi-story building facade with central white sign, colorful murals with stylized human silhouettes and geometric patterns, and vertical louvered ventilation openings above the sign"
           }
         ],
         "confidence": 0.98
       }
     ],
-    "place_candidates": [
-      {
-        "name": "Nairobi",
-        "hierarchy": [
-          "Kenya",
-          "Nairobi"
-        ],
-        "key": "kenya/nairobi",
-        "status": "confirmed",
-        "evidence": [
-          {
-            "kind": "visible_text",
-            "detail": "NAIROBI CITY COUNTY"
-          }
-        ],
-        "confidence": 0.96
-      }
-    ],
+    "place_candidates": [],
     "uncertainties": [
       "Text inside the circular emblem on the sign is not legible due to resolution and distance",
       "Exact time of day and weather conditions cannot be determined from lighting alone",
@@ -329,7 +312,8 @@
       "name": "City Market",
       "hierarchy": [
         "Kenya",
-        "Nairobi"
+        "Nairobi",
+        "CBD"
       ],
       "key": "unknown/city-market",
       "status": "confirmed",
@@ -348,7 +332,7 @@
         },
         {
           "kind": "architecture",
-          "detail": "multi-story building facade with large weathered white rectangular sign and colorful murals with stylized human silhouettes and geometric patterns"
+          "detail": "market building facade with central white sign and mural-covered walls"
         }
       ],
       "confidence": 0.98
@@ -380,9 +364,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:51:12+00:00",
+        "run_at": "2026-10-27T21:37:03+00:00",
         "raw_output_path": "data/annotations/raw/market_019_passB_attempt1.txt",
-        "tokens": 5917
+        "tokens": 4741
       }
     ],
     "human_review": {

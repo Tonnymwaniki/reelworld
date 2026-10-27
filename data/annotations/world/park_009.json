@@ -296,7 +296,7 @@
         "name": "Uhuru Park",
         "key": "kenya/nairobi/uhuru-park",
         "type": "park",
-        "status": "confirmed",
+        "status": "candidate",
         "evidence": [
           {
             "kind": "provided_title",
@@ -304,17 +304,48 @@
           },
           {
             "kind": "context",
-            "detail": "Wide elevated view of an urban park with a pond and scattered trees in the foreground and a dense city skyline in the background"
-          },
-          {
-            "kind": "architecture",
-            "detail": "grassy foreground with scattered trees, narrow pond or lake behind row of covered pavilions with light-colored roofs, open dirt area and paved road"
+            "detail": "Wide elevated view of an urban park with a pond and scattered trees in the foreground and a dense city skyline under a partly cloudy blue sky in the background"
           }
         ],
-        "confidence": 0.93
+        "confidence": 0.92
       }
     ],
-    "place_candidates": [],
+    "place_candidates": [
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "architecture",
+            "detail": "dense cluster of high-rise buildings of varying heights, colors and shapes forming a city skyline in the distance"
+          }
+        ],
+        "confidence": 0.85
+      },
+      {
+        "name": "Kenyatta International Convention Centre",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd/kicc",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "architecture",
+            "detail": "distinctive cylindrical tower on the right side of skyline with wider top section and dark top"
+          }
+        ],
+        "confidence": 0.55
+      }
+    ],
     "uncertainties": [
       "Text on the small white signboard in the foreground grass is not legible due to distance and resolution, so no text can be transcribed",
       "Exact number of people in the distance is uncertain because figures are small and may be obscured by trees or structures",
@@ -323,13 +354,15 @@
       "Whether additional people are present near the pavilions or pond area is unclear due to distance and tree cover",
       "Text on small white signboard in grassy foreground not legible due to distance and resolution so no transcription possible",
       "Specific identities, names or functions of buildings in the distant skyline including cylindrical tower cannot be determined from image alone",
-      "Exact number and details of people and white car not discernible due to distance and tree cover"
+      "Exact number and details of people and white car not discernible due to distance and tree cover",
+      "Text on the small white signboard in the grassy foreground is not legible due to distance and resolution so no transcription possible"
     ],
     "place": {
       "name": "Uhuru Park",
       "hierarchy": [
         "Kenya",
-        "Nairobi"
+        "Nairobi",
+        "Uhuru Park"
       ],
       "key": "kenya/nairobi/uhuru-park",
       "status": "candidate",
@@ -340,10 +373,10 @@
         },
         {
           "kind": "context",
-          "detail": "outdoor urban park with pond, covered pavilions, grassy foreground with scattered trees and dense high-rise city skyline described in caption and description"
+          "detail": "outdoor urban park in the foreground with patches of green and brown grass, scattered trees, small white signboard, paved road, reddish-brown dirt area, low covered pavilions with light-colored roofs lined up in front of a narrow pond or lake, with dense city skyline in background"
         }
       ],
-      "confidence": 0.93
+      "confidence": 0.9
     },
     "place_key": "kenya/nairobi/uhuru-park",
     "taken_from": null,
@@ -372,9 +405,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:52:27+00:00",
-        "raw_output_path": "data/annotations/raw/park_009_passB_attempt1.txt",
-        "tokens": 6844
+        "run_at": "2026-10-27T21:38:37+00:00",
+        "raw_output_path": "data/annotations/raw/park_009_passB_attempt2.txt",
+        "tokens": 4938
       }
     ],
     "human_review": {

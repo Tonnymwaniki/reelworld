@@ -352,12 +352,54 @@
           {
             "kind": "provided_title",
             "detail": "Kenyatta Avenue, Nairobi, 2025 (03)"
+          },
+          {
+            "kind": "context",
+            "detail": "wide urban street intersection with buses, cars, traffic officers and high-rise buildings"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta Avenue, Nairobi, 2025 (03)"
+          },
+          {
+            "kind": "context",
+            "detail": "downtown high-rise buildings and busy intersection"
+          }
+        ],
+        "confidence": 0.85
+      },
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta Avenue, Nairobi, 2025 (03)"
           }
         ],
         "confidence": 0.92
       }
     ],
-    "place_candidates": [],
     "uncertainties": [
       "Exact number of people is uncertain due to occlusion, distance and overlapping figures",
       "Text on distant rooftop signs, bus destination boards and vehicle license plates is not fully legible and was omitted",
@@ -366,7 +408,10 @@
       "Weather details beyond overcast cloud cover and exact time of day cannot be determined",
       "Specific high-rise building identities beyond the visible TECNO sign cannot be determined",
       "Exact time shown on the street clock cannot be determined",
-      "Full wording on distant rooftop signs and bus destination boards is not legible"
+      "Full wording on distant rooftop signs and bus destination boards is not legible",
+      "Specific high-rise building identities beyond visible TECNO sign cannot be determined",
+      "Exact time shown on street clock cannot be determined",
+      "Full wording on distant rooftop signs and bus destination boards not legible"
     ],
     "place": {
       "name": "Kenyatta Avenue",
@@ -381,9 +426,13 @@
         {
           "kind": "provided_title",
           "detail": "Kenyatta Avenue, Nairobi, 2025 (03)"
+        },
+        {
+          "kind": "context",
+          "detail": "busy urban intersection with buses, cars, traffic officers, and tall buildings under an overcast sky"
         }
       ],
-      "confidence": 0.92
+      "confidence": 0.9
     },
     "place_key": "kenya/nairobi/cbd/kenyatta-avenue",
     "taken_from": null,
@@ -412,9 +461,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:54:43+00:00",
-        "raw_output_path": "data/annotations/raw/street_012_passB_attempt1.txt",
-        "tokens": 7877
+        "run_at": "2026-10-27T21:40:38+00:00",
+        "raw_output_path": "data/annotations/raw/street_012_passB_attempt2.txt",
+        "tokens": 4990
       }
     ],
     "human_review": {

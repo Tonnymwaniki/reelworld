@@ -282,11 +282,11 @@
           },
           {
             "kind": "architecture",
-            "detail": "white wind turbines with tall towers and blades lined along ridge"
+            "detail": "dry brownish ridge with scattered green vegetation lined with numerous white wind turbines with tall towers and blades"
           },
           {
             "kind": "context",
-            "detail": "dry brownish ridge with scattered green vegetation lined with numerous white wind turbines overlooking patchwork farmland and settlements"
+            "detail": "aerial view of white wind turbines lined along dry hilltop ridge overlooking patchwork farmland and settlements under pale blue sky"
           }
         ],
         "confidence": 0.88
@@ -311,15 +311,19 @@
         "Ngong Hills"
       ],
       "key": "kenya/kajiado/ngong-hills",
-      "status": "candidate",
+      "status": "confirmed",
       "evidence": [
         {
           "kind": "provided_title",
           "detail": "Ngong Hills Wind Power farm"
         },
         {
+          "kind": "architecture",
+          "detail": "dry brownish ridge with scattered green vegetation lined with numerous white wind turbines with tall towers and blades"
+        },
+        {
           "kind": "context",
-          "detail": "Aerial view of white wind turbines lined along a dry hilltop ridge overlooking patchwork farmland and settlements under a pale blue sky"
+          "detail": "aerial view of white wind turbines lined along dry hilltop ridge overlooking patchwork farmland and settlements"
         }
       ],
       "confidence": 0.88
@@ -351,9 +355,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:48:36+00:00",
+        "run_at": "2026-10-27T21:34:45+00:00",
         "raw_output_path": "data/annotations/raw/hills_017_passB_attempt1.txt",
-        "tokens": 5475
+        "tokens": 4533
       }
     ],
     "human_review": {

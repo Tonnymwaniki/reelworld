@@ -298,34 +298,13 @@
           },
           {
             "kind": "context",
-            "detail": "outdoor urban park centered on a calm lake with grassy shoreline, people relaxing and boating, framed by large trees and tall city buildings reflected in water"
+            "detail": "outdoor urban park centered on a calm lake that reflects the cloudy sky and tall buildings behind it with grassy shoreline, large trees, people along shores and boating"
           }
         ],
-        "confidence": 0.92
+        "confidence": 0.9
       }
     ],
-    "place_candidates": [
-      {
-        "name": "Nairobi",
-        "hierarchy": [
-          "Kenya",
-          "Nairobi"
-        ],
-        "key": "kenya/nairobi",
-        "status": "candidate",
-        "evidence": [
-          {
-            "kind": "provided_title",
-            "detail": "Nyayo House as seen from Uhuru Park"
-          },
-          {
-            "kind": "context",
-            "detail": "tall beige high-rise buildings with antennas behind park treeline indicating central Nairobi skyline"
-          }
-        ],
-        "confidence": 0.75
-      }
-    ],
+    "place_candidates": [],
     "uncertainties": [
       "exact number of people on far shore due to small size and distance",
       "text and logos on distant high-rise building banners are blurry and not legible for at least 3 letters",
@@ -333,7 +312,11 @@
       "exact time of day and weather conditions beyond overcast appearance",
       "names or functions of the background buildings",
       "Nyayo House is named in provided_title but background building identities are listed as uncertain with no visible text to confirm which tower is Nyayo House, so not listed as separate landmark",
-      "taken_from is inside the park itself (view across lake toward skyline) so left as null rather than duplicating place"
+      "taken_from is inside the park itself (view across lake toward skyline) so left as null rather than duplicating place",
+      "exact number of people on far shore not determinable due to small size and distance",
+      "specific identities, ages or genders of people not determinable",
+      "exact time of day and weather beyond overcast cloudy daytime not determinable",
+      "names or functions of background tall beige high-rise buildings with antennas not determinable; Nyayo House named in provided_title but no visible text confirms which tower is Nyayo House so not listed as separate landmark"
     ],
     "place": {
       "name": "Uhuru Park",
@@ -351,10 +334,10 @@
         },
         {
           "kind": "context",
-          "detail": "outdoor urban park centered on a calm lake with grassy bank, trees, people along shores and boating, with city skyline behind treeline"
+          "detail": "A calm lake in a busy urban park with people along the shores and boating, framed by large trees and tall city buildings reflected in the water under an overcast sky"
         }
       ],
-      "confidence": 0.9
+      "confidence": 0.89
     },
     "place_key": "kenya/nairobi/uhuru-park",
     "taken_from": null,
@@ -383,9 +366,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:52:36+00:00",
+        "run_at": "2026-10-27T21:38:37+00:00",
         "raw_output_path": "data/annotations/raw/park_012_passB_attempt1.txt",
-        "tokens": 8381
+        "tokens": 7798
       }
     ],
     "human_review": {

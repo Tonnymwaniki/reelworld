@@ -353,7 +353,10 @@
       "Interior details of buildings and theater are not visible",
       "Text on clothing or bags is ignored per rules and not transcribed",
       "Some small credit text on the large billboard is partially obscured by angle and distance",
-      "Provided title mentions Broadway at West 43rd Street intersection at Times Tower, but no evidence confirms this is the Nairobi Times Tower from allowed list; no Kenya landmark can be determined with available information; location outside Kenya hierarchy cannot be confirmed from provided information alone"
+      "Provided title mentions Broadway at West 43rd Street intersection at Times Tower, but no evidence confirms this is the Nairobi Times Tower from allowed list; no Kenya landmark can be determined with available information; location outside Kenya hierarchy cannot be confirmed from provided information alone",
+      "Exact make, model and year of vehicles cannot be determined; license plate numbers and small vehicle details not legible",
+      "Exact date and time beyond daytime cannot be determined from image alone",
+      "Location outside Kenya hierarchy cannot be confirmed from provided information alone; provided title reference to Times Tower cannot be verified as Nairobi Times Tower"
     ],
     "place": {
       "name": "Unknown",
@@ -364,16 +367,16 @@
       "status": "confirmed",
       "evidence": [
         {
-          "kind": "provided_title",
-          "detail": "Broadway, középen a Nyugati 43. utca kereszteződésénél a Times Tower. Fortepan 85127"
-        },
-        {
           "kind": "context",
-          "detail": "No Kenya landmark from allowed list is identifiable in description, entities, or visible_text; visible architecture (stepped stone clock tower with globe, white modern tower with Allied Chemical rooftop sign, STAR! billboard) does not match allowed Kenya names"
+          "detail": "No Kenya-specific landmarks, street names, or visible text identified; visible text shows 'Allied Chemical', 'STAR!', 'VICTORIA', 'CLINT EASTWOOD HANG 'EM HIGH' with no Kenya reference"
         },
         {
-          "kind": "visible_text",
-          "detail": "Allied Chemical"
+          "kind": "provided_title",
+          "detail": "Broadway, középen a Nyugati 43. utca kereszteződésénél a Times Tower. Fortepan 85127 - mentions Times Tower but uncertainties state this cannot be confirmed as Nairobi Times Tower from allowed list"
+        },
+        {
+          "kind": "architecture",
+          "detail": "Art deco clock tower with globe and white modern tower with rooftop sign described do not provide verifiable evidence for any allowed Kenya landmark"
         }
       ],
       "confidence": 0.96
@@ -405,9 +408,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:46:49+00:00",
+        "run_at": "2026-10-27T21:33:16+00:00",
         "raw_output_path": "data/annotations/raw/cbd_007_passB_attempt1.txt",
-        "tokens": 8167
+        "tokens": 6587
       }
     ],
     "human_review": {

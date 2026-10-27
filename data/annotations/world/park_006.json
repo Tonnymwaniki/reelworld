@@ -283,6 +283,27 @@
         "name": "Uhuru Park",
         "key": "kenya/nairobi/uhuru-park",
         "type": "park",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi's skyline from Uhuru Park"
+          },
+          {
+            "kind": "architecture",
+            "detail": "three long low grandstand structures with light-colored zigzag roofs and tiered seating"
+          },
+          {
+            "kind": "context",
+            "detail": "expansive patchy grassy field with scattered small leafy trees, wide gray paved plaza and narrow blue pond surrounded by dense green park trees and vegetation in foreground"
+          }
+        ],
+        "confidence": 0.92
+      },
+      {
+        "name": "Nairobi CBD",
+        "key": "kenya/nairobi/cbd",
+        "type": "district",
         "status": "candidate",
         "evidence": [
           {
@@ -291,13 +312,34 @@
           },
           {
             "kind": "context",
-            "detail": "Wide elevated view of a grassy park with scattered trees, covered grandstands and a pond in the foreground, with a dense city skyline in the background"
+            "detail": "dense cluster of high-rise buildings of varying heights, colors and designs including brown, red and blue-glass towers lining horizon under bright cloudless blue sky in background"
           }
         ],
-        "confidence": 0.93
+        "confidence": 0.88
       }
     ],
     "place_candidates": [
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi's skyline from Uhuru Park"
+          },
+          {
+            "kind": "context",
+            "detail": "dense cluster of high-rise buildings of varying heights, colors and designs lining horizon under bright cloudless blue sky in background"
+          }
+        ],
+        "confidence": 0.87
+      },
       {
         "name": "Nairobi",
         "hierarchy": [
@@ -313,7 +355,7 @@
           },
           {
             "kind": "context",
-            "detail": "dense cluster of high-rise buildings of varying heights, colors and designs including brown, red and blue-glass towers lining the horizon under bright cloudless blue sky"
+            "detail": "city skyline with high-rise buildings under clear blue sky"
           }
         ],
         "confidence": 0.9
@@ -326,7 +368,8 @@
       "Exact time of day beyond daytime and time of year",
       "Condition and use of paved plaza and grandstands",
       "Exact names, heights or functions of buildings in the distant skyline cannot be determined; visible_text is empty and distant building signs not legible",
-      "Whether very small distant figures are present in grandstands or park cannot be determined due to low resolution"
+      "Whether very small distant figures are present in grandstands or park cannot be determined due to low resolution",
+      "Condition and use of paved plaza and grandstands cannot be determined"
     ],
     "place": {
       "name": "Uhuru Park",
@@ -336,7 +379,7 @@
         "Uhuru Park"
       ],
       "key": "kenya/nairobi/uhuru-park",
-      "status": "candidate",
+      "status": "confirmed",
       "evidence": [
         {
           "kind": "provided_title",
@@ -344,10 +387,14 @@
         },
         {
           "kind": "context",
-          "detail": "expansive patchy grassy field with scattered small leafy trees, paved plaza, three long low grandstand structures with zigzag roofs and tiered seating, narrow blue pond surrounded by dense green park trees and vegetation"
+          "detail": "wide elevated view of a grassy park with scattered trees, covered grandstands and a pond in the foreground, with a dense city skyline in the background"
+        },
+        {
+          "kind": "architecture",
+          "detail": "three long low grandstand structures with light-colored zigzag roofs and tiered seating facing paved plaza"
         }
       ],
-      "confidence": 0.92
+      "confidence": 0.9
     },
     "place_key": "kenya/nairobi/uhuru-park",
     "taken_from": {
@@ -366,10 +413,10 @@
         },
         {
           "kind": "context",
-          "detail": "elevated viewpoint facing toward the city skyline across the park"
+          "detail": "camera viewpoint elevated high facing toward the city skyline across the park"
         }
       ],
-      "confidence": 0.88
+      "confidence": 0.89
     },
     "cultural_context": []
   },
@@ -396,9 +443,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:52:13+00:00",
-        "raw_output_path": "data/annotations/raw/park_006_passB_attempt1.txt",
-        "tokens": 8357
+        "run_at": "2026-10-27T21:38:18+00:00",
+        "raw_output_path": "data/annotations/raw/park_006_passB_attempt2.txt",
+        "tokens": 7694
       }
     ],
     "human_review": {

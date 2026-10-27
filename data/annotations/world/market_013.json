@@ -359,22 +359,60 @@
             "detail": "NAIROBI CITY COUNTY"
           },
           {
-            "kind": "provided_title",
-            "detail": "Nairobi City Market, 2025 (01)"
-          },
-          {
             "kind": "architecture",
             "detail": "large stepped building with vibrant multicolor mural covering its facade and central entrance"
           },
           {
-            "kind": "context",
-            "detail": "caption describes colorful mural-covered Nairobi City Market building viewed across a street with parked vans and pedestrians"
+            "kind": "provided_title",
+            "detail": "Nairobi City Market, 2025 (01)"
           }
         ],
         "confidence": 0.98
       }
     ],
-    "place_candidates": [],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "NAIROBI CITY COUNTY"
+          },
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi City Market, 2025 (01)"
+          }
+        ],
+        "confidence": 0.96
+      },
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "Nairobi CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi City Market, 2025 (01)"
+          },
+          {
+            "kind": "context",
+            "detail": "outdoor urban market scene with paved street and high-rise buildings"
+          }
+        ],
+        "confidence": 0.94
+      }
+    ],
     "uncertainties": [
       "Exact number of people due to occlusion and distance",
       "Full text of small awning signs under the market colonnade such as KMC RESTAURANT due to blur and distance",
@@ -384,13 +422,15 @@
       "Details of distant background buildings and signage that are blurry or partially obscured",
       "Exact street name and precise camera position across the street not determinable from provided information",
       "Interior layout or contents of market building not visible",
-      "Full text of small awning signs under colonnade partially legible and not used as evidence"
+      "Full text of small awning signs under colonnade partially legible and not used as evidence",
+      "Interior layout or contents of the market building not visible"
     ],
     "place": {
       "name": "City Market",
       "hierarchy": [
         "Kenya",
-        "Nairobi"
+        "Nairobi",
+        "Nairobi CBD"
       ],
       "key": "unknown/city-market",
       "status": "confirmed",
@@ -409,14 +449,10 @@
         },
         {
           "kind": "architecture",
-          "detail": "large stepped building with vibrant multicolor mural covering its facade and central entrance"
-        },
-        {
-          "kind": "context",
-          "detail": "tags include Nairobi City Market, Kenya, street scene, market building"
+          "detail": "large stepped building with vibrant multicolor mural covering its facade"
         }
       ],
-      "confidence": 0.98
+      "confidence": 0.97
     },
     "place_key": "unknown/city-market",
     "taken_from": null,
@@ -445,9 +481,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:50:45+00:00",
+        "run_at": "2026-10-27T21:36:47+00:00",
         "raw_output_path": "data/annotations/raw/market_013_passB_attempt1.txt",
-        "tokens": 5738
+        "tokens": 6916
       }
     ],
     "human_review": {

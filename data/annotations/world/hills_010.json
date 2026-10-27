@@ -264,18 +264,22 @@
         "name": "Ngong Hills",
         "key": "kenya/kajiado/ngong-hills",
         "type": "natural",
-        "status": "candidate",
+        "status": "confirmed",
         "evidence": [
           {
             "kind": "provided_title",
             "detail": "Ngong Hills, January 2017"
           },
           {
+            "kind": "architecture",
+            "detail": "darker elevated ridge extending horizontally left of center in midground"
+          },
+          {
             "kind": "context",
-            "detail": "aerial view shows elevated ridge extending across midground and expansive arid terrain with distant hazy mountains"
+            "detail": "high-altitude aerial view of expansive arid terrain with distant hazy mountains"
           }
         ],
-        "confidence": 0.82
+        "confidence": 0.75
       }
     ],
     "place_candidates": [],
@@ -303,10 +307,10 @@
         },
         {
           "kind": "context",
-          "detail": "high-altitude aerial view of arid plain with elevated ridge, clustered settlement, small water body and distant hazy mountains"
+          "detail": "aerial view of expansive arid landscape with clustered settlement, winding dirt roads, small lake, and elevated ridge"
         }
       ],
-      "confidence": 0.8
+      "confidence": 0.75
     },
     "place_key": "kenya/kajiado/ngong-hills",
     "taken_from": null,
@@ -335,9 +339,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:48:10+00:00",
+        "run_at": "2026-10-27T21:34:29+00:00",
         "raw_output_path": "data/annotations/raw/hills_010_passB_attempt1.txt",
-        "tokens": 5459
+        "tokens": 5142
       }
     ],
     "human_review": {

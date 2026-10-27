@@ -303,24 +303,20 @@
     "landmarks": [],
     "place_candidates": [
       {
-        "name": "Masai Market",
+        "name": "Nairobi",
         "hierarchy": [
           "Kenya",
           "Nairobi"
         ],
-        "key": "kenya/masai-market",
+        "key": "kenya/nairobi",
         "status": "candidate",
         "evidence": [
           {
             "kind": "provided_title",
             "detail": "Nairobi Tourist market - panoramio"
-          },
-          {
-            "kind": "context",
-            "detail": "tourist market alley with hanging bags and accessories in Nairobi"
           }
         ],
-        "confidence": 0.42
+        "confidence": 0.55
       }
     ],
     "uncertainties": [
@@ -336,12 +332,12 @@
       "No local cultural terms clearly shown in image"
     ],
     "place": {
-      "name": "Nairobi",
+      "name": "Masai Market",
       "hierarchy": [
         "Kenya",
         "Nairobi"
       ],
-      "key": "kenya/nairobi",
+      "key": "kenya/masai-market",
       "status": "candidate",
       "evidence": [
         {
@@ -353,9 +349,9 @@
           "detail": "narrow covered market alley lined on both sides with stalls displaying hanging bags and accessories"
         }
       ],
-      "confidence": 0.68
+      "confidence": 0.58
     },
-    "place_key": "kenya/nairobi",
+    "place_key": "kenya/masai-market",
     "taken_from": null,
     "cultural_context": []
   },
@@ -382,9 +378,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:51:23+00:00",
+        "run_at": "2026-10-27T21:37:20+00:00",
         "raw_output_path": "data/annotations/raw/market_022_passB_attempt1.txt",
-        "tokens": 6443
+        "tokens": 8180
       }
     ],
     "human_review": {

@@ -267,7 +267,7 @@
             "detail": "At Nairobi National Museum 2025 127"
           }
         ],
-        "confidence": 0.9
+        "confidence": 0.85
       }
     ],
     "place_candidates": [],
@@ -285,7 +285,8 @@
       "name": "Nairobi National Museum",
       "hierarchy": [
         "Kenya",
-        "Nairobi"
+        "Nairobi",
+        "Nairobi National Museum"
       ],
       "key": "unknown/nairobi-national-museum",
       "status": "candidate",
@@ -293,13 +294,9 @@
         {
           "kind": "provided_title",
           "detail": "At Nairobi National Museum 2025 127"
-        },
-        {
-          "kind": "context",
-          "detail": "indoor glass display case exhibit on parquet wooden floor consistent with museum interior setting"
         }
       ],
-      "confidence": 0.9
+      "confidence": 0.85
     },
     "place_key": "unknown/nairobi-national-museum",
     "taken_from": null,
@@ -328,9 +325,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:47:13+00:00",
+        "run_at": "2026-10-27T21:33:41+00:00",
         "raw_output_path": "data/annotations/raw/cbd_016_passB_attempt1.txt",
-        "tokens": 5107
+        "tokens": 4836
       }
     ],
     "human_review": {

@@ -333,7 +333,21 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Akiba Tashiro street",
+        "key": "japan/tokyo/akiba-tashiro-street/akiba-tashiro-street",
+        "type": "street",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Akiba Tashiro street viewed from Tokyo Times Tower entrance (2010-05-04 16.13.34)"
+          }
+        ],
+        "confidence": 0.63
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact number of people due to occlusion, distance and overlapping figures",
@@ -344,29 +358,26 @@
       "Details of individual faces, identities or clothing text",
       "No landmarks from the allowed Kenya list are visible; Tokyo Times Tower in title is distinct from Nairobi Times Tower",
       "Japanese text on billboards is partially illegible and building names/functions cannot be verified",
-      "Exact street location beyond provided title cannot be independently verified from image description alone"
+      "Exact street location beyond provided title cannot be independently verified from image description alone",
+      "No landmarks from the allowed Kenya list are visible; Tokyo Times Tower in title is distinct from Nairobi Times Tower and is not identified as Times Tower"
     ],
     "place": {
-      "name": "Unknown",
+      "name": "Akiba Tashiro street",
       "hierarchy": [
         "Japan",
         "Tokyo"
       ],
-      "key": "unknown/unknown",
+      "key": "japan/tokyo/akiba-tashiro-street/akiba-tashiro-street",
       "status": "candidate",
       "evidence": [
         {
           "kind": "provided_title",
           "detail": "Akiba Tashiro street viewed from Tokyo Times Tower entrance (2010-05-04 16.13.34)"
-        },
-        {
-          "kind": "context",
-          "detail": "urban plaza with billboards containing Japanese characters and no Nairobi landmarks visible"
         }
       ],
-      "confidence": 0.93
+      "confidence": 0.63
     },
-    "place_key": "unknown/unknown",
+    "place_key": "japan/tokyo/akiba-tashiro-street/akiba-tashiro-street",
     "taken_from": {
       "name": "Tokyo Times Tower entrance",
       "hierarchy": [
@@ -381,7 +392,7 @@
           "detail": "Akiba Tashiro street viewed from Tokyo Times Tower entrance (2010-05-04 16.13.34)"
         }
       ],
-      "confidence": 0.85
+      "confidence": 0.63
     },
     "cultural_context": []
   },
@@ -408,9 +419,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:46:28+00:00",
+        "run_at": "2026-10-27T21:33:17+00:00",
         "raw_output_path": "data/annotations/raw/cbd_005_passB_attempt1.txt",
-        "tokens": 7460
+        "tokens": 9341
       }
     ],
     "human_review": {

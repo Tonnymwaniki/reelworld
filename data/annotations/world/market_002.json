@@ -280,10 +280,10 @@
         },
         {
           "kind": "context",
-          "detail": "outdoor market display of carved wooden masks and handicrafts"
+          "detail": "market display of carved wooden masks and handicrafts"
         }
       ],
-      "confidence": 0.62
+      "confidence": 0.6
     },
     "place_key": "kenya/nairobi",
     "taken_from": null,
@@ -312,9 +312,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:49:50+00:00",
+        "run_at": "2026-10-27T21:35:58+00:00",
         "raw_output_path": "data/annotations/raw/market_002_passB_attempt1.txt",
-        "tokens": 4119
+        "tokens": 5085
       }
     ],
     "human_review": {

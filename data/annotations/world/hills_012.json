@@ -264,7 +264,7 @@
             "detail": "Ngong Hills Hike"
           }
         ],
-        "confidence": 0.85
+        "confidence": 0.62
       }
     ],
     "place_candidates": [],
@@ -275,7 +275,8 @@
       "Person's identity, age, and facial features cannot be determined due to distance and resolution",
       "Exact geographic location cannot be independently verified from visual features alone; location inferred from provided_title only",
       "No visible_text or distinctive architecture present to confirm location",
-      "Camera viewpoint is ground_level on the dirt trail facing up the hillside, but no explicit taken_from evidence beyond the trail itself"
+      "Camera viewpoint is ground_level on the dirt trail facing up the hillside, but no explicit taken_from evidence beyond the trail itself",
+      "No explicit taken_from evidence beyond ground-level trail viewpoint facing up hillside"
     ],
     "place": {
       "name": "Ngong Hills",
@@ -289,13 +290,9 @@
         {
           "kind": "provided_title",
           "detail": "Ngong Hills Hike"
-        },
-        {
-          "kind": "context",
-          "detail": "grassy hillside with dirt trail and lone tree on crest under clear blue sky described as hiking scene"
         }
       ],
-      "confidence": 0.85
+      "confidence": 0.62
     },
     "place_key": "kenya/kajiado/ngong-hills",
     "taken_from": null,
@@ -324,9 +321,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:48:24+00:00",
+        "run_at": "2026-10-27T21:34:36+00:00",
         "raw_output_path": "data/annotations/raw/hills_012_passB_attempt1.txt",
-        "tokens": 6014
+        "tokens": 6055
       }
     ],
     "human_review": {

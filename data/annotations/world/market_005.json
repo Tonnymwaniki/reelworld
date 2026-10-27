@@ -394,13 +394,51 @@
           },
           {
             "kind": "architecture",
-            "detail": "large beige building with a prominent arched facade and stone detailing behind fence"
+            "detail": "large beige building with prominent arched facade and stone detailing behind fence"
+          }
+        ],
+        "confidence": 0.95
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "City Market in Nairobi"
+          },
+          {
+            "kind": "context",
+            "detail": "elevated daytime view of busy urban street intersection with parked cars, buses, pedestrians and arched building"
           }
         ],
         "confidence": 0.88
+      },
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "City Market in Nairobi"
+          }
+        ],
+        "confidence": 0.9
       }
     ],
-    "place_candidates": [],
     "uncertainties": [
       "Exact spelling of CHAPACCOY sign is partially obscured and blurry",
       "Number of people is approximate due to distance and small figure size",
@@ -412,28 +450,40 @@
       "Specific street name of intersection cannot be determined from visible evidence"
     ],
     "place": {
-      "name": "Nairobi",
+      "name": "City Market",
       "hierarchy": [
         "Kenya",
-        "Nairobi"
+        "Nairobi",
+        "CBD"
       ],
-      "key": "kenya/nairobi",
-      "status": "candidate",
+      "key": "unknown/city-market",
+      "status": "confirmed",
       "evidence": [
         {
           "kind": "provided_title",
           "detail": "City Market in Nairobi"
         },
         {
-          "kind": "context",
-          "detail": "elevated daytime view of busy urban street intersection with parked cars, buses, pedestrians and arched building"
+          "kind": "architecture",
+          "detail": "large beige building with prominent arched facade and stone detailing"
+        },
+        {
+          "kind": "visible_text",
+          "detail": "NATIONAL HOUSE"
         }
       ],
-      "confidence": 0.9
+      "confidence": 0.92
     },
-    "place_key": "kenya/nairobi",
+    "place_key": "unknown/city-market",
     "taken_from": null,
-    "cultural_context": []
+    "cultural_context": [
+      {
+        "term": "kiosk",
+        "local_name": "kiosk",
+        "language": "English",
+        "evidence": "small kiosks with red roofs behind corrugated metal fence"
+      }
+    ]
   },
   "privacy": {
     "faces_visible": false,
@@ -458,9 +508,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:50:18+00:00",
+        "run_at": "2026-10-27T21:36:13+00:00",
         "raw_output_path": "data/annotations/raw/market_005_passB_attempt1.txt",
-        "tokens": 6905
+        "tokens": 7009
       }
     ],
     "human_review": {

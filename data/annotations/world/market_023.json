@@ -329,14 +329,10 @@
           },
           {
             "kind": "architecture",
-            "detail": "multi-level open-air shopping mall courtyard surrounded by buildings with balconies and glass railings with large white tensile fabric canopies stretched over upper balconies and the lower courtyard"
-          },
-          {
-            "kind": "context",
-            "detail": "Elevated view of a multi-level outdoor shopping mall courtyard with white tensile canopy sails, colorful glass storefronts, and people dining and walking on balconies and ground level"
+            "detail": "multi-level open-air shopping mall courtyard with white tensile canopy sails, glass railings and balconies"
           }
         ],
-        "confidence": 0.94
+        "confidence": 0.95
       }
     ],
     "place_candidates": [],
@@ -348,7 +344,8 @@
       "Whether logos or text on red umbrellas and canopies are present cannot be determined",
       "Exact shop names and small sign text not legible beyond partial 'EXPERIENCE' and 'REV'",
       "Exact number of people and merchandise details uncertain due to distance, occlusion and blur",
-      "Weather conditions beyond evening lighting with warm artificial illumination cannot be determined"
+      "Weather conditions beyond evening lighting with warm artificial illumination cannot be determined",
+      "Exact number of people, merchandise details, time of day and weather cannot be determined due to distance, occlusion and lighting"
     ],
     "place": {
       "name": "The Village Market",
@@ -357,22 +354,14 @@
         "Nairobi"
       ],
       "key": "unknown/the-village-market",
-      "status": "confirmed",
+      "status": "candidate",
       "evidence": [
         {
           "kind": "provided_title",
           "detail": "Overhead view of the Village Market, Nairobi"
-        },
-        {
-          "kind": "architecture",
-          "detail": "multi-level open-air shopping mall courtyard surrounded by buildings with balconies and glass railings with large white tensile fabric canopies and colorful stained-glass windows with red, blue, yellow and green panels"
-        },
-        {
-          "kind": "context",
-          "detail": "Elevated, wide view looking down into a multi-level open-air shopping mall courtyard with potted plants, red umbrellas and paved stone courtyard floor"
         }
       ],
-      "confidence": 0.94
+      "confidence": 0.95
     },
     "place_key": "unknown/the-village-market",
     "taken_from": null,
@@ -401,9 +390,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:51:26+00:00",
+        "run_at": "2026-10-27T21:37:13+00:00",
         "raw_output_path": "data/annotations/raw/market_023_passB_attempt1.txt",
-        "tokens": 5658
+        "tokens": 5150
       }
     ],
     "human_review": {

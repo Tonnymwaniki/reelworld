@@ -256,18 +256,14 @@
         "name": "Kenyatta International Convention Centre",
         "key": "kenya/nairobi/cbd/kicc",
         "type": "building",
-        "status": "confirmed",
+        "status": "candidate",
         "evidence": [
           {
             "kind": "provided_title",
             "detail": "Kenyatta International Convention Centre, Nairobi, by Karl Henrik Nøstvik architect, entrance"
-          },
-          {
-            "kind": "architecture",
-            "detail": "multi-level brutalist concrete building with cantilevered terraces, deep overhangs, and zigzagging exterior ramps with dark metal railings"
           }
         ],
-        "confidence": 0.92
+        "confidence": 0.85
       }
     ],
     "place_candidates": [],
@@ -281,13 +277,17 @@
       "Small light-colored shape near blue pipes at bottom left cannot be confirmed as person or object",
       "Exact building name cannot be determined from exterior view alone per uncertainties; identification relies solely on provided_title",
       "Interior layout, number of floors and rooms not visible",
-      "Weather beyond visible partly cloudy sky patch unknown"
+      "Weather beyond visible partly cloudy sky patch unknown",
+      "No visible_text available to independently verify building name; text on brown stone sign on middle ramp is illegible and cut off",
+      "Exact building name, interior layout, number of floors and rooms cannot be determined from exterior view alone; identification relies solely on provided_title",
+      "Weather conditions beyond visible partly cloudy sky patch unknown"
     ],
     "place": {
       "name": "Kenyatta International Convention Centre",
       "hierarchy": [
         "Kenya",
-        "Nairobi"
+        "Nairobi",
+        "Nairobi CBD"
       ],
       "key": "kenya/nairobi/cbd/kicc",
       "status": "candidate",
@@ -297,7 +297,7 @@
           "detail": "Kenyatta International Convention Centre, Nairobi, by Karl Henrik Nøstvik architect, entrance"
         }
       ],
-      "confidence": 0.92
+      "confidence": 0.85
     },
     "place_key": "kenya/nairobi/cbd/kicc",
     "taken_from": null,
@@ -326,9 +326,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:49:17+00:00",
+        "run_at": "2026-10-27T21:35:29+00:00",
         "raw_output_path": "data/annotations/raw/landmarks_005_passB_attempt1.txt",
-        "tokens": 5305
+        "tokens": 4350
       }
     ],
     "human_review": {

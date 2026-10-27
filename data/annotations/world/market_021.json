@@ -352,10 +352,10 @@
           },
           {
             "kind": "context",
-            "detail": "tags include Kenya, market, indoor bazaar and description shows densely packed indoor craft stall with bowls, figurines, chess sets and textiles"
+            "detail": "vibrant indoor market stall displays colorful bowls, carved figurines, chess sets, masks, and hanging graphic T-shirts with vendors sitting among the goods"
           }
         ],
-        "confidence": 0.85
+        "confidence": 0.78
       }
     ],
     "place_candidates": [],
@@ -383,10 +383,10 @@
         },
         {
           "kind": "context",
-          "detail": "tags include Kenya and scene type market indoor with activity selling handmade souvenirs and textiles"
+          "detail": "indoor market stall with colorful bowls, carved animal figurines, chess sets, masks and hanging textiles; tags include Kenya and market"
         }
       ],
-      "confidence": 0.85
+      "confidence": 0.78
     },
     "place_key": "kenya/masai-market",
     "taken_from": null,
@@ -415,9 +415,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:51:15+00:00",
+        "run_at": "2026-10-27T21:37:09+00:00",
         "raw_output_path": "data/annotations/raw/market_021_passB_attempt1.txt",
-        "tokens": 6022
+        "tokens": 5455
       }
     ],
     "human_review": {

@@ -265,14 +265,18 @@
         "name": "Ngong Hills",
         "key": "kenya/kajiado/ngong-hills",
         "type": "natural",
-        "status": "candidate",
+        "status": "confirmed",
         "evidence": [
           {
             "kind": "provided_title",
             "detail": "Ngong Hills aerial view, January 2017"
+          },
+          {
+            "kind": "architecture",
+            "detail": "long, dark, steep escarpment ridge runs across the terrain in the center"
           }
         ],
-        "confidence": 0.88
+        "confidence": 0.75
       }
     ],
     "place_candidates": [],
@@ -284,7 +288,8 @@
       "Presence of people, vehicles, or animals too small to resolve at this distance cannot be determined",
       "Precise time of day, season, and weather conditions beyond visible haze and clear sky cannot be determined",
       "Exact geographic location and names of landforms cannot be independently verified from visual features alone; location relies solely on provided title",
-      "Details of small structures, roads, vegetation, altitude, aircraft type, and distant mountain peak cannot be resolved at this distance"
+      "Details of small structures, roads, vegetation, altitude, aircraft type, and distant mountain peak cannot be resolved at this distance",
+      "No visible text present to support location identification"
     ],
     "place": {
       "name": "Ngong Hills",
@@ -298,9 +303,13 @@
         {
           "kind": "provided_title",
           "detail": "Ngong Hills aerial view, January 2017"
+        },
+        {
+          "kind": "context",
+          "detail": "Aerial view of a vast arid plateau with a dark escarpment ridge under a clear blue sky and hazy distant horizon"
         }
       ],
-      "confidence": 0.88
+      "confidence": 0.75
     },
     "place_key": "kenya/kajiado/ngong-hills",
     "taken_from": null,
@@ -329,9 +338,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:48:33+00:00",
+        "run_at": "2026-10-27T21:34:50+00:00",
         "raw_output_path": "data/annotations/raw/hills_018_passB_attempt1.txt",
-        "tokens": 4768
+        "tokens": 4776
       }
     ],
     "human_review": {

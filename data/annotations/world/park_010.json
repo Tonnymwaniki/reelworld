@@ -319,12 +319,20 @@
             "detail": "PARK"
           },
           {
+            "kind": "visible_text",
+            "detail": "Karibu"
+          },
+          {
             "kind": "provided_title",
             "detail": "Name sign, Uhuru Park, 2025 (01)"
           },
           {
             "kind": "architecture",
             "detail": "curved gray concrete entrance wall with large raised black 3D letters and vertical red, green, black and white stripes"
+          },
+          {
+            "kind": "context",
+            "detail": "caption describes curved concrete entrance wall to Uhuru Park displaying large black 3D letters and colorful vertical stripes"
           }
         ],
         "confidence": 0.98
@@ -337,14 +345,14 @@
       "Material composition of wall, letters and emblem beyond visual appearance",
       "Time and date the photo was taken cannot be determined",
       "Whether additional signs or text exist outside the cropped frame",
-      "Whether additional signs or text exist outside the cropped frame is unknown"
+      "Whether additional signs or text exist outside the cropped frame is unknown",
+      "Material composition of wall, letters and emblem beyond visual appearance cannot be determined"
     ],
     "place": {
       "name": "Uhuru Park",
       "hierarchy": [
         "Kenya",
-        "Nairobi",
-        "Uhuru Park"
+        "Nairobi"
       ],
       "key": "kenya/nairobi/uhuru-park",
       "status": "confirmed",
@@ -363,7 +371,11 @@
         },
         {
           "kind": "architecture",
-          "detail": "curved concrete entrance wall displaying large black 3D letters spelling UHURU PARK"
+          "detail": "curved gray concrete entrance wall filling most of frame with large raised black letters spelling UHURU and PARK"
+        },
+        {
+          "kind": "context",
+          "detail": "scene type is park and tags include Uhuru Park"
         }
       ],
       "confidence": 0.98
@@ -375,7 +387,7 @@
         "term": "Karibu",
         "local_name": "Karibu",
         "language": "Swahili",
-        "evidence": "visible_text 'Karibu' on entrance wall"
+        "evidence": "visible_text 'Karibu' on entrance wall below UHURU PARK"
       }
     ]
   },
@@ -402,9 +414,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:52:22+00:00",
+        "run_at": "2026-10-27T21:38:17+00:00",
         "raw_output_path": "data/annotations/raw/park_010_passB_attempt1.txt",
-        "tokens": 5527
+        "tokens": 6294
       }
     ],
     "human_review": {

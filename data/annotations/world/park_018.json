@@ -339,7 +339,7 @@
         "name": "Uhuru Park",
         "key": "kenya/nairobi/uhuru-park",
         "type": "park",
-        "status": "candidate",
+        "status": "confirmed",
         "evidence": [
           {
             "kind": "provided_title",
@@ -347,10 +347,14 @@
           },
           {
             "kind": "context",
-            "detail": "outdoor park scene with sloping grassy hill dotted with small trees and distant figures sitting and walking, paved parking area with buses and vans, described as outdoor park in daytime"
+            "detail": "outdoor park scene with sloping grassy hill dotted with small trees and people resting and walking on grass, paved parking area with buses separated by low stone retaining wall"
+          },
+          {
+            "kind": "architecture",
+            "detail": "large sloping grassy hill with scattered trees and low stone retaining wall separating parking area from hill"
           }
         ],
-        "confidence": 0.9
+        "confidence": 0.92
       }
     ],
     "place_candidates": [],
@@ -368,8 +372,7 @@
       "name": "Uhuru Park",
       "hierarchy": [
         "Kenya",
-        "Nairobi",
-        "Uhuru Park"
+        "Nairobi"
       ],
       "key": "kenya/nairobi/uhuru-park",
       "status": "candidate",
@@ -380,10 +383,10 @@
         },
         {
           "kind": "context",
-          "detail": "scene type is park with grassy hill, scattered trees, people resting and walking, and paved parking area holding yellow school buses and white vans"
+          "detail": "scene type park, outdoor daytime with grassy hill, paved parking area holding two yellow school buses and two white vans, dense shrubs and utility pole in foreground"
         }
       ],
-      "confidence": 0.9
+      "confidence": 0.92
     },
     "place_key": "kenya/nairobi/uhuru-park",
     "taken_from": null,
@@ -412,9 +415,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:53:05+00:00",
+        "run_at": "2026-10-27T21:39:02+00:00",
         "raw_output_path": "data/annotations/raw/park_018_passB_attempt1.txt",
-        "tokens": 5956
+        "tokens": 5203
       }
     ],
     "human_review": {

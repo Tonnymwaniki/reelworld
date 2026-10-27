@@ -279,9 +279,13 @@
           {
             "kind": "provided_title",
             "detail": "Ngong Hills IMG 4747 (5849851051)"
+          },
+          {
+            "kind": "context",
+            "detail": "wide elevated view of rolling grassy hills and valley at dawn with dense green trees and red-tiled house in foreground"
           }
         ],
-        "confidence": 0.85
+        "confidence": 0.71
       }
     ],
     "place_candidates": [],
@@ -292,7 +296,9 @@
       "Text on any distant signs if present is unreadable due to distance and haze",
       "Exact species of trees and condition of foliage in shadow areas",
       "Exact geographic location and identity of distant hills and settlement beyond provided title cannot be independently verified from visual features",
-      "No visible text to corroborate location"
+      "No visible text to corroborate location",
+      "Exact geographic location and identity of distant hills and settlement beyond provided title cannot be independently verified from visual features alone",
+      "Whether low sun is sunrise or sunset cannot be determined from image alone"
     ],
     "place": {
       "name": "Ngong Hills",
@@ -309,10 +315,10 @@
         },
         {
           "kind": "context",
-          "detail": "wide elevated view of rolling green hills and valley at dawn with pale sky, scattered clouds and soft light over distant undulating grassy terrain"
+          "detail": "rolling hills and grassy plains stretching across horizon behind valley with scattered small buildings and trees"
         }
       ],
-      "confidence": 0.84
+      "confidence": 0.7
     },
     "place_key": "kenya/kajiado/ngong-hills",
     "taken_from": null,
@@ -341,9 +347,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:48:22+00:00",
+        "run_at": "2026-10-27T21:34:32+00:00",
         "raw_output_path": "data/annotations/raw/hills_013_passB_attempt1.txt",
-        "tokens": 5091
+        "tokens": 4924
       }
     ],
     "human_review": {

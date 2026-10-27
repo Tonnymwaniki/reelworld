@@ -389,7 +389,7 @@
           "detail": "Early morning street view in Nairobi, Kenya"
         }
       ],
-      "confidence": 0.85
+      "confidence": 0.9
     },
     "place_key": "kenya/nairobi",
     "taken_from": null,
@@ -418,9 +418,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:53:43+00:00",
-        "raw_output_path": "data/annotations/raw/street_002_passB_attempt1.txt",
-        "tokens": 4721
+        "run_at": "2026-10-27T21:39:59+00:00",
+        "raw_output_path": "data/annotations/raw/street_002_passB_attempt2.txt",
+        "tokens": 4632
       }
     ],
     "human_review": {

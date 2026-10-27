@@ -262,10 +262,10 @@
           },
           {
             "kind": "context",
-            "detail": "green vegetated hill ridge stretching across horizon with several wind turbines silhouetted along its crest"
+            "detail": "green vegetated hill ridge stretches across the horizon with several wind turbines silhouetted along its crest"
           }
         ],
-        "confidence": 0.78
+        "confidence": 0.65
       }
     ],
     "place_candidates": [],
@@ -277,7 +277,10 @@
       "Presence or absence of people, animals, or vehicles in the distant valley cannot be confirmed due to distance and resolution",
       "Exact geographic location of the hill cannot be independently verified beyond provided_title",
       "Exact number of wind turbines is uncertain due to distance and partial occlusion",
-      "No visible text, people, or distinctive architecture to confirm location beyond title and landscape features"
+      "No visible text, people, or distinctive architecture to confirm location beyond title and landscape features",
+      "Exact geographic location cannot be independently verified beyond provided_title",
+      "No visible text, distinctive architecture, or people to confirm location",
+      "No evidence to determine camera location (taken_from)"
     ],
     "place": {
       "name": "Ngong Hills",
@@ -294,10 +297,10 @@
         },
         {
           "kind": "context",
-          "detail": "green vegetated hill ridge with wind turbines silhouetted along its crest under cloudy sky"
+          "detail": "green vegetated hill ridge stretches across the horizon with several wind turbines silhouetted along its crest under large cumulus clouds, with valley and trees in foreground"
         }
       ],
-      "confidence": 0.78
+      "confidence": 0.65
     },
     "place_key": "kenya/kajiado/ngong-hills",
     "taken_from": null,
@@ -326,9 +329,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:47:36+00:00",
+        "run_at": "2026-10-27T21:34:02+00:00",
         "raw_output_path": "data/annotations/raw/hills_002_passB_attempt1.txt",
-        "tokens": 4559
+        "tokens": 4413
       }
     ],
     "human_review": {

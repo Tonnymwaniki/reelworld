@@ -329,14 +329,14 @@
           },
           {
             "kind": "architecture",
-            "detail": "grassy park with ponds and bridges, two small ponds with green footbridges surrounded by mown lawns, trees, and two small white buildings with turquoise trim"
+            "detail": "grassy park with ponds and bridges - expansive green area with water bodies and bridges between foreground path and distant roadway"
           },
           {
             "kind": "context",
-            "detail": "wide view of a grassy urban park with ponds and scattered people in the foreground and a cluster of modern high-rise buildings in the background under a pale sky"
+            "detail": "two small ponds with green footbridges, surrounded by mown lawns, trees, and two small white buildings with turquoise trim on the right"
           }
         ],
-        "confidence": 0.96
+        "confidence": 0.94
       },
       {
         "name": "Kenyatta International Convention Centre",
@@ -346,67 +346,34 @@
         "evidence": [
           {
             "kind": "architecture",
-            "detail": "cylindrical tower with helipad, cylindrical brown flat top with structure, round tall building with flat top on left side of skyline"
+            "detail": "cylindrical tower with helipad - round tall building with flat top on left side of skyline"
           },
           {
             "kind": "context",
-            "detail": "part of cluster of modern high-rise buildings in background dominated by several tall skyscrapers of varying designs"
+            "detail": "background is dominated by several tall skyscrapers including a cylindrical tower on the left"
           }
         ],
-        "confidence": 0.92
-      },
-      {
-        "name": "Nairobi CBD",
-        "key": "kenya/nairobi/cbd",
-        "type": "district",
-        "status": "candidate",
-        "evidence": [
-          {
-            "kind": "provided_title",
-            "detail": "Uhuru Park in Nairobi, Kenya, during sunset"
-          },
-          {
-            "kind": "context",
-            "detail": "cluster of modern high-rise buildings in the background including tall brown reflective skyscraper on right, twin blue-glass towers in center, and cylindrical tower on left"
-          }
-        ],
-        "confidence": 0.89
+        "confidence": 0.88
       }
     ],
     "place_candidates": [
       {
-        "name": "Nairobi",
-        "hierarchy": [
-          "Kenya",
-          "Nairobi"
-        ],
-        "key": "kenya/nairobi",
-        "status": "candidate",
-        "evidence": [
-          {
-            "kind": "provided_title",
-            "detail": "Uhuru Park in Nairobi, Kenya, during sunset"
-          },
-          {
-            "kind": "context",
-            "detail": "urban park with city skyline of modern high-rise buildings in background"
-          }
-        ],
-        "confidence": 0.85
-      },
-      {
-        "name": "Teleposta Towers",
+        "name": "Nairobi CBD",
         "hierarchy": [
           "Kenya",
           "Nairobi",
           "CBD"
         ],
-        "key": "kenya/nairobi/cbd/teleposta-towers",
-        "status": "candidate",
+        "key": "kenya/nairobi/cbd",
+        "status": "confirmed",
         "evidence": [
           {
+            "kind": "context",
+            "detail": "cluster of modern high-rise buildings in the background including a brown reflective tower on the right, twin blue-glass towers in the center, and a cylindrical tower on the left"
+          },
+          {
             "kind": "architecture",
-            "detail": "tall brown reflective skyscraper, brown glass facade, rectangular, tall, antenna on roof, dominant tall brown glass tower on right side of skyline reflecting light"
+            "detail": "tall brown reflective skyscraper on right side of skyline and twin blue-glass high-rise towers in center"
           }
         ],
         "confidence": 0.62
@@ -420,7 +387,10 @@
       "Details of vehicles or activity on the distant elevated roadway are not visible",
       "Exact number of people in distant group on grass cannot be determined due to distance and resolution",
       "Details of vehicles or activity on distant elevated roadway are not visible",
-      "Exact time of day beyond clear daylight with warm late-afternoon light cannot be confirmed"
+      "Exact time of day beyond clear daylight with warm late-afternoon light cannot be confirmed",
+      "Exact number of people in the distant group on the grass and on the dirt path cannot be determined due to distance and resolution",
+      "Text or signage on distant high-rise buildings is not legible and cannot be transcribed - visible_text is empty",
+      "Camera viewpoint is elevated and raised facing toward city skyline across park with rocky outcrop and grass in immediate foreground, but specific taken_from location is not named in provided information"
     ],
     "place": {
       "name": "Uhuru Park",
@@ -438,14 +408,14 @@
         },
         {
           "kind": "architecture",
-          "detail": "grassy park with ponds and bridges, two small ponds with green footbridges, mown lawns, trees, and dirt pathway with people walking and sitting"
+          "detail": "grassy park with ponds and bridges with two small ponds with green footbridges surrounded by mown lawns and trees"
         },
         {
           "kind": "context",
-          "detail": "wide view of a grassy urban park with ponds and scattered people in foreground and cluster of modern high-rise buildings in background"
+          "detail": "wide view of a grassy urban park with ponds and scattered people in the foreground and a cluster of modern high-rise buildings in the background under a pale sky"
         }
       ],
-      "confidence": 0.96
+      "confidence": 0.93
     },
     "place_key": "kenya/nairobi/uhuru-park",
     "taken_from": null,
@@ -474,9 +444,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:53:38+00:00",
+        "run_at": "2026-10-27T21:39:39+00:00",
         "raw_output_path": "data/annotations/raw/park_024_passB_attempt1.txt",
-        "tokens": 8511
+        "tokens": 7487
       }
     ],
     "human_review": {

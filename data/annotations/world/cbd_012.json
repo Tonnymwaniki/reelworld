@@ -378,7 +378,7 @@
             "detail": "Citi Hoppa UD MKB 210 368, Mama Ngina Street, 2025 (01)"
           }
         ],
-        "confidence": 0.96
+        "confidence": 0.92
       }
     ],
     "place_candidates": [],
@@ -391,7 +391,8 @@
       "Specific destination, route or time information beyond visible bus signs cannot be determined",
       "No visible street-name sign in image; location derived solely from provided_title",
       "Identities of tall cylindrical high-rise and rectangular high-rise buildings in background cannot be determined from description alone without outside knowledge",
-      "Exact bus routes, destinations and distant billboard text not legible"
+      "Exact bus routes, destinations and distant billboard text not legible",
+      "Exact bus routes, destinations, license plates and distant billboard text not legible"
     ],
     "place": {
       "name": "Mama Ngina Street",
@@ -408,7 +409,7 @@
           "detail": "Citi Hoppa UD MKB 210 368, Mama Ngina Street, 2025 (01)"
         }
       ],
-      "confidence": 0.94
+      "confidence": 0.92
     },
     "place_key": "unknown/mama-ngina-street",
     "taken_from": null,
@@ -437,9 +438,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:47:08+00:00",
+        "run_at": "2026-10-27T21:33:28+00:00",
         "raw_output_path": "data/annotations/raw/cbd_012_passB_attempt1.txt",
-        "tokens": 8026
+        "tokens": 5573
       }
     ],
     "human_review": {

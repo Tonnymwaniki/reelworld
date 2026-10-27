@@ -267,7 +267,8 @@ def process(client, path, registry, notes, force):
     if data is None:
         return pid, "FAILED: no valid JSON", None
 
-    vt_texts = [t["text"] for t in rec["observed"]["visible_text"] if t.get("text")]
+    vt_texts = [t["text"] for t in rec["observed"]["visible_text"]
+    if t.get("text") and t.get("legibility") == "clear"]
 
     landmarks = []
     for lm in data["landmarks"]:

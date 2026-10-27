@@ -277,13 +277,55 @@
           },
           {
             "kind": "context",
-            "detail": "wide panoramic outdoor view with grassy urban park in foreground containing scattered green trees, open grassy areas, small reflective pond on center-right, and long covered pavilions with crowd gathering on grass"
+            "detail": "grassy urban park in foreground with scattered green trees, open grassy areas, small reflective pond on center-right, and long covered pavilions with metal roofs"
           }
         ],
-        "confidence": 0.9
+        "confidence": 0.88
       }
     ],
-    "place_candidates": [],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi UhuruPark Panorama 2010"
+          },
+          {
+            "kind": "context",
+            "detail": "dense skyline of numerous high-rise buildings of varying heights behind park"
+          }
+        ],
+        "confidence": 0.85
+      },
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi UhuruPark Panorama 2010"
+          },
+          {
+            "kind": "context",
+            "detail": "dense skyline of numerous high-rise buildings stretching across horizon behind park"
+          }
+        ],
+        "confidence": 0.68
+      }
+    ],
     "uncertainties": [
       "Exact number of people in park cannot be determined due to distance and resolution",
       "Text on banner on prominent yellow-brown building is illegible and cannot be read",
@@ -295,7 +337,11 @@
       "Exact time of day beyond daytime and weather beyond partly cloudy cannot be determined",
       "Specific names and functions of high-rise buildings in skyline cannot be determined from image alone",
       "Exact number and details of people in park cannot be determined due to distance and resolution",
-      "Exact time beyond daytime and weather beyond partly cloudy cannot be determined"
+      "Exact time beyond daytime and weather beyond partly cloudy cannot be determined",
+      "Specific building names or functions in skyline cannot be determined from image alone",
+      "Exact number of people and purpose of gathering in park cannot be determined due to distance and resolution",
+      "Exact geographic location not visible as legible text in image; location inferred only from provided_title",
+      "Vehicle models, license plates and individual details not resolvable"
     ],
     "place": {
       "name": "Uhuru Park",
@@ -313,7 +359,7 @@
         },
         {
           "kind": "context",
-          "detail": "crowded urban park with trees, pavilions and pond in foreground and dense city skyline with high-rise buildings in background; scene type park with crowd gathering and sitting on grass"
+          "detail": "panoramic daytime view of crowded urban park with trees, pavilions and pond in foreground and dense city skyline with tall buildings in background"
         }
       ],
       "confidence": 0.9
@@ -345,9 +391,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:52:13+00:00",
+        "run_at": "2026-10-27T21:38:00+00:00",
         "raw_output_path": "data/annotations/raw/park_007_passB_attempt1.txt",
-        "tokens": 6570
+        "tokens": 7449
       }
     ],
     "human_review": {

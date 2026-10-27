@@ -327,13 +327,9 @@
           {
             "kind": "architecture",
             "detail": "tall cylindrical high-rise tower with horizontal window bands and flat disc-shaped roof beside low wide building with dark conical roof on dark horizontal podium structure"
-          },
-          {
-            "kind": "context",
-            "detail": "caption describes tall cylindrical tower with disc-shaped roof stands beside conical-roof building behind fenced plaza under clear sky"
           }
         ],
-        "confidence": 0.96
+        "confidence": 0.97
       }
     ],
     "place_candidates": [],
@@ -344,7 +340,8 @@
       "Details of the statue figure and interior of buildings are not discernible",
       "Exact time of day and date cannot be determined beyond daytime with clear weather",
       "No legible visible_text in image; location identification relies on provided_title",
-      "Exact function, interior details and statue identity not discernible from image alone"
+      "Exact function, interior details and statue identity not discernible from image alone",
+      "Exact function, interior details, statue identity and precise date not discernible from image alone"
     ],
     "place": {
       "name": "Kenyatta International Convention Centre",
@@ -361,11 +358,7 @@
         },
         {
           "kind": "architecture",
-          "detail": "tall cylindrical high-rise tower with horizontal window bands and flat disc-shaped roof dominates center-left with low conical-roof building to its right, both on dark podium"
-        },
-        {
-          "kind": "context",
-          "detail": "provided_title locates subject in Nairobi, Kenya"
+          "detail": "tall cylindrical tower with disc-shaped roof and conical-roof building behind fenced plaza as described"
         }
       ],
       "confidence": 0.96
@@ -397,9 +390,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:49:00+00:00",
+        "run_at": "2026-10-27T21:35:24+00:00",
         "raw_output_path": "data/annotations/raw/landmarks_001_passB_attempt1.txt",
-        "tokens": 4782
+        "tokens": 7802
       }
     ],
     "human_review": {

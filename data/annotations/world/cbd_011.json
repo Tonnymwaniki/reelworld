@@ -279,7 +279,7 @@
             "detail": "Bravin Yuri at Hilton Inn Hotel in Nairobi, Kenya"
           }
         ],
-        "confidence": 0.65
+        "confidence": 0.6
       }
     ],
     "place_candidates": [
@@ -309,14 +309,15 @@
       "No legible text is visible on signs or labels; any text on wall art is not legible as letters",
       "No visible text or distinctive architectural features are visible to independently verify hotel or city; location inference relies solely on provided_title",
       "Indoor setting shows generic furnishings (yellow patterned armchair, abstract wall artworks, side table, patterned rug) with no geographic indicators",
-      "Exact building name, city, time of day, and person identity cannot be determined from visual content alone"
+      "Exact building name, city, time of day, and person identity cannot be determined from visual content alone",
+      "Exact building name variant Hilton Inn Hotel vs Hilton Nairobi cannot be verified from visual content alone",
+      "Time of day, date, and material composition cannot be determined from visual content"
     ],
     "place": {
       "name": "Hilton Nairobi",
       "hierarchy": [
         "Kenya",
-        "Nairobi",
-        "CBD"
+        "Nairobi"
       ],
       "key": "kenya/nairobi/cbd/hilton-nairobi",
       "status": "candidate",
@@ -326,7 +327,7 @@
           "detail": "Bravin Yuri at Hilton Inn Hotel in Nairobi, Kenya"
         }
       ],
-      "confidence": 0.64
+      "confidence": 0.6
     },
     "place_key": "kenya/nairobi/cbd/hilton-nairobi",
     "taken_from": null,
@@ -355,9 +356,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:47:01+00:00",
+        "run_at": "2026-10-27T21:33:30+00:00",
         "raw_output_path": "data/annotations/raw/cbd_011_passB_attempt1.txt",
-        "tokens": 6869
+        "tokens": 5935
       }
     ],
     "human_review": {

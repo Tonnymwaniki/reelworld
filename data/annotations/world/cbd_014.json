@@ -309,7 +309,11 @@
       "Details of the outdoor area beyond the windows are overexposed and blurred",
       "Exact time of day beyond daylight and indoor lighting conditions",
       "No identifiable landmark, signage, or location-specific architecture visible; exact geographic location cannot be determined from provided description",
-      "Exact ingredients or name of blue beverage cannot be determined from appearance alone"
+      "Exact ingredients or name of blue beverage cannot be determined from appearance alone",
+      "Exact geographic location cannot be determined from provided description",
+      "No visible text or distinctive architecture to identify place",
+      "Exact ingredients or name of blue beverage cannot be determined",
+      "Details of outdoor area beyond windows are overexposed and blurred"
     ],
     "place": {
       "name": "Unknown",
@@ -321,10 +325,14 @@
       "evidence": [
         {
           "kind": "context",
-          "detail": "Photo shows generic indoor cafe interior with wooden tables, mesh chairs, and bright windows; no visible text, distinctive architecture, or geographic markers to identify location"
+          "detail": "No identifiable landmark, signage, or location-specific architecture visible; exact geographic location cannot be determined from provided description"
+        },
+        {
+          "kind": "context",
+          "detail": "Photo shows sunlit indoor cafe setting with wooden tables, mesh chairs, and bright windows - generic interior with no location-specific features"
         }
       ],
-      "confidence": 0.99
+      "confidence": 1.0
     },
     "place_key": "unknown/unknown",
     "taken_from": null,
@@ -353,9 +361,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:47:00+00:00",
+        "run_at": "2026-10-27T21:33:37+00:00",
         "raw_output_path": "data/annotations/raw/cbd_014_passB_attempt1.txt",
-        "tokens": 4292
+        "tokens": 4226
       }
     ],
     "human_review": {

@@ -350,7 +350,7 @@
       {
         "name": "WEST PARK TOWERS",
         "key": "unknown/west-park-towers",
-        "type": "other",
+        "type": "building",
         "status": "confirmed",
         "evidence": [
           {
@@ -387,7 +387,7 @@
           "detail": "Nairobi street"
         }
       ],
-      "confidence": 0.88
+      "confidence": 0.9
     },
     "place_key": "kenya/nairobi",
     "taken_from": null,
@@ -416,9 +416,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:55:47+00:00",
+        "run_at": "2026-10-27T21:41:14+00:00",
         "raw_output_path": "data/annotations/raw/street_024_passB_attempt1.txt",
-        "tokens": 7338
+        "tokens": 4998
       }
     ],
     "human_review": {

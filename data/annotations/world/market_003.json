@@ -305,12 +305,8 @@
         "name": "Artcaffe Market",
         "key": "unknown/artcaffe-market",
         "type": "market",
-        "status": "confirmed",
+        "status": "candidate",
         "evidence": [
-          {
-            "kind": "visible_text",
-            "detail": "Artcaffe Market"
-          },
           {
             "kind": "provided_title",
             "detail": "Art cafe market in Nairobi- Kenya 1"
@@ -326,7 +322,9 @@
       "Time of day and weather outside cannot be determined from this indoor photo with artificial lighting",
       "Details of the far background area including escalator and distant walls are indistinct",
       "Exact location within Nairobi cannot be determined from indoor view with no exterior features",
-      "Time of day and weather cannot be determined due to indoor artificial lighting"
+      "Time of day and weather cannot be determined due to indoor artificial lighting",
+      "Exact number of people in dim background behind counter is uncertain due to shadows and low light",
+      "Details of far background area including escalator and distant walls are indistinct"
     ],
     "place": {
       "name": "Artcaffe Market",
@@ -335,19 +333,11 @@
         "Nairobi"
       ],
       "key": "unknown/artcaffe-market",
-      "status": "confirmed",
+      "status": "candidate",
       "evidence": [
-        {
-          "kind": "visible_text",
-          "detail": "Artcaffe Market"
-        },
         {
           "kind": "provided_title",
           "detail": "Art cafe market in Nairobi- Kenya 1"
-        },
-        {
-          "kind": "context",
-          "detail": "Indoor dining area with wooden tables and folding chairs beside a stone arch and potted plants, with a wall sign in the background"
         }
       ],
       "confidence": 0.88
@@ -379,9 +369,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:50:03+00:00",
+        "run_at": "2026-10-27T21:36:08+00:00",
         "raw_output_path": "data/annotations/raw/market_003_passB_attempt1.txt",
-        "tokens": 5610
+        "tokens": 5650
       }
     ],
     "human_review": {

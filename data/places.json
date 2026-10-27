@@ -297,5 +297,10 @@
     "name": "WEST PARK TOWERS",
     "type": "other",
     "aliases": []
+  },
+  "unknown/i-m-building": {
+    "name": "I&M Building",
+    "type": "building",
+    "aliases": []
   }
 }

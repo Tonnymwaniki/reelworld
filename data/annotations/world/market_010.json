@@ -293,7 +293,25 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Masai Market",
+        "key": "kenya/masai-market",
+        "type": "market",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Masai Market Nairobi 01"
+          },
+          {
+            "kind": "context",
+            "detail": "vibrant outdoor market stall displays colorful patterned fabrics, dresses, beaded jewelry and wooden crafts along a paved aisle"
+          }
+        ],
+        "confidence": 0.65
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact geographic location of the market cannot be determined",
@@ -303,25 +321,33 @@
       "Whether the partially visible person on the far right is shopping or passing by cannot be determined",
       "Exact geographic location of the market cannot be determined from visual evidence alone",
       "No visible text or distinctive architecture visible to confirm specific market location",
-      "Provided title suggests Masai Market in Nairobi but visual confirmation is limited to generic outdoor market stall with colorful fabrics and crafts"
+      "Provided title suggests Masai Market in Nairobi but visual confirmation is limited to generic outdoor market stall with colorful fabrics and crafts",
+      "Exact geographic location cannot be determined from visual evidence alone - no visible text or distinctive architecture visible",
+      "Location inferred only from provided_title 'Masai Market Nairobi 01'; visual confirmation limited to generic outdoor market stall with colorful fabrics and crafts",
+      "Text on red plastic crate not legible",
+      "Identities and activities of people cannot be determined"
     ],
     "place": {
-      "name": "Nairobi",
+      "name": "Masai Market",
       "hierarchy": [
         "Kenya",
         "Nairobi"
       ],
-      "key": "kenya/nairobi",
+      "key": "kenya/masai-market",
       "status": "candidate",
       "evidence": [
         {
           "kind": "provided_title",
           "detail": "Masai Market Nairobi 01"
+        },
+        {
+          "kind": "context",
+          "detail": "outdoor market scene with canopy stalls, hanging patterned fabrics, beaded bracelets and wooden crafts along paved pathway"
         }
       ],
-      "confidence": 0.65
+      "confidence": 0.62
     },
-    "place_key": "kenya/nairobi",
+    "place_key": "kenya/masai-market",
     "taken_from": null,
     "cultural_context": []
   },
@@ -348,9 +374,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:50:36+00:00",
+        "run_at": "2026-10-27T21:36:28+00:00",
         "raw_output_path": "data/annotations/raw/market_010_passB_attempt1.txt",
-        "tokens": 6079
+        "tokens": 4845
       }
     ],
     "human_review": {

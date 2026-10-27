@@ -282,29 +282,7 @@
   },
   "inferred": {
     "landmarks": [],
-    "place_candidates": [
-      {
-        "name": "Nairobi CBD",
-        "hierarchy": [
-          "Kenya",
-          "Nairobi",
-          "CBD"
-        ],
-        "key": "kenya/nairobi/cbd",
-        "status": "candidate",
-        "evidence": [
-          {
-            "kind": "context",
-            "detail": "dense urban cityscape with high-rise towers and downtown high-rise buildings"
-          },
-          {
-            "kind": "provided_title",
-            "detail": "Nairobi view 1 (949939763)"
-          }
-        ],
-        "confidence": 0.52
-      }
-    ],
+    "place_candidates": [],
     "uncertainties": [
       "Exact city and building names cannot be determined from visible features alone",
       "Smaller text below the main slogan on the billboard and the small logo in the corner are not legible due to distance and blur",
@@ -314,7 +292,9 @@
       "Exact time of day and weather conditions beyond hazy daylight cannot be determined",
       "Exact city and building names cannot be determined from visible features alone per uncertainties",
       "Smaller text below main billboard slogan and distant building signs not legible due to distance and blur",
-      "No evidence to confidently identify specific towers such as Kenyatta International Convention Centre or Times Tower from description alone"
+      "No evidence to confidently identify specific towers such as Kenyatta International Convention Centre or Times Tower from description alone",
+      "Exact city and building names cannot be determined from visible features alone per uncertainties; place inference relies on provided_title",
+      "Smaller text below the main billboard slogan and distant building signs are not legible due to distance and blur"
     ],
     "place": {
       "name": "Nairobi",
@@ -331,7 +311,7 @@
         },
         {
           "kind": "context",
-          "detail": "Elevated wide view of a dense city skyline with high-rise towers and downtown high-rise buildings"
+          "detail": "Elevated wide view of a dense city skyline with high-rise towers described as downtown"
         }
       ],
       "confidence": 0.88
@@ -363,9 +343,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:47:28+00:00",
+        "run_at": "2026-10-27T21:33:55+00:00",
         "raw_output_path": "data/annotations/raw/cbd_020_passB_attempt1.txt",
-        "tokens": 6811
+        "tokens": 5476
       }
     ],
     "human_review": {

@@ -266,21 +266,25 @@
   "inferred": {
     "landmarks": [
       {
-        "name": "The Village Market",
-        "key": "unknown/the-village-market",
-        "type": "other",
+        "name": "Masai Market",
+        "key": "kenya/masai-market",
+        "type": "market",
         "status": "candidate",
         "evidence": [
           {
             "kind": "provided_title",
             "detail": "The Maasai Markets in Nairobi on the rooftop at The Village Market 01"
+          },
+          {
+            "kind": "context",
+            "detail": "Shoppers browse art and craft stalls under a large corrugated metal roof in a covered open-air market."
           }
         ],
-        "confidence": 0.92
+        "confidence": 0.85
       },
       {
-        "name": "Masai Market",
-        "key": "kenya/masai-market",
+        "name": "The Village Market",
+        "key": "unknown/the-village-market",
         "type": "market",
         "status": "candidate",
         "evidence": [
@@ -297,8 +301,7 @@
         "name": "The Village Market",
         "hierarchy": [
           "Kenya",
-          "Nairobi",
-          "The Village Market"
+          "Nairobi"
         ],
         "key": "unknown/the-village-market",
         "status": "candidate",
@@ -335,28 +338,16 @@
         {
           "kind": "provided_title",
           "detail": "The Maasai Markets in Nairobi on the rooftop at The Village Market 01"
+        },
+        {
+          "kind": "context",
+          "detail": "wide covered market hall with corrugated metal roof supported by dark green steel beams and market stalls displaying framed paintings, textiles, clothing and crafts"
         }
       ],
-      "confidence": 0.88
+      "confidence": 0.85
     },
     "place_key": "kenya/masai-market",
-    "taken_from": {
-      "name": "The Village Market",
-      "hierarchy": [
-        "Kenya",
-        "Nairobi",
-        "The Village Market"
-      ],
-      "key": "unknown/the-village-market",
-      "status": "candidate",
-      "evidence": [
-        {
-          "kind": "provided_title",
-          "detail": "The Maasai Markets in Nairobi on the rooftop at The Village Market 01"
-        }
-      ],
-      "confidence": 0.88
-    },
+    "taken_from": null,
     "cultural_context": []
   },
   "privacy": {
@@ -382,9 +373,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:51:41+00:00",
+        "run_at": "2026-10-27T21:37:20+00:00",
         "raw_output_path": "data/annotations/raw/market_025_passB_attempt1.txt",
-        "tokens": 8723
+        "tokens": 5605
       }
     ],
     "human_review": {

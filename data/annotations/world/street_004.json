@@ -349,17 +349,12 @@
             "detail": "TIMES TOWER"
           }
         ],
-        "confidence": 0.97
-      }
-    ],
-    "place_candidates": [
+        "confidence": 0.98
+      },
       {
-        "name": "Nairobi",
-        "hierarchy": [
-          "Kenya",
-          "Nairobi"
-        ],
-        "key": "kenya/nairobi",
+        "name": "Haile Selassie Avenue",
+        "key": "kenya/nairobi/haile-selassie-avenue",
+        "type": "street",
         "status": "candidate",
         "evidence": [
           {
@@ -367,30 +362,10 @@
             "detail": "Haile Selassie Avenue (Nairobi), 2025 (02)"
           }
         ],
-        "confidence": 0.9
-      },
-      {
-        "name": "Nairobi CBD",
-        "hierarchy": [
-          "Kenya",
-          "Nairobi",
-          "CBD"
-        ],
-        "key": "kenya/nairobi/cbd",
-        "status": "confirmed",
-        "evidence": [
-          {
-            "kind": "context",
-            "detail": "wide multi-lane roadway through dense urban area with tall buildings and heavy traffic"
-          },
-          {
-            "kind": "visible_text",
-            "detail": "TIMES TOWER"
-          }
-        ],
-        "confidence": 0.62
+        "confidence": 0.92
       }
     ],
+    "place_candidates": [],
     "uncertainties": [
       "exact city and street name cannot be determined from image alone",
       "exact number of pedestrians and vehicles due to distance and occlusion",
@@ -401,7 +376,10 @@
       "building names and functions beyond visible TIMES TOWER text are unknown",
       "exact building identities beyond TIMES TOWER text cannot be determined from image alone",
       "vehicle makes, models and license plates not clearly readable",
-      "exact time of day and temperature cannot be determined"
+      "exact time of day and temperature cannot be determined",
+      "Exact building identities beyond TIMES TOWER cannot be determined from image alone",
+      "Exact number of pedestrians and vehicles cannot be determined due to distance and occlusion",
+      "Text on distant billboards and smaller text on BOOK THESE SPACES billboard is partially legible"
     ],
     "place": {
       "name": "Haile Selassie Avenue",
@@ -410,14 +388,18 @@
         "Nairobi"
       ],
       "key": "kenya/nairobi/haile-selassie-avenue",
-      "status": "candidate",
+      "status": "confirmed",
       "evidence": [
         {
           "kind": "provided_title",
           "detail": "Haile Selassie Avenue (Nairobi), 2025 (02)"
+        },
+        {
+          "kind": "visible_text",
+          "detail": "TIMES TOWER"
         }
       ],
-      "confidence": 0.9
+      "confidence": 0.93
     },
     "place_key": "kenya/nairobi/haile-selassie-avenue",
     "taken_from": null,
@@ -446,9 +428,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:53:58+00:00",
+        "run_at": "2026-10-27T21:39:50+00:00",
         "raw_output_path": "data/annotations/raw/street_004_passB_attempt1.txt",
-        "tokens": 7635
+        "tokens": 5572
       }
     ],
     "human_review": {

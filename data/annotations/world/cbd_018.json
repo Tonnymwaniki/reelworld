@@ -326,7 +326,11 @@
       "Building names and specific location cannot be determined from image",
       "Weather beyond sky appearance cannot be determined",
       "Exact building identities and street name cannot be determined from visual evidence alone; uncertainties note building names and specific location cannot be determined from image",
-      "Billboard content, bus text, vehicle makes/models and license plates not legible; exact time of day ambiguous between dawn/dusk"
+      "Billboard content, bus text, vehicle makes/models and license plates not legible; exact time of day ambiguous between dawn/dusk",
+      "Building names, exact street name and specific building identities cannot be determined from image alone per uncertainties",
+      "Exact time of day ambiguous between dawn and dusk",
+      "Billboard content, bus text, vehicle makes/models and license plates not legible",
+      "Total number of distant pedestrians unclear due to small size and blur"
     ],
     "place": {
       "name": "Nairobi",
@@ -342,7 +346,7 @@
           "detail": "GPO, Nairobi"
         }
       ],
-      "confidence": 0.85
+      "confidence": 0.62
     },
     "place_key": "kenya/nairobi",
     "taken_from": null,
@@ -371,9 +375,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:47:23+00:00",
+        "run_at": "2026-10-27T21:33:55+00:00",
         "raw_output_path": "data/annotations/raw/cbd_018_passB_attempt1.txt",
-        "tokens": 5248
+        "tokens": 6586
       }
     ],
     "human_review": {

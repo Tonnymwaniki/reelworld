@@ -249,14 +249,11 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [
+    "landmarks": [
       {
         "name": "Ngong Ping, Ma On Shan",
-        "hierarchy": [
-          "Unknown"
-        ],
         "key": "unknown/ngong-ping-ma-on-shan",
+        "type": "natural",
         "status": "candidate",
         "evidence": [
           {
@@ -264,9 +261,10 @@
             "detail": "Ngong Ping, Ma On Shan 01"
           }
         ],
-        "confidence": 0.3
+        "confidence": 0.72
       }
     ],
+    "place_candidates": [],
     "uncertainties": [
       "Exact number of distant figures on the ridge cannot be determined due to small size and distance",
       "Clothing details, ages, genders and identities of the distant figures are not discernible",
@@ -276,24 +274,30 @@
       "Exact geographic location and name of the mountain range cannot be determined from visual evidence alone",
       "No visible text or distinctive architecture present to identify landmarks",
       "Provided title suggests Ngong Ping, Ma On Shan but visual features do not independently confirm location",
-      "Identities and details of distant figures on ridge not discernible"
+      "Identities and details of distant figures on ridge not discernible",
+      "No visible text or distinctive architecture present to independently confirm location; location inferred only from provided_title",
+      "Visual features alone do not independently confirm geographic location as noted in uncertainties",
+      "Exact number, clothing details, ages, genders and identities of distant figures on ridge not discernible",
+      "Precise time of day, temperature and elevation cannot be determined from overcast lighting"
     ],
     "place": {
-      "name": "Unknown",
+      "name": "Ngong Ping, Ma On Shan",
       "hierarchy": [
-        "Unknown"
+        "Hong Kong",
+        "Ma On Shan",
+        "Ngong Ping"
       ],
-      "key": "unknown/unknown",
+      "key": "unknown/ngong-ping-ma-on-shan",
       "status": "candidate",
       "evidence": [
         {
-          "kind": "context",
-          "detail": "wide outdoor mountain landscape with foggy grassy slopes, mist-shrouded peak, rocky cliff faces and grassy ridge as described; no distinctive architecture or visible text to identify location"
+          "kind": "provided_title",
+          "detail": "Ngong Ping, Ma On Shan 01"
         }
       ],
-      "confidence": 0.35
+      "confidence": 0.72
     },
-    "place_key": "unknown/unknown",
+    "place_key": "unknown/ngong-ping-ma-on-shan",
     "taken_from": null,
     "cultural_context": []
   },
@@ -320,9 +324,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:48:49+00:00",
+        "run_at": "2026-10-27T21:35:04+00:00",
         "raw_output_path": "data/annotations/raw/hills_022_passB_attempt1.txt",
-        "tokens": 5366
+        "tokens": 5784
       }
     ],
     "human_review": {

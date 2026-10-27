@@ -276,22 +276,18 @@
         "name": "Ngong Hills",
         "key": "kenya/kajiado/ngong-hills",
         "type": "natural",
-        "status": "confirmed",
+        "status": "candidate",
         "evidence": [
           {
             "kind": "provided_title",
             "detail": "FROM THE HILL TOPS OF NGONG"
           },
           {
-            "kind": "architecture",
-            "detail": "broad grassy hilltop with rolling green hills, wind turbines and lattice telecommunications tower on distant ridge"
-          },
-          {
             "kind": "context",
-            "detail": "wide valley view from hilltop overlooking sprawling settlement under partly cloudy sky"
+            "detail": "broad grassy hilltop with patches of green and brown grass overlooking wide valley with wind turbines and lattice telecommunications tower on distant ridge"
           }
         ],
-        "confidence": 0.9
+        "confidence": 0.85
       }
     ],
     "place_candidates": [],
@@ -320,10 +316,10 @@
         },
         {
           "kind": "context",
-          "detail": "grassy hilltop field in foreground with rolling green hills, wind turbines and telecommunications tower on ridge overlooking wide valley settlement"
+          "detail": "grassy hilltop overlooking wide valley with wind turbines and communications tower on distant ridge, with rolling green hills and hazy valley settlement"
         }
       ],
-      "confidence": 0.9
+      "confidence": 0.85
     },
     "place_key": "kenya/kajiado/ngong-hills",
     "taken_from": {
@@ -338,13 +334,9 @@
         {
           "kind": "provided_title",
           "detail": "FROM THE HILL TOPS OF NGONG"
-        },
-        {
-          "kind": "context",
-          "detail": "ground_level viewpoint across the hilltop toward the valley and distant ridge; people relaxing on grassy hilltop in foreground"
         }
       ],
-      "confidence": 0.9
+      "confidence": 0.85
     },
     "cultural_context": []
   },
@@ -371,9 +363,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:47:45+00:00",
+        "run_at": "2026-10-27T21:34:07+00:00",
         "raw_output_path": "data/annotations/raw/hills_003_passB_attempt1.txt",
-        "tokens": 6823
+        "tokens": 5502
       }
     ],
     "human_review": {

@@ -274,7 +274,7 @@
           },
           {
             "kind": "context",
-            "detail": "large grass-covered hill with narrow light-brown dirt trail winding from flat grassy foreground to rounded summit, scattered isolated trees, dense dark green forest on left and right flanks, bright blue sky with large white cumulus clouds"
+            "detail": "large grass-covered hill with rounded summit, winding light-brown dirt trail from foreground to summit, open grass with scattered trees and dense dark green forest on flanks"
           }
         ],
         "confidence": 0.85
@@ -290,7 +290,10 @@
       "No visible text to confirm location; identification relies on provided_title NgongHillsKenya",
       "Exact geographic location cannot be determined from image alone per uncertainties",
       "Whether tiny dark specks on upper trail near summit are people, animals, or shadows cannot be determined",
-      "Clothing details, age, gender, or identity of person on trail cannot be determined"
+      "Clothing details, age, gender, or identity of person on trail cannot be determined",
+      "Exact geographic location cannot be independently confirmed from image alone; identification relies solely on provided_title NgongHillsKenya with no visible text or distinctive architecture",
+      "Whether tiny dark specks aligned along upper trail near summit are people, animals, or shadows cannot be determined",
+      "Clothing details, age, gender, or identity of person walking on trail cannot be determined"
     ],
     "place": {
       "name": "Ngong Hills",
@@ -307,7 +310,7 @@
         },
         {
           "kind": "context",
-          "detail": "large grass-covered hill with narrow light-brown dirt trail winding from flat grassy foreground to rounded summit, scattered isolated trees, dense dark green forest on left and right flanks, bright blue sky with large white cumulus clouds"
+          "detail": "large grass-covered hill dominating center with winding dirt trail to summit, open grassy slopes with scattered trees and dense forest on sides, grazing animals on lower slope under partly cloudy sky"
         }
       ],
       "confidence": 0.85
@@ -339,9 +342,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:48:08+00:00",
+        "run_at": "2026-10-27T21:34:21+00:00",
         "raw_output_path": "data/annotations/raw/hills_009_passB_attempt1.txt",
-        "tokens": 5148
+        "tokens": 3973
       }
     ],
     "human_review": {

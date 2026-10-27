@@ -343,6 +343,10 @@
           {
             "kind": "architecture",
             "detail": "tall cylindrical building with horizontal balconies and wide circular top dominates center"
+          },
+          {
+            "kind": "context",
+            "detail": "outdoor urban plaza with paved plaza, palm trees, flagpoles and large circular building with brown conical roof to its right"
           }
         ],
         "confidence": 0.98
@@ -362,10 +366,32 @@
             "detail": "light-colored rectangular tower with grid of windows behind conical roof"
           }
         ],
+        "confidence": 0.88
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta International Convention Centre, Nairobi, by Karl Henrik Nøstvik architect, general"
+          },
+          {
+            "kind": "context",
+            "detail": "outdoor urban plaza with modern high-rise buildings and paved plaza"
+          }
+        ],
         "confidence": 0.85
       }
     ],
-    "place_candidates": [],
     "uncertainties": [
       "Text on plaque on statue pedestal is not legible due to distance and resolution",
       "Exact number of people on plaza is uncertain due to small size and distance",
@@ -373,7 +399,9 @@
       "License plate numbers and car models cannot be determined",
       "Exact time of day beyond daytime and weather beyond cloud cover cannot be determined",
       "Names and identities of buildings and statue subject cannot be determined from image alone",
-      "Exact number of people on plaza and building floor counts cannot be determined from image alone"
+      "Exact number of people on plaza and building floor counts cannot be determined from image alone",
+      "Exact number of people on plaza and building floor counts cannot be determined",
+      "Names and identities of statue subject and other background buildings cannot be determined from image alone beyond provided title and visible text"
     ],
     "place": {
       "name": "Kenyatta International Convention Centre",
@@ -391,7 +419,11 @@
         },
         {
           "kind": "architecture",
-          "detail": "tall cylindrical building with horizontal balconies and wide circular top dominates center"
+          "detail": "tall cylindrical tower with disc-shaped top stands in center of paved plaza surrounded by modern buildings"
+        },
+        {
+          "kind": "context",
+          "detail": "outdoor urban plaza with modern high-rise buildings, palm trees and statue on pedestal"
         }
       ],
       "confidence": 0.97
@@ -423,9 +455,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:49:24+00:00",
+        "run_at": "2026-10-27T21:35:47+00:00",
         "raw_output_path": "data/annotations/raw/landmarks_006_passB_attempt1.txt",
-        "tokens": 5759
+        "tokens": 8678
       }
     ],
     "human_review": {

@@ -311,26 +311,26 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [
+    "landmarks": [
       {
-        "name": "Nairobi CBD",
-        "hierarchy": [
-          "Kenya",
-          "Nairobi",
-          "CBD"
-        ],
-        "key": "kenya/nairobi/cbd",
+        "name": "Haile Selassie Avenue",
+        "key": "kenya/nairobi/haile-selassie-avenue",
+        "type": "street",
         "status": "candidate",
         "evidence": [
           {
+            "kind": "provided_title",
+            "detail": "Haile Selassie Avenue (Nairobi), 2025 (04)"
+          },
+          {
             "kind": "context",
-            "detail": "distant high-rise city skyline with tall towers visible on horizon beyond congested road"
+            "detail": "elevated wide view of divided multi-lane road filled with queued vehicles stretching toward city skyline with tall towers"
           }
         ],
-        "confidence": 0.55
+        "confidence": 0.93
       }
     ],
+    "place_candidates": [],
     "uncertainties": [
       "exact number of people due to distance, motion blur and occlusion",
       "text on additional distant billboards along the road which are blurry and unreadable",
@@ -340,7 +340,11 @@
       "names or functions of buildings in distant skyline not determinable",
       "text on additional distant billboards along road blurry and unreadable",
       "exact number of people, vehicle license plates and makes/models not determinable",
-      "exact time of day beyond daytime under overcast conditions not determinable"
+      "exact time of day beyond daytime under overcast conditions not determinable",
+      "Names or functions of buildings in distant skyline not determinable",
+      "Exact time of day beyond daytime under overcast conditions not determinable",
+      "Vehicle license plates, makes/models and exact number of people not determinable due to distance, motion blur and occlusion",
+      "Text on additional distant billboards along road blurry and unreadable"
     ],
     "place": {
       "name": "Haile Selassie Avenue",
@@ -357,10 +361,10 @@
         },
         {
           "kind": "context",
-          "detail": "elevated wide view of divided multi-lane road filled with queued vehicles including green bus with roof rack, white vans, cars and motorcycles stretching into distance toward city skyline with tall towers, lined with trees and buildings under overcast sky"
+          "detail": "heavy traffic congestion on multi-lane urban road lined with trees and buildings under overcast sky"
         }
       ],
-      "confidence": 0.9
+      "confidence": 0.93
     },
     "place_key": "kenya/nairobi/haile-selassie-avenue",
     "taken_from": null,
@@ -389,9 +393,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:54:04+00:00",
+        "run_at": "2026-10-27T21:40:05+00:00",
         "raw_output_path": "data/annotations/raw/street_006_passB_attempt1.txt",
-        "tokens": 6329
+        "tokens": 7158
       }
     ],
     "human_review": {

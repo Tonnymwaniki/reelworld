@@ -277,7 +277,7 @@
   "inferred": {
     "landmarks": [
       {
-        "name": "Nairobi City Market",
+        "name": "City Market",
         "key": "unknown/city-market",
         "type": "market",
         "status": "candidate",
@@ -287,7 +287,7 @@
             "detail": "Colorful beaded necklaces at Nairobi City Market in Kenya"
           }
         ],
-        "confidence": 0.9
+        "confidence": 0.85
       }
     ],
     "place_candidates": [],
@@ -301,7 +301,7 @@
       "Exact stall position within market and precise geographic coordinates cannot be determined from image alone"
     ],
     "place": {
-      "name": "Nairobi City Market",
+      "name": "City Market",
       "hierarchy": [
         "Kenya",
         "Nairobi"
@@ -312,9 +312,13 @@
         {
           "kind": "provided_title",
           "detail": "Colorful beaded necklaces at Nairobi City Market in Kenya"
+        },
+        {
+          "kind": "context",
+          "detail": "indoor market stall displaying beaded necklaces, plaid textiles and paintings for sale on concrete floor with background shelves of footwear"
         }
       ],
-      "confidence": 0.9
+      "confidence": 0.85
     },
     "place_key": "unknown/city-market",
     "taken_from": null,
@@ -350,9 +354,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:50:22+00:00",
+        "run_at": "2026-10-27T21:36:19+00:00",
         "raw_output_path": "data/annotations/raw/market_007_passB_attempt1.txt",
-        "tokens": 6721
+        "tokens": 5560
       }
     ],
     "human_review": {

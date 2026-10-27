@@ -318,7 +318,7 @@
           },
           {
             "kind": "architecture",
-            "detail": "cylindrical high-rise tower with disc-shaped top"
+            "detail": "tall cylindrical concrete facade disc-shaped top"
           }
         ],
         "confidence": 0.97
@@ -339,7 +339,7 @@
             "detail": "CITY HALL WAY, NAIROBI"
           }
         ],
-        "confidence": 0.95
+        "confidence": 0.96
       }
     ],
     "uncertainties": [
@@ -369,14 +369,14 @@
         },
         {
           "kind": "architecture",
-          "detail": "cylindrical high-rise tower with disc-shaped top visible in skyline"
+          "detail": "cylindrical high-rise tower with disc top (Kenyatta International Convention Centre) visible above trees"
         },
         {
           "kind": "context",
-          "detail": "busy street intersection with tall modern buildings, dense green trees and large crowd under clear blue sky"
+          "detail": "busy street intersection with tall modern buildings and dense green trees in Nairobi"
         }
       ],
-      "confidence": 0.9
+      "confidence": 0.94
     },
     "place_key": "kenya/nairobi/cbd",
     "taken_from": null,
@@ -405,9 +405,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:47:25+00:00",
+        "run_at": "2026-10-27T21:33:52+00:00",
         "raw_output_path": "data/annotations/raw/cbd_017_passB_attempt1.txt",
-        "tokens": 7192
+        "tokens": 6583
       }
     ],
     "human_review": {

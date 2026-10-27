@@ -279,26 +279,28 @@
       "No legible text is visible on any sign or label; no signs with 3 or more readable letters are present",
       "Exact geographic location and name of mountain cannot be determined from photo",
       "No distinctive architecture or visible text to identify specific landmark",
-      "Provided title 'First Hill' does not correspond to a known landmark in the allowed list"
+      "Provided title 'First Hill' does not correspond to a known landmark in the allowed list",
+      "No legible text visible on any sign or label; no signs with 3 or more readable letters are present",
+      "No distinctive architecture to identify specific landmark"
     ],
     "place": {
       "name": "Unknown",
       "hierarchy": [
-        "Kenya"
+        "Unknown"
       ],
       "key": "unknown/unknown",
       "status": "candidate",
       "evidence": [
         {
           "kind": "context",
-          "detail": "Description shows generic forested mountain ridge with grassy clearing and dirt trail and no distinctive landmarks; uncertainties state exact geographic location and name of the mountain cannot be determined"
+          "detail": "No distinctive architecture or visible text to identify specific landmark; exact geographic location and name of mountain cannot be determined from photo"
         },
         {
-          "kind": "context",
-          "detail": "visible_text is empty with no legible signs to identify location"
+          "kind": "provided_title",
+          "detail": "First Hill does not correspond to a known landmark in the allowed list"
         }
       ],
-      "confidence": 0.93
+      "confidence": 0.98
     },
     "place_key": "unknown/unknown",
     "taken_from": null,
@@ -327,9 +329,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:47:57+00:00",
+        "run_at": "2026-10-27T21:34:11+00:00",
         "raw_output_path": "data/annotations/raw/hills_004_passB_attempt1.txt",
-        "tokens": 8192
+        "tokens": 5136
       }
     ],
     "human_review": {

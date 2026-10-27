@@ -274,18 +274,22 @@
         "name": "Ngong Hills",
         "key": "kenya/kajiado/ngong-hills",
         "type": "natural",
-        "status": "candidate",
+        "status": "confirmed",
         "evidence": [
           {
             "kind": "provided_title",
             "detail": "Green land; Ngong Hill"
           },
           {
+            "kind": "architecture",
+            "detail": "numerous white wind turbines lined along the ridgeline of rolling green hills"
+          },
+          {
             "kind": "context",
-            "detail": "rolling green hills with numerous white wind turbines lined along the ridgeline overlooking a dense forested valley"
+            "detail": "dense expanse of green trees and vegetation filling a valley below rolling green hills under pale blue clear sky"
           }
         ],
-        "confidence": 0.65
+        "confidence": 0.72
       }
     ],
     "place_candidates": [],
@@ -314,10 +318,10 @@
         },
         {
           "kind": "context",
-          "detail": "rolling green hills with white wind turbines on ridge and dense green trees filling valley as described in caption and description"
+          "detail": "rolling green hills with numerous white wind turbines lined along the ridgeline overlooking a dense forested valley"
         }
       ],
-      "confidence": 0.62
+      "confidence": 0.72
     },
     "place_key": "kenya/kajiado/ngong-hills",
     "taken_from": null,
@@ -346,9 +350,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:47:51+00:00",
+        "run_at": "2026-10-27T21:34:14+00:00",
         "raw_output_path": "data/annotations/raw/hills_005_passB_attempt1.txt",
-        "tokens": 5956
+        "tokens": 4877
       }
     ],
     "human_review": {

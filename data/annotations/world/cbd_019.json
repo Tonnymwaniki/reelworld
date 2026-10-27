@@ -375,7 +375,29 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "I&M Building",
+        "key": "unknown/i-m-building",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "I&M Building, Nairobi CBD"
+          },
+          {
+            "kind": "visible_text",
+            "detail": "I&M Bank"
+          },
+          {
+            "kind": "architecture",
+            "detail": "modern multi-story building with blue-tinted glass windows and metal awnings"
+          }
+        ],
+        "confidence": 0.85
+      }
+    ],
     "place_candidates": [
       {
         "name": "Nairobi",
@@ -410,17 +432,25 @@
       "hierarchy": [
         "Kenya",
         "Nairobi",
-        "Nairobi CBD"
+        "CBD"
       ],
       "key": "kenya/nairobi/cbd",
-      "status": "candidate",
+      "status": "confirmed",
       "evidence": [
         {
           "kind": "provided_title",
           "detail": "I&M Building, Nairobi CBD"
+        },
+        {
+          "kind": "visible_text",
+          "detail": "I&M Bank"
+        },
+        {
+          "kind": "context",
+          "detail": "busy urban street with vehicles, pedestrians, and tall buildings"
         }
       ],
-      "confidence": 0.85
+      "confidence": 0.88
     },
     "place_key": "kenya/nairobi/cbd",
     "taken_from": null,
@@ -449,9 +479,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:47:32+00:00",
+        "run_at": "2026-10-27T21:34:03+00:00",
         "raw_output_path": "data/annotations/raw/cbd_019_passB_attempt1.txt",
-        "tokens": 7899
+        "tokens": 9574
       }
     ],
     "human_review": {

@@ -329,7 +329,25 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Akiba Tashiro street",
+        "key": "japan/tokyo/akiba-tashiro-street/akiba-tashiro-street",
+        "type": "street",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Akiba Tashiro street viewed from Tokyo Times Tower entrance east side (2010-05-04 16.13.16)"
+          },
+          {
+            "kind": "architecture",
+            "detail": "paved asphalt street curving into the distance bordered on the right by a long concrete covered walkway with recessed ceiling lights and on the left by manicured green hedges and leafy trees"
+          }
+        ],
+        "confidence": 0.95
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact number of people in the far background is uncertain due to small size and blur",
@@ -348,19 +366,15 @@
         "Akiba Tashiro street"
       ],
       "key": "japan/tokyo/akiba-tashiro-street/akiba-tashiro-street",
-      "status": "confirmed",
+      "status": "candidate",
       "evidence": [
         {
           "kind": "provided_title",
           "detail": "Akiba Tashiro street viewed from Tokyo Times Tower entrance east side (2010-05-04 16.13.16)"
         },
         {
-          "kind": "visible_text",
-          "detail": "法人買取大歓迎"
-        },
-        {
           "kind": "context",
-          "detail": "tags include Japan and description of Japanese urban street scene"
+          "detail": "tags indicate Japan and visible_text is Japanese: 法人買取大歓迎 and AMUSEMENT TOWER"
         }
       ],
       "confidence": 0.92
@@ -407,9 +421,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:46:38+00:00",
+        "run_at": "2026-10-27T21:33:10+00:00",
         "raw_output_path": "data/annotations/raw/cbd_006_passB_attempt1.txt",
-        "tokens": 6373
+        "tokens": 5971
       }
     ],
     "human_review": {

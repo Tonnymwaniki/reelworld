@@ -283,10 +283,10 @@
           },
           {
             "kind": "context",
-            "detail": "large urban park with expansive green grass fields including a rectangular sports field on the left, winding paved paths, dense scattered trees, and an irregular-shaped reflective lake near the center behind the building complex"
+            "detail": "large urban park with expansive green grass fields including rectangular sports field, winding paved paths, dense scattered trees, and irregular-shaped reflective lake near center behind building complex"
           }
         ],
-        "confidence": 0.93
+        "confidence": 0.88
       }
     ],
     "place_candidates": [
@@ -305,10 +305,27 @@
           },
           {
             "kind": "context",
-            "detail": "dense urban area with mid-rise and high-rise buildings of varied heights and colors interspersed with trees beyond the park"
+            "detail": "dense urban area with mid-rise and high-rise buildings of varied heights and colors beyond park and distant hazy mountain range"
           }
         ],
-        "confidence": 0.88
+        "confidence": 0.85
+      },
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "context",
+            "detail": "dense urban area with mid-rise and high-rise buildings interspersed with trees beyond park"
+          }
+        ],
+        "confidence": 0.55
       }
     ],
     "uncertainties": [
@@ -318,7 +335,10 @@
       "Exact time of day and weather temperature cannot be determined",
       "Number and types of vehicles are not individually countable",
       "Exact names of individual high-rise buildings and distant mountain range cannot be determined from visible features alone",
-      "No visible text is legible to independently confirm location"
+      "No visible text is legible to independently confirm location",
+      "No visible text is legible to independently confirm location; identification relies on provided_title",
+      "Exact names of building complex with clock tower, individual high-rise buildings, and distant mountain range cannot be determined from visible features alone",
+      "Number of people, vehicle types, and specific activities cannot be discerned at aerial distance"
     ],
     "place": {
       "name": "Uhuru Park",
@@ -335,10 +355,10 @@
         },
         {
           "kind": "context",
-          "detail": "aerial view looking across a city with a large green park with a lake in the center behind a beige building complex with a tall central clock tower and dense urban area with high-rise buildings beyond the park"
+          "detail": "aerial view shows large urban park with green fields, winding paths, and reflective lake as central subject behind beige building complex with clock tower"
         }
       ],
-      "confidence": 0.92
+      "confidence": 0.87
     },
     "place_key": "kenya/nairobi/uhuru-park",
     "taken_from": null,
@@ -367,9 +387,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:52:40+00:00",
+        "run_at": "2026-10-27T21:38:34+00:00",
         "raw_output_path": "data/annotations/raw/park_013_passB_attempt1.txt",
-        "tokens": 6696
+        "tokens": 7221
       }
     ],
     "human_review": {

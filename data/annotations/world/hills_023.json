@@ -299,7 +299,21 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Ngong Ping, Ma On Shan",
+        "key": "unknown/ngong-ping-ma-on-shan",
+        "type": "natural",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Ngong Ping, Ma On Shan 02"
+          }
+        ],
+        "confidence": 0.6
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact number of people due to small size, overlap, distance and fog",
@@ -310,28 +324,29 @@
       "Details of terrain and vegetation obscured by fog in the background",
       "Exact geographic location, mountain name and trail name cannot be determined from visual evidence alone",
       "No visible text or distinctive architecture to identify a specific landmark",
-      "Provided title alone insufficient to confirm location without visual corroboration"
+      "Provided title alone insufficient to confirm location without visual corroboration",
+      "No visible text or distinctive architecture to visually confirm location; identification relies solely on provided title",
+      "Exact geographic location, mountain name and trail name cannot be determined from visual evidence alone due to fog, distance and lack of markers",
+      "Details of terrain and vegetation obscured by fog in background"
     ],
     "place": {
-      "name": "Unknown",
+      "name": "Ngong Ping, Ma On Shan",
       "hierarchy": [
-        "Unknown"
+        "Hong Kong",
+        "Ma On Shan",
+        "Ngong Ping"
       ],
-      "key": "unknown/unknown",
+      "key": "unknown/ngong-ping-ma-on-shan",
       "status": "candidate",
       "evidence": [
         {
           "kind": "provided_title",
           "detail": "Ngong Ping, Ma On Shan 02"
-        },
-        {
-          "kind": "context",
-          "detail": "Exact geographic location, mountain name or trail name cannot be determined per uncertainties; description shows generic fog-shrouded mountain ridge with brown grassy hilltop, dirt trail and hikers and no distinctive landmark features or visible text"
         }
       ],
-      "confidence": 0.95
+      "confidence": 0.6
     },
-    "place_key": "unknown/unknown",
+    "place_key": "unknown/ngong-ping-ma-on-shan",
     "taken_from": null,
     "cultural_context": []
   },
@@ -358,9 +373,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:48:55+00:00",
+        "run_at": "2026-10-27T21:35:07+00:00",
         "raw_output_path": "data/annotations/raw/hills_023_passB_attempt1.txt",
-        "tokens": 5575
+        "tokens": 5876
       }
     ],
     "human_review": {

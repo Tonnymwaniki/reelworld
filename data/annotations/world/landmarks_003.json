@@ -341,11 +341,11 @@
           },
           {
             "kind": "architecture",
-            "detail": "tall cylindrical high-rise with horizontal pinkish-brown balconies and flat disc-shaped roof"
+            "detail": "tall cylindrical high-rise with horizontal pinkish-brown balconies and flat disc-shaped roof dominates left side"
           },
           {
             "kind": "architecture",
-            "detail": "low circular pavilion with dark brown conical roof on elevated platform"
+            "detail": "low circular pavilion with dark brown conical roof on elevated platform in foreground center"
           }
         ],
         "confidence": 0.98
@@ -373,14 +373,38 @@
           "CBD"
         ],
         "key": "kenya/nairobi/cbd",
-        "status": "candidate",
+        "status": "confirmed",
         "evidence": [
           {
-            "kind": "context",
-            "detail": "city skyline dominated by Kenyatta International Convention Centre tower and conical pavilion with modern glass skyscrapers"
+            "kind": "provided_title",
+            "detail": "Kenyatta International Convention Center Tower"
+          },
+          {
+            "kind": "visible_text",
+            "detail": "CBK PENSION TOWERS"
           }
         ],
         "confidence": 0.88
+      },
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "KENYA"
+          },
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta International Convention Center Tower"
+          }
+        ],
+        "confidence": 0.9
       }
     ],
     "uncertainties": [
@@ -391,7 +415,9 @@
       "Exact weather conditions beyond partly cloudy appearance",
       "Small dark speck in upper left sky may be bird or artifact but cannot be confirmed",
       "Identity of modern blue-glass skyscraper with angular gold-accented top not determined - no legible visible_text",
-      "Exact number of people and interior details not determinable due to distance and occlusion"
+      "Exact number of people and interior details not determinable due to distance and occlusion",
+      "Identity of modern blue-glass skyscraper with angular gold-accented top not determinable - no legible visible_text",
+      "Exact number of people and interior details of buildings and pavilion not determinable due to distance and occlusion"
     ],
     "place": {
       "name": "Kenyatta International Convention Centre",
@@ -409,11 +435,7 @@
         },
         {
           "kind": "architecture",
-          "detail": "tall cylindrical high-rise with horizontal pinkish-brown balconies and flat disc-shaped roof"
-        },
-        {
-          "kind": "visible_text",
-          "detail": "KENYA"
+          "detail": "tall cylindrical high-rise with horizontal pinkish-brown balconies and flat disc-shaped roof with conical-roof pavilion"
         }
       ],
       "confidence": 0.97
@@ -445,9 +467,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:49:12+00:00",
+        "run_at": "2026-10-27T21:35:23+00:00",
         "raw_output_path": "data/annotations/raw/landmarks_003_passB_attempt1.txt",
-        "tokens": 5953
+        "tokens": 5705
       }
     ],
     "human_review": {

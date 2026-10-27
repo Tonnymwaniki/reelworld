@@ -370,37 +370,22 @@
           },
           {
             "kind": "visible_text",
-            "detail": "Nairobi, 17-22 July 20"
+            "detail": "UNCTAD"
           }
         ],
         "confidence": 0.92
       }
     ],
-    "place_candidates": [
-      {
-        "name": "Nairobi",
-        "hierarchy": [
-          "Kenya",
-          "Nairobi"
-        ],
-        "key": "kenya/nairobi",
-        "status": "confirmed",
-        "evidence": [
-          {
-            "kind": "visible_text",
-            "detail": "Nairobi, 17-22 July 20"
-          }
-        ],
-        "confidence": 0.95
-      }
-    ],
+    "place_candidates": [],
     "uncertainties": [
       "Full year on banner is cut off by edge of banner and cannot be determined",
       "Text on identification badges worn by standing individuals is not legible and is ignored per clothing text rule",
       "Content of handwriting inside open book is not legible",
       "Exact identities, names, or titles of individuals cannot be determined from image alone",
       "Specific location of room beyond banner text is not visible",
-      "Specific room or hall within the centre cannot be determined from image alone"
+      "Specific room or hall within the centre cannot be determined from image alone",
+      "Specific room or hall within the Kenyatta International Convention Centre cannot be determined from image alone",
+      "Exact identities, names or titles of individuals cannot be determined from image alone"
     ],
     "place": {
       "name": "Kenyatta International Convention Centre",
@@ -410,19 +395,11 @@
         "CBD"
       ],
       "key": "kenya/nairobi/cbd/kicc",
-      "status": "confirmed",
+      "status": "candidate",
       "evidence": [
         {
           "kind": "provided_title",
           "detail": "Checking in at Kenyatta International Convention Centre (28304394372)"
-        },
-        {
-          "kind": "visible_text",
-          "detail": "Nairobi, 17-22 July 20"
-        },
-        {
-          "kind": "visible_text",
-          "detail": "UNCTAD"
         }
       ],
       "confidence": 0.9
@@ -454,9 +431,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:49:05+00:00",
+        "run_at": "2026-10-27T21:35:21+00:00",
         "raw_output_path": "data/annotations/raw/landmarks_002_passB_attempt1.txt",
-        "tokens": 5223
+        "tokens": 6285
       }
     ],
     "human_review": {

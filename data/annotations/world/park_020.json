@@ -314,18 +314,22 @@
         "name": "Uhuru Park",
         "key": "kenya/nairobi/uhuru-park",
         "type": "park",
-        "status": "candidate",
+        "status": "confirmed",
         "evidence": [
           {
             "kind": "provided_title",
             "detail": "Uhuru Park, 2025 (01)"
           },
           {
+            "kind": "architecture",
+            "detail": "four large dark brown funnel-shaped metal structures with rectangular cut-out openings on light-colored paved plaza"
+          },
+          {
             "kind": "context",
-            "detail": "outdoor urban park with paved plaza, large dark funnel-shaped metal structures with rectangular cut-outs, benches, pond, trees, grass and high-rise skyline under overcast sky"
+            "detail": "outdoor urban park with benches, pond, trees, grass and high-rise buildings in background under overcast sky"
           }
         ],
-        "confidence": 0.9
+        "confidence": 0.88
       }
     ],
     "place_candidates": [],
@@ -343,7 +347,8 @@
       "name": "Uhuru Park",
       "hierarchy": [
         "Kenya",
-        "Nairobi"
+        "Nairobi",
+        "Uhuru Park"
       ],
       "key": "kenya/nairobi/uhuru-park",
       "status": "candidate",
@@ -354,10 +359,10 @@
         },
         {
           "kind": "context",
-          "detail": "outdoor urban park with paved plaza, large funnel-shaped metal structures, benches, pond, trees and high-rise buildings in background"
+          "detail": "outdoor urban park scene with paved plaza, benches, pond, trees and city skyline consistent with provided title"
         }
       ],
-      "confidence": 0.9
+      "confidence": 0.88
     },
     "place_key": "kenya/nairobi/uhuru-park",
     "taken_from": null,
@@ -386,9 +391,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:53:17+00:00",
+        "run_at": "2026-10-27T21:39:21+00:00",
         "raw_output_path": "data/annotations/raw/park_020_passB_attempt1.txt",
-        "tokens": 5455
+        "tokens": 6465
       }
     ],
     "human_review": {

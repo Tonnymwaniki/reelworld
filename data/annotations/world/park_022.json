@@ -341,6 +341,23 @@
   "inferred": {
     "landmarks": [
       {
+        "name": "Uhuru Park",
+        "key": "kenya/nairobi/uhuru-park",
+        "type": "park",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Uhuru Park Nairobi 03"
+          },
+          {
+            "kind": "context",
+            "detail": "urban park with calm lake, yellow pedal boat with green canopy, grassy shoreline lined with palm trees and people gathering"
+          }
+        ],
+        "confidence": 0.97
+      },
+      {
         "name": "Kenyatta International Convention Centre",
         "key": "kenya/nairobi/cbd/kicc",
         "type": "building",
@@ -348,30 +365,44 @@
         "evidence": [
           {
             "kind": "architecture",
-            "detail": "tall round building with horizontal bands and wide flat top on left side of skyline"
+            "detail": "tall cylindrical tower with flat disc top on left, tall round building with horizontal bands and wide flat top on left side of skyline"
           }
         ],
-        "confidence": 0.98
+        "confidence": 0.96
       },
       {
         "name": "CBK Pension Towers",
         "key": "kenya/nairobi/cbd/cbk-pension-towers",
         "type": "building",
-        "status": "confirmed",
+        "status": "candidate",
         "evidence": [
           {
-            "kind": "visible_text",
-            "detail": "CBA PENSION TOWERS"
-          },
-          {
             "kind": "architecture",
-            "detail": "two connected tall glass buildings with blue windows and gold vertical elements on right"
+            "detail": "modern glass twin towers with gold accents, two connected tall glass buildings with blue windows and gold vertical elements on right"
           }
         ],
-        "confidence": 0.88
+        "confidence": 0.65
       }
     ],
-    "place_candidates": [],
+    "place_candidates": [
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "context",
+            "detail": "city skyline of tall buildings behind park including cylindrical tower and glass twin towers"
+          }
+        ],
+        "confidence": 0.6
+      }
+    ],
     "uncertainties": [
       "Exact number of people is uncertain due to distance, occlusion by trees and small figure size",
       "Full text on distant building signs is partially blurry and may contain additional words or logos not legible",
@@ -379,7 +410,10 @@
       "Details of people's clothing, ages or genders cannot be determined due to distance",
       "Text on small or distant signs with fewer than 3 legible letters was omitted",
       "Exact time of day beyond daytime and weather conditions beyond clear sky cannot be determined",
-      "Specific identities or names of other mid-rise buildings beyond visible signage cannot be determined"
+      "Specific identities or names of other mid-rise buildings beyond visible signage cannot be determined",
+      "Full text on distant building signs is partially blurry and may contain additional words not legible",
+      "Exact number of people uncertain due to distance and occlusion by trees",
+      "Specific identities of other mid-rise buildings beyond visible signage cannot be determined"
     ],
     "place": {
       "name": "Uhuru Park",
@@ -397,7 +431,7 @@
         },
         {
           "kind": "context",
-          "detail": "urban park with lake, palm trees, yellow pedal boat and grassy shoreline with people relaxing, walking and boating, with city skyline in background"
+          "detail": "calm lake with yellow pedal boat, grassy shoreline lined with palm trees and people gathering, with elevated highway overpass behind park and city skyline in background"
         }
       ],
       "confidence": 0.96
@@ -429,9 +463,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:53:21+00:00",
+        "run_at": "2026-10-27T21:39:33+00:00",
         "raw_output_path": "data/annotations/raw/park_022_passB_attempt1.txt",
-        "tokens": 6130
+        "tokens": 8560
       }
     ],
     "human_review": {

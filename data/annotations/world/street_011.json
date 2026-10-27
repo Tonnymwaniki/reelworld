@@ -329,34 +329,12 @@
             "detail": "Kenyatta Avenue, Nairobi, 2025 (02)"
           }
         ],
-        "confidence": 0.88
-      }
-    ],
-    "place_candidates": [
-      {
-        "name": "Nairobi CBD",
-        "hierarchy": [
-          "Kenya",
-          "Nairobi",
-          "Nairobi CBD"
-        ],
-        "key": "kenya/nairobi/cbd",
-        "status": "candidate",
-        "evidence": [
-          {
-            "kind": "provided_title",
-            "detail": "Kenyatta Avenue, Nairobi, 2025 (02)"
-          }
-        ],
-        "confidence": 0.85
+        "confidence": 0.78
       },
       {
         "name": "Nairobi",
-        "hierarchy": [
-          "Kenya",
-          "Nairobi"
-        ],
         "key": "kenya/nairobi",
+        "type": "district",
         "status": "candidate",
         "evidence": [
           {
@@ -364,9 +342,10 @@
             "detail": "Kenyatta Avenue, Nairobi, 2025 (02)"
           }
         ],
-        "confidence": 0.87
+        "confidence": 0.78
       }
     ],
+    "place_candidates": [],
     "uncertainties": [
       "Exact number of people due to occlusion and distance",
       "Text on red sign attached to right foreground pole is partially visible and cannot be fully read",
@@ -376,14 +355,16 @@
       "Exact time of day beyond daytime and weather conditions beyond cloud cover",
       "Exact intersection along Kenyatta Avenue cannot be determined from description",
       "Specific building identities and distant high-rise names not legible beyond generic multi-story buildings",
-      "No distinctive architectural landmark visible to independently confirm location beyond provided title"
+      "No distinctive architectural landmark visible to independently confirm location beyond provided title",
+      "Visible text City Shuttle and TECNO is partial and does not independently identify location",
+      "Text on red sign, distant building signs, shop fronts and license plates not legible"
     ],
     "place": {
       "name": "Kenyatta Avenue",
       "hierarchy": [
         "Kenya",
         "Nairobi",
-        "Nairobi CBD"
+        "Kenyatta Avenue"
       ],
       "key": "kenya/nairobi/cbd/kenyatta-avenue",
       "status": "candidate",
@@ -394,10 +375,10 @@
         },
         {
           "kind": "context",
-          "detail": "wide paved intersection with multiple lanes of traffic, multi-story buildings, traffic light poles, street lamp posts and moderate pedestrian activity"
+          "detail": "Busy urban street intersection with paved multi-lane road, cars, buses, motorcycles, pedestrians, traffic lights and multi-story buildings consistent with street setting"
         }
       ],
-      "confidence": 0.88
+      "confidence": 0.78
     },
     "place_key": "kenya/nairobi/cbd/kenyatta-avenue",
     "taken_from": null,
@@ -426,9 +407,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:54:35+00:00",
+        "run_at": "2026-10-27T21:40:18+00:00",
         "raw_output_path": "data/annotations/raw/street_011_passB_attempt1.txt",
-        "tokens": 7102
+        "tokens": 5501
       }
     ],
     "human_review": {

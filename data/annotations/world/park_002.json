@@ -326,39 +326,14 @@
           },
           {
             "kind": "architecture",
-            "detail": "large curved reflective lake surrounded by green lawns, scattered mature trees, pathways and small circular fountain monuments"
-          },
-          {
-            "kind": "architecture",
-            "detail": "four long low covered pavilion structures with tiered seating and distinctive white zigzag and flat roofs lining reddish-brown dirt area"
+            "detail": "large curved reflective lake surrounded by green lawns, scattered mature trees, pathways and four long low covered pavilions with white zigzag and flat roofs lining reddish-brown dirt area"
           },
           {
             "kind": "context",
-            "detail": "elevated wide-angle outdoor view looking across large urban park toward dense city skyline"
+            "detail": "elevated wide view looking across large urban park toward city skyline with lake in foreground"
           }
         ],
-        "confidence": 0.96
-      },
-      {
-        "name": "Nairobi CBD",
-        "key": "kenya/nairobi/cbd",
-        "type": "district",
-        "status": "confirmed",
-        "evidence": [
-          {
-            "kind": "provided_title",
-            "detail": "City view from Uhuru Park, Nairobi"
-          },
-          {
-            "kind": "architecture",
-            "detail": "dense city skyline of high-rise buildings of varying heights and designs extending across horizon"
-          },
-          {
-            "kind": "context",
-            "detail": "road with tiny vehicles and clusters of mid-rise and high-rise buildings beyond park under overcast sky"
-          }
-        ],
-        "confidence": 0.89
+        "confidence": 0.94
       },
       {
         "name": "Kenyatta International Convention Centre",
@@ -368,15 +343,15 @@
         "evidence": [
           {
             "kind": "architecture",
-            "detail": "prominent cylindrical tower on the right side of skyline"
+            "detail": "prominent cylindrical high-rise tower with flat top on right side of skyline"
           },
           {
-            "kind": "architecture",
-            "detail": "cylindrical high-rise tower with flat top standing alone on right side of dense skyline"
+            "kind": "provided_title",
+            "detail": "City view from Uhuru Park, Nairobi"
           },
           {
             "kind": "context",
-            "detail": "tall cylindrical tower visible behind park among high-rise buildings"
+            "detail": "dense city skyline of high-rise buildings behind park consistent with Nairobi CBD"
           }
         ],
         "confidence": 0.68
@@ -398,10 +373,10 @@
           },
           {
             "kind": "context",
-            "detail": "dense city skyline of high-rise buildings beyond urban park"
+            "detail": "dense city skyline of high-rise buildings beyond park"
           }
         ],
-        "confidence": 0.88
+        "confidence": 0.9
       },
       {
         "name": "Nairobi CBD",
@@ -411,18 +386,18 @@
           "CBD"
         ],
         "key": "kenya/nairobi/cbd",
-        "status": "confirmed",
+        "status": "candidate",
         "evidence": [
           {
-            "kind": "architecture",
-            "detail": "cluster of high-rise buildings of varying heights and designs extending across horizon"
+            "kind": "provided_title",
+            "detail": "City view from Uhuru Park, Nairobi"
           },
           {
             "kind": "context",
-            "detail": "city skyline beyond park with road and parking area filled with light-colored cars"
+            "detail": "cluster of mid-rise and high-rise buildings of varying heights extending across horizon behind park"
           }
         ],
-        "confidence": 0.85
+        "confidence": 0.88
       }
     ],
     "uncertainties": [
@@ -433,7 +408,10 @@
       "Exact time of day and weather temperature cannot be determined",
       "No visible_text legible to confirm building names; specific building identities beyond general skyline cannot be verified from image alone",
       "Exact number of people, vehicle details, and building functions not discernible due to distance and resolution",
-      "Cylindrical tower identification as Kenyatta International Convention Centre based solely on distinctive shape and Nairobi context without textual confirmation"
+      "Cylindrical tower identification as Kenyatta International Convention Centre based solely on distinctive shape and Nairobi context without textual confirmation",
+      "Cylindrical tower identification as Kenyatta International Convention Centre based solely on distinctive cylindrical shape and Nairobi context without textual confirmation - confidence reduced accordingly",
+      "Exact number of people, vehicle makes/models, building functions and heights cannot be determined due to distance and resolution",
+      "Exact time of day and weather temperature cannot be determined beyond overcast daytime"
     ],
     "place": {
       "name": "Uhuru Park",
@@ -451,14 +429,14 @@
         },
         {
           "kind": "architecture",
-          "detail": "large curved reflective lake surrounded by green lawns and mature trees with pavilions in foreground"
+          "detail": "curved lake, green lawns, mature trees, pathways, circular fountain monuments and four covered pavilions with tiered seating and white zigzag roofs"
         },
         {
           "kind": "context",
-          "detail": "elevated wide view across large urban park with lake toward dense city skyline"
+          "detail": "elevated wide-angle outdoor view across large urban park toward city skyline"
         }
       ],
-      "confidence": 0.94
+      "confidence": 0.92
     },
     "place_key": "kenya/nairobi/uhuru-park",
     "taken_from": {
@@ -477,10 +455,10 @@
         },
         {
           "kind": "context",
-          "detail": "elevated, very_high viewpoint facing across the park toward the city skyline"
+          "detail": "elevated very_high viewpoint facing across the park toward the city skyline"
         }
       ],
-      "confidence": 0.86
+      "confidence": 0.78
     },
     "cultural_context": []
   },
@@ -507,9 +485,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:51:50+00:00",
-        "raw_output_path": "data/annotations/raw/park_002_passB_attempt1.txt",
-        "tokens": 9712
+        "run_at": "2026-10-27T21:38:05+00:00",
+        "raw_output_path": "data/annotations/raw/park_002_passB_attempt2.txt",
+        "tokens": 9086
       }
     ],
     "human_review": {

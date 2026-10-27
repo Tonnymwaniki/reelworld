@@ -355,23 +355,6 @@
   "inferred": {
     "landmarks": [
       {
-        "name": "Teleposta Towers",
-        "key": "kenya/nairobi/cbd/teleposta-towers",
-        "type": "building",
-        "status": "candidate",
-        "evidence": [
-          {
-            "kind": "architecture",
-            "detail": "two prominent cylindrical towers with striped pattern dominating skyline behind low building"
-          },
-          {
-            "kind": "architecture",
-            "detail": "tall red metal lattice tower rising between the two cylindrical towers of the high-rise"
-          }
-        ],
-        "confidence": 0.92
-      },
-      {
         "name": "Kenyatta Avenue",
         "key": "kenya/nairobi/cbd/kenyatta-avenue",
         "type": "street",
@@ -383,10 +366,31 @@
           },
           {
             "kind": "context",
-            "detail": "wide urban street intersection with paved road, traffic lights and pedestrians"
+            "detail": "wide urban street intersection with paved road, traffic lights, pedestrians and Bank of India building described in caption and description"
           }
         ],
-        "confidence": 0.95
+        "confidence": 0.93
+      },
+      {
+        "name": "Teleposta Towers",
+        "key": "kenya/nairobi/cbd/teleposta-towers",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "architecture",
+            "detail": "two prominent cylindrical towers with striped pattern dominating skyline behind low building"
+          },
+          {
+            "kind": "architecture",
+            "detail": "tall red metal lattice tower rising between the two cylindrical towers of the high-rise"
+          },
+          {
+            "kind": "context",
+            "detail": "tall building with two cylindrical striped towers and tall red lattice antenna between them behind Bank of India building on Kenyatta Avenue"
+          }
+        ],
+        "confidence": 0.88
       }
     ],
     "place_candidates": [
@@ -406,10 +410,10 @@
           },
           {
             "kind": "context",
-            "detail": "busy urban intersection with high-rise buildings and commercial signage"
+            "detail": "wide urban street intersection in central Nairobi with moderate crowd and vehicles"
           }
         ],
-        "confidence": 0.88
+        "confidence": 0.89
       },
       {
         "name": "Nairobi",
@@ -425,7 +429,28 @@
             "detail": "Kenyatta Avenue, Nairobi, 2025 (08)"
           }
         ],
-        "confidence": 0.9
+        "confidence": 0.95
+      },
+      {
+        "name": "Teleposta Towers",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd/teleposta-towers",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "architecture",
+            "detail": "two prominent cylindrical towers with striped pattern and tall red lattice antenna between them dominating skyline"
+          },
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta Avenue, Nairobi, 2025 (08)"
+          }
+        ],
+        "confidence": 0.85
       }
     ],
     "uncertainties": [
@@ -437,7 +462,11 @@
       "Exact time of day and weather conditions beyond overcast cannot be determined",
       "Building names beyond BANK OF INDIA and shop brands cannot be confirmed",
       "Exact number of pedestrians and full text on yellow billboard could not be determined due to distance and occlusion",
-      "Building names beyond BANK OF INDIA visible text cannot be confirmed"
+      "Building names beyond BANK OF INDIA visible text cannot be confirmed",
+      "Exact number of pedestrians uncertain due to distance, occlusion and small figure size",
+      "Full text on large yellow billboard cut off and partially obscured, not legible",
+      "Building names beyond BANK OF INDIA visible text cannot be confirmed from visible_text alone",
+      "License plate characters and small shop signs not reliably readable at this resolution"
     ],
     "place": {
       "name": "Kenyatta Avenue",
@@ -455,10 +484,10 @@
         },
         {
           "kind": "context",
-          "detail": "wide urban street intersection with Bank of India building and twin-tower high-rise with red antenna"
+          "detail": "busy urban intersection with Bank of India building and distinctive twin-tower high-rise with red antenna"
         }
       ],
-      "confidence": 0.93
+      "confidence": 0.92
     },
     "place_key": "kenya/nairobi/cbd/kenyatta-avenue",
     "taken_from": null,
@@ -487,9 +516,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:55:23+00:00",
+        "run_at": "2026-10-27T21:41:10+00:00",
         "raw_output_path": "data/annotations/raw/street_017_passB_attempt2.txt",
-        "tokens": 6982
+        "tokens": 7409
       }
     ],
     "human_review": {

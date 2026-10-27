@@ -48,7 +48,7 @@ MODEL = "meta-models/muse-spark-open-1026"
 BASE_URL = "https://inference.baseten.co/v1"
 SCHEMA_VERSION = "0.1"
 PROMPT_VERSION = "passA-v2.1"
-MAX_TOKENS = 12000
+MAX_TOKENS = 8000
 
 VIEWPOINTS = {"ground_level", "elevated", "aerial", "interior", "water_level"}
 LEGIBILITY = {"clear", "partial", "unreadable"}

@@ -347,12 +347,12 @@
             "detail": "NAIROBI CITY COUNTY"
           },
           {
-            "kind": "provided_title",
-            "detail": "Nairobi City Market, 2025 (04)"
-          },
-          {
             "kind": "architecture",
             "detail": "stepped art deco shape with bright green, yellow and blue mural covering facade and covered entrance canopy"
+          },
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi City Market, 2025 (04)"
           }
         ],
         "confidence": 0.98
@@ -377,7 +377,32 @@
             "detail": "Nairobi City Market, 2025 (04)"
           }
         ],
-        "confidence": 0.9
+        "confidence": 0.92
+      },
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "Nairobi CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "NAIROBI CITY COUNTY"
+          },
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi City Market, 2025 (04)"
+          },
+          {
+            "kind": "context",
+            "detail": "urban street with market building and high-rise buildings in background"
+          }
+        ],
+        "confidence": 0.88
       }
     ],
     "uncertainties": [
@@ -388,13 +413,16 @@
       "Interior layout and activity inside the market is not visible",
       "Tall beige high-rise building with red trim behind market cannot be identified as a specific named landmark from provided evidence",
       "Interior layout and activity inside market not visible",
-      "Exact number of people in shaded entrances unclear due to shadows and distance"
+      "Exact number of people in shaded entrances unclear due to shadows and distance",
+      "Exact number of people inside shaded market entrances is unclear due to shadows and distance",
+      "Additional distant signage on high-rise buildings including TECNO is blurry and only partially readable"
     ],
     "place": {
       "name": "City Market",
       "hierarchy": [
         "Kenya",
-        "Nairobi"
+        "Nairobi",
+        "Nairobi CBD"
       ],
       "key": "unknown/city-market",
       "status": "confirmed",
@@ -413,21 +441,14 @@
         },
         {
           "kind": "architecture",
-          "detail": "stepped market building with mural facade and covered entrance canopy"
+          "detail": "large stepped market building with bright green, yellow and blue mural facade and covered entrance canopy"
         }
       ],
       "confidence": 0.97
     },
     "place_key": "unknown/city-market",
     "taken_from": null,
-    "cultural_context": [
-      {
-        "term": "nyama",
-        "local_name": "nyama",
-        "language": "Swahili",
-        "evidence": "visible_text 'KENYA MEAT COMMISSION NYAMA HAVEN' and 'KMC NYAMA HAVEN'"
-      }
-    ]
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -452,9 +473,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:50:59+00:00",
+        "run_at": "2026-10-27T21:36:55+00:00",
         "raw_output_path": "data/annotations/raw/market_016_passB_attempt1.txt",
-        "tokens": 6953
+        "tokens": 6715
       }
     ],
     "human_review": {

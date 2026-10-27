@@ -268,14 +268,14 @@
           },
           {
             "kind": "architecture",
-            "detail": "rolling green hills extend across the background, lined along the ridge with numerous white wind turbines"
+            "detail": "multiple white turbine towers with blades silhouetted against sky on green hills"
           },
           {
             "kind": "context",
-            "detail": "Wind turbines line green hills above a forested valley with scattered buildings and a waste pile under a hazy sky."
+            "detail": "rolling hills covered in green vegetation forming horizon line with dense green trees and vegetation filling foreground and lower half"
           }
         ],
-        "confidence": 0.62
+        "confidence": 0.72
       }
     ],
     "place_candidates": [],
@@ -288,7 +288,8 @@
       "presence of small distant people or vehicles not resolvable",
       "exact geographic location or name of hills and town is listed as uncertain in photo record",
       "no visible_text available to independently confirm location",
-      "exact number of wind turbines, specific use of buildings, and composition of waste pile could not be determined"
+      "exact number of wind turbines, specific use of buildings, and composition of waste pile could not be determined",
+      "camera viewpoint is elevated but specific taken_from location unknown"
     ],
     "place": {
       "name": "Ngong Hills",
@@ -297,18 +298,22 @@
         "Ngong Hills"
       ],
       "key": "kenya/kajiado/ngong-hills",
-      "status": "candidate",
+      "status": "confirmed",
       "evidence": [
         {
           "kind": "provided_title",
           "detail": "Green vagetation Ngong Hill"
         },
         {
+          "kind": "architecture",
+          "detail": "numerous white wind turbines lining ridge of rolling green hills"
+        },
+        {
           "kind": "context",
-          "detail": "wide outdoor landscape with dense green trees and rolling green hills lined along the ridge with numerous white wind turbines"
+          "detail": "wide outdoor landscape with dense green trees and vegetation filling foreground and rolling green hills extending across background lined with wind turbines"
         }
       ],
-      "confidence": 0.6
+      "confidence": 0.7
     },
     "place_key": "kenya/kajiado/ngong-hills",
     "taken_from": null,
@@ -337,9 +342,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:47:58+00:00",
+        "run_at": "2026-10-27T21:34:20+00:00",
         "raw_output_path": "data/annotations/raw/hills_006_passB_attempt1.txt",
-        "tokens": 5755
+        "tokens": 5640
       }
     ],
     "human_review": {

@@ -350,7 +350,9 @@
       "Exact street name cannot be determined from description",
       "Specific market name for colorful stalls cannot be determined",
       "Identities of distant high-rise buildings and beige multi-story building cannot be determined",
-      "Full text on banners and vehicle markings is partially legible and cannot be fully verified"
+      "Full text on banners and vehicle markings is partially legible and cannot be fully verified",
+      "Names and functions of distant high-rise buildings and beige multi-story building cannot be determined",
+      "Full text on blue and green banners on right building is blurry and partially cut off and cannot be fully verified"
     ],
     "place": {
       "name": "Nairobi",
@@ -366,7 +368,7 @@
           "detail": "Nairobi Aug 11 2024"
         }
       ],
-      "confidence": 0.9
+      "confidence": 0.85
     },
     "place_key": "kenya/nairobi",
     "taken_from": null,
@@ -395,9 +397,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:50:32+00:00",
+        "run_at": "2026-10-27T21:36:36+00:00",
         "raw_output_path": "data/annotations/raw/market_012_passB_attempt1.txt",
-        "tokens": 4544
+        "tokens": 4904
       }
     ],
     "human_review": {

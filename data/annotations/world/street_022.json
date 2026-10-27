@@ -382,10 +382,48 @@
             "detail": "Nairobi Isuzu NQR, cnr Tom Mboya Street and Haile Selassie Avenue, 2025 (01)"
           }
         ],
-        "confidence": 0.9
+        "confidence": 0.88
       }
     ],
-    "place_candidates": [],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi Isuzu NQR, cnr Tom Mboya Street and Haile Selassie Avenue, 2025 (01)"
+          }
+        ],
+        "confidence": 0.9
+      },
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "Nairobi CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi Isuzu NQR, cnr Tom Mboya Street and Haile Selassie Avenue, 2025 (01)"
+          },
+          {
+            "kind": "context",
+            "detail": "busy city street lined with multi-story buildings and pedestrians"
+          }
+        ],
+        "confidence": 0.65
+      }
+    ],
     "uncertainties": [
       "Exact number of people is uncertain due to occlusion inside bus and distance in background crowd",
       "Exact characters on bus license plate are not legible due to resolution",
@@ -394,13 +432,17 @@
       "Specific destination or route of the bus cannot be determined from visible text",
       "Tom Mboya Street also mentioned in provided_title but not independently verifiable from visible features and not in allowed names list",
       "Specific building identities (yellow building with COLLEGE signs, gray high-rise, red-brick building) cannot be matched to named landmarks without outside knowledge",
-      "License plate, distant bus signs and far background signs not legible"
+      "License plate, distant bus signs and far background signs not legible",
+      "No visible street name sign confirms Haile Selassie Avenue; location relies solely on provided_title",
+      "Tom Mboya Street also mentioned in provided_title but not in allowed names list and not independently verifiable from visible features",
+      "Bus destination, license plate and distant background signs not legible"
     ],
     "place": {
       "name": "Haile Selassie Avenue",
       "hierarchy": [
         "Kenya",
-        "Nairobi"
+        "Nairobi",
+        "Nairobi CBD"
       ],
       "key": "kenya/nairobi/haile-selassie-avenue",
       "status": "candidate",
@@ -410,7 +452,7 @@
           "detail": "Nairobi Isuzu NQR, cnr Tom Mboya Street and Haile Selassie Avenue, 2025 (01)"
         }
       ],
-      "confidence": 0.9
+      "confidence": 0.87
     },
     "place_key": "kenya/nairobi/haile-selassie-avenue",
     "taken_from": null,
@@ -439,9 +481,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:55:45+00:00",
+        "run_at": "2026-10-27T21:41:09+00:00",
         "raw_output_path": "data/annotations/raw/street_022_passB_attempt1.txt",
-        "tokens": 9032
+        "tokens": 8178
       }
     ],
     "human_review": {

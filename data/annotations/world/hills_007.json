@@ -325,26 +325,32 @@
       "Details of fence and small structures on hilltop are not clear due to distance",
       "Exact location and name of wind farm cannot be determined from provided information",
       "No evidence to identify Ngong Hills or any other specific landmark from allowed list",
-      "Facial features, ages, genders and identities of people cannot be determined as they are seen from behind"
+      "Facial features, ages, genders and identities of people cannot be determined as they are seen from behind",
+      "No visible text or distinctive architecture to identify a specific landmark from allowed list",
+      "Identities of people cannot be determined as they are seen from behind"
     ],
     "place": {
       "name": "Unknown",
       "hierarchy": [
-        "Kenya"
+        "Unknown"
       ],
       "key": "unknown/unknown",
       "status": "candidate",
       "evidence": [
+        {
+          "kind": "context",
+          "detail": "Photo shows generic landscape with unpaved dirt road winding uphill through grassy terrain toward hilltop with multiple white wind turbines, lattice communication tower, utility poles and no identifying signs"
+        },
         {
           "kind": "provided_title",
           "detail": "Home in Nature"
         },
         {
           "kind": "context",
-          "detail": "No visible text, distinctive architecture, or location-specific features; generic wind turbines on grassy hill with dirt road insufficient to identify specific place"
+          "detail": "No visible text present and no distinctive architecture to identify a specific landmark; uncertainties state exact location and name of wind farm cannot be determined and no evidence to identify Ngong Hills or any other specific landmark"
         }
       ],
-      "confidence": 0.95
+      "confidence": 0.98
     },
     "place_key": "unknown/unknown",
     "taken_from": null,
@@ -373,9 +379,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:48:15+00:00",
-        "raw_output_path": "data/annotations/raw/hills_007_passB_attempt2.txt",
-        "tokens": 4699
+        "run_at": "2026-10-27T21:34:18+00:00",
+        "raw_output_path": "data/annotations/raw/hills_007_passB_attempt1.txt",
+        "tokens": 5014
       }
     ],
     "human_review": {

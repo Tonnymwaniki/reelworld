@@ -324,22 +324,18 @@
         "name": "Ngong Hills",
         "key": "kenya/kajiado/ngong-hills",
         "type": "natural",
-        "status": "confirmed",
+        "status": "candidate",
         "evidence": [
           {
             "kind": "provided_title",
             "detail": "Ngong Hills Wind Farm"
           },
           {
-            "kind": "architecture",
-            "detail": "multiple white wind turbines with three blades visible along the ridge and hillside"
-          },
-          {
             "kind": "context",
-            "detail": "green grassy hillside with scattered rocks and a large white wind turbine on the right side with additional turbines along the ridge"
+            "detail": "wind farm with multiple white turbines on green grassy hillside and ridge as described"
           }
         ],
-        "confidence": 0.88
+        "confidence": 0.65
       }
     ],
     "place_candidates": [],
@@ -350,7 +346,9 @@
       "specific makes or models of vehicles cannot be determined",
       "exact location name of the wind farm cannot be determined from the photo",
       "Exact number of distant wind turbines and specific infrastructure details cannot be determined due to distance and overlap",
-      "No visible text or owner note to independently confirm location beyond provided title"
+      "No visible text or owner note to independently confirm location beyond provided title",
+      "Location identification relies solely on provided_title 'Ngong Hills Wind Farm'; no visible_text or owner_note independently confirms location",
+      "Exact number of distant wind turbines, vehicle details, and human figures cannot be determined due to distance and resolution"
     ],
     "place": {
       "name": "Ngong Hills",
@@ -367,10 +365,10 @@
         },
         {
           "kind": "context",
-          "detail": "A wind farm with multiple white turbines on a green grassy hill under a partly cloudy blue sky"
+          "detail": "wind farm with multiple white turbines on green grassy hillside as described"
         }
       ],
-      "confidence": 0.85
+      "confidence": 0.65
     },
     "place_key": "kenya/kajiado/ngong-hills",
     "taken_from": null,
@@ -399,9 +397,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:48:32+00:00",
+        "run_at": "2026-10-27T21:34:43+00:00",
         "raw_output_path": "data/annotations/raw/hills_016_passB_attempt1.txt",
-        "tokens": 4750
+        "tokens": 5164
       }
     ],
     "human_review": {

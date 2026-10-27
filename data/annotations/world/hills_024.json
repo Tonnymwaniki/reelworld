@@ -288,7 +288,21 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Ngong Ping, Ma On Shan",
+        "key": "unknown/ngong-ping-ma-on-shan",
+        "type": "natural",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Ngong Ping, Ma On Shan 04"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact number of people is uncertain due to distance and small figures in background",
@@ -299,14 +313,17 @@
       "Exact number of people uncertain due to distance",
       "Text or logos on paraglider canopies not legible",
       "No visible_text or distinctive architecture to identify any listed Nairobi landmark",
-      "Exact time of day and weather beyond overcast not determinable"
+      "Exact time of day and weather beyond overcast not determinable",
+      "Location identification relies solely on provided_title; no visible_text or distinctive architecture in image to independently verify; specific mountain identity and exact time not determinable from image alone"
     ],
     "place": {
-      "name": "Unknown",
+      "name": "Ngong Ping, Ma On Shan",
       "hierarchy": [
-        "Unknown"
+        "Hong Kong",
+        "Ma On Shan",
+        "Ngong Ping"
       ],
-      "key": "unknown/unknown",
+      "key": "unknown/ngong-ping-ma-on-shan",
       "status": "candidate",
       "evidence": [
         {
@@ -315,12 +332,12 @@
         },
         {
           "kind": "context",
-          "detail": "Specific location and identity of mountain not determinable from image; no visible_text and no distinctive architecture linking to listed landmarks; scene shows generic dry grassy hilltop with rocky mountain peak and paragliding activity"
+          "detail": "wide dry grassy hilltop with paragliding activity and rocky mountain peak backdrop as described"
         }
       ],
-      "confidence": 0.92
+      "confidence": 0.87
     },
-    "place_key": "unknown/unknown",
+    "place_key": "unknown/ngong-ping-ma-on-shan",
     "taken_from": null,
     "cultural_context": []
   },
@@ -347,9 +364,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:49:19+00:00",
-        "raw_output_path": "data/annotations/raw/hills_024_passB_attempt2.txt",
-        "tokens": 5269
+        "run_at": "2026-10-27T21:35:10+00:00",
+        "raw_output_path": "data/annotations/raw/hills_024_passB_attempt1.txt",
+        "tokens": 6385
       }
     ],
     "human_review": {

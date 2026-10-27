@@ -301,7 +301,10 @@
       "Text on clothing which was ignored per instructions",
       "Exact street/overpass location within Nairobi cannot be determined from visible features; no identifiable landmark, street sign, or distinctive architecture visible",
       "Species of bird of prey and contents of cardboard box and woven sacks not determinable",
-      "Full graffiti text not legible beyond THE BIRDMAN FACE, FABIO, VOST!"
+      "Full graffiti text not legible beyond THE BIRDMAN FACE, FABIO, VOST!",
+      "Species of bird of prey not determinable",
+      "Contents of cardboard box and woven sacks not determinable",
+      "Photo shows outdoor night scene under dark concrete overpass with graffiti-covered walls, uneven dirt ground, and artificial harsh lighting"
     ],
     "place": {
       "name": "Nairobi",
@@ -317,7 +320,7 @@
           "detail": "Nairobi Birdman feeding the street family"
         }
       ],
-      "confidence": 0.6
+      "confidence": 0.62
     },
     "place_key": "kenya/nairobi",
     "taken_from": null,
@@ -346,9 +349,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:55:25+00:00",
+        "run_at": "2026-10-27T21:41:04+00:00",
         "raw_output_path": "data/annotations/raw/street_021_passB_attempt1.txt",
-        "tokens": 5403
+        "tokens": 5626
       }
     ],
     "human_review": {

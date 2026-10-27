@@ -288,10 +288,10 @@
           },
           {
             "kind": "context",
-            "detail": "faint ridgeline visible through haze behind the city spanning the horizon"
+            "detail": "large muted gray-blue mountain range spanning horizon visible through haze behind the city"
           }
         ],
-        "confidence": 0.64
+        "confidence": 0.68
       }
     ],
     "place_candidates": [
@@ -310,7 +310,7 @@
           },
           {
             "kind": "context",
-            "detail": "sprawling urban area with mid- and high-rise buildings emerging from dense trees in foreground and midground"
+            "detail": "sprawling urban area with high-rise buildings including blue-glass high-rise and dense tree canopy in foreground"
           }
         ],
         "confidence": 0.55
@@ -325,7 +325,8 @@
       "Exact geographic location and city name cannot be determined from image alone; identification relies on provided_title",
       "Specific building names, functions, or heights cannot be determined due to distance, haze and tree cover",
       "No visible text with 3+ legible letters discernible in image",
-      "Presence of people, vehicles, or small street details cannot be determined due to distance and haze"
+      "Presence of people, vehicles, or small street details cannot be determined due to distance and haze",
+      "Exact geographic location and building identities cannot be determined from image alone; identification relies on provided_title"
     ],
     "place": {
       "name": "Ngong Hills",
@@ -342,10 +343,10 @@
         },
         {
           "kind": "context",
-          "detail": "large muted mountain range spanning the horizon beyond sprawling urban area and dense tree canopy"
+          "detail": "large muted mountain range spanning horizon beyond sprawling urban area and dense tree canopy, described as distant hills"
         }
       ],
-      "confidence": 0.62
+      "confidence": 0.65
     },
     "place_key": "kenya/kajiado/ngong-hills",
     "taken_from": {
@@ -363,10 +364,10 @@
         },
         {
           "kind": "context",
-          "detail": "elevated wide view looking across dense green tree canopy and high-rise buildings toward distant mountains"
+          "detail": "elevated wide view across sprawling urban area with dense green tree canopy and high-rise buildings in foreground"
         }
       ],
-      "confidence": 0.6
+      "confidence": 0.62
     },
     "cultural_context": []
   },
@@ -393,9 +394,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:48:42+00:00",
+        "run_at": "2026-10-27T21:35:02+00:00",
         "raw_output_path": "data/annotations/raw/hills_019_passB_attempt1.txt",
-        "tokens": 7517
+        "tokens": 7560
       }
     ],
     "human_review": {

@@ -334,12 +334,13 @@
     "landmarks": [],
     "place_candidates": [
       {
-        "name": "Nairobi",
+        "name": "Nairobi CBD",
         "hierarchy": [
           "Kenya",
-          "Nairobi"
+          "Nairobi",
+          "Nairobi CBD"
         ],
-        "key": "kenya/nairobi",
+        "key": "kenya/nairobi/cbd",
         "status": "candidate",
         "evidence": [
           {
@@ -347,22 +348,24 @@
             "detail": "Kenyatta International Convention Centre - BugWarp (16)"
           }
         ],
-        "confidence": 0.58
+        "confidence": 0.52
       },
       {
-        "name": "Unknown",
+        "name": "Kenyatta International Convention Centre",
         "hierarchy": [
-          "Kenya"
+          "Kenya",
+          "Nairobi",
+          "Nairobi CBD"
         ],
-        "key": "unknown/unknown",
+        "key": "kenya/nairobi/cbd/kicc",
         "status": "candidate",
         "evidence": [
           {
-            "kind": "context",
-            "detail": "congested urban street with unfinished buildings and phone billboards; exact street and district not identifiable from visible features alone"
+            "kind": "provided_title",
+            "detail": "Kenyatta International Convention Centre - BugWarp (16)"
           }
         ],
-        "confidence": 0.4
+        "confidence": 0.5
       }
     ],
     "uncertainties": [
@@ -373,51 +376,29 @@
       "Vehicle types, license plates and individual clothing details are not distinguishable at this distance",
       "No landmark from the allowed list is visibly identifiable by architecture or visible_text; GABERONE PLAZA, TUSKYS, vivo and Infinix HOT 60 PRO SERIES signage is visible but does not correspond to allowed landmark names",
       "Exact street name, building names beyond visible signage, and precise location within CBD cannot be determined from description alone",
-      "Association with Nairobi CBD and Kenyatta International Convention Centre rests solely on provided_title, not on distinctive architectural features described"
+      "Association with Nairobi CBD and Kenyatta International Convention Centre rests solely on provided_title, not on distinctive architectural features described",
+      "No landmark from the allowed list is visibly identifiable by architecture or visible_text; visible signage GABERONE PLAZA, TUSKYS, vivo and Infinix HOT 60 PRO SERIES does not correspond to allowed landmark names",
+      "Exact number of pedestrians and vehicles, distant billboard text, vehicle types, and cause of haze cannot be determined due to distance, haze and small scale",
+      "taken_from cannot be determined; elevated very_high viewpoint is described but no owner_note states camera was at Kenyatta International Convention Centre"
     ],
     "place": {
-      "name": "Nairobi CBD",
+      "name": "Nairobi",
       "hierarchy": [
         "Kenya",
-        "Nairobi",
-        "CBD"
+        "Nairobi"
       ],
-      "key": "kenya/nairobi/cbd",
+      "key": "kenya/nairobi",
       "status": "candidate",
       "evidence": [
         {
           "kind": "provided_title",
           "detail": "Kenyatta International Convention Centre - BugWarp (16)"
-        },
-        {
-          "kind": "context",
-          "detail": "elevated hazy view looking down along long straight street packed with dense clusters of vehicles and pedestrians lined with commercial buildings and unfinished concrete buildings"
         }
       ],
-      "confidence": 0.64
+      "confidence": 0.55
     },
-    "place_key": "kenya/nairobi/cbd",
-    "taken_from": {
-      "name": "Kenyatta International Convention Centre",
-      "hierarchy": [
-        "Kenya",
-        "Nairobi",
-        "CBD"
-      ],
-      "key": "kenya/nairobi/cbd/kicc",
-      "status": "candidate",
-      "evidence": [
-        {
-          "kind": "provided_title",
-          "detail": "Kenyatta International Convention Centre - BugWarp (16)"
-        },
-        {
-          "kind": "context",
-          "detail": "elevated very_high viewpoint facing down along crowded street toward distant hazy skyline, consistent with view from tall tower"
-        }
-      ],
-      "confidence": 0.72
-    },
+    "place_key": "kenya/nairobi",
+    "taken_from": null,
     "cultural_context": []
   },
   "privacy": {
@@ -443,9 +424,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:49:51+00:00",
+        "run_at": "2026-10-27T21:36:06+00:00",
         "raw_output_path": "data/annotations/raw/landmarks_012_passB_attempt1.txt",
-        "tokens": 6859
+        "tokens": 8180
       }
     ],
     "human_review": {

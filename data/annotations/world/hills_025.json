@@ -282,10 +282,10 @@
           },
           {
             "kind": "context",
-            "detail": "long, hazy greenish-gray mountain range stretches across the horizon in background"
+            "detail": "long hazy greenish-gray mountain range stretching across horizon behind river valley with scattered houses"
           }
         ],
-        "confidence": 0.82
+        "confidence": 0.62
       }
     ],
     "place_candidates": [],
@@ -295,7 +295,10 @@
       "Number and condition of individual houses is uncertain due to haze and distance",
       "Time of year and specific weather conditions beyond visible clouds cannot be determined",
       "Exact river name, individual house details, and specific peak identification cannot be determined from image due to distance, haze and low resolution; location identification relies solely on provided_title",
-      "No visible text, distinctive architecture, or local cultural terms are visible to independently confirm location beyond the provided title"
+      "No visible text, distinctive architecture, or local cultural terms are visible to independently confirm location beyond the provided title",
+      "No visible text or distinctive architecture visible to independently confirm location; identification relies solely on provided_title",
+      "Exact river name, house details, and specific peak identification cannot be determined due to distance, haze and low resolution",
+      "Time of year and specific weather beyond partly cloudy bright daylight cannot be determined"
     ],
     "place": {
       "name": "Ngong Hills",
@@ -312,10 +315,10 @@
         },
         {
           "kind": "context",
-          "detail": "distant hazy mountain range spanning horizon is the subject of the wide rural landscape view toward the river and mountains"
+          "detail": "distant hazy mountain range viewed across rural river valley with scattered houses and muddy river"
         }
       ],
-      "confidence": 0.8
+      "confidence": 0.6
     },
     "place_key": "kenya/kajiado/ngong-hills",
     "taken_from": {
@@ -330,13 +333,9 @@
         {
           "kind": "provided_title",
           "detail": "Ngong hill (view from kiserian)"
-        },
-        {
-          "kind": "context",
-          "detail": "elevated viewpoint facing toward the river and mountains"
         }
       ],
-      "confidence": 0.75
+      "confidence": 0.65
     },
     "cultural_context": []
   },
@@ -363,9 +362,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:49:02+00:00",
+        "run_at": "2026-10-27T21:35:13+00:00",
         "raw_output_path": "data/annotations/raw/hills_025_passB_attempt1.txt",
-        "tokens": 6240
+        "tokens": 5046
       }
     ],
     "human_review": {

@@ -307,10 +307,10 @@
           },
           {
             "kind": "context",
-            "detail": "Panoramic view of expansive valley flanked by grassy hills under partly cloudy sky with bright sun glare"
+            "detail": "Panoramic view of a sunlit expansive valley flanked by grassy hills under a partly cloudy sky with broad valley floor stretching to hazy distant horizon flanked by sloping grassy hills"
           }
         ],
-        "confidence": 0.9
+        "confidence": 0.85
       }
     ],
     "place_candidates": [],
@@ -322,7 +322,11 @@
       "No sign with 3 or more legible letters is visible; any distant text or markings are unreadable or not discernible",
       "Exact geographic location cannot be determined from image alone; location inferred from provided title",
       "No visible text with 3 or more legible letters",
-      "Distant valley details obscured by haze, distance and glare"
+      "Distant valley details obscured by haze, distance and glare",
+      "Exact geographic location cannot be determined from image alone; location inferred from provided_title",
+      "No visible text with 3 or more legible letters is visible",
+      "Distant valley floor details obscured by haze, distance and glare",
+      "Whether small people, animals or vehicles are present in distant valley cannot be determined due to resolution"
     ],
     "place": {
       "name": "Ngong Hills",
@@ -339,10 +343,10 @@
         },
         {
           "kind": "context",
-          "detail": "Panoramic view of expansive valley flanked by grassy hills under partly cloudy sky"
+          "detail": "wide panoramic landscape shows broad valley floor flanked on left and right by sloping grassy hills covered in dry brown-green grass and scattered rocks"
         }
       ],
-      "confidence": 0.9
+      "confidence": 0.85
     },
     "place_key": "kenya/kajiado/ngong-hills",
     "taken_from": null,
@@ -371,9 +375,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:48:23+00:00",
+        "run_at": "2026-10-27T21:34:40+00:00",
         "raw_output_path": "data/annotations/raw/hills_014_passB_attempt1.txt",
-        "tokens": 4944
+        "tokens": 5393
       }
     ],
     "human_review": {

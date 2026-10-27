@@ -285,10 +285,14 @@
           },
           {
             "kind": "context",
-            "detail": "park with calm pond reflecting trees and tall building, grassy bank with fallen leaves, dense treeline across water, overhanging branches, urban park setting"
+            "detail": "scene type park with tags park, pond, lake, urban park, nature; description of grassy bank with scattered brown fallen leaves bordering large calm pond that fills middle of image and reflects sky, trees and tall building"
+          },
+          {
+            "kind": "context",
+            "detail": "dense line of mature trees with dark green canopies stretching horizontally across water and overhanging branches with small green leaves hanging from top left and top right edges"
           }
         ],
-        "confidence": 0.93
+        "confidence": 0.92
       },
       {
         "name": "UAP Towers",
@@ -302,28 +306,36 @@
           },
           {
             "kind": "architecture",
-            "detail": "tall light-colored high-rise building with pointed top rising above treeline in center distance"
+            "detail": "tall light-colored high-rise building with a pointed top and multiple windows rising above the treeline in center distance"
+          },
+          {
+            "kind": "context",
+            "detail": "mirrored reflection of the building and treeline visible on the calm pond surface across from grassy bank"
           }
         ],
-        "confidence": 0.88
+        "confidence": 0.85
       }
     ],
     "place_candidates": [
       {
-        "name": "Nairobi",
+        "name": "UAP Towers",
         "hierarchy": [
           "Kenya",
           "Nairobi"
         ],
-        "key": "kenya/nairobi",
-        "status": "candidate",
+        "key": "unknown/uap-towers",
+        "status": "confirmed",
         "evidence": [
           {
             "kind": "provided_title",
             "detail": "UAP Towers seen from Uhuru Park, Nairobi"
+          },
+          {
+            "kind": "architecture",
+            "detail": "tall light-colored high-rise building with pointed top rising above treeline in center distance"
           }
         ],
-        "confidence": 0.9
+        "confidence": 0.85
       }
     ],
     "uncertainties": [
@@ -332,14 +344,16 @@
       "Whether any distant signs or text exist behind trees or on the far building cannot be determined due to distance and blur",
       "Specific identity and name of the tall building cannot be determined from this view",
       "Exact geographic location cannot be determined from the image alone",
-      "Specific identity of tall building cannot be independently verified from image alone beyond provided title; tiny blurred specks along far shore cannot be determined; exact time of day cannot be determined from light alone"
+      "Specific identity of tall building cannot be independently verified from image alone beyond provided title; tiny blurred specks along far shore cannot be determined; exact time of day cannot be determined from light alone",
+      "Whether tiny blurred specks along far shore are people, objects, or vegetation cannot be determined due to distance and low resolution",
+      "Specific identity and name of the tall building cannot be independently verified from image alone beyond provided title; identification relies on provided_title",
+      "Exact geographic location cannot be determined from image alone without provided title"
     ],
     "place": {
       "name": "Uhuru Park",
       "hierarchy": [
         "Kenya",
-        "Nairobi",
-        "Uhuru Park"
+        "Nairobi"
       ],
       "key": "kenya/nairobi/uhuru-park",
       "status": "candidate",
@@ -350,13 +364,36 @@
         },
         {
           "kind": "context",
-          "detail": "park setting with calm pond, grassy bank, dense treeline, and skyline reflection described as urban park"
+          "detail": "foreground grassy bank with scattered brown fallen leaves bordering large calm pond that fills middle of image and reflects sky, trees and tall building"
+        },
+        {
+          "kind": "context",
+          "detail": "scene type park, outdoor, with dense treeline across water, overhanging branches, tags park, pond, lake, urban park, nature"
         }
       ],
-      "confidence": 0.92
+      "confidence": 0.9
     },
     "place_key": "kenya/nairobi/uhuru-park",
-    "taken_from": null,
+    "taken_from": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "UAP Towers seen from Uhuru Park, Nairobi indicates photo taken from Uhuru Park"
+        },
+        {
+          "kind": "context",
+          "detail": "camera viewpoint ground_level eye_level facing across the water toward the treeline and tall building within park setting"
+        }
+      ],
+      "confidence": 0.9
+    },
     "cultural_context": []
   },
   "privacy": {
@@ -382,9 +419,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:53:09+00:00",
+        "run_at": "2026-10-27T21:39:05+00:00",
         "raw_output_path": "data/annotations/raw/park_017_passB_attempt1.txt",
-        "tokens": 9863
+        "tokens": 9867
       }
     ],
     "human_review": {

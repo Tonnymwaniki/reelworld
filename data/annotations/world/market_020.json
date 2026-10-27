@@ -339,7 +339,7 @@
           },
           {
             "kind": "architecture",
-            "detail": "large multi-story yellow building covered in colorful geometric murals and painted patterns with flower stalls and buckets on sidewalk"
+            "detail": "large multi-story yellow building covered in colorful geometric murals and painted patterns occupying the center and right of the frame"
           }
         ],
         "confidence": 0.88
@@ -353,7 +353,8 @@
       "Exact number of people partially obscured behind vehicles or market stalls is uncertain",
       "Text printed on people's clothing was ignored per annotation rules",
       "Exact city location cannot be determined from visual features alone; identification relies on provided title",
-      "Full text of faded murals on upper floors and text on water tower billboard not legible"
+      "Full text of faded murals on upper floors and text on water tower billboard not legible",
+      "Exact city location cannot be determined from visual features alone; identification relies on provided_title"
     ],
     "place": {
       "name": "City Market",
@@ -362,18 +363,18 @@
         "Nairobi"
       ],
       "key": "unknown/city-market",
-      "status": "candidate",
+      "status": "confirmed",
       "evidence": [
         {
           "kind": "provided_title",
           "detail": "Nairobi City Market in Kenya"
         },
         {
-          "kind": "context",
-          "detail": "flower vendors with buckets on sidewalk and market stalls in front of mural-covered building on city street"
+          "kind": "architecture",
+          "detail": "large multi-story yellow building covered in colorful geometric murals with flower vendors and buckets of flowers displayed for sale on sidewalk"
         }
       ],
-      "confidence": 0.87
+      "confidence": 0.88
     },
     "place_key": "unknown/city-market",
     "taken_from": null,
@@ -402,9 +403,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:51:14+00:00",
+        "run_at": "2026-10-27T21:37:07+00:00",
         "raw_output_path": "data/annotations/raw/market_020_passB_attempt1.txt",
-        "tokens": 6125
+        "tokens": 5048
       }
     ],
     "human_review": {

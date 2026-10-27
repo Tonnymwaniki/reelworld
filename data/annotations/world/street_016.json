@@ -316,25 +316,7 @@
     }
   },
   "inferred": {
-    "landmarks": [
-      {
-        "name": "Kenyatta Avenue",
-        "key": "kenya/nairobi/cbd/kenyatta-avenue",
-        "type": "street",
-        "status": "candidate",
-        "evidence": [
-          {
-            "kind": "provided_title",
-            "detail": "Kenyatta Avenue, Nairobi, 2025 (07)"
-          },
-          {
-            "kind": "context",
-            "detail": "wide paved urban roadway with lane markings, traffic light poles, tall office buildings and mature green trees described as busy urban street intersection"
-          }
-        ],
-        "confidence": 0.92
-      }
-    ],
+    "landmarks": [],
     "place_candidates": [],
     "uncertainties": [
       "exact number of pedestrians in far background due to distance and occlusion",
@@ -345,7 +327,12 @@
       "exact time shown on street clock faces is uncertain due to resolution",
       "Exact identities of large gray office building, brown high-rise, narrow concrete tower and distant white cylindrical building cannot be determined from description",
       "Text on white signs below red street clock and distant billboard not legible",
-      "Time shown on red double-sided street clock uncertain due to resolution"
+      "Time shown on red double-sided street clock uncertain due to resolution",
+      "Text on white signs below red double-sided street clock and text on distant billboard not legible",
+      "Vehicle license plates and building names cannot be determined",
+      "Exact time shown on red double-sided street clock uncertain due to resolution",
+      "Visible text 'GABA' does not correspond to an allowed landmark name and does not identify a specific place",
+      "No local cultural terms (matatu, kiosk, mkokoteni, kanga) clearly visible"
     ],
     "place": {
       "name": "Kenyatta Avenue",
@@ -360,13 +347,9 @@
         {
           "kind": "provided_title",
           "detail": "Kenyatta Avenue, Nairobi, 2025 (07)"
-        },
-        {
-          "kind": "context",
-          "detail": "wide paved urban roadway with lane markings, traffic light poles, tall office buildings and mature green trees described as busy urban street intersection"
         }
       ],
-      "confidence": 0.92
+      "confidence": 0.9
     },
     "place_key": "kenya/nairobi/cbd/kenyatta-avenue",
     "taken_from": null,
@@ -395,9 +378,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:54:59+00:00",
+        "run_at": "2026-10-27T21:40:50+00:00",
         "raw_output_path": "data/annotations/raw/street_016_passB_attempt1.txt",
-        "tokens": 7089
+        "tokens": 8488
       }
     ],
     "human_review": {

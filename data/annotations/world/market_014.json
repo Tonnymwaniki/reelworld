@@ -388,7 +388,11 @@
           },
           {
             "kind": "architecture",
-            "detail": "multi-story building with colorful mural facade and stepped roofline"
+            "detail": "large building with painted mural and signage reading NAIROBI CITY COUNTY CITY MARKET"
+          },
+          {
+            "kind": "architecture",
+            "detail": "colorful mural facade"
           },
           {
             "kind": "provided_title",
@@ -396,38 +400,13 @@
           },
           {
             "kind": "context",
-            "detail": "caption describes Nairobi City County City Market building across street with parked vehicles; tags include Nairobi and City Market"
+            "detail": "caption describes Nairobi City County City Market building across a street with parked vehicles and pedestrians"
           }
         ],
         "confidence": 0.98
       }
     ],
-    "place_candidates": [
-      {
-        "name": "Nairobi",
-        "hierarchy": [
-          "Kenya",
-          "Nairobi"
-        ],
-        "key": "kenya/nairobi",
-        "status": "confirmed",
-        "evidence": [
-          {
-            "kind": "visible_text",
-            "detail": "NAIROBI CITY COUNTY"
-          },
-          {
-            "kind": "provided_title",
-            "detail": "Nairobi City Market, 2025 (02)"
-          },
-          {
-            "kind": "context",
-            "detail": "tags include Nairobi, Kenya"
-          }
-        ],
-        "confidence": 0.95
-      }
-    ],
+    "place_candidates": [],
     "uncertainties": [
       "Exact number of people is uncertain due to occlusion, distance and overlapping figures",
       "Text on distant billboards and rooftop signage is small and partially legible, not fully transcribed",
@@ -453,11 +432,15 @@
       "evidence": [
         {
           "kind": "visible_text",
-          "detail": "NAIROBI CITY COUNTY CITY MARKET"
+          "detail": "NAIROBI CITY COUNTY"
+        },
+        {
+          "kind": "visible_text",
+          "detail": "CITY MARKET"
         },
         {
           "kind": "architecture",
-          "detail": "central low-rise market building with large colorful mural depicting Kenyan flag, city skyline and ship"
+          "detail": "large building with painted mural and signage reading NAIROBI CITY COUNTY CITY MARKET"
         },
         {
           "kind": "provided_title",
@@ -465,10 +448,10 @@
         },
         {
           "kind": "context",
-          "detail": "caption and description identify Nairobi City County City Market building across paved street with parked vehicles and pedestrians"
+          "detail": "tags include Nairobi, City Market, Kenya"
         }
       ],
-      "confidence": 0.98
+      "confidence": 0.97
     },
     "place_key": "unknown/city-market",
     "taken_from": null,
@@ -497,9 +480,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:50:58+00:00",
+        "run_at": "2026-10-27T21:36:46+00:00",
         "raw_output_path": "data/annotations/raw/market_014_passB_attempt1.txt",
-        "tokens": 8710
+        "tokens": 6584
       }
     ],
     "human_review": {

@@ -281,27 +281,10 @@
           },
           {
             "kind": "context",
-            "detail": "pond covered with lily pads and yellow flowers with grassy park area, green pedestrian bridges spanning narrow channel and people walking and relaxing by pond in urban park setting"
+            "detail": "pond covered with lily pads and yellow flowers in an urban park with city skyline and people along the grassy edge under an overcast sky"
           }
         ],
-        "confidence": 0.96
-      },
-      {
-        "name": "Nairobi",
-        "key": "kenya/nairobi",
-        "type": "district",
-        "status": "candidate",
-        "evidence": [
-          {
-            "kind": "provided_title",
-            "detail": "Skyline of Nairobi city as seen from a lake in Uhuru Park"
-          },
-          {
-            "kind": "context",
-            "detail": "city skyline with high-rise buildings with glass facades rising behind the park against overcast sky"
-          }
-        ],
-        "confidence": 0.95
+        "confidence": 0.9
       }
     ],
     "place_candidates": [
@@ -317,13 +300,9 @@
           {
             "kind": "provided_title",
             "detail": "Skyline of Nairobi city as seen from a lake in Uhuru Park"
-          },
-          {
-            "kind": "context",
-            "detail": "city skyline with high-rise buildings with glass facades behind the park"
           }
         ],
-        "confidence": 0.88
+        "confidence": 0.85
       }
     ],
     "uncertainties": [
@@ -353,13 +332,33 @@
         },
         {
           "kind": "context",
-          "detail": "pond covered with lily pads and yellow flowers, grassy park area, green pedestrian bridges and people along grassy edge in urban park with city skyline beyond"
+          "detail": "large pond densely covered with green lily pads and small yellow flowers bordered by green grass with pedestrian bridges and city skyline beyond"
         }
       ],
-      "confidence": 0.95
+      "confidence": 0.9
     },
     "place_key": "kenya/nairobi/uhuru-park",
-    "taken_from": null,
+    "taken_from": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Skyline of Nairobi city as seen from a lake in Uhuru Park"
+        },
+        {
+          "kind": "context",
+          "detail": "ground_level viewpoint facing toward the city skyline across the pond"
+        }
+      ],
+      "confidence": 0.88
+    },
     "cultural_context": []
   },
   "privacy": {
@@ -385,9 +384,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:52:53+00:00",
+        "run_at": "2026-10-27T21:38:51+00:00",
         "raw_output_path": "data/annotations/raw/park_015_passB_attempt1.txt",
-        "tokens": 8946
+        "tokens": 7281
       }
     ],
     "human_review": {

@@ -369,19 +369,19 @@
         "evidence": [
           {
             "kind": "visible_text",
-            "detail": "THE KENYATTA INTERNATIONAL CONVENTION CENTRE"
-          },
-          {
-            "kind": "visible_text",
             "detail": "KICC"
           },
           {
-            "kind": "architecture",
-            "detail": "tall cylindrical tower with horizontal striped bands and flat disc roof rising directly behind stone entrance arch"
+            "kind": "visible_text",
+            "detail": "THE KENYATTA INTERNATIONAL CONVENTION CENTRE"
           },
           {
             "kind": "provided_title",
             "detail": "Kenyatta International Convention Centre, 2025 (01)"
+          },
+          {
+            "kind": "architecture",
+            "detail": "tall cylindrical tower with horizontal striped bands and flat disc roof rising directly behind stone entrance arch"
           }
         ],
         "confidence": 0.99
@@ -390,18 +390,14 @@
         "name": "CBK Pension Towers",
         "key": "kenya/nairobi/cbd/cbk-pension-towers",
         "type": "building",
-        "status": "confirmed",
+        "status": "candidate",
         "evidence": [
           {
-            "kind": "visible_text",
-            "detail": "CBK PENSION TOWERS"
-          },
-          {
-            "kind": "architecture",
-            "detail": "tall curved building with blue glass on right side behind conical structure with angular top"
+            "kind": "context",
+            "detail": "modern curved high-rise with blue glass and angular top visible behind conical-roof building on right side"
           }
         ],
-        "confidence": 0.72
+        "confidence": 0.62
       }
     ],
     "place_candidates": [],
@@ -412,36 +408,40 @@
       "Exact time of day beyond daytime and specific weather conditions beyond clear sky",
       "Whether additional people or vehicles are present outside the frame or obscured by structures",
       "CBK Pension Towers identification based on partially legible visible_text; exact correspondence to blue glass high-rise uncertain due to distance",
-      "Exact number of people behind gates, details inside white tent, and text on small red sign on guardhouse could not be determined due to distance and occlusion"
+      "Exact number of people behind gates, details inside white tent, and text on small red sign on guardhouse could not be determined due to distance and occlusion",
+      "Exact number of people behind gates could not be determined due to distance and occlusion by gates and tent",
+      "Text on small red sign on guardhouse and other distant small signs could not be determined due to blur and partial obscuring",
+      "Details inside white tent and inside tower and other buildings could not be determined"
     ],
     "place": {
       "name": "Kenyatta International Convention Centre",
       "hierarchy": [
         "Kenya",
-        "Nairobi"
+        "Nairobi",
+        "Nairobi CBD"
       ],
       "key": "kenya/nairobi/cbd/kicc",
       "status": "confirmed",
       "evidence": [
         {
           "kind": "visible_text",
-          "detail": "THE KENYATTA INTERNATIONAL CONVENTION CENTRE"
-        },
-        {
-          "kind": "visible_text",
           "detail": "KICC"
         },
         {
-          "kind": "architecture",
-          "detail": "large stone arch spanning driveway with KICC letters on top and cylindrical tower with horizontal striped bands behind"
+          "kind": "visible_text",
+          "detail": "THE KENYATTA INTERNATIONAL CONVENTION CENTRE"
         },
         {
           "kind": "provided_title",
           "detail": "Kenyatta International Convention Centre, 2025 (01)"
         },
         {
+          "kind": "architecture",
+          "detail": "large stone entrance arch spanning paved driveway with closed grey metal gates and tall cylindrical tower with horizontal striped bands and flat disc roof rising directly behind arch"
+        },
+        {
           "kind": "context",
-          "detail": "tags include KICC, Nairobi, Kenya"
+          "detail": "tags list Nairobi, Kenya and caption identifies subject as Kenyatta International Convention Centre"
         }
       ],
       "confidence": 0.98
@@ -473,9 +473,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:49:16+00:00",
+        "run_at": "2026-10-27T21:35:32+00:00",
         "raw_output_path": "data/annotations/raw/landmarks_004_passB_attempt1.txt",
-        "tokens": 6379
+        "tokens": 7653
       }
     ],
     "human_review": {

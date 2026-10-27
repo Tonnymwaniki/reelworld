@@ -317,22 +317,14 @@
         "name": "Kenyatta International Convention Centre",
         "key": "kenya/nairobi/cbd/kicc",
         "type": "building",
-        "status": "confirmed",
+        "status": "candidate",
         "evidence": [
           {
             "kind": "provided_title",
             "detail": "Kenyatta International Convention Centre, Nairobi, by Karl Henrik Nøstvik architect, lobby"
-          },
-          {
-            "kind": "architecture",
-            "detail": "spacious indoor lobby with symmetrical sculptural concrete staircases with dark metal railings, massive textured concrete beams and polished brown tile floor with broad red carpet runners"
-          },
-          {
-            "kind": "context",
-            "detail": "Wide interior view of a brutalist lobby with red carpet runners, polished tile floors, and symmetrical concrete staircases under exposed beams"
           }
         ],
-        "confidence": 0.96
+        "confidence": 0.85
       }
     ],
     "place_candidates": [],
@@ -344,7 +336,10 @@
       "Material composition of floors, walls, and beams beyond visual appearance cannot be confirmed",
       "Identification relies solely on provided_title; no legible visible_text in image independently confirms building name or location",
       "Exact text on small yellow sign above wooden doors on left and small white sign near red wall not legible due to blur and distance",
-      "No exterior or geographic features visible to independently verify Nairobi location beyond provided title"
+      "No exterior or geographic features visible to independently verify Nairobi location beyond provided title",
+      "No legible visible_text in image to independently confirm building name or location; identification relies solely on provided_title",
+      "No exterior or geographic features visible to independently verify Nairobi location beyond provided_title",
+      "Text on small yellow sign above wooden doors on left and small white sign near red wall on left not legible due to blur and distance"
     ],
     "place": {
       "name": "Kenyatta International Convention Centre",
@@ -358,13 +353,9 @@
         {
           "kind": "provided_title",
           "detail": "Kenyatta International Convention Centre, Nairobi, by Karl Henrik Nøstvik architect, lobby"
-        },
-        {
-          "kind": "context",
-          "detail": "indoor lobby interior described as brutalist lobby with red carpet runners, polished tile floors and symmetrical concrete staircases"
         }
       ],
-      "confidence": 0.96
+      "confidence": 0.85
     },
     "place_key": "kenya/nairobi/cbd/kicc",
     "taken_from": null,
@@ -393,9 +384,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:49:32+00:00",
+        "run_at": "2026-10-27T21:35:46+00:00",
         "raw_output_path": "data/annotations/raw/landmarks_008_passB_attempt1.txt",
-        "tokens": 6064
+        "tokens": 6347
       }
     ],
     "human_review": {

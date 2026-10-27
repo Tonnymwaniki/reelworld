@@ -361,7 +361,7 @@
             "detail": "distinctive tower building with a rounded top structure are visible in the background above the trees"
           }
         ],
-        "confidence": 0.78
+        "confidence": 0.9
       }
     ],
     "place_candidates": [
@@ -375,11 +375,36 @@
         "status": "candidate",
         "evidence": [
           {
+            "kind": "provided_title",
+            "detail": "Uhuru park dam"
+          },
+          {
             "kind": "context",
             "detail": "cluster of high-rise buildings visible behind trees against a partly cloudy sky"
           }
         ],
-        "confidence": 0.65
+        "confidence": 0.85
+      },
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "architecture",
+            "detail": "tall building with circular top structure visible above trees"
+          },
+          {
+            "kind": "context",
+            "detail": "cluster of high-rise buildings visible behind trees on horizon"
+          }
+        ],
+        "confidence": 0.82
       }
     ],
     "uncertainties": [
@@ -391,7 +416,11 @@
       "Exact time of day beyond daytime and season cannot be determined",
       "Exact geographic location and name of the park or city cannot be independently determined from image alone beyond provided title",
       "Details of goods or activities under market umbrellas are not clear",
-      "Species of trees, grass, and whether water is natural lake or artificial pond cannot be determined"
+      "Species of trees, grass, and whether water is natural lake or artificial pond cannot be determined",
+      "Exact geographic location and name of park/city cannot be independently determined from image alone beyond provided_title per uncertainties",
+      "Visible text 'OBEDE KEVIN' and 'SPARK 4' are watermarks and do not indicate place",
+      "Details of goods under market umbrellas, species of trees/grass, and whether water is natural lake or artificial pond cannot be determined",
+      "Exact number of people and time of day beyond daytime cannot be determined"
     ],
     "place": {
       "name": "Uhuru Park",
@@ -409,10 +438,10 @@
         },
         {
           "kind": "context",
-          "detail": "calm reflective lake that occupies the center of the image bordered by lush green grass and a narrow light-brown dirt path with dense green trees and high-rise buildings behind them"
+          "detail": "calm lake bordered by green grass and a dirt path with city skyline and trees in the background under a cloudy sky"
         }
       ],
-      "confidence": 0.87
+      "confidence": 0.88
     },
     "place_key": "kenya/nairobi/uhuru-park",
     "taken_from": null,
@@ -441,9 +470,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:53:35+00:00",
+        "run_at": "2026-10-27T21:39:37+00:00",
         "raw_output_path": "data/annotations/raw/park_025_passB_attempt1.txt",
-        "tokens": 6423
+        "tokens": 6792
       }
     ],
     "human_review": {

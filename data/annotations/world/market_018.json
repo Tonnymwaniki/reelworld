@@ -331,7 +331,7 @@
           },
           {
             "kind": "architecture",
-            "detail": "stepped facade with large multicolored mural covering central multi-story building"
+            "detail": "stepped facade with large multicolored mural central building"
           },
           {
             "kind": "provided_title",
@@ -349,14 +349,15 @@
       "Vehicle license plates, makes and models cannot be determined",
       "Weather and exact time of day beyond bright daylight with strong sun glare",
       "Exact number of pedestrians cannot be determined due to occlusion, distance and grouping near market entrances",
-      "Text on small awnings and distant banners is blurry and not fully legible, and text at top of left tall building is cut off by image edge and overexposed"
+      "Text on small awnings and distant banners is blurry and not fully legible, and text at top of left tall building is cut off by image edge and overexposed",
+      "Text on small awnings and distant banners is blurry and not fully legible",
+      "Text at top of left tall building is cut off by image edge and overexposed"
     ],
     "place": {
       "name": "City Market",
       "hierarchy": [
         "Kenya",
-        "Nairobi",
-        "CBD"
+        "Nairobi"
       ],
       "key": "unknown/city-market",
       "status": "confirmed",
@@ -371,18 +372,14 @@
         },
         {
           "kind": "architecture",
-          "detail": "stepped facade with large multicolored mural covering central multi-story building"
+          "detail": "stepped facade with large multicolored mural central building"
         },
         {
           "kind": "provided_title",
           "detail": "Nairobi City Market"
-        },
-        {
-          "kind": "context",
-          "detail": "urban street with paved road, median, vehicles and pedestrians, flanked by tall multi-story building and background high-rises indicating central business district"
         }
       ],
-      "confidence": 0.97
+      "confidence": 0.98
     },
     "place_key": "unknown/city-market",
     "taken_from": null,
@@ -411,9 +408,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:51:05+00:00",
+        "run_at": "2026-10-27T21:37:00+00:00",
         "raw_output_path": "data/annotations/raw/market_018_passB_attempt1.txt",
-        "tokens": 5690
+        "tokens": 5868
       }
     ],
     "human_review": {

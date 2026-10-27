@@ -325,48 +325,10 @@
             "detail": "cylindrical high-rise tower with beige facade, many windows and vertical glass shaft on right side"
           }
         ],
-        "confidence": 0.96
+        "confidence": 0.98
       }
     ],
-    "place_candidates": [
-      {
-        "name": "Nairobi",
-        "hierarchy": [
-          "Kenya",
-          "Nairobi"
-        ],
-        "key": "kenya/nairobi",
-        "status": "candidate",
-        "evidence": [
-          {
-            "kind": "provided_title",
-            "detail": "Corner House (left) and Hilton Nairobi (right)"
-          }
-        ],
-        "confidence": 0.82
-      },
-      {
-        "name": "Hilton Nairobi",
-        "hierarchy": [
-          "Kenya",
-          "Nairobi",
-          "Nairobi CBD"
-        ],
-        "key": "kenya/nairobi/cbd/hilton-nairobi",
-        "status": "confirmed",
-        "evidence": [
-          {
-            "kind": "provided_title",
-            "detail": "Corner House (left) and Hilton Nairobi (right)"
-          },
-          {
-            "kind": "architecture",
-            "detail": "cylindrical high-rise tower with vertical glass shaft on right side"
-          }
-        ],
-        "confidence": 0.8
-      }
-    ],
+    "place_candidates": [],
     "uncertainties": [
       "Exact number of pedestrians is uncertain due to small size, distance and occlusion at bottom edge",
       "Text on vertical billboard in center is not fully legible due to blur and distance, only partial numbers and graphics visible",
@@ -376,14 +338,16 @@
       "Vehicle details beyond the partially visible bus cannot be determined",
       "Exact street name and low-rise commercial building name cannot be determined from description; only provided_title identifies the two towers",
       "Corner House is mentioned in provided_title but not in allowed vocabulary and therefore not listed as separate landmark",
-      "Text on vertical billboard and bus side is not fully legible and pedestrian count is uncertain per uncertainties"
+      "Text on vertical billboard and bus side is not fully legible and pedestrian count is uncertain per uncertainties",
+      "Text on vertical billboard and on side of bus is not fully legible due to blur and distance",
+      "Building interior details and additional shop signage not legible"
     ],
     "place": {
       "name": "Nairobi CBD",
       "hierarchy": [
         "Kenya",
         "Nairobi",
-        "Nairobi CBD"
+        "CBD"
       ],
       "key": "kenya/nairobi/cbd",
       "status": "candidate",
@@ -394,7 +358,7 @@
         },
         {
           "kind": "context",
-          "detail": "outdoor urban street scene with low commercial building and two high-rise towers behind it"
+          "detail": "outdoor urban street scene with low commercial building, high-rise towers, ground-floor shops, trees and bus in daytime overcast"
         }
       ],
       "confidence": 0.88
@@ -426,9 +390,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:47:12+00:00",
+        "run_at": "2026-10-27T21:33:41+00:00",
         "raw_output_path": "data/annotations/raw/cbd_013_passB_attempt1.txt",
-        "tokens": 7998
+        "tokens": 5598
       }
     ],
     "human_review": {

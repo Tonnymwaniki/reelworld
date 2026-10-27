@@ -282,10 +282,10 @@
           },
           {
             "kind": "context",
-            "detail": "scene type market, indoor display of souvenir crafts for sale"
+            "detail": "scene type is market indoor with activity crafts displayed for sale"
           }
         ],
-        "confidence": 0.65
+        "confidence": 0.62
       }
     ],
     "place_candidates": [],
@@ -297,7 +297,10 @@
       "The meaning or cultural significance of the patterns on the red gourd cannot be determined from the photo alone.",
       "No visible_text or distinctive architecture visible to independently verify market identity; location inferred solely from provided_title",
       "Exact stall location within market, materials, age and maker of carvings and gourds, and cultural significance of patterns cannot be determined from photo alone",
-      "Visible text on cardboard box is blurry and unreadable; no local terms such as matatu, kiosk, mkokoteni, or kanga clearly shown"
+      "Visible text on cardboard box is blurry and unreadable; no local terms such as matatu, kiosk, mkokoteni, or kanga clearly shown",
+      "Visible text on side of cardboard box is blurry and unreadable",
+      "Exact stall location within market, materials, age and maker of carvings and gourds, and cultural significance of patterns on red gourd cannot be determined from photo alone",
+      "No local terms such as matatu, kiosk, mkokoteni, or kanga clearly shown"
     ],
     "place": {
       "name": "City Market",
@@ -315,10 +318,10 @@
         },
         {
           "kind": "context",
-          "detail": "scene type market, indoor display of souvenir crafts for sale"
+          "detail": "scene type is market indoor with activity crafts displayed for sale"
         }
       ],
-      "confidence": 0.65
+      "confidence": 0.6
     },
     "place_key": "unknown/city-market",
     "taken_from": null,
@@ -347,9 +350,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:51:29+00:00",
+        "run_at": "2026-10-27T21:37:19+00:00",
         "raw_output_path": "data/annotations/raw/market_024_passB_attempt1.txt",
-        "tokens": 6043
+        "tokens": 5471
       }
     ],
     "human_review": {

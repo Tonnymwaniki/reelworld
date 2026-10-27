@@ -284,6 +284,10 @@
           {
             "kind": "provided_title",
             "detail": "Ngong Hills"
+          },
+          {
+            "kind": "context",
+            "detail": "Lush green forested ridge with narrow dirt trail winding along grassy crest under bright partly cloudy sky"
           }
         ],
         "confidence": 0.85
@@ -312,6 +316,10 @@
         {
           "kind": "provided_title",
           "detail": "Ngong Hills"
+        },
+        {
+          "kind": "context",
+          "detail": "Lush green forested ridge with narrow dirt trail winding along grassy crest; rolling green hills covered in dense forest and open grassy slopes"
         }
       ],
       "confidence": 0.85
@@ -343,9 +351,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:48:12+00:00",
+        "run_at": "2026-10-27T21:34:29+00:00",
         "raw_output_path": "data/annotations/raw/hills_011_passB_attempt1.txt",
-        "tokens": 4620
+        "tokens": 4253
       }
     ],
     "human_review": {

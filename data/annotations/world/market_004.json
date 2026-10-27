@@ -319,7 +319,7 @@
             "detail": "Art cafe market in Nairobi- Kenya 2"
           }
         ],
-        "confidence": 0.9
+        "confidence": 0.99
       }
     ],
     "place_candidates": [],
@@ -331,7 +331,9 @@
       "Details of objects on the cleaning utility cart",
       "Exact street address and neighborhood within Nairobi cannot be determined from visual evidence alone",
       "Text or images on easel display boards are not legible",
-      "Time of day outside and weather conditions unknown"
+      "Time of day outside and weather conditions unknown",
+      "Text or images on the easel display boards are not legible",
+      "Time of day outside the building and weather conditions unknown"
     ],
     "place": {
       "name": "Artcaffè Market",
@@ -353,13 +355,9 @@
         {
           "kind": "provided_title",
           "detail": "Art cafe market in Nairobi- Kenya 2"
-        },
-        {
-          "kind": "context",
-          "detail": "indoor corridor with brick wall and illuminated neon sign"
         }
       ],
-      "confidence": 0.85
+      "confidence": 0.96
     },
     "place_key": "unknown/artcaff-market",
     "taken_from": null,
@@ -388,9 +386,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:50:06+00:00",
+        "run_at": "2026-10-27T21:36:05+00:00",
         "raw_output_path": "data/annotations/raw/market_004_passB_attempt1.txt",
-        "tokens": 5291
+        "tokens": 4193
       }
     ],
     "human_review": {

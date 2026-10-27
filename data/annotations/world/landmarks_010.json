@@ -346,12 +346,12 @@
             "detail": "THE KENYATTA INTERNATIONAL CONVENTION CENTRE"
           },
           {
-            "kind": "architecture",
-            "detail": "large concrete multi-level building with orange sign above glass entrance doors and wide concrete stairs leading up to entrance"
-          },
-          {
             "kind": "provided_title",
             "detail": "Kenyatta International Convention Centre - BugWarp (10)"
+          },
+          {
+            "kind": "architecture",
+            "detail": "large concrete multi-level building with orange sign above glass entrance doors and wide concrete stairs leading up to entrance"
           }
         ],
         "confidence": 0.99
@@ -366,14 +366,18 @@
       "Details of flags other than the Kenyan flag are not clearly distinguishable",
       "Weather and time beyond visible bright overcast daylight cannot be determined",
       "Exact number of people, text on vertical promotional banners, vehicle license plate, and content of small digital screen above entrance could not be determined due to distance, blur or occlusion",
-      "Identities of tall glass skyscraper and pinkish curved high-rise visible behind the centre and angular concrete roof structure on right could not be determined from provided information"
+      "Identities of tall glass skyscraper and pinkish curved high-rise visible behind the centre and angular concrete roof structure on right could not be determined from provided information",
+      "Exact number of people due to occlusion, distance and small figures on upper balcony could not be determined",
+      "Text on vertical promotional banners and green flags is blurry and partially cut off and cannot be fully read",
+      "Vehicle license plate characters not legible due to distance and blur",
+      "Content of small digital screen above entrance doors not legible"
     ],
     "place": {
       "name": "Kenyatta International Convention Centre",
       "hierarchy": [
         "Kenya",
         "Nairobi",
-        "CBD"
+        "Nairobi CBD"
       ],
       "key": "kenya/nairobi/cbd/kicc",
       "status": "confirmed",
@@ -388,14 +392,18 @@
         },
         {
           "kind": "architecture",
-          "detail": "large concrete multi-level building with glass entrance doors and wide concrete stairs leading up to entrance"
+          "detail": "large concrete multi-level building with orange sign reading THE KENYATTA INTERNATIONAL CONVENTION CENTRE above glass entrance doors centered in frame with wide concrete stairs"
         },
         {
           "kind": "context",
-          "detail": "Kenyan national flag flying above building and tall silver flagpoles lining plaza"
+          "detail": "Kenyan flag flying above building indicating Kenya"
+        },
+        {
+          "kind": "visible_text",
+          "detail": "NAIROBI SAFARI WALK"
         }
       ],
-      "confidence": 0.99
+      "confidence": 0.98
     },
     "place_key": "kenya/nairobi/cbd/kicc",
     "taken_from": null,
@@ -424,9 +432,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:49:42+00:00",
+        "run_at": "2026-10-27T21:35:46+00:00",
         "raw_output_path": "data/annotations/raw/landmarks_010_passB_attempt1.txt",
-        "tokens": 7264
+        "tokens": 5234
       }
     ],
     "human_review": {

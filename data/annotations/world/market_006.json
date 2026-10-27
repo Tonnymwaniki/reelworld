@@ -326,7 +326,29 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "City Market",
+        "key": "unknown/city-market",
+        "type": "market",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "City market hall, Nairobi"
+          },
+          {
+            "kind": "architecture",
+            "detail": "spacious indoor market hall with high vaulted arches and rows of tall multi-pane windows along the right wall letting in daylight"
+          },
+          {
+            "kind": "context",
+            "detail": "Interior view of a large arched market hall with stalls on two levels and people browsing below"
+          }
+        ],
+        "confidence": 0.64
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact number of people due to occlusion and distance",
@@ -338,26 +360,30 @@
       "No distinctive landmark architecture or legible signage confirms a specific market identity beyond the provided title; visible text 'BANANA HILL FLORIST' is a stall name and does not establish location; exact position within Nairobi cannot be determined from description alone"
     ],
     "place": {
-      "name": "Nairobi",
+      "name": "City Market",
       "hierarchy": [
         "Kenya",
         "Nairobi"
       ],
-      "key": "kenya/nairobi",
-      "status": "candidate",
+      "key": "unknown/city-market",
+      "status": "confirmed",
       "evidence": [
         {
           "kind": "provided_title",
           "detail": "City market hall, Nairobi"
         },
         {
+          "kind": "architecture",
+          "detail": "spacious indoor market hall with high vaulted arches and rows of tall multi-pane windows along the right wall letting in daylight"
+        },
+        {
           "kind": "context",
           "detail": "Interior view of a large arched market hall with stalls on two levels and people browsing below"
         }
       ],
-      "confidence": 0.84
+      "confidence": 0.62
     },
-    "place_key": "kenya/nairobi",
+    "place_key": "unknown/city-market",
     "taken_from": null,
     "cultural_context": []
   },
@@ -384,9 +410,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:50:19+00:00",
+        "run_at": "2026-10-27T21:36:25+00:00",
         "raw_output_path": "data/annotations/raw/market_006_passB_attempt1.txt",
-        "tokens": 6130
+        "tokens": 7621
       }
     ],
     "human_review": {

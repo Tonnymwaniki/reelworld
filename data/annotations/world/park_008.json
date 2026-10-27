@@ -285,7 +285,25 @@
   },
   "inferred": {
     "landmarks": [],
-    "place_candidates": [],
+    "place_candidates": [
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "context",
+            "detail": "cluster of high-rise and mid-rise buildings forming city skyline viewed from elevated position"
+          }
+        ],
+        "confidence": 0.62
+      }
+    ],
     "uncertainties": [
       "Additional illuminated text on the left side of the cylindrical building is visible but too blurry to transcribe with at least 3 letters",
       "Exact names and functions of the buildings cannot be determined from the image",
@@ -294,7 +312,8 @@
       "Details inside buildings and behind the foreground wall cannot be determined",
       "Exact count of birds is uncertain due to small size and distance",
       "Exact names and functions of the cylindrical high-rise, rectangular high-rise, and clock tower buildings cannot be determined from the image",
-      "Additional illuminated text on the cylindrical building is visible but too blurry to transcribe"
+      "Additional illuminated text on the cylindrical building is visible but too blurry to transcribe",
+      "Additional illuminated text on the cylindrical building is too blurry to transcribe"
     ],
     "place": {
       "name": "Nairobi",
@@ -315,7 +334,7 @@
         },
         {
           "kind": "context",
-          "detail": "Hazy city skyline with clock tower flanked by two tall high-rise buildings and palm trees"
+          "detail": "hazy city skyline with a clock tower in the foreground flanked by two tall high-rise buildings and palm trees"
         }
       ],
       "confidence": 0.9
@@ -334,13 +353,9 @@
         {
           "kind": "provided_title",
           "detail": "Nairobi skyline from Uhuru Park"
-        },
-        {
-          "kind": "context",
-          "detail": "elevated viewpoint with weathered greenish wall in foreground and palm trees rising above it"
         }
       ],
-      "confidence": 0.85
+      "confidence": 0.88
     },
     "cultural_context": []
   },
@@ -367,9 +382,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:52:11+00:00",
+        "run_at": "2026-10-27T21:38:06+00:00",
         "raw_output_path": "data/annotations/raw/park_008_passB_attempt1.txt",
-        "tokens": 5940
+        "tokens": 7113
       }
     ],
     "human_review": {

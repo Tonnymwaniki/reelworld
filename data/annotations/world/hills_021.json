@@ -294,10 +294,10 @@
           },
           {
             "kind": "context",
-            "detail": "grassy hilltop terrain overlooking distant hazy valley and lowlands"
+            "detail": "grassy hilltop overlooking distant hazy valley and lowlands"
           }
         ],
-        "confidence": 0.62
+        "confidence": 0.6
       }
     ],
     "place_candidates": [],
@@ -310,7 +310,10 @@
       "weather temperature and wind conditions cannot be determined",
       "Exact geographic location of hilltop cannot be independently verified beyond provided title; no distinctive architecture or visible text confirms Ngong Hills",
       "Camera viewpoint is ground_level on same grassy hilltop as subject, but taken_from is not separately evidenced",
-      "Person identity, vehicle ownership, and detailed weather conditions cannot be determined"
+      "Person identity, vehicle ownership, and detailed weather conditions cannot be determined",
+      "Exact geographic location of hilltop cannot be independently verified beyond provided_title; no distinctive architecture or visible_text confirms Ngong Hills",
+      "Visible text KCG 063P and FORESTER XT do not provide location evidence",
+      "Camera viewpoint is ground_level on same grassy hilltop as subject but taken_from is not separately evidenced"
     ],
     "place": {
       "name": "Ngong Hills",
@@ -327,7 +330,7 @@
         },
         {
           "kind": "context",
-          "detail": "SUV parked on patchy dry grass and brown dirt at edge of hilltop overlooking distant hazy valley and lowlands"
+          "detail": "grassy hilltop terrain with patchy dry grass and brown dirt at edge of hilltop overlooking distant hazy valley"
         }
       ],
       "confidence": 0.6
@@ -359,9 +362,9 @@
         "pass": "B",
         "model": "meta-models/muse-spark-open-1026",
         "prompt_version": "passB-v1",
-        "run_at": "2026-10-27T20:48:48+00:00",
+        "run_at": "2026-10-27T21:34:53+00:00",
         "raw_output_path": "data/annotations/raw/hills_021_passB_attempt1.txt",
-        "tokens": 6027
+        "tokens": 4301
       }
     ],
     "human_review": {
