@@ -1,0 +1,372 @@
+{
+  "photo_id": "cbd_005",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/cbd/cbd_005.jpg",
+    "license": "CC BY 2.0",
+    "author": "street viewer",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Akiba_Tashiro_street_viewed_from_Tokyo_Times_Tower_entrance_(2010-05-04_16.13.34).jpg",
+    "title": "File:Akiba Tashiro street viewed from Tokyo Times Tower entrance (2010-05-04 16.13.34).jpg"
+  },
+  "observed": {
+    "caption": "A crowd gathers in an urban plaza lined with green hedges and young trees, surrounded by multi-story commercial buildings with colorful billboards under overcast daylight.",
+    "description": "A wide urban plaza with a low manicured green hedge in the foreground and several young leafy trees planted in a row behind it, a paved open area behind the hedge where a group of approximately 30 people in casual clothing are standing and walking, a modern multi-story building with a glass facade and dark supports on the left, a weathered light-colored commercial building with balconies and large colorful billboards with Japanese characters in the center background, additional low buildings on the right with a yellow banner, a red vertical sign on a pillar near the left building, an overcast pale sky above, and a road curb with a metal drainage grate at the bottom right.",
+    "retrieval_queries": [
+      "crowd in urban plaza with tall buildings and Japanese billboards",
+      "city square with green hedges and trees and people gathering",
+      "overcast day in commercial district with colorful signs and plaza"
+    ],
+    "tags": [
+      "urban plaza",
+      "city buildings",
+      "crowd",
+      "hedge",
+      "trees",
+      "billboards",
+      "commercial district",
+      "daytime",
+      "overcast"
+    ],
+    "scene": {
+      "type": "plaza",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast",
+      "lighting": "diffuse daylight",
+      "crowd_level": "moderate",
+      "activity_summary": "people gathering and walking in plaza"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward commercial buildings across plaza",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "urban plaza with crowd and buildings"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "modern glass building",
+        "category": "building",
+        "attributes": [
+          "glass facade",
+          "multi-story",
+          "metal framing"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left",
+        "evidence": "large building with reflective glass windows and dark vertical supports on left side",
+        "confidence": 0.95
+      },
+      {
+        "id": "e2",
+        "label": "weathered concrete commercial building",
+        "category": "building",
+        "attributes": [
+          "aged facade",
+          "balconies",
+          "multiple stories"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center background",
+        "evidence": "tall light-colored building with balconies and large billboards in center background",
+        "confidence": 0.95
+      },
+      {
+        "id": "e3",
+        "label": "trimmed green hedge",
+        "category": "plant",
+        "attributes": [
+          "dense",
+          "low",
+          "manicured"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground",
+        "evidence": "continuous low green hedge running across bottom of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e4",
+        "label": "young leafy trees",
+        "category": "plant",
+        "attributes": [
+          "thin trunks",
+          "green foliage",
+          "planted in row"
+        ],
+        "count": 6,
+        "salience": 3,
+        "position": "center and right midground",
+        "evidence": "several small trees with light green leaves between hedge and buildings",
+        "confidence": 0.92
+      },
+      {
+        "id": "e5",
+        "label": "group of people",
+        "category": "person_group",
+        "attributes": [
+          "standing",
+          "walking",
+          "casual clothing"
+        ],
+        "count": 30,
+        "salience": 4,
+        "position": "midground plaza",
+        "evidence": "numerous individuals gathered and moving on paved area behind hedge",
+        "confidence": 0.85
+      },
+      {
+        "id": "e6",
+        "label": "paved plaza area",
+        "category": "terrain",
+        "attributes": [
+          "open",
+          "paved",
+          "urban"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "midground",
+        "evidence": "open paved ground where people are standing between buildings and hedge",
+        "confidence": 0.9
+      },
+      {
+        "id": "e7",
+        "label": "red vertical sign",
+        "category": "sign",
+        "attributes": [
+          "red background",
+          "white vertical text",
+          "rectangular"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left-center on building pillar",
+        "evidence": "red pillar sign with white letters reading ICHI",
+        "confidence": 0.92
+      },
+      {
+        "id": "e8",
+        "label": "yellow billboard with Japanese text",
+        "category": "sign",
+        "attributes": [
+          "yellow background",
+          "red and black text",
+          "hand graphic"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center on building facade",
+        "evidence": "large yellow sign with Japanese characters and illustration of a hand on center building",
+        "confidence": 0.88
+      },
+      {
+        "id": "e9",
+        "label": "rooftop billboard with illustrated figures",
+        "category": "sign",
+        "attributes": [
+          "white background",
+          "colorful illustrations",
+          "large"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top of center building",
+        "evidence": "large billboard on upper facade of center building with anime-style characters",
+        "confidence": 0.85
+      },
+      {
+        "id": "e10",
+        "label": "yellow banner with English text",
+        "category": "sign",
+        "attributes": [
+          "yellow background",
+          "red and black text",
+          "rectangular"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right side on low building",
+        "evidence": "yellow banner with red text reading BATTLE CAT FIGHT on building at right",
+        "confidence": 0.96
+      },
+      {
+        "id": "e11",
+        "label": "road curb and drainage grate",
+        "category": "terrain",
+        "attributes": [
+          "concrete curb",
+          "metal grate",
+          "asphalt edge"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "bottom right foreground",
+        "evidence": "curb and metal drainage channel along edge of road at bottom right",
+        "confidence": 0.9
+      },
+      {
+        "id": "e12",
+        "label": "overcast sky",
+        "category": "other",
+        "attributes": [
+          "pale",
+          "cloudy",
+          "bright"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "top background",
+        "evidence": "pale sky visible above buildings",
+        "confidence": 0.9
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "in_front_of",
+        "object": "e5",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e3",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e4",
+        "predicate": "near",
+        "object": "e5",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e8",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e9",
+        "predicate": "above",
+        "object": "e8",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e10",
+        "predicate": "right_of",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e11",
+        "predicate": "in_front_of",
+        "object": "e3",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e6",
+        "predicate": "behind",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e5",
+        "predicate": "beside",
+        "object": "e4",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e2",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "ICHI",
+        "language": "en",
+        "entity_id": "e7",
+        "location_in_image": "on red vertical sign at left-center",
+        "legibility": "clear",
+        "confidence": 0.92
+      },
+      {
+        "text": "BATTLE CAT FIGHT",
+        "language": "en",
+        "entity_id": "e10",
+        "location_in_image": "on yellow banner at right side",
+        "legibility": "clear",
+        "confidence": 0.96
+      }
+    ],
+    "people": {
+      "count": 30,
+      "count_confidence": 0.65,
+      "faces_visible": false,
+      "activities": [
+        "standing",
+        "walking",
+        "gathering"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people due to occlusion, distance and overlapping figures",
+      "Exact wording of Japanese-language signs that are blurry, partially obscured by trees or cut off by image edges",
+      "Text on small or distant vertical signs that is not legible with at least 3 letters",
+      "Building names, functions and interior details",
+      "Exact time of day beyond daytime and precise weather conditions beyond overcast appearance",
+      "Details of individual faces, identities or clothing text"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 30,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:07:06+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_005_attempt1.txt",
+        "tokens": 14281
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

@@ -1,0 +1,316 @@
+{
+  "photo_id": "park_006",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_006.jpg",
+    "license": "CC BY 2.0",
+    "author": "Jorge Láscar",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Nairobi%27s_skyline_from_Uhuru_Park.jpg",
+    "title": "File:Nairobi's skyline from Uhuru Park.jpg"
+  },
+  "observed": {
+    "caption": "Wide elevated view of a grassy park with scattered trees, covered grandstands and a pond in the foreground, with a dense city skyline under a clear blue sky in the background.",
+    "description": "In the foreground an expansive patchy grassy field with scattered small leafy trees and a prominent small tree in the lower center extends toward a wide gray paved plaza. Behind the plaza are three long low grandstand structures with light-colored zigzag roofs and tiered seating. Beyond the grandstands a narrow blue pond is visible surrounded by dense green park trees and vegetation. In the background a dense cluster of high-rise buildings of varying heights, colors and designs including brown, red and blue-glass towers lines the horizon under a bright cloudless blue sky in daylight.",
+    "retrieval_queries": [
+      "aerial view of park with pond and grandstands in front of city skyline",
+      "grassy field with scattered trees overlooking downtown high rises",
+      "city park with pavilions and lake with urban skyline behind"
+    ],
+    "tags": [
+      "park",
+      "city skyline",
+      "grass field",
+      "grandstand",
+      "pond",
+      "urban landscape",
+      "high-rise buildings",
+      "outdoor"
+    ],
+    "scene": {
+      "type": "park",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "clear and sunny",
+      "lighting": "bright daylight",
+      "crowd_level": "empty",
+      "activity_summary": "empty park overlooking city skyline"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "high",
+      "facing": "toward the city skyline across the park",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "park foreground and distant city skyline"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "grassy field with scattered trees",
+        "category": "terrain",
+        "attributes": [
+          "patchy light green and brown grass",
+          "open",
+          "scattered small trees"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground, lower half",
+        "evidence": "expansive grassy area covering lower half of image with small trees and dry patches",
+        "confidence": 0.95
+      },
+      {
+        "id": "e2",
+        "label": "small leafy tree in center foreground",
+        "category": "plant",
+        "attributes": [
+          "thin trunk",
+          "sparse green leaves",
+          "spreading branches"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center foreground",
+        "evidence": "prominent small tree with thin trunk and spreading canopy in lower center",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "paved open plaza",
+        "category": "terrain",
+        "attributes": [
+          "gray concrete",
+          "flat",
+          "wide"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "middle ground, below grandstands",
+        "evidence": "wide gray paved strip running horizontally behind grassy field",
+        "confidence": 0.9
+      },
+      {
+        "id": "e4",
+        "label": "covered grandstand structures",
+        "category": "structure",
+        "attributes": [
+          "zigzag roofs",
+          "tiered seating",
+          "long row"
+        ],
+        "count": 3,
+        "salience": 4,
+        "position": "center middle ground",
+        "evidence": "three long low structures with patterned light roofs and stepped seating facing the plaza",
+        "confidence": 0.92
+      },
+      {
+        "id": "e5",
+        "label": "pond or small lake",
+        "category": "terrain",
+        "attributes": [
+          "blue water",
+          "reflective",
+          "narrow"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center, behind grandstands",
+        "evidence": "narrow blue water body visible behind the grandstands among trees",
+        "confidence": 0.88
+      },
+      {
+        "id": "e6",
+        "label": "park trees and vegetation",
+        "category": "plant",
+        "attributes": [
+          "dense green foliage",
+          "varied canopy",
+          "lush"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "middle ground surrounding pond",
+        "evidence": "dense cluster of green trees and grass surrounding the water and extending to city edge",
+        "confidence": 0.9
+      },
+      {
+        "id": "e7",
+        "label": "city skyline with high-rise buildings",
+        "category": "building",
+        "attributes": [
+          "varied heights",
+          "modern towers",
+          "dense cluster"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "background, horizon",
+        "evidence": "numerous tall buildings of different shapes and colors lining the horizon under blue sky",
+        "confidence": 0.97
+      },
+      {
+        "id": "e8",
+        "label": "tall brown twin-tower building",
+        "category": "building",
+        "attributes": [
+          "brown facade",
+          "two connected towers",
+          "tall"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left background",
+        "evidence": "prominent dark brown high-rise with two vertical sections on left side of skyline",
+        "confidence": 0.93
+      },
+      {
+        "id": "e9",
+        "label": "tall reddish tower with crown",
+        "category": "building",
+        "attributes": [
+          "reddish-brown",
+          "slender",
+          "distinct top"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right background",
+        "evidence": "tall narrow red building with flared top standing out on right side of skyline",
+        "confidence": 0.91
+      },
+      {
+        "id": "e10",
+        "label": "tall blue-glass skyscraper",
+        "category": "building",
+        "attributes": [
+          "blue and white glass",
+          "rectangular",
+          "tall"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "far right background",
+        "evidence": "tall modern building with blue vertical glass stripes on extreme right horizon",
+        "confidence": 0.92
+      },
+      {
+        "id": "e11",
+        "label": "clear blue sky",
+        "category": "other",
+        "attributes": [
+          "bright blue",
+          "cloudless",
+          "expansive"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "upper background",
+        "evidence": "large cloudless blue sky occupying upper third of image above skyline",
+        "confidence": 0.98
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "in_front_of",
+        "object": "e3",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e3",
+        "predicate": "in_front_of",
+        "object": "e4",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e4",
+        "predicate": "in_front_of",
+        "object": "e5",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e5",
+        "predicate": "in_front_of",
+        "object": "e7",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e7",
+        "predicate": "behind",
+        "object": "e6",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e8",
+        "predicate": "left_of",
+        "object": "e9",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e10",
+        "predicate": "right_of",
+        "object": "e9",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e11",
+        "predicate": "above",
+        "object": "e7",
+        "confidence": 0.99
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.85,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Whether very small distant figures are present in grandstands or park due to low resolution",
+      "Text on distant building signs, banners or billboards is not legible (less than 3 letters readable)",
+      "Exact names, heights or functions of buildings in the skyline",
+      "Exact time of day beyond daytime and time of year",
+      "Condition and use of paved plaza and grandstands"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:16:31+00:00",
+        "raw_output_path": "data/annotations/raw/park_006_attempt1.txt",
+        "tokens": 7905
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

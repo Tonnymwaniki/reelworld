@@ -1,0 +1,319 @@
+{
+  "photo_id": "hills_001",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_001.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "MrMMMute",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Benches@NgongHills.jpg",
+    "title": "File:Benches@NgongHills.jpg"
+  },
+  "observed": {
+    "caption": "Two weathered concrete benches and a table sit on a dry grassy hilltop overlooking a vast arid valley under a clear blue sky.",
+    "description": "The foreground shows dry patchy brown-green grass and bare dirt on a hilltop with two weathered curved concrete benches facing inward and a low rectangular concrete table between them. Small sparse dry shrubs grow near the edge of the hill around the seating area. Beyond the hilltop, a vast flat arid valley with scattered vegetation stretches to the hazy horizon, with a low dark mountain range visible on the left in the distance. Above the valley a thin band of wispy white clouds lines the horizon beneath a large expanse of clear bright blue sky.",
+    "retrieval_queries": [
+      "concrete benches and table on hilltop overlooking valley",
+      "scenic overlook with empty picnic seating and mountain view",
+      "dry grass hilltop viewpoint with clear blue sky panorama"
+    ],
+    "tags": [
+      "hilltop overlook",
+      "concrete benches",
+      "valley panorama",
+      "arid landscape",
+      "clear blue sky",
+      "scenic viewpoint"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "clear with thin horizon clouds",
+      "lighting": "bright natural daylight",
+      "crowd_level": "empty",
+      "activity_summary": "scenic overlook with no visible activity"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "eye_level",
+      "facing": "across the valley from hilltop",
+      "distance": "close",
+      "framing": "wide",
+      "orientation": "portrait",
+      "subject_focus": "concrete benches and table on hilltop overlook"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "concrete bench on left",
+        "category": "structure",
+        "attributes": [
+          "weathered",
+          "curved backrest",
+          "gray"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-left",
+        "evidence": "curved concrete bench facing inward on hilltop",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "concrete bench on right",
+        "category": "structure",
+        "attributes": [
+          "weathered",
+          "curved backrest",
+          "gray"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-right",
+        "evidence": "curved concrete bench facing inward opposite other bench",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "concrete picnic table",
+        "category": "structure",
+        "attributes": [
+          "rectangular",
+          "weathered",
+          "gray-brown"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "low rectangular concrete table between two benches",
+        "confidence": 0.98
+      },
+      {
+        "id": "e4",
+        "label": "grassy hilltop ground",
+        "category": "terrain",
+        "attributes": [
+          "dry",
+          "patchy",
+          "brown-green",
+          "uneven"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground",
+        "evidence": "dry grass and dirt covering foreground hilltop",
+        "confidence": 0.99
+      },
+      {
+        "id": "e5",
+        "label": "clear blue sky",
+        "category": "other",
+        "attributes": [
+          "vast",
+          "bright blue",
+          "mostly clear"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "upper and background",
+        "evidence": "large expanse of blue sky occupying upper two-thirds of image",
+        "confidence": 0.99
+      },
+      {
+        "id": "e6",
+        "label": "expansive valley plain",
+        "category": "terrain",
+        "attributes": [
+          "vast",
+          "flat",
+          "arid",
+          "sparsely vegetated"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "middle-background",
+        "evidence": "wide flat arid plain stretching to horizon below hilltop",
+        "confidence": 0.97
+      },
+      {
+        "id": "e7",
+        "label": "distant mountain range",
+        "category": "terrain",
+        "attributes": [
+          "hazy",
+          "low",
+          "dark"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left-background",
+        "evidence": "dark hazy mountains on left horizon beyond valley",
+        "confidence": 0.95
+      },
+      {
+        "id": "e8",
+        "label": "sparse shrubs",
+        "category": "plant",
+        "attributes": [
+          "small",
+          "dry",
+          "scattered"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "near benches at hill edge",
+        "evidence": "small dry bushes near benches at edge of hilltop",
+        "confidence": 0.85
+      },
+      {
+        "id": "e9",
+        "label": "thin horizon clouds",
+        "category": "other",
+        "attributes": [
+          "wispy",
+          "white",
+          "low"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "horizon",
+        "evidence": "thin white clouds along horizon line above valley",
+        "confidence": 0.9
+      },
+      {
+        "id": "e10",
+        "label": "dirt patch under seating",
+        "category": "terrain",
+        "attributes": [
+          "bare",
+          "brown",
+          "compacted"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center beneath benches and table",
+        "evidence": "bare dirt area directly under and around concrete furniture",
+        "confidence": 0.92
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e2",
+        "predicate": "right_of",
+        "object": "e3",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e1",
+        "predicate": "beside",
+        "object": "e3",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e2",
+        "predicate": "beside",
+        "object": "e3",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e6",
+        "predicate": "behind",
+        "object": "e3",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e7",
+        "predicate": "behind",
+        "object": "e6",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e5",
+        "predicate": "above",
+        "object": "e6",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e8",
+        "predicate": "near",
+        "object": "e2",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e10",
+        "predicate": "below",
+        "object": "e3",
+        "confidence": 0.92
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 1.0,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact geographic location cannot be determined from the photo",
+      "Specific material composition of benches and table beyond weathered concrete appearance",
+      "Precise time of day beyond daylight hours",
+      "Details of distant valley floor due to haze and distance",
+      "Whether the overlook is part of a public park or other property"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:08:41+00:00",
+        "raw_output_path": "data/annotations/raw/hills_001_attempt1.txt",
+        "tokens": 7289
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

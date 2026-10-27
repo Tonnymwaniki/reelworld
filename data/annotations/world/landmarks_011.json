@@ -1,0 +1,296 @@
+{
+  "photo_id": "landmarks_011",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/landmarks/landmarks_011.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "BugWarp",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Kenyatta_International_Convention_Centre_-_BugWarp_(11).jpg",
+    "title": "File:Kenyatta International Convention Centre - BugWarp (11).jpg"
+  },
+  "observed": {
+    "caption": "A golden coat of arms with two lions holding spears flanking a central shield is mounted on a rough gray stone pillar.",
+    "description": "A close-up view shows a weathered golden metallic emblem mounted centrally on a rough, speckled gray stone pillar with a pointed top. The emblem features two rearing lions facing inward, each holding a spear, flanking a central shield that displays a rooster holding an axe between two horizontal bars. Below the shield, two crossed spears and a ribbon banner with raised lettering are visible. In the blurred background, a dark building facade with glass and wood paneling is visible, with two out-of-focus people standing near an entrance on the right side. The lighting is natural daylight.",
+    "retrieval_queries": [
+      "close up of golden coat of arms with two lions and shield on stone",
+      "Harambee emblem mounted on granite monument",
+      "metal crest with lions holding spears and rooster shield"
+    ],
+    "tags": [
+      "coat of arms",
+      "stone monument",
+      "harambee",
+      "emblem",
+      "lions",
+      "shield"
+    ],
+    "scene": {
+      "type": "other",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "unknown",
+      "lighting": "natural daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "people standing near building entrance"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the emblem on stone pillar",
+      "distance": "close",
+      "framing": "close_up",
+      "orientation": "landscape",
+      "subject_focus": "metallic emblem on stone pillar"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "rough stone pillar",
+        "category": "structure",
+        "attributes": [
+          "gray",
+          "speckled",
+          "rough-textured",
+          "triangular top"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "large textured stone occupying most of frame with emblem mounted on it",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "golden coat of arms emblem",
+        "category": "object",
+        "attributes": [
+          "golden",
+          "metallic",
+          "weathered",
+          "ornate"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "central metallic crest with lions, shield and banner",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "central shield with rooster",
+        "category": "object",
+        "attributes": [
+          "shield-shaped",
+          "golden",
+          "rooster holding axe in center"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center",
+        "evidence": "shield in middle of emblem with bird figure holding axe",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "left lion sculpture",
+        "category": "object",
+        "attributes": [
+          "rearing",
+          "golden",
+          "holding spear"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-left",
+        "evidence": "lion figure on left side of shield standing on hind legs holding spear",
+        "confidence": 0.97
+      },
+      {
+        "id": "e5",
+        "label": "right lion sculpture",
+        "category": "object",
+        "attributes": [
+          "rearing",
+          "golden",
+          "holding spear"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right",
+        "evidence": "lion figure on right side of shield standing on hind legs holding spear",
+        "confidence": 0.97
+      },
+      {
+        "id": "e6",
+        "label": "crossed spears",
+        "category": "object",
+        "attributes": [
+          "golden",
+          "crossed behind shield"
+        ],
+        "count": 2,
+        "salience": 3,
+        "position": "center",
+        "evidence": "two spear shafts crossing behind shield with points above lions",
+        "confidence": 0.94
+      },
+      {
+        "id": "e7",
+        "label": "ribbon banner with text",
+        "category": "sign",
+        "attributes": [
+          "golden",
+          "curved",
+          "inscribed"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "bottom-center",
+        "evidence": "curved banner at base of emblem with raised letters",
+        "confidence": 0.97
+      },
+      {
+        "id": "e8",
+        "label": "blurred building facade",
+        "category": "building",
+        "attributes": [
+          "out of focus",
+          "dark",
+          "glass and wood panels"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "background",
+        "evidence": "blurred structure with windows and doorway behind stone pillar",
+        "confidence": 0.85
+      },
+      {
+        "id": "e9",
+        "label": "blurred people near entrance",
+        "category": "person_group",
+        "attributes": [
+          "out of focus",
+          "standing",
+          "dark clothing"
+        ],
+        "count": 2,
+        "salience": 1,
+        "position": "background-right",
+        "evidence": "two out-of-focus figures with backs to camera near building entrance",
+        "confidence": 0.72
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "inside",
+        "object": "e2",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e4",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e5",
+        "predicate": "right_of",
+        "object": "e3",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e7",
+        "predicate": "below",
+        "object": "e3",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e6",
+        "predicate": "behind",
+        "object": "e3",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e8",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e9",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e9",
+        "predicate": "near",
+        "object": "e8",
+        "confidence": 0.85
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "HARAMBEE",
+        "language": "sw",
+        "entity_id": "e7",
+        "location_in_image": "bottom center on ribbon banner",
+        "legibility": "clear",
+        "confidence": 0.98
+      }
+    ],
+    "people": {
+      "count": 2,
+      "count_confidence": 0.72,
+      "faces_visible": false,
+      "activities": [
+        "standing near building entrance"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact geographic location and name of building or monument",
+      "Material composition of stone pillar and metallic emblem",
+      "Full context or purpose of the building entrance in background",
+      "Details of people in background due to blur and partial visibility",
+      "Date and time photo was taken beyond daytime lighting"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 2,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:12:29+00:00",
+        "raw_output_path": "data/annotations/raw/landmarks_011_attempt1.txt",
+        "tokens": 6843
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

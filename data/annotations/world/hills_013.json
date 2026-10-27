@@ -1,0 +1,307 @@
+{
+  "photo_id": "hills_013",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_013.jpg",
+    "license": "CC BY 2.0",
+    "author": "Stefan Magdalinski from San Francisco, USA",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ngong_Hills_IMG_4747_(5849851051).jpg",
+    "title": "File:Ngong Hills IMG 4747 (5849851051).jpg"
+  },
+  "observed": {
+    "caption": "Sun partially behind clouds at dawn over rolling green hills with a red-tiled house and dense trees in the foreground.",
+    "description": "A wide elevated view shows a pale sky with scattered clouds and a bright sun low on the horizon partially obscured by cloud, casting soft light over distant rolling grassy hills and a valley. In the midground, scattered small buildings and trees are visible among greenery with faint utility poles and wires. In the foreground, dense dark green trees and foliage dominate the lower half, with a house featuring a red tiled roof and a small chimney visible on the left and a large leafy tree on the right, and a small white spherical lamp near the bottom edge.",
+    "retrieval_queries": [
+      "sunrise over green hills with red roof house in foreground",
+      "misty valley landscape at dawn with trees and distant settlement",
+      "elevated view of countryside at sunrise with clouds and glowing sun"
+    ],
+    "tags": [
+      "sunrise",
+      "landscape",
+      "hills",
+      "valley",
+      "trees",
+      "house",
+      "red roof",
+      "clouds",
+      "dawn"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "dawn",
+      "weather": "partly cloudy",
+      "lighting": "soft diffused dawn light",
+      "crowd_level": "empty",
+      "activity_summary": "still landscape with no visible activity"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "raised",
+      "facing": "toward the horizon across the valley",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "sunrise over distant hills and valley"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "house with red tiled roof",
+        "category": "building",
+        "attributes": [
+          "red tiled roof",
+          "chimney on ridge",
+          "partially visible above foliage"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left foreground",
+        "evidence": "red tiled roof and chimney visible above dense foliage on left side",
+        "confidence": 0.96
+      },
+      {
+        "id": "e2",
+        "label": "dense green trees and foliage in foreground",
+        "category": "plant",
+        "attributes": [
+          "dense",
+          "dark green",
+          "leafy canopy",
+          "covering lower half"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground center and bottom",
+        "evidence": "thick green canopy and tangled branches occupying lower portion of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "rolling hills and grassy plains",
+        "category": "terrain",
+        "attributes": [
+          "undulating",
+          "grassy",
+          "sparse trees",
+          "distant"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "middle to background horizon",
+        "evidence": "open green-brown undulating terrain stretching across horizon behind valley",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "sky with scattered clouds",
+        "category": "other",
+        "attributes": [
+          "pale gradient",
+          "scattered clouds",
+          "soft light"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "upper half",
+        "evidence": "pale sky occupying upper half with gray and white clouds",
+        "confidence": 0.98
+      },
+      {
+        "id": "e5",
+        "label": "sun partially obscured by cloud",
+        "category": "other",
+        "attributes": [
+          "bright glow",
+          "low on horizon",
+          "partially hidden by cloud",
+          "warm light"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center horizon",
+        "evidence": "bright glowing area behind cloud near center horizon with radiating light",
+        "confidence": 0.93
+      },
+      {
+        "id": "e6",
+        "label": "distant buildings in valley",
+        "category": "building",
+        "attributes": [
+          "small",
+          "scattered",
+          "partially obscured by trees",
+          "midground"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center midground",
+        "evidence": "small structures visible among trees in the valley below hills",
+        "confidence": 0.84
+      },
+      {
+        "id": "e7",
+        "label": "large leafy tree on right",
+        "category": "plant",
+        "attributes": [
+          "large",
+          "dense canopy",
+          "dark green",
+          "prominent"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right foreground",
+        "evidence": "large dense tree with rounded canopy on right side foreground",
+        "confidence": 0.96
+      },
+      {
+        "id": "e8",
+        "label": "utility poles and power lines",
+        "category": "structure",
+        "attributes": [
+          "thin vertical poles",
+          "faint horizontal wires",
+          "barely visible"
+        ],
+        "count": 2,
+        "salience": 1,
+        "position": "center-right midground",
+        "evidence": "faint vertical poles with wires among trees in midground",
+        "confidence": 0.72
+      },
+      {
+        "id": "e9",
+        "label": "chimney on house roof",
+        "category": "structure",
+        "attributes": [
+          "small",
+          "on roof ridge",
+          "dark"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "left on roof",
+        "evidence": "small protrusion on ridge of red tiled roof",
+        "confidence": 0.88
+      },
+      {
+        "id": "e10",
+        "label": "spherical outdoor lamp",
+        "category": "object",
+        "attributes": [
+          "small white globe",
+          "on railing or post",
+          "near bottom edge"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "bottom center-right",
+        "evidence": "small white spherical light fixture visible near bottom edge among foliage",
+        "confidence": 0.71
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e7",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e2",
+        "predicate": "below",
+        "object": "e4",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e5",
+        "predicate": "above",
+        "object": "e3",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e6",
+        "predicate": "behind",
+        "object": "e2",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e3",
+        "predicate": "behind",
+        "object": "e6",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e7",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e10",
+        "predicate": "below",
+        "object": "e7",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e2",
+        "predicate": "in_front_of",
+        "object": "e6",
+        "confidence": 0.87
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.99,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Whether the low sun is sunrise or sunset cannot be determined from image alone",
+      "Exact geographic location and identity of distant hills and settlement",
+      "Details of distant buildings obscured by haze and trees",
+      "Text on any distant signs if present is unreadable due to distance and haze",
+      "Exact species of trees and condition of foliage in shadow areas"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:10:00+00:00",
+        "raw_output_path": "data/annotations/raw/hills_013_attempt1.txt",
+        "tokens": 6563
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

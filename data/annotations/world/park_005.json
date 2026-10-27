@@ -1,0 +1,329 @@
+{
+  "photo_id": "park_005",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_005.jpg",
+    "license": "CC BY 2.0",
+    "author": "Jorge Láscar from Australia",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Lascar_Nairobi%27s_skyline_from_Uhuru_Park_(4519272483).jpg",
+    "title": "File:Lascar Nairobi's skyline from Uhuru Park (4519272483).jpg"
+  },
+  "observed": {
+    "caption": "Wide view of a dry park with scattered trees and covered stands in the foreground and a dense city skyline under a clear blue sky in the background.",
+    "description": "The photo shows an expansive outdoor park viewed from an elevated position. In the immediate foreground is dry, patchy ground with reddish soil and several small trees with sparse green and yellow foliage casting shadows. Behind that are long, low covered grandstands with zigzag roofs and tiered seating. Beyond the stands is a green park area with dense trees, open grassy patches, and a small pond reflecting the sky. In the far background a dense cluster of high-rise buildings and skyscrapers of varying heights and shapes forms a city skyline under a bright, clear blue sky with strong daylight illumination.",
+    "retrieval_queries": [
+      "city skyline behind a large park with dry grass and trees",
+      "aerial view of park with covered bleachers and downtown high rises",
+      "dry open field with scattered trees looking toward city buildings"
+    ],
+    "tags": [
+      "park",
+      "city skyline",
+      "urban landscape",
+      "dry field",
+      "scattered trees",
+      "grandstands",
+      "pond",
+      "high-rise buildings",
+      "daytime"
+    ],
+    "scene": {
+      "type": "park",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "clear and sunny",
+      "lighting": "bright natural daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "small groups gathered under park shelters"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "raised",
+      "facing": "toward city skyline across park",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "park with city skyline beyond"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "dry open ground with reddish soil",
+        "category": "terrain",
+        "attributes": [
+          "dry",
+          "patchy grass",
+          "reddish-brown soil",
+          "expansive"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground, bottom half",
+        "evidence": "large area of light brown and reddish earth covering lower portion of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "scattered small trees",
+        "category": "plant",
+        "attributes": [
+          "thin trunks",
+          "sparse green-yellow foliage",
+          "casting shadows"
+        ],
+        "count": 8,
+        "salience": 4,
+        "position": "foreground and mid-foreground",
+        "evidence": "individual trees with visible trunks and canopies spread across dry ground",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "covered grandstands with zigzag roofs",
+        "category": "structure",
+        "attributes": [
+          "long and low",
+          "white zigzag roofs",
+          "tiered seating",
+          "open-sided"
+        ],
+        "count": 4,
+        "salience": 4,
+        "position": "center, middle distance",
+        "evidence": "row of structures with distinctive folded roofs and stepped seating behind dry field",
+        "confidence": 0.95
+      },
+      {
+        "id": "e4",
+        "label": "small pond",
+        "category": "terrain",
+        "attributes": [
+          "still water",
+          "reflective",
+          "surrounded by trees"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center, behind grandstands",
+        "evidence": "narrow body of water visible between trees and behind stands",
+        "confidence": 0.88
+      },
+      {
+        "id": "e5",
+        "label": "dense park trees and greenery",
+        "category": "plant",
+        "attributes": [
+          "lush green",
+          "varied canopy",
+          "midground band"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "midground, across width",
+        "evidence": "continuous line of green trees and vegetation between pond and city buildings",
+        "confidence": 0.94
+      },
+      {
+        "id": "e6",
+        "label": "city skyline high-rise buildings",
+        "category": "building",
+        "attributes": [
+          "multiple towers",
+          "varied heights and shapes",
+          "glass and concrete facades"
+        ],
+        "count": 20,
+        "salience": 5,
+        "position": "background, horizon",
+        "evidence": "cluster of tall buildings spanning entire horizon under sky",
+        "confidence": 0.97
+      },
+      {
+        "id": "e7",
+        "label": "brown twin-tower building",
+        "category": "building",
+        "attributes": [
+          "dark brown",
+          "rectangular",
+          "tall",
+          "left side prominent"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left background",
+        "evidence": "large dark brown high-rise standing out on left side of skyline",
+        "confidence": 0.96
+      },
+      {
+        "id": "e8",
+        "label": "tall cylindrical tower with crown",
+        "category": "building",
+        "attributes": [
+          "cylindrical",
+          "dark",
+          "distinctive top"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right-center background",
+        "evidence": "slender dark tower with flared top visible right of center",
+        "confidence": 0.92
+      },
+      {
+        "id": "e9",
+        "label": "clear blue sky",
+        "category": "other",
+        "attributes": [
+          "cloudless",
+          "bright",
+          "pale blue"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "top, background",
+        "evidence": "uniform blue area occupying upper third of image above skyline",
+        "confidence": 0.99
+      },
+      {
+        "id": "e10",
+        "label": "group of people under shelters",
+        "category": "person_group",
+        "attributes": [
+          "small figures",
+          "gathered",
+          "sitting and standing"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center, inside grandstands",
+        "evidence": "clusters of tiny dark figures visible under covered seating areas",
+        "confidence": 0.65
+      },
+      {
+        "id": "e11",
+        "label": "tall light-colored tower on far right",
+        "category": "building",
+        "attributes": [
+          "light gray",
+          "rectangular",
+          "tall"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "far right background",
+        "evidence": "tall rectangular building standing isolated on right edge of skyline",
+        "confidence": 0.93
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "in_front_of",
+        "object": "e3",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e3",
+        "predicate": "in_front_of",
+        "object": "e4",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e5",
+        "predicate": "behind",
+        "object": "e3",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e6",
+        "predicate": "behind",
+        "object": "e5",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e9",
+        "predicate": "above",
+        "object": "e6",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e10",
+        "predicate": "inside",
+        "object": "e3",
+        "confidence": 0.7
+      },
+      {
+        "subject": "e7",
+        "predicate": "left_of",
+        "object": "e6",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e8",
+        "predicate": "right_of",
+        "object": "e7",
+        "confidence": 0.94
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 25,
+      "count_confidence": 0.45,
+      "faces_visible": false,
+      "activities": [
+        "gathering under covered stands",
+        "sitting on bleachers"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people under shelters and on grounds due to distance and small figure size",
+      "Text on distant building banners and signs is too blurry to read at least 3 letters",
+      "Specific building names, functions, or heights cannot be determined",
+      "Exact species of trees and condition of vegetation beyond general appearance",
+      "Whether pond is natural or artificial and its depth"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 25,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:16:18+00:00",
+        "raw_output_path": "data/annotations/raw/park_005_attempt1.txt",
+        "tokens": 6914
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

@@ -1,0 +1,338 @@
+{
+  "photo_id": "hills_023",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_023.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Underwaterbuffalo",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ngong_Ping,_Ma_On_Shan_02.jpg",
+    "title": "File:Ngong Ping, Ma On Shan 02.jpg"
+  },
+  "observed": {
+    "caption": "A group of hikers walks and rests on a brown grassy hilltop with a narrow trail leading up a fog-shrouded mountain peak.",
+    "description": "A wide outdoor mountain landscape shows a broad brown grassy hilltop in the foreground with patches of dry grass, low shrubs and scattered gray rocks, a narrow light-brown dirt trail winding from the foreground up a central ridge toward a steep rocky mountain peak whose upper portion is obscured by thick white fog and mist, with dark green tree-covered slopes on the left and right sides of the ridge, a pale overcast sky above the haze, and a group of small human figures in varied general clothing standing, walking and sitting along the hilltop and trail.",
+    "retrieval_queries": [
+      "hikers on a foggy mountain ridge trail",
+      "misty mountain peak with people walking on brown hilltop",
+      "overcast hiking trail leading up a cloudy mountain"
+    ],
+    "tags": [
+      "mountain",
+      "hiking",
+      "fog",
+      "ridge",
+      "trail",
+      "hilltop",
+      "misty",
+      "outdoors"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "foggy and overcast",
+      "lighting": "diffuse overcast",
+      "crowd_level": "sparse",
+      "activity_summary": "hiking on mountain ridge"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "eye_level",
+      "facing": "toward the foggy peak along the ridge",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "hikers on mountain ridge"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "fog-shrouded mountain peak",
+        "category": "terrain",
+        "attributes": [
+          "steep",
+          "rocky",
+          "mist-covered",
+          "central"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-background",
+        "evidence": "large mountain rising in center with upper portion obscured by thick white fog",
+        "confidence": 0.96
+      },
+      {
+        "id": "e2",
+        "label": "grassy hilltop ridge",
+        "category": "terrain",
+        "attributes": [
+          "brown",
+          "dry",
+          "grassy",
+          "rounded",
+          "broad"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground-center",
+        "evidence": "wide brown hill with sparse vegetation occupying lower half of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "dirt hiking trail",
+        "category": "terrain",
+        "attributes": [
+          "narrow",
+          "winding",
+          "light brown",
+          "well-worn"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center leading from foreground to background",
+        "evidence": "visible path winding from foreground hill up the ridge toward the peak",
+        "confidence": 0.92
+      },
+      {
+        "id": "e4",
+        "label": "group of hikers",
+        "category": "person_group",
+        "attributes": [
+          "small figures",
+          "standing",
+          "walking",
+          "sitting",
+          "colorful clothing"
+        ],
+        "count": 15,
+        "salience": 4,
+        "position": "center-midground on hilltop",
+        "evidence": "cluster of small human figures scattered along the ridge and trail",
+        "confidence": 0.88
+      },
+      {
+        "id": "e5",
+        "label": "low shrubs and dry grass",
+        "category": "plant",
+        "attributes": [
+          "sparse",
+          "brown",
+          "dry",
+          "scattered",
+          "patchy"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "foreground and across hillside",
+        "evidence": "patches of dry grass and small bushes across the brown hill",
+        "confidence": 0.9
+      },
+      {
+        "id": "e6",
+        "label": "fog and mist",
+        "category": "other",
+        "attributes": [
+          "thick",
+          "white",
+          "low-lying",
+          "hazy"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "upper and background surrounding peak",
+        "evidence": "white haze obscuring mountain top and distant hills",
+        "confidence": 0.96
+      },
+      {
+        "id": "e7",
+        "label": "forested hillside",
+        "category": "terrain",
+        "attributes": [
+          "green",
+          "tree-covered",
+          "sloping",
+          "dense"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left-background",
+        "evidence": "dark green tree-covered slope on left side of central ridge",
+        "confidence": 0.89
+      },
+      {
+        "id": "e8",
+        "label": "overcast sky",
+        "category": "other",
+        "attributes": [
+          "pale",
+          "overcast",
+          "hazy",
+          "bright"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top",
+        "evidence": "bright white-gray sky above the fog layer",
+        "confidence": 0.86
+      },
+      {
+        "id": "e9",
+        "label": "scattered rocks",
+        "category": "object",
+        "attributes": [
+          "small",
+          "gray",
+          "scattered",
+          "low"
+        ],
+        "count": 3,
+        "salience": 1,
+        "position": "foreground and mid-ground on hill",
+        "evidence": "small gray rocks visible on the dirt hilltop",
+        "confidence": 0.76
+      },
+      {
+        "id": "e10",
+        "label": "forested mountain slope",
+        "category": "terrain",
+        "attributes": [
+          "green",
+          "tree-covered",
+          "steep",
+          "hazy"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right-background",
+        "evidence": "green tree-covered slope on right side of central ridge fading into mist",
+        "confidence": 0.88
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e7",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e10",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e8",
+        "predicate": "above",
+        "object": "e6",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "near",
+        "object": "e1",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e4",
+        "predicate": "near",
+        "object": "e3",
+        "confidence": 0.88
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 15,
+      "count_confidence": 0.62,
+      "faces_visible": false,
+      "activities": [
+        "hiking",
+        "walking",
+        "standing",
+        "sitting"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people due to small size, overlap, distance and fog",
+      "Details of individual clothing, age or other personal characteristics cannot be determined",
+      "Exact geographic location, mountain name or trail name cannot be determined",
+      "Exact time of day and temperature cannot be determined beyond daylight with overcast fog",
+      "Whether any distant signs, markers or text exist is not determinable due to distance, fog and resolution",
+      "Details of terrain and vegetation obscured by fog in the background"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 15,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:11:10+00:00",
+        "raw_output_path": "data/annotations/raw/hills_023_attempt1.txt",
+        "tokens": 13215
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

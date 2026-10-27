@@ -1,0 +1,377 @@
+{
+  "photo_id": "market_021",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_021.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Sdkb",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Nairobi_Maasai_Market_stand.jpg",
+    "title": "File:Nairobi Maasai Market stand.jpg"
+  },
+  "observed": {
+    "caption": "A vibrant indoor market stall displays colorful bowls, carved figurines, chess sets, masks, and hanging graphic T-shirts with vendors sitting among the goods.",
+    "description": "The photo shows a densely packed market stall viewed at eye level. In the foreground, hundreds of small colorful carved animal figurines, painted wooden bowls and plates with animal and landscape motifs, and carved wooden masks are spread on a brown tarp over a concrete floor marked with a yellow line. A blue chessboard with black and blue pieces sits atop a green plastic barrel on the left, with additional chess sets on blue barrels behind it. Behind the bowls, wooden giraffe carvings and other dark wood sculptures are clustered. Folded bright striped textiles in red, blue, orange and purple are stacked to the right. The back wall is covered with hanging T-shirts and fabrics featuring Africa-shaped graphics, maps, and text, alongside patterned cloths. Several people are seated among the merchandise: a person in a green jacket and dark pants sitting on a blue barrel in the center-right, a person in a dark jacket and light pants sitting on a green stool in the background, a person with a yellow hat seated behind the central figure, a person in a pink top partially visible behind fabrics on the left, and a partial view of a standing person's foot and shoe at the bottom right edge. The setting is a covered indoor market with bright even lighting.",
+    "retrieval_queries": [
+      "colorful African souvenir market stall with bowls and figurines",
+      "indoor craft market with hanging Kenya T-shirts and chess sets",
+      "busy souvenir bazaar with painted plates and wooden carvings on the floor"
+    ],
+    "tags": [
+      "market",
+      "souvenirs",
+      "crafts",
+      "bowls",
+      "figurines",
+      "chess sets",
+      "textiles",
+      "Kenya",
+      "indoor bazaar"
+    ],
+    "scene": {
+      "type": "market",
+      "setting": "indoor",
+      "time_of_day": "unknown",
+      "weather": "unknown",
+      "lighting": "bright even indoor lighting",
+      "crowd_level": "sparse",
+      "activity_summary": "selling and displaying handmade souvenirs and textiles"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the market stall",
+      "distance": "close",
+      "framing": "wide",
+      "orientation": "portrait",
+      "subject_focus": "colorful craft stall with bowls and figurines"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "hanging graphic T-shirts and patterned fabrics display",
+        "category": "object",
+        "attributes": [
+          "multicolored",
+          "hanging vertically",
+          "graphic prints"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "upper center and background",
+        "evidence": "rows of T-shirts and cloths hanging from top edge covering back wall",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "painted wooden bowls and decorative plates",
+        "category": "object",
+        "attributes": [
+          "colorful",
+          "round",
+          "painted with animals and landscapes",
+          "stacked on ground"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center and foreground",
+        "evidence": "dozens of white, blue, red and multicolor bowls and plates spread on tarp",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "small colorful carved animal figurines",
+        "category": "object",
+        "attributes": [
+          "multicolored",
+          "small",
+          "animal-shaped",
+          "densely packed"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "bottom center foreground",
+        "evidence": "hundreds of tiny red, blue, yellow and green animal carvings covering lower tarp",
+        "confidence": 0.97
+      },
+      {
+        "id": "e4",
+        "label": "chessboard with chess pieces on barrel",
+        "category": "object",
+        "attributes": [
+          "blue board",
+          "black and blue pieces",
+          "on green barrel"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "lower left",
+        "evidence": "blue chessboard with arranged pieces sitting on green plastic barrel",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "carved wooden masks",
+        "category": "object",
+        "attributes": [
+          "wooden",
+          "oval",
+          "patterned",
+          "light and dark tones"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom left foreground",
+        "evidence": "two large oval masks with incised patterns at bottom edge",
+        "confidence": 0.92
+      },
+      {
+        "id": "e6",
+        "label": "wooden giraffe figurines",
+        "category": "object",
+        "attributes": [
+          "tall",
+          "spotted",
+          "wooden",
+          "clustered"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center behind bowls",
+        "evidence": "group of tall spotted giraffe carvings standing behind bowls",
+        "confidence": 0.94
+      },
+      {
+        "id": "e7",
+        "label": "person in green jacket sitting on barrel",
+        "category": "person_group",
+        "attributes": [
+          "sitting",
+          "green jacket",
+          "dark pants",
+          "facing right"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right",
+        "evidence": "individual seated on blue barrel with legs crossed, wearing green jacket",
+        "confidence": 0.97
+      },
+      {
+        "id": "e8",
+        "label": "person in dark jacket sitting on green stool",
+        "category": "person_group",
+        "attributes": [
+          "sitting",
+          "dark jacket",
+          "light pants",
+          "in background"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "background right",
+        "evidence": "individual seated on green stool further back, wearing dark top",
+        "confidence": 0.93
+      },
+      {
+        "id": "e9",
+        "label": "person with yellow hat sitting",
+        "category": "person_group",
+        "attributes": [
+          "sitting",
+          "yellow hat",
+          "partially obscured"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center-right behind central person",
+        "evidence": "yellow hat and shoulder visible behind person in green jacket",
+        "confidence": 0.88
+      },
+      {
+        "id": "e10",
+        "label": "person in pink top partially visible",
+        "category": "person_group",
+        "attributes": [
+          "partially visible",
+          "pink top",
+          "behind fabrics"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "left edge",
+        "evidence": "back and shoulder in pink clothing visible behind hanging textiles on left",
+        "confidence": 0.85
+      },
+      {
+        "id": "e11",
+        "label": "folded colorful striped textiles",
+        "category": "object",
+        "attributes": [
+          "folded",
+          "bright stripes",
+          "red, blue, orange, purple"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right center",
+        "evidence": "stacks of folded blankets/cloths with vivid stripes beside seated person",
+        "confidence": 0.96
+      },
+      {
+        "id": "e12",
+        "label": "plastic barrels used as display tables",
+        "category": "object",
+        "attributes": [
+          "cylindrical",
+          "blue and green",
+          "used as stands"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left and center",
+        "evidence": "green barrel under chessboard and blue barrels under other chess sets and as seats",
+        "confidence": 0.95
+      },
+      {
+        "id": "e13",
+        "label": "concrete floor with yellow painted line",
+        "category": "terrain",
+        "attributes": [
+          "concrete",
+          "yellow line",
+          "aisle marker"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right edge foreground to background",
+        "evidence": "gray concrete floor with thick yellow stripe running along right side",
+        "confidence": 0.97
+      },
+      {
+        "id": "e14",
+        "label": "person standing at edge with only foot visible",
+        "category": "person_group",
+        "attributes": [
+          "standing",
+          "only foot and shoe visible",
+          "gray sneaker"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "bottom right edge",
+        "evidence": "gray shoe and lower leg visible at bottom right corner on concrete",
+        "confidence": 0.82
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "above",
+        "object": "e2",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e12",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e12",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e7",
+        "predicate": "beside",
+        "object": "e11",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e8",
+        "predicate": "behind",
+        "object": "e7",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e9",
+        "predicate": "beside",
+        "object": "e7",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e3",
+        "predicate": "in_front_of",
+        "object": "e2",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e6",
+        "predicate": "behind",
+        "object": "e2",
+        "confidence": 0.91
+      },
+      {
+        "subject": "e5",
+        "predicate": "below",
+        "object": "e4",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e13",
+        "predicate": "beside",
+        "object": "e2",
+        "confidence": 0.94
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 5,
+      "count_confidence": 0.84,
+      "faces_visible": true,
+      "activities": [
+        "sitting on barrels and stools among merchandise",
+        "standing at edge of stall"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Text on hanging T-shirts and fabrics is visible but excluded per instruction to ignore text on clothing; many shirts are partially cut off or blurry and cannot be transcribed with certainty",
+      "Exact count of small figurines, bowls and plates cannot be determined due to dense stacking and overlap",
+      "Whether the foot at bottom right belongs to a customer or vendor cannot be determined",
+      "Specific location, market name, and time of day cannot be determined from indoor lighting alone",
+      "Material and price of items cannot be determined from photo"
+    ]
+  },
+  "privacy": {
+    "faces_visible": true,
+    "people_count": 5,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:15:16+00:00",
+        "raw_output_path": "data/annotations/raw/market_021_attempt1.txt",
+        "tokens": 10511
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

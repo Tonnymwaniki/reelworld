@@ -1,0 +1,307 @@
+{
+  "photo_id": "hills_005",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_005.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "GeorgeMasila",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Green_land;_Ngong_Hill.jpg",
+    "title": "File:Green land; Ngong Hill.jpg"
+  },
+  "observed": {
+    "caption": "White laundry hangs on yellow lines on a blue balcony railing overlooking a green forested valley and hills lined with wind turbines under a pale blue sky.",
+    "description": "In the foreground a blue metal balcony railing runs diagonally with two yellow clotheslines strung above it holding white garments secured with small colorful clothespins. Beyond the balcony a dense expanse of green trees and vegetation fills a valley, with scattered buildings and a structure with a weathered corrugated metal roof visible on the lower right. In the background rolling green hills rise under a pale blue clear sky, with numerous white wind turbines lined along the ridgeline and a cluster of houses nestled among trees on the hillside.",
+    "retrieval_queries": [
+      "view from balcony with laundry overlooking wind turbines on hills",
+      "laundry hanging on balcony with forested valley and wind farm in background",
+      "hills with wind turbines seen over trees from a balcony railing"
+    ],
+    "tags": [
+      "balcony",
+      "laundry",
+      "clothesline",
+      "valley",
+      "forest",
+      "trees",
+      "hills",
+      "wind turbines",
+      "wind farm",
+      "landscape",
+      "outdoor",
+      "corrugated roof"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "clear and sunny",
+      "lighting": "bright natural daylight",
+      "crowd_level": "empty",
+      "activity_summary": "laundry drying on balcony overlooking valley"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "raised",
+      "facing": "toward hills with wind turbines across valley",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "hills with wind turbines and forested valley with foreground laundry"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "blue metal balcony railing",
+        "category": "structure",
+        "attributes": [
+          "blue",
+          "metal",
+          "foreground",
+          "diagonal"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground, bottom",
+        "evidence": "blue painted metal bars spanning lower portion of image",
+        "confidence": 0.95
+      },
+      {
+        "id": "e2",
+        "label": "yellow clotheslines",
+        "category": "object",
+        "attributes": [
+          "yellow",
+          "taut",
+          "horizontal",
+          "parallel"
+        ],
+        "count": 2,
+        "salience": 4,
+        "position": "foreground, above railing",
+        "evidence": "two parallel yellow lines stretched across image holding laundry",
+        "confidence": 0.95
+      },
+      {
+        "id": "e3",
+        "label": "white laundry garments",
+        "category": "object",
+        "attributes": [
+          "white",
+          "hanging",
+          "fabric",
+          "folded"
+        ],
+        "count": 5,
+        "salience": 4,
+        "position": "foreground, on clotheslines",
+        "evidence": "white cloth items draped over yellow lines with visible folds and patterns",
+        "confidence": 0.9
+      },
+      {
+        "id": "e4",
+        "label": "dense green trees and vegetation",
+        "category": "plant",
+        "attributes": [
+          "dense",
+          "green",
+          "forested",
+          "lush"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "middle ground, center and left",
+        "evidence": "thick canopy of trees covering valley and slopes",
+        "confidence": 0.95
+      },
+      {
+        "id": "e5",
+        "label": "rolling green hills",
+        "category": "terrain",
+        "attributes": [
+          "green",
+          "rolling",
+          "distant",
+          "hilly"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "background, center to right",
+        "evidence": "elevated landforms in distance with turbines on ridge",
+        "confidence": 0.95
+      },
+      {
+        "id": "e6",
+        "label": "wind turbines on hill ridge",
+        "category": "structure",
+        "attributes": [
+          "white",
+          "tall",
+          "slender",
+          "numerous"
+        ],
+        "count": 20,
+        "salience": 4,
+        "position": "background, on hilltop",
+        "evidence": "small white vertical structures with blades aligned along hill crest",
+        "confidence": 0.85
+      },
+      {
+        "id": "e7",
+        "label": "cluster of buildings in town",
+        "category": "building",
+        "attributes": [
+          "small",
+          "scattered",
+          "multicolored roofs"
+        ],
+        "count": 15,
+        "salience": 3,
+        "position": "middle distance, right center",
+        "evidence": "group of houses and structures nestled among trees on hillside",
+        "confidence": 0.8
+      },
+      {
+        "id": "e8",
+        "label": "building with corrugated metal roof",
+        "category": "building",
+        "attributes": [
+          "corrugated metal roof",
+          "weathered",
+          "rectangular",
+          "stone walls"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "lower right, foreground distance",
+        "evidence": "single building with light gray rusted metal roof in bottom right corner",
+        "confidence": 0.9
+      },
+      {
+        "id": "e9",
+        "label": "pale blue clear sky",
+        "category": "other",
+        "attributes": [
+          "pale blue",
+          "clear",
+          "bright",
+          "cloudless"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "upper, background",
+        "evidence": "expansive light blue sky occupying upper two-thirds of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e10",
+        "label": "clothespins",
+        "category": "object",
+        "attributes": [
+          "small",
+          "colorful",
+          "plastic"
+        ],
+        "count": 4,
+        "salience": 2,
+        "position": "foreground, on clotheslines",
+        "evidence": "small blue, pink and orange clips attaching laundry to lines",
+        "confidence": 0.85
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "in_front_of",
+        "object": "e4",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e2",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e5",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e4",
+        "predicate": "below",
+        "object": "e5",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e8",
+        "predicate": "below",
+        "object": "e4",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e7",
+        "predicate": "in_front_of",
+        "object": "e5",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e10",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.85
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.98,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "exact geographic location of the hills and town cannot be determined",
+      "exact number of wind turbines is uncertain due to distance and resolution",
+      "specific time of day beyond daylight is unclear",
+      "details of distant buildings are obscured by trees and distance",
+      "any text on distant structures is unreadable"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:09:23+00:00",
+        "raw_output_path": "data/annotations/raw/hills_005_attempt1.txt",
+        "tokens": 7159
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

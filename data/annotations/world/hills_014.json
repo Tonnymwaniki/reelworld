@@ -1,0 +1,332 @@
+{
+  "photo_id": "hills_014",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_014.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Realisticbiscuit",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ngong_Hills_Kenya.jpg",
+    "title": "File:Ngong Hills Kenya.jpg"
+  },
+  "observed": {
+    "caption": "Panoramic view of a sunlit expansive valley flanked by grassy hills under a partly cloudy sky with bright sun glare.",
+    "description": "A wide panoramic landscape shows a broad valley floor stretching to a hazy distant horizon, flanked on the left and right by sloping grassy hills covered in dry brown-green grass and scattered rocks. Bright sunlight with glare dominates the top center of the sky, which is blue with large white and gray clouds. A small white wind turbine stands on the far right hilltop, a solitary green tree grows on the right slope, and a smaller dark shrub is visible in the center midground. The foreground is rocky grassy terrain with uneven ground and small boulders, and faint mountain ridges are visible in the far distance under the cloud cover.",
+    "retrieval_queries": [
+      "panoramic view of sunny valley between grassy hills",
+      "hilltop overlook of vast plain with wind turbine and lone tree",
+      "wide landscape photo of sun shining over cloudy valley"
+    ],
+    "tags": [
+      "valley",
+      "hills",
+      "panorama",
+      "grassland",
+      "landscape",
+      "sunlight",
+      "clouds",
+      "wind turbine",
+      "rocks",
+      "tree"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "bright sunlight with glare",
+      "crowd_level": "empty",
+      "activity_summary": "natural landscape with no visible human activity"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "high",
+      "facing": "across the valley toward distant horizon",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "expansive valley between hills"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "expansive valley floor",
+        "category": "terrain",
+        "attributes": [
+          "broad",
+          "flat to rolling",
+          "hazy",
+          "distant"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center and background",
+        "evidence": "wide low area stretching to horizon between hills",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "bright sun with glare",
+        "category": "other",
+        "attributes": [
+          "bright",
+          "overexposed",
+          "central in sky"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "top-center",
+        "evidence": "intense white light and lens flare in clouds",
+        "confidence": 0.99
+      },
+      {
+        "id": "e3",
+        "label": "partly cloudy sky",
+        "category": "other",
+        "attributes": [
+          "blue",
+          "white and gray clouds",
+          "bright"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "top across entire width",
+        "evidence": "blue sky with large cumulus clouds above horizon",
+        "confidence": 0.99
+      },
+      {
+        "id": "e4",
+        "label": "left grassy hillside slope",
+        "category": "terrain",
+        "attributes": [
+          "steep",
+          "dry grass",
+          "brown-green",
+          "grassy"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left foreground",
+        "evidence": "sloping hill covered in short dry vegetation on left side",
+        "confidence": 0.98
+      },
+      {
+        "id": "e5",
+        "label": "right grassy hillside slope",
+        "category": "terrain",
+        "attributes": [
+          "rolling",
+          "dry grass",
+          "rocky",
+          "grassy"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right foreground and midground",
+        "evidence": "sloping hill on right side with grass and rocks",
+        "confidence": 0.98
+      },
+      {
+        "id": "e6",
+        "label": "wind turbine on hilltop",
+        "category": "structure",
+        "attributes": [
+          "small",
+          "white",
+          "with blades",
+          "distant"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "far right on hilltop",
+        "evidence": "vertical structure with three blades silhouetted against sky on right ridge",
+        "confidence": 0.96
+      },
+      {
+        "id": "e7",
+        "label": "solitary tree on right slope",
+        "category": "plant",
+        "attributes": [
+          "green",
+          "leafy",
+          "isolated",
+          "medium height"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right midground on slope",
+        "evidence": "single green canopy tree standing alone on right hillside",
+        "confidence": 0.97
+      },
+      {
+        "id": "e8",
+        "label": "scattered rocks on foreground",
+        "category": "terrain",
+        "attributes": [
+          "brown",
+          "irregular",
+          "small to medium",
+          "on grass"
+        ],
+        "count": 12,
+        "salience": 2,
+        "position": "bottom right foreground",
+        "evidence": "multiple brown stones visible on dry grass in lower right",
+        "confidence": 0.95
+      },
+      {
+        "id": "e9",
+        "label": "distant mountain ridges",
+        "category": "terrain",
+        "attributes": [
+          "hazy",
+          "low",
+          "bluish",
+          "on horizon"
+        ],
+        "count": 2,
+        "salience": 3,
+        "position": "background center-left on horizon",
+        "evidence": "faint elevated landforms visible through haze beyond valley",
+        "confidence": 0.88
+      },
+      {
+        "id": "e10",
+        "label": "small dark shrub in center midground",
+        "category": "plant",
+        "attributes": [
+          "dark green",
+          "compact",
+          "low"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center midground",
+        "evidence": "dark bushy plant visible on slope below valley center",
+        "confidence": 0.9
+      },
+      {
+        "id": "e11",
+        "label": "dry grassy foreground terrain",
+        "category": "terrain",
+        "attributes": [
+          "dry",
+          "yellow-brown",
+          "uneven",
+          "grassy"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "bottom center to right",
+        "evidence": "close grass-covered ground with patches of soil and rocks",
+        "confidence": 0.97
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e4",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e5",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e5",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e5",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e8",
+        "predicate": "on",
+        "object": "e11",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e2",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e3",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e9",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e10",
+        "predicate": "near",
+        "object": "e1",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e11",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.95
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.99,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact geographic location cannot be determined from the image alone",
+      "Exact time of day and season cannot be determined beyond daytime with bright sun",
+      "Details of the distant valley floor are obscured by haze, distance and glare",
+      "Whether small people, animals or vehicles are present in the distant valley cannot be determined due to resolution",
+      "No sign with 3 or more legible letters is visible; any distant text or markings are unreadable or not discernible"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:10:07+00:00",
+        "raw_output_path": "data/annotations/raw/hills_014_attempt1.txt",
+        "tokens": 7187
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

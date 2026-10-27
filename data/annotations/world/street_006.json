@@ -1,0 +1,349 @@
+{
+  "photo_id": "street_006",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_006.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Haile_Selassie_Avenue_(Nairobi),_2025_(04).jpg",
+    "title": "File:Haile Selassie Avenue (Nairobi), 2025 (04).jpg"
+  },
+  "observed": {
+    "caption": "Heavy traffic congestion on a multi-lane urban road lined with trees and buildings under an overcast sky.",
+    "description": "An elevated wide view of a divided multi-lane road filled with queued vehicles including a green bus with a roof rack in the foreground, numerous white vans, cars, and motorcycles stretching into the distance toward a city skyline with tall towers. On the left side an unfinished high-rise building with scaffolding stands behind a low stone building with a fenced sidewalk where several people are walking, while on the right side a tree-lined sidewalk has more pedestrians and motorcyclists beside the traffic. Roadside billboards are visible along the median, the sky is overcast with clouds, and dense green trees line both sides of the road.",
+    "retrieval_queries": [
+      "aerial view of heavy traffic jam on city road with green bus",
+      "congested urban street lined with trees and construction building",
+      "city skyline view down a busy multi-lane road with cars and motorcycles"
+    ],
+    "tags": [
+      "traffic jam",
+      "urban road",
+      "city skyline",
+      "construction building",
+      "bus",
+      "cars",
+      "motorcycles",
+      "trees",
+      "billboard"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast cloudy",
+      "lighting": "overcast daylight",
+      "crowd_level": "busy",
+      "activity_summary": "heavy traffic congestion with pedestrians walking"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "high",
+      "facing": "down the road toward the city skyline",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "congested multi-lane road with vehicles"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "multi-lane roadway with heavy traffic",
+        "category": "structure",
+        "attributes": [
+          "paved",
+          "divided by median fence",
+          "congested with vehicles"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center and foreground extending to background",
+        "evidence": "long road with two directions, median barrier, filled with cars, vans, bus and motorcycles",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "green bus with roof rack",
+        "category": "vehicle",
+        "attributes": [
+          "green with orange trim",
+          "roof luggage rack",
+          "large"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "bottom center foreground",
+        "evidence": "large green bus on left lane near bottom of image with visible roof rack",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "white vans and minibuses",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "boxy",
+          "queued in traffic"
+        ],
+        "count": 6,
+        "salience": 4,
+        "position": "center-right and bottom right",
+        "evidence": "multiple white vans lined up in right lanes",
+        "confidence": 0.95
+      },
+      {
+        "id": "e4",
+        "label": "cars in traffic queue",
+        "category": "vehicle",
+        "attributes": [
+          "various colors silver, white, black",
+          "sedans and SUVs",
+          "stationary in lanes"
+        ],
+        "count": 18,
+        "salience": 4,
+        "position": "center and center-right",
+        "evidence": "many cars bumper to bumper in multiple lanes",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "motorcycles with riders",
+        "category": "vehicle",
+        "attributes": [
+          "small",
+          "with riders wearing helmets",
+          "between and beside cars"
+        ],
+        "count": 7,
+        "salience": 3,
+        "position": "right edge and center-left",
+        "evidence": "several motorcycles with riders along right side and one in opposite lane",
+        "confidence": 0.9
+      },
+      {
+        "id": "e6",
+        "label": "unfinished high-rise building under construction",
+        "category": "building",
+        "attributes": [
+          "concrete frame",
+          "scaffolding and green netting",
+          "multiple floors"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left background",
+        "evidence": "tall skeletal building with scaffolding on left side",
+        "confidence": 0.97
+      },
+      {
+        "id": "e7",
+        "label": "low-rise stone building with fence",
+        "category": "building",
+        "attributes": [
+          "stone and concrete facade",
+          "flat roof",
+          "fenced perimeter"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left midground",
+        "evidence": "low building with stone lower walls and fence along sidewalk",
+        "confidence": 0.94
+      },
+      {
+        "id": "e8",
+        "label": "trees lining both sides of road",
+        "category": "plant",
+        "attributes": [
+          "green leafy canopies",
+          "dense",
+          "tall"
+        ],
+        "count": 20,
+        "salience": 3,
+        "position": "both sides of road, right foreground prominent",
+        "evidence": "rows of green trees along sidewalks and median",
+        "confidence": 0.97
+      },
+      {
+        "id": "e9",
+        "label": "roadside advertising billboard",
+        "category": "sign",
+        "attributes": [
+          "rectangular",
+          "white background with black text",
+          "on pole beside road"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center near median",
+        "evidence": "sign with text BOOK THESE SPACES beside the road",
+        "confidence": 0.93
+      },
+      {
+        "id": "e10",
+        "label": "distant high-rise city skyline",
+        "category": "building",
+        "attributes": [
+          "tall towers",
+          "clustered",
+          "hazy in distance"
+        ],
+        "count": 5,
+        "salience": 3,
+        "position": "center background horizon",
+        "evidence": "several tall skyscrapers visible on horizon under cloudy sky",
+        "confidence": 0.92
+      },
+      {
+        "id": "e11",
+        "label": "pedestrians on right sidewalk",
+        "category": "person_group",
+        "attributes": [
+          "walking",
+          "casual clothing in various colors"
+        ],
+        "count": 10,
+        "salience": 3,
+        "position": "right foreground sidewalk",
+        "evidence": "group of people walking along paved sidewalk on right side",
+        "confidence": 0.88
+      },
+      {
+        "id": "e12",
+        "label": "pedestrians on left sidewalk",
+        "category": "person_group",
+        "attributes": [
+          "walking and standing",
+          "casual clothing"
+        ],
+        "count": 6,
+        "salience": 2,
+        "position": "left midground sidewalk",
+        "evidence": "several people walking or standing near fence and road edge on left",
+        "confidence": 0.85
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e9",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e8",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e11",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e12",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e10",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e7",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.94
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "BOOK THESE SPACES 0725 654 389",
+        "language": "en",
+        "entity_id": "e9",
+        "location_in_image": "center near road median",
+        "legibility": "clear",
+        "confidence": 0.9
+      }
+    ],
+    "people": {
+      "count": 24,
+      "count_confidence": 0.65,
+      "faces_visible": false,
+      "activities": [
+        "walking on sidewalks",
+        "riding motorcycles in traffic",
+        "standing near roadside"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "exact number of people due to distance, motion blur and occlusion",
+      "text on additional distant billboards along the road which are blurry and unreadable",
+      "vehicle license plate numbers and vehicle makes/models",
+      "names or functions of buildings in the distant skyline",
+      "exact time of day beyond daytime under overcast conditions"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 24,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:19:36+00:00",
+        "raw_output_path": "data/annotations/raw/street_006_attempt1.txt",
+        "tokens": 8720
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

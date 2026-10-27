@@ -1,0 +1,359 @@
+{
+  "photo_id": "park_016",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_016.jpg",
+    "license": "CC BY 4.0",
+    "author": "DesiBoy101",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Skyline_of_Nairobi_city_as_seen_from_the_lake_in_Uhuru_Park.jpg",
+    "title": "File:Skyline of Nairobi city as seen from the lake in Uhuru Park.jpg"
+  },
+  "observed": {
+    "caption": "A calm lake in a park with palm trees and people along the shore, with a city skyline of high-rise buildings under an overcast sky in the background.",
+    "description": "In the foreground a large still lake reflects the cloudy sky and surrounding trees. A grassy shoreline with scattered trees including several tall palm trees runs across the middle of the image, with numerous small figures of people standing and walking along the water's edge. Behind the park an elevated roadway is partially visible among the trees, and beyond that a city skyline rises with multiple high-rise buildings of varying shapes and colors including a tall brown glass tower on the right, blue glass twin towers near the center, a cylindrical tower, and a clock tower. The sky above is heavily overcast with gray and white clouds, and the lighting is soft and diffused.",
+    "retrieval_queries": [
+      "city skyline behind a lake in a park with palm trees on a cloudy day",
+      "people by the water at an urban park with tall buildings in the background",
+      "overcast view of a lakefront park with high-rise buildings and palm trees"
+    ],
+    "tags": [
+      "lake",
+      "park",
+      "city skyline",
+      "overcast",
+      "palm trees",
+      "urban park",
+      "waterfront",
+      "high-rise buildings",
+      "cloudy sky",
+      "shoreline"
+    ],
+    "scene": {
+      "type": "park",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast and cloudy",
+      "lighting": "soft diffused daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "people walking and gathering along lakeside park"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "across the lake toward the city skyline",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "lake and city skyline with park foreground"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "lake water body",
+        "category": "terrain",
+        "attributes": [
+          "calm",
+          "reflective",
+          "dark water",
+          "wide"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground, bottom",
+        "evidence": "large expanse of water occupying lower third reflecting sky and trees",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "grassy shoreline parkland",
+        "category": "terrain",
+        "attributes": [
+          "green grass",
+          "flat",
+          "lined with trees"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "middle, across horizontally",
+        "evidence": "strip of green land between water and trees where people are gathered",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "tall palm trees",
+        "category": "plant",
+        "attributes": [
+          "tall slender trunks",
+          "fan-shaped fronds",
+          "scattered"
+        ],
+        "count": 7,
+        "salience": 4,
+        "position": "middle-left to center",
+        "evidence": "distinct tall palms with fronds rising above other trees along shoreline",
+        "confidence": 0.97
+      },
+      {
+        "id": "e4",
+        "label": "tall brown glass high-rise building",
+        "category": "building",
+        "attributes": [
+          "rectangular",
+          "brown facade",
+          "glass windows",
+          "antenna on roof"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "far right background",
+        "evidence": "dominant tall brown building with reflective windows on right side of skyline",
+        "confidence": 0.98
+      },
+      {
+        "id": "e5",
+        "label": "blue glass twin high-rise buildings",
+        "category": "building",
+        "attributes": [
+          "blue glass facade",
+          "modern",
+          "two connected towers",
+          "angular roofs"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right background",
+        "evidence": "pair of blue reflective towers with pointed tops behind trees",
+        "confidence": 0.96
+      },
+      {
+        "id": "e6",
+        "label": "cylindrical high-rise tower",
+        "category": "building",
+        "attributes": [
+          "cylindrical",
+          "striped facade",
+          "flat top structure"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center background",
+        "evidence": "round tall building with horizontal lines and rooftop structure visible above trees",
+        "confidence": 0.95
+      },
+      {
+        "id": "e7",
+        "label": "clock tower building",
+        "category": "building",
+        "attributes": [
+          "light colored",
+          "clock face",
+          "tower with spire"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center background",
+        "evidence": "beige building with visible clock and small tower behind trees",
+        "confidence": 0.9
+      },
+      {
+        "id": "e8",
+        "label": "overcast sky with clouds",
+        "category": "other",
+        "attributes": [
+          "gray and white clouds",
+          "heavily clouded",
+          "diffused light"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "upper, covering most of image",
+        "evidence": "expansive cloudy sky occupying upper two-thirds of frame",
+        "confidence": 0.99
+      },
+      {
+        "id": "e9",
+        "label": "group of people along shore",
+        "category": "person_group",
+        "attributes": [
+          "small distant figures",
+          "standing and walking",
+          "casual clothing"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "middle, along shoreline",
+        "evidence": "numerous small human figures dispersed along grassy edge of lake",
+        "confidence": 0.85
+      },
+      {
+        "id": "e10",
+        "label": "elevated roadway overpass",
+        "category": "structure",
+        "attributes": [
+          "long horizontal",
+          "concrete",
+          "partially obscured by trees"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "middle background behind trees",
+        "evidence": "elevated linear structure running horizontally behind treeline",
+        "confidence": 0.88
+      },
+      {
+        "id": "e11",
+        "label": "dense trees and vegetation",
+        "category": "plant",
+        "attributes": [
+          "green foliage",
+          "mixed species",
+          "leafy canopies"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "middle, along shoreline",
+        "evidence": "clusters of leafy trees and bushes lining the park between people and buildings",
+        "confidence": 0.96
+      },
+      {
+        "id": "e12",
+        "label": "distant city buildings skyline",
+        "category": "building",
+        "attributes": [
+          "varied heights",
+          "mixed colors",
+          "urban cluster"
+        ],
+        "count": 8,
+        "salience": 3,
+        "position": "background across horizon",
+        "evidence": "multiple smaller high-rise and mid-rise buildings spread across horizon behind main towers",
+        "confidence": 0.92
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "in_front_of",
+        "object": "e4",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e9",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e3",
+        "predicate": "behind",
+        "object": "e9",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e4",
+        "predicate": "right_of",
+        "object": "e5",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e5",
+        "predicate": "right_of",
+        "object": "e6",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e6",
+        "predicate": "right_of",
+        "object": "e7",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e10",
+        "predicate": "behind",
+        "object": "e11",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e11",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e8",
+        "predicate": "above",
+        "object": "e4",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e3",
+        "predicate": "left_of",
+        "object": "e6",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e9",
+        "predicate": "in_front_of",
+        "object": "e10",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e11",
+        "predicate": "below",
+        "object": "e8",
+        "confidence": 0.98
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 30,
+      "count_confidence": 0.55,
+      "faces_visible": false,
+      "activities": [
+        "walking along shoreline",
+        "standing by water",
+        "gathering in small groups"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "exact number of people is uncertain due to distance and small figure size",
+      "text on top of tall brown building on right is blurry and unreadable, fewer than 3 letters can be confidently read",
+      "specific names or identities of buildings cannot be determined from image alone",
+      "exact time of day beyond daytime is unclear due to overcast lighting",
+      "details of clothing colors and facial features of people are not discernible",
+      "purpose of white temporary structures on left side of park is unclear"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 30,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:17:27+00:00",
+        "raw_output_path": "data/annotations/raw/park_016_attempt1.txt",
+        "tokens": 6710
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

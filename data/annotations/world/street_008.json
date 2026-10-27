@@ -1,0 +1,378 @@
+{
+  "photo_id": "street_008",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_008.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Haile_Selassie_Avenue_(Nairobi),_2025_(07).jpg",
+    "title": "File:Haile Selassie Avenue (Nairobi), 2025 (07).jpg"
+  },
+  "observed": {
+    "caption": "A white and blue shuttle bus is parked on a dusty urban street with pedestrians and the tall Kahawa House building in the background.",
+    "description": "The photo shows a paved urban street with a reddish dirt shoulder in the foreground and center. A large white bus with blue stripes is positioned in the middle of the road, with several people standing and walking on the dirt and pavement nearby. Behind the bus, a large brown multi-story building with a vertical sign dominates the center background, flanked by other high-rise buildings with green, beige, and white facades to the right and a stone building with a tiled roof on the far right. A small red car is parked on the right side near a metal fence with people standing beside it, and additional vehicles including a black car on the left and a blue van behind the main bus are visible further down the street. The sky is partly cloudy with bright daylight illuminating the scene.",
+    "retrieval_queries": [
+      "white and blue matatu bus on street with Kahawa House building",
+      "busy Nairobi street scene with buses and tall buildings",
+      "city road with Solid Rock shuttle bus and pedestrians"
+    ],
+    "tags": [
+      "bus",
+      "matatu",
+      "street",
+      "Kahawa House",
+      "urban",
+      "city",
+      "traffic",
+      "pedestrians",
+      "buildings"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "bright natural daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "buses and cars on urban street with pedestrians walking"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the Kahawa House building down the street",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "white and blue bus on street"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "white and blue shuttle bus",
+        "category": "vehicle",
+        "attributes": [
+          "white with blue stripes",
+          "large",
+          "parked on road"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "large bus in center foreground with blue stripe and text on front and side",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "Kahawa House building",
+        "category": "building",
+        "attributes": [
+          "tall brown concrete",
+          "multi-story",
+          "vertical sign on facade"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-background",
+        "evidence": "large brown building with vertical KAHAWA HOUSE lettering in center background",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "red compact car",
+        "category": "vehicle",
+        "attributes": [
+          "small",
+          "red",
+          "parked on right side"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right",
+        "evidence": "small red car parked near fence on right side of image",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "pedestrians on street",
+        "category": "person_group",
+        "attributes": [
+          "standing and walking",
+          "various clothing including blue plaid shirt and beige sweater"
+        ],
+        "count": 10,
+        "salience": 4,
+        "position": "foreground and right",
+        "evidence": "multiple people visible on dirt shoulder, beside bus, and beside red car",
+        "confidence": 0.75
+      },
+      {
+        "id": "e5",
+        "label": "paved road with dirt shoulder",
+        "category": "terrain",
+        "attributes": [
+          "asphalt road",
+          "reddish dirt on side",
+          "uneven surface"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "foreground and center",
+        "evidence": "road surface extending through center with dirt area in foreground left",
+        "confidence": 0.95
+      },
+      {
+        "id": "e6",
+        "label": "green and beige high-rise building",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "green and beige facade",
+          "multiple windows"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "background right",
+        "evidence": "tall building with green side panels and beige center behind stone building",
+        "confidence": 0.94
+      },
+      {
+        "id": "e7",
+        "label": "white grid-pattern high-rise building",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "white",
+          "grid windows"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "background right",
+        "evidence": "white tall building with many windows to the right of green building",
+        "confidence": 0.93
+      },
+      {
+        "id": "e8",
+        "label": "stone building with tiled roof",
+        "category": "building",
+        "attributes": [
+          "stone facade",
+          "tiled roof",
+          "two stories"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "far right",
+        "evidence": "stone building with brown tiled roof and arched windows on far right edge",
+        "confidence": 0.92
+      },
+      {
+        "id": "e9",
+        "label": "black car",
+        "category": "vehicle",
+        "attributes": [
+          "dark color",
+          "small",
+          "parked on left"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "left background",
+        "evidence": "dark vehicle parked on left side of road in mid-background",
+        "confidence": 0.88
+      },
+      {
+        "id": "e10",
+        "label": "blue van behind bus",
+        "category": "vehicle",
+        "attributes": [
+          "blue",
+          "small van",
+          "partially visible"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center-left behind bus",
+        "evidence": "blue vehicle visible behind the main white and blue bus on the left side",
+        "confidence": 0.85
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "in_front_of",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e5",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e4",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e6",
+        "predicate": "right_of",
+        "object": "e2",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e7",
+        "predicate": "right_of",
+        "object": "e6",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e8",
+        "predicate": "in_front_of",
+        "object": "e7",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e9",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e10",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e3",
+        "predicate": "near",
+        "object": "e8",
+        "confidence": 0.85
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "KAHAWA HOUSE",
+        "language": "en",
+        "entity_id": "e2",
+        "location_in_image": "vertical sign on center building",
+        "legibility": "clear",
+        "confidence": 0.98
+      },
+      {
+        "text": "JESUS TEACHING MINISTRY",
+        "language": "en",
+        "entity_id": "e2",
+        "location_in_image": "horizontal sign on lower facade of center building",
+        "legibility": "clear",
+        "confidence": 0.85
+      },
+      {
+        "text": "SOLID ROCK",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "front top of white and blue bus",
+        "legibility": "clear",
+        "confidence": 0.96
+      },
+      {
+        "text": "CAPSTONE Of Love",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "side top of white and blue bus",
+        "legibility": "clear",
+        "confidence": 0.9
+      },
+      {
+        "text": "REMBO SHUTTLE",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "side of white and blue bus",
+        "legibility": "clear",
+        "confidence": 0.92
+      },
+      {
+        "text": "REMBO",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "front of white and blue bus below windshield",
+        "legibility": "clear",
+        "confidence": 0.9
+      },
+      {
+        "text": "MILITIA",
+        "language": "en",
+        "entity_id": null,
+        "location_in_image": "side of bus in background on right behind red car",
+        "legibility": "clear",
+        "confidence": 0.88
+      },
+      {
+        "text": "easycoach 3",
+        "language": "en",
+        "entity_id": null,
+        "location_in_image": "billboard on right side behind red car",
+        "legibility": "partial",
+        "confidence": 0.75
+      }
+    ],
+    "people": {
+      "count": 10,
+      "count_confidence": 0.65,
+      "faces_visible": false,
+      "activities": [
+        "walking on dirt shoulder",
+        "standing near bus",
+        "standing beside red car"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "exact number of people inside the bus and in distant background due to occlusion and small size",
+      "exact license plate numbers on buses and cars due to distance and blur",
+      "text on distant billboards and small signs that is blurry or cut off by image edge",
+      "text printed on people's clothing or bags which is ignored per rules",
+      "exact destination or route information on bus windshield in small red lettering"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 10,
+    "license_plates_visible": true,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:20:52+00:00",
+        "raw_output_path": "data/annotations/raw/street_008_attempt2.txt",
+        "tokens": 10677
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'easycoach 3'"
+      ]
+    }
+  }
+}

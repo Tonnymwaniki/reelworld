@@ -1,0 +1,296 @@
+{
+  "photo_id": "street_001",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_001.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Ethmostigmus",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Boomslang_(Dispholidus_typus)_at_Nairobi_Snake_Park_3.jpg",
+    "title": "File:Boomslang (Dispholidus typus) at Nairobi Snake Park 3.jpg"
+  },
+  "observed": {
+    "caption": "A brown snake with its head raised is coiled around a thin branch with green leaves.",
+    "description": "A brown snake with tan underparts and a dark eye is coiled around a thin, brown woody branch that extends diagonally across the frame. The snake's head is raised and facing to the right, with its body looping behind the branch on the left side. Bright green, textured leaves with visible veins are attached to the branch, one large leaf near the center and several smaller leaves clustered toward the lower right and upper left. The background consists of out-of-focus brown twigs and soft green foliage, creating a shallow depth of field with natural daylight illumination.",
+    "retrieval_queries": [
+      "close up of a brown snake on a branch with green leaves",
+      "snake coiled on a twig looking to the side",
+      "reptile resting on a leafy branch in nature"
+    ],
+    "tags": [
+      "snake",
+      "reptile",
+      "branch",
+      "leaves",
+      "wildlife",
+      "close-up",
+      "nature"
+    ],
+    "scene": {
+      "type": "other",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "unknown",
+      "lighting": "natural daylight",
+      "crowd_level": "empty",
+      "activity_summary": "snake coiled on branch"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the snake on branch",
+      "distance": "close",
+      "framing": "close_up",
+      "orientation": "landscape",
+      "subject_focus": "snake on branch"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "brown snake",
+        "category": "animal",
+        "attributes": [
+          "brown dorsal scales",
+          "tan ventral scales",
+          "raised head",
+          "dark eye"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "snake coiled on branch with head raised facing right, visible scales and eye",
+        "confidence": 0.99
+      },
+      {
+        "id": "e2",
+        "label": "thin woody branch",
+        "category": "plant",
+        "attributes": [
+          "brown",
+          "thin",
+          "textured bark"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center to lower-right",
+        "evidence": "diagonal branch extending from left edge to lower right with snake wrapped around it",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "green leaves on branch",
+        "category": "plant",
+        "attributes": [
+          "green",
+          "textured",
+          "lobed",
+          "veined"
+        ],
+        "count": 8,
+        "salience": 4,
+        "position": "center and lower-right",
+        "evidence": "bright green leaves attached to main branch, clustered near snake and along lower twig",
+        "confidence": 0.98
+      },
+      {
+        "id": "e4",
+        "label": "blurred background branches",
+        "category": "plant",
+        "attributes": [
+          "brown",
+          "out-of-focus",
+          "thin"
+        ],
+        "count": 6,
+        "salience": 2,
+        "position": "background",
+        "evidence": "multiple unfocused brown twigs behind main subject",
+        "confidence": 0.92
+      },
+      {
+        "id": "e5",
+        "label": "small green leaf near snake midsection",
+        "category": "plant",
+        "attributes": [
+          "green",
+          "small",
+          "veined",
+          "partially under snake"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-left",
+        "evidence": "small leaf tucked under snake body on the branch",
+        "confidence": 0.95
+      },
+      {
+        "id": "e6",
+        "label": "snake's coiled body section",
+        "category": "animal",
+        "attributes": [
+          "scaled",
+          "brown",
+          "curved",
+          "out-of-focus"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left-center",
+        "evidence": "looped coils of snake body visible behind main branch on left side",
+        "confidence": 0.96
+      },
+      {
+        "id": "e7",
+        "label": "out-of-focus green foliage",
+        "category": "plant",
+        "attributes": [
+          "green",
+          "blurred",
+          "background"
+        ],
+        "count": 4,
+        "salience": 1,
+        "position": "background",
+        "evidence": "soft green bokeh patches behind branches",
+        "confidence": 0.85
+      },
+      {
+        "id": "e8",
+        "label": "thin diagonal twig upper right",
+        "category": "plant",
+        "attributes": [
+          "brown",
+          "thin",
+          "bare"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "upper-right to center",
+        "evidence": "sharp thin twig crossing behind snake head diagonally",
+        "confidence": 0.93
+      },
+      {
+        "id": "e9",
+        "label": "upper left branch with leaves",
+        "category": "plant",
+        "attributes": [
+          "brown",
+          "thin",
+          "with green leaves"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "upper-left",
+        "evidence": "branch entering from top left corner with two small green leaves",
+        "confidence": 0.94
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e1",
+        "predicate": "near",
+        "object": "e3",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e6",
+        "predicate": "behind",
+        "object": "e2",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e8",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e9",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e7",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e2",
+        "predicate": "near",
+        "object": "e8",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.99,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Species of snake cannot be determined from photo",
+      "Exact size and length of snake not determinable",
+      "Geographic location not visible",
+      "Time of day and weather conditions beyond natural daylight not determinable",
+      "Whether snake is venomous or its behavior intent not determinable",
+      "No visible text signs meet the 3-letter legibility threshold"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:18:41+00:00",
+        "raw_output_path": "data/annotations/raw/street_001_attempt1.txt",
+        "tokens": 6966
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

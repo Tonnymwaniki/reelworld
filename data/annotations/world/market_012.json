@@ -1,0 +1,380 @@
+{
+  "photo_id": "market_012",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_012.jpg",
+    "license": "CC BY 4.0",
+    "author": "Lauralebu",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Nairobi_Aug_11_2024.jpg",
+    "title": "File:Nairobi Aug 11 2024.jpg"
+  },
+  "observed": {
+    "caption": "A paved city street lined with trees and parked cars leads toward colorful market stalls and distant high-rise buildings under a cloudy sky.",
+    "description": "The photo shows an outdoor urban street scene viewed at ground level. In the foreground a patterned paved sidewalk lined with black and white bollards runs along the left, with two prominent trees with thin dark trunks and green foliage in the center and left foreground. A gray asphalt road occupies the center and right, with a row of parked cars in white, silver and black along the right curb and additional vehicles further down the street. Two people are visible in the foreground, one walking on the sidewalk on the left and one in a light blue jacket and jeans crossing the street on the right while holding a phone. In the midground and background there are colorful market tents, a green and blue bus on the left, motorcycles, and more people gathered near the stalls. Tall buildings including a red and gray high-rise on the left, a beige multi-story building on the right with banners, and modern glass towers in the distant center are visible beyond dense green trees. The sky is overcast with gray clouds.",
+    "retrieval_queries": [
+      "busy city street with parked cars and market stalls under cloudy sky",
+      "urban road lined with trees and tall buildings with people walking",
+      "downtown street with sidewalk bollards and colorful market tents in background"
+    ],
+    "tags": [
+      "street",
+      "urban",
+      "market",
+      "trees",
+      "parked cars",
+      "city buildings",
+      "sidewalk",
+      "outdoor"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast cloudy",
+      "lighting": "overcast daylight",
+      "crowd_level": "moderate",
+      "activity_summary": "people walking and vehicles parked near outdoor market"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "down the street toward market and skyline",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "portrait",
+      "subject_focus": "street with trees and parked cars"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "tall tree with sparse branches in center foreground",
+        "category": "plant",
+        "attributes": [
+          "thin dark trunk",
+          "sparse green leaves",
+          "vertical"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center foreground",
+        "evidence": "thin trunk extends vertically through center of image with branches at top",
+        "confidence": 0.96
+      },
+      {
+        "id": "e2",
+        "label": "leaning tree with dense foliage on left",
+        "category": "plant",
+        "attributes": [
+          "leaning trunk",
+          "dense green leaves"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left foreground",
+        "evidence": "tree trunk leaning left with full canopy occupying left side",
+        "confidence": 0.95
+      },
+      {
+        "id": "e3",
+        "label": "paved sidewalk with bollards",
+        "category": "terrain",
+        "attributes": [
+          "patterned interlocking paving stones",
+          "lined with black and white bollards"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "bottom left to center",
+        "evidence": "patterned pavement along bottom with row of bollards separating from road",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "asphalt street",
+        "category": "terrain",
+        "attributes": [
+          "gray asphalt",
+          "cracked surface"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center to right",
+        "evidence": "paved road occupying middle and right lower area with parked cars",
+        "confidence": 0.97
+      },
+      {
+        "id": "e5",
+        "label": "row of parked cars",
+        "category": "vehicle",
+        "attributes": [
+          "various colors white silver black",
+          "parked along curb"
+        ],
+        "count": 6,
+        "salience": 4,
+        "position": "center-right",
+        "evidence": "multiple cars lined along right side of street including silver hatchbacks and black SUV",
+        "confidence": 0.92
+      },
+      {
+        "id": "e6",
+        "label": "person walking on sidewalk",
+        "category": "person_group",
+        "attributes": [
+          "dark clothing",
+          "walking"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left center",
+        "evidence": "figure walking on sidewalk near bollards",
+        "confidence": 0.88
+      },
+      {
+        "id": "e7",
+        "label": "person crossing street",
+        "category": "person_group",
+        "attributes": [
+          "light blue jacket",
+          "jeans",
+          "walking",
+          "holding phone"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right center",
+        "evidence": "figure in blue jacket and jeans walking across road",
+        "confidence": 0.9
+      },
+      {
+        "id": "e8",
+        "label": "market stalls with colorful canopies",
+        "category": "structure",
+        "attributes": [
+          "colorful tents",
+          "clustered in background"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "background center",
+        "evidence": "multiple small tents with multicolored roofs behind parked cars",
+        "confidence": 0.87
+      },
+      {
+        "id": "e9",
+        "label": "distant high-rise buildings",
+        "category": "building",
+        "attributes": [
+          "modern glass facades",
+          "multiple towers"
+        ],
+        "count": 4,
+        "salience": 3,
+        "position": "background center",
+        "evidence": "tall buildings visible beyond trees in distance with reflective windows",
+        "confidence": 0.91
+      },
+      {
+        "id": "e10",
+        "label": "green and blue bus",
+        "category": "vehicle",
+        "attributes": [
+          "green and blue coloring",
+          "parked on left"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left background",
+        "evidence": "bus with green and blue coloring on left side of street near motorcycles",
+        "confidence": 0.89
+      },
+      {
+        "id": "e11",
+        "label": "beige multi-story building on right",
+        "category": "building",
+        "attributes": [
+          "beige facade",
+          "multiple floors",
+          "banners on side"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right",
+        "evidence": "tall beige building on right edge with visible balconies and banners",
+        "confidence": 0.92
+      },
+      {
+        "id": "e12",
+        "label": "red and gray high-rise building on left",
+        "category": "building",
+        "attributes": [
+          "red and gray facade",
+          "multiple windows"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left background",
+        "evidence": "tall building with red side and gray windows on far left",
+        "confidence": 0.91
+      },
+      {
+        "id": "e13",
+        "label": "blue banner sign on building",
+        "category": "sign",
+        "attributes": [
+          "blue background",
+          "white text"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right center on building",
+        "evidence": "blue banner with white text attached to beige building on right",
+        "confidence": 0.82
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e10",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e3",
+        "predicate": "beside",
+        "object": "e4",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e11",
+        "predicate": "beside",
+        "object": "e4",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e8",
+        "predicate": "behind",
+        "object": "e5",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e9",
+        "predicate": "behind",
+        "object": "e8",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e13",
+        "predicate": "on",
+        "object": "e11",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e2",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.97
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "City Shuttle",
+        "language": "en",
+        "entity_id": "e10",
+        "location_in_image": "left side on bus",
+        "legibility": "partial",
+        "confidence": 0.68
+      },
+      {
+        "text": "PATAPATA CASH",
+        "language": "en",
+        "entity_id": "e13",
+        "location_in_image": "right side on blue banner on building",
+        "legibility": "partial",
+        "confidence": 0.75
+      }
+    ],
+    "people": {
+      "count": 12,
+      "count_confidence": 0.62,
+      "faces_visible": false,
+      "activities": [
+        "walking on sidewalk",
+        "crossing street while on phone",
+        "standing near market stalls"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people in background near market stalls and bus is unclear due to distance and occlusion",
+      "Full text on blue and green banners on right building is blurry and partially cut off, additional words like PERSONAL LOAN and CASH IN cannot be fully verified",
+      "Text on yellow spare tire cover on silver vehicle is not legible",
+      "License plate numbers on parked cars are not clearly readable",
+      "Names and functions of distant high-rise buildings cannot be determined",
+      "Exact time of day beyond daytime overcast conditions cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 12,
+    "license_plates_visible": true,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:14:07+00:00",
+        "raw_output_path": "data/annotations/raw/market_012_attempt1.txt",
+        "tokens": 9984
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'City Shuttle'",
+        "partially legible text: 'PATAPATA CASH'"
+      ]
+    }
+  }
+}

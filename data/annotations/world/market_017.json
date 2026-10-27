@@ -1,0 +1,338 @@
+{
+  "photo_id": "market_017",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_017.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Nairobi_City_Market,_2025_(05).jpg",
+    "title": "File:Nairobi City Market, 2025 (05).jpg"
+  },
+  "observed": {
+    "caption": "A concrete staircase leads up to a colorful market stall displaying patterned dresses, bags, and hats, with paintings leaning on the steps and a sign for the market inspector's office.",
+    "description": "The photo shows an outdoor market courtyard with a weathered beige concrete staircase with black metal handrails in the center and right, leading to an upper balcony densely packed with colorful merchandise including patterned dresses hanging on the railing, hats, bags, and fabrics displayed on the wall. Three people stand on the balcony near the merchandise, one with their back to the camera wearing a yellow and black checkered shirt and two facing forward in casual clothing. A white sign with black text and an arrow is mounted on the stair wall, and a colorful abstract painting with blue, yellow, orange and green shapes leans against the stairs, with additional paintings of elephants and a portrait on the ground to the left near a closed black accordion security gate and a purple shutter. A blue plastic water bottle sits on the bottom step next to a worn brown wooden board leaning against the wall, with pale yellow building walls enclosing the space.",
+    "retrieval_queries": [
+      "colorful market staircase with paintings and hanging dresses",
+      "outdoor market stall with bags and clothes on balcony above stairs",
+      "market inspector office sign on stairway with artwork for sale"
+    ],
+    "tags": [
+      "market",
+      "staircase",
+      "paintings",
+      "clothing stall",
+      "bazaar",
+      "outdoor market",
+      "handicrafts",
+      "sign"
+    ],
+    "scene": {
+      "type": "market",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "unknown",
+      "lighting": "natural daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "vending and browsing at market stall"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward staircase and upper market stall",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "portrait",
+      "subject_focus": "staircase and market display"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "concrete staircase with metal railings",
+        "category": "structure",
+        "attributes": [
+          "weathered",
+          "beige",
+          "dual-flight",
+          "black handrails"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-right",
+        "evidence": "prominent stairs occupying center and right foreground leading upward",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "upper market stall with colorful clothing and bags",
+        "category": "structure",
+        "attributes": [
+          "densely packed",
+          "colorful",
+          "hanging merchandise"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "upper center",
+        "evidence": "wall covered with hats, bags, fabrics and garments above balcony",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "group of people standing on balcony",
+        "category": "person_group",
+        "attributes": [
+          "three individuals",
+          "casual clothing",
+          "one with back turned"
+        ],
+        "count": 3,
+        "salience": 4,
+        "position": "upper center",
+        "evidence": "three figures standing behind balcony railing among merchandise",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "colorful abstract painting leaning on stair wall",
+        "category": "object",
+        "attributes": [
+          "multicolored",
+          "geometric",
+          "vertical canvas"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center",
+        "evidence": "bright blue, yellow, orange and green abstract canvas on stairs",
+        "confidence": 0.97
+      },
+      {
+        "id": "e5",
+        "label": "paintings of elephants and portrait on ground",
+        "category": "object",
+        "attributes": [
+          "colorful",
+          "rectangular canvases",
+          "on pavement"
+        ],
+        "count": 3,
+        "salience": 4,
+        "position": "bottom-left",
+        "evidence": "three canvases on ground showing elephants and a person with beaded necklace",
+        "confidence": 0.95
+      },
+      {
+        "id": "e6",
+        "label": "directional sign for market inspector's office",
+        "category": "sign",
+        "attributes": [
+          "white with black text",
+          "arrow",
+          "mounted on stair wall"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center",
+        "evidence": "rectangular white sign with black lettering along staircase",
+        "confidence": 0.98
+      },
+      {
+        "id": "e7",
+        "label": "black metal accordion security gate",
+        "category": "structure",
+        "attributes": [
+          "closed",
+          "diamond pattern",
+          "covering shop entrance"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "lower center-left",
+        "evidence": "black expandable gate behind staircase under balcony",
+        "confidence": 0.96
+      },
+      {
+        "id": "e8",
+        "label": "patterned dresses hanging on balcony railing",
+        "category": "object",
+        "attributes": [
+          "colorful patterns",
+          "six garments",
+          "suspended on hangers"
+        ],
+        "count": 6,
+        "salience": 4,
+        "position": "center-left",
+        "evidence": "six dresses with geometric and striped patterns hanging from railing",
+        "confidence": 0.97
+      },
+      {
+        "id": "e9",
+        "label": "blue plastic water bottle on step",
+        "category": "object",
+        "attributes": [
+          "transparent blue",
+          "small",
+          "upright"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom center",
+        "evidence": "blue bottle on bottom stair near wall",
+        "confidence": 0.94
+      },
+      {
+        "id": "e10",
+        "label": "weathered wooden board leaning against wall",
+        "category": "object",
+        "attributes": [
+          "brown",
+          "worn",
+          "rectangular"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom-right",
+        "evidence": "dark brown board propped against wall in foreground",
+        "confidence": 0.92
+      },
+      {
+        "id": "e11",
+        "label": "beige building walls enclosing courtyard",
+        "category": "building",
+        "attributes": [
+          "pale yellow",
+          "weathered",
+          "multi-level"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "background",
+        "evidence": "tall pale walls surrounding stairs and market area",
+        "confidence": 0.95
+      },
+      {
+        "id": "e12",
+        "label": "black metal handrails along staircases",
+        "category": "structure",
+        "attributes": [
+          "curved ends",
+          "dark",
+          "mounted on walls"
+        ],
+        "count": 2,
+        "salience": 3,
+        "position": "center-right",
+        "evidence": "dark rails running along both flights of stairs",
+        "confidence": 0.96
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e3",
+        "predicate": "above",
+        "object": "e8",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e8",
+        "predicate": "below",
+        "object": "e2",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e5",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e7",
+        "predicate": "below",
+        "object": "e8",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e9",
+        "predicate": "near",
+        "object": "e10",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e1",
+        "predicate": "beside",
+        "object": "e11",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "MARKET INSPECTOR'S OFFICE",
+        "language": "en",
+        "entity_id": "e6",
+        "location_in_image": "on wall along lower staircase",
+        "legibility": "clear",
+        "confidence": 0.98
+      }
+    ],
+    "people": {
+      "count": 3,
+      "count_confidence": 0.96,
+      "faces_visible": true,
+      "activities": [
+        "standing on balcony",
+        "browsing merchandise"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact geographic location of the market cannot be determined from image alone",
+      "Text on bags and small labels is blurry or partially obscured and not legible",
+      "Whether the shop behind the security gate is open or closed beyond the visible gate",
+      "Time of day beyond daylight and weather conditions",
+      "Identities, ages, or names of the individuals visible"
+    ]
+  },
+  "privacy": {
+    "faces_visible": true,
+    "people_count": 3,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:14:48+00:00",
+        "raw_output_path": "data/annotations/raw/market_017_attempt1.txt",
+        "tokens": 10854
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

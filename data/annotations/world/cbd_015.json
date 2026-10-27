@@ -1,0 +1,384 @@
+{
+  "photo_id": "cbd_015",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/cbd/cbd_015.jpg",
+    "license": "CC BY 4.0",
+    "author": "DesiBoy101",
+    "source_url": "https://commons.wikimedia.org/wiki/File:A_green_post_box_in_the_central_business_district_of_Nairobi.jpg",
+    "title": "File:A green post box in the central business district of Nairobi.jpg"
+  },
+  "observed": {
+    "caption": "A weathered green pillar postbox stands on a sidewalk with a street, parked cars, trees, buildings and a billboard in the background.",
+    "description": "A cylindrical green pillar postbox with chipped red paint at its base and rim stands in the center foreground on a paved concrete sidewalk. The postbox has a rectangular mail slot with embossed lettering on either side and a small keyhole below. Behind it is an asphalt street with a curb and traffic island, with several parked cars visible on both sides including a black SUV on the left and a black Volvo SUV on the right. Large leafy trees and a smaller tree line the opposite side of the street, partially obscuring a beige multi-story building with rectangular windows. A tall vertical advertising billboard with red and white coloring and images of drinks stands on the right side of the background, and a palm tree is visible further right. A black-and-white striped bollard is positioned on the sidewalk behind the postbox. The lighting is natural daylight under overcast conditions.",
+    "retrieval_queries": [
+      "green vintage postbox on city sidewalk with street behind",
+      "old pillar mailbox with chipped paint on pavement",
+      "weathered green mail box in urban street with billboard and parked cars"
+    ],
+    "tags": [
+      "green postbox",
+      "pillar box",
+      "sidewalk",
+      "urban street",
+      "parked cars",
+      "billboard",
+      "city building"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast",
+      "lighting": "natural daylight",
+      "crowd_level": "empty",
+      "activity_summary": "quiet urban street with parked vehicles"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the postbox and across the street",
+      "distance": "close",
+      "framing": "close_up",
+      "orientation": "portrait",
+      "subject_focus": "green pillar postbox"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "green pillar postbox",
+        "category": "structure",
+        "attributes": [
+          "green",
+          "cylindrical",
+          "weathered",
+          "chipped red paint at base and rim",
+          "embossed lettering",
+          "rectangular mail slot"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center foreground",
+        "evidence": "large cylindrical green metal box with domed top and mail slot centered on sidewalk",
+        "confidence": 0.99
+      },
+      {
+        "id": "e2",
+        "label": "concrete sidewalk",
+        "category": "terrain",
+        "attributes": [
+          "paved",
+          "concrete slabs",
+          "light brown",
+          "curb edge"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground",
+        "evidence": "paved slabs under and around postbox extending across bottom of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "asphalt street",
+        "category": "terrain",
+        "attributes": [
+          "asphalt",
+          "gray",
+          "road markings",
+          "two-way"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "middle ground",
+        "evidence": "gray paved road behind sidewalk with lane markings and traffic island",
+        "confidence": 0.98
+      },
+      {
+        "id": "e4",
+        "label": "large leafy tree",
+        "category": "plant",
+        "attributes": [
+          "leafy",
+          "green",
+          "large canopy",
+          "dense foliage"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center background",
+        "evidence": "large tree with dense green leaves directly behind postbox obscuring building",
+        "confidence": 0.97
+      },
+      {
+        "id": "e5",
+        "label": "smaller leafy tree",
+        "category": "plant",
+        "attributes": [
+          "leafy",
+          "green",
+          "smaller",
+          "thin trunk"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "left background",
+        "evidence": "smaller tree with green leaves on left side of street near parked cars",
+        "confidence": 0.96
+      },
+      {
+        "id": "e6",
+        "label": "beige multi-story building",
+        "category": "building",
+        "attributes": [
+          "beige",
+          "multi-story",
+          "rectangular windows",
+          "urban"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "background",
+        "evidence": "beige building with multiple windows visible behind trees across street",
+        "confidence": 0.97
+      },
+      {
+        "id": "e7",
+        "label": "vertical advertising billboard",
+        "category": "sign",
+        "attributes": [
+          "vertical",
+          "red and white",
+          "advertising",
+          "images of drinks"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right background",
+        "evidence": "tall billboard on right side with red section and drink images",
+        "confidence": 0.96
+      },
+      {
+        "id": "e8",
+        "label": "black SUV",
+        "category": "vehicle",
+        "attributes": [
+          "black",
+          "parked",
+          "SUV"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "left middle ground",
+        "evidence": "black SUV parked on left side of street facing away",
+        "confidence": 0.95
+      },
+      {
+        "id": "e9",
+        "label": "black Volvo SUV",
+        "category": "vehicle",
+        "attributes": [
+          "black",
+          "parked",
+          "Volvo SUV"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right middle ground",
+        "evidence": "black Volvo SUV parked on right side of street near curb",
+        "confidence": 0.95
+      },
+      {
+        "id": "e10",
+        "label": "white sedan",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "parked",
+          "sedan"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "far left",
+        "evidence": "white car parked on far left edge of street",
+        "confidence": 0.94
+      },
+      {
+        "id": "e11",
+        "label": "black-and-white bollard",
+        "category": "object",
+        "attributes": [
+          "black and white",
+          "striped",
+          "short post",
+          "cylindrical"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center behind postbox",
+        "evidence": "short black and white striped post on sidewalk edge behind postbox",
+        "confidence": 0.93
+      },
+      {
+        "id": "e12",
+        "label": "palm tree",
+        "category": "plant",
+        "attributes": [
+          "palm",
+          "tall",
+          "slender trunk",
+          "fronds"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "far right background",
+        "evidence": "tall palm tree with fronds on far right near billboard",
+        "confidence": 0.94
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e3",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e6",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e7",
+        "predicate": "right_of",
+        "object": "e6",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e8",
+        "predicate": "left_of",
+        "object": "e4",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e9",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e11",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e5",
+        "predicate": "left_of",
+        "object": "e4",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e12",
+        "predicate": "right_of",
+        "object": "e7",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e2",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "in_front_of",
+        "object": "e6",
+        "confidence": 0.96
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "POST",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "center on postbox left of mail slot",
+        "legibility": "clear",
+        "confidence": 0.98
+      },
+      {
+        "text": "OFFICE",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "center on postbox right of mail slot",
+        "legibility": "clear",
+        "confidence": 0.98
+      },
+      {
+        "text": "KIYOYO",
+        "language": "en",
+        "entity_id": "e7",
+        "location_in_image": "upper right background on billboard",
+        "legibility": "clear",
+        "confidence": 0.97
+      }
+    ],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.98,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Small print on billboard below KIYOYO is not fully legible due to distance and blur",
+      "Partial text visible through tree foliage on building in background cannot be read completely",
+      "License plate numbers on parked cars are not legible",
+      "Exact number of floors and interior details of background building cannot be determined",
+      "Text at top of billboard above KIYOYO is blurry and cut off"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:08:21+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_015_attempt1.txt",
+        "tokens": 14876
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

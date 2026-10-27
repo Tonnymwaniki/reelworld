@@ -1,0 +1,289 @@
+{
+  "photo_id": "hills_012",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_012.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Petersoleeh",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ngong_Hills_Hike.jpg",
+    "title": "File:Ngong Hills Hike.jpg"
+  },
+  "observed": {
+    "caption": "A person in a blue top and light shorts walks down a dirt trail on a grassy hillside under a clear blue sky.",
+    "description": "A grassy hillside with patches of reddish-brown exposed soil and a worn dirt trail running from the foreground up toward the crest dominates the view. A single person wearing a light blue sleeveless top, light-colored shorts and a dark cap is walking down the trail in the mid-ground. A solitary tree with a windswept canopy stands on the hill crest behind the person, with dense green shrubs lining the left side of the slope and a cluster of bushes on the right horizon. Scattered rocks lie along the trail. The upper portion of the image shows a bright clear blue sky with small white clouds near the horizon. Bright natural daylight illuminates the scene.",
+    "retrieval_queries": [
+      "person walking down a dirt trail on a grassy hill",
+      "lone tree on a hilltop with a hiker on the path",
+      "grassy hillside with rocky footpath under blue sky"
+    ],
+    "tags": [
+      "grassy hill",
+      "dirt trail",
+      "hiking",
+      "lone tree",
+      "outdoor landscape",
+      "blue sky"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "clear and sunny",
+      "lighting": "bright natural daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "person hiking down a hillside trail"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "up the hillside toward the person and tree",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "person on grassy hill trail"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "person walking on trail",
+        "category": "person_group",
+        "attributes": [
+          "wearing light blue sleeveless top",
+          "wearing light-colored shorts",
+          "wearing dark cap"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center mid-ground on trail",
+        "evidence": "single figure centered on dirt path descending the hill",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "grassy hillside",
+        "category": "terrain",
+        "attributes": [
+          "green grass",
+          "uneven surface",
+          "sloping upward",
+          "patches of reddish soil"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground to background covering most of frame",
+        "evidence": "expansive green slope with eroded earth visible throughout",
+        "confidence": 0.99
+      },
+      {
+        "id": "e3",
+        "label": "dirt trail",
+        "category": "terrain",
+        "attributes": [
+          "reddish-brown soil",
+          "rocky",
+          "worn footpath",
+          "eroded"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center foreground extending to mid-ground",
+        "evidence": "narrow eroded path cutting through grass up the hill",
+        "confidence": 0.98
+      },
+      {
+        "id": "e4",
+        "label": "lone tree on hill crest",
+        "category": "plant",
+        "attributes": [
+          "dark green foliage",
+          "wind-shaped canopy",
+          "single trunk"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center background on horizon",
+        "evidence": "solitary tree silhouetted against sky above the person",
+        "confidence": 0.97
+      },
+      {
+        "id": "e5",
+        "label": "dense shrubs on left slope",
+        "category": "plant",
+        "attributes": [
+          "green leafy bushes",
+          "dense vegetation"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left foreground to mid-ground",
+        "evidence": "thick green bushes lining left side of trail",
+        "confidence": 0.96
+      },
+      {
+        "id": "e6",
+        "label": "bushes on right horizon",
+        "category": "plant",
+        "attributes": [
+          "dark green",
+          "clustered"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right background on hilltop",
+        "evidence": "group of bushes along right edge of hill crest",
+        "confidence": 0.94
+      },
+      {
+        "id": "e7",
+        "label": "blue sky",
+        "category": "other",
+        "attributes": [
+          "clear",
+          "bright blue"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "upper background",
+        "evidence": "clear blue sky occupying upper half of image",
+        "confidence": 0.99
+      },
+      {
+        "id": "e8",
+        "label": "scattered rocks on trail",
+        "category": "object",
+        "attributes": [
+          "small to medium stones",
+          "reddish-brown and gray"
+        ],
+        "count": 12,
+        "salience": 2,
+        "position": "center foreground on trail",
+        "evidence": "rocks embedded and scattered along dirt path",
+        "confidence": 0.92
+      },
+      {
+        "id": "e9",
+        "label": "white clouds",
+        "category": "other",
+        "attributes": [
+          "small",
+          "wispy",
+          "near horizon"
+        ],
+        "count": 2,
+        "salience": 1,
+        "position": "center background just above hill line",
+        "evidence": "faint white clouds visible behind hill crest near tree",
+        "confidence": 0.9
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e1",
+        "predicate": "below",
+        "object": "e4",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e5",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e6",
+        "predicate": "right_of",
+        "object": "e4",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e8",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e2",
+        "predicate": "below",
+        "object": "e7",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e4",
+        "predicate": "below",
+        "object": "e7",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e1",
+        "predicate": "in_front_of",
+        "object": "e4",
+        "confidence": 0.95
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 1,
+      "count_confidence": 0.98,
+      "faces_visible": false,
+      "activities": [
+        "walking down a dirt trail on a hillside"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact geographic location cannot be determined from the photo",
+      "Text on person's clothing is not transcribed per instruction and is not legible at this distance",
+      "Exact time beyond daytime cannot be determined",
+      "Person's identity, age, and facial features cannot be determined due to distance and resolution"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 1,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:10:00+00:00",
+        "raw_output_path": "data/annotations/raw/hills_012_attempt1.txt",
+        "tokens": 7289
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

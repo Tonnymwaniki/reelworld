@@ -1,0 +1,410 @@
+{
+  "photo_id": "street_022",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_022.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Nairobi_Isuzu_NQR,_cnr_Tom_Mboya_Street_and_Haile_Selassie_Avenue,_2025_(01).jpg",
+    "title": "File:Nairobi Isuzu NQR, cnr Tom Mboya Street and Haile Selassie Avenue, 2025 (01).jpg"
+  },
+  "observed": {
+    "caption": "A brightly painted orange bus covered in graffiti drives down a busy city street lined with multi-story buildings and pedestrians.",
+    "description": "In the center foreground a large orange bus covered in colorful graffiti and text is on a paved asphalt road. The bus has elaborate artwork including faces and stylized lettering. Behind and around the bus are multi-story buildings including a yellow building on the right with large signs, a gray high-rise and a red-brick building on the left. Trees line the sidewalk, and numerous pedestrians are visible walking on both sides of the street and in the background near additional buses. A motorcycle is parked on the left sidewalk. The sky is bright and the scene is lit by strong daylight with shadows on the road.",
+    "retrieval_queries": [
+      "colorful graffiti bus driving on busy city street",
+      "orange decorated public bus with FUMES text in urban area",
+      "busy street scene with painted matatu and pedestrians and buildings"
+    ],
+    "tags": [
+      "graffiti bus",
+      "orange bus",
+      "city street",
+      "urban",
+      "public transport",
+      "decorated vehicle",
+      "pedestrians",
+      "buildings"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "sunny",
+      "lighting": "bright daylight",
+      "crowd_level": "moderate",
+      "activity_summary": "bus driving on urban street with pedestrians walking"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the bus and buildings down the street",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "decorated orange bus in foreground"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "brightly decorated orange bus",
+        "category": "vehicle",
+        "attributes": [
+          "orange",
+          "heavily graffitied",
+          "large",
+          "colorful artwork"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-foreground",
+        "evidence": "large orange vehicle covering center of image with graffiti, text FUMES and TOXIC visible",
+        "confidence": 0.99
+      },
+      {
+        "id": "e2",
+        "label": "yellow multi-story building with signs",
+        "category": "building",
+        "attributes": [
+          "yellow facade",
+          "curved balconies",
+          "multiple signs",
+          "ground floor shops"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right-background",
+        "evidence": "yellow building on right with COLLEGE OF BUSINESS TECHNOLOGY signs and shopfronts at street level",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "gray high-rise building",
+        "category": "building",
+        "attributes": [
+          "gray",
+          "tall",
+          "modern",
+          "many windows"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left-background",
+        "evidence": "tall gray building with vertical windows behind red-brick building on left",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "red-brick multi-story building",
+        "category": "building",
+        "attributes": [
+          "red brick",
+          "multiple stories",
+          "rectangular windows"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "far left",
+        "evidence": "red brick building on far left with rows of windows",
+        "confidence": 0.97
+      },
+      {
+        "id": "e5",
+        "label": "paved asphalt road",
+        "category": "terrain",
+        "attributes": [
+          "gray asphalt",
+          "wide",
+          "street"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground and center",
+        "evidence": "gray paved surface the bus is on extending into background",
+        "confidence": 0.99
+      },
+      {
+        "id": "e6",
+        "label": "trees along sidewalk",
+        "category": "plant",
+        "attributes": [
+          "tall",
+          "sparse leaves",
+          "trunk visible"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "right and center",
+        "evidence": "trees with thin trunks and branches in front of yellow building and in mid-distance",
+        "confidence": 0.95
+      },
+      {
+        "id": "e7",
+        "label": "pedestrians on left side of street",
+        "category": "person_group",
+        "attributes": [
+          "walking",
+          "various clothing colors"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left",
+        "evidence": "group of people walking on left sidewalk and crossing near rear of bus",
+        "confidence": 0.9
+      },
+      {
+        "id": "e8",
+        "label": "pedestrians on right sidewalk",
+        "category": "person_group",
+        "attributes": [
+          "walking",
+          "standing near shops"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right",
+        "evidence": "people walking on right sidewalk near yellow building shops",
+        "confidence": 0.88
+      },
+      {
+        "id": "e9",
+        "label": "motorcycle parked on sidewalk",
+        "category": "vehicle",
+        "attributes": [
+          "small",
+          "two-wheeled",
+          "parked"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "far left",
+        "evidence": "motorcycle on left sidewalk near curb with person beside it",
+        "confidence": 0.92
+      },
+      {
+        "id": "e10",
+        "label": "additional buses in distance",
+        "category": "vehicle",
+        "attributes": [
+          "blue and pink",
+          "parked",
+          "partially visible"
+        ],
+        "count": 2,
+        "salience": 2,
+        "position": "far left background",
+        "evidence": "two buses visible in far background on left side of street",
+        "confidence": 0.85
+      },
+      {
+        "id": "e11",
+        "label": "ground-floor shopfront",
+        "category": "structure",
+        "attributes": [
+          "open front",
+          "metal grilles",
+          "goods displayed"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right foreground",
+        "evidence": "shop at base of yellow building with items on tables and open entrance",
+        "confidence": 0.9
+      },
+      {
+        "id": "e12",
+        "label": "bright sky",
+        "category": "other",
+        "attributes": [
+          "bright",
+          "overexposed",
+          "daytime"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "top center",
+        "evidence": "bright area above buildings between high-rises",
+        "confidence": 0.95
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e5",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e2",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e6",
+        "predicate": "in_front_of",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e7",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e8",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e9",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e10",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e11",
+        "predicate": "inside",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e1",
+        "predicate": "near",
+        "object": "e2",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "FUMES",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "center side of bus",
+        "legibility": "clear",
+        "confidence": 0.98
+      },
+      {
+        "text": "FUMES",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "front of bus above windshield",
+        "legibility": "clear",
+        "confidence": 0.97
+      },
+      {
+        "text": "TOXIC",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "front side of bus near door",
+        "legibility": "clear",
+        "confidence": 0.95
+      },
+      {
+        "text": "DANGER",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "upper side of bus near middle",
+        "legibility": "clear",
+        "confidence": 0.9
+      },
+      {
+        "text": "WARNING",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "upper side of bus",
+        "legibility": "clear",
+        "confidence": 0.9
+      },
+      {
+        "text": "COLLEGE OF USINESS ECHNOLOGY",
+        "language": "en",
+        "entity_id": "e2",
+        "location_in_image": "upper right on yellow building",
+        "legibility": "partial",
+        "confidence": 0.85
+      },
+      {
+        "text": "AIMS COLLEGE OF BUSINESS AND TECHNOLOGY",
+        "language": "en",
+        "entity_id": "e2",
+        "location_in_image": "middle right on yellow building",
+        "legibility": "clear",
+        "confidence": 0.95
+      },
+      {
+        "text": "AIMS COLLEGE OF BUSINESS AND TECHNOLOGY 0799 651 904 / 0111 490 959",
+        "language": "en",
+        "entity_id": "e2",
+        "location_in_image": "lower right on yellow building",
+        "legibility": "clear",
+        "confidence": 0.93
+      }
+    ],
+    "people": {
+      "count": 15,
+      "count_confidence": 0.6,
+      "faces_visible": true,
+      "activities": [
+        "walking",
+        "standing",
+        "riding motorcycle",
+        "driving"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people is uncertain due to occlusion inside bus and distance in background crowd",
+      "Exact characters on bus license plate are not legible due to resolution",
+      "Text on small distant signs and billboards in far background is not legible",
+      "Text on far right edge sign is cut off and not fully legible",
+      "Specific destination or route of the bus cannot be determined from visible text"
+    ]
+  },
+  "privacy": {
+    "faces_visible": true,
+    "people_count": 15,
+    "license_plates_visible": true,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:22:10+00:00",
+        "raw_output_path": "data/annotations/raw/street_022_attempt1.txt",
+        "tokens": 11164
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'COLLEGE OF USINESS ECHNOLOGY'"
+      ]
+    }
+  }
+}

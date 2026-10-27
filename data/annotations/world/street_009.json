@@ -1,0 +1,357 @@
+{
+  "photo_id": "street_009",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_009.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Matti Blume",
+    "source_url": "https://commons.wikimedia.org/wiki/File:ICRAF_Road,_Nairobi_(20250808-P1048951).jpg",
+    "title": "File:ICRAF Road, Nairobi (20250808-P1048951).jpg"
+  },
+  "observed": {
+    "caption": "A long empty paved road lined with trees and utility poles stretches into the distance at an intersection with an ICRAF directional sign.",
+    "description": "The photo shows a paved intersection in the foreground with a black and white striped curb and low vegetation on a median, a cross street, and a long straight asphalt road with a faded center line receding to the horizon. Green bollards line both sides of the entrance to the long road, with orange traffic cones visible further down the road. Tall wooden utility poles with tangled overhead wires run along the left side of the road, while a row of flat-topped trees with light-colored trunks lines the right side. Behind a fence on the left, tall green crops and a small building are visible, and a white vehicle is partially visible behind the fence. Two people in dark clothing are visible near the roadside, one walking on the far left edge and one standing near the center-left. The sky is overcast with soft diffused daylight.",
+    "retrieval_queries": [
+      "long straight empty road lined with trees and power lines",
+      "street intersection with ICRAF sign and green bollards",
+      "quiet road with acacia trees and utility poles under overcast sky"
+    ],
+    "tags": [
+      "road",
+      "street",
+      "intersection",
+      "power lines",
+      "trees",
+      "ICRAF sign",
+      "bollards",
+      "overcast"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast",
+      "lighting": "soft diffused daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "quiet street with people near roadside"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "down the long straight road toward the horizon",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "portrait",
+      "subject_focus": "long straight road and intersection"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "long straight asphalt road receding to horizon",
+        "category": "structure",
+        "attributes": [
+          "asphalt",
+          "faded yellow center line",
+          "empty"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center extending to background",
+        "evidence": "paved road with center line vanishing in distance between poles and trees",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "foreground asphalt road",
+        "category": "structure",
+        "attributes": [
+          "asphalt",
+          "white lane markings"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground",
+        "evidence": "wide paved road at bottom of frame in front of median",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "median strip with black and white curb",
+        "category": "structure",
+        "attributes": [
+          "black and white painted curb",
+          "low vegetation with small purple flowers"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center foreground",
+        "evidence": "raised divider with alternating black and white blocks and plants between foreground and cross street",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "utility poles with overhead wires",
+        "category": "structure",
+        "attributes": [
+          "wooden poles",
+          "tangled black wires",
+          "green insulators"
+        ],
+        "count": 12,
+        "salience": 4,
+        "position": "left side",
+        "evidence": "tall poles with multiple crossing wires along left side of long road",
+        "confidence": 0.97
+      },
+      {
+        "id": "e5",
+        "label": "row of flat-topped trees",
+        "category": "plant",
+        "attributes": [
+          "light-colored trunks",
+          "spreading green canopies"
+        ],
+        "count": 15,
+        "salience": 4,
+        "position": "right side",
+        "evidence": "line of trees with pale bark and umbrella-shaped crowns along right side of road",
+        "confidence": 0.96
+      },
+      {
+        "id": "e6",
+        "label": "ICRAF directional sign",
+        "category": "sign",
+        "attributes": [
+          "white background",
+          "green text",
+          "right-pointing arrow"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left foreground near intersection",
+        "evidence": "rectangular sign with ICRAF text and arrow beside road",
+        "confidence": 0.95
+      },
+      {
+        "id": "e7",
+        "label": "people near roadside",
+        "category": "person_group",
+        "attributes": [
+          "dark clothing",
+          "one walking",
+          "one standing"
+        ],
+        "count": 2,
+        "salience": 2,
+        "position": "left and center-left near road",
+        "evidence": "two figures in dark clothing, one partially visible at far left edge walking, one standing near speed limit signs",
+        "confidence": 0.85
+      },
+      {
+        "id": "e8",
+        "label": "green bollards lining road entrance",
+        "category": "object",
+        "attributes": [
+          "short",
+          "green",
+          "vertical posts"
+        ],
+        "count": 14,
+        "salience": 3,
+        "position": "both sides of center road entrance",
+        "evidence": "small green posts along curbs at entrance to long road",
+        "confidence": 0.94
+      },
+      {
+        "id": "e9",
+        "label": "tall green crops behind fence",
+        "category": "plant",
+        "attributes": [
+          "dense",
+          "tall",
+          "green"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "left background behind fence and right background behind trees",
+        "evidence": "dense tall vegetation visible behind fence on left and behind trees on right",
+        "confidence": 0.9
+      },
+      {
+        "id": "e10",
+        "label": "small building with partial signage",
+        "category": "building",
+        "attributes": [
+          "dark roof",
+          "partial text on facade"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "left background",
+        "evidence": "small structure behind ICRAF sign with visible partial text on its front",
+        "confidence": 0.88
+      },
+      {
+        "id": "e11",
+        "label": "traffic cones on road",
+        "category": "object",
+        "attributes": [
+          "orange and white",
+          "conical"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "center-right on long road",
+        "evidence": "small orange cones placed on right side of long road in middle distance",
+        "confidence": 0.9
+      },
+      {
+        "id": "e12",
+        "label": "overcast sky",
+        "category": "other",
+        "attributes": [
+          "pale",
+          "cloudy",
+          "diffused light"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top background",
+        "evidence": "pale cloudy sky above road and trees",
+        "confidence": 0.97
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e4",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e5",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e6",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e8",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e11",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e7",
+        "predicate": "near",
+        "object": "e1",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e3",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e10",
+        "predicate": "behind",
+        "object": "e6",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e9",
+        "predicate": "behind",
+        "object": "e8",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e3",
+        "predicate": "below",
+        "object": "e12",
+        "confidence": 0.95
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "ICRAF",
+        "language": "en",
+        "entity_id": "e6",
+        "location_in_image": "left side near intersection on directional sign",
+        "legibility": "clear",
+        "confidence": 0.96
+      },
+      {
+        "text": "ATURE TRA",
+        "language": "en",
+        "entity_id": "e10",
+        "location_in_image": "left background on building facade",
+        "legibility": "partial",
+        "confidence": 0.75
+      }
+    ],
+    "people": {
+      "count": 2,
+      "count_confidence": 0.85,
+      "faces_visible": false,
+      "activities": [
+        "walking on sidewalk",
+        "standing near roadside"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact geographic location cannot be determined from the photo alone",
+      "Exact time of day and date cannot be determined beyond daylight with overcast sky",
+      "Content of small white sign near fence on left is blurry and unreadable",
+      "Text on circular speed limit sign and triangular warning sign is not legible enough to transcribe with at least 3 letters",
+      "Full text of building sign cut off by edge cannot be determined",
+      "Purpose of traffic cones and whether road is open or closed cannot be determined",
+      "Species of trees and crops cannot be confirmed from image alone",
+      "Details of partially visible white vehicle behind fence cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 2,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:20:16+00:00",
+        "raw_output_path": "data/annotations/raw/street_009_attempt1.txt",
+        "tokens": 13865
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'ATURE TRA'"
+      ]
+    }
+  }
+}

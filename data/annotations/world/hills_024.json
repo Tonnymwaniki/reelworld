@@ -1,0 +1,326 @@
+{
+  "photo_id": "hills_024",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_024.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Underwaterbuffalo",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ngong_Ping,_Ma_On_Shan_04.jpg",
+    "title": "File:Ngong Ping, Ma On Shan 04.jpg"
+  },
+  "observed": {
+    "caption": "People gather on a dry grassy hilltop with colorful paragliders on the ground and one in the air against a mountain backdrop.",
+    "description": "A wide outdoor hilltop covered in dry brown grass and patches of dirt slopes toward a rocky mountain peak in the background under an overcast sky. A colorful paraglider with red, yellow, and blue sections is airborne above the ridge, while several other paraglider canopies in white and purple, blue and green, and blue and orange lie on the ground. Scattered green trees and shrubs dot the hillside. Numerous people are spread across the hill, some sitting on the grass in the foreground and midground, some standing or walking, and some gathered in small groups near the canopies, with a small blue tent visible on the ridge.",
+    "retrieval_queries": [
+      "paragliders on grassy hilltop with mountain in background",
+      "people preparing paragliding on dry hill overcast day",
+      "colorful paraglider flying over hill with crowd watching"
+    ],
+    "tags": [
+      "paragliding",
+      "hilltop",
+      "mountain",
+      "grassy field",
+      "outdoor recreation",
+      "overcast sky"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast",
+      "lighting": "diffuse daylight",
+      "crowd_level": "moderate",
+      "activity_summary": "paragliding and gathering on hilltop"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward mountain across hilltop",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "paragliding activity on grassy hilltop"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "dry grassy hilltop field",
+        "category": "terrain",
+        "attributes": [
+          "dry",
+          "brown",
+          "grassy",
+          "open",
+          "sloping"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground and center",
+        "evidence": "expansive brown grass covering ground from foreground to ridge",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "rocky mountain peak in background",
+        "category": "terrain",
+        "attributes": [
+          "rocky",
+          "brown and green",
+          "rugged",
+          "prominent"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "background center-right",
+        "evidence": "large mountain with bare rock and vegetation rising behind hilltop",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "paraglider in flight with multicolor canopy",
+        "category": "object",
+        "attributes": [
+          "colorful",
+          "red yellow blue",
+          "airborne",
+          "arched"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center above ridge",
+        "evidence": "bright canopy suspended in air above hill with visible lines",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "paraglider canopy on ground blue and green",
+        "category": "object",
+        "attributes": [
+          "blue",
+          "green",
+          "collapsed",
+          "on grass"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center",
+        "evidence": "blue and green fabric lying on brown grass midground",
+        "confidence": 0.92
+      },
+      {
+        "id": "e5",
+        "label": "paraglider canopy on ground white and purple",
+        "category": "object",
+        "attributes": [
+          "white",
+          "purple",
+          "spread out",
+          "on grass"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left-center",
+        "evidence": "white and purple fabric spread on grass with person nearby",
+        "confidence": 0.9
+      },
+      {
+        "id": "e6",
+        "label": "paraglider canopy on ground blue and orange",
+        "category": "object",
+        "attributes": [
+          "blue",
+          "orange",
+          "spread out",
+          "on grass"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right-center",
+        "evidence": "blue and orange fabric lying on grass to right of center",
+        "confidence": 0.91
+      },
+      {
+        "id": "e7",
+        "label": "scattered trees and shrubs",
+        "category": "plant",
+        "attributes": [
+          "green",
+          "leafy",
+          "small to medium"
+        ],
+        "count": 8,
+        "salience": 3,
+        "position": "midground across ridge",
+        "evidence": "clusters of green trees dotting hillside and ridge line",
+        "confidence": 0.88
+      },
+      {
+        "id": "e8",
+        "label": "people gathered on hilltop",
+        "category": "person_group",
+        "attributes": [
+          "standing",
+          "sitting",
+          "walking",
+          "varied clothing"
+        ],
+        "count": 28,
+        "salience": 5,
+        "position": "foreground to background across hill",
+        "evidence": "multiple small figures in varied jackets including red, white, blue spread across grass",
+        "confidence": 0.75
+      },
+      {
+        "id": "e9",
+        "label": "overcast sky",
+        "category": "other",
+        "attributes": [
+          "pale",
+          "cloudy",
+          "bright",
+          "diffuse"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "top background",
+        "evidence": "pale gray-white sky covering upper portion of image",
+        "confidence": 0.97
+      },
+      {
+        "id": "e10",
+        "label": "small blue tent or canopy on ridge",
+        "category": "object",
+        "attributes": [
+          "blue",
+          "small",
+          "dome-shaped",
+          "on ridge"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center-right on ridge",
+        "evidence": "small blue dome visible on hill ridge behind group of people",
+        "confidence": 0.82
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e3",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e8",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e2",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e9",
+        "predicate": "above",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e10",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e5",
+        "predicate": "left_of",
+        "object": "e4",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e6",
+        "predicate": "right_of",
+        "object": "e4",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 28,
+      "count_confidence": 0.65,
+      "faces_visible": false,
+      "activities": [
+        "sitting on grass",
+        "standing and walking",
+        "preparing paragliders",
+        "paragliding"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people is uncertain due to distance and small figures in background",
+      "Text or logos on paraglider canopies not legible due to distance and folding",
+      "Specific location and identity of mountain not determinable from image",
+      "Exact time of day and weather conditions beyond overcast appearance",
+      "Details of individual clothing and equipment not clear for distant figures"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 28,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:11:02+00:00",
+        "raw_output_path": "data/annotations/raw/hills_024_attempt1.txt",
+        "tokens": 6933
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

@@ -1,0 +1,287 @@
+{
+  "photo_id": "hills_002",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_002.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Sammigachuhi",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Clouds_ngong_hills.jpg",
+    "title": "File:Clouds ngong hills.jpg"
+  },
+  "observed": {
+    "caption": "A dramatic cloudy sky over a green hilltop lined with wind turbines, framed by trees in the foreground.",
+    "description": "In the left foreground a tall leaning tree with dense green foliage and a curved trunk is visible, with additional trees and shrubs on the right foreground. In the middle and background a green vegetated hill ridge stretches across the horizon with several wind turbines silhouetted along its crest. Above the hill a large mass of bright white and gray cumulus clouds dominates the sky, with a small patch of blue sky visible on the far right. Below the hill a valley with scattered trees and vegetation is visible under natural daylight.",
+    "retrieval_queries": [
+      "wind turbines on green hill under cloudy sky with trees in foreground",
+      "dramatic clouds over distant hill with windmills framed by trees",
+      "landscape view of hilltop wind farm seen across a valley"
+    ],
+    "tags": [
+      "landscape",
+      "hill",
+      "wind turbines",
+      "clouds",
+      "trees",
+      "valley",
+      "sky",
+      "daytime",
+      "nature",
+      "renewable energy"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "bright natural daylight",
+      "crowd_level": "empty",
+      "activity_summary": "no visible human activity, scenic view of hill and sky"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "raised",
+      "facing": "toward distant hill across valley",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "distant green hill with wind turbines under cloudy sky"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "leaning tree with dense foliage in left foreground",
+        "category": "plant",
+        "attributes": [
+          "leaning trunk",
+          "dense green leaves",
+          "tall",
+          "curved"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "left foreground",
+        "evidence": "curved trunk and full canopy clearly visible on left side",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "large cumulus cloud formation",
+        "category": "other",
+        "attributes": [
+          "voluminous",
+          "white and gray",
+          "bright edges",
+          "towering"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center and upper",
+        "evidence": "massive white and gray clouds filling most of sky",
+        "confidence": 0.99
+      },
+      {
+        "id": "e3",
+        "label": "green hill ridge in background",
+        "category": "terrain",
+        "attributes": [
+          "vegetated",
+          "rolling",
+          "distant",
+          "green"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center background",
+        "evidence": "green elevated landform across horizon behind valley",
+        "confidence": 0.97
+      },
+      {
+        "id": "e4",
+        "label": "wind turbines on hilltop",
+        "category": "structure",
+        "attributes": [
+          "tall slender towers",
+          "three-bladed",
+          "silhouetted",
+          "distant"
+        ],
+        "count": 6,
+        "salience": 4,
+        "position": "center-right background on hill crest",
+        "evidence": "small vertical structures with blades along hilltop skyline",
+        "confidence": 0.92
+      },
+      {
+        "id": "e5",
+        "label": "dense trees on right foreground",
+        "category": "plant",
+        "attributes": [
+          "dense foliage",
+          "dark green",
+          "multiple canopies"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right foreground",
+        "evidence": "thick tree cover occupying right lower and middle area",
+        "confidence": 0.96
+      },
+      {
+        "id": "e6",
+        "label": "blue sky patch",
+        "category": "other",
+        "attributes": [
+          "small",
+          "clear",
+          "light blue"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "far right upper",
+        "evidence": "narrow strip of blue visible beyond clouds on right edge",
+        "confidence": 0.95
+      },
+      {
+        "id": "e7",
+        "label": "valley with scattered vegetation",
+        "category": "terrain",
+        "attributes": [
+          "low-lying",
+          "green",
+          "mixed trees and shrubs",
+          "distant"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center lower",
+        "evidence": "lower vegetated area between foreground trees and distant hill",
+        "confidence": 0.9
+      },
+      {
+        "id": "e8",
+        "label": "smaller trees and shrubs in midground",
+        "category": "plant",
+        "attributes": [
+          "scattered",
+          "green",
+          "low"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center lower",
+        "evidence": "clusters of vegetation in valley below hill",
+        "confidence": 0.88
+      },
+      {
+        "id": "e9",
+        "label": "overcast gray sky background",
+        "category": "other",
+        "attributes": [
+          "cloudy",
+          "gray",
+          "diffuse"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "upper background",
+        "evidence": "gray cloud cover behind bright cumulus",
+        "confidence": 0.9
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e5",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e2",
+        "predicate": "above",
+        "object": "e3",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e3",
+        "predicate": "behind",
+        "object": "e5",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e3",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e7",
+        "predicate": "in_front_of",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "right_of",
+        "object": "e2",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e5",
+        "predicate": "in_front_of",
+        "object": "e4",
+        "confidence": 0.88
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.99,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact geographic location of the hill cannot be determined from the photo",
+      "Exact number of wind turbines is uncertain due to distance and partial occlusion by trees",
+      "Time of day beyond daytime and weather conditions beyond visible clouds cannot be determined",
+      "No text is legible on any sign or structure in the image",
+      "Presence or absence of people, animals, or vehicles in the distant valley cannot be confirmed due to distance and resolution"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:08:46+00:00",
+        "raw_output_path": "data/annotations/raw/hills_002_attempt1.txt",
+        "tokens": 5038
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

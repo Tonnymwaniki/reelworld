@@ -1,0 +1,368 @@
+{
+  "photo_id": "landmarks_006",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/landmarks/landmarks_006.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "IndicibleEspace",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Kenyatta_International_Convention_Centre,_Nairobi,_by_Karl_Henrik_N%C3%B8stvik_architect,_general.jpg",
+    "title": "File:Kenyatta International Convention Centre, Nairobi, by Karl Henrik Nøstvik architect, general.jpg"
+  },
+  "observed": {
+    "caption": "A tall cylindrical tower with a disc-shaped top stands in the center of a paved plaza surrounded by modern buildings, palm trees, and a statue on a pedestal under a partly cloudy sky.",
+    "description": "The photo shows an outdoor urban plaza with a prominent tall cylindrical building with horizontal balconies and a wide flat roof in the center, a large circular building with a brown conical roof to its right, and two additional high-rise buildings behind it including a curved glass tower with a blue facade on the far right and a rectangular light-colored tower. In the left foreground a seated statue sits atop a tall stone pedestal, while the paved plaza in the foreground holds several parked light-colored cars, numerous thin flagpoles, clusters of palm trees, and a few small figures of people walking. Low-rise buildings are visible in the left background, and the sky above is filled with white and gray clouds with patches of blue.",
+    "retrieval_queries": [
+      "tall round tower with flat top in city plaza with conical building",
+      "city square with statue and modern skyscrapers under cloudy sky",
+      "paved plaza with palm trees and parked cars in front of cylindrical high rise"
+    ],
+    "tags": [
+      "plaza",
+      "cylindrical tower",
+      "modern architecture",
+      "cityscape",
+      "statue",
+      "palm trees",
+      "parked cars",
+      "cloudy sky"
+    ],
+    "scene": {
+      "type": "plaza",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "bright natural daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "people walking and cars parked on open plaza"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the cylindrical tower and plaza",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "cylindrical tower and surrounding plaza"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "cylindrical high-rise tower",
+        "category": "building",
+        "attributes": [
+          "cylindrical",
+          "multi-story",
+          "striped balconies",
+          "flat disc roof"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "tall cylindrical building with horizontal balconies and wide circular top dominates center",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "conical-roof circular building",
+        "category": "building",
+        "attributes": [
+          "conical brown roof",
+          "circular base",
+          "low-rise"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right, foreground",
+        "evidence": "large building with brown conical roof and open structure beneath to the right of cylindrical tower",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "modern glass skyscraper with blue facade",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "curved",
+          "blue glass",
+          "white sides"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "far right background",
+        "evidence": "tall curved building with blue reflective glass on right edge",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "rectangular high-rise building",
+        "category": "building",
+        "attributes": [
+          "rectangular",
+          "light-colored",
+          "many windows"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-right background, behind conical building",
+        "evidence": "light-colored rectangular tower with grid of windows behind conical roof",
+        "confidence": 0.94
+      },
+      {
+        "id": "e5",
+        "label": "seated statue",
+        "category": "object",
+        "attributes": [
+          "stone",
+          "seated figure",
+          "on pedestal"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left foreground",
+        "evidence": "statue of seated figure atop stone base on left side",
+        "confidence": 0.92
+      },
+      {
+        "id": "e6",
+        "label": "stone pedestal",
+        "category": "structure",
+        "attributes": [
+          "rectangular",
+          "weathered stone",
+          "tall base"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left foreground, below statue",
+        "evidence": "tall rectangular stone base supporting statue with plaque on side",
+        "confidence": 0.95
+      },
+      {
+        "id": "e7",
+        "label": "paved plaza",
+        "category": "terrain",
+        "attributes": [
+          "open",
+          "paved",
+          "patterned tiles"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "foreground, bottom",
+        "evidence": "wide paved open area with patterned ground extending across bottom",
+        "confidence": 0.96
+      },
+      {
+        "id": "e8",
+        "label": "parked cars",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "silver",
+          "small",
+          "parked"
+        ],
+        "count": 5,
+        "salience": 2,
+        "position": "foreground center-right",
+        "evidence": "several light-colored cars parked on plaza pavement",
+        "confidence": 0.88
+      },
+      {
+        "id": "e9",
+        "label": "palm trees",
+        "category": "plant",
+        "attributes": [
+          "green",
+          "tall",
+          "leafy"
+        ],
+        "count": 8,
+        "salience": 2,
+        "position": "foreground center and right, near buildings",
+        "evidence": "clusters of palm trees with green fronds around plaza and buildings",
+        "confidence": 0.9
+      },
+      {
+        "id": "e10",
+        "label": "flagpoles",
+        "category": "object",
+        "attributes": [
+          "tall",
+          "thin",
+          "metal",
+          "lined up"
+        ],
+        "count": 20,
+        "salience": 2,
+        "position": "foreground center and right",
+        "evidence": "numerous thin vertical poles lined along plaza in front of buildings",
+        "confidence": 0.89
+      },
+      {
+        "id": "e11",
+        "label": "cloudy sky",
+        "category": "other",
+        "attributes": [
+          "partly cloudy",
+          "blue patches",
+          "white clouds"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "background, top",
+        "evidence": "sky with scattered white and gray clouds and patches of blue",
+        "confidence": 0.98
+      },
+      {
+        "id": "e12",
+        "label": "low-rise background buildings",
+        "category": "building",
+        "attributes": [
+          "yellowish",
+          "multi-story",
+          "rectangular"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "left background",
+        "evidence": "cluster of low-rise light-colored buildings with many windows on left horizon",
+        "confidence": 0.87
+      },
+      {
+        "id": "e13",
+        "label": "pedestrians",
+        "category": "person_group",
+        "attributes": [
+          "small figures",
+          "walking",
+          "casual clothing"
+        ],
+        "count": 4,
+        "salience": 1,
+        "position": "foreground center, on plaza",
+        "evidence": "small human figures walking on paved plaza near center",
+        "confidence": 0.65
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e2",
+        "predicate": "in_front_of",
+        "object": "e4",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e3",
+        "predicate": "right_of",
+        "object": "e2",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e5",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e6",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e8",
+        "predicate": "on",
+        "object": "e7",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e9",
+        "predicate": "near",
+        "object": "e2",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e10",
+        "predicate": "on",
+        "object": "e7",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e13",
+        "predicate": "on",
+        "object": "e7",
+        "confidence": 0.85
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "C&K PENSION TOWERS",
+        "language": "en",
+        "entity_id": "e3",
+        "location_in_image": "on blue glass facade of tall building on far right",
+        "legibility": "clear",
+        "confidence": 0.85
+      }
+    ],
+    "people": {
+      "count": 4,
+      "count_confidence": 0.65,
+      "faces_visible": false,
+      "activities": [
+        "walking across plaza"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Text on plaque on statue pedestal is not legible due to distance and resolution",
+      "Exact number of people on plaza is uncertain due to small size and distance",
+      "Details of building interiors and exact number of floors cannot be determined",
+      "License plate numbers and car models cannot be determined",
+      "Exact time of day beyond daytime and weather beyond cloud cover cannot be determined",
+      "Names and identities of buildings and statue subject cannot be determined from image alone"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 4,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:12:08+00:00",
+        "raw_output_path": "data/annotations/raw/landmarks_006_attempt1.txt",
+        "tokens": 9858
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

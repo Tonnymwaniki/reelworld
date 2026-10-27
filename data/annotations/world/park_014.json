@@ -1,0 +1,328 @@
+{
+  "photo_id": "park_014",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_014.jpg",
+    "license": "CC BY 4.0",
+    "author": "DesiBoy101",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Skyline_of_Nairobi_city_as_seen_from_Uhuru_Park.jpg",
+    "title": "File:Skyline of Nairobi city as seen from Uhuru Park.jpg"
+  },
+  "observed": {
+    "caption": "An elevated wide view of a green urban park with a lake and white tents in the foreground and a cloudy city skyline in the background.",
+    "description": "The photo shows an outdoor urban park viewed from an elevated position under an overcast sky. In the foreground there is green grass, a paved circular walkway, scattered trees and dense foliage, with small figures of people sitting and lying on the grass. White peaked event tents are clustered in the middle ground in front of a calm lake surrounded by trees. Beyond the lake an elevated roadway stretches horizontally, and behind it a skyline of numerous high-rise buildings of varying heights, colors and designs rises against a cloudy gray sky. The lighting is diffuse and the overall scene is a wide landscape view of parkland contrasting with the distant city.",
+    "retrieval_queries": [
+      "city skyline over park with lake and white tents",
+      "overcast view of urban park with people on grass and tall buildings behind",
+      "aerial view of green park and pond in front of downtown high rises"
+    ],
+    "tags": [
+      "city skyline",
+      "urban park",
+      "lake",
+      "white tents",
+      "high-rise buildings",
+      "overcast sky",
+      "green space"
+    ],
+    "scene": {
+      "type": "park",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast and cloudy",
+      "lighting": "diffuse overcast daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "people relaxing on grass in park with city view"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "raised",
+      "facing": "across the park toward the city skyline",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "park and city skyline with lake"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "city skyline with high-rise buildings",
+        "category": "building",
+        "attributes": [
+          "multiple towers",
+          "varied heights and designs",
+          "distant along horizon"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "background across horizon",
+        "evidence": "numerous tall buildings visible against cloudy sky spanning left to right",
+        "confidence": 0.96
+      },
+      {
+        "id": "e2",
+        "label": "park area with grass and trees",
+        "category": "terrain",
+        "attributes": [
+          "green grass",
+          "scattered trees",
+          "open space"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground to middle ground",
+        "evidence": "expansive green area with trees and pathways occupying lower half of image",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "lake or pond",
+        "category": "terrain",
+        "attributes": [
+          "calm water",
+          "surrounded by greenery",
+          "reflective surface"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "middle ground center",
+        "evidence": "body of water visible behind white tents with tree-lined banks",
+        "confidence": 0.94
+      },
+      {
+        "id": "e4",
+        "label": "white event tents",
+        "category": "structure",
+        "attributes": [
+          "white fabric",
+          "peaked roofs",
+          "clustered together"
+        ],
+        "count": 5,
+        "salience": 4,
+        "position": "middle ground center-right",
+        "evidence": "large white marquee structures with pointed tops in front of lake",
+        "confidence": 0.95
+      },
+      {
+        "id": "e5",
+        "label": "large leafy tree",
+        "category": "plant",
+        "attributes": [
+          "dense green canopy",
+          "thick trunk",
+          "prominent"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left foreground",
+        "evidence": "large tree with full foliage standing on grass near paved path",
+        "confidence": 0.96
+      },
+      {
+        "id": "e6",
+        "label": "paved circular walkway",
+        "category": "structure",
+        "attributes": [
+          "patterned paving",
+          "curved design",
+          "light colored"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom center",
+        "evidence": "circular paved area with concentric patterns surrounded by grass",
+        "confidence": 0.92
+      },
+      {
+        "id": "e7",
+        "label": "overcast sky",
+        "category": "other",
+        "attributes": [
+          "cloudy",
+          "gray tones",
+          "diffuse light"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "top filling upper two-thirds",
+        "evidence": "sky covered with thick gray and white clouds",
+        "confidence": 0.98
+      },
+      {
+        "id": "e8",
+        "label": "brown high-rise building",
+        "category": "building",
+        "attributes": [
+          "rectangular",
+          "dark brown facade",
+          "tall"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right background",
+        "evidence": "tall brown building with many windows on right side of skyline",
+        "confidence": 0.95
+      },
+      {
+        "id": "e9",
+        "label": "yellow high-rise buildings",
+        "category": "building",
+        "attributes": [
+          "yellow facade",
+          "clustered towers",
+          "tall"
+        ],
+        "count": 3,
+        "salience": 4,
+        "position": "left background",
+        "evidence": "group of yellowish tall buildings on left side of skyline",
+        "confidence": 0.94
+      },
+      {
+        "id": "e10",
+        "label": "group of people on grass",
+        "category": "person_group",
+        "attributes": [
+          "small distant figures",
+          "sitting and lying",
+          "casual"
+        ],
+        "count": 15,
+        "salience": 2,
+        "position": "foreground left-center and near lake",
+        "evidence": "tiny human figures scattered on grass areas and near lake shore",
+        "confidence": 0.55
+      },
+      {
+        "id": "e11",
+        "label": "dense green foliage",
+        "category": "plant",
+        "attributes": [
+          "leafy branches",
+          "foreground",
+          "bushy"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom right foreground",
+        "evidence": "thick green leaves and branches occupying lower right corner",
+        "confidence": 0.93
+      },
+      {
+        "id": "e12",
+        "label": "elevated roadway or bridge",
+        "category": "structure",
+        "attributes": [
+          "long horizontal structure",
+          "behind lake",
+          "concrete"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "middle ground behind lake",
+        "evidence": "elevated linear structure spanning across behind trees and lake",
+        "confidence": 0.88
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e5",
+        "predicate": "left_of",
+        "object": "e4",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e3",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e6",
+        "predicate": "below",
+        "object": "e5",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e10",
+        "predicate": "near",
+        "object": "e5",
+        "confidence": 0.7
+      },
+      {
+        "subject": "e8",
+        "predicate": "right_of",
+        "object": "e3",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e9",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e11",
+        "predicate": "in_front_of",
+        "object": "e4",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e2",
+        "predicate": "below",
+        "object": "e7",
+        "confidence": 0.97
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 15,
+      "count_confidence": 0.55,
+      "faces_visible": false,
+      "activities": [
+        "sitting on grass",
+        "lying on grass",
+        "walking near lake"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people is uncertain due to small size and distance",
+      "Text on distant building facades and billboards is illegible and cannot be read",
+      "Specific identities, functions or names of buildings cannot be determined",
+      "Exact time of day beyond daytime and weather conditions beyond overcast cannot be determined",
+      "Details of vehicles or small objects in the distance are not discernible"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 15,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:17:11+00:00",
+        "raw_output_path": "data/annotations/raw/park_014_attempt1.txt",
+        "tokens": 6311
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

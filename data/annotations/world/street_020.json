@@ -1,0 +1,378 @@
+{
+  "photo_id": "street_020",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_020.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Koinange_Street,_2025_(02).jpg",
+    "title": "File:Koinange Street, 2025 (02).jpg"
+  },
+  "observed": {
+    "caption": "A wide urban street lined with tall buildings and trees, with cars driving and parked along both sides and a few people crossing the road under an overcast sky.",
+    "description": "The photo shows a wide asphalt street extending into the distance, flanked on both sides by multi-story buildings with many windows and by mature trees with green foliage. Several vehicles are visible, including a black SUV in the left foreground driving away and a white hatchback in the center lane, with rows of parked cars along both curbs. A few small human figures are walking on the road and sidewalks. On the right side a red and white billboard is mounted on a pole next to a tree, and commercial buildings with signage line the street. The sky above is pale and overcast, and the lighting is diffused daylight.",
+    "retrieval_queries": [
+      "wide city street with tall buildings and cars parked on both sides",
+      "urban road with trees and a billboard that says book these spaces",
+      "overcast downtown street with people crossing and traffic"
+    ],
+    "tags": [
+      "street",
+      "urban",
+      "city",
+      "buildings",
+      "cars",
+      "trees",
+      "road",
+      "billboard",
+      "overcast"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast",
+      "lighting": "diffused overcast daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "vehicles driving and parked, people walking and crossing street"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "down the street toward distant buildings",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "urban street with buildings and traffic"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "tall beige building on left",
+        "category": "building",
+        "attributes": [
+          "multi-story",
+          "beige facade",
+          "many windows"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left background",
+        "evidence": "vertical structure with rows of windows along left edge of image",
+        "confidence": 0.95
+      },
+      {
+        "id": "e2",
+        "label": "large leafy tree on left sidewalk",
+        "category": "plant",
+        "attributes": [
+          "green foliage",
+          "thick trunk",
+          "tall"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left foreground",
+        "evidence": "tree with dense leaves in front of left building, trunk near sidewalk",
+        "confidence": 0.95
+      },
+      {
+        "id": "e3",
+        "label": "red and white striped building in center distance",
+        "category": "building",
+        "attributes": [
+          "cylindrical shape",
+          "red and white horizontal stripes",
+          "multi-story"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center background",
+        "evidence": "distinctive building with red and white pattern visible down the street",
+        "confidence": 0.9
+      },
+      {
+        "id": "e4",
+        "label": "paved urban street",
+        "category": "terrain",
+        "attributes": [
+          "asphalt",
+          "wide",
+          "lined with parked cars"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center foreground to background",
+        "evidence": "road stretching from foreground to horizon with vehicles on it",
+        "confidence": 0.98
+      },
+      {
+        "id": "e5",
+        "label": "black SUV driving on left",
+        "category": "vehicle",
+        "attributes": [
+          "black",
+          "SUV",
+          "rear lights on"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left foreground on street",
+        "evidence": "black vehicle with visible rear and yellow license plate moving away from camera",
+        "confidence": 0.95
+      },
+      {
+        "id": "e6",
+        "label": "white hatchback in middle of street",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "small",
+          "hatchback"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center middle distance on street",
+        "evidence": "white car driving away from camera in center lane",
+        "confidence": 0.9
+      },
+      {
+        "id": "e7",
+        "label": "parked cars along both sides of street",
+        "category": "vehicle",
+        "attributes": [
+          "various colors",
+          "stationary",
+          "lined along curb"
+        ],
+        "count": 10,
+        "salience": 3,
+        "position": "both sides of street",
+        "evidence": "rows of vehicles parked along left and right curbs",
+        "confidence": 0.85
+      },
+      {
+        "id": "e8",
+        "label": "people walking on street and sidewalks",
+        "category": "person_group",
+        "attributes": [
+          "walking",
+          "crossing street",
+          "general clothing"
+        ],
+        "count": 7,
+        "salience": 3,
+        "position": "center and right side of street",
+        "evidence": "several small human figures walking on road and sidewalks",
+        "confidence": 0.65
+      },
+      {
+        "id": "e9",
+        "label": "red and white billboard sign on right",
+        "category": "sign",
+        "attributes": [
+          "rectangular",
+          "red border",
+          "white background",
+          "black text"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right middle, attached to pole",
+        "evidence": "vertical sign with text BOOK THESE SPACES mounted on pole",
+        "confidence": 0.95
+      },
+      {
+        "id": "e10",
+        "label": "multi-story building on right with green trim",
+        "category": "building",
+        "attributes": [
+          "beige facade",
+          "green trim",
+          "many windows",
+          "commercial"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right background",
+        "evidence": "building with rows of windows and signage along right edge",
+        "confidence": 0.9
+      },
+      {
+        "id": "e11",
+        "label": "tall tree on right sidewalk",
+        "category": "plant",
+        "attributes": [
+          "thin trunk",
+          "green foliage",
+          "tall"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right foreground",
+        "evidence": "tree with sparse leaves next to billboard pole on right sidewalk",
+        "confidence": 0.9
+      },
+      {
+        "id": "e12",
+        "label": "overcast sky",
+        "category": "terrain",
+        "attributes": [
+          "cloudy",
+          "gray-white",
+          "diffused light"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top center background",
+        "evidence": "pale sky visible between buildings",
+        "confidence": 0.95
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e8",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.7
+      },
+      {
+        "subject": "e2",
+        "predicate": "left_of",
+        "object": "e4",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e11",
+        "predicate": "right_of",
+        "object": "e4",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e1",
+        "predicate": "behind",
+        "object": "e2",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e10",
+        "predicate": "behind",
+        "object": "e11",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e9",
+        "predicate": "beside",
+        "object": "e11",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e3",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e7",
+        "predicate": "beside",
+        "object": "e4",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "BOOK THESE SPACES 0725 654 385 sales@rudgim-signage.co.ke",
+        "language": "en",
+        "entity_id": "e9",
+        "location_in_image": "on red and white billboard on right side attached to pole",
+        "legibility": "clear",
+        "confidence": 0.95
+      },
+      {
+        "text": "CONSOLIDATED BANK HO",
+        "language": "en",
+        "entity_id": "e10",
+        "location_in_image": "upper facade of building on right side, cut off by image edge",
+        "legibility": "partial",
+        "confidence": 0.8
+      },
+      {
+        "text": "Consolidated Bank",
+        "language": "en",
+        "entity_id": "e10",
+        "location_in_image": "on awning of building on lower right sidewalk",
+        "legibility": "clear",
+        "confidence": 0.85
+      },
+      {
+        "text": "RESERVED PARKING",
+        "language": "en",
+        "entity_id": null,
+        "location_in_image": "on small green sign on right sidewalk near curb",
+        "legibility": "clear",
+        "confidence": 0.75
+      }
+    ],
+    "people": {
+      "count": 7,
+      "count_confidence": 0.6,
+      "faces_visible": false,
+      "activities": [
+        "walking across street",
+        "walking on sidewalk"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people in the far distance is unclear due to small size and blur",
+      "Text on blue storefront signs on the left side is blurry and less than 3 letters are clearly readable, so it is omitted",
+      "Full text of the upper right building sign is cut off by the image edge beyond HO",
+      "Make, model and exact color of distant parked cars cannot be determined",
+      "Exact time of day beyond daytime overcast cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 7,
+    "license_plates_visible": true,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:21:49+00:00",
+        "raw_output_path": "data/annotations/raw/street_020_attempt1.txt",
+        "tokens": 10068
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'CONSOLIDATED BANK HO'"
+      ]
+    }
+  }
+}

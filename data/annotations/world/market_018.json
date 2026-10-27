@@ -1,0 +1,354 @@
+{
+  "photo_id": "market_018",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_018.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Queen Asali",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Nairobi_City_Market.jpg",
+    "title": "File:Nairobi City Market.jpg"
+  },
+  "observed": {
+    "caption": "Colorful mural-covered Nairobi City Market building viewed across a busy street with vehicles and pedestrians in bright daylight.",
+    "description": "The central stepped building with a large multicolored mural and signs reading NAIROBI CITY COUNTY and CITY MARKET dominates the center, flanked by a tall multi-story building on the left and smaller high-rises in the background. In the foreground a paved street and median separate the viewer from the market, with a motorcycle carrying two riders in the center, a black sedan on the left, white and silver cars parked along the curb on the right, and several pedestrians walking on sidewalks and crossing the street. Storefront banners are visible under the main building, the sky is bright with sun glare, and the overall scene shows urban street activity outside a market.",
+    "retrieval_queries": [
+      "colorful Nairobi City Market building with mural across street",
+      "Nairobi City County City Market street view with motorcycle and cars",
+      "mural painted market building in downtown Nairobi with traffic"
+    ],
+    "tags": [
+      "Nairobi City Market",
+      "mural building",
+      "street traffic",
+      "motorcycle",
+      "urban market",
+      "Kenya",
+      "city street",
+      "pedestrians"
+    ],
+    "scene": {
+      "type": "market",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "clear and bright",
+      "lighting": "bright daylight with sun glare",
+      "crowd_level": "moderate",
+      "activity_summary": "vehicles and pedestrians moving outside market"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the market building across the street",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "colorful Nairobi City Market building"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "Nairobi City County City Market building with mural",
+        "category": "building",
+        "attributes": [
+          "stepped facade",
+          "large multicolored mural",
+          "central",
+          "multi-story"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "large central building with stepped roofline, colorful mural covering facade, and CITY MARKET signage",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "tall multi-story building on left",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "rectangular",
+          "many windows",
+          "red and beige facade"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left",
+        "evidence": "high-rise with vertical rows of windows and red trim on left edge of image",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "motorcycle with two riders",
+        "category": "vehicle",
+        "attributes": [
+          "red motorcycle",
+          "two occupants",
+          "in motion",
+          "foreground"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground center",
+        "evidence": "motorcycle with driver in green helmet and high-visibility vest and passenger behind it on the road",
+        "confidence": 0.97
+      },
+      {
+        "id": "e4",
+        "label": "black sedan",
+        "category": "vehicle",
+        "attributes": [
+          "black",
+          "parked",
+          "left side"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left foreground",
+        "evidence": "dark sedan parked near sidewalk on left beside pedestrian",
+        "confidence": 0.92
+      },
+      {
+        "id": "e5",
+        "label": "white sedan",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "parked",
+          "center"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center",
+        "evidence": "white car parked along curb in front of market storefronts",
+        "confidence": 0.9
+      },
+      {
+        "id": "e6",
+        "label": "silver SUV",
+        "category": "vehicle",
+        "attributes": [
+          "silver",
+          "parked",
+          "right side"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right foreground",
+        "evidence": "light-colored SUV parked on right side of street near curb",
+        "confidence": 0.93
+      },
+      {
+        "id": "e7",
+        "label": "pedestrians on sidewalks and crossing",
+        "category": "person_group",
+        "attributes": [
+          "walking",
+          "standing",
+          "varied clothing",
+          "including high-visibility vest"
+        ],
+        "count": 9,
+        "salience": 3,
+        "position": "foreground and midground sidewalks",
+        "evidence": "multiple figures walking on sidewalks, crossing street, and standing near market entrances",
+        "confidence": 0.75
+      },
+      {
+        "id": "e8",
+        "label": "paved street and median",
+        "category": "terrain",
+        "attributes": [
+          "asphalt road",
+          "concrete median",
+          "curb"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "foreground",
+        "evidence": "road surface in lower third with raised median separating lanes",
+        "confidence": 0.95
+      },
+      {
+        "id": "e9",
+        "label": "background high-rise buildings",
+        "category": "building",
+        "attributes": [
+          "distant",
+          "modern",
+          "clustered"
+        ],
+        "count": 5,
+        "salience": 2,
+        "position": "background left and right",
+        "evidence": "several tall buildings visible behind and beside the market building against bright sky",
+        "confidence": 0.88
+      },
+      {
+        "id": "e10",
+        "label": "market storefronts and awnings",
+        "category": "structure",
+        "attributes": [
+          "ground floor",
+          "covered entrances",
+          "banners",
+          "commercial"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center below mural",
+        "evidence": "row of shops with awnings and hanging banners directly under the main mural building",
+        "confidence": 0.9
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e4",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "right_of",
+        "object": "e5",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e7",
+        "predicate": "near",
+        "object": "e1",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e8",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e10",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e9",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e8",
+        "confidence": 0.98
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "NAIROBI CITY COUNTY",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "center on facade above CITY MARKET",
+        "legibility": "clear",
+        "confidence": 0.98
+      },
+      {
+        "text": "CITY MARKET",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "center on facade below NAIROBI CITY COUNTY",
+        "legibility": "clear",
+        "confidence": 0.98
+      },
+      {
+        "text": "KENYA MEAT COMMISSION",
+        "language": "en",
+        "entity_id": "e10",
+        "location_in_image": "left storefront banner",
+        "legibility": "clear",
+        "confidence": 0.88
+      },
+      {
+        "text": "NYAMA HAVEN",
+        "language": "en",
+        "entity_id": "e10",
+        "location_in_image": "left storefront banner below KENYA MEAT COMMISSION",
+        "legibility": "clear",
+        "confidence": 0.88
+      },
+      {
+        "text": "Marrwa City RESTAURANT",
+        "language": "en",
+        "entity_id": "e10",
+        "location_in_image": "right storefront banner",
+        "legibility": "partial",
+        "confidence": 0.82
+      }
+    ],
+    "people": {
+      "count": 9,
+      "count_confidence": 0.72,
+      "faces_visible": false,
+      "activities": [
+        "walking on sidewalk",
+        "crossing street",
+        "riding motorcycle",
+        "standing near market entrance"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of pedestrians due to occlusion, distance and grouping near market entrances",
+      "Text on small awnings reading KMC RESTAURANT and other distant banners is blurry and not fully legible",
+      "Text at top of left tall building is cut off by image edge and partially overexposed",
+      "Vehicle license plates, makes and models cannot be determined",
+      "Weather and exact time of day beyond bright daylight with strong sun glare"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 9,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:15:04+00:00",
+        "raw_output_path": "data/annotations/raw/market_018_attempt1.txt",
+        "tokens": 9161
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'Marrwa City RESTAURANT'"
+      ]
+    }
+  }
+}

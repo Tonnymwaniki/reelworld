@@ -1,0 +1,354 @@
+{
+  "photo_id": "park_024",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_024.jpg",
+    "license": "CC BY 4.0",
+    "author": "AEira-WMF",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Uhuru_Park_in_Nairobi,_Kenya,_during_sunset.jpg",
+    "title": "File:Uhuru Park in Nairobi, Kenya, during sunset.jpg"
+  },
+  "observed": {
+    "caption": "A wide view of a grassy urban park with ponds and scattered people in the foreground and a cluster of modern high-rise buildings in the background under a pale sky.",
+    "description": "In the foreground a grassy area with patches of dirt, rocks, and small plants slopes down to a wide dirt path where several small figures are walking and a group sits on the grass to the left. Beyond the path are two small ponds with green footbridges, surrounded by mown lawns, trees, and two small white buildings with turquoise trim on the right. A dark lamppost and a palm tree stand on the right side near the path, and a large leafy tree fills the left edge. In the midground an elevated roadway stretches horizontally behind the park, lined with trees and lower buildings. The background is dominated by several tall skyscrapers of varying designs, including a brown reflective tower on the right, twin blue-glass towers in the center, and a cylindrical tower on the left, all lit by warm daylight under a pale blue sky with light clouds.",
+    "retrieval_queries": [
+      "city skyline behind a park with ponds and people walking",
+      "urban park with grass and water and tall buildings in the distance",
+      "wide view of downtown high rises seen from a green park at sunset"
+    ],
+    "tags": [
+      "park",
+      "city skyline",
+      "pond",
+      "skyscrapers",
+      "urban park",
+      "grass",
+      "walking path",
+      "palm trees"
+    ],
+    "scene": {
+      "type": "park",
+      "setting": "outdoor",
+      "time_of_day": "evening",
+      "weather": "clear",
+      "lighting": "natural daylight with warm late-afternoon light",
+      "crowd_level": "sparse",
+      "activity_summary": "people sitting and walking in park with city skyline beyond"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "raised",
+      "facing": "toward city skyline across park",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "park with ponds and distant skyline"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "large leafy tree",
+        "category": "plant",
+        "attributes": [
+          "dense green foliage",
+          "tall"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left edge, foreground to midground",
+        "evidence": "large dark green tree canopy occupying left border of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "grassy park with ponds and bridges",
+        "category": "terrain",
+        "attributes": [
+          "green lawn",
+          "two ponds",
+          "small green bridges",
+          "scattered trees"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center, midground",
+        "evidence": "expansive green area with water bodies and bridges between foreground path and distant roadway",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "dirt pathway and open ground",
+        "category": "terrain",
+        "attributes": [
+          "brown dirt",
+          "wide",
+          "puddles"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-foreground",
+        "evidence": "broad brown dirt area stretching horizontally across lower third with people walking on it",
+        "confidence": 0.95
+      },
+      {
+        "id": "e4",
+        "label": "group of people in park",
+        "category": "person_group",
+        "attributes": [
+          "small distant figures",
+          "sitting on grass",
+          "walking on path"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-left and center, foreground",
+        "evidence": "several small figures on grass and on dirt path, some sitting, some walking",
+        "confidence": 0.75
+      },
+      {
+        "id": "e5",
+        "label": "small white buildings with turquoise trim",
+        "category": "building",
+        "attributes": [
+          "white walls",
+          "turquoise roof trim",
+          "single story"
+        ],
+        "count": 2,
+        "salience": 3,
+        "position": "right midground, near park edge",
+        "evidence": "two small rectangular buildings with white walls and turquoise edges beside grass near right side",
+        "confidence": 0.92
+      },
+      {
+        "id": "e6",
+        "label": "tall brown reflective skyscraper",
+        "category": "building",
+        "attributes": [
+          "brown glass facade",
+          "rectangular",
+          "tall",
+          "antenna on roof"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "right background",
+        "evidence": "dominant tall brown glass tower on right side of skyline reflecting light",
+        "confidence": 0.98
+      },
+      {
+        "id": "e7",
+        "label": "twin blue-glass high-rise towers",
+        "category": "building",
+        "attributes": [
+          "blue glass",
+          "pointed tops",
+          "two connected towers"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center background",
+        "evidence": "pair of modern blue-glass towers with angular tops in center of skyline",
+        "confidence": 0.97
+      },
+      {
+        "id": "e8",
+        "label": "cylindrical tower with helipad",
+        "category": "building",
+        "attributes": [
+          "cylindrical",
+          "brown",
+          "flat top with structure"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left background",
+        "evidence": "round tall building with flat top on left side of skyline",
+        "confidence": 0.96
+      },
+      {
+        "id": "e9",
+        "label": "lamppost with streetlight",
+        "category": "structure",
+        "attributes": [
+          "tall black pole",
+          "light fixture",
+          "wires attached"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right foreground",
+        "evidence": "tall black lamppost with light arm standing beside palm tree on right",
+        "confidence": 0.93
+      },
+      {
+        "id": "e10",
+        "label": "palm tree in right foreground",
+        "category": "plant",
+        "attributes": [
+          "slender trunk",
+          "palm fronds",
+          "green"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right foreground",
+        "evidence": "palm tree with visible fronds standing near lamppost on right",
+        "confidence": 0.95
+      },
+      {
+        "id": "e11",
+        "label": "rocky outcrop and grass in immediate foreground",
+        "category": "terrain",
+        "attributes": [
+          "gray rocks",
+          "green grass",
+          "small shrubs"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom center, immediate foreground",
+        "evidence": "cluster of gray rocks with grass and small plants at bottom edge closest to camera",
+        "confidence": 0.94
+      },
+      {
+        "id": "e12",
+        "label": "elevated roadway or overpass",
+        "category": "structure",
+        "attributes": [
+          "long horizontal",
+          "concrete",
+          "spanning midground"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center midground, behind park",
+        "evidence": "long elevated road structure running horizontally behind trees and park area",
+        "confidence": 0.88
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "in_front_of",
+        "object": "e2",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.75
+      },
+      {
+        "subject": "e6",
+        "predicate": "right_of",
+        "object": "e7",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e8",
+        "predicate": "left_of",
+        "object": "e7",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e10",
+        "predicate": "right_of",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e9",
+        "predicate": "beside",
+        "object": "e10",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e11",
+        "predicate": "in_front_of",
+        "object": "e3",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e12",
+        "predicate": "behind",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e5",
+        "predicate": "near",
+        "object": "e10",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e2",
+        "predicate": "in_front_of",
+        "object": "e12",
+        "confidence": 0.88
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 8,
+      "count_confidence": 0.65,
+      "faces_visible": false,
+      "activities": [
+        "sitting on grass",
+        "walking on dirt path",
+        "standing"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people in the distant group on the grass cannot be determined due to distance and resolution",
+      "Text or signage on distant high-rise buildings is not legible and cannot be transcribed",
+      "Specific clothing details, ages, or genders of individuals are not discernible",
+      "Exact time of day and weather conditions beyond clear daylight cannot be confirmed",
+      "Details of vehicles or activity on the distant elevated roadway are not visible"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 8,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:18:23+00:00",
+        "raw_output_path": "data/annotations/raw/park_024_attempt1.txt",
+        "tokens": 6470
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

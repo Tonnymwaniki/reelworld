@@ -1,0 +1,293 @@
+{
+  "photo_id": "cbd_016",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/cbd/cbd_016.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Photograph by Mike Peel (www.mikepeel.net).",
+    "source_url": "https://commons.wikimedia.org/wiki/File:At_Nairobi_National_Museum_2025_127.jpg",
+    "title": "File:At Nairobi National Museum 2025 127.jpg"
+  },
+  "observed": {
+    "caption": "A detailed scale model of a town with roads, buildings, trees, a river and a train is displayed inside a glass case.",
+    "description": "A large detailed scale model of a town is displayed inside a transparent glass case resting on a parquet wooden floor, showing a network of gray roads and roundabouts, numerous miniature buildings with red, brown, blue, white and green roofs, patches of green and small dark trees representing parks and vegetation, a winding blue strip representing a river along the right side, a railway track with a white train and blue car along the bottom edge, and small light-colored vehicles arranged in central parking areas, with reflections and glare visible on the glass surfaces and a herringbone-patterned wooden floor in the background.",
+    "retrieval_queries": [
+      "aerial view of a miniature town model in a glass display case",
+      "architectural scale model of a city with red roofs roads and train tracks",
+      "diorama of a planned town with buildings trees and river on display indoors"
+    ],
+    "tags": [
+      "scale model",
+      "miniature town",
+      "architectural model",
+      "diorama",
+      "glass display case",
+      "urban planning model"
+    ],
+    "scene": {
+      "type": "other",
+      "setting": "indoor",
+      "time_of_day": "unknown",
+      "weather": "unknown",
+      "lighting": "even indoor artificial light with glass reflections",
+      "crowd_level": "empty",
+      "activity_summary": "display of architectural scale model"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "raised",
+      "facing": "down at the scale model",
+      "distance": "close",
+      "framing": "medium",
+      "orientation": "landscape",
+      "subject_focus": "scale model of town in glass case"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "scale model of town",
+        "category": "structure",
+        "attributes": [
+          "detailed",
+          "multicolored",
+          "miniature"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "large detailed miniature town with buildings roads trees and river filling the display case",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "glass display case",
+        "category": "structure",
+        "attributes": [
+          "transparent",
+          "rectangular",
+          "reflective"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center, enclosing model",
+        "evidence": "clear glass walls and reflections surrounding the model on all sides",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "miniature buildings with red roofs",
+        "category": "building",
+        "attributes": [
+          "small-scale",
+          "red-roofed",
+          "clustered"
+        ],
+        "count": 25,
+        "salience": 4,
+        "position": "throughout model, left and center",
+        "evidence": "numerous small structures with bright red roofs scattered across the model",
+        "confidence": 0.94
+      },
+      {
+        "id": "e4",
+        "label": "miniature buildings with light and brown roofs",
+        "category": "building",
+        "attributes": [
+          "small-scale",
+          "varied roof colors",
+          "scattered"
+        ],
+        "count": 30,
+        "salience": 3,
+        "position": "throughout model, bottom and right",
+        "evidence": "numerous small structures with white, brown, blue and green roofs across the model",
+        "confidence": 0.9
+      },
+      {
+        "id": "e5",
+        "label": "miniature road network",
+        "category": "structure",
+        "attributes": [
+          "gray",
+          "interconnected",
+          "with roundabouts"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "throughout model",
+        "evidence": "gray paved roads forming intersections and roundabouts connecting all areas of the model",
+        "confidence": 0.97
+      },
+      {
+        "id": "e6",
+        "label": "miniature trees and green areas",
+        "category": "plant",
+        "attributes": [
+          "small-scale",
+          "green",
+          "scattered"
+        ],
+        "count": 100,
+        "salience": 3,
+        "position": "throughout model, edges and parks",
+        "evidence": "small dark green tree models and green patches representing parks and vegetation",
+        "confidence": 0.93
+      },
+      {
+        "id": "e7",
+        "label": "miniature train on railway track",
+        "category": "vehicle",
+        "attributes": [
+          "small-scale",
+          "white with blue car",
+          "on curved track"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom center, along lower edge",
+        "evidence": "long white train with a blue car on a curved railway track along the lower edge of the model",
+        "confidence": 0.92
+      },
+      {
+        "id": "e8",
+        "label": "parquet wooden floor",
+        "category": "terrain",
+        "attributes": [
+          "herringbone pattern",
+          "brown",
+          "reflective"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "background, surrounding display case",
+        "evidence": "brown wooden floor with herringbone pattern visible through and around the glass case",
+        "confidence": 0.95
+      },
+      {
+        "id": "e9",
+        "label": "miniature vehicles in parking areas",
+        "category": "vehicle",
+        "attributes": [
+          "small-scale",
+          "white and yellow",
+          "parked"
+        ],
+        "count": 12,
+        "salience": 2,
+        "position": "center-bottom",
+        "evidence": "tiny bus-like vehicles arranged in two paved parking lots near the center of the model",
+        "confidence": 0.86
+      },
+      {
+        "id": "e10",
+        "label": "miniature river or water feature",
+        "category": "terrain",
+        "attributes": [
+          "narrow",
+          "blue",
+          "winding"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right side",
+        "evidence": "blue winding strip representing water running along the right edge with trees alongside",
+        "confidence": 0.88
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "inside",
+        "object": "e2",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e3",
+        "predicate": "inside",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e5",
+        "predicate": "inside",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e6",
+        "predicate": "inside",
+        "object": "e1",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e10",
+        "predicate": "inside",
+        "object": "e1",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e8",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e9",
+        "predicate": "inside",
+        "object": "e1",
+        "confidence": 0.86
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.99,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Geographic location or name of the town represented by the model cannot be determined",
+      "Scale, date, or maker of the model cannot be determined",
+      "Text on miniature signs or labels is not legible due to size and resolution",
+      "Materials used for the model cannot be determined",
+      "Reflections on the glass obscure some background details"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:08:21+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_016_attempt1.txt",
+        "tokens": 8683
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

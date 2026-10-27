@@ -1,0 +1,397 @@
+{
+  "photo_id": "landmarks_002",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/landmarks/landmarks_002.jpg",
+    "license": "CC BY-SA 2.0",
+    "author": "UNCTAD",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Checking_in_at_Kenyatta_International_Convention_Centre_(28304394372).jpg",
+    "title": "File:Checking in at Kenyatta International Convention Centre (28304394372).jpg"
+  },
+  "observed": {
+    "caption": "A man in a suit signs an open book on a wooden desk while five people stand around watching indoors.",
+    "description": "In an indoor room with a speckled stone wall, six people gather around a dark wooden desk in front of a white backdrop banner. One man in a dark suit and patterned tie is seated at the center leaning over an open book and writing with a pen, with eyeglasses and a white case beside him on the desk. Five other people stand behind and beside the desk observing, including a woman in a bright yellow, orange and black patterned jacket, two men in dark suits with ties, a partially cropped man at the far left edge, and a person in a blue military uniform with a peaked cap and gold braided cord. Two tall clear glass vases with floral arrangements sit on opposite ends of the desk, one with pink and white lilies on the left and one with white and yellow flowers on the right. A framed painting hangs on the wall to the right of the banner.",
+    "retrieval_queries": [
+      "man signing guest book while people watch indoors",
+      "official ceremony with UNCTAD banner in Nairobi",
+      "group standing around desk with flowers and military officer"
+    ],
+    "tags": [
+      "signing ceremony",
+      "guest book",
+      "UNCTAD banner",
+      "indoor gathering",
+      "military uniform",
+      "floral vases"
+    ],
+    "scene": {
+      "type": "building",
+      "setting": "indoor",
+      "time_of_day": "unknown",
+      "weather": "unknown",
+      "lighting": "indoor artificial even lighting",
+      "crowd_level": "sparse",
+      "activity_summary": "signing a guest book"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the group and backdrop banner",
+      "distance": "close",
+      "framing": "medium",
+      "orientation": "landscape",
+      "subject_focus": "man signing book at desk surrounded by onlookers"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "man signing book at desk",
+        "category": "person_group",
+        "attributes": [
+          "dark suit",
+          "red patterned tie",
+          "glasses",
+          "seated writing"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center foreground",
+        "evidence": "seated leaning over open book holding pen with both hands",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "standing man in dark suit with blue tie",
+        "category": "person_group",
+        "attributes": [
+          "dark suit",
+          "light shirt",
+          "blue tie",
+          "glasses",
+          "standing observing"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right foreground",
+        "evidence": "standing to right of desk looking down at book with hand extended",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "uniformed officer in blue military uniform",
+        "category": "person_group",
+        "attributes": [
+          "blue uniform",
+          "peaked cap with insignia",
+          "gold braided cord",
+          "standing"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right behind desk",
+        "evidence": "standing behind seated man wearing formal blue military attire with cap and gold aiguillette",
+        "confidence": 0.98
+      },
+      {
+        "id": "e4",
+        "label": "woman in colorful patterned jacket",
+        "category": "person_group",
+        "attributes": [
+          "multicolor geometric jacket in yellow orange black",
+          "black pants",
+          "standing",
+          "badge lanyard"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left-center behind desk",
+        "evidence": "standing behind desk wearing bright patterned jacket looking toward book",
+        "confidence": 0.97
+      },
+      {
+        "id": "e5",
+        "label": "man in dark suit with patterned tie",
+        "category": "person_group",
+        "attributes": [
+          "dark suit",
+          "white shirt",
+          "red patterned tie",
+          "glasses",
+          "standing smiling"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left behind desk",
+        "evidence": "standing to left of woman smiling toward center",
+        "confidence": 0.96
+      },
+      {
+        "id": "e6",
+        "label": "partially visible man in dark suit with red tie",
+        "category": "person_group",
+        "attributes": [
+          "dark suit",
+          "red tie",
+          "partially cropped at edge",
+          "standing"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "far left edge",
+        "evidence": "only torso and arm visible at left edge of frame",
+        "confidence": 0.9
+      },
+      {
+        "id": "e7",
+        "label": "wooden desk",
+        "category": "object",
+        "attributes": [
+          "dark brown wood",
+          "curved front",
+          "polished surface"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center foreground",
+        "evidence": "large wooden table holding book and vases spanning lower frame",
+        "confidence": 0.99
+      },
+      {
+        "id": "e8",
+        "label": "open guest book",
+        "category": "object",
+        "attributes": [
+          "open pages",
+          "cream paper",
+          "hard cover",
+          "on desk"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center on desk",
+        "evidence": "open book with visible pages under man's hands and pen",
+        "confidence": 0.98
+      },
+      {
+        "id": "e9",
+        "label": "floral arrangement in glass vase on left",
+        "category": "plant",
+        "attributes": [
+          "pink lilies",
+          "white calla lilies",
+          "tall clear glass vase",
+          "green ribbon"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left on desk",
+        "evidence": "glass vase with pink and white flowers on left side of desk",
+        "confidence": 0.97
+      },
+      {
+        "id": "e10",
+        "label": "floral arrangement in glass vase on right",
+        "category": "plant",
+        "attributes": [
+          "white flowers",
+          "yellow flowers",
+          "tall clear glass vase",
+          "green ribbon"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right on desk",
+        "evidence": "glass vase with white and yellow flowers on right side of desk",
+        "confidence": 0.97
+      },
+      {
+        "id": "e11",
+        "label": "white backdrop banner with UNCTAD text",
+        "category": "sign",
+        "attributes": [
+          "white background",
+          "purple lettering",
+          "multicolor logo",
+          "text"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center background",
+        "evidence": "large white banner behind group with visible UNCTAD lettering and date line",
+        "confidence": 0.98
+      },
+      {
+        "id": "e12",
+        "label": "framed painting on wall",
+        "category": "object",
+        "attributes": [
+          "framed artwork",
+          "depicts figures with rifles",
+          "wooden frame",
+          "on right wall"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right background",
+        "evidence": "painting in wooden frame hanging on textured wall to right of banner",
+        "confidence": 0.92
+      },
+      {
+        "id": "e13",
+        "label": "eyeglasses on desk",
+        "category": "object",
+        "attributes": [
+          "eyeglasses",
+          "on desk surface",
+          "next to white case"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center-right on desk",
+        "evidence": "pair of glasses lying on desk beside book near white eyeglass case",
+        "confidence": 0.95
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "in_front_of",
+        "object": "e11",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e2",
+        "predicate": "right_of",
+        "object": "e3",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e4",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e5",
+        "predicate": "left_of",
+        "object": "e4",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e6",
+        "predicate": "left_of",
+        "object": "e5",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e8",
+        "predicate": "on",
+        "object": "e7",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e7",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e10",
+        "predicate": "on",
+        "object": "e7",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e13",
+        "predicate": "on",
+        "object": "e7",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e11",
+        "predicate": "behind",
+        "object": "e7",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e12",
+        "predicate": "right_of",
+        "object": "e11",
+        "confidence": 0.94
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "UNCTAD",
+        "language": "en",
+        "entity_id": "e11",
+        "location_in_image": "center background on white banner, upper line",
+        "legibility": "clear",
+        "confidence": 0.98
+      },
+      {
+        "text": "Nairobi, 17-22 July 20",
+        "language": "en",
+        "entity_id": "e11",
+        "location_in_image": "center background on white banner, below UNCTAD",
+        "legibility": "partial",
+        "confidence": 0.88
+      }
+    ],
+    "people": {
+      "count": 6,
+      "count_confidence": 0.98,
+      "faces_visible": true,
+      "activities": [
+        "signing book",
+        "standing observing"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Full year on banner is cut off by edge of banner and cannot be determined",
+      "Text on identification badges worn by standing individuals is not legible and is ignored per clothing text rule",
+      "Content of handwriting inside open book is not legible",
+      "Exact identities, names, or titles of individuals cannot be determined from image alone",
+      "Specific location of room beyond banner text is not visible"
+    ]
+  },
+  "privacy": {
+    "faces_visible": true,
+    "people_count": 6,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:11:37+00:00",
+        "raw_output_path": "data/annotations/raw/landmarks_002_attempt1.txt",
+        "tokens": 9515
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'Nairobi, 17-22 July 20'"
+      ]
+    }
+  }
+}

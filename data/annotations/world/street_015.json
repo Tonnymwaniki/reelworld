@@ -1,0 +1,303 @@
+{
+  "photo_id": "street_015",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_015.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Kenyatta_Avenue,_Nairobi,_2025_(06).jpg",
+    "title": "File:Kenyatta Avenue, Nairobi, 2025 (06).jpg"
+  },
+  "observed": {
+    "caption": "A wide tree-lined divided avenue with vehicles on the road, pedestrians on sidewalks, and tall buildings in the background under an overcast sky.",
+    "description": "A wide divided urban roadway with two carriageways separated by a paved central median extends into the distance, flanked on both sides by green metal fences and mature leafy trees. A red hatchback car and two motorcycles with riders travel on the left carriageway in the foreground, while additional vehicles are visible further down the road and white cars are parked along the right sidewalk. Groups of pedestrians are gathered and walking behind the fences on both sidewalks. Tall modern high-rise buildings with glass facades rise behind the trees on the left, with additional buildings visible in the far background. The sky is overcast and the lighting is diffuse daylight.",
+    "retrieval_queries": [
+      "tree lined city avenue with motorcycles and red car",
+      "wide divided urban street with tall buildings and green fences",
+      "overcast daytime view down a busy city boulevard with pedestrians"
+    ],
+    "tags": [
+      "urban avenue",
+      "divided street",
+      "tree lined road",
+      "city buildings",
+      "motorcycles",
+      "pedestrians"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast",
+      "lighting": "diffuse daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "vehicles driving and pedestrians walking"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "raised",
+      "facing": "down the avenue",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "tree-lined divided avenue"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "divided urban roadway",
+        "category": "structure",
+        "attributes": [
+          "two carriageways",
+          "asphalt surface",
+          "central median"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center and foreground",
+        "evidence": "two paved lanes separated by a median extending into distance",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "red hatchback car",
+        "category": "vehicle",
+        "attributes": [
+          "red color",
+          "rear view visible",
+          "yellow license plate"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left foreground on roadway",
+        "evidence": "red vehicle on left lane with visible taillights and plate",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "motorcycles with riders",
+        "category": "vehicle",
+        "attributes": [
+          "two motorcycles",
+          "riders wearing helmets",
+          "one rider in red jacket, one in high-visibility vest"
+        ],
+        "count": 2,
+        "salience": 4,
+        "position": "center-left on roadway",
+        "evidence": "two motorbikes traveling on road behind red car",
+        "confidence": 0.95
+      },
+      {
+        "id": "e4",
+        "label": "high-rise buildings",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "glass and concrete facades",
+          "multiple stories"
+        ],
+        "count": 4,
+        "salience": 4,
+        "position": "left background",
+        "evidence": "tall structures with windows rising behind trees on left",
+        "confidence": 0.97
+      },
+      {
+        "id": "e5",
+        "label": "mature leafy trees",
+        "category": "plant",
+        "attributes": [
+          "dense green foliage",
+          "tall trunks",
+          "lining both sides of street"
+        ],
+        "count": 15,
+        "salience": 5,
+        "position": "both sides of roadway",
+        "evidence": "rows of large trees with canopies along fences and sidewalks",
+        "confidence": 0.98
+      },
+      {
+        "id": "e6",
+        "label": "green metal roadside fences",
+        "category": "structure",
+        "attributes": [
+          "green painted metal",
+          "low barrier",
+          "with attached banners"
+        ],
+        "count": 2,
+        "salience": 3,
+        "position": "left and right edges of roadway",
+        "evidence": "green railings separating roadway from sidewalks",
+        "confidence": 0.96
+      },
+      {
+        "id": "e7",
+        "label": "paved central median",
+        "category": "structure",
+        "attributes": [
+          "narrow",
+          "paved with stones",
+          "raised curb"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center foreground",
+        "evidence": "strip dividing the two carriageways with worn paving",
+        "confidence": 0.94
+      },
+      {
+        "id": "e8",
+        "label": "pedestrians on sidewalks",
+        "category": "person_group",
+        "attributes": [
+          "multiple individuals",
+          "standing and walking",
+          "general clothing"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right and left sidewalks behind fences",
+        "evidence": "groups of people visible along sidewalks on both sides",
+        "confidence": 0.88
+      },
+      {
+        "id": "e9",
+        "label": "overcast sky",
+        "category": "other",
+        "attributes": [
+          "pale gray-white",
+          "cloudy",
+          "bright"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top center background",
+        "evidence": "bright sky visible between buildings and above trees",
+        "confidence": 0.95
+      },
+      {
+        "id": "e10",
+        "label": "parked white cars",
+        "category": "vehicle",
+        "attributes": [
+          "white color",
+          "parked",
+          "along curb"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "right side near sidewalk",
+        "evidence": "white vehicles parked beside green fence on right",
+        "confidence": 0.9
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e5",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e6",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e7",
+        "predicate": "inside",
+        "object": "e1",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e5",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e8",
+        "predicate": "behind",
+        "object": "e6",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e10",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e3",
+        "predicate": "behind",
+        "object": "e2",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 25,
+      "count_confidence": 0.6,
+      "faces_visible": false,
+      "activities": [
+        "riding motorcycles on roadway",
+        "walking on sidewalks",
+        "standing near fences"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of pedestrians is uncertain due to distance, occlusion by trees and fences, and small scale",
+      "Text on banners attached to green fences and on building storefronts is blurry and cut off, fewer than 3 consecutive letters are clearly legible",
+      "License plate characters on red car and other vehicles are not legible due to distance and blur",
+      "Specific location, city, street name, building names, and vehicle makes/models cannot be determined",
+      "Exact time of day and weather conditions beyond overcast appearance cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 25,
+    "license_plates_visible": true,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:21:10+00:00",
+        "raw_output_path": "data/annotations/raw/street_015_attempt1.txt",
+        "tokens": 7075
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

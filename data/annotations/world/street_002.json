@@ -1,0 +1,404 @@
+{
+  "photo_id": "street_002",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_002.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Masssly",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Early_morning_street_view_in_Nairobi,_Kenya.jpg",
+    "title": "File:Early morning street view in Nairobi, Kenya.jpg"
+  },
+  "observed": {
+    "caption": "A person walks down the center of a narrow urban street lined with parked vans and multi-story buildings at dawn.",
+    "description": "A paved street stretches into the distance between multi-story buildings on both sides, with a white Nissan pickup parked on the left curb near a discarded tire and a row of white and silver vans parked along the right curb. A single person wearing dark pants, a dark and light jacket, and white shoes walks toward the camera in the center of the road. Shopfronts and street lights are illuminated along both sides, with visible signs on building facades, and a tall building under construction is visible in the background under an overcast gray sky. The road surface is worn with scattered debris and faint lane markings.",
+    "retrieval_queries": [
+      "person walking down city street lined with parked white vans and buildings",
+      "early morning urban street with KOONE shopping mall sign and Nissan pickup",
+      "narrow street with green and beige buildings and vans parked on both sides"
+    ],
+    "tags": [
+      "street",
+      "urban",
+      "parked vans",
+      "buildings",
+      "person walking",
+      "city road",
+      "dawn",
+      "Nissan pickup"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "dawn",
+      "weather": "overcast",
+      "lighting": "dim natural light with artificial shop and street lights",
+      "crowd_level": "sparse",
+      "activity_summary": "person walking down street lined with parked vehicles"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "down the street toward distant buildings",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "portrait",
+      "subject_focus": "street with parked vehicles and walking person"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "person walking in street",
+        "category": "person_group",
+        "attributes": [
+          "single person",
+          "dark pants",
+          "dark and light jacket",
+          "white shoes",
+          "walking toward camera"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center, middle distance",
+        "evidence": "figure in center of road with legs in stride, wearing contrasting jacket and white shoes",
+        "confidence": 0.95
+      },
+      {
+        "id": "e2",
+        "label": "white Nissan pickup truck",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "pickup",
+          "parked on left curb",
+          "NISSAN on tailgate"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left, foreground",
+        "evidence": "white pickup with open bed parked at left curb, red NISSAN lettering visible on tailgate",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "silver van foreground right",
+        "category": "vehicle",
+        "attributes": [
+          "silver",
+          "van",
+          "parked on right curb",
+          "rear facing camera"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right, foreground",
+        "evidence": "large silver van parked at right curb closest to camera with visible rear windows and taillights",
+        "confidence": 0.97
+      },
+      {
+        "id": "e4",
+        "label": "row of parked vans along right side",
+        "category": "vehicle",
+        "attributes": [
+          "white and silver",
+          "multiple vans",
+          "parked in line"
+        ],
+        "count": 7,
+        "salience": 3,
+        "position": "right, middle to background",
+        "evidence": "line of white vans extending down right side of street into distance",
+        "confidence": 0.92
+      },
+      {
+        "id": "e5",
+        "label": "multi-story buildings on left side",
+        "category": "building",
+        "attributes": [
+          "multi-story",
+          "balconies",
+          "shopfronts on ground floor",
+          "beige and brown facades"
+        ],
+        "count": 3,
+        "salience": 4,
+        "position": "left, foreground to background",
+        "evidence": "tall buildings with balconies and closed shutters lining left side of street",
+        "confidence": 0.96
+      },
+      {
+        "id": "e6",
+        "label": "multi-story buildings on right side",
+        "category": "building",
+        "attributes": [
+          "multi-story",
+          "green facade",
+          "shopfronts on ground floor"
+        ],
+        "count": 2,
+        "salience": 4,
+        "position": "right, foreground to background",
+        "evidence": "green-painted multi-story buildings with windows and awnings lining right side of street",
+        "confidence": 0.96
+      },
+      {
+        "id": "e7",
+        "label": "asphalt street surface",
+        "category": "terrain",
+        "attributes": [
+          "paved",
+          "worn",
+          "scattered debris",
+          "faint lane markings"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center, foreground to background",
+        "evidence": "dark paved road occupying lower two-thirds of image extending to horizon",
+        "confidence": 0.99
+      },
+      {
+        "id": "e8",
+        "label": "discarded tire on left curb",
+        "category": "object",
+        "attributes": [
+          "black",
+          "rubber tire",
+          "lying on curb"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "left, foreground near curb",
+        "evidence": "black tire lying on edge of sidewalk next to street in lower left",
+        "confidence": 0.93
+      },
+      {
+        "id": "e9",
+        "label": "tall building under construction in background",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "dark",
+          "scaffolding",
+          "illuminated windows"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center, background",
+        "evidence": "dark high-rise with construction netting and lights visible at end of street",
+        "confidence": 0.88
+      },
+      {
+        "id": "e10",
+        "label": "blue sign on left building",
+        "category": "sign",
+        "attributes": [
+          "blue background",
+          "white text",
+          "rectangular"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left, above shopfront",
+        "evidence": "blue sign with white lettering mounted on left building facade above ground floor",
+        "confidence": 0.9
+      },
+      {
+        "id": "e11",
+        "label": "hanging sign for shopping mall in center",
+        "category": "sign",
+        "attributes": [
+          "white background",
+          "black text",
+          "rectangular",
+          "hanging over street"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center, middle distance above street",
+        "evidence": "white rectangular sign with black text suspended across left side of street reading KOONE SHOPPING MALL",
+        "confidence": 0.92
+      },
+      {
+        "id": "e12",
+        "label": "illuminated shopfronts and street lights",
+        "category": "structure",
+        "attributes": [
+          "bright lights",
+          "glare",
+          "open shops"
+        ],
+        "count": 4,
+        "salience": 2,
+        "position": "both sides, foreground to background",
+        "evidence": "bright white lights from shops and street lamps creating lens flare along both sides of street",
+        "confidence": 0.85
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e7",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e7",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e7",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e2",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e3",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e5",
+        "predicate": "left_of",
+        "object": "e7",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e6",
+        "predicate": "right_of",
+        "object": "e7",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e8",
+        "predicate": "beside",
+        "object": "e2",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e9",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e10",
+        "predicate": "above",
+        "object": "e2",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e11",
+        "predicate": "above",
+        "object": "e7",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e4",
+        "predicate": "beside",
+        "object": "e6",
+        "confidence": 0.92
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "SECUREREST HOUSE",
+        "language": "en",
+        "entity_id": "e10",
+        "location_in_image": "left building facade, blue sign above shop",
+        "legibility": "clear",
+        "confidence": 0.88
+      },
+      {
+        "text": "KOONE SHOPPING MALL",
+        "language": "en",
+        "entity_id": "e11",
+        "location_in_image": "center, hanging sign over street",
+        "legibility": "clear",
+        "confidence": 0.92
+      },
+      {
+        "text": "NISSAN",
+        "language": "en",
+        "entity_id": "e2",
+        "location_in_image": "rear tailgate of white pickup on left",
+        "legibility": "clear",
+        "confidence": 0.97
+      },
+      {
+        "text": "TONERS COKE",
+        "language": "en",
+        "entity_id": "e6",
+        "location_in_image": "right side, shop sign above parked vans",
+        "legibility": "partial",
+        "confidence": 0.75
+      },
+      {
+        "text": "MOSAIC",
+        "language": "en",
+        "entity_id": null,
+        "location_in_image": "center distance, red illuminated sign",
+        "legibility": "partial",
+        "confidence": 0.7
+      }
+    ],
+    "people": {
+      "count": 1,
+      "count_confidence": 0.95,
+      "faces_visible": false,
+      "activities": [
+        "walking down street toward camera"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact time of day cannot be determined from lighting alone, could be dawn or dusk",
+      "Text on distant and blurry signs and billboards is not legible enough to transcribe",
+      "License plate numbers are partially visible but blurry and not fully legible",
+      "Exact number of parked vehicles in distance is obscured by perspective and lighting",
+      "Text on smaller signs such as ALLS TO LET and other shop names is too blurry to read accurately",
+      "Whether the tall background building is under construction or completed cannot be confirmed"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 1,
+    "license_plates_visible": true,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:19:50+00:00",
+        "raw_output_path": "data/annotations/raw/street_002_attempt2.txt",
+        "tokens": 10826
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'TONERS COKE'",
+        "partially legible text: 'MOSAIC'"
+      ]
+    }
+  }
+}

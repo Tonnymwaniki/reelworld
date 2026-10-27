@@ -1,0 +1,381 @@
+{
+  "photo_id": "park_022",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_022.jpg",
+    "license": "CC0",
+    "author": "Francis Akuka for the Wikimedia Foundation",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Uhuru_Park_Nairobi_03.jpg",
+    "title": "File:Uhuru Park Nairobi 03.jpg"
+  },
+  "observed": {
+    "caption": "People gather around a small lake with a yellow pedal boat in an urban park with palm trees and a city skyline of tall buildings under a clear blue sky.",
+    "description": "In the foreground a calm lake reflects the sky with a yellow pedal boat with a green canopy carrying two people near the center. The grassy shoreline is lined with palm trees, leafy green trees and a prominent leafless tree, with numerous small figures of people walking, sitting on the grass and gathering in groups. A brown giraffe sculpture stands near the shore on the right. Behind the park an elevated highway overpass runs horizontally across the middle ground. The background skyline features a tall cylindrical tower with a flat disc top on the left, several mid-rise buildings in the center, and a modern glass twin tower with gold accents and a smaller clock tower in front of it on the right. The sky is clear and bright blue with strong daylight illumination.",
+    "retrieval_queries": [
+      "urban park with lake and yellow pedal boat and city skyline in background",
+      "people relaxing on grass by a pond with palm trees and tall skyscrapers behind",
+      "city park with cylindrical tower and modern glass buildings behind a lake"
+    ],
+    "tags": [
+      "urban park",
+      "city skyline",
+      "lake",
+      "pedal boat",
+      "palm trees",
+      "skyscrapers",
+      "daytime",
+      "outdoor recreation"
+    ],
+    "scene": {
+      "type": "park",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "clear and sunny",
+      "lighting": "bright natural daylight",
+      "crowd_level": "moderate",
+      "activity_summary": "people relaxing, walking and boating in park"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "across the lake toward the skyline",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "park lake with city skyline"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "cylindrical high-rise tower with disc top",
+        "category": "building",
+        "attributes": [
+          "cylindrical",
+          "striped facade",
+          "flat disc roof",
+          "tall"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "left background",
+        "evidence": "tall round building with horizontal bands and wide flat top on left side of skyline",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "modern glass twin towers with gold accents",
+        "category": "building",
+        "attributes": [
+          "glass facade",
+          "blue and gold",
+          "pointed tops",
+          "tall"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "right background",
+        "evidence": "two connected tall glass buildings with blue windows and gold vertical elements on right",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "clock tower building",
+        "category": "building",
+        "attributes": [
+          "light stone",
+          "clock face",
+          "rectangular",
+          "tower"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right background, in front of glass towers",
+        "evidence": "smaller light-colored tower with visible clock face in front of the glass towers",
+        "confidence": 0.95
+      },
+      {
+        "id": "e4",
+        "label": "lake",
+        "category": "terrain",
+        "attributes": [
+          "calm water",
+          "reflective",
+          "foreground"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground bottom",
+        "evidence": "body of water stretching across bottom of image with reflections and boat on it",
+        "confidence": 0.99
+      },
+      {
+        "id": "e5",
+        "label": "yellow pedal boat with green canopy",
+        "category": "vehicle",
+        "attributes": [
+          "yellow hull",
+          "green canopy",
+          "on water"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center foreground on lake",
+        "evidence": "small yellow boat with green roof floating on lake with people aboard",
+        "confidence": 0.97
+      },
+      {
+        "id": "e6",
+        "label": "palm trees",
+        "category": "plant",
+        "attributes": [
+          "green fronds",
+          "tall",
+          "clustered"
+        ],
+        "count": 3,
+        "salience": 4,
+        "position": "center foreground near shore",
+        "evidence": "cluster of tall palm trees with dense fronds near center shoreline",
+        "confidence": 0.96
+      },
+      {
+        "id": "e7",
+        "label": "giraffe sculpture",
+        "category": "object",
+        "attributes": [
+          "brown",
+          "tall",
+          "animal-shaped"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-right near shore",
+        "evidence": "tall brown giraffe-shaped figure standing among trees near the grassy bank",
+        "confidence": 0.88
+      },
+      {
+        "id": "e8",
+        "label": "elevated highway overpass",
+        "category": "structure",
+        "attributes": [
+          "concrete",
+          "horizontal",
+          "elevated"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "middle ground behind trees",
+        "evidence": "concrete bridge structure running horizontally behind the park trees",
+        "confidence": 0.94
+      },
+      {
+        "id": "e9",
+        "label": "grassy park area",
+        "category": "terrain",
+        "attributes": [
+          "green grass",
+          "open",
+          "shoreline"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground center to right",
+        "evidence": "green grassy bank along lake edge where people are gathered",
+        "confidence": 0.97
+      },
+      {
+        "id": "e10",
+        "label": "leafless dead tree",
+        "category": "plant",
+        "attributes": [
+          "bare branches",
+          "gray-brown",
+          "tall"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-right behind giraffe sculpture",
+        "evidence": "tall tree with no leaves and gnarled bare branches near center-right",
+        "confidence": 0.93
+      },
+      {
+        "id": "e11",
+        "label": "group of people",
+        "category": "person_group",
+        "attributes": [
+          "small figures",
+          "various clothing colors",
+          "walking and sitting"
+        ],
+        "count": 32,
+        "salience": 4,
+        "position": "foreground and middle ground along shore and paths",
+        "evidence": "numerous small human figures scattered along grass, paths and in boat",
+        "confidence": 0.85
+      },
+      {
+        "id": "e12",
+        "label": "sky",
+        "category": "other",
+        "attributes": [
+          "clear",
+          "light blue",
+          "cloudless"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "upper background",
+        "evidence": "large clear blue area occupying upper half of image above buildings",
+        "confidence": 0.99
+      },
+      {
+        "id": "e13",
+        "label": "mid-rise building with BANK signage",
+        "category": "building",
+        "attributes": [
+          "light facade",
+          "rectangular",
+          "sign on roof"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center background",
+        "evidence": "building in center with visible signage on top behind lower blue-roofed structures",
+        "confidence": 0.9
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e3",
+        "predicate": "in_front_of",
+        "object": "e2",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e6",
+        "predicate": "near",
+        "object": "e4",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e8",
+        "predicate": "behind",
+        "object": "e6",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e7",
+        "predicate": "beside",
+        "object": "e10",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e11",
+        "predicate": "on",
+        "object": "e9",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e9",
+        "predicate": "beside",
+        "object": "e4",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e10",
+        "predicate": "right_of",
+        "object": "e6",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e4",
+        "predicate": "in_front_of",
+        "object": "e8",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "CBA PENSION TOWERS",
+        "language": "en",
+        "entity_id": "e2",
+        "location_in_image": "on facade of tall glass building on right",
+        "legibility": "partial",
+        "confidence": 0.82
+      },
+      {
+        "text": "BANK",
+        "language": "en",
+        "entity_id": "e13",
+        "location_in_image": "on rooftop sign of mid-rise building in center background",
+        "legibility": "partial",
+        "confidence": 0.75
+      }
+    ],
+    "people": {
+      "count": 32,
+      "count_confidence": 0.62,
+      "faces_visible": false,
+      "activities": [
+        "walking along paths",
+        "sitting on grass",
+        "riding pedal boat",
+        "gathering in groups"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people is uncertain due to distance, occlusion by trees and small figure size",
+      "Full text on distant building signs is partially blurry and may contain additional words or logos not legible",
+      "Specific identities or names of buildings beyond visible signage cannot be determined",
+      "Details of people's clothing, ages or genders cannot be determined due to distance",
+      "Text on small or distant signs with fewer than 3 legible letters was omitted",
+      "Exact time of day beyond daytime and weather conditions beyond clear sky cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 32,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:19:19+00:00",
+        "raw_output_path": "data/annotations/raw/park_022_attempt2.txt",
+        "tokens": 9034
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'CBA PENSION TOWERS'",
+        "partially legible text: 'BANK'"
+      ]
+    }
+  }
+}

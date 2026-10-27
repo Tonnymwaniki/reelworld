@@ -1,0 +1,307 @@
+{
+  "photo_id": "hills_004",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_004.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Akash Pitrola",
+    "source_url": "https://commons.wikimedia.org/wiki/File:First_Hill.jpg",
+    "title": "File:First Hill.jpg"
+  },
+  "observed": {
+    "caption": "Aerial view of a lush green forested mountain ridge with a grassy trail under a partly cloudy sky.",
+    "description": "A long forested mountain ridge covered in dense green trees and vegetation extends into the distance, with a narrow grassy clearing and dirt trail running along its crest. Two small figures are visible walking on the grassy area. The ridge is surrounded by more forested slopes and a hazy distant plain is visible to the left under a pale blue sky with scattered white clouds. Sunlight illuminates the scene from above, casting soft shadows from the trees onto the grass.",
+    "retrieval_queries": [
+      "aerial view of green forested mountain ridge with hiking trail",
+      "lush mountain landscape with grassy hilltop and trees",
+      "drone photo of forested hill ridge under cloudy sky"
+    ],
+    "tags": [
+      "mountain ridge",
+      "forest",
+      "aerial view",
+      "grassland",
+      "hiking trail",
+      "landscape",
+      "green hills",
+      "clouds",
+      "nature",
+      "outdoor"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "natural daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "walking on mountain ridge"
+    },
+    "camera": {
+      "viewpoint": "aerial",
+      "height_estimate": "high",
+      "facing": "along the mountain ridge",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "forested mountain ridge"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "forested mountain ridge",
+        "category": "terrain",
+        "attributes": [
+          "long",
+          "elevated",
+          "densely vegetated",
+          "green"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "dominant landform extending from foreground to background covered in trees",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "grassy clearing on ridge crest",
+        "category": "terrain",
+        "attributes": [
+          "light green",
+          "open",
+          "grassy",
+          "elongated"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right",
+        "evidence": "open grassy area running along top of ridge contrasting with darker forest",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "dense green forest",
+        "category": "plant",
+        "attributes": [
+          "dense",
+          "dark green",
+          "lush",
+          "covering slopes"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center and left",
+        "evidence": "thick tree cover on both sides of the ridge",
+        "confidence": 0.98
+      },
+      {
+        "id": "e4",
+        "label": "dirt trail along ridge",
+        "category": "terrain",
+        "attributes": [
+          "narrow",
+          "brown",
+          "winding",
+          "bare earth"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-right, along ridge top",
+        "evidence": "thin brown path visible on grassy crest extending into distance",
+        "confidence": 0.85
+      },
+      {
+        "id": "e5",
+        "label": "distant plain and valley",
+        "category": "terrain",
+        "attributes": [
+          "hazy",
+          "flat",
+          "pale",
+          "expansive"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "left background",
+        "evidence": "flat hazy land visible beyond the forested slopes to the left",
+        "confidence": 0.9
+      },
+      {
+        "id": "e6",
+        "label": "group of people walking",
+        "category": "person_group",
+        "attributes": [
+          "small",
+          "distant",
+          "standing on grass"
+        ],
+        "count": 2,
+        "salience": 2,
+        "position": "center-right on grassy clearing",
+        "evidence": "two tiny dark figures on the grassy ridge",
+        "confidence": 0.65
+      },
+      {
+        "id": "e7",
+        "label": "sky",
+        "category": "other",
+        "attributes": [
+          "pale blue",
+          "bright",
+          "expansive"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top background",
+        "evidence": "sky visible above horizon and clouds",
+        "confidence": 0.95
+      },
+      {
+        "id": "e8",
+        "label": "white clouds",
+        "category": "other",
+        "attributes": [
+          "white",
+          "fluffy",
+          "scattered",
+          "low"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top center and background",
+        "evidence": "white cloud formations above ridge and near horizon",
+        "confidence": 0.93
+      },
+      {
+        "id": "e9",
+        "label": "distant mountain peak",
+        "category": "terrain",
+        "attributes": [
+          "rounded",
+          "forested",
+          "hazy",
+          "elevated"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center background",
+        "evidence": "higher rounded peak visible at far end of ridge",
+        "confidence": 0.88
+      },
+      {
+        "id": "e10",
+        "label": "scattered trees and shrubs",
+        "category": "plant",
+        "attributes": [
+          "small",
+          "green",
+          "clustered",
+          "on ridge edge"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "foreground bottom-right",
+        "evidence": "clumps of trees bordering the grassy area in the foreground",
+        "confidence": 0.9
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.7
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e8",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e5",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e9",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e10",
+        "predicate": "near",
+        "object": "e2",
+        "confidence": 0.85
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 2,
+      "count_confidence": 0.65,
+      "faces_visible": false,
+      "activities": [
+        "walking on grassy ridge"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people is uncertain due to small size and distance; additional figures may be obscured by vegetation or shadows",
+      "Exact geographic location and name of the mountain cannot be determined from the photo",
+      "Specific time of day beyond daytime and weather conditions beyond visible clouds cannot be determined",
+      "Details of clothing, age, or gender of the distant figures cannot be discerned",
+      "No legible text is visible on any sign or label; no signs with 3 or more readable letters are present"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 2,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:09:03+00:00",
+        "raw_output_path": "data/annotations/raw/hills_004_attempt1.txt",
+        "tokens": 5282
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

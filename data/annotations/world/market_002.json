@@ -1,0 +1,292 @@
+{
+  "photo_id": "market_002",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_002.jpg",
+    "license": "CC BY 4.0",
+    "author": "Ninaras",
+    "source_url": "https://commons.wikimedia.org/wiki/File:African_masks_in_Nairobi_01.jpg",
+    "title": "File:African masks in Nairobi 01.jpg"
+  },
+  "observed": {
+    "caption": "A dense overhead view of numerous carved wooden masks and small figurines arranged together on a dark surface.",
+    "description": "A large number of carved wooden masks in varying sizes, shapes, colors and patterns are densely arranged to fill the frame on a dark textured cloth. The masks show diverse carved features including closed eyes, open mouths, geometric triangle patterns, striped textures, and weathered surfaces in shades of dark brown, black, tan, beige and red with white accents. Interspersed among the masks are small wooden figurines depicting human forms, a carved torso with breasts near the center, an elephant-shaped carving on the right, and a small woven basket containing green and yellow beaded necklaces near the center-left. The display is viewed from directly above under natural daylight, with a light brown ground visible at the top right edge and a white sack partially visible in the upper right corner.",
+    "retrieval_queries": [
+      "overhead photo of many African tribal wooden masks for sale at market",
+      "collection of carved wooden face masks and figurines displayed on cloth",
+      "close up of assorted handmade tribal masks with different patterns and colors"
+    ],
+    "tags": [
+      "wooden masks",
+      "tribal art",
+      "carved figurines",
+      "handicrafts",
+      "market display"
+    ],
+    "scene": {
+      "type": "market",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "unknown",
+      "lighting": "natural daylight",
+      "crowd_level": "empty",
+      "activity_summary": "display of carved masks and handicrafts"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "raised",
+      "facing": "down at the mask display",
+      "distance": "close",
+      "framing": "close_up",
+      "orientation": "landscape",
+      "subject_focus": "collection of carved wooden masks"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "collection of carved wooden masks",
+        "category": "object",
+        "attributes": [
+          "dense arrangement",
+          "varied sizes and colors",
+          "filling frame"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center, filling frame",
+        "evidence": "dozens of distinct face masks covering most of image area",
+        "confidence": 0.99
+      },
+      {
+        "id": "e2",
+        "label": "round geometric-patterned mask with triangles",
+        "category": "object",
+        "attributes": [
+          "circular",
+          "red and beige triangle pattern",
+          "central vertical ridge"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left-center",
+        "evidence": "circular mask with repeating triangle motif and two eye holes left of center",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "red and white painted face mask",
+        "category": "object",
+        "attributes": [
+          "red and white paint",
+          "closed eyes",
+          "red lips"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center",
+        "evidence": "distinct red and white mask with painted grid on forehead below beaded necklaces",
+        "confidence": 0.98
+      },
+      {
+        "id": "e4",
+        "label": "dark brown wooden mask with closed eyes",
+        "category": "object",
+        "attributes": [
+          "dark brown",
+          "closed slit eyes",
+          "open mouth"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-right",
+        "evidence": "dark carved mask with narrow eye slits and open mouth to the right of center",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "small carved wooden human figurines",
+        "category": "object",
+        "attributes": [
+          "small",
+          "dark wood",
+          "human forms"
+        ],
+        "count": 8,
+        "salience": 3,
+        "position": "scattered throughout",
+        "evidence": "multiple small standing human figures interspersed among masks",
+        "confidence": 0.95
+      },
+      {
+        "id": "e6",
+        "label": "woven basket with beaded necklaces",
+        "category": "object",
+        "attributes": [
+          "woven",
+          "contains green and yellow beads",
+          "circular"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-left",
+        "evidence": "small woven container holding beaded strands next to red and white mask",
+        "confidence": 0.94
+      },
+      {
+        "id": "e7",
+        "label": "dark fabric ground covering",
+        "category": "object",
+        "attributes": [
+          "dark gray",
+          "textured",
+          "underneath masks"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "background, underneath",
+        "evidence": "dark cloth visible between and under all masks",
+        "confidence": 0.97
+      },
+      {
+        "id": "e8",
+        "label": "carved wooden torso sculpture",
+        "category": "object",
+        "attributes": [
+          "dark brown",
+          "torso with breasts",
+          "smooth"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center, slightly right",
+        "evidence": "dark wooden torso form with two breasts between masks near center",
+        "confidence": 0.96
+      },
+      {
+        "id": "e9",
+        "label": "light tan woven straw mask with slit eyes",
+        "category": "object",
+        "attributes": [
+          "light tan",
+          "woven texture",
+          "large slit eyes"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right side",
+        "evidence": "large light-colored mask with horizontal slit eyes and textured surface on right",
+        "confidence": 0.95
+      },
+      {
+        "id": "e10",
+        "label": "elephant-shaped wooden carving",
+        "category": "object",
+        "attributes": [
+          "dark wood",
+          "elephant form",
+          "small human figure on top"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right-center",
+        "evidence": "small carving with elephant ears and trunk near right side among masks",
+        "confidence": 0.92
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e7",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e2",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e6",
+        "predicate": "beside",
+        "object": "e3",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e8",
+        "predicate": "right_of",
+        "object": "e3",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e4",
+        "predicate": "right_of",
+        "object": "e8",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e9",
+        "predicate": "right_of",
+        "object": "e4",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e5",
+        "predicate": "near",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e10",
+        "predicate": "beside",
+        "object": "e9",
+        "confidence": 0.88
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.99,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact geographic location and market name cannot be determined from the photo",
+      "Materials, age, and cultural origin of individual masks cannot be determined from image alone",
+      "Whether items are for sale, exhibition, or storage cannot be confirmed beyond visual arrangement",
+      "Any small markings or text on masks are not legible enough to read at least 3 letters",
+      "Time of day and weather conditions beyond natural daylight cannot be determined precisely"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:12:52+00:00",
+        "raw_output_path": "data/annotations/raw/market_002_attempt1.txt",
+        "tokens": 7348
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

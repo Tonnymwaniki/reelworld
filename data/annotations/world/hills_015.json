@@ -1,0 +1,369 @@
+{
+  "photo_id": "hills_015",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_015.jpg",
+    "license": "CC0",
+    "author": "safaritravelplus",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ngong_Hills_Photo.jpg",
+    "title": "File:Ngong Hills Photo.jpg"
+  },
+  "observed": {
+    "caption": "Wind turbines and communication towers stand on a grassy hilltop under a partly cloudy sky with a dirt road and small groups of people below.",
+    "description": "A wide outdoor landscape shows a grassy hilltop with several tall white wind turbines with three blades each positioned along the ridge, and multiple lattice communication towers of varying heights scattered across the hill. A winding dirt road cuts through the green and brown grassy terrain in the midground, with a white car on the road and a white van parked on the hillside below. Small groups of people are visible near the road and near the van, appearing as dark figures due to distance. Wooden utility poles line the left side of the hill, and small low buildings sit near the base of the largest communication tower. The sky above is blue with scattered white clouds, and the foreground consists of dry reddish-brown earth and patches of grass.",
+    "retrieval_queries": [
+      "wind turbines on a grassy hill with communication towers",
+      "hilltop wind farm with dirt road and people walking",
+      "grassy landscape with windmills and cell towers under cloudy sky"
+    ],
+    "tags": [
+      "wind turbine",
+      "hilltop",
+      "communication tower",
+      "grassy hill",
+      "dirt road",
+      "outdoor landscape"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "natural daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "people walking and gathering near hilltop turbines"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward hilltop with turbines",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "wind turbines and towers on hilltop"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "wind turbine foreground",
+        "category": "structure",
+        "attributes": [
+          "tall",
+          "white",
+          "three blades",
+          "prominent"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "large white tower with three dark blades in center of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "wind turbines background group",
+        "category": "structure",
+        "attributes": [
+          "white",
+          "three blades",
+          "distant",
+          "multiple"
+        ],
+        "count": 4,
+        "salience": 4,
+        "position": "center-right to background",
+        "evidence": "four additional white turbines receding along hill ridge to the right",
+        "confidence": 0.95
+      },
+      {
+        "id": "e3",
+        "label": "tall communication tower",
+        "category": "structure",
+        "attributes": [
+          "lattice",
+          "tall",
+          "metal",
+          "with antennas"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left",
+        "evidence": "tall lattice tower with multiple antenna arrays on left hillside",
+        "confidence": 0.97
+      },
+      {
+        "id": "e4",
+        "label": "smaller communication towers",
+        "category": "structure",
+        "attributes": [
+          "lattice",
+          "metal",
+          "distant"
+        ],
+        "count": 3,
+        "salience": 3,
+        "position": "center-left to center",
+        "evidence": "three smaller lattice towers visible behind the main hill ridge",
+        "confidence": 0.9
+      },
+      {
+        "id": "e5",
+        "label": "grassy hillside terrain",
+        "category": "terrain",
+        "attributes": [
+          "grassy",
+          "sloped",
+          "green and brown",
+          "dry patches"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground and midground",
+        "evidence": "rolling hill covered in green grass and reddish-brown earth extending across image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e6",
+        "label": "dirt road",
+        "category": "terrain",
+        "attributes": [
+          "unpaved",
+          "winding",
+          "light brown"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-left",
+        "evidence": "light brown dirt track winding up the hill",
+        "confidence": 0.95
+      },
+      {
+        "id": "e7",
+        "label": "white car on road",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "small",
+          "on dirt road"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-left",
+        "evidence": "small white vehicle on the dirt road mid-hill",
+        "confidence": 0.88
+      },
+      {
+        "id": "e8",
+        "label": "white van parked on hillside",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "parked",
+          "on grass"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center",
+        "evidence": "white van parked on grassy slope below turbines",
+        "confidence": 0.85
+      },
+      {
+        "id": "e9",
+        "label": "group of people walking on road",
+        "category": "person_group",
+        "attributes": [
+          "small figures",
+          "dark clothing",
+          "walking"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center-left",
+        "evidence": "several small dark figures walking on dirt road below white car",
+        "confidence": 0.7
+      },
+      {
+        "id": "e10",
+        "label": "group of people near van",
+        "category": "person_group",
+        "attributes": [
+          "small figures",
+          "gathered",
+          "sitting or standing"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center",
+        "evidence": "small figures clustered on grass near white van",
+        "confidence": 0.65
+      },
+      {
+        "id": "e11",
+        "label": "sky with scattered clouds",
+        "category": "other",
+        "attributes": [
+          "blue",
+          "partly cloudy",
+          "bright"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "background upper",
+        "evidence": "blue sky with white and gray clouds covering upper portion of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e12",
+        "label": "wooden utility poles",
+        "category": "structure",
+        "attributes": [
+          "wooden",
+          "with wires",
+          "leaning"
+        ],
+        "count": 2,
+        "salience": 2,
+        "position": "left",
+        "evidence": "two wooden poles with cross arms and wires on left slope",
+        "confidence": 0.85
+      },
+      {
+        "id": "e13",
+        "label": "small low buildings",
+        "category": "building",
+        "attributes": [
+          "low",
+          "rectangular",
+          "near tower base"
+        ],
+        "count": 2,
+        "salience": 2,
+        "position": "left-center",
+        "evidence": "small flat-roofed structures at base of tall communication tower",
+        "confidence": 0.8
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e3",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e6",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e6",
+        "confidence": 0.75
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e5",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e5",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e8",
+        "predicate": "on",
+        "object": "e5",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e12",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e13",
+        "predicate": "near",
+        "object": "e3",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e2",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e10",
+        "predicate": "near",
+        "object": "e8",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e5",
+        "predicate": "below",
+        "object": "e11",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e4",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.85
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 7,
+      "count_confidence": 0.6,
+      "faces_visible": false,
+      "activities": [
+        "walking on dirt road",
+        "gathering near parked van on hillside"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "exact number of people due to small size and distance",
+      "text or logos on wind turbine nacelles not legible",
+      "vehicle makes and models",
+      "exact count of distant turbines and towers in far background",
+      "purpose of small buildings near communication tower"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 7,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:10:03+00:00",
+        "raw_output_path": "data/annotations/raw/hills_015_attempt1.txt",
+        "tokens": 5547
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

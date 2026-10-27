@@ -1,0 +1,313 @@
+{
+  "photo_id": "hills_019",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_019.jpg",
+    "license": "CC BY-SA 3.0",
+    "author": "Rotsee2",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ngong_Hills_from_Nairobi.jpg",
+    "title": "File:Ngong Hills from Nairobi.jpg"
+  },
+  "observed": {
+    "caption": "Hazy distant view of a city skyline with high-rise buildings rising above dense trees and mountains on the horizon.",
+    "description": "A wide, elevated view looks across a sprawling urban area under a pale, hazy sky. In the foreground a dense canopy of green trees fills the lower portion of the image. Several mid- and high-rise buildings emerge from the trees, including a blue-glass building on the right with a low wavy-roof structure in front of it, a dark blocky building complex in the center, and a lighter high-rise on the left. Beyond the central buildings a low-density urban area stretches toward a large, muted mountain range that spans the horizon. The atmosphere is hazy, softening distant details and giving the sky and background a washed-out appearance.",
+    "retrieval_queries": [
+      "hazy city skyline with mountains in the distance and trees in foreground",
+      "aerial view of tall buildings surrounded by forest with hills on horizon",
+      "foggy urban landscape with high rises above green canopy"
+    ],
+    "tags": [
+      "city skyline",
+      "hazy mountains",
+      "urban forest",
+      "high-rise buildings",
+      "distant hills",
+      "aerial city view"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "hazy and overcast",
+      "lighting": "soft diffused daylight",
+      "crowd_level": "empty",
+      "activity_summary": "distant city view with no discernible activity"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "high",
+      "facing": "across the city toward distant mountains",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "distant skyline and mountain range above tree canopy"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "distant mountain range",
+        "category": "terrain",
+        "attributes": [
+          "large",
+          "hazy",
+          "muted gray-blue",
+          "spanning horizon"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center background on horizon",
+        "evidence": "faint ridgeline visible through haze behind the city",
+        "confidence": 0.92
+      },
+      {
+        "id": "e2",
+        "label": "hazy sky",
+        "category": "other",
+        "attributes": [
+          "pale",
+          "overcast",
+          "washed-out",
+          "diffused light"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "top across entire width",
+        "evidence": "pale upper portion of image above mountains and buildings",
+        "confidence": 0.95
+      },
+      {
+        "id": "e3",
+        "label": "blue-glass high-rise building",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "rectangular",
+          "blue reflective facade",
+          "multiple floors"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "right midground",
+        "evidence": "prominent tall building with blue vertical windows on right side",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "dark blocky mid-rise building complex",
+        "category": "building",
+        "attributes": [
+          "dark",
+          "blocky",
+          "multi-section",
+          "flat roof"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center midground",
+        "evidence": "dark rectangular building with multiple connected blocks in center",
+        "confidence": 0.94
+      },
+      {
+        "id": "e5",
+        "label": "white and dark high-rise building",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "light facade with dark vertical stripes",
+          "rectangular"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left midground",
+        "evidence": "tall building on left side with white exterior and dark accents",
+        "confidence": 0.93
+      },
+      {
+        "id": "e6",
+        "label": "dense green tree canopy",
+        "category": "plant",
+        "attributes": [
+          "dense",
+          "green",
+          "leafy",
+          "covering foreground"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "bottom foreground across width",
+        "evidence": "thick layer of trees and foliage occupying lower third of image",
+        "confidence": 0.97
+      },
+      {
+        "id": "e7",
+        "label": "sprawling low-density urban area",
+        "category": "building",
+        "attributes": [
+          "low-rise",
+          "scattered",
+          "hazy",
+          "distant"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "middle distance between buildings and mountains",
+        "evidence": "faint cluster of small buildings and structures stretching toward mountains",
+        "confidence": 0.85
+      },
+      {
+        "id": "e8",
+        "label": "low wavy-roof building",
+        "category": "building",
+        "attributes": [
+          "low",
+          "light colored",
+          "wavy roofline",
+          "in front of high-rise"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom right in front of blue-glass building",
+        "evidence": "light building with undulating roof directly below and in front of the blue high-rise",
+        "confidence": 0.88
+      },
+      {
+        "id": "e9",
+        "label": "red-roofed building",
+        "category": "building",
+        "attributes": [
+          "small",
+          "red roof",
+          "partially visible"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "far left near white high-rise",
+        "evidence": "small structure with reddish roof visible among trees on left",
+        "confidence": 0.82
+      },
+      {
+        "id": "e10",
+        "label": "atmospheric haze",
+        "category": "other",
+        "attributes": [
+          "translucent",
+          "grayish",
+          "reducing visibility",
+          "layered"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "middle and background across city and mountains",
+        "evidence": "milky veil softening details of distant buildings and mountains",
+        "confidence": 0.9
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e1",
+        "predicate": "behind",
+        "object": "e3",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e2",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e6",
+        "predicate": "in_front_of",
+        "object": "e3",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e6",
+        "predicate": "in_front_of",
+        "object": "e4",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e6",
+        "predicate": "below",
+        "object": "e4",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e3",
+        "predicate": "right_of",
+        "object": "e4",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e5",
+        "predicate": "left_of",
+        "object": "e4",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e8",
+        "predicate": "in_front_of",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e8",
+        "predicate": "on",
+        "object": "e6",
+        "confidence": 0.85
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.98,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact geographic location and city name cannot be determined from the image",
+      "Specific building names, functions, or heights cannot be determined due to distance and haze",
+      "Whether any signs or text are present on distant buildings cannot be determined due to resolution and haze; no text with 3+ legible letters is discernible",
+      "Exact time of day, weather conditions beyond hazy appearance, and season cannot be determined",
+      "Presence of people, vehicles, or small details on streets cannot be determined due to distance and tree cover"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:10:24+00:00",
+        "raw_output_path": "data/annotations/raw/hills_019_attempt1.txt",
+        "tokens": 5535
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

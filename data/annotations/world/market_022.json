@@ -1,0 +1,340 @@
+{
+  "photo_id": "market_022",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_022.jpg",
+    "license": "CC BY-SA 3.0",
+    "author": "giannip46",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Nairobi_Tourist_market_-_panoramio.jpg",
+    "title": "File:Nairobi Tourist market - panoramio.jpg"
+  },
+  "observed": {
+    "caption": "A narrow covered market alley lined on both sides with stalls displaying hanging bags and accessories with a few people visible in the foreground and background.",
+    "description": "A narrow covered alley with stalls on both sides displays numerous hanging bags, purses and accessories in brown, orange, black and multicolored tones, with a bright red garment hanging on the left partition and a white pegboard with small hanging jewelry nearby, while the right side shows dark hanging items and bags against a weathered white wooden wall with a wooden frame, the uneven brown floor extends into the distance toward bright overexposed daylight at the far end, overhead wooden beams and corrugated roofing hold bright lights, a person in a white shirt is bent over working in the bottom center foreground near a partially visible person with braided hair at the bottom right edge, and two more blurry figures are visible far down the alley one seated on a chair and one standing, with a white container on the floor near the left stall.",
+    "retrieval_queries": [
+      "narrow market alley with bags hanging on both sides",
+      "covered bazaar corridor with stalls selling handbags and jewelry",
+      "person bending over working in a market passage lined with hanging goods"
+    ],
+    "tags": [
+      "market alley",
+      "hanging bags",
+      "stalls",
+      "narrow passage",
+      "bazaar",
+      "jewelry display"
+    ],
+    "scene": {
+      "type": "market",
+      "setting": "mixed",
+      "time_of_day": "daytime",
+      "weather": "unknown",
+      "lighting": "bright overhead lights and daylight from alley end",
+      "crowd_level": "sparse",
+      "activity_summary": "vending and browsing in market alley"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "down the narrow market alley",
+      "distance": "close",
+      "framing": "medium",
+      "orientation": "portrait",
+      "subject_focus": "market alley with stalls and hanging goods"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "cluster of hanging handbags on left wall",
+        "category": "object",
+        "attributes": [
+          "multicolored",
+          "stacked",
+          "hanging",
+          "orange and brown tones"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "left",
+        "evidence": "multiple bags stacked and hanging on left side filling foreground",
+        "confidence": 0.95
+      },
+      {
+        "id": "e2",
+        "label": "red garment hanging on stall",
+        "category": "object",
+        "attributes": [
+          "bright red",
+          "hanging",
+          "fabric"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left-center",
+        "evidence": "bright red cloth hanging on white partition left of center",
+        "confidence": 0.92
+      },
+      {
+        "id": "e3",
+        "label": "jewelry display on pegboard",
+        "category": "object",
+        "attributes": [
+          "small hanging items",
+          "white board",
+          "multiple rows"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-left",
+        "evidence": "white board with many small hanging accessories behind red garment",
+        "confidence": 0.88
+      },
+      {
+        "id": "e4",
+        "label": "hanging bags and accessories on right wall",
+        "category": "object",
+        "attributes": [
+          "dark colored",
+          "vertically arranged",
+          "hanging"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "right",
+        "evidence": "dark bags and straps hanging densely on right side wall",
+        "confidence": 0.93
+      },
+      {
+        "id": "e5",
+        "label": "white wooden stall partition with wooden frame",
+        "category": "structure",
+        "attributes": [
+          "white painted",
+          "weathered",
+          "wooden trim"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right-center",
+        "evidence": "white wooden wall on right with rectangular wooden frame and hanging items",
+        "confidence": 0.9
+      },
+      {
+        "id": "e6",
+        "label": "narrow dirt alley floor",
+        "category": "terrain",
+        "attributes": [
+          "brown",
+          "uneven",
+          "extending into distance"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "brown ground surface running down middle of image toward bright background",
+        "confidence": 0.92
+      },
+      {
+        "id": "e7",
+        "label": "overhead roof structure with bright lights",
+        "category": "structure",
+        "attributes": [
+          "wooden beams",
+          "bright illumination",
+          "corrugated covering"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "top",
+        "evidence": "roof beams and bright lights visible at top of image",
+        "confidence": 0.85
+      },
+      {
+        "id": "e8",
+        "label": "person in white shirt bending over",
+        "category": "person_group",
+        "attributes": [
+          "white shirt",
+          "bending forward",
+          "short hair"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "bottom-center",
+        "evidence": "person in white shirt bent over at bottom center foreground",
+        "confidence": 0.9
+      },
+      {
+        "id": "e9",
+        "label": "partial person with braided hair at edge",
+        "category": "person_group",
+        "attributes": [
+          "braided hair",
+          "partially visible"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom-right",
+        "evidence": "braided hair and shoulder visible at extreme bottom right corner",
+        "confidence": 0.65
+      },
+      {
+        "id": "e10",
+        "label": "seated person in background",
+        "category": "person_group",
+        "attributes": [
+          "sitting on chair",
+          "distant",
+          "blurry"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "background-center",
+        "evidence": "small blurry figure sitting on white chair far down alley",
+        "confidence": 0.6
+      },
+      {
+        "id": "e11",
+        "label": "standing person in background",
+        "category": "person_group",
+        "attributes": [
+          "standing",
+          "distant",
+          "blurry"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "background-center",
+        "evidence": "blurry standing figure near seated figure far down alley",
+        "confidence": 0.58
+      },
+      {
+        "id": "e12",
+        "label": "bags hanging from ceiling",
+        "category": "object",
+        "attributes": [
+          "suspended",
+          "dark tones"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "top-center",
+        "evidence": "bags hanging from overhead structure in upper center",
+        "confidence": 0.8
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e6",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e4",
+        "predicate": "right_of",
+        "object": "e6",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e5",
+        "predicate": "right_of",
+        "object": "e6",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e2",
+        "predicate": "beside",
+        "object": "e3",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e7",
+        "predicate": "above",
+        "object": "e6",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e8",
+        "predicate": "near",
+        "object": "e5",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e8",
+        "predicate": "below",
+        "object": "e7",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e10",
+        "predicate": "behind",
+        "object": "e8",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e11",
+        "predicate": "beside",
+        "object": "e10",
+        "confidence": 0.7
+      },
+      {
+        "subject": "e9",
+        "predicate": "beside",
+        "object": "e8",
+        "confidence": 0.75
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 4,
+      "count_confidence": 0.68,
+      "faces_visible": false,
+      "activities": [
+        "bending over working",
+        "sitting",
+        "standing"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact geographic location of the market cannot be determined from the photo",
+      "Text or markings on white container on floor near left stall are blurry and less than 3 letters are legible so it is not listed",
+      "Material composition of bags and accessories cannot be confirmed from image",
+      "Identities, ages and facial features of people are not discernible",
+      "Whether the partial braided hair at bottom right belongs to a separate person or is part of another figure is uncertain due to cropping",
+      "Exact time of day and weather conditions outside the covered area cannot be determined",
+      "Text on bags and small labels is ignored per rules and not listed"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 4,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:15:45+00:00",
+        "raw_output_path": "data/annotations/raw/market_022_attempt1.txt",
+        "tokens": 11775
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

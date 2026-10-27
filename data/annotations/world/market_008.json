@@ -1,0 +1,320 @@
+{
+  "photo_id": "market_008",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_008.jpg",
+    "license": "CC BY 4.0",
+    "author": "Stowe14",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Handcrafted_beaded_necklaces_at_Nairobi_City_Market_in_Kenya.jpg",
+    "title": "File:Handcrafted beaded necklaces at Nairobi City Market in Kenya.jpg"
+  },
+  "observed": {
+    "caption": "Colorful beaded necklaces hanging on a wooden display board with dark blue fabric backing.",
+    "description": "Multiple strands of beaded necklaces in bright colors including red, yellow, blue, green, orange, white and black hang from metal hooks on a horizontal wooden bar mounted on a dark blue fabric-covered board framed by light wood. On the left and center are large circular collar-style necklaces with dense multicolor beadwork, in the center are smaller hoop necklaces, to the center-right hangs a cluster of black beaded necklaces with white and brown pendants, beside them are thin brown cord necklaces with a green and white pendant, on the right are long multistrand necklaces with yellow beads and light blue beads, one with a large ornate metal pendant with fringe at the bottom, and a partially visible green beaded strand on the far right edge.",
+    "retrieval_queries": [
+      "colorful beaded necklaces hanging on display board",
+      "handmade tribal collar necklaces at market stall",
+      "close up of multicolor bead jewelry for sale"
+    ],
+    "tags": [
+      "beaded necklaces",
+      "colorful jewelry",
+      "market display",
+      "handmade beads",
+      "collar necklace"
+    ],
+    "scene": {
+      "type": "market",
+      "setting": "mixed",
+      "time_of_day": "unknown",
+      "weather": "unknown",
+      "lighting": "even natural light",
+      "crowd_level": "empty",
+      "activity_summary": "jewelry displayed for sale"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the display board",
+      "distance": "close",
+      "framing": "close_up",
+      "orientation": "landscape",
+      "subject_focus": "beaded necklaces on display board"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "large multicolored beaded collar necklaces",
+        "category": "object",
+        "attributes": [
+          "circular",
+          "multicolored beads",
+          "dense beadwork",
+          "collar style"
+        ],
+        "count": 4,
+        "salience": 5,
+        "position": "left-center",
+        "evidence": "large overlapping circular necklaces with red, yellow, blue, green, white and black beads hanging on left side",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "small multicolored beaded hoop necklaces",
+        "category": "object",
+        "attributes": [
+          "hoop shaped",
+          "multicolored beads",
+          "thin"
+        ],
+        "count": 4,
+        "salience": 4,
+        "position": "center",
+        "evidence": "four smaller circular beaded hoops in orange, blue, yellow and red hanging in middle",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "black beaded necklaces with pendants",
+        "category": "object",
+        "attributes": [
+          "black beads",
+          "clustered",
+          "white and brown pendants",
+          "tassel-like"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right",
+        "evidence": "dense cluster of black strands with white and brown horn-shaped pendants hanging together",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "thin cord necklaces with pendant",
+        "category": "object",
+        "attributes": [
+          "thin brown cord",
+          "green and white pendant",
+          "long"
+        ],
+        "count": 2,
+        "salience": 3,
+        "position": "center-right",
+        "evidence": "two thin brown leather-like cords with small green and white oval pendant hanging beside black cluster",
+        "confidence": 0.94
+      },
+      {
+        "id": "e5",
+        "label": "long multistrand beaded necklaces with yellow beads",
+        "category": "object",
+        "attributes": [
+          "long",
+          "multistrand",
+          "yellow beads",
+          "multicolored"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right",
+        "evidence": "long hanging strands with prominent yellow beads mixed with blue, red and white beads on right side",
+        "confidence": 0.97
+      },
+      {
+        "id": "e6",
+        "label": "light blue beaded necklace with metal pendant",
+        "category": "object",
+        "attributes": [
+          "light blue beads",
+          "large metal pendant",
+          "fringe",
+          "ornate"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "far right",
+        "evidence": "light blue beaded strands with large domed metal pendant and light blue fringe at bottom on far right",
+        "confidence": 0.96
+      },
+      {
+        "id": "e7",
+        "label": "dark blue fabric display backing",
+        "category": "structure",
+        "attributes": [
+          "dark blue",
+          "textured fabric",
+          "rectangular"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "background center",
+        "evidence": "dark navy blue textured fabric covering the board behind all necklaces",
+        "confidence": 0.99
+      },
+      {
+        "id": "e8",
+        "label": "wooden display frame with horizontal bar",
+        "category": "structure",
+        "attributes": [
+          "light wood",
+          "horizontal bar",
+          "rectangular frame"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "background",
+        "evidence": "light brown wooden frame surrounding fabric and horizontal wooden bar across top holding hooks",
+        "confidence": 0.98
+      },
+      {
+        "id": "e9",
+        "label": "metal hooks",
+        "category": "object",
+        "attributes": [
+          "small",
+          "metal",
+          "curved"
+        ],
+        "count": 8,
+        "salience": 2,
+        "position": "top center-right",
+        "evidence": "small metal hooks attached to wooden bar holding each necklace",
+        "confidence": 0.92
+      },
+      {
+        "id": "e10",
+        "label": "green beaded strand on far edge",
+        "category": "object",
+        "attributes": [
+          "green beads",
+          "partially visible",
+          "vertical"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "far right edge",
+        "evidence": "vertical strand of green beads with white accent barely visible at extreme right edge",
+        "confidence": 0.85
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e2",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "left_of",
+        "object": "e5",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e5",
+        "predicate": "left_of",
+        "object": "e6",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e7",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e7",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e7",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e7",
+        "predicate": "inside",
+        "object": "e8",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e9",
+        "predicate": "above",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e4",
+        "predicate": "beside",
+        "object": "e3",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e6",
+        "predicate": "near",
+        "object": "e5",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e10",
+        "predicate": "right_of",
+        "object": "e6",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.99,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "No legible text with 3 or more letters is visible; any small labels or background signs are not readable",
+      "Exact geographic location and whether the stall is indoor, outdoor or covered cannot be determined",
+      "Materials of beads and pendants (glass, plastic, bone, metal) cannot be confirmed from image alone",
+      "Time of day, weather and lighting source cannot be determined precisely",
+      "Maker, price, cultural origin or intended use of the necklaces cannot be determined from visual evidence alone"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:13:40+00:00",
+        "raw_output_path": "data/annotations/raw/market_008_attempt1.txt",
+        "tokens": 7779
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

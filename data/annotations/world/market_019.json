@@ -1,0 +1,311 @@
+{
+  "photo_id": "market_019",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_019.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Queen Asali",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Nairobi_City_Market_(cropped).jpg",
+    "title": "File:Nairobi City Market (cropped).jpg"
+  },
+  "observed": {
+    "caption": "The facade of the Nairobi City County City Market building with a central white sign and colorful murals covering the walls.",
+    "description": "A multi-story building facade fills the frame with a large weathered white rectangular sign in the center displaying brown lettering, colorful murals with stylized human silhouettes and geometric patterns covering the upper and side walls, multiple vertical louvered ventilation openings above the sign, thin horizontal electrical wires crossing the front of the building, a dark recessed entrance below the sign surrounded by multicolored zigzag and diamond patterned trim, and glass windows on the lower side sections.",
+    "retrieval_queries": [
+      "Nairobi City County City Market building with colorful mural",
+      "facade of City Market Nairobi with painted wall art and sign",
+      "Nairobi City Market exterior sign and mural building"
+    ],
+    "tags": [
+      "Nairobi City Market",
+      "building facade",
+      "mural",
+      "market sign",
+      "urban architecture",
+      "painted wall"
+    ],
+    "scene": {
+      "type": "building",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "unknown",
+      "lighting": "soft diffused daylight",
+      "crowd_level": "empty",
+      "activity_summary": "static view of market building facade"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the building facade",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "central market sign and mural facade"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "market building facade",
+        "category": "building",
+        "attributes": [
+          "multistory",
+          "painted mural",
+          "weathered exterior"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center, fills frame",
+        "evidence": "large building occupying entire width and height of image with mural and sign",
+        "confidence": 0.96
+      },
+      {
+        "id": "e2",
+        "label": "market sign board",
+        "category": "sign",
+        "attributes": [
+          "white background",
+          "brown lettering",
+          "rectangular",
+          "weathered"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "white rectangular sign with brown text reading NAIROBI CITY COUNTY and CITY MARKET",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "wall mural",
+        "category": "structure",
+        "attributes": [
+          "colorful",
+          "abstract human figures",
+          "geometric patterns"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "upper and side areas",
+        "evidence": "painted artwork covering building walls with silhouettes and multicolored patterns",
+        "confidence": 0.95
+      },
+      {
+        "id": "e4",
+        "label": "ventilation louvers",
+        "category": "structure",
+        "attributes": [
+          "horizontal slats",
+          "gray",
+          "rectangular"
+        ],
+        "count": 4,
+        "salience": 3,
+        "position": "center-above sign",
+        "evidence": "vertical columns of louvered openings above the central sign",
+        "confidence": 0.9
+      },
+      {
+        "id": "e5",
+        "label": "electrical wires",
+        "category": "object",
+        "attributes": [
+          "thin",
+          "horizontal",
+          "dark"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "across middle",
+        "evidence": "horizontal wires crossing the facade in front of sign and mural",
+        "confidence": 0.92
+      },
+      {
+        "id": "e6",
+        "label": "building entrance",
+        "category": "structure",
+        "attributes": [
+          "dark",
+          "recessed",
+          "below sign"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom-center",
+        "evidence": "dark opening beneath the sign with patterned surround",
+        "confidence": 0.86
+      },
+      {
+        "id": "e7",
+        "label": "decorative patterned border",
+        "category": "structure",
+        "attributes": [
+          "geometric",
+          "multicolored",
+          "zigzag and diamond"
+        ],
+        "count": 2,
+        "salience": 2,
+        "position": "bottom edge and lower sides",
+        "evidence": "colorful zigzag and diamond patterns along lower facade",
+        "confidence": 0.88
+      },
+      {
+        "id": "e8",
+        "label": "painted human silhouettes",
+        "category": "other",
+        "attributes": [
+          "stylized",
+          "black and white",
+          "part of mural"
+        ],
+        "count": 8,
+        "salience": 3,
+        "position": "left and right upper areas",
+        "evidence": "dark and light human shapes painted on mural walls",
+        "confidence": 0.89
+      },
+      {
+        "id": "e9",
+        "label": "circular emblem",
+        "category": "sign",
+        "attributes": [
+          "circular",
+          "blue and white",
+          "center of sign"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center of sign",
+        "evidence": "round logo between the two lines of text on the white sign",
+        "confidence": 0.82
+      },
+      {
+        "id": "e10",
+        "label": "side windows",
+        "category": "structure",
+        "attributes": [
+          "glass",
+          "rectangular",
+          "dark frames"
+        ],
+        "count": 2,
+        "salience": 2,
+        "position": "bottom-left and bottom-right",
+        "evidence": "window openings on lower side sections of building with reflections",
+        "confidence": 0.83
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e4",
+        "predicate": "above",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e6",
+        "predicate": "below",
+        "object": "e2",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e5",
+        "predicate": "in_front_of",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e9",
+        "predicate": "inside",
+        "object": "e2",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e7",
+        "predicate": "below",
+        "object": "e3",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e10",
+        "predicate": "beside",
+        "object": "e6",
+        "confidence": 0.82
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "NAIROBI CITY COUNTY",
+        "language": "en",
+        "entity_id": "e2",
+        "location_in_image": "upper portion of central sign",
+        "legibility": "clear",
+        "confidence": 0.97
+      },
+      {
+        "text": "CITY MARKET",
+        "language": "en",
+        "entity_id": "e2",
+        "location_in_image": "lower portion of central sign",
+        "legibility": "clear",
+        "confidence": 0.98
+      }
+    ],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.96,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Text inside the circular emblem on the sign is not legible due to resolution and distance",
+      "Exact time of day and weather conditions cannot be determined from lighting alone",
+      "Interior of the market and activity inside the entrance is not visible due to darkness and shadows",
+      "Details of side windows and lower facade are partially obscured by shadows",
+      "Whether additional small or faded text exists on the mural is unclear"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:15:08+00:00",
+        "raw_output_path": "data/annotations/raw/market_019_attempt1.txt",
+        "tokens": 8927
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

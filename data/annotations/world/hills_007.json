@@ -1,0 +1,353 @@
+{
+  "photo_id": "hills_007",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_007.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Lebrazzah",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Home_in_Nature.jpg",
+    "title": "File:Home in Nature.jpg"
+  },
+  "observed": {
+    "caption": "People walk up a winding dirt road toward large wind turbines on a grassy hill under a cloudy sky.",
+    "description": "A wide unpaved dirt road with gravel and tire ruts winds uphill through grassy terrain toward a hilltop. Several tall white wind turbines with three blades stand on the hill, with one prominent turbine on the right and two more visible in the distance on the left and center. A metal lattice communication tower stands beside the central turbine, and a small cluster of trees is on the hill crest near a fence line. A white vehicle is parked on the grass near the base of the closest turbine. On the left side of the road, wooden utility poles with wires recede into the distance. Seven people seen from behind walk away from the camera along the road, three in the foreground and four smaller figures further up the road, wearing casual clothing including dark pants, light tops and a backpack. The sky is mostly overcast with white and gray clouds and patches of blue, and the lighting is diffused daylight.",
+    "retrieval_queries": [
+      "people walking up dirt road to wind turbines on hill",
+      "wind farm on grassy hill with cloudy sky and hikers",
+      "dirt path leading to windmills with group walking away"
+    ],
+    "tags": [
+      "wind turbine",
+      "wind farm",
+      "dirt road",
+      "grassy hill",
+      "hiking",
+      "cloudy sky",
+      "utility poles"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy with patches of blue",
+      "lighting": "diffused overcast daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "people walking uphill on dirt road toward wind turbines"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "up the road toward hilltop turbines",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "portrait",
+      "subject_focus": "dirt road and wind turbines on hill"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "dirt road",
+        "category": "terrain",
+        "attributes": [
+          "unpaved",
+          "brown",
+          "gravelly",
+          "winding uphill",
+          "tire ruts"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center foreground extending to background",
+        "evidence": "wide brown dirt track with gravel and ruts running from bottom to middle distance",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "wind turbine closest",
+        "category": "structure",
+        "attributes": [
+          "tall white tower",
+          "three blades",
+          "nacelle on top"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "right side on hill",
+        "evidence": "large white wind turbine with three blades standing on grassy hill to the right",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "wind turbine on hilltop center",
+        "category": "structure",
+        "attributes": [
+          "tall white tower",
+          "three blades"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center background on hilltop",
+        "evidence": "white wind turbine behind communication tower on hill crest",
+        "confidence": 0.95
+      },
+      {
+        "id": "e4",
+        "label": "wind turbine distant left",
+        "category": "structure",
+        "attributes": [
+          "tall white tower",
+          "three blades",
+          "smaller due to distance"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left background on distant hill",
+        "evidence": "smaller white wind turbine visible on far left horizon",
+        "confidence": 0.92
+      },
+      {
+        "id": "e5",
+        "label": "grassy hill",
+        "category": "terrain",
+        "attributes": [
+          "green and brown grass",
+          "sloped",
+          "eroded patches"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right background",
+        "evidence": "grassy elevated terrain supporting turbines and tower",
+        "confidence": 0.96
+      },
+      {
+        "id": "e6",
+        "label": "people walking foreground",
+        "category": "person_group",
+        "attributes": [
+          "walking away from camera",
+          "casual clothing",
+          "one with backpack",
+          "one in blue pants",
+          "one in light top and dark pants"
+        ],
+        "count": 3,
+        "salience": 4,
+        "position": "left-center foreground on road",
+        "evidence": "three figures seen from behind walking on dirt road",
+        "confidence": 0.94
+      },
+      {
+        "id": "e7",
+        "label": "people walking background",
+        "category": "person_group",
+        "attributes": [
+          "walking away from camera",
+          "small figures due to distance",
+          "casual clothing"
+        ],
+        "count": 4,
+        "salience": 2,
+        "position": "center middle distance on road",
+        "evidence": "four smaller figures walking further up the dirt road",
+        "confidence": 0.82
+      },
+      {
+        "id": "e8",
+        "label": "lattice communication tower",
+        "category": "structure",
+        "attributes": [
+          "metal lattice",
+          "tall",
+          "antennas"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center background on hilltop beside turbine",
+        "evidence": "steel lattice tower with antennas next to central wind turbine",
+        "confidence": 0.96
+      },
+      {
+        "id": "e9",
+        "label": "utility poles with power lines",
+        "category": "structure",
+        "attributes": [
+          "wooden poles",
+          "wires",
+          "multiple along left side"
+        ],
+        "count": 5,
+        "salience": 2,
+        "position": "left background along road",
+        "evidence": "row of wooden utility poles carrying wires receding into distance on left",
+        "confidence": 0.93
+      },
+      {
+        "id": "e10",
+        "label": "white vehicle",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "small",
+          "parked"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right side on hill near turbine base",
+        "evidence": "small white car parked on grass near base of closest turbine",
+        "confidence": 0.88
+      },
+      {
+        "id": "e11",
+        "label": "trees on hilltop",
+        "category": "plant",
+        "attributes": [
+          "dark green",
+          "wind-shaped",
+          "clustered"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "center background on hilltop",
+        "evidence": "cluster of dark trees on hill crest near tower",
+        "confidence": 0.92
+      },
+      {
+        "id": "e12",
+        "label": "partial wind turbine tower",
+        "category": "structure",
+        "attributes": [
+          "tall white tower",
+          "cropped by image edge"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "far right edge",
+        "evidence": "vertical white tower structure cut off by right edge of photo",
+        "confidence": 0.95
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e5",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e5",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e8",
+        "predicate": "on",
+        "object": "e5",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e11",
+        "predicate": "on",
+        "object": "e5",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e10",
+        "predicate": "on",
+        "object": "e5",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e9",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e2",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e8",
+        "predicate": "beside",
+        "object": "e3",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e12",
+        "predicate": "right_of",
+        "object": "e2",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e4",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.93
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 7,
+      "count_confidence": 0.85,
+      "faces_visible": false,
+      "activities": [
+        "walking away from camera along dirt road"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people in far distance is uncertain due to small size and resolution",
+      "Text or branding on wind turbine nacelles is not legible and cannot be read",
+      "Exact location, name of wind farm, and time of day beyond daytime cannot be determined",
+      "Facial features, ages, genders, and identities of people cannot be determined as they are seen from behind",
+      "Make, model, and license plate of white vehicle cannot be determined",
+      "Details of fence and small structures on hilltop are not clear due to distance"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 7,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:09:41+00:00",
+        "raw_output_path": "data/annotations/raw/hills_007_attempt1.txt",
+        "tokens": 13204
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

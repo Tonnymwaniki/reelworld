@@ -1,0 +1,342 @@
+{
+  "photo_id": "cbd_001",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/cbd/cbd_001.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Lebu Ayiga",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_the_Nairobi_skyline_from_the_KICC_rooftop_at_golden_hour.jpg",
+    "title": "File:Aerial view of the Nairobi skyline from the KICC rooftop at golden hour.jpg"
+  },
+  "observed": {
+    "caption": "Elevated wide view of a dense city center with clustered high-rise buildings under a pale blue sky with scattered clouds.",
+    "description": "The photo shows an elevated panoramic view over a dense urban area. In the immediate foreground a weathered concrete rooftop parapet runs across the bottom edge. Below and beyond are numerous high-rise and mid-rise buildings with varied facades including yellow-tinted glass, brown grid windows, dark reflective glass, and white concrete, interspersed with patches of green trees and narrow streets with small parked vehicles. A tall dark glass tower stands near the center behind two yellow-glass buildings, with additional mid-rise clusters extending to the left and low-rise sprawl stretching to a hazy horizon. The upper half is pale blue sky with a few small white and sunlit clouds and warm golden light casting long shadows and illuminating building sides.",
+    "retrieval_queries": [
+      "aerial panorama of downtown high-rise buildings at golden hour",
+      "city skyline view from tall building rooftop overlooking urban center",
+      "wide elevated photo of dense city with glass towers and distant sprawl"
+    ],
+    "tags": [
+      "cityscape",
+      "skyline",
+      "high-rise",
+      "aerial view",
+      "urban panorama",
+      "downtown",
+      "elevated viewpoint",
+      "evening light"
+    ],
+    "scene": {
+      "type": "other",
+      "setting": "outdoor",
+      "time_of_day": "evening",
+      "weather": "partly cloudy",
+      "lighting": "warm golden hour sunlight",
+      "crowd_level": "empty",
+      "activity_summary": "panoramic city view with no discernible activity"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "very_high",
+      "facing": "across the city toward the horizon",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "city skyline and central high-rise buildings"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "weathered concrete rooftop parapet",
+        "category": "structure",
+        "attributes": [
+          "weathered",
+          "concrete",
+          "rough texture",
+          "foreground edge"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom foreground",
+        "evidence": "rough dark concrete ledge spanning the entire bottom of the image",
+        "confidence": 0.96
+      },
+      {
+        "id": "e2",
+        "label": "yellow-glass high-rise buildings",
+        "category": "building",
+        "attributes": [
+          "yellow-tinted glass",
+          "rectangular",
+          "multi-story",
+          "grid windows"
+        ],
+        "count": 2,
+        "salience": 5,
+        "position": "center-foreground",
+        "evidence": "two adjacent tall buildings with yellow reflective facades and uniform window grids in lower center",
+        "confidence": 0.95
+      },
+      {
+        "id": "e3",
+        "label": "dark glass modern skyscraper",
+        "category": "building",
+        "attributes": [
+          "dark reflective glass",
+          "tall",
+          "rectangular with tapered base"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "tallest dark building with black glass facade standing behind the yellow buildings",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "brown grid-pattern high-rise",
+        "category": "building",
+        "attributes": [
+          "brown facade",
+          "grid windows",
+          "rectangular"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-left",
+        "evidence": "brown building with uniform window grid to the left of the dark skyscraper",
+        "confidence": 0.93
+      },
+      {
+        "id": "e5",
+        "label": "cluster of mid-rise buildings",
+        "category": "building",
+        "attributes": [
+          "varied facades",
+          "mid-rise",
+          "mixed colors"
+        ],
+        "count": 8,
+        "salience": 4,
+        "position": "left and center",
+        "evidence": "group of mid-rise buildings with green, white, and gray facades on the left side",
+        "confidence": 0.9
+      },
+      {
+        "id": "e6",
+        "label": "distant low-rise urban sprawl",
+        "category": "building",
+        "attributes": [
+          "low-rise",
+          "dense",
+          "distant",
+          "hazy"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "background",
+        "evidence": "dense spread of small buildings extending to the horizon under haze",
+        "confidence": 0.92
+      },
+      {
+        "id": "e7",
+        "label": "pale blue sky with scattered clouds",
+        "category": "other",
+        "attributes": [
+          "pale blue",
+          "partly cloudy",
+          "hazy horizon",
+          "soft light"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "top",
+        "evidence": "sky occupying upper half with small white clouds and warm glow near horizon",
+        "confidence": 0.98
+      },
+      {
+        "id": "e8",
+        "label": "green trees and vegetation",
+        "category": "plant",
+        "attributes": [
+          "green",
+          "scattered",
+          "small canopies"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "lower left and right",
+        "evidence": "dark green tree clusters between buildings and along streets",
+        "confidence": 0.88
+      },
+      {
+        "id": "e9",
+        "label": "city streets with small vehicles",
+        "category": "vehicle",
+        "attributes": [
+          "small",
+          "parked",
+          "along roads"
+        ],
+        "count": 20,
+        "salience": 2,
+        "position": "lower left and center",
+        "evidence": "narrow roads with tiny dark and light specks indicating cars",
+        "confidence": 0.75
+      },
+      {
+        "id": "e10",
+        "label": "red-roofed low buildings",
+        "category": "building",
+        "attributes": [
+          "red-brown roofs",
+          "low-rise",
+          "elongated"
+        ],
+        "count": 4,
+        "salience": 3,
+        "position": "center-right and right",
+        "evidence": "long low buildings with reddish roofs to the right of center",
+        "confidence": 0.9
+      },
+      {
+        "id": "e11",
+        "label": "yellow vertical billboard",
+        "category": "sign",
+        "attributes": [
+          "yellow",
+          "vertical",
+          "distant",
+          "rectangular"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center-left",
+        "evidence": "bright yellow vertical sign among mid-rise buildings left of center",
+        "confidence": 0.85
+      },
+      {
+        "id": "e12",
+        "label": "white high-rise with large side advertisement",
+        "category": "building",
+        "attributes": [
+          "white facade",
+          "rectangular",
+          "with faded image on side"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-right",
+        "evidence": "white building with large indistinct image on its side near center-right",
+        "confidence": 0.87
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "below",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e2",
+        "predicate": "in_front_of",
+        "object": "e3",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e4",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e11",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e10",
+        "predicate": "right_of",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e12",
+        "predicate": "right_of",
+        "object": "e3",
+        "confidence": 0.89
+      },
+      {
+        "subject": "e7",
+        "predicate": "above",
+        "object": "e6",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e6",
+        "predicate": "behind",
+        "object": "e3",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e8",
+        "predicate": "near",
+        "object": "e9",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e5",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.95,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact city and building names cannot be determined from visible evidence alone",
+      "Text on distant billboards, rooftop signs, and building logos is not legible due to distance and blur and is therefore not transcribed",
+      "Whether the warm light is sunrise or sunset cannot be determined from the image alone",
+      "Exact number of vehicles, windows, and distant buildings cannot be determined due to scale and haze",
+      "Presence of people on streets or in buildings cannot be determined at this distance and resolution"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:01:17+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_001_attempt1.txt",
+        "tokens": 9572
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

@@ -1,0 +1,371 @@
+{
+  "photo_id": "landmarks_012",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/landmarks/landmarks_012.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "BugWarp",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Kenyatta_International_Convention_Centre_-_BugWarp_(16).jpg",
+    "title": "File:Kenyatta International Convention Centre - BugWarp (16).jpg"
+  },
+  "observed": {
+    "caption": "An elevated hazy view of a densely congested urban street lined with unfinished concrete buildings and commercial buildings covered in large phone billboards.",
+    "description": "A wide elevated view looks down along a long straight street packed with dense clusters of small vehicles including white vans, buses and cars, and many tiny pedestrian figures along the sidewalks and between vehicles. On the left and center-right stand large unfinished gray concrete buildings covered in scaffolding, netting and rooftop construction debris. On the right are light-colored commercial buildings with glass windows, one with a red rooftop sign and another white building covered with repeated logos and large rectangular billboards displaying phone images. In the immediate foreground is a tan building with a flat brown rooftop. In the background a dense hazy cityscape of indistinct buildings fades into atmospheric haze under diffuse daylight.",
+    "retrieval_queries": [
+      "aerial view of crowded city street with traffic jam and construction buildings",
+      "hazy urban street packed with buses and pedestrians lined with phone billboards",
+      "elevated view of congested road between unfinished buildings with Vivo advertisements"
+    ],
+    "tags": [
+      "aerial city view",
+      "congested street",
+      "traffic jam",
+      "unfinished buildings",
+      "construction scaffolding",
+      "phone billboards",
+      "urban haze",
+      "crowded road",
+      "commercial buildings"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "hazy",
+      "lighting": "diffuse daylight",
+      "crowd_level": "busy",
+      "activity_summary": "dense traffic and pedestrian movement"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "very_high",
+      "facing": "down along the crowded street toward distant skyline",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "congested urban street"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "congested urban street",
+        "category": "terrain",
+        "attributes": [
+          "central",
+          "crowded",
+          "lined with buildings"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "long straight road filled with dense clusters of vehicles and small pedestrian figures extending into background haze",
+        "confidence": 0.96
+      },
+      {
+        "id": "e2",
+        "label": "unfinished concrete building on left",
+        "category": "building",
+        "attributes": [
+          "gray",
+          "skeletal",
+          "under construction",
+          "multi-story"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left-center",
+        "evidence": "large dark gray structure with exposed floors, scaffolding and debris pile on roof",
+        "confidence": 0.95
+      },
+      {
+        "id": "e3",
+        "label": "unfinished concrete building center-right",
+        "category": "building",
+        "attributes": [
+          "dark gray",
+          "scaffolded",
+          "tall",
+          "under construction"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right",
+        "evidence": "tall building covered in scaffolding and netting behind the crowded street",
+        "confidence": 0.94
+      },
+      {
+        "id": "e4",
+        "label": "commercial building with GABERONE PLAZA sign",
+        "category": "building",
+        "attributes": [
+          "light gray",
+          "multi-story",
+          "glass windows",
+          "rooftop sign"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right-center",
+        "evidence": "rectangular building with red rooftop lettering reading GABERONE PLAZA",
+        "confidence": 0.92
+      },
+      {
+        "id": "e5",
+        "label": "commercial building with vivo branding",
+        "category": "building",
+        "attributes": [
+          "white",
+          "multi-story",
+          "advertising-covered",
+          "billboards on roof"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right",
+        "evidence": "white building facade covered with repeated vivo logos and large phone billboards on top and side",
+        "confidence": 0.91
+      },
+      {
+        "id": "e6",
+        "label": "foreground beige building rooftop",
+        "category": "building",
+        "attributes": [
+          "beige",
+          "flat roof",
+          "low-rise",
+          "foreground"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "foreground bottom",
+        "evidence": "tan building with brown flat roof and small rooftop fixtures in immediate foreground",
+        "confidence": 0.9
+      },
+      {
+        "id": "e7",
+        "label": "dense vehicle traffic",
+        "category": "vehicle",
+        "attributes": [
+          "numerous",
+          "white vans and buses",
+          "congested",
+          "mixed"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center along street",
+        "evidence": "many small white, red and dark vehicles packed bumper-to-bumper along the entire street",
+        "confidence": 0.88
+      },
+      {
+        "id": "e8",
+        "label": "crowd of pedestrians",
+        "category": "person_group",
+        "attributes": [
+          "numerous small figures",
+          "dark clothing",
+          "walking"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center along street edges",
+        "evidence": "many tiny dark dots moving along sidewalks and between vehicles",
+        "confidence": 0.65
+      },
+      {
+        "id": "e9",
+        "label": "large advertising billboards",
+        "category": "sign",
+        "attributes": [
+          "rectangular",
+          "colorful",
+          "phone advertisements",
+          "rooftop-mounted"
+        ],
+        "count": 3,
+        "salience": 3,
+        "position": "right and center-right",
+        "evidence": "several large billboards displaying phone images and brand text above buildings",
+        "confidence": 0.87
+      },
+      {
+        "id": "e10",
+        "label": "distant hazy city skyline",
+        "category": "building",
+        "attributes": [
+          "indistinct",
+          "dense",
+          "hazy",
+          "multi-story"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "background top",
+        "evidence": "many faded buildings and structures disappearing into atmospheric haze in the distance",
+        "confidence": 0.82
+      },
+      {
+        "id": "e11",
+        "label": "construction scaffolding and rooftop debris",
+        "category": "structure",
+        "attributes": [
+          "metal scaffolding",
+          "netting",
+          "piled material",
+          "unfinished"
+        ],
+        "count": 2,
+        "salience": 2,
+        "position": "left and center-right on unfinished buildings",
+        "evidence": "scaffolding frames and piles of construction debris visible on top of gray unfinished buildings",
+        "confidence": 0.86
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e3",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e6",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e4",
+        "predicate": "right_of",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e5",
+        "predicate": "below",
+        "object": "e4",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e7",
+        "predicate": "inside",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e8",
+        "predicate": "inside",
+        "object": "e1",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e5",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e10",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e11",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "GABERONE PLAZA",
+        "language": "en",
+        "entity_id": "e4",
+        "location_in_image": "right side, rooftop of gray building",
+        "legibility": "clear",
+        "confidence": 0.95
+      },
+      {
+        "text": "TUSKYS",
+        "language": "en",
+        "entity_id": "e2",
+        "location_in_image": "bottom left, dark storefront sign",
+        "legibility": "partial",
+        "confidence": 0.7
+      },
+      {
+        "text": "vivo",
+        "language": "en",
+        "entity_id": "e5",
+        "location_in_image": "right side, repeated across white building facade",
+        "legibility": "clear",
+        "confidence": 0.9
+      },
+      {
+        "text": "Infinix HOT 60 PRO SERIES",
+        "language": "en",
+        "entity_id": "e5",
+        "location_in_image": "right side, lower billboard on white building",
+        "legibility": "clear",
+        "confidence": 0.85
+      }
+    ],
+    "people": {
+      "count": 250,
+      "count_confidence": 0.4,
+      "faces_visible": false,
+      "activities": [
+        "walking along sidewalks",
+        "standing near vehicles",
+        "moving through traffic"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of pedestrians and vehicles cannot be determined due to distance, haze and small scale",
+      "Text on several distant and blurry billboards including blue billboard in center-right and top-right phone billboard is not legible enough to transcribe",
+      "Precise weather conditions, time of day and cause of haze cannot be determined",
+      "Building names, floors and interior details beyond visible signage are not discernible",
+      "Vehicle types, license plates and individual clothing details are not distinguishable at this distance"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 250,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:13:07+00:00",
+        "raw_output_path": "data/annotations/raw/landmarks_012_attempt1.txt",
+        "tokens": 13556
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'TUSKYS'"
+      ]
+    }
+  }
+}

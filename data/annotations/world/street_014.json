@@ -1,0 +1,413 @@
+{
+  "photo_id": "street_014",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_014.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Kenyatta_Avenue,_Nairobi,_2025_(05).jpg",
+    "title": "File:Kenyatta Avenue, Nairobi, 2025 (05).jpg"
+  },
+  "observed": {
+    "caption": "Busy urban street filled with buses, cars, vans and motorcycles lined by trees and high-rise buildings under an overcast sky.",
+    "description": "A wide multi-lane asphalt road in the foreground and center is filled with vehicles including a white hatchback car in the lower center, a red bus on the left viewed from the rear, a blue bus in the center, a white van in front of it, and an orange and white bus on the right foreground with a motorcycle and rider beside it. Another motorcycle with rider is visible on the far left near the sidewalk. Pedestrians are visible on the right sidewalk near shops with blue awnings and on the left sidewalk near the red bus, with more distant figures along the road. Tall buildings line the background, including a blue-glass modern high-rise with spires in the center distance and a tall brown rectangular building on the right. Large leafy green trees are on both sides of the street. Traffic lights on poles are visible on the left and right. An overhead metal arch structure spans the road in the far center. The sky is overcast and lighting is diffuse daylight.",
+    "retrieval_queries": [
+      "busy city street with buses cars and motorcycles",
+      "crowded urban road with matatus and high rise buildings",
+      "downtown traffic with colorful public buses and pedestrians"
+    ],
+    "tags": [
+      "busy street",
+      "city traffic",
+      "public buses",
+      "cars",
+      "motorcycles",
+      "pedestrians",
+      "high-rise buildings",
+      "urban",
+      "overcast"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast",
+      "lighting": "diffuse overcast daylight",
+      "crowd_level": "busy",
+      "activity_summary": "heavy urban traffic and commuting"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "down the street toward high-rise buildings",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "busy street traffic with buses and cars"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "white hatchback car",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "small",
+          "four-door",
+          "in motion"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground center",
+        "evidence": "white compact car in lower center on the road",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "orange and white bus",
+        "category": "vehicle",
+        "attributes": [
+          "orange and white",
+          "large",
+          "public transit"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "right foreground",
+        "evidence": "large bus on right side with orange lower half and white upper half",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "blue bus",
+        "category": "vehicle",
+        "attributes": [
+          "blue",
+          "large",
+          "public transit"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center",
+        "evidence": "blue bus behind white van in middle of road",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "white van",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "small van",
+          "public transit"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right",
+        "evidence": "white van in front of blue bus on the road",
+        "confidence": 0.95
+      },
+      {
+        "id": "e5",
+        "label": "red bus",
+        "category": "vehicle",
+        "attributes": [
+          "red",
+          "large",
+          "rear view"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left",
+        "evidence": "red bus on left side of road viewed from rear",
+        "confidence": 0.97
+      },
+      {
+        "id": "e6",
+        "label": "motorcycle with rider",
+        "category": "vehicle",
+        "attributes": [
+          "red motorcycle",
+          "rider wearing helmet and dark jacket"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right foreground",
+        "evidence": "motorcycle with helmeted rider on right edge of road",
+        "confidence": 0.96
+      },
+      {
+        "id": "e7",
+        "label": "glass high-rise building",
+        "category": "building",
+        "attributes": [
+          "modern",
+          "glass facade",
+          "tall",
+          "blue-tinted"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center background",
+        "evidence": "tall blue glass building with spires in center distance",
+        "confidence": 0.97
+      },
+      {
+        "id": "e8",
+        "label": "brown high-rise building",
+        "category": "building",
+        "attributes": [
+          "brown",
+          "tall",
+          "rectangular",
+          "weathered"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right background",
+        "evidence": "tall brown building with many windows on right side",
+        "confidence": 0.96
+      },
+      {
+        "id": "e9",
+        "label": "large tree",
+        "category": "plant",
+        "attributes": [
+          "tall",
+          "leafy",
+          "green"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left center",
+        "evidence": "large leafy tree on left side behind red bus",
+        "confidence": 0.95
+      },
+      {
+        "id": "e10",
+        "label": "traffic light assembly",
+        "category": "structure",
+        "attributes": [
+          "black traffic lights",
+          "on pole",
+          "multiple heads"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "left",
+        "evidence": "traffic lights on horizontal pole on left side of image",
+        "confidence": 0.92
+      },
+      {
+        "id": "e11",
+        "label": "paved road",
+        "category": "terrain",
+        "attributes": [
+          "asphalt",
+          "multi-lane",
+          "urban street"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "foreground and center",
+        "evidence": "wide asphalt road filling lower half of image with vehicles",
+        "confidence": 0.98
+      },
+      {
+        "id": "e12",
+        "label": "group of pedestrians",
+        "category": "person_group",
+        "attributes": [
+          "standing and walking",
+          "on sidewalk",
+          "various clothing"
+        ],
+        "count": 6,
+        "salience": 3,
+        "position": "right sidewalk",
+        "evidence": "several people on right sidewalk near shops and traffic light",
+        "confidence": 0.75
+      },
+      {
+        "id": "e13",
+        "label": "overhead arch structure",
+        "category": "structure",
+        "attributes": [
+          "metal arch",
+          "spanning road",
+          "in distance"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center distance",
+        "evidence": "arch structure crossing the road in the far center",
+        "confidence": 0.85
+      },
+      {
+        "id": "e14",
+        "label": "motorcycle on far left",
+        "category": "vehicle",
+        "attributes": [
+          "small",
+          "with rider",
+          "on roadside"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "far left",
+        "evidence": "motorcycle with rider on far left edge near sidewalk",
+        "confidence": 0.88
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e5",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e6",
+        "predicate": "right_of",
+        "object": "e2",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e4",
+        "predicate": "in_front_of",
+        "object": "e3",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e7",
+        "predicate": "behind",
+        "object": "e3",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e8",
+        "predicate": "right_of",
+        "object": "e7",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e9",
+        "predicate": "behind",
+        "object": "e5",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e11",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e11",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e13",
+        "predicate": "behind",
+        "object": "e3",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e12",
+        "predicate": "beside",
+        "object": "e2",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e10",
+        "predicate": "above",
+        "object": "e5",
+        "confidence": 0.88
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "City Shuttle",
+        "language": "en",
+        "entity_id": "e3",
+        "location_in_image": "on front top of blue bus in center",
+        "legibility": "clear",
+        "confidence": 0.95
+      },
+      {
+        "text": "COUNTY LINK SACCO",
+        "language": "en",
+        "entity_id": "e2",
+        "location_in_image": "on front of orange and white bus on right",
+        "legibility": "clear",
+        "confidence": 0.97
+      },
+      {
+        "text": "ISUZU",
+        "language": "en",
+        "entity_id": "e2",
+        "location_in_image": "on front of orange and white bus below windshield",
+        "legibility": "clear",
+        "confidence": 0.9
+      }
+    ],
+    "people": {
+      "count": 14,
+      "count_confidence": 0.62,
+      "faces_visible": false,
+      "activities": [
+        "walking along roadside",
+        "riding motorcycles",
+        "standing on sidewalk",
+        "driving vehicles"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of pedestrians in the far distance along the road",
+      "Text on the overhead arch spanning the road in the center distance",
+      "License plate numbers on vehicles which are small and blurry",
+      "Text on distant building signs, billboards and shop fronts",
+      "Text on the rear of the red bus on the left",
+      "Exact building names and heights beyond what is visible"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 14,
+    "license_plates_visible": true,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:21:04+00:00",
+        "raw_output_path": "data/annotations/raw/street_014_attempt1.txt",
+        "tokens": 11898
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

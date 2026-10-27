@@ -1,0 +1,323 @@
+{
+  "photo_id": "park_012",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_012.jpg",
+    "license": "CC BY 4.0",
+    "author": "DesiBoy101",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Nyayo_House_as_seen_from_Uhuru_Park.jpg",
+    "title": "File:Nyayo House as seen from Uhuru Park.jpg"
+  },
+  "observed": {
+    "caption": "A calm lake in a busy urban park with people along the shores and boating, framed by large trees and tall city buildings reflected in the water under an overcast sky.",
+    "description": "The image shows an outdoor urban park centered on a calm lake that reflects the cloudy sky and tall buildings behind it. In the foreground a grassy bank with a narrow dirt edge curves along the water, with two people standing on the left shore near the water's edge and a large leafy tree overhanging from the left and a large dense green tree on the right. Across the lake, many small figures of people are scattered along the far grassy shore, some sitting and some standing, and a small red boat with several occupants floats on the water toward the right. Behind the far shore a line of mature trees separates the park from several tall beige high-rise buildings with antennas and additional smaller city buildings, all under a bright overcast sky.",
+    "retrieval_queries": [
+      "urban park lake with city skyline reflected in water",
+      "people boating and relaxing by pond surrounded by trees and tall buildings",
+      "overcast day at city park lake with crowds on the grass"
+    ],
+    "tags": [
+      "urban park",
+      "lake",
+      "city skyline",
+      "high-rise buildings",
+      "trees",
+      "boating",
+      "crowd",
+      "reflection",
+      "overcast"
+    ],
+    "scene": {
+      "type": "park",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast cloudy",
+      "lighting": "diffuse overcast daylight",
+      "crowd_level": "moderate",
+      "activity_summary": "people relaxing, walking and boating by lakeside"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "across the lake toward the high-rise buildings",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "lake and park with city skyline"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "lake water",
+        "category": "terrain",
+        "attributes": [
+          "calm",
+          "reflective",
+          "curved shoreline"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center and foreground",
+        "evidence": "large body of water occupying lower half reflecting sky and buildings",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "large dense tree on right",
+        "category": "plant",
+        "attributes": [
+          "tall",
+          "dense green canopy",
+          "thick trunk"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right foreground",
+        "evidence": "large tree with full foliage on right bank over grass",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "overhanging tree on left",
+        "category": "plant",
+        "attributes": [
+          "broad leaves",
+          "overhanging branches",
+          "partially framing"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left foreground",
+        "evidence": "tree with large leaves extending into frame from left edge",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "tall beige high-rise buildings",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "beige facade",
+          "multiple towers",
+          "antennas on roof"
+        ],
+        "count": 2,
+        "salience": 5,
+        "position": "center background",
+        "evidence": "prominent twin-tower buildings rising behind treeline with vertical antennas",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "grassy shoreline",
+        "category": "terrain",
+        "attributes": [
+          "green grass",
+          "brown dirt edge",
+          "curved bank"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "foreground and right",
+        "evidence": "grass and dirt bank bordering lake in foreground and extending to right",
+        "confidence": 0.95
+      },
+      {
+        "id": "e6",
+        "label": "group of people on far shore",
+        "category": "person_group",
+        "attributes": [
+          "small figures",
+          "scattered",
+          "sitting and standing"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "across lake center to right",
+        "evidence": "numerous small human figures along far grassy bank",
+        "confidence": 0.88
+      },
+      {
+        "id": "e7",
+        "label": "red boat on lake",
+        "category": "vehicle",
+        "attributes": [
+          "small",
+          "red",
+          "carrying occupants"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right-center on water",
+        "evidence": "small red vessel with several people floating on lake surface",
+        "confidence": 0.9
+      },
+      {
+        "id": "e8",
+        "label": "overcast sky",
+        "category": "other",
+        "attributes": [
+          "cloudy",
+          "gray-white",
+          "diffuse light"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "upper background",
+        "evidence": "cloud-covered sky occupying upper portion above buildings",
+        "confidence": 0.97
+      },
+      {
+        "id": "e9",
+        "label": "treeline along far shore",
+        "category": "plant",
+        "attributes": [
+          "mature trees",
+          "dense",
+          "lining horizon"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "middle distance behind lake",
+        "evidence": "continuous row of trees separating park lawn from city buildings",
+        "confidence": 0.92
+      },
+      {
+        "id": "e10",
+        "label": "people standing on near shore",
+        "category": "person_group",
+        "attributes": [
+          "standing",
+          "near water",
+          "general clothing"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left foreground",
+        "evidence": "two distinct figures standing on dirt edge by lake on left",
+        "confidence": 0.9
+      },
+      {
+        "id": "e11",
+        "label": "palm trees on far shore",
+        "category": "plant",
+        "attributes": [
+          "palm fronds",
+          "short",
+          "clustered"
+        ],
+        "count": 2,
+        "salience": 2,
+        "position": "right-center far shore",
+        "evidence": "small palm trees visible near far bank among other trees",
+        "confidence": 0.85
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e3",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e2",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e10",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e9",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e9",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e5",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e8",
+        "predicate": "above",
+        "object": "e4",
+        "confidence": 0.97
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 40,
+      "count_confidence": 0.55,
+      "faces_visible": false,
+      "activities": [
+        "standing by water",
+        "sitting on grass",
+        "boating",
+        "walking along shore"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "exact number of people on far shore due to small size and distance",
+      "text and logos on distant high-rise building banners are blurry and not legible for at least 3 letters",
+      "specific identities, ages or genders of people",
+      "exact time of day and weather conditions beyond overcast appearance",
+      "names or functions of the background buildings"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 40,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:17:06+00:00",
+        "raw_output_path": "data/annotations/raw/park_012_attempt1.txt",
+        "tokens": 7620
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

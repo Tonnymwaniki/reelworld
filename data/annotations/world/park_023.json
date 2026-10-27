@@ -1,0 +1,344 @@
+{
+  "photo_id": "park_023",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_023.jpg",
+    "license": "CC0",
+    "author": "Francis Akuka for the Wikimedia Foundation",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Uhuru_Park_Nairobi_04.jpg",
+    "title": "File:Uhuru Park Nairobi 04.jpg"
+  },
+  "observed": {
+    "caption": "A sunny urban park with a lake, pedal boats, a green footbridge, and tall city buildings behind palm trees.",
+    "description": "The foreground shows a calm brownish lake with two small pedal boats carrying people, one with a green canopy, bordered by grassy banks edged with stone where numerous people are sitting, standing, and walking. A green metal pedestrian bridge crosses the water on the right with people on it. Behind the banks are scattered trees including a prominent cluster of tall slender palm trees in the center and dense leafy green trees on the right, plus brown giraffe-shaped sculptures near trees on the left. In the background a modern high-rise building with blue glass and gold accents rises behind a smaller beige clock-tower building, with a light-colored elevated roadway visible behind the trees under a bright blue sky with light clouds.",
+    "retrieval_queries": [
+      "urban park lake with pedal boats and green footbridge",
+      "city park with palm trees and tall glass skyscraper in background",
+      "people relaxing by pond with giraffe statues and bridge"
+    ],
+    "tags": [
+      "urban park",
+      "lake",
+      "pedal boat",
+      "footbridge",
+      "palm trees",
+      "city skyline",
+      "recreation",
+      "giraffe statue"
+    ],
+    "scene": {
+      "type": "park",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "clear and sunny",
+      "lighting": "bright natural daylight",
+      "crowd_level": "moderate",
+      "activity_summary": "boating and relaxing by lake"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the lake and city skyline",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "lake with pedal boats and surrounding park"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "lake water in foreground",
+        "category": "terrain",
+        "attributes": [
+          "calm",
+          "brownish",
+          "reflective"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground center-bottom",
+        "evidence": "large expanse of water occupying lower third of image reflecting sky and trees",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "pedal boats on lake",
+        "category": "vehicle",
+        "attributes": [
+          "small",
+          "yellow and white",
+          "one with green canopy"
+        ],
+        "count": 2,
+        "salience": 4,
+        "position": "center on lake",
+        "evidence": "two small boats with people aboard floating on water",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "green metal pedestrian bridge",
+        "category": "structure",
+        "attributes": [
+          "green",
+          "metal",
+          "arched",
+          "pedestrian"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right over lake",
+        "evidence": "green lattice bridge spanning water with people walking on it",
+        "confidence": 0.97
+      },
+      {
+        "id": "e4",
+        "label": "modern high-rise building with blue glass",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "blue glass facade",
+          "gold accents",
+          "modern"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "background left",
+        "evidence": "tall curved building with blue windows and gold top sections behind clock tower",
+        "confidence": 0.98
+      },
+      {
+        "id": "e5",
+        "label": "clock tower building",
+        "category": "building",
+        "attributes": [
+          "beige",
+          "rectangular",
+          "with clock face"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "background left in front of high-rise",
+        "evidence": "shorter beige tower with visible clock face in front of taller building",
+        "confidence": 0.92
+      },
+      {
+        "id": "e6",
+        "label": "cluster of tall palm trees",
+        "category": "plant",
+        "attributes": [
+          "tall",
+          "slender trunks",
+          "green fronds"
+        ],
+        "count": 9,
+        "salience": 5,
+        "position": "center background",
+        "evidence": "group of tall palms with thin trunks and fan-shaped tops rising above other trees",
+        "confidence": 0.97
+      },
+      {
+        "id": "e7",
+        "label": "large leafy trees on right",
+        "category": "plant",
+        "attributes": [
+          "dense",
+          "green foliage",
+          "large"
+        ],
+        "count": 2,
+        "salience": 4,
+        "position": "right foreground",
+        "evidence": "large trees with thick green canopies occupying right edge of image",
+        "confidence": 0.96
+      },
+      {
+        "id": "e8",
+        "label": "grassy shoreline and park area",
+        "category": "terrain",
+        "attributes": [
+          "green grass",
+          "stone edge",
+          "along water"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "middle ground along lake",
+        "evidence": "grassy banks bordering lake where people are gathered",
+        "confidence": 0.94
+      },
+      {
+        "id": "e9",
+        "label": "group of people on grass and bridge and boats",
+        "category": "person_group",
+        "attributes": [
+          "scattered",
+          "various clothing colors",
+          "sitting, standing, walking, boating"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "middle ground across park and on water",
+        "evidence": "numerous small figures distributed on grassy banks, on bridge, and in boats",
+        "confidence": 0.88
+      },
+      {
+        "id": "e10",
+        "label": "elevated roadway overpass",
+        "category": "structure",
+        "attributes": [
+          "light-colored",
+          "elevated",
+          "horizontal"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "middle background behind trees",
+        "evidence": "light concrete overpass structure visible through trees behind park",
+        "confidence": 0.88
+      },
+      {
+        "id": "e11",
+        "label": "giraffe sculptures near trees",
+        "category": "object",
+        "attributes": [
+          "brown",
+          "tall",
+          "animal-shaped"
+        ],
+        "count": 2,
+        "salience": 2,
+        "position": "left middle ground",
+        "evidence": "tall brown giraffe figures standing among trees on left bank",
+        "confidence": 0.85
+      },
+      {
+        "id": "e12",
+        "label": "sky with light clouds",
+        "category": "other",
+        "attributes": [
+          "blue",
+          "light clouds",
+          "bright"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "upper background",
+        "evidence": "clear blue sky occupying upper half of image with faint white clouds",
+        "confidence": 0.99
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e5",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e6",
+        "predicate": "behind",
+        "object": "e8",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e7",
+        "predicate": "right_of",
+        "object": "e6",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e8",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e11",
+        "predicate": "on",
+        "object": "e8",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e10",
+        "predicate": "behind",
+        "object": "e6",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e4",
+        "predicate": "left_of",
+        "object": "e6",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e3",
+        "predicate": "beside",
+        "object": "e7",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 35,
+      "count_confidence": 0.6,
+      "faces_visible": false,
+      "activities": [
+        "boating on pedal boats",
+        "walking across bridge",
+        "sitting and standing on grassy banks"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people is uncertain due to distance, occlusion by trees, and small figure size",
+      "Text on distant high-rise building is too small and blurry to read reliably - omitted because fewer than 3 letters are clearly legible",
+      "Specific names of buildings, park, or geographic location cannot be determined from image alone",
+      "Exact time of day beyond daytime cannot be determined",
+      "Species of trees and plants cannot be confirmed",
+      "Details of clothing, facial features, and individual activities are not discernible at this distance"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 35,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:18:36+00:00",
+        "raw_output_path": "data/annotations/raw/park_023_attempt1.txt",
+        "tokens": 10408
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

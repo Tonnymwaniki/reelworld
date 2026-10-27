@@ -1,0 +1,385 @@
+{
+  "photo_id": "street_025",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_025.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:River_Road_(Nairobi),_2025_(01).jpg",
+    "title": "File:River Road (Nairobi), 2025 (01).jpg"
+  },
+  "observed": {
+    "caption": "A crowded outdoor street market with clothing stalls, shoppers walking along a paved road, and multi-story buildings in the background.",
+    "description": "The foreground shows a street vendor stall covered with a purple and white checkered cloth displaying folded clothing, knit hats with pom-poms, and other garments, next to a black and white striped bollard and a blue plastic stool with green fabric. Behind it, another table holds small packaged goods. Numerous people are walking along a paved street, some carrying bags, wearing casual clothing such as hoodies, jackets, vests, and jeans. To the right, a long row of hanging jackets and folded jeans is displayed under awnings. To the left, an orange building with steps has two people sitting. In the middle distance, white vans are parked along the street and several colorful signs are mounted above the crowd. Multi-story buildings with balconies and windows line the background under a bright overcast sky, with utility poles and wires visible.",
+    "retrieval_queries": [
+      "busy outdoor street market with clothing stalls and crowds of shoppers",
+      "crowded urban market street with vendors selling jackets and hats",
+      "people walking through a street bazaar with vans and buildings in the background"
+    ],
+    "tags": [
+      "street market",
+      "outdoor bazaar",
+      "crowded street",
+      "clothing vendors",
+      "urban market",
+      "daytime shopping",
+      "paved street",
+      "market stalls"
+    ],
+    "scene": {
+      "type": "market",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "natural daylight",
+      "crowd_level": "busy",
+      "activity_summary": "shopping and walking through street market"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "down the street toward buildings",
+      "distance": "close",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "street market stalls and shoppers"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "foreground clothing stall with hats",
+        "category": "structure",
+        "attributes": [
+          "purple and white checkered cloth",
+          "folded garments",
+          "knit hats with pom-poms",
+          "displayed on tire base"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground center-bottom",
+        "evidence": "cloth-covered stall with hats and clothing in lower center",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "crowd of people walking and shopping",
+        "category": "person_group",
+        "attributes": [
+          "walking",
+          "standing",
+          "casual clothing including hoodies, vests, jackets, jeans",
+          "carrying bags"
+        ],
+        "count": 28,
+        "salience": 5,
+        "position": "center and middle distance",
+        "evidence": "numerous individuals walking and browsing along street",
+        "confidence": 0.85
+      },
+      {
+        "id": "e3",
+        "label": "hanging clothing display on right",
+        "category": "structure",
+        "attributes": [
+          "hanging jackets",
+          "folded jeans on tables",
+          "under awnings"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right side",
+        "evidence": "row of jackets hanging and stacks of jeans along right edge",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "multi-story buildings in background",
+        "category": "building",
+        "attributes": [
+          "multi-story",
+          "balconies",
+          "windows",
+          "weathered facades"
+        ],
+        "count": 4,
+        "salience": 3,
+        "position": "background center and right",
+        "evidence": "tall buildings with balconies lining street in distance",
+        "confidence": 0.92
+      },
+      {
+        "id": "e5",
+        "label": "white vans parked along street",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "parked",
+          "vans/minibuses"
+        ],
+        "count": 3,
+        "salience": 3,
+        "position": "center middle distance",
+        "evidence": "white vans visible behind crowd",
+        "confidence": 0.88
+      },
+      {
+        "id": "e6",
+        "label": "paved street surface",
+        "category": "terrain",
+        "attributes": [
+          "paved",
+          "concrete",
+          "worn surface"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "foreground and center",
+        "evidence": "paved road surface extending through market",
+        "confidence": 0.97
+      },
+      {
+        "id": "e7",
+        "label": "black and white bollard posts",
+        "category": "object",
+        "attributes": [
+          "black and white striped",
+          "metal",
+          "bollard posts"
+        ],
+        "count": 2,
+        "salience": 2,
+        "position": "left foreground",
+        "evidence": "two striped posts beside foreground stall",
+        "confidence": 0.95
+      },
+      {
+        "id": "e8",
+        "label": "vendor table with small packaged goods",
+        "category": "structure",
+        "attributes": [
+          "small packaged goods",
+          "table display",
+          "colorful items"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center foreground behind main stall",
+        "evidence": "table with assorted small goods behind foreground stall",
+        "confidence": 0.9
+      },
+      {
+        "id": "e9",
+        "label": "orange storefront building on left",
+        "category": "building",
+        "attributes": [
+          "orange facade",
+          "steps",
+          "storefront"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "left side",
+        "evidence": "orange building with steps and signage on left edge",
+        "confidence": 0.93
+      },
+      {
+        "id": "e10",
+        "label": "billboard on upper right building",
+        "category": "sign",
+        "attributes": [
+          "large",
+          "pink and white",
+          "billboard"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top right",
+        "evidence": "large billboard with pink oval above right-side shops",
+        "confidence": 0.9
+      },
+      {
+        "id": "e11",
+        "label": "utility poles with overhead wires",
+        "category": "structure",
+        "attributes": [
+          "tall",
+          "utility poles",
+          "overhead wires"
+        ],
+        "count": 3,
+        "salience": 1,
+        "position": "background center",
+        "evidence": "poles with wires rising above buildings and crowd",
+        "confidence": 0.85
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "near",
+        "object": "e7",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e6",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e6",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e3",
+        "predicate": "beside",
+        "object": "e6",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e8",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e3",
+        "predicate": "right_of",
+        "object": "e2",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e9",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e10",
+        "predicate": "above",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e5",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e6",
+        "confidence": 0.96
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "ARMELLE",
+        "language": "en",
+        "entity_id": "e10",
+        "location_in_image": "top right billboard",
+        "legibility": "clear",
+        "confidence": 0.95
+      },
+      {
+        "text": "KAJIADO",
+        "language": "sw",
+        "entity_id": null,
+        "location_in_image": "center middle distance sign",
+        "legibility": "clear",
+        "confidence": 0.85
+      },
+      {
+        "text": "BISSI",
+        "language": "sw",
+        "entity_id": null,
+        "location_in_image": "center sign",
+        "legibility": "partial",
+        "confidence": 0.65
+      },
+      {
+        "text": "NAMANGA BISSIL",
+        "language": "sw",
+        "entity_id": null,
+        "location_in_image": "center sign",
+        "legibility": "partial",
+        "confidence": 0.7
+      },
+      {
+        "text": "KWADO EXPRESS",
+        "language": "sw",
+        "entity_id": null,
+        "location_in_image": "center-right sign",
+        "legibility": "partial",
+        "confidence": 0.68
+      },
+      {
+        "text": "SPORTS",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "foreground stall on knit hats",
+        "legibility": "clear",
+        "confidence": 0.96
+      }
+    ],
+    "people": {
+      "count": 28,
+      "count_confidence": 0.65,
+      "faces_visible": true,
+      "activities": [
+        "walking",
+        "shopping",
+        "standing",
+        "sitting"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people due to crowding, occlusion and distance",
+      "Full text of several distant blurry signs where fewer than 3 letters are legible",
+      "Exact wording and spelling on partially visible or blurry destination signs",
+      "Specific identities, ages or genders of individuals",
+      "Exact time of day beyond daytime and weather beyond visible sky",
+      "Text printed on people's clothing or bags was ignored per rules",
+      "License plate numbers and small label text not legible"
+    ]
+  },
+  "privacy": {
+    "faces_visible": true,
+    "people_count": 28,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:22:32+00:00",
+        "raw_output_path": "data/annotations/raw/street_025_attempt1.txt",
+        "tokens": 14583
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'BISSI'",
+        "partially legible text: 'NAMANGA BISSIL'",
+        "partially legible text: 'KWADO EXPRESS'"
+      ]
+    }
+  }
+}

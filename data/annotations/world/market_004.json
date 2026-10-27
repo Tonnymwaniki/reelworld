@@ -1,0 +1,337 @@
+{
+  "photo_id": "market_004",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_004.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Masssly",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Art_cafe_market_in_Nairobi-_Kenya_2.jpg",
+    "title": "File:Art cafe market in Nairobi- Kenya 2.jpg"
+  },
+  "observed": {
+    "caption": "An illuminated Artcaffè Market neon sign glows on a brick wall in an indoor corridor with easels and potted plants.",
+    "description": "A textured light-brown brick wall occupies the center of the image with a glowing neon sign mounted on it, the upper line in white-blue and the lower line in green. To the left is a brick arch with a black metal tiered stand holding three potted green plants in white pots. In the foreground and midground along the wall are two wooden A-frame easels holding light-colored display boards on a tiled floor that is light along the wall and dark further into the corridor. In the background a tall arched brick doorway leads further inside, and on the far right wall a wheeled gray cleaning utility cart with bins sits near cleaning tools. The lighting is dim and artificial, dominated by the neon glow reflecting on the wall and floor.",
+    "retrieval_queries": [
+      "neon Artcaffe Market sign on brick wall in corridor",
+      "indoor brick hallway with easels and glowing market sign",
+      "illuminated green and white Artcaffe sign at night indoors"
+    ],
+    "tags": [
+      "neon sign",
+      "brick wall",
+      "market",
+      "corridor",
+      "easel",
+      "indoor",
+      "night",
+      "illuminated",
+      "plants"
+    ],
+    "scene": {
+      "type": "building",
+      "setting": "indoor",
+      "time_of_day": "night",
+      "weather": "unknown",
+      "lighting": "dim artificial with neon glow",
+      "crowd_level": "empty",
+      "activity_summary": "empty corridor with no activity"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the brick wall along the corridor",
+      "distance": "close",
+      "framing": "medium",
+      "orientation": "portrait",
+      "subject_focus": "illuminated Artcaffè Market sign on wall"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "textured brick wall",
+        "category": "structure",
+        "attributes": [
+          "light brown",
+          "rough texture",
+          "vertical"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "large brick wall occupying central and right portion with illuminated sign mounted on it",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "illuminated sign text Artcaffè",
+        "category": "sign",
+        "attributes": [
+          "white neon",
+          "glowing",
+          "serif lettering"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "upper line of neon lettering spelling Artcaffè with blue-white glow on brick wall",
+        "confidence": 0.99
+      },
+      {
+        "id": "e3",
+        "label": "illuminated sign text Market",
+        "category": "sign",
+        "attributes": [
+          "green neon",
+          "glowing",
+          "serif lettering"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "lower line of neon lettering spelling Market with green glow below Artcaffè",
+        "confidence": 0.99
+      },
+      {
+        "id": "e4",
+        "label": "arched brick alcove and doorway",
+        "category": "structure",
+        "attributes": [
+          "arched",
+          "brick",
+          "recessed"
+        ],
+        "count": 2,
+        "salience": 3,
+        "position": "left and center-right background",
+        "evidence": "brick arch on left edge and tall arched doorway in background on right side of wall",
+        "confidence": 0.95
+      },
+      {
+        "id": "e5",
+        "label": "tiered plant stand with potted plants",
+        "category": "plant",
+        "attributes": [
+          "green foliage",
+          "white pots",
+          "black metal stand"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left",
+        "evidence": "three potted green plants stacked vertically on black stand against brick arch",
+        "confidence": 0.97
+      },
+      {
+        "id": "e6",
+        "label": "wooden easel with display board in foreground",
+        "category": "object",
+        "attributes": [
+          "wooden",
+          "A-frame",
+          "light board"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-foreground",
+        "evidence": "wooden A-frame easel holding a light-colored board closest to camera along wall",
+        "confidence": 0.96
+      },
+      {
+        "id": "e7",
+        "label": "wooden easel with display board in background",
+        "category": "object",
+        "attributes": [
+          "wooden",
+          "A-frame",
+          "angled board"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-right",
+        "evidence": "second wooden A-frame easel holding a board further down the corridor",
+        "confidence": 0.94
+      },
+      {
+        "id": "e8",
+        "label": "tiled floor",
+        "category": "terrain",
+        "attributes": [
+          "dark tiles",
+          "light tiles",
+          "reflective"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom and right",
+        "evidence": "floor with dark tiles on right and light tiles along wall where easels stand",
+        "confidence": 0.97
+      },
+      {
+        "id": "e9",
+        "label": "cleaning utility cart",
+        "category": "object",
+        "attributes": [
+          "gray",
+          "wheeled",
+          "with bins"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "far right background",
+        "evidence": "wheeled cart with containers and cleaning supplies against far right wall",
+        "confidence": 0.92
+      },
+      {
+        "id": "e10",
+        "label": "wall vent",
+        "category": "object",
+        "attributes": [
+          "small",
+          "dark",
+          "rectangular"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "center-bottom",
+        "evidence": "small dark rectangular vent near base of brick wall below neon sign",
+        "confidence": 0.88
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e3",
+        "predicate": "below",
+        "object": "e2",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e5",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e6",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e7",
+        "predicate": "behind",
+        "object": "e6",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e10",
+        "predicate": "below",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e8",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e8",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e9",
+        "predicate": "near",
+        "object": "e4",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e5",
+        "predicate": "beside",
+        "object": "e4",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e9",
+        "predicate": "right_of",
+        "object": "e7",
+        "confidence": 0.92
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "Artcaffè",
+        "language": "other",
+        "entity_id": "e2",
+        "location_in_image": "center on brick wall, upper line",
+        "legibility": "clear",
+        "confidence": 0.99
+      },
+      {
+        "text": "Market",
+        "language": "en",
+        "entity_id": "e3",
+        "location_in_image": "center on brick wall, lower line below Artcaffè",
+        "legibility": "clear",
+        "confidence": 0.99
+      }
+    ],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.99,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Text or images on the easel display boards are not legible due to angle and glare",
+      "Exact geographic location of the Artcaffè Market cannot be determined from the photo",
+      "Whether the market area beyond the arch is open or closed",
+      "Time of day outside the building and weather conditions",
+      "Details of objects on the cleaning utility cart"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:13:19+00:00",
+        "raw_output_path": "data/annotations/raw/market_004_attempt1.txt",
+        "tokens": 10055
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

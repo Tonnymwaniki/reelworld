@@ -1,0 +1,313 @@
+{
+  "photo_id": "market_007",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_007.jpg",
+    "license": "CC BY 4.0",
+    "author": "Stowe14",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Colorful_beaded_necklaces_at_Nairobi_City_Market_in_Kenya.jpg",
+    "title": "File:Colorful beaded necklaces at Nairobi City Market in Kenya.jpg"
+  },
+  "observed": {
+    "caption": "Colorful beaded necklaces and plaid textiles displayed on a market stall.",
+    "description": "A wooden display board with dark blue backing holds multiple rows of large, circular, multicolored beaded collar necklaces on hooks, with a cluster of black cord necklaces with light-colored pendants hanging in the center and several long, thin, multicolored and light blue beaded strand necklaces hanging vertically on the right side of the board. To the right of the board hang several folded plaid fabrics with fringed ends in blue, green, and red patterns, beside patterned garments with geometric prints in blue, yellow, and red. At the base of the display are framed paintings leaning against the board, one showing an elephant and landscape with green and yellow tones. In the background to the right, a dimly lit market interior with shelves holding footwear and additional goods is visible on a concrete floor.",
+    "retrieval_queries": [
+      "colorful African beaded necklaces hanging on market display",
+      "Maasai style jewelry and plaid shuka fabrics at souvenir stall",
+      "close up of handmade beaded collar necklaces for sale"
+    ],
+    "tags": [
+      "market stall",
+      "beaded necklaces",
+      "African crafts",
+      "plaid shuka",
+      "handmade jewelry",
+      "textiles",
+      "souvenir shop"
+    ],
+    "scene": {
+      "type": "market",
+      "setting": "indoor",
+      "time_of_day": "unknown",
+      "weather": "unknown",
+      "lighting": "bright even indoor lighting",
+      "crowd_level": "empty",
+      "activity_summary": "crafts and jewelry on display for sale"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the display board",
+      "distance": "close",
+      "framing": "medium",
+      "orientation": "landscape",
+      "subject_focus": "beaded necklaces and textiles display"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "upper beaded collar necklaces",
+        "category": "object",
+        "attributes": [
+          "multicolored",
+          "circular",
+          "beaded",
+          "large"
+        ],
+        "count": 7,
+        "salience": 5,
+        "position": "upper center",
+        "evidence": "multiple bright circular necklaces hanging from top wooden rail on blue backing",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "lower beaded collar necklaces",
+        "category": "object",
+        "attributes": [
+          "multicolored",
+          "circular",
+          "beaded",
+          "patterned"
+        ],
+        "count": 6,
+        "salience": 5,
+        "position": "lower left to center",
+        "evidence": "large beaded necklaces hanging from bottom wooden rail, including blue and multicolor designs",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "black pendant necklaces cluster",
+        "category": "object",
+        "attributes": [
+          "black cords",
+          "light pendants",
+          "clustered",
+          "hanging"
+        ],
+        "count": 6,
+        "salience": 4,
+        "position": "center",
+        "evidence": "bunch of black string necklaces with white and brown rectangular pendants hanging below upper necklaces",
+        "confidence": 0.95
+      },
+      {
+        "id": "e4",
+        "label": "long strand beaded necklaces",
+        "category": "object",
+        "attributes": [
+          "long",
+          "thin",
+          "multicolored and light blue",
+          "fringed"
+        ],
+        "count": 5,
+        "salience": 4,
+        "position": "right-center",
+        "evidence": "vertical long beaded strands in yellow, multicolor, and light blue hanging beside pendant cluster",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "plaid fringed shuka fabrics",
+        "category": "object",
+        "attributes": [
+          "plaid",
+          "fringed ends",
+          "red, green, blue",
+          "folded hanging"
+        ],
+        "count": 4,
+        "salience": 5,
+        "position": "right",
+        "evidence": "four vertically hanging plaid cloths with tassels in blue, green, and red check patterns",
+        "confidence": 0.98
+      },
+      {
+        "id": "e6",
+        "label": "patterned African print garments",
+        "category": "object",
+        "attributes": [
+          "geometric print",
+          "blue, yellow, red",
+          "hanging"
+        ],
+        "count": 2,
+        "salience": 4,
+        "position": "far right",
+        "evidence": "colorful garments with bold triangular and abstract patterns hanging beside plaid fabrics",
+        "confidence": 0.92
+      },
+      {
+        "id": "e7",
+        "label": "framed paintings at base",
+        "category": "object",
+        "attributes": [
+          "framed",
+          "colorful",
+          "leaning",
+          "landscape and animal motifs"
+        ],
+        "count": 4,
+        "salience": 3,
+        "position": "bottom",
+        "evidence": "artworks leaning against display base, one with elephant and green-yellow sky, others partially visible on right",
+        "confidence": 0.9
+      },
+      {
+        "id": "e8",
+        "label": "wooden display frame",
+        "category": "structure",
+        "attributes": [
+          "wooden rails",
+          "vertical supports",
+          "dark blue backing"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center",
+        "evidence": "light wood horizontal rails and vertical posts forming the jewelry display structure",
+        "confidence": 0.97
+      },
+      {
+        "id": "e9",
+        "label": "background market stall with footwear",
+        "category": "structure",
+        "attributes": [
+          "shelves",
+          "footwear",
+          "dimly lit",
+          "indoor"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "background right",
+        "evidence": "blurred shelves with sandals and goods visible in the interior behind the main display",
+        "confidence": 0.85
+      },
+      {
+        "id": "e10",
+        "label": "dark blue fabric backing",
+        "category": "object",
+        "attributes": [
+          "dark blue",
+          "textured",
+          "vertical"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center background",
+        "evidence": "dark blue cloth covering the display board behind the necklaces",
+        "confidence": 0.96
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "above",
+        "object": "e2",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e5",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e2",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e3",
+        "predicate": "beside",
+        "object": "e4",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e4",
+        "predicate": "left_of",
+        "object": "e5",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e5",
+        "predicate": "right_of",
+        "object": "e4",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e7",
+        "predicate": "below",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e6",
+        "predicate": "right_of",
+        "object": "e5",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e9",
+        "predicate": "behind",
+        "object": "e5",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e10",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.96
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.99,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact materials and construction of necklaces and fabrics cannot be determined from photo",
+      "Whether any small labels or price tags with text are present but too small or blurry to read",
+      "Text or details on background shelves and footwear in the distant market interior are not legible",
+      "Geographic location and cultural origin beyond visual style cannot be confirmed from image alone",
+      "Lighting source and time of day outside the indoor market cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:13:28+00:00",
+        "raw_output_path": "data/annotations/raw/market_007_attempt1.txt",
+        "tokens": 6948
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

@@ -1,0 +1,322 @@
+{
+  "photo_id": "hills_021",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_021.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Dennis kipkogei",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ngong_Hills_with_my_Subaru.jpg",
+    "title": "File:Ngong Hills with my Subaru.jpg"
+  },
+  "observed": {
+    "caption": "A person in a white shirt and dark pants stands on the roof of a black SUV parked on a grassy hilltop under a partly cloudy sky.",
+    "description": "A single person wearing a white t-shirt and dark jeans stands upright on the roof of a black, mud-splattered SUV viewed from the rear, with the vehicle's left rear door open outward. The SUV is parked on patchy dry grass and brown dirt at the edge of a hilltop overlooking a distant hazy valley and lowlands. The sky above is bright blue with large white and gray clouds, and small pieces of litter are scattered on the ground in the foreground.",
+    "retrieval_queries": [
+      "person standing on roof of black SUV on hilltop overlooking valley",
+      "man on top of Subaru Forester parked on grassy hill with cloudy sky",
+      "black car with open door on hilltop with someone standing on roof"
+    ],
+    "tags": [
+      "person on car roof",
+      "black SUV hilltop",
+      "grassy overlook",
+      "cloudy sky",
+      "Subaru Forester",
+      "valley view"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "bright natural daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "person standing on SUV roof on hilltop"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the person and vehicle on hilltop",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "portrait",
+      "subject_focus": "person standing on SUV roof"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "person standing on vehicle roof",
+        "category": "person_group",
+        "attributes": [
+          "wearing white t-shirt",
+          "wearing dark jeans",
+          "standing upright"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "person standing on roof of SUV with hands near waist, facing camera",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "black SUV",
+        "category": "vehicle",
+        "attributes": [
+          "black",
+          "muddy and dirty",
+          "rear view",
+          "Subaru Forester XT"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "black SUV with yellow license plate viewed from rear, parked on hill",
+        "confidence": 0.99
+      },
+      {
+        "id": "e3",
+        "label": "grassy hilltop terrain",
+        "category": "terrain",
+        "attributes": [
+          "patchy dry grass",
+          "brown dirt",
+          "elevated overlook"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground and midground",
+        "evidence": "dry grass and exposed soil extending to hill edge",
+        "confidence": 0.97
+      },
+      {
+        "id": "e4",
+        "label": "sky with clouds",
+        "category": "other",
+        "attributes": [
+          "blue sky",
+          "white and gray cumulus clouds",
+          "partly cloudy"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "upper background",
+        "evidence": "expansive sky occupying upper two-thirds of image with scattered clouds",
+        "confidence": 0.99
+      },
+      {
+        "id": "e5",
+        "label": "distant valley landscape",
+        "category": "terrain",
+        "attributes": [
+          "hazy",
+          "flat lowlands",
+          "distant horizon"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "background",
+        "evidence": "wide valley and plains visible beyond hilltop edge under horizon",
+        "confidence": 0.92
+      },
+      {
+        "id": "e6",
+        "label": "yellow license plate",
+        "category": "object",
+        "attributes": [
+          "yellow",
+          "rectangular",
+          "black text"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-right on vehicle rear",
+        "evidence": "yellow plate with black characters on rear bumper of SUV",
+        "confidence": 0.98
+      },
+      {
+        "id": "e7",
+        "label": "open rear vehicle door",
+        "category": "object",
+        "attributes": [
+          "black",
+          "open outward",
+          "left side rear"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-left",
+        "evidence": "left rear door swung open away from vehicle body",
+        "confidence": 0.97
+      },
+      {
+        "id": "e8",
+        "label": "dry grass and dirt foreground",
+        "category": "terrain",
+        "attributes": [
+          "brown soil",
+          "sparse dry grass",
+          "uneven texture"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "foreground",
+        "evidence": "close-up ground texture with dry grass and exposed reddish soil",
+        "confidence": 0.95
+      },
+      {
+        "id": "e9",
+        "label": "small litter on ground",
+        "category": "object",
+        "attributes": [
+          "small",
+          "scattered",
+          "red and white fragment"
+        ],
+        "count": 3,
+        "salience": 1,
+        "position": "foreground bottom center",
+        "evidence": "small pieces of trash on dirt near bottom of image",
+        "confidence": 0.75
+      },
+      {
+        "id": "e10",
+        "label": "vehicle antenna",
+        "category": "object",
+        "attributes": [
+          "thin",
+          "black",
+          "vertical on roof"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "center-right on vehicle roof",
+        "evidence": "thin antenna protruding from rear roof of SUV",
+        "confidence": 0.85
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e1",
+        "predicate": "above",
+        "object": "e3",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e2",
+        "predicate": "below",
+        "object": "e4",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e3",
+        "predicate": "in_front_of",
+        "object": "e5",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e10",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e9",
+        "predicate": "near",
+        "object": "e2",
+        "confidence": 0.7
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "KCG 063P",
+        "language": "en",
+        "entity_id": "e6",
+        "location_in_image": "center on rear bumper of vehicle",
+        "legibility": "clear",
+        "confidence": 0.98
+      },
+      {
+        "text": "FORESTER XT",
+        "language": "en",
+        "entity_id": "e2",
+        "location_in_image": "right side of vehicle rear",
+        "legibility": "partial",
+        "confidence": 0.72
+      }
+    ],
+    "people": {
+      "count": 1,
+      "count_confidence": 0.99,
+      "faces_visible": true,
+      "activities": [
+        "standing on vehicle roof"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "exact geographic location of hilltop cannot be determined",
+      "exact time of day beyond daytime cannot be determined",
+      "person's identity and age cannot be determined",
+      "vehicle ownership and condition history cannot be determined",
+      "small badge text and stickers on rear window are blurry and not fully legible",
+      "weather temperature and wind conditions cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": true,
+    "people_count": 1,
+    "license_plates_visible": true,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:11:32+00:00",
+        "raw_output_path": "data/annotations/raw/hills_021_attempt2.txt",
+        "tokens": 10318
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'FORESTER XT'"
+      ]
+    }
+  }
+}

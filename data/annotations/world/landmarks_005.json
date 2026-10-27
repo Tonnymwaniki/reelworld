@@ -1,0 +1,289 @@
+{
+  "photo_id": "landmarks_005",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/landmarks/landmarks_005.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "IndicibleEspace",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Kenyatta_International_Convention_Centre,_Nairobi,_by_Karl_Henrik_N%C3%B8stvik_architect,_entrance.jpg",
+    "title": "File:Kenyatta International Convention Centre, Nairobi, by Karl Henrik Nøstvik architect, entrance.jpg"
+  },
+  "observed": {
+    "caption": "Sunlit brutalist concrete building with layered terraces and zigzagging ramps under a partly cloudy sky.",
+    "description": "A multi-level brutalist concrete building dominates the frame with cantilevered terraces, deep overhangs, and zigzagging exterior ramps with dark metal railings. The textured concrete surfaces show weathering and rust staining under the overhangs. Green potted plants sit on several terrace levels. Large glass windows are visible behind the upper balconies, with air conditioning units mounted under the concrete soffits. Blue pipes run beneath the lowest ramp. The sky in the upper left is bright with scattered clouds, casting strong daylight shadows across the structure. No people are clearly visible.",
+    "retrieval_queries": [
+      "brutalist concrete building with zigzag ramps and terraces",
+      "Kenyatta International Conference Centre exterior architecture",
+      "modernist concrete terraces with plants and metal railings"
+    ],
+    "tags": [
+      "brutalist architecture",
+      "concrete building",
+      "terraced balconies",
+      "exterior ramp",
+      "modernist structure"
+    ],
+    "scene": {
+      "type": "building",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "bright daylight with strong shadows",
+      "crowd_level": "empty",
+      "activity_summary": "no visible activity"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the terraced building facade",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "terraced concrete ramps and balconies"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "brutalist concrete building with terraced levels",
+        "category": "building",
+        "attributes": [
+          "multi-level",
+          "weathered concrete",
+          "cantilevered terraces",
+          "large glass windows"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center and right",
+        "evidence": "dominant structure filling most of frame with layered concrete floors and overhangs",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "zigzagging exterior concrete ramp with metal railing",
+        "category": "structure",
+        "attributes": [
+          "sloped",
+          "textured concrete",
+          "dark metal railing",
+          "diagonal"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground center-right",
+        "evidence": "prominent sloped walkway with vertical metal balusters crossing diagonally in foreground",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "lower exterior concrete ramp",
+        "category": "structure",
+        "attributes": [
+          "sloped",
+          "textured concrete",
+          "dark metal railing",
+          "angled"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "bottom center",
+        "evidence": "second sloped walkway below the main ramp extending toward left",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "cantilevered concrete terrace with overhang",
+        "category": "structure",
+        "attributes": [
+          "flat roof",
+          "deep overhang",
+          "exposed beams",
+          "weathered"
+        ],
+        "count": 3,
+        "salience": 4,
+        "position": "center and upper right",
+        "evidence": "horizontal concrete platforms with thick beam supports projecting from building",
+        "confidence": 0.95
+      },
+      {
+        "id": "e5",
+        "label": "potted green plants",
+        "category": "plant",
+        "attributes": [
+          "green foliage",
+          "potted",
+          "tropical leaves"
+        ],
+        "count": 6,
+        "salience": 3,
+        "position": "on terraces center and left",
+        "evidence": "clusters of green leaves in planters on balcony edges and ramp sides",
+        "confidence": 0.92
+      },
+      {
+        "id": "e6",
+        "label": "glass window wall",
+        "category": "structure",
+        "attributes": [
+          "reflective",
+          "floor-to-ceiling",
+          "behind railing"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "upper right behind terrace",
+        "evidence": "reflective glass panels visible behind metal railing on upper level",
+        "confidence": 0.9
+      },
+      {
+        "id": "e7",
+        "label": "air conditioning units",
+        "category": "object",
+        "attributes": [
+          "white rectangular",
+          "mounted under soffit"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "upper right under overhang",
+        "evidence": "boxy white units attached to ceiling under concrete overhang",
+        "confidence": 0.88
+      },
+      {
+        "id": "e8",
+        "label": "blue pipes",
+        "category": "object",
+        "attributes": [
+          "light blue",
+          "horizontal",
+          "industrial"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom left under ramp",
+        "evidence": "light blue horizontal pipes running along ground level beneath structure",
+        "confidence": 0.9
+      },
+      {
+        "id": "e9",
+        "label": "concrete support pillars",
+        "category": "structure",
+        "attributes": [
+          "thick",
+          "cylindrical",
+          "textured concrete"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "bottom center and right under ramps",
+        "evidence": "vertical concrete columns supporting lower ramp levels",
+        "confidence": 0.91
+      },
+      {
+        "id": "e10",
+        "label": "partly cloudy sky",
+        "category": "terrain",
+        "attributes": [
+          "bright",
+          "white clouds",
+          "pale blue"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "upper left background",
+        "evidence": "bright sky with soft white clouds visible above building",
+        "confidence": 0.97
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e3",
+        "predicate": "below",
+        "object": "e2",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e7",
+        "predicate": "below",
+        "object": "e4",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e6",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.89
+      },
+      {
+        "subject": "e8",
+        "predicate": "below",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e9",
+        "predicate": "below",
+        "object": "e2",
+        "confidence": 0.92
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.85,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Text on brown stone sign on middle ramp is illegible and cut off, cannot be transcribed",
+      "Small light-colored shape near blue pipes at bottom left cannot be confirmed as a person or object due to distance and blur",
+      "Exact building name, location, and interior layout cannot be determined from exterior view alone",
+      "Number of floors and rooms inside building not visible",
+      "Weather conditions beyond visible sky patch unknown"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:11:50+00:00",
+        "raw_output_path": "data/annotations/raw/landmarks_005_attempt1.txt",
+        "tokens": 5818
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

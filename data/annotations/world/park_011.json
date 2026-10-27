@@ -1,0 +1,310 @@
+{
+  "photo_id": "park_011",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_011.jpg",
+    "license": "CC BY 2.0",
+    "author": "Ian Alexander",
+    "source_url": "https://commons.wikimedia.org/wiki/File:National_Monument_at_Uhuru_Park.jpg",
+    "title": "File:National Monument at Uhuru Park.jpg"
+  },
+  "observed": {
+    "caption": "Four dark statues jointly raise a flag on a stone monument under a blue sky with scattered clouds.",
+    "description": "A large stone monument base made of light brown layered blocks occupies the lower portion of the image, with a small rectangular plaque mounted on its lower left side and a dark arched opening on the lower right. On top of the base stand four dark, weathered statues of human figures in dynamic poses jointly holding a long silver flagpole angled upward to the left, topped with a spear finial. A flag with horizontal black, red, and green stripes separated by thin white lines and a central shield emblem hangs from the pole, showing some discoloration. The background is a bright blue sky with scattered white clouds, with the dark green top of a tree visible behind the base on the far left and a small patch of foliage at the bottom right edge, and a small dark spotlight fixture sits on the top surface of the base near the statues' feet.",
+    "retrieval_queries": [
+      "statues raising flag on stone monument against blue sky",
+      "bronze sculpture of four figures lifting flagpole outdoors",
+      "national monument with flag and cloudy sky"
+    ],
+    "tags": [
+      "monument",
+      "statue",
+      "flag",
+      "flagpole",
+      "stone pedestal",
+      "outdoor sculpture",
+      "sky",
+      "clouds",
+      "plaque"
+    ],
+    "scene": {
+      "type": "other",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "bright natural daylight",
+      "crowd_level": "empty",
+      "activity_summary": "static monument with flag-raising sculpture"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "upward toward monument",
+      "distance": "medium",
+      "framing": "medium",
+      "orientation": "landscape",
+      "subject_focus": "monument with flag-raising statues"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "stone monument base",
+        "category": "structure",
+        "attributes": [
+          "light brown",
+          "layered stone blocks",
+          "weathered",
+          "elevated platform",
+          "arched opening on right"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "lower center and bottom",
+        "evidence": "large rectangular stone structure supporting statues with visible block pattern and arch",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "group of four statues raising flagpole",
+        "category": "object",
+        "attributes": [
+          "dark bronze or black",
+          "human figures in dynamic poses",
+          "weathered paint patches",
+          "life-sized"
+        ],
+        "count": 4,
+        "salience": 5,
+        "position": "center",
+        "evidence": "four sculpted figures jointly holding and lifting a long pole with flag",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "flag with black, red, green horizontal stripes and central emblem",
+        "category": "object",
+        "attributes": [
+          "tricolor",
+          "black top stripe",
+          "red middle stripe",
+          "green bottom stripe",
+          "white fimbriation",
+          "shield emblem in center",
+          "slightly wavy",
+          "rust discoloration"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "upper center-left",
+        "evidence": "flag attached to top of pole displaying horizontal bands and central shield motif",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "flagpole with spear tip",
+        "category": "object",
+        "attributes": [
+          "silver metallic",
+          "long diagonal pole",
+          "pointed spear finial at top"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center to upper left diagonal",
+        "evidence": "long pole extending from statues' hands upward to spear point holding flag",
+        "confidence": 0.98
+      },
+      {
+        "id": "e5",
+        "label": "rectangular commemorative plaque",
+        "category": "sign",
+        "attributes": [
+          "light colored",
+          "mounted on stone base",
+          "multiple lines of small text",
+          "blurry illegible"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "lower left on base",
+        "evidence": "small light rectangle affixed to stone wall with engraved text not clearly readable",
+        "confidence": 0.85
+      },
+      {
+        "id": "e6",
+        "label": "blue sky with scattered white clouds",
+        "category": "other",
+        "attributes": [
+          "pale blue",
+          "partly cloudy",
+          "soft white cumulus clouds"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "background upper and left",
+        "evidence": "expansive sky occupying upper two-thirds of image with cloud formations",
+        "confidence": 0.99
+      },
+      {
+        "id": "e7",
+        "label": "tall tree with dark green foliage",
+        "category": "plant",
+        "attributes": [
+          "dark green",
+          "conical canopy",
+          "distant"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "far left background",
+        "evidence": "tree top visible behind monument base against sky",
+        "confidence": 0.88
+      },
+      {
+        "id": "e8",
+        "label": "small spotlight fixture",
+        "category": "object",
+        "attributes": [
+          "dark",
+          "box-shaped",
+          "mounted on pedestal top"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "center-right on top of base near statues' feet",
+        "evidence": "small dark rectangular object on stone surface between statue feet",
+        "confidence": 0.75
+      },
+      {
+        "id": "e9",
+        "label": "arched opening under monument base",
+        "category": "structure",
+        "attributes": [
+          "stone arch",
+          "shadowed interior",
+          "curved top"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "lower right under base",
+        "evidence": "arch-shaped void in stone structure on right side",
+        "confidence": 0.9
+      },
+      {
+        "id": "e10",
+        "label": "distant tree foliage at edge",
+        "category": "plant",
+        "attributes": [
+          "dark green",
+          "partially visible",
+          "out of focus"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "bottom right edge",
+        "evidence": "small patch of foliage visible at extreme lower right corner",
+        "confidence": 0.7
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e3",
+        "predicate": "above",
+        "object": "e2",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e1",
+        "predicate": "below",
+        "object": "e6",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e8",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e9",
+        "predicate": "inside",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e7",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e4",
+        "predicate": "near",
+        "object": "e2",
+        "confidence": 0.95
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.99,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Text on the rectangular plaque on the lower left of the base is too blurry and small to transcribe; at least 3 letters cannot be read with certainty",
+      "Exact material and construction date of the monument and statues cannot be determined from the photo",
+      "Exact geographic location cannot be determined from the photo alone",
+      "Condition and cause of discoloration on the flag and statues cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:17:06+00:00",
+        "raw_output_path": "data/annotations/raw/park_011_attempt1.txt",
+        "tokens": 8687
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

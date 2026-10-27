@@ -1,0 +1,303 @@
+{
+  "photo_id": "market_025",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_025.jpg",
+    "license": "CC BY 4.0",
+    "author": "Aliceinthealice",
+    "source_url": "https://commons.wikimedia.org/wiki/File:The_Maasai_Markets_in_Nairobi_on_the_rooftop_at_The_Village_Market_01.jpg",
+    "title": "File:The Maasai Markets in Nairobi on the rooftop at The Village Market 01.jpg"
+  },
+  "observed": {
+    "caption": "Shoppers browse art and craft stalls under a large corrugated metal roof in a covered open-air market.",
+    "description": "A wide covered market hall with a corrugated metal roof supported by dark green steel beams and columns, with white pendant lights hanging from the ceiling. The concrete floor has yellow painted lines. Numerous market stalls line the sides and center, displaying framed paintings, textiles, clothing and various crafts. A group of people is gathered on the left examining framed artwork, while other individuals are walking, standing and browsing throughout the hall. Daylight enters from the open sides of the structure. The scene is viewed from ground level across the interior of the market.",
+    "retrieval_queries": [
+      "covered outdoor craft market with people shopping under metal roof",
+      "busy art market stalls with framed paintings and tourists browsing",
+      "large open air bazaar hall with corrugated roof and hanging lights"
+    ],
+    "tags": [
+      "market",
+      "covered market",
+      "craft market",
+      "art stalls",
+      "shoppers",
+      "corrugated roof",
+      "bazaar"
+    ],
+    "scene": {
+      "type": "market",
+      "setting": "mixed",
+      "time_of_day": "daytime",
+      "weather": "unknown",
+      "lighting": "natural daylight with overhead pendant lights",
+      "crowd_level": "moderate",
+      "activity_summary": "browsing and shopping at market stalls"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "across the covered market hall",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "shoppers and stalls under market roof"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "corrugated metal roof structure",
+        "category": "structure",
+        "attributes": [
+          "corrugated metal panels",
+          "supported by dark green steel beams",
+          "large covering over market"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "top, spanning entire image",
+        "evidence": "visible ridged metal ceiling with green trusses overhead",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "pendant lights",
+        "category": "object",
+        "attributes": [
+          "white glass shades",
+          "hanging from ceiling beams"
+        ],
+        "count": 8,
+        "salience": 3,
+        "position": "overhead, left and right",
+        "evidence": "white dome-shaped lights suspended from roof trusses",
+        "confidence": 0.95
+      },
+      {
+        "id": "e3",
+        "label": "concrete floor",
+        "category": "terrain",
+        "attributes": [
+          "gray concrete",
+          "worn surface",
+          "yellow painted lines"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "bottom, foreground to background",
+        "evidence": "large gray floor surface with yellow markings",
+        "confidence": 0.97
+      },
+      {
+        "id": "e4",
+        "label": "group of shoppers",
+        "category": "person_group",
+        "attributes": [
+          "standing and walking",
+          "casual clothing",
+          "carrying bags"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center and left to right midground",
+        "evidence": "multiple people gathered and moving among stalls",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "framed paintings on display",
+        "category": "object",
+        "attributes": [
+          "framed artwork",
+          "landscapes and images",
+          "propped on ground and tables"
+        ],
+        "count": 12,
+        "salience": 4,
+        "position": "left foreground",
+        "evidence": "rows of framed pictures leaning on tables and floor on left side",
+        "confidence": 0.94
+      },
+      {
+        "id": "e6",
+        "label": "market stalls with crafts and textiles",
+        "category": "structure",
+        "attributes": [
+          "covered tables and racks",
+          "colorful merchandise",
+          "clothing and souvenirs"
+        ],
+        "count": 6,
+        "salience": 5,
+        "position": "left, center and right background",
+        "evidence": "stalls lining sides with hanging and stacked goods",
+        "confidence": 0.93
+      },
+      {
+        "id": "e7",
+        "label": "steel support columns and beams",
+        "category": "structure",
+        "attributes": [
+          "dark green painted steel",
+          "vertical columns and horizontal trusses"
+        ],
+        "count": 10,
+        "salience": 3,
+        "position": "throughout, supporting roof",
+        "evidence": "green metal framework holding up roof",
+        "confidence": 0.96
+      },
+      {
+        "id": "e8",
+        "label": "person carrying child on back",
+        "category": "person_group",
+        "attributes": [
+          "adult with backpack",
+          "child on back",
+          "walking away from camera"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right midground",
+        "evidence": "figure with backpack and small child secured on back walking on concrete floor",
+        "confidence": 0.88
+      },
+      {
+        "id": "e9",
+        "label": "hanging clothing and textiles",
+        "category": "object",
+        "attributes": [
+          "patterned fabrics",
+          "hanging from racks"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center background",
+        "evidence": "colorful garments hanging at central stalls",
+        "confidence": 0.9
+      },
+      {
+        "id": "e10",
+        "label": "open sides of market hall",
+        "category": "structure",
+        "attributes": [
+          "open to outside",
+          "daylight entering",
+          "no walls"
+        ],
+        "count": 2,
+        "salience": 2,
+        "position": "left and right background edges",
+        "evidence": "bright daylight visible beyond roof edges and stalls",
+        "confidence": 0.92
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e1",
+        "predicate": "above",
+        "object": "e4",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e1",
+        "predicate": "above",
+        "object": "e6",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e8",
+        "predicate": "right_of",
+        "object": "e4",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e6",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e7",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e9",
+        "predicate": "inside",
+        "object": "e6",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 20,
+      "count_confidence": 0.65,
+      "faces_visible": true,
+      "activities": [
+        "standing and browsing stalls",
+        "walking through market",
+        "carrying shopping bags",
+        "carrying child on back"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people is uncertain due to crowding, occlusion and distance in background",
+      "No signs with at least 3 legible letters are clearly readable; small labels on artwork and stalls are blurry or indistinct",
+      "Specific text on merchandise, artwork titles or small price tags cannot be determined",
+      "Exact location, name of market and geographic context cannot be determined from image",
+      "Weather and time outside the covered structure cannot be determined beyond daylight",
+      "Details of individual stall goods beyond general categories of art, clothing and crafts are indistinct"
+    ]
+  },
+  "privacy": {
+    "faces_visible": true,
+    "people_count": 20,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:15:35+00:00",
+        "raw_output_path": "data/annotations/raw/market_025_attempt1.txt",
+        "tokens": 6803
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

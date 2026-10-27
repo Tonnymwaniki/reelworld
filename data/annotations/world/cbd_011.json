@@ -1,0 +1,306 @@
+{
+  "photo_id": "cbd_011",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/cbd/cbd_011.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "BravinYuri",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Bravin_Yuri_at_Hilton_Inn_Hotel_in_Nairobi,_Kenya.jpg",
+    "title": "File:Bravin Yuri at Hilton Inn Hotel in Nairobi, Kenya.jpg"
+  },
+  "observed": {
+    "caption": "A person in a white shirt and black pants sits on a yellow patterned armchair indoors with hands clasped.",
+    "description": "One person wearing a white short-sleeved shirt, black pants, and shiny black loafers sits on a yellow and white patterned high-back armchair with wooden legs, with hands clasped together resting near the knees and facing the camera. Behind the chair, two large framed abstract artworks with yellow, black, and white shapes hang on a light-colored wall. The floor includes a light tile surface partially covered by a gray rug with overlapping yellow and black circular line patterns. A small round light-brown side table with a tiered pedestal base sits to the right of the chair. The lighting is bright and even, indicating an indoor setting.",
+    "retrieval_queries": [
+      "person sitting on yellow armchair indoors",
+      "man in white shirt and black pants posing on patterned chair",
+      "yellow high-back chair with round side table and circular rug"
+    ],
+    "tags": [
+      "person sitting",
+      "yellow armchair",
+      "indoor portrait",
+      "patterned rug",
+      "side table",
+      "wall art"
+    ],
+    "scene": {
+      "type": "building",
+      "setting": "indoor",
+      "time_of_day": "unknown",
+      "weather": "unknown",
+      "lighting": "bright even indoor lighting",
+      "crowd_level": "sparse",
+      "activity_summary": "person sitting and posing for photo"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the seated person and wall",
+      "distance": "close",
+      "framing": "medium",
+      "orientation": "portrait",
+      "subject_focus": "person seated on yellow armchair"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "person sitting on chair",
+        "category": "person_group",
+        "attributes": [
+          "white short-sleeved shirt",
+          "black pants",
+          "black shiny loafers"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "one individual seated on yellow chair with hands clasped facing camera",
+        "confidence": 0.99
+      },
+      {
+        "id": "e2",
+        "label": "yellow patterned armchair",
+        "category": "object",
+        "attributes": [
+          "yellow and white patterned upholstery",
+          "high back",
+          "wooden legs"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-left",
+        "evidence": "large upholstered chair with yellow abstract pattern behind and under person",
+        "confidence": 0.99
+      },
+      {
+        "id": "e3",
+        "label": "abstract wall artwork center",
+        "category": "object",
+        "attributes": [
+          "yellow black and white geometric shapes",
+          "framed",
+          "large"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "background center",
+        "evidence": "framed painting with yellow and black shapes on wall behind chair",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "partial abstract wall artwork left",
+        "category": "object",
+        "attributes": [
+          "yellow and black",
+          "framed",
+          "partially cropped by edge"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "background left",
+        "evidence": "left edge of framed painting visible with yellow and black pattern",
+        "confidence": 0.92
+      },
+      {
+        "id": "e5",
+        "label": "small round wooden side table",
+        "category": "object",
+        "attributes": [
+          "light brown",
+          "round top",
+          "tiered pedestal base"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom-right",
+        "evidence": "small circular table with stacked rounded base on right side of frame",
+        "confidence": 0.98
+      },
+      {
+        "id": "e6",
+        "label": "patterned area rug",
+        "category": "object",
+        "attributes": [
+          "gray with yellow and black circular line patterns",
+          "on floor under chair"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom",
+        "evidence": "rug with overlapping yellow and black circles under chair and feet",
+        "confidence": 0.97
+      },
+      {
+        "id": "e7",
+        "label": "plain light-colored wall",
+        "category": "structure",
+        "attributes": [
+          "off-white",
+          "smooth"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "background right",
+        "evidence": "large plain wall occupying right and center background",
+        "confidence": 0.99
+      },
+      {
+        "id": "e8",
+        "label": "light tile floor",
+        "category": "terrain",
+        "attributes": [
+          "beige",
+          "smooth"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom-center",
+        "evidence": "light-colored floor visible between rug and wall baseboard",
+        "confidence": 0.95
+      },
+      {
+        "id": "e9",
+        "label": "eyeglasses",
+        "category": "object",
+        "attributes": [
+          "black frames",
+          "worn on face"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center",
+        "evidence": "black-framed glasses on person's face",
+        "confidence": 0.98
+      },
+      {
+        "id": "e10",
+        "label": "black patent loafers",
+        "category": "object",
+        "attributes": [
+          "shiny",
+          "black",
+          "slip-on"
+        ],
+        "count": 2,
+        "salience": 3,
+        "position": "bottom-center",
+        "evidence": "shiny black loafers on person's feet on rug",
+        "confidence": 0.98
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e2",
+        "predicate": "left_of",
+        "object": "e5",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "behind",
+        "object": "e2",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e4",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e7",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e10",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e5",
+        "predicate": "right_of",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e6",
+        "predicate": "below",
+        "object": "e2",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e6",
+        "confidence": 0.96
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 1,
+      "count_confidence": 0.99,
+      "faces_visible": true,
+      "activities": [
+        "sitting on armchair",
+        "posing with hands clasped",
+        "facing camera"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact location, building name, or city where photo was taken cannot be determined",
+      "Time of day, date, or light source outside the frame cannot be determined",
+      "Person's identity, age, or other personal details cannot be determined",
+      "Artist, title, or meaning of the abstract wall artworks cannot be determined",
+      "Material composition of furniture, flooring, and wall beyond visual appearance cannot be determined",
+      "No legible text is visible on signs or labels; any text on wall art is not legible as letters"
+    ]
+  },
+  "privacy": {
+    "faces_visible": true,
+    "people_count": 1,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "medium",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:07:36+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_011_attempt1.txt",
+        "tokens": 10579
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

@@ -1,0 +1,375 @@
+{
+  "photo_id": "landmarks_010",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/landmarks/landmarks_010.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "BugWarp",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Kenyatta_International_Convention_Centre_-_BugWarp_(10).jpg",
+    "title": "File:Kenyatta International Convention Centre - BugWarp (10).jpg"
+  },
+  "observed": {
+    "caption": "The entrance of the Kenyatta International Convention Centre with people on the stairs, flagpoles, banners and tall buildings in the background during daylight.",
+    "description": "A large concrete multi-level building with an orange sign reading THE KENYATTA INTERNATIONAL CONVENTION CENTRE above glass entrance doors is centered in the frame, with wide concrete stairs leading up to the entrance where several people are walking up and down and standing near the doors, tall silver flagpoles line the left and right sides of the plaza with two flags flying above the building including a Kenyan flag, vertical promotional banners stand on both sides of the stairs, a silver SUV is parked on the right near the stairs, potted plants and small trees flank the entrance, a tall glass skyscraper and a pinkish curved high-rise are visible behind the centre and a large angular concrete roof structure extends on the right, the sky is bright and overcast and the scene is lit by natural daylight.",
+    "retrieval_queries": [
+      "front entrance of Kenyatta International Convention Centre with stairs and flags",
+      "KICC building exterior with people walking and Kenyan flag flying",
+      "wide view of convention centre plaza with banners and parked SUV"
+    ],
+    "tags": [
+      "Kenyatta International Convention Centre",
+      "KICC entrance",
+      "convention centre stairs",
+      "Kenyan flag",
+      "flagpoles",
+      "promotional banners",
+      "concrete architecture",
+      "plaza"
+    ],
+    "scene": {
+      "type": "building",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast",
+      "lighting": "natural daylight",
+      "crowd_level": "moderate",
+      "activity_summary": "people walking, standing and entering building"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the building entrance",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "entrance of the convention centre"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "Kenyatta International Convention Centre main facade",
+        "category": "building",
+        "attributes": [
+          "concrete",
+          "multi-level",
+          "glass entrance doors",
+          "balconies"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "large concrete building with orange sign above entrance and glass doors at base",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "tall glass skyscraper behind centre",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "glass windows",
+          "light facade"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-background",
+        "evidence": "high-rise with grid of windows visible behind flags",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "pinkish curved high-rise on left",
+        "category": "building",
+        "attributes": [
+          "curved",
+          "pinkish",
+          "balconies"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left-background",
+        "evidence": "multi-story building with rounded balconies on left edge",
+        "confidence": 0.95
+      },
+      {
+        "id": "e4",
+        "label": "angular concrete amphitheatre roof on right",
+        "category": "structure",
+        "attributes": [
+          "angular",
+          "concrete",
+          "overhanging"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right-background",
+        "evidence": "large dark concrete structure with geometric underside on right side",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "row of tall flagpoles in plaza",
+        "category": "structure",
+        "attributes": [
+          "tall",
+          "silver",
+          "vertical"
+        ],
+        "count": 12,
+        "salience": 4,
+        "position": "left and right foreground",
+        "evidence": "numerous thin vertical poles lining both sides of stairs and plaza",
+        "confidence": 0.97
+      },
+      {
+        "id": "e6",
+        "label": "Kenyan national flag flying",
+        "category": "object",
+        "attributes": [
+          "black red green with white fimbriation",
+          "flying"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-background above building",
+        "evidence": "flag with horizontal black red green stripes on pole behind centre",
+        "confidence": 0.97
+      },
+      {
+        "id": "e7",
+        "label": "entrance stairs and plaza",
+        "category": "structure",
+        "attributes": [
+          "concrete",
+          "wide steps",
+          "central"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-foreground",
+        "evidence": "broad concrete steps leading up to glass doors with people on them",
+        "confidence": 0.98
+      },
+      {
+        "id": "e8",
+        "label": "group of people walking and standing",
+        "category": "person_group",
+        "attributes": [
+          "walking",
+          "standing",
+          "casual clothing"
+        ],
+        "count": 18,
+        "salience": 4,
+        "position": "center-foreground and balconies",
+        "evidence": "multiple figures on stairs, plaza and upper balcony in various poses",
+        "confidence": 0.82
+      },
+      {
+        "id": "e9",
+        "label": "silver SUV parked near entrance",
+        "category": "vehicle",
+        "attributes": [
+          "silver",
+          "SUV",
+          "parked"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right-foreground",
+        "evidence": "silver Toyota SUV visible on right side near stairs",
+        "confidence": 0.96
+      },
+      {
+        "id": "e10",
+        "label": "vertical promotional banners along plaza",
+        "category": "sign",
+        "attributes": [
+          "vertical",
+          "colorful",
+          "printed"
+        ],
+        "count": 4,
+        "salience": 3,
+        "position": "left and right foreground",
+        "evidence": "tall narrow banners with images and text on both sides of stairs",
+        "confidence": 0.94
+      },
+      {
+        "id": "e11",
+        "label": "main entrance signboard",
+        "category": "sign",
+        "attributes": [
+          "orange background",
+          "capital letters",
+          "horizontal"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center above entrance",
+        "evidence": "long orange sign with white text spanning width above entrance",
+        "confidence": 0.99
+      },
+      {
+        "id": "e12",
+        "label": "potted plants and small trees flanking entrance",
+        "category": "plant",
+        "attributes": [
+          "green",
+          "potted",
+          "small trees"
+        ],
+        "count": 6,
+        "salience": 2,
+        "position": "center near entrance and foreground",
+        "evidence": "greenery in planters on balconies and beside stairs",
+        "confidence": 0.9
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e7",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e11",
+        "predicate": "above",
+        "object": "e7",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e8",
+        "predicate": "on",
+        "object": "e7",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e9",
+        "predicate": "near",
+        "object": "e7",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e5",
+        "predicate": "beside",
+        "object": "e7",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e10",
+        "predicate": "beside",
+        "object": "e7",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e2",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e4",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e3",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e6",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e12",
+        "predicate": "near",
+        "object": "e1",
+        "confidence": 0.88
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "THE KENYATTA INTERNATIONAL CONVENTION CENTRE",
+        "language": "en",
+        "entity_id": "e11",
+        "location_in_image": "center above entrance on orange sign",
+        "legibility": "clear",
+        "confidence": 0.99
+      },
+      {
+        "text": "NAIROBI SAFARI WALK",
+        "language": "en",
+        "entity_id": "e10",
+        "location_in_image": "left foreground on vertical banner",
+        "legibility": "clear",
+        "confidence": 0.88
+      },
+      {
+        "text": "VIP ENTRANCE",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "center above glass doors",
+        "legibility": "partial",
+        "confidence": 0.72
+      }
+    ],
+    "people": {
+      "count": 18,
+      "count_confidence": 0.78,
+      "faces_visible": true,
+      "activities": [
+        "walking up and down stairs",
+        "standing near entrance",
+        "sitting on balcony"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people due to occlusion, distance and small figures on upper balcony",
+      "Text on right-side vertical banners and green flags is blurry and partially cut off and cannot be fully read",
+      "Characters on vehicle license plate are not legible due to distance and blur",
+      "Content of small digital screen above entrance doors is not legible",
+      "Details of flags other than the Kenyan flag are not clearly distinguishable",
+      "Weather and time beyond visible bright overcast daylight cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": true,
+    "people_count": 18,
+    "license_plates_visible": true,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:12:35+00:00",
+        "raw_output_path": "data/annotations/raw/landmarks_010_attempt1.txt",
+        "tokens": 10565
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'VIP ENTRANCE'"
+      ]
+    }
+  }
+}

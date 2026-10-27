@@ -1,0 +1,409 @@
+{
+  "photo_id": "cbd_012",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/cbd/cbd_012.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Citi_Hoppa_UD_MKB_210_368,_Mama_Ngina_Street,_2025_(01).jpg",
+    "title": "File:Citi Hoppa UD MKB 210 368, Mama Ngina Street, 2025 (01).jpg"
+  },
+  "observed": {
+    "caption": "Two colorful buses stopped on a busy urban street with pedestrians crossing and tall buildings in the background.",
+    "description": "A green and yellow bus with an advertisement on its side is stopped in the foreground on a paved street, with a blue and yellow bus behind it to the right and a third bus further in the background. Multiple pedestrians are visible on the sidewalk and crossing the street, including a person in a high-visibility vest seated on a motorcycle near a traffic light pole. Tall buildings with many windows, leafy trees, utility poles with cameras, and a large yellow billboard are visible in the background under overcast daylight. A large rock sits on a small traffic island near the curb.",
+    "retrieval_queries": [
+      "green and yellow city bus stopped on busy street with people crossing",
+      "urban intersection with colorful buses and pedestrians and tall buildings",
+      "crowded street with public buses and motorcycle and high rises in background"
+    ],
+    "tags": [
+      "bus",
+      "city street",
+      "public transport",
+      "pedestrians",
+      "urban traffic",
+      "buildings"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast",
+      "lighting": "natural daylight",
+      "crowd_level": "moderate",
+      "activity_summary": "buses stopped with pedestrians crossing street"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward buses and street intersection",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "green and yellow bus in foreground"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "green and yellow bus in foreground",
+        "category": "vehicle",
+        "attributes": [
+          "green and yellow paint",
+          "weathered",
+          "large",
+          "advertisement on side"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-left, foreground",
+        "evidence": "large bus occupying center-left with green front and yellow lower side, number 368 visible",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "blue and yellow bus behind",
+        "category": "vehicle",
+        "attributes": [
+          "blue and yellow paint",
+          "large"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right, middle distance",
+        "evidence": "blue front and yellow side bus stopped behind green bus",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "third bus in far background",
+        "category": "vehicle",
+        "attributes": [
+          "partially visible",
+          "distant"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "far right, background",
+        "evidence": "rear of bus visible behind blue bus on right edge",
+        "confidence": 0.85
+      },
+      {
+        "id": "e4",
+        "label": "group of pedestrians crossing and standing",
+        "category": "person_group",
+        "attributes": [
+          "walking",
+          "standing",
+          "varied clothing including high-visibility vest and hooded jacket"
+        ],
+        "count": 14,
+        "salience": 4,
+        "position": "right side and left sidewalk",
+        "evidence": "multiple people on sidewalk and crossing street near traffic light and buses",
+        "confidence": 0.75
+      },
+      {
+        "id": "e5",
+        "label": "motorcycle with rider",
+        "category": "vehicle",
+        "attributes": [
+          "black",
+          "parked on sidewalk",
+          "rider in high-visibility vest"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right foreground, near traffic pole",
+        "evidence": "motorcycle parked at curb with person in neon vest seated on it",
+        "confidence": 0.95
+      },
+      {
+        "id": "e6",
+        "label": "traffic light pole",
+        "category": "structure",
+        "attributes": [
+          "metal pole",
+          "traffic signals",
+          "at curb"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right foreground",
+        "evidence": "vertical pole with traffic lights at sidewalk island with rock",
+        "confidence": 0.96
+      },
+      {
+        "id": "e7",
+        "label": "utility pole with surveillance cameras",
+        "category": "structure",
+        "attributes": [
+          "tall metal pole",
+          "cameras and electrical boxes",
+          "on left sidewalk"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left, foreground",
+        "evidence": "pole with cameras and boxes on left edge near trees",
+        "confidence": 0.96
+      },
+      {
+        "id": "e8",
+        "label": "tall cylindrical high-rise building",
+        "category": "building",
+        "attributes": [
+          "cylindrical",
+          "many windows",
+          "light colored"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center background",
+        "evidence": "tall round building with grid windows behind trees in center",
+        "confidence": 0.97
+      },
+      {
+        "id": "e9",
+        "label": "rectangular high-rise building",
+        "category": "building",
+        "attributes": [
+          "rectangular",
+          "many windows",
+          "light colored"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right background",
+        "evidence": "tall rectangular building with many windows on right side behind lower building",
+        "confidence": 0.96
+      },
+      {
+        "id": "e10",
+        "label": "trees with foliage",
+        "category": "plant",
+        "attributes": [
+          "green leaves",
+          "tall",
+          "sparse branches"
+        ],
+        "count": 4,
+        "salience": 3,
+        "position": "left and center background",
+        "evidence": "large trees with green leaves lining street and partially obscuring buildings",
+        "confidence": 0.95
+      },
+      {
+        "id": "e11",
+        "label": "large rock on sidewalk island",
+        "category": "terrain",
+        "attributes": [
+          "rough",
+          "gray-brown",
+          "on curb island"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right foreground, at base of traffic pole",
+        "evidence": "large boulder on small paved island near motorcycle and pole",
+        "confidence": 0.94
+      },
+      {
+        "id": "e12",
+        "label": "yellow billboard advertisement",
+        "category": "sign",
+        "attributes": [
+          "yellow",
+          "large",
+          "distant"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "far right background",
+        "evidence": "yellow billboard with text visible on right side behind buildings",
+        "confidence": 0.9
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e2",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e5",
+        "predicate": "beside",
+        "object": "e6",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e4",
+        "predicate": "near",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e11",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e7",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e8",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e10",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e12",
+        "predicate": "right_of",
+        "object": "e9",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e3",
+        "predicate": "behind",
+        "object": "e2",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "Citi hoppa",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "front top destination sign of green bus",
+        "legibility": "clear",
+        "confidence": 0.97
+      },
+      {
+        "text": "Uber Boda",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "side advertisement on green bus",
+        "legibility": "clear",
+        "confidence": 0.96
+      },
+      {
+        "text": "Everything Uber, now on two wheels",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "side advertisement on green bus below Uber Boda",
+        "legibility": "clear",
+        "confidence": 0.95
+      },
+      {
+        "text": "Shuttle",
+        "language": "en",
+        "entity_id": "e2",
+        "location_in_image": "front top of blue bus",
+        "legibility": "clear",
+        "confidence": 0.92
+      },
+      {
+        "text": "Glovo",
+        "language": "en",
+        "entity_id": "e12",
+        "location_in_image": "yellow billboard on far right background",
+        "legibility": "partial",
+        "confidence": 0.9
+      },
+      {
+        "text": "449 KES",
+        "language": "en",
+        "entity_id": "e12",
+        "location_in_image": "yellow billboard on far right background below Glovo",
+        "legibility": "partial",
+        "confidence": 0.88
+      },
+      {
+        "text": "WEZESHA BIASHARA",
+        "language": "sw",
+        "entity_id": null,
+        "location_in_image": "blue roadside sign in middle background behind trees",
+        "legibility": "partial",
+        "confidence": 0.85
+      },
+      {
+        "text": "KCB 609E",
+        "language": "other",
+        "entity_id": "e1",
+        "location_in_image": "front license plate of green bus",
+        "legibility": "clear",
+        "confidence": 0.94
+      }
+    ],
+    "people": {
+      "count": 14,
+      "count_confidence": 0.65,
+      "faces_visible": true,
+      "activities": [
+        "standing on sidewalk",
+        "walking across street",
+        "riding motorcycle",
+        "waiting near bus"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people partially occluded behind buses, barriers and trees cannot be determined",
+      "Text on small windshield stickers, route numbers and distant billboards is blurry or cut off and cannot be read",
+      "License plate of blue bus and other distant vehicles is not legible with certainty",
+      "Text printed on people's clothing or bags was ignored per instructions",
+      "Numeric-only signs such as 368 and 504 were omitted because they contain fewer than 3 letters",
+      "Specific destination, route or time information beyond visible bus signs cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": true,
+    "people_count": 14,
+    "license_plates_visible": true,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:07:59+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_012_attempt1.txt",
+        "tokens": 13458
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'Glovo'",
+        "partially legible text: '449 KES'",
+        "partially legible text: 'WEZESHA BIASHARA'"
+      ]
+    }
+  }
+}

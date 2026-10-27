@@ -1,0 +1,308 @@
+{
+  "photo_id": "hills_017",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_017.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Mwe17",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ngong_Hills_Wind_Power_farm.jpg",
+    "title": "File:Ngong Hills Wind Power farm.jpg"
+  },
+  "observed": {
+    "caption": "Aerial view of white wind turbines lined along a dry hilltop ridge overlooking patchwork farmland and settlements under a pale blue sky.",
+    "description": "The photo shows a high-altitude aerial view taken from an aircraft, with the dark curved edge of an airplane window visible in the bottom left corner. A prominent dry, brownish ridge with scattered green vegetation and dark tree clusters runs diagonally through the middle ground, lined with numerous white wind turbines with tall towers and blades. To the left of the ridge, flat arid plains stretch toward a hazy horizon with distant low mountains and hills. To the right and below the ridge, the landscape consists of a patchwork of small agricultural fields in brown and green tones, dense dark green vegetation patches, and clustered light-colored buildings forming settlements. The upper portion of the image is a pale to medium blue sky with thin, wispy white clouds and soft haze near the horizon, illuminated by bright natural daylight.",
+    "retrieval_queries": [
+      "aerial view of wind turbines on a hill ridge",
+      "airplane window view of wind farm over farmland",
+      "high altitude photo of countryside with windmills and villages"
+    ],
+    "tags": [
+      "aerial view",
+      "wind turbines",
+      "wind farm",
+      "hill ridge",
+      "landscape",
+      "farmland",
+      "settlement",
+      "airplane window"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "clear with light haze",
+      "lighting": "bright natural daylight",
+      "crowd_level": "empty",
+      "activity_summary": "wind turbines on ridge above rural farmland and settlements"
+    },
+    "camera": {
+      "viewpoint": "aerial",
+      "height_estimate": "very_high",
+      "facing": "across the landscape toward the horizon",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "portrait",
+      "subject_focus": "wind turbines on hilltop ridge"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "wind turbines",
+        "category": "structure",
+        "attributes": [
+          "white",
+          "tall towers with blades",
+          "lined along ridge"
+        ],
+        "count": 25,
+        "salience": 5,
+        "position": "center-left, middle ground",
+        "evidence": "multiple white vertical structures with blades visible along the hilltop",
+        "confidence": 0.96
+      },
+      {
+        "id": "e2",
+        "label": "hill ridge",
+        "category": "terrain",
+        "attributes": [
+          "dry brownish",
+          "elongated",
+          "scattered green vegetation"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-left to center",
+        "evidence": "elevated dry landform running diagonally with turbines on top",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "sky",
+        "category": "other",
+        "attributes": [
+          "pale to medium blue",
+          "clear",
+          "hazy near horizon"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "top, background",
+        "evidence": "upper half of image shows blue sky with light haze",
+        "confidence": 0.99
+      },
+      {
+        "id": "e4",
+        "label": "distant mountains and hills",
+        "category": "terrain",
+        "attributes": [
+          "hazy",
+          "low",
+          "bluish-gray"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "far background, horizon",
+        "evidence": "faint elevated landforms along horizon line",
+        "confidence": 0.88
+      },
+      {
+        "id": "e5",
+        "label": "agricultural fields",
+        "category": "terrain",
+        "attributes": [
+          "patchwork",
+          "brown and green",
+          "rectangular plots"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right and bottom, middle to foreground",
+        "evidence": "divided plots of farmland in varying brown and green tones",
+        "confidence": 0.92
+      },
+      {
+        "id": "e6",
+        "label": "clustered settlement",
+        "category": "building",
+        "attributes": [
+          "dense",
+          "small light-colored buildings",
+          "clustered"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right, middle ground",
+        "evidence": "concentrated area of small structures forming a village or town",
+        "confidence": 0.9
+      },
+      {
+        "id": "e7",
+        "label": "dense vegetation patches",
+        "category": "plant",
+        "attributes": [
+          "dark green",
+          "forested",
+          "irregular"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "foreground and right, scattered",
+        "evidence": "dark green areas of trees and shrubs across the landscape",
+        "confidence": 0.91
+      },
+      {
+        "id": "e8",
+        "label": "airplane window frame",
+        "category": "object",
+        "attributes": [
+          "dark",
+          "curved",
+          "partial edge"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom left corner, foreground",
+        "evidence": "dark curved border indicating interior of aircraft window",
+        "confidence": 0.95
+      },
+      {
+        "id": "e9",
+        "label": "arid lowland plain",
+        "category": "terrain",
+        "attributes": [
+          "flat",
+          "dry",
+          "light brown"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left, middle to background",
+        "evidence": "expansive flat dry terrain extending to horizon on left side",
+        "confidence": 0.93
+      },
+      {
+        "id": "e10",
+        "label": "thin wispy clouds",
+        "category": "other",
+        "attributes": [
+          "white",
+          "thin",
+          "wispy"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "upper, inside sky",
+        "evidence": "faint streaky clouds in the blue sky",
+        "confidence": 0.89
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e2",
+        "predicate": "below",
+        "object": "e3",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e9",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e6",
+        "predicate": "right_of",
+        "object": "e2",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e5",
+        "predicate": "near",
+        "object": "e6",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e10",
+        "predicate": "inside",
+        "object": "e3",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e2",
+        "predicate": "in_front_of",
+        "object": "e4",
+        "confidence": 0.91
+      },
+      {
+        "subject": "e8",
+        "predicate": "below",
+        "object": "e2",
+        "confidence": 0.88
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.99,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact geographic location cannot be determined from the photo alone",
+      "Precise number of wind turbines is uncertain due to distance and image resolution",
+      "Specific time of day beyond daylight cannot be determined",
+      "Types of crops, vegetation species, or building functions cannot be determined",
+      "Altitude of the aircraft and camera settings cannot be determined",
+      "Any small or distant text on the ground is not legible and was excluded"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:10:21+00:00",
+        "raw_output_path": "data/annotations/raw/hills_017_attempt1.txt",
+        "tokens": 8428
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

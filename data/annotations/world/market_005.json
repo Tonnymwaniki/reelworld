@@ -1,0 +1,405 @@
+{
+  "photo_id": "market_005",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_005.jpg",
+    "license": "CC BY-SA 2.0",
+    "author": "Sam Wilson  (taken with Samsung Galaxy S21 FE 5G)",
+    "source_url": "https://commons.wikimedia.org/wiki/File:City_Market_in_Nairobi.jpg",
+    "title": "File:City Market in Nairobi.jpg"
+  },
+  "observed": {
+    "caption": "An elevated daytime view of a busy urban street intersection with parked cars, buses, pedestrians, and a distinctive arched building in the background under a blue sky.",
+    "description": "The photo shows an outdoor urban street scene viewed from an elevated position. In the foreground is a paved intersection with multiple parked cars including white, red, blue, and silver vehicles, and several white minibuses. A large beige bus is parked on the left side near a tall metal utility pole. A corrugated metal fence runs across the middle of the image, behind which are small kiosks with red roofs and green vegetation. Behind the fence stands a large beige building with a prominent arched facade and stone detailing, flanked by other multi-story buildings including a tall beige high-rise to its left and modern high-rises in the distant center-right. On the right foreground is a white and brown multi-story building with large windows. Trees are visible on the left, and the sky is bright blue with scattered white clouds. Several small human figures are visible walking on the street and sidewalk.",
+    "retrieval_queries": [
+      "busy city street with arched building and parked cars",
+      "elevated view of Nairobi city market intersection",
+      "urban street with National House building and traffic"
+    ],
+    "tags": [
+      "urban street",
+      "city intersection",
+      "arched building",
+      "parked cars",
+      "buses",
+      "National House",
+      "daytime cityscape",
+      "elevated view"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "sunny with scattered clouds",
+      "lighting": "bright daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "vehicles parked and pedestrians walking at intersection"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "raised",
+      "facing": "toward the arched building across the street",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "street intersection and arched building"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "arched market building",
+        "category": "building",
+        "attributes": [
+          "beige",
+          "large arched facade",
+          "stone detailing",
+          "multi-story"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "large building with distinctive arch in middle of image behind fence",
+        "confidence": 0.95
+      },
+      {
+        "id": "e2",
+        "label": "beige high-rise building behind arched building",
+        "category": "building",
+        "attributes": [
+          "beige",
+          "rectangular",
+          "weathered facade",
+          "multi-story"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left-center background",
+        "evidence": "tall rectangular building directly behind and to left of arched building",
+        "confidence": 0.92
+      },
+      {
+        "id": "e3",
+        "label": "white and brown building with National House sign",
+        "category": "building",
+        "attributes": [
+          "white facade",
+          "brown trim",
+          "multi-story",
+          "large windows",
+          "rooftop sign"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right foreground",
+        "evidence": "building on right edge with visible windows and rooftop lettering",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "modern high-rise buildings in distant background",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "glass and concrete",
+          "multi-story"
+        ],
+        "count": 2,
+        "salience": 3,
+        "position": "center-right background",
+        "evidence": "two tall buildings visible behind arched building on horizon",
+        "confidence": 0.88
+      },
+      {
+        "id": "e5",
+        "label": "paved street intersection",
+        "category": "terrain",
+        "attributes": [
+          "asphalt",
+          "intersection",
+          "road markings"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground center",
+        "evidence": "paved road area with cars and lane markings in lower half",
+        "confidence": 0.94
+      },
+      {
+        "id": "e6",
+        "label": "parked cars",
+        "category": "vehicle",
+        "attributes": [
+          "various colors",
+          "sedans and SUVs",
+          "parked along curb"
+        ],
+        "count": 10,
+        "salience": 4,
+        "position": "foreground and right",
+        "evidence": "multiple cars lined up on right side and center of street",
+        "confidence": 0.93
+      },
+      {
+        "id": "e7",
+        "label": "white minibuses",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "van-shaped",
+          "parked"
+        ],
+        "count": 3,
+        "salience": 3,
+        "position": "center-right",
+        "evidence": "white vans parked near fence on right side of street",
+        "confidence": 0.9
+      },
+      {
+        "id": "e8",
+        "label": "beige bus",
+        "category": "vehicle",
+        "attributes": [
+          "beige and white",
+          "large",
+          "parked"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left",
+        "evidence": "large bus parked on left side near utility pole",
+        "confidence": 0.91
+      },
+      {
+        "id": "e9",
+        "label": "people walking",
+        "category": "person_group",
+        "attributes": [
+          "small figures",
+          "various clothing",
+          "walking"
+        ],
+        "count": 5,
+        "salience": 2,
+        "position": "center and right",
+        "evidence": "several small human figures visible on street and sidewalk",
+        "confidence": 0.75
+      },
+      {
+        "id": "e10",
+        "label": "corrugated metal fence",
+        "category": "structure",
+        "attributes": [
+          "gray",
+          "metal",
+          "corrugated",
+          "long barrier"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center",
+        "evidence": "long gray fence running horizontally across middle separating street from buildings",
+        "confidence": 0.92
+      },
+      {
+        "id": "e11",
+        "label": "utility pole",
+        "category": "structure",
+        "attributes": [
+          "tall",
+          "metal",
+          "vertical",
+          "foreground"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "left foreground",
+        "evidence": "tall gray pole on left edge extending vertically through frame",
+        "confidence": 0.95
+      },
+      {
+        "id": "e12",
+        "label": "trees and vegetation",
+        "category": "plant",
+        "attributes": [
+          "green",
+          "leafy",
+          "dense"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "left",
+        "evidence": "green trees and bushes on left side behind fence",
+        "confidence": 0.9
+      },
+      {
+        "id": "e13",
+        "label": "water tower scaffolding structure",
+        "category": "structure",
+        "attributes": [
+          "metal",
+          "tall",
+          "scaffolding",
+          "water tank on top"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center-right behind arched building",
+        "evidence": "metal tower with tank beside arched building",
+        "confidence": 0.85
+      },
+      {
+        "id": "e14",
+        "label": "sky with clouds",
+        "category": "other",
+        "attributes": [
+          "blue",
+          "partly cloudy",
+          "bright"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top",
+        "evidence": "blue sky with white clouds covering upper portion",
+        "confidence": 0.98
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "behind",
+        "object": "e10",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e3",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e2",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e8",
+        "predicate": "left_of",
+        "object": "e6",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e7",
+        "predicate": "near",
+        "object": "e10",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e5",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e11",
+        "predicate": "left_of",
+        "object": "e5",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e12",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e13",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.82
+      },
+      {
+        "subject": "e6",
+        "predicate": "in_front_of",
+        "object": "e10",
+        "confidence": 0.87
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "NATIONAL HOUSE",
+        "language": "en",
+        "entity_id": "e3",
+        "location_in_image": "rooftop of building on right",
+        "legibility": "clear",
+        "confidence": 0.92
+      },
+      {
+        "text": "CHAPACCOY",
+        "language": "en",
+        "entity_id": "e3",
+        "location_in_image": "black sign on lower floor of building on right",
+        "legibility": "partial",
+        "confidence": 0.65
+      },
+      {
+        "text": "G4S",
+        "language": "en",
+        "entity_id": null,
+        "location_in_image": "small white structure behind fence center-left",
+        "legibility": "clear",
+        "confidence": 0.78
+      }
+    ],
+    "people": {
+      "count": 5,
+      "count_confidence": 0.7,
+      "faces_visible": false,
+      "activities": [
+        "walking across street",
+        "standing near vehicles"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact spelling of CHAPACCOY sign is partially obscured and blurry",
+      "Number of people is approximate due to distance and small figure size",
+      "Details of distant building facades and billboards are not legible",
+      "Text on small green and red signs on left side is not legible (less than 3 clear letters)",
+      "License plates and vehicle models cannot be determined",
+      "Exact time of day beyond daytime"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 5,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:13:26+00:00",
+        "raw_output_path": "data/annotations/raw/market_005_attempt1.txt",
+        "tokens": 6869
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'CHAPACCOY'"
+      ]
+    }
+  }
+}

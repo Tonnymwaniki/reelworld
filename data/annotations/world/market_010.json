@@ -1,0 +1,331 @@
+{
+  "photo_id": "market_010",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_010.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Ninaras",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Masai_Market_Nairobi_01.jpg",
+    "title": "File:Masai Market Nairobi 01.jpg"
+  },
+  "observed": {
+    "caption": "A vibrant outdoor market stall displays colorful patterned fabrics, dresses, beaded jewelry and wooden crafts along a paved aisle.",
+    "description": "In the foreground and center, a market stall covered by a light-colored canopy and supported by metal poles displays numerous brightly colored patterned fabrics and garments hanging vertically, including a blue patterned dress on a mannequin on the right side of the stall. Beneath the hanging fabrics, a yellow tarp covers the ground with a red plastic crate underneath, and in the immediate foreground on a mat are piles of multicolored beaded bracelets and rows of small carved wooden figurines on thin metal stands. To the right, a paved pathway runs between stalls, with another stall on the right side holding folded textiles and assorted crafts. Three people are visible: one in the right foreground wearing a dark jacket and a long blue patterned skirt with a hand near the head, one in the mid-background wearing a checkered shirt and dark pants standing near the stall, and a partially visible person on the far right edge. Additional market stalls with more textiles and goods extend into the background under bright daylight.",
+    "retrieval_queries": [
+      "colorful African fabric market stall with hanging dresses and jewelry",
+      "outdoor bazaar with bright patterned textiles and beaded bracelets",
+      "market aisle with vibrant clothing stalls and crafts on the ground"
+    ],
+    "tags": [
+      "market",
+      "outdoor bazaar",
+      "colorful fabrics",
+      "patterned textiles",
+      "dress",
+      "jewelry",
+      "beaded bracelets",
+      "wooden crafts",
+      "market stall",
+      "canopy"
+    ],
+    "scene": {
+      "type": "market",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "sunny",
+      "lighting": "bright natural daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "browsing and shopping at textile and craft stalls"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "down the market aisle toward stalls",
+      "distance": "close",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "market stall with colorful hanging fabrics"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "hanging colorful patterned fabrics and garments",
+        "category": "object",
+        "attributes": [
+          "multicolored",
+          "patterned",
+          "hanging vertically",
+          "varied designs"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center and left",
+        "evidence": "numerous bright fabrics with geometric and floral patterns suspended from canopy",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "blue patterned dress on mannequin",
+        "category": "object",
+        "attributes": [
+          "blue with circular pattern",
+          "long dress",
+          "on mannequin"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right",
+        "evidence": "blue dress with dark circular motifs displayed on white mannequin torso",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "beaded bracelets and jewelry on ground mat",
+        "category": "object",
+        "attributes": [
+          "multicolored",
+          "small",
+          "piled",
+          "on light mat"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground center",
+        "evidence": "large pile of colorful beaded bracelets and scattered jewelry pieces on ground",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "carved wooden figurines on metal stands",
+        "category": "object",
+        "attributes": [
+          "small",
+          "dark and light wood",
+          "on thin black stands",
+          "decorative"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "foreground left",
+        "evidence": "rows of small carved figures with patterned details mounted on metal rods",
+        "confidence": 0.94
+      },
+      {
+        "id": "e5",
+        "label": "market stall canopy and support poles",
+        "category": "structure",
+        "attributes": [
+          "light-colored tarp",
+          "metal poles",
+          "overhead cover"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "top center",
+        "evidence": "fabric canopy stretched over stall with vertical metal supports",
+        "confidence": 0.95
+      },
+      {
+        "id": "e6",
+        "label": "people browsing market",
+        "category": "person_group",
+        "attributes": [
+          "standing",
+          "browsing",
+          "casual clothing"
+        ],
+        "count": 3,
+        "salience": 4,
+        "position": "right and background",
+        "evidence": "one person in foreground right in dark jacket and blue skirt, one in background in checkered shirt, one partially visible on far right",
+        "confidence": 0.92
+      },
+      {
+        "id": "e7",
+        "label": "red plastic crate",
+        "category": "object",
+        "attributes": [
+          "red",
+          "rectangular",
+          "under fabrics"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center under stall",
+        "evidence": "red crate with white markings placed on yellow tarp beneath hanging garments",
+        "confidence": 0.93
+      },
+      {
+        "id": "e8",
+        "label": "paved market pathway",
+        "category": "terrain",
+        "attributes": [
+          "gray concrete",
+          "narrow aisle",
+          "between stalls"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-right foreground to background",
+        "evidence": "paved walkway separating left and right market stalls",
+        "confidence": 0.97
+      },
+      {
+        "id": "e9",
+        "label": "folded textiles and crafts on right stall",
+        "category": "object",
+        "attributes": [
+          "folded",
+          "multicolored",
+          "stacked",
+          "on ground and table"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right",
+        "evidence": "stacks of folded fabrics and assorted small crafts displayed under blue canopy on right",
+        "confidence": 0.94
+      },
+      {
+        "id": "e10",
+        "label": "background market stalls with goods",
+        "category": "structure",
+        "attributes": [
+          "covered",
+          "with hanging textiles",
+          "distant"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "background",
+        "evidence": "additional stalls with fabrics and items visible along pathway in distance",
+        "confidence": 0.88
+      },
+      {
+        "id": "e11",
+        "label": "yellow tarp under stall",
+        "category": "object",
+        "attributes": [
+          "yellow",
+          "plastic",
+          "on ground"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center under hanging fabrics",
+        "evidence": "yellow sheet covering ground beneath stall and crate",
+        "confidence": 0.95
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e3",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e4",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e5",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e7",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e6",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e8",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e9",
+        "predicate": "right_of",
+        "object": "e8",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e11",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e10",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.88
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 3,
+      "count_confidence": 0.88,
+      "faces_visible": false,
+      "activities": [
+        "standing and browsing",
+        "walking along market aisle"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact geographic location of the market cannot be determined",
+      "Text on the red plastic crate is not legible enough to read at least 3 letters",
+      "Prices, materials, and origins of the fabrics and crafts cannot be determined",
+      "Identities, ages, and genders of the people cannot be determined",
+      "Whether the partially visible person on the far right is shopping or passing by cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 3,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:13:49+00:00",
+        "raw_output_path": "data/annotations/raw/market_010_attempt1.txt",
+        "tokens": 6437
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

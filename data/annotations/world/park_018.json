@@ -1,0 +1,372 @@
+{
+  "photo_id": "park_018",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_018.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "oliver",
+    "source_url": "https://commons.wikimedia.org/wiki/File:UHURU_PARK,_NAIROBI.jpg",
+    "title": "File:UHURU PARK, NAIROBI.jpg"
+  },
+  "observed": {
+    "caption": "Two yellow school buses and two white vans parked in front of a grassy hill with scattered people and trees.",
+    "description": "In the foreground, dense green shrubs and a striped utility pole with a transformer box are visible. Behind them, a paved parking area holds two large yellow school buses in the center and right and two white vans on the left, separated from a sloping grassy hill by a low stone retaining wall. The hill is dotted with small trees and numerous small distant figures sitting and walking on the grass. Buildings and more trees are visible on the horizon under bright daylight.",
+    "retrieval_queries": [
+      "yellow school buses parked in front of grassy hill with people",
+      "parking lot with school buses and vans near park hill",
+      "aerial view of buses parked below a grassy slope with trees"
+    ],
+    "tags": [
+      "school bus",
+      "parking lot",
+      "grassy hill",
+      "white vans",
+      "utility pole",
+      "shrubs",
+      "outdoor park",
+      "daytime"
+    ],
+    "scene": {
+      "type": "park",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "clear",
+      "lighting": "bright natural daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "people resting and walking on grassy hill near parked buses"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "raised",
+      "facing": "toward grassy hill across parking area",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "yellow school buses parked in lot"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "yellow school bus in center",
+        "category": "vehicle",
+        "attributes": [
+          "yellow",
+          "large",
+          "front-facing"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "large yellow bus with SCHOOL BUS sign on front, parked facing camera",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "yellow school bus on right",
+        "category": "vehicle",
+        "attributes": [
+          "yellow",
+          "partially obscured by shrubs"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right",
+        "evidence": "partially obscured yellow bus with SCHOOL BUS sign behind shrubs",
+        "confidence": 0.95
+      },
+      {
+        "id": "e3",
+        "label": "white van on left",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "small",
+          "parked"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left-center",
+        "evidence": "white van parked near stone wall with dark lower trim",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "white van in center-left",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "small",
+          "parked"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-left",
+        "evidence": "white van parked next to left van near stone wall",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "utility pole with transformer box",
+        "category": "structure",
+        "attributes": [
+          "tall",
+          "grey box on top",
+          "yellow-black striped base",
+          "wires"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left foreground",
+        "evidence": "tall pole with grey electrical box and yellow-black stripes on lower section",
+        "confidence": 0.97
+      },
+      {
+        "id": "e6",
+        "label": "green shrubs in foreground",
+        "category": "plant",
+        "attributes": [
+          "dense",
+          "light green foliage",
+          "leafy"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground",
+        "evidence": "dense leafy bushes with light green foliage in lower part of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e7",
+        "label": "grassy hill",
+        "category": "terrain",
+        "attributes": [
+          "sloping",
+          "patchy green and brown grass",
+          "open"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "background",
+        "evidence": "large sloping grassy area with patches of dry grass extending behind parking area",
+        "confidence": 0.98
+      },
+      {
+        "id": "e8",
+        "label": "stone retaining wall",
+        "category": "structure",
+        "attributes": [
+          "low",
+          "stone",
+          "horizontal"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center",
+        "evidence": "low stone wall separating parking area from grassy hill",
+        "confidence": 0.9
+      },
+      {
+        "id": "e9",
+        "label": "scattered trees on hill",
+        "category": "plant",
+        "attributes": [
+          "small",
+          "green canopies",
+          "isolated"
+        ],
+        "count": 5,
+        "salience": 2,
+        "position": "background",
+        "evidence": "small trees with green canopies dotted across grassy hill",
+        "confidence": 0.92
+      },
+      {
+        "id": "e10",
+        "label": "paved parking area",
+        "category": "terrain",
+        "attributes": [
+          "asphalt",
+          "grey",
+          "cracked"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center",
+        "evidence": "asphalt surface where buses and vans are parked",
+        "confidence": 0.95
+      },
+      {
+        "id": "e11",
+        "label": "people on grassy hill",
+        "category": "person_group",
+        "attributes": [
+          "small distant figures",
+          "sitting",
+          "walking"
+        ],
+        "count": 20,
+        "salience": 2,
+        "position": "background",
+        "evidence": "small distant figures sitting and walking on grass",
+        "confidence": 0.75
+      },
+      {
+        "id": "e12",
+        "label": "white car partially visible",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "partially obscured",
+          "rear portion visible"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "right edge",
+        "evidence": "rear portion of white car visible behind shrubs on right",
+        "confidence": 0.85
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "left_of",
+        "object": "e4",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e4",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e6",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e5",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e7",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e11",
+        "predicate": "on",
+        "object": "e7",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e7",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e10",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e12",
+        "predicate": "right_of",
+        "object": "e2",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e5",
+        "predicate": "near",
+        "object": "e6",
+        "confidence": 0.85
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "SCHOOL BUS",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "top front of center yellow bus",
+        "legibility": "clear",
+        "confidence": 0.97
+      },
+      {
+        "text": "SCHOOL BUS",
+        "language": "en",
+        "entity_id": "e2",
+        "location_in_image": "top front of right yellow bus",
+        "legibility": "clear",
+        "confidence": 0.94
+      },
+      {
+        "text": "ISUZU",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "front grille of center yellow bus",
+        "legibility": "clear",
+        "confidence": 0.9
+      }
+    ],
+    "people": {
+      "count": 28,
+      "count_confidence": 0.6,
+      "faces_visible": false,
+      "activities": [
+        "sitting on grass",
+        "walking on hill",
+        "standing near wall"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "exact number of people on hill due to distance and small size",
+      "text on white vans and side of right bus is blurry and partially legible",
+      "license plate numbers are small and partially obscured",
+      "details of buildings on horizon are indistinct",
+      "text on small signs or distant structures cannot be read"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 28,
+    "license_plates_visible": true,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:18:05+00:00",
+        "raw_output_path": "data/annotations/raw/park_018_attempt2.txt",
+        "tokens": 8538
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

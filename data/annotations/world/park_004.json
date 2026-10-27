@@ -1,0 +1,311 @@
+{
+  "photo_id": "park_004",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_004.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "AmateurMaestro",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ficus_Mugumo_tree_at_Uhuru_Park_in_Nairobi.jpg",
+    "title": "File:Ficus Mugumo tree at Uhuru Park in Nairobi.jpg"
+  },
+  "observed": {
+    "caption": "A large tree with thick intertwined trunk and hanging aerial roots stands in a grassy open area with a fence and distant city buildings in the background.",
+    "description": "A massive tree with a thick, gnarled trunk covered in intertwined aerial roots dominates the center of the frame, its wide branches and dense green foliage spreading across the top and sides. Numerous long, thin aerial roots hang down from the branches and trunk. The ground around the base is a mix of bare brown soil and patches of green grass and low leafy undergrowth extending to the left and right. To the left in the mid-background a long gray metal picket fence runs along the edge of the vegetation, with another smaller tree visible behind it. To the right an open grassy field slopes gently toward a cluster of tall modern buildings on the distant horizon under a bright sky visible through gaps in the canopy. The lighting is natural daylight with sunlight filtering through the leaves.",
+    "retrieval_queries": [
+      "large banyan tree with hanging aerial roots in a grassy park",
+      "giant fig tree with tangled trunk near city skyline",
+      "big tree with aerial roots and dense canopy in an open field"
+    ],
+    "tags": [
+      "banyan tree",
+      "aerial roots",
+      "large tree",
+      "park",
+      "grassy field",
+      "city skyline",
+      "nature"
+    ],
+    "scene": {
+      "type": "park",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "natural daylight with sun through leaves",
+      "crowd_level": "empty",
+      "activity_summary": "still natural scene"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the large tree",
+      "distance": "close",
+      "framing": "medium",
+      "orientation": "portrait",
+      "subject_focus": "large tree with aerial roots"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "large central tree with aerial roots",
+        "category": "plant",
+        "attributes": [
+          "thick intertwined trunk",
+          "hanging aerial roots",
+          "wide spreading branches"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "massive trunk with fused prop roots and hanging strands dominates center of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "hanging aerial roots",
+        "category": "plant",
+        "attributes": [
+          "long",
+          "thin",
+          "dangling",
+          "brown and gray"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center and right-center",
+        "evidence": "numerous root strands hanging from trunk and branches down toward ground",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "dense tree canopy and leaves",
+        "category": "plant",
+        "attributes": [
+          "dense",
+          "green",
+          "spreading",
+          "sunlit"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "top and across",
+        "evidence": "broad branches with abundant green foliage filling upper portion of frame",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "grassy vegetation and undergrowth",
+        "category": "plant",
+        "attributes": [
+          "green",
+          "lush",
+          "low-lying",
+          "leafy"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom and left",
+        "evidence": "green grass and leafy ground cover surrounding tree base and extending left",
+        "confidence": 0.95
+      },
+      {
+        "id": "e5",
+        "label": "metal picket fence",
+        "category": "structure",
+        "attributes": [
+          "gray",
+          "vertical slats",
+          "long"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left background",
+        "evidence": "picket-style fence running along left side behind vegetation",
+        "confidence": 0.97
+      },
+      {
+        "id": "e6",
+        "label": "distant city buildings",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "modern",
+          "clustered",
+          "light colored"
+        ],
+        "count": 5,
+        "salience": 2,
+        "position": "right background",
+        "evidence": "high-rise buildings visible on horizon beyond grassy field",
+        "confidence": 0.92
+      },
+      {
+        "id": "e7",
+        "label": "bare dirt and soil patch",
+        "category": "terrain",
+        "attributes": [
+          "brown",
+          "bare",
+          "uneven",
+          "with fallen leaves"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom center-right",
+        "evidence": "exposed earth around tree base and path to the right",
+        "confidence": 0.94
+      },
+      {
+        "id": "e8",
+        "label": "open grassy field",
+        "category": "terrain",
+        "attributes": [
+          "open",
+          "green",
+          "sloping",
+          "grassy"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right mid-background",
+        "evidence": "open grassy area extending from tree toward distant buildings",
+        "confidence": 0.94
+      },
+      {
+        "id": "e9",
+        "label": "smaller background tree",
+        "category": "plant",
+        "attributes": [
+          "thin trunk",
+          "sparse canopy"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "left background behind fence",
+        "evidence": "additional tree visible beyond fence line in distance",
+        "confidence": 0.88
+      },
+      {
+        "id": "e10",
+        "label": "bright sky",
+        "category": "other",
+        "attributes": [
+          "bright",
+          "partly visible through leaves",
+          "overexposed"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "background top",
+        "evidence": "bright sky visible through gaps in foliage and beyond canopy",
+        "confidence": 0.93
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e7",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e5",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e6",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e4",
+        "predicate": "near",
+        "object": "e1",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e8",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e9",
+        "predicate": "behind",
+        "object": "e5",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e7",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e10",
+        "predicate": "above",
+        "object": "e3",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.98,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact species of the central tree cannot be determined from photo alone",
+      "Geographic location and name of park or city in background cannot be determined",
+      "Exact time of day beyond daytime",
+      "Any text on distant buildings is too blurry and small to read and is excluded",
+      "Whether fence encloses private property or public area cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:16:18+00:00",
+        "raw_output_path": "data/annotations/raw/park_004_attempt1.txt",
+        "tokens": 8168
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

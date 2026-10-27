@@ -1,0 +1,415 @@
+{
+  "photo_id": "street_013",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_013.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Kenyatta_Avenue,_Nairobi,_2025_(04).jpg",
+    "title": "File:Kenyatta Avenue, Nairobi, 2025 (04).jpg"
+  },
+  "observed": {
+    "caption": "A busy urban street intersection with orange and gray buses, a white car, and a motorcycle with a rider in a yellow vest moving toward the camera under an overcast sky.",
+    "description": "A wide asphalt road stretches through a city center lined with multi-story buildings including a tall blue-glass high-rise in the background center and a red-brick building on the right, with green trees along both sides of the street. In the foreground on the right a large orange and white Isuzu bus with BROOK on its destination board is on the road, with a motorcycle carrying a rider in a yellow reflective vest in the center lane and a white station wagon turning left nearby. Behind them a gray and orange bus with SHAYANI on its sign and additional blue and white buses are visible further down the road in moderate traffic. Pedestrians are gathered on the left sidewalk near storefronts, traffic lights on poles are at the intersection corners, and the sky is overcast with diffuse daylight illuminating the scene.",
+    "retrieval_queries": [
+      "busy city street with orange matatu buses and motorcycle in Nairobi",
+      "urban intersection traffic with Isuzu bus and tall buildings",
+      "crowded avenue with matatus, cars and pedestrians on overcast day"
+    ],
+    "tags": [
+      "city street",
+      "traffic",
+      "matatu bus",
+      "motorcycle",
+      "urban intersection",
+      "Nairobi",
+      "buildings",
+      "overcast"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast",
+      "lighting": "diffuse daylight",
+      "crowd_level": "moderate",
+      "activity_summary": "vehicles moving through busy intersection"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "down the avenue toward the skyline",
+      "distance": "close",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "busy street with buses in foreground"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "orange and white Isuzu bus with BROOK sign",
+        "category": "vehicle",
+        "attributes": [
+          "orange and white",
+          "large",
+          "BROOK on destination board",
+          "ISUZU on front"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground right",
+        "evidence": "large orange bus dominates right foreground with BROOK lettering on top",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "motorcycle with rider in yellow vest",
+        "category": "vehicle",
+        "attributes": [
+          "black motorcycle",
+          "rider wearing yellow reflective vest",
+          "moving on road"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center foreground",
+        "evidence": "motorcycle with rider in bright yellow vest in center lane facing away from camera",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "white station wagon car",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "station wagon",
+          "turning left"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-left on road",
+        "evidence": "white car in intersection mid-turn",
+        "confidence": 0.97
+      },
+      {
+        "id": "e4",
+        "label": "gray and orange bus with SHAYANI sign",
+        "category": "vehicle",
+        "attributes": [
+          "gray with orange trim",
+          "SHAYANI on destination board",
+          "behind motorcycle"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center middle distance",
+        "evidence": "second bus directly behind motorcycle with SHAYANI visible on top",
+        "confidence": 0.95
+      },
+      {
+        "id": "e5",
+        "label": "pedestrians on sidewalk",
+        "category": "person_group",
+        "attributes": [
+          "walking and standing",
+          "various clothing",
+          "on left sidewalk"
+        ],
+        "count": 10,
+        "salience": 2,
+        "position": "left sidewalk",
+        "evidence": "group of people on left sidewalk near buildings and street corner",
+        "confidence": 0.82
+      },
+      {
+        "id": "e6",
+        "label": "traffic lights on poles",
+        "category": "structure",
+        "attributes": [
+          "black traffic light housings",
+          "mounted on metal poles",
+          "at intersection"
+        ],
+        "count": 4,
+        "salience": 2,
+        "position": "left and right sides of intersection",
+        "evidence": "traffic lights visible on poles at both sides of the road",
+        "confidence": 0.92
+      },
+      {
+        "id": "e7",
+        "label": "modern glass high-rise building",
+        "category": "building",
+        "attributes": [
+          "blue-tinted glass facade",
+          "tall",
+          "UAP logo on top"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "background center",
+        "evidence": "tall glass building in distance center with reflective windows",
+        "confidence": 0.93
+      },
+      {
+        "id": "e8",
+        "label": "red brick multi-story building",
+        "category": "building",
+        "attributes": [
+          "red brick",
+          "multi-story",
+          "arched windows"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right background",
+        "evidence": "red brick building on right side behind traffic lights and trees",
+        "confidence": 0.94
+      },
+      {
+        "id": "e9",
+        "label": "trees lining street",
+        "category": "plant",
+        "attributes": [
+          "green foliage",
+          "tall",
+          "along both sides of road"
+        ],
+        "count": 8,
+        "salience": 2,
+        "position": "center and sides along street",
+        "evidence": "trees with dense green leaves along the avenue and sidewalks",
+        "confidence": 0.9
+      },
+      {
+        "id": "e10",
+        "label": "asphalt road surface",
+        "category": "terrain",
+        "attributes": [
+          "gray asphalt",
+          "wide intersection",
+          "lane markings"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "foreground and center extending to background",
+        "evidence": "paved road covering lower and middle portion of image with vehicles on it",
+        "confidence": 0.98
+      },
+      {
+        "id": "e11",
+        "label": "overcast sky",
+        "category": "other",
+        "attributes": [
+          "cloudy",
+          "pale gray-white"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "top of image",
+        "evidence": "cloudy sky visible above buildings across top of frame",
+        "confidence": 0.97
+      },
+      {
+        "id": "e12",
+        "label": "additional buses in distance",
+        "category": "vehicle",
+        "attributes": [
+          "blue and white",
+          "multiple",
+          "in traffic further down road"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "background center on road",
+        "evidence": "several buses visible further down the street behind the gray bus",
+        "confidence": 0.85
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "right_of",
+        "object": "e2",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e2",
+        "predicate": "in_front_of",
+        "object": "e4",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e2",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e3",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e5",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e6",
+        "predicate": "above",
+        "object": "e10",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e7",
+        "predicate": "behind",
+        "object": "e9",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e8",
+        "predicate": "right_of",
+        "object": "e7",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e9",
+        "predicate": "beside",
+        "object": "e10",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e12",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.87
+      },
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e10",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e10",
+        "confidence": 0.98
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "BROOK",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "top front of orange bus in foreground right",
+        "legibility": "clear",
+        "confidence": 0.98
+      },
+      {
+        "text": "ISUZU",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "front of orange bus below windshield",
+        "legibility": "clear",
+        "confidence": 0.92
+      },
+      {
+        "text": "county link sacco",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "lower front of orange bus above bumper",
+        "legibility": "clear",
+        "confidence": 0.88
+      },
+      {
+        "text": "KBY 731R",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "license plate on front of orange bus",
+        "legibility": "clear",
+        "confidence": 0.95
+      },
+      {
+        "text": "SHAYANI",
+        "language": "en",
+        "entity_id": "e4",
+        "location_in_image": "destination board on top of gray bus in center",
+        "legibility": "clear",
+        "confidence": 0.9
+      },
+      {
+        "text": "KBT 022V",
+        "language": "en",
+        "entity_id": "e4",
+        "location_in_image": "license plate on front of gray bus",
+        "legibility": "partial",
+        "confidence": 0.78
+      },
+      {
+        "text": "UAP",
+        "language": "en",
+        "entity_id": "e7",
+        "location_in_image": "top of glass high-rise building in background center",
+        "legibility": "partial",
+        "confidence": 0.72
+      }
+    ],
+    "people": {
+      "count": 13,
+      "count_confidence": 0.65,
+      "faces_visible": false,
+      "activities": [
+        "riding motorcycle",
+        "walking on sidewalk",
+        "standing near intersection",
+        "driving vehicles"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of pedestrians on left sidewalk due to distance and occlusion",
+      "Text on distant blue sign on right building and other small storefront signs is not legible enough to read 3 letters",
+      "Text on motorcycle license plate and small windshield stickers is blurry and cannot be read reliably",
+      "Exact make and model of distant vehicles beyond the foreground buses and white car",
+      "Specific street name or city location cannot be determined from image alone",
+      "Exact time of day beyond daytime and weather conditions beyond overcast"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 13,
+    "license_plates_visible": true,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:20:51+00:00",
+        "raw_output_path": "data/annotations/raw/street_013_attempt1.txt",
+        "tokens": 10076
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'KBT 022V'",
+        "partially legible text: 'UAP'"
+      ]
+    }
+  }
+}

@@ -1,0 +1,309 @@
+{
+  "photo_id": "hills_003",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_003.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "GEORGE WAWERU",
+    "source_url": "https://commons.wikimedia.org/wiki/File:FROM_THE_HILL_TOPS_OF_NGONG.JPG",
+    "title": "File:FROM THE HILL TOPS OF NGONG.JPG"
+  },
+  "observed": {
+    "caption": "Two people rest on a grassy hilltop overlooking a wide valley with wind turbines and a communications tower on a distant ridge.",
+    "description": "In the foreground, a broad grassy hilltop with patches of green and brown grass fills the lower two-thirds of the image. In the bottom-left corner, two people in plaid shirts are on the grass, one sitting upright and one reclining with their head near the other person. Scattered low trees and shrubs dot the mid-distance hills. On a ridge to the left, several tall white wind turbines and a lattice telecommunications tower are visible. Thin black overhead power lines cross the upper portion of the image horizontally and diagonally. Beyond the hills, a hazy, sprawling valley settlement extends to the horizon under a bright blue sky with scattered white clouds.",
+    "retrieval_queries": [
+      "people sitting on grassy hill overlooking valley with wind turbines",
+      "hilltop view of town in valley with power lines and windmills",
+      "grassy landscape with communication tower and wind farm on ridge"
+    ],
+    "tags": [
+      "hilltop",
+      "grassland",
+      "valley view",
+      "wind turbines",
+      "telecommunications tower",
+      "power lines",
+      "landscape",
+      "outdoor"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "bright natural daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "people relaxing on grassy hilltop"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "across the hilltop toward the valley and distant ridge",
+      "distance": "close",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "people on grassy hilltop with wind turbines and valley view"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "group of two people on grass",
+        "category": "person_group",
+        "attributes": [
+          "sitting and reclining",
+          "plaid shirts",
+          "on grass in foreground"
+        ],
+        "count": 2,
+        "salience": 4,
+        "position": "bottom-left foreground",
+        "evidence": "two figures in blue plaid shirts, one sitting upright and one lying with head near the other on the grass",
+        "confidence": 0.96
+      },
+      {
+        "id": "e2",
+        "label": "grassy hilltop field",
+        "category": "terrain",
+        "attributes": [
+          "green grass",
+          "patchy brown areas",
+          "expansive open field"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground and center",
+        "evidence": "large area of grass covering lower two-thirds of image extending to mid-distance",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "wind turbines",
+        "category": "structure",
+        "attributes": [
+          "white",
+          "tall with three blades",
+          "on distant ridge"
+        ],
+        "count": 6,
+        "salience": 4,
+        "position": "left background on ridge",
+        "evidence": "multiple white turbine towers with blades visible against sky on left horizon",
+        "confidence": 0.92
+      },
+      {
+        "id": "e4",
+        "label": "telecommunications tower",
+        "category": "structure",
+        "attributes": [
+          "tall lattice structure",
+          "with antennas",
+          "on hill ridge"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left-center mid-distance",
+        "evidence": "tall metal lattice tower with antenna arrays standing on green hill",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "overhead power lines",
+        "category": "structure",
+        "attributes": [
+          "thin black cables",
+          "crossing sky horizontally and diagonally"
+        ],
+        "count": 3,
+        "salience": 3,
+        "position": "upper third across image",
+        "evidence": "three thin dark lines stretching across the sky, one horizontal and two diagonal",
+        "confidence": 0.97
+      },
+      {
+        "id": "e6",
+        "label": "partly cloudy sky",
+        "category": "other",
+        "attributes": [
+          "blue",
+          "scattered white cumulus clouds",
+          "bright"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "upper background",
+        "evidence": "blue sky occupying top half of image with white clouds",
+        "confidence": 0.98
+      },
+      {
+        "id": "e7",
+        "label": "distant valley settlement",
+        "category": "terrain",
+        "attributes": [
+          "hazy",
+          "sprawling",
+          "low-lying plains with buildings"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-right background",
+        "evidence": "wide hazy expanse of clustered structures and plains extending to horizon",
+        "confidence": 0.88
+      },
+      {
+        "id": "e8",
+        "label": "scattered trees and shrubs",
+        "category": "plant",
+        "attributes": [
+          "green",
+          "low and bushy",
+          "dotting hills"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "mid-distance across hills",
+        "evidence": "clusters of dark green trees and bushes on rolling hills between foreground and valley",
+        "confidence": 0.9
+      },
+      {
+        "id": "e9",
+        "label": "rolling green hills",
+        "category": "terrain",
+        "attributes": [
+          "undulating",
+          "grass-covered",
+          "mid-distance"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center mid-distance",
+        "evidence": "green undulating hills forming ridge between foreground field and distant valley",
+        "confidence": 0.92
+      },
+      {
+        "id": "e10",
+        "label": "utility pole",
+        "category": "structure",
+        "attributes": [
+          "wooden",
+          "with cross-arms",
+          "small in distance"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "far left mid-distance",
+        "evidence": "small vertical pole with horizontal elements near left edge among grass",
+        "confidence": 0.72
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e5",
+        "predicate": "above",
+        "object": "e2",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e5",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e3",
+        "predicate": "behind",
+        "object": "e2",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e2",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e3",
+        "predicate": "left_of",
+        "object": "e4",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e7",
+        "predicate": "behind",
+        "object": "e9",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e8",
+        "predicate": "on",
+        "object": "e9",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e10",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.75
+      },
+      {
+        "subject": "e9",
+        "predicate": "in_front_of",
+        "object": "e7",
+        "confidence": 0.87
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 2,
+      "count_confidence": 0.96,
+      "faces_visible": true,
+      "activities": [
+        "sitting on grass",
+        "lying on grass"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact geographic location of the hilltop and valley cannot be determined from the photo",
+      "Exact number of wind turbines is uncertain due to haze and overlap in the distance",
+      "Details and scale of the distant valley settlement cannot be determined due to haze",
+      "Species of small light-colored animals grazing in the left mid-distance cannot be determined",
+      "Whether any distant signage exists and its legibility cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": true,
+    "people_count": 2,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:09:03+00:00",
+        "raw_output_path": "data/annotations/raw/hills_003_attempt1.txt",
+        "tokens": 7136
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

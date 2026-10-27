@@ -1,0 +1,414 @@
+{
+  "photo_id": "cbd_019",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/cbd/cbd_019.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Keshie Muchai",
+    "source_url": "https://commons.wikimedia.org/wiki/File:I%26M_Building,_Nairobi_CBD.jpg",
+    "title": "File:I&M Building, Nairobi CBD.jpg"
+  },
+  "observed": {
+    "caption": "A busy urban street with vehicles, pedestrians, and tall buildings under an overcast sky.",
+    "description": "The photo shows a wide paved urban street viewed from ground level extending into the distance under a cloudy gray sky. On the left, a modern multi-story building with blue-tinted glass windows and metal awnings lines the sidewalk where several pedestrians in light and dark clothing walk. On the right, a tall white building and a smaller orange-and-white building stand behind a large mostly bare tree and other leafy trees. In the foreground on the road, a silver SUV is in the right lane and a person in an orange jacket and helmet rides a motorcycle with a white delivery box in the center lane, while a white box truck is parked on the right side near a traffic light pole with a horizontal arm. Storefronts with signage are visible at street level on both sides, and additional cars and trees are visible further down the street.",
+    "retrieval_queries": [
+      "busy city street with cars and motorcycle under cloudy sky",
+      "urban road with tall buildings pedestrians and trees",
+      "silver SUV and delivery motorcycle driving on street lined with shops"
+    ],
+    "tags": [
+      "city street",
+      "urban traffic",
+      "SUV",
+      "motorcycle",
+      "pedestrians",
+      "buildings",
+      "trees",
+      "overcast sky"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast",
+      "lighting": "diffused overcast daylight",
+      "crowd_level": "moderate",
+      "activity_summary": "vehicles driving and pedestrians walking along street"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "down the street toward distant buildings",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "portrait",
+      "subject_focus": "street with vehicles and buildings"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "modern glass building on left",
+        "category": "building",
+        "attributes": [
+          "multi-story",
+          "blue-tinted glass facade",
+          "metal awnings",
+          "modern"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left edge, foreground to background",
+        "evidence": "glass windows and protruding metal canopies visible along left side",
+        "confidence": 0.95
+      },
+      {
+        "id": "e2",
+        "label": "tall white building on right",
+        "category": "building",
+        "attributes": [
+          "white exterior",
+          "multi-story",
+          "rectangular windows",
+          "flat roof"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right side, background",
+        "evidence": "large white rectangular building with small windows on right",
+        "confidence": 0.95
+      },
+      {
+        "id": "e3",
+        "label": "orange and white mid-rise building",
+        "category": "building",
+        "attributes": [
+          "orange and white facade",
+          "multi-story",
+          "balconies",
+          "rectangular windows"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-right, background behind trees",
+        "evidence": "building with orange panels and white walls visible behind central tree",
+        "confidence": 0.9
+      },
+      {
+        "id": "e4",
+        "label": "large bare tree in center-right",
+        "category": "plant",
+        "attributes": [
+          "tall",
+          "sparse leaves",
+          "dark branching trunk",
+          "wide canopy"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-right, middle distance",
+        "evidence": "prominent tree with mostly bare branches dominating center-right sky",
+        "confidence": 0.95
+      },
+      {
+        "id": "e5",
+        "label": "silver SUV on road",
+        "category": "vehicle",
+        "attributes": [
+          "silver",
+          "SUV",
+          "rear view",
+          "yellow license plate",
+          "on road"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-right, foreground on road",
+        "evidence": "silver Toyota SUV viewed from rear driving on right lane",
+        "confidence": 0.95
+      },
+      {
+        "id": "e6",
+        "label": "motorcycle with delivery box",
+        "category": "vehicle",
+        "attributes": [
+          "motorcycle",
+          "rider in orange jacket and helmet",
+          "white rear delivery box"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center, foreground on road",
+        "evidence": "motorcycle with rider wearing helmet and orange top carrying white box on back",
+        "confidence": 0.9
+      },
+      {
+        "id": "e7",
+        "label": "white box truck parked on roadside",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "box truck",
+          "parked",
+          "on roadside"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center, middle distance on right side of road",
+        "evidence": "white truck with enclosed cargo box parked near curb",
+        "confidence": 0.9
+      },
+      {
+        "id": "e8",
+        "label": "group of pedestrians on left sidewalk",
+        "category": "person_group",
+        "attributes": [
+          "multiple people",
+          "walking",
+          "varied light and dark clothing",
+          "on sidewalk"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left side, sidewalk foreground to background",
+        "evidence": "several people walking along left sidewalk beside building",
+        "confidence": 0.85
+      },
+      {
+        "id": "e9",
+        "label": "paved asphalt road",
+        "category": "terrain",
+        "attributes": [
+          "asphalt",
+          "two lanes",
+          "yellow curb line",
+          "urban street"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center, foreground to background",
+        "evidence": "dark paved road with lane markings extending down center of image",
+        "confidence": 0.95
+      },
+      {
+        "id": "e10",
+        "label": "overcast sky with clouds",
+        "category": "other",
+        "attributes": [
+          "cloudy",
+          "gray-blue",
+          "overcast",
+          "diffused light"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "top, background covering upper half",
+        "evidence": "large expanse of gray clouds filling upper portion of image",
+        "confidence": 0.95
+      },
+      {
+        "id": "e11",
+        "label": "traffic light pole with horizontal arm",
+        "category": "structure",
+        "attributes": [
+          "metal pole",
+          "horizontal arm",
+          "traffic lights",
+          "vertical"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center, middle distance over road",
+        "evidence": "metal pole with crossbar and signal heads spanning road",
+        "confidence": 0.85
+      },
+      {
+        "id": "e12",
+        "label": "storefront with signage on right building",
+        "category": "structure",
+        "attributes": [
+          "ground floor storefront",
+          "black and blue signage",
+          "commercial"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "lower right, ground floor of white building",
+        "evidence": "shop front with dark signs and illuminated displays at base of right building",
+        "confidence": 0.9
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e9",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e2",
+        "predicate": "right_of",
+        "object": "e4",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e5",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e5",
+        "predicate": "right_of",
+        "object": "e6",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e9",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e9",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e7",
+        "predicate": "behind",
+        "object": "e5",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e8",
+        "predicate": "left_of",
+        "object": "e9",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e8",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e12",
+        "predicate": "inside",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e11",
+        "predicate": "near",
+        "object": "e7",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e3",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.85
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "I&M Bank",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "on sign on left building, lower left",
+        "legibility": "clear",
+        "confidence": 0.9
+      },
+      {
+        "text": "MANIX",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "below I&M Bank sign on left building, lower left",
+        "legibility": "clear",
+        "confidence": 0.85
+      },
+      {
+        "text": "Infinix",
+        "language": "en",
+        "entity_id": "e12",
+        "location_in_image": "on black storefront sign on right building, lower right",
+        "legibility": "clear",
+        "confidence": 0.9
+      },
+      {
+        "text": "SAMSUNG",
+        "language": "en",
+        "entity_id": "e12",
+        "location_in_image": "on blue storefront sign below Infinix, lower right",
+        "legibility": "clear",
+        "confidence": 0.9
+      },
+      {
+        "text": "350",
+        "language": "unknown",
+        "entity_id": null,
+        "location_in_image": "on billboard in center background above white truck",
+        "legibility": "clear",
+        "confidence": 0.75
+      },
+      {
+        "text": "G4S",
+        "language": "en",
+        "entity_id": "e6",
+        "location_in_image": "on white delivery box on motorcycle, center",
+        "legibility": "clear",
+        "confidence": 0.85
+      }
+    ],
+    "people": {
+      "count": 11,
+      "count_confidence": 0.65,
+      "faces_visible": false,
+      "activities": [
+        "walking on sidewalk",
+        "riding motorcycle",
+        "standing near storefront"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact city or street name cannot be determined from visible signs",
+      "Time of day beyond daytime and date of photo cannot be determined",
+      "Make and model of vehicles beyond general type and color",
+      "Text on distant billboards and small background signs that is blurry or too small to read",
+      "Identities, ages, or facial features of people due to distance and resolution",
+      "Weather temperature, wind, or precise lighting conditions beyond overcast appearance"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 11,
+    "license_plates_visible": true,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:09:04+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_019_attempt1.txt",
+        "tokens": 13770
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

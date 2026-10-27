@@ -1,0 +1,323 @@
+{
+  "photo_id": "park_019",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_019.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Luide Kakembo",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Uhuru_Gardens,_Nairobi.jpg",
+    "title": "File:Uhuru Gardens, Nairobi.jpg"
+  },
+  "observed": {
+    "caption": "A tall stone monument with bronze statues raising a flag and a sculpted hand holding a dove stands on a stepped platform in an open plaza with several people nearby under a clear blue sky.",
+    "description": "The image shows a large outdoor stone monument with a tall tapered obelisk tower featuring arched openings at its base, a group of dark bronze statues of several figures raising a flag on a pole atop a tiered stone platform with wide steps, and a large light-colored sculpted hand holding a dove with outstretched wings visible through the tower's arch. The monument sits on a paved plaza surrounded by low hedges and scattered trees under a clear blue sky with a few small birds in flight on the left, illuminated by warm low-angle sunlight casting long shadows, with several people in casual and dark clothing standing on the steps, near the base, and climbing or sitting under the platform's overhang.",
+    "retrieval_queries": [
+      "tall obelisk monument with statues raising a flag and a hand holding a dove",
+      "people climbing on a stone memorial with a pointed tower at sunset",
+      "outdoor plaza with a large sculpture and children playing on steps"
+    ],
+    "tags": [
+      "monument",
+      "obelisk",
+      "memorial",
+      "statue",
+      "plaza",
+      "sculpture",
+      "flag",
+      "dove"
+    ],
+    "scene": {
+      "type": "plaza",
+      "setting": "outdoor",
+      "time_of_day": "evening",
+      "weather": "clear",
+      "lighting": "warm golden hour sunlight",
+      "crowd_level": "sparse",
+      "activity_summary": "visiting and playing on monument"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the monument",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "portrait",
+      "subject_focus": "tall monument with statues"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "tall stone obelisk tower",
+        "category": "structure",
+        "attributes": [
+          "tall",
+          "tapered",
+          "light stone",
+          "arched base",
+          "pointed top"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-right, background",
+        "evidence": "tall narrow stone structure with arches at base extending high into sky",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "bronze statue group raising flag",
+        "category": "structure",
+        "attributes": [
+          "dark bronze",
+          "multiple figures",
+          "holding flag and pole"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center, on platform",
+        "evidence": "dark sculpted figures clustered together lifting a flag on a pole atop stone base",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "sculpted hand holding dove",
+        "category": "structure",
+        "attributes": [
+          "light stone",
+          "large hand",
+          "bird with spread wings"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right, inside arch",
+        "evidence": "large light-colored hand sculpture with dove perched on fingers visible through arch of tower",
+        "confidence": 0.95
+      },
+      {
+        "id": "e4",
+        "label": "stepped stone platform",
+        "category": "structure",
+        "attributes": [
+          "tiered",
+          "light stone",
+          "wide steps",
+          "rectangular base"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center, foreground to middle",
+        "evidence": "broad stone base with multiple stepped levels supporting statues and tower",
+        "confidence": 0.97
+      },
+      {
+        "id": "e5",
+        "label": "group of people",
+        "category": "person_group",
+        "attributes": [
+          "varied dark and light clothing",
+          "standing and climbing"
+        ],
+        "count": 5,
+        "salience": 3,
+        "position": "foreground and on platform",
+        "evidence": "several small figures including child on steps, adult near base, and figures on and under platform overhang",
+        "confidence": 0.88
+      },
+      {
+        "id": "e6",
+        "label": "trees",
+        "category": "plant",
+        "attributes": [
+          "green foliage",
+          "scattered",
+          "mature"
+        ],
+        "count": 5,
+        "salience": 2,
+        "position": "left background and right background",
+        "evidence": "leafy trees lining horizon behind plaza",
+        "confidence": 0.92
+      },
+      {
+        "id": "e7",
+        "label": "clear blue sky",
+        "category": "other",
+        "attributes": [
+          "clear",
+          "pale to deep blue",
+          "few clouds near horizon"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "upper and background",
+        "evidence": "expansive blue sky occupying upper two-thirds of image",
+        "confidence": 0.99
+      },
+      {
+        "id": "e8",
+        "label": "paved plaza ground",
+        "category": "terrain",
+        "attributes": [
+          "smooth stone paving",
+          "open area"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "foreground and middle",
+        "evidence": "flat paved surface surrounding monument base and steps",
+        "confidence": 0.95
+      },
+      {
+        "id": "e9",
+        "label": "birds in flight",
+        "category": "animal",
+        "attributes": [
+          "small",
+          "dark silhouettes",
+          "flying"
+        ],
+        "count": 2,
+        "salience": 1,
+        "position": "left sky, far background",
+        "evidence": "two small dark bird shapes in sky on left side",
+        "confidence": 0.75
+      },
+      {
+        "id": "e10",
+        "label": "flag",
+        "category": "object",
+        "attributes": [
+          "multicolored",
+          "on pole",
+          "held by statues"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center, above statues",
+        "evidence": "flag with green, yellow, black and blue colors attached to pole held by bronze figures",
+        "confidence": 0.85
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e1",
+        "predicate": "behind",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e3",
+        "predicate": "inside",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e10",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e9",
+        "predicate": "above",
+        "object": "e6",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e4",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e3",
+        "predicate": "beside",
+        "object": "e2",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e8",
+        "predicate": "below",
+        "object": "e4",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "DO NOT CLIMB",
+        "language": "en",
+        "entity_id": "e4",
+        "location_in_image": "center, on front face of stone platform below statues",
+        "legibility": "partial",
+        "confidence": 0.65
+      }
+    ],
+    "people": {
+      "count": 5,
+      "count_confidence": 0.85,
+      "faces_visible": false,
+      "activities": [
+        "standing on steps",
+        "standing near monument base",
+        "climbing and sitting under platform overhang"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact text on small white sign on platform is not fully legible at this resolution and distance",
+      "Exact colors and pattern details of the flag are not clearly distinguishable",
+      "Identities, ages, and genders of people cannot be determined",
+      "Exact location, name, and historical meaning of the monument cannot be determined from image alone",
+      "Precise time of day beyond daylight with low sun angle cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 5,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:18:01+00:00",
+        "raw_output_path": "data/annotations/raw/park_019_attempt1.txt",
+        "tokens": 11854
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'DO NOT CLIMB'"
+      ]
+    }
+  }
+}

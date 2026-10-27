@@ -1,0 +1,282 @@
+{
+  "photo_id": "street_003",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_003.jpg",
+    "license": "CC BY-SA 2.0",
+    "author": "Gyps_rueppellii_-Nairobi_National_Park,_Kenya-8.jpg: Jorge Láscar from Bogotá, Colombia\nderivative work: Snowmanradio (talk)",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Gyps_rueppellii_-Nairobi_National_Park,_Kenya-8-4c.jpg",
+    "title": "File:Gyps rueppellii -Nairobi National Park, Kenya-8-4c.jpg"
+  },
+  "observed": {
+    "caption": "A large vulture with wings fully spread runs across dry, rocky ground in bright daylight.",
+    "description": "A single large bird with mottled brown and white plumage, a pale featherless head and neck, and broad wings extended outward is captured mid-stride on dry, dusty brown earth scattered with small dark rocks and pebbles. The bird's legs are extended forward with talons visible, and its dark shadow falls sharply on the ground beneath it. In the background, sparse clumps of dry yellow-brown grass grow from uneven, rocky soil under bright, harsh sunlight.",
+    "retrieval_queries": [
+      "vulture running with wings spread on dry ground",
+      "large bird taking off in arid rocky field",
+      "close up of vulture with open wings in sunlight"
+    ],
+    "tags": [
+      "vulture",
+      "bird",
+      "wings spread",
+      "dry ground",
+      "rocks",
+      "arid habitat",
+      "wildlife",
+      "daylight"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "sunny and dry",
+      "lighting": "bright harsh daylight with sharp shadow",
+      "crowd_level": "empty",
+      "activity_summary": "bird running with wings extended"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the bird on dry ground",
+      "distance": "medium",
+      "framing": "medium",
+      "orientation": "landscape",
+      "subject_focus": "vulture with spread wings"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "vulture with wings spread",
+        "category": "animal",
+        "attributes": [
+          "large",
+          "mottled brown and white plumage",
+          "pale featherless head",
+          "wings fully extended",
+          "running posture"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "large bird dominates center of frame with both wings outstretched and legs in motion",
+        "confidence": 0.99
+      },
+      {
+        "id": "e2",
+        "label": "dry dusty ground",
+        "category": "terrain",
+        "attributes": [
+          "brown",
+          "dusty",
+          "uneven",
+          "arid"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground and background",
+        "evidence": "covers entire lower and middle area beneath bird with bare soil texture",
+        "confidence": 0.99
+      },
+      {
+        "id": "e3",
+        "label": "scattered dark rocks",
+        "category": "object",
+        "attributes": [
+          "dark gray",
+          "irregular",
+          "small to medium"
+        ],
+        "count": 15,
+        "salience": 3,
+        "position": "across ground",
+        "evidence": "multiple dark stones of varying sizes visible on soil surface around bird",
+        "confidence": 0.97
+      },
+      {
+        "id": "e4",
+        "label": "dry grass tufts",
+        "category": "plant",
+        "attributes": [
+          "yellow-brown",
+          "dry",
+          "clumped",
+          "wiry"
+        ],
+        "count": 8,
+        "salience": 3,
+        "position": "background",
+        "evidence": "pale straw-colored grass clumps growing from soil in upper background",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "shadow of bird",
+        "category": "other",
+        "attributes": [
+          "dark",
+          "sharp",
+          "elongated",
+          "on ground"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "below bird",
+        "evidence": "dark silhouette of wings and legs cast on dusty ground directly under vulture",
+        "confidence": 0.98
+      },
+      {
+        "id": "e6",
+        "label": "outstretched wings",
+        "category": "other",
+        "attributes": [
+          "broad",
+          "feathered",
+          "dark tips",
+          "patterned"
+        ],
+        "count": 2,
+        "salience": 4,
+        "position": "center",
+        "evidence": "two large wings extended sideways with visible primary feathers and contrasting dark and light patterns",
+        "confidence": 0.99
+      },
+      {
+        "id": "e7",
+        "label": "bird's legs and talons",
+        "category": "other",
+        "attributes": [
+          "scaly",
+          "gray",
+          "clawed",
+          "extended"
+        ],
+        "count": 2,
+        "salience": 3,
+        "position": "center-bottom",
+        "evidence": "two legs beneath body with curved talons visible above ground",
+        "confidence": 0.97
+      },
+      {
+        "id": "e8",
+        "label": "small pebbles and stones",
+        "category": "object",
+        "attributes": [
+          "tiny",
+          "light and dark",
+          "scattered"
+        ],
+        "count": 20,
+        "salience": 2,
+        "position": "foreground",
+        "evidence": "numerous small pebbles embedded in and on dusty soil in lower area",
+        "confidence": 0.95
+      },
+      {
+        "id": "e9",
+        "label": "pale head and hooked beak",
+        "category": "other",
+        "attributes": [
+          "light gray",
+          "featherless neck",
+          "hooked beak",
+          "dark eye"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-right",
+        "evidence": "bird's head in profile on right side with pale skin and curved beak tip",
+        "confidence": 0.98
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e5",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e7",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e1",
+        "predicate": "near",
+        "object": "e3",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.99,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "exact species of vulture cannot be determined from photo alone",
+      "precise geographic location cannot be determined",
+      "reason for bird's behavior such as taking off or landing cannot be determined",
+      "exact time of day beyond daytime cannot be determined",
+      "whether other animals or people are outside the frame cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:19:00+00:00",
+        "raw_output_path": "data/annotations/raw/street_003_attempt1.txt",
+        "tokens": 6056
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

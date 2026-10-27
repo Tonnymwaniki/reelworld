@@ -1,0 +1,357 @@
+{
+  "photo_id": "market_023",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_023.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Sdkb",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Overhead_view_of_the_Village_Market,_Nairobi.jpg",
+    "title": "File:Overhead view of the Village Market, Nairobi.jpg"
+  },
+  "observed": {
+    "caption": "Elevated view of a multi-level outdoor shopping mall courtyard with white tensile canopy sails, colorful glass storefronts, and people dining and walking on balconies and ground level.",
+    "description": "The photo shows an elevated, wide view looking down into a multi-level open-air shopping mall courtyard surrounded by buildings with balconies and glass railings. Large white tensile fabric canopies are stretched over upper balconies and the lower courtyard. The building on the right has multiple floors with illuminated shop interiors, colorful stained-glass windows with red, blue, yellow and green panels, and a staircase with striped steps. The building on the left and in the background has a gray facade with rectangular windows. Numerous potted plants and tall green trees are placed along balconies and in the central courtyard. Dark tables and chairs are arranged on balconies and on the paved stone courtyard floor below, with several red umbrellas shading tables. Small figures of people are visible seated at tables dining and walking on walkways and the ground floor. Warm artificial lighting from shops and balcony lights illuminates the scene against fading daylight.",
+    "retrieval_queries": [
+      "overhead view of shopping mall courtyard with white shade sails",
+      "multi level outdoor mall atrium with colorful glass windows at dusk",
+      "people dining on balconies in modern mall with canopy tents"
+    ],
+    "tags": [
+      "mall",
+      "atrium",
+      "courtyard",
+      "canopy",
+      "multilevel",
+      "shopping center",
+      "balconies",
+      "evening"
+    ],
+    "scene": {
+      "type": "building",
+      "setting": "outdoor",
+      "time_of_day": "evening",
+      "weather": "unknown",
+      "lighting": "warm artificial with fading daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "people dining and walking in mall courtyard"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "high",
+      "facing": "down into the courtyard",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "multi-level mall atrium with canopy sails"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "white tensile canopy sails",
+        "category": "structure",
+        "attributes": [
+          "white",
+          "fabric",
+          "suspended",
+          "large"
+        ],
+        "count": 5,
+        "salience": 5,
+        "position": "center, left and bottom",
+        "evidence": "large white fabric sails stretched over balconies and courtyard",
+        "confidence": 0.96
+      },
+      {
+        "id": "e2",
+        "label": "multi-story building with balconies",
+        "category": "building",
+        "attributes": [
+          "white columns",
+          "glass railings",
+          "multiple levels",
+          "illuminated interiors"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "right",
+        "evidence": "right side building with several floors of balconies and lit shop fronts",
+        "confidence": 0.95
+      },
+      {
+        "id": "e3",
+        "label": "gray multi-story building with rectangular windows",
+        "category": "building",
+        "attributes": [
+          "gray facade",
+          "rectangular windows",
+          "flat roof"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left and background",
+        "evidence": "gray building with rows of windows behind the canopies",
+        "confidence": 0.92
+      },
+      {
+        "id": "e4",
+        "label": "potted plants and trees",
+        "category": "plant",
+        "attributes": [
+          "green foliage",
+          "in pots",
+          "tall trees in courtyard"
+        ],
+        "count": 18,
+        "salience": 3,
+        "position": "throughout balconies and bottom courtyard",
+        "evidence": "green plants in pots along railings and large trees in lower courtyard",
+        "confidence": 0.9
+      },
+      {
+        "id": "e5",
+        "label": "people dining and walking",
+        "category": "person_group",
+        "attributes": [
+          "small figures",
+          "casual clothing",
+          "seated and standing"
+        ],
+        "count": 14,
+        "salience": 3,
+        "position": "various levels and courtyard",
+        "evidence": "small figures seated at tables on balconies and walking on lower paved area",
+        "confidence": 0.62
+      },
+      {
+        "id": "e6",
+        "label": "outdoor dining tables and chairs",
+        "category": "object",
+        "attributes": [
+          "dark tables",
+          "chairs",
+          "arranged on balconies"
+        ],
+        "count": 20,
+        "salience": 3,
+        "position": "balconies and courtyard",
+        "evidence": "tables with chairs on multiple balcony levels and ground floor",
+        "confidence": 0.86
+      },
+      {
+        "id": "e7",
+        "label": "red umbrellas",
+        "category": "object",
+        "attributes": [
+          "red fabric",
+          "open",
+          "over tables"
+        ],
+        "count": 4,
+        "salience": 3,
+        "position": "bottom courtyard",
+        "evidence": "red umbrellas shading tables in lower courtyard",
+        "confidence": 0.91
+      },
+      {
+        "id": "e8",
+        "label": "glass balcony railings",
+        "category": "structure",
+        "attributes": [
+          "transparent",
+          "metal frames",
+          "curved"
+        ],
+        "count": 10,
+        "salience": 3,
+        "position": "throughout building levels",
+        "evidence": "glass railings lining each balcony level",
+        "confidence": 0.92
+      },
+      {
+        "id": "e9",
+        "label": "staircase with striped steps",
+        "category": "structure",
+        "attributes": [
+          "striped pattern",
+          "glass railing",
+          "vertical"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right side",
+        "evidence": "staircase with alternating light and dark steps on right building",
+        "confidence": 0.87
+      },
+      {
+        "id": "e10",
+        "label": "colorful stained-glass windows",
+        "category": "structure",
+        "attributes": [
+          "multicolored panels",
+          "illuminated",
+          "large"
+        ],
+        "count": 2,
+        "salience": 4,
+        "position": "right side middle level",
+        "evidence": "large windows with red, blue, yellow, green panels on right building",
+        "confidence": 0.93
+      },
+      {
+        "id": "e11",
+        "label": "illuminated shop interiors",
+        "category": "other",
+        "attributes": [
+          "warm lighting",
+          "visible merchandise",
+          "open storefronts"
+        ],
+        "count": 5,
+        "salience": 2,
+        "position": "right side upper and middle levels",
+        "evidence": "brightly lit shop interiors with clothing displays behind glass",
+        "confidence": 0.82
+      },
+      {
+        "id": "e12",
+        "label": "paved courtyard floor",
+        "category": "terrain",
+        "attributes": [
+          "stone tiles",
+          "geometric pattern",
+          "open area"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom center",
+        "evidence": "tiled ground floor area with tables and walkways",
+        "confidence": 0.88
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "above",
+        "object": "e12",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e2",
+        "predicate": "right_of",
+        "object": "e3",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e10",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e12",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e12",
+        "confidence": 0.82
+      },
+      {
+        "subject": "e6",
+        "predicate": "near",
+        "object": "e8",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e5",
+        "predicate": "near",
+        "object": "e6",
+        "confidence": 0.78
+      },
+      {
+        "subject": "e1",
+        "predicate": "near",
+        "object": "e2",
+        "confidence": 0.84
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "EXPERIENCE",
+        "language": "en",
+        "entity_id": "e2",
+        "location_in_image": "top right, upper level storefront",
+        "legibility": "partial",
+        "confidence": 0.75
+      },
+      {
+        "text": "REV",
+        "language": "en",
+        "entity_id": "e2",
+        "location_in_image": "top right, above storefront",
+        "legibility": "partial",
+        "confidence": 0.62
+      }
+    ],
+    "people": {
+      "count": 14,
+      "count_confidence": 0.62,
+      "faces_visible": false,
+      "activities": [
+        "dining",
+        "walking",
+        "sitting"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people is uncertain due to distance, occlusion, and blur",
+      "Text on several small, blurry or partially cut-off signs including a green illuminated sign in the lower middle and a blue sign on the lower left cannot be read with at least 3 letters",
+      "Exact time of day and weather conditions beyond evening lighting cannot be determined",
+      "Details of merchandise and shop names inside illuminated interiors are not legible",
+      "Whether logos or text on red umbrellas and canopies are present cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 14,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:15:56+00:00",
+        "raw_output_path": "data/annotations/raw/market_023_attempt1.txt",
+        "tokens": 12824
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'EXPERIENCE'",
+        "partially legible text: 'REV'"
+      ]
+    }
+  }
+}

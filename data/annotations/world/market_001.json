@@ -1,0 +1,347 @@
+{
+  "photo_id": "market_001",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_001.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Nguthi Joseph kagechu",
+    "source_url": "https://commons.wikimedia.org/wiki/File:A_section_of_Wakulima_Market,_Nairobi_Kenya,_May_2023.jpg",
+    "title": "File:A section of Wakulima Market, Nairobi Kenya, May 2023.jpg"
+  },
+  "observed": {
+    "caption": "A covered market hall with vaulted concrete roofing, large piles of watermelons and produce, and several shoppers browsing stalls.",
+    "description": "The photo shows the interior of a large covered market with a dark weathered vaulted concrete roof supported by thick concrete pillars, with bright daylight entering through gaps in the roof and open sides. In the foreground and middle ground there are large piles of green striped watermelons, red mesh sacks resting on teal sacks, and trays and baskets containing brown bulbous produce in the immediate foreground. Several people are visible throughout the space, including a person in a teal shirt and blue patterned cap seated with back to the camera on the left, a person in a black t-shirt standing near the center, and a person in a striped shirt and white cap on the far left, with additional figures blurred in the background near red walls and market stalls holding colorful plastic bags and boxes on the right.",
+    "retrieval_queries": [
+      "covered market with watermelons stacked under concrete arches",
+      "people shopping for produce inside a large vaulted market hall",
+      "close up of garlic and watermelons at an indoor fruit market"
+    ],
+    "tags": [
+      "market",
+      "watermelons",
+      "produce",
+      "vaulted roof",
+      "indoor market",
+      "garlic",
+      "shoppers",
+      "concrete pillars"
+    ],
+    "scene": {
+      "type": "market",
+      "setting": "indoor",
+      "time_of_day": "daytime",
+      "weather": "unknown",
+      "lighting": "bright natural daylight through roof gaps",
+      "crowd_level": "moderate",
+      "activity_summary": "buying and selling fresh produce"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the interior of the market hall",
+      "distance": "close",
+      "framing": "wide",
+      "orientation": "portrait",
+      "subject_focus": "produce stalls and shoppers under vaulted roof"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "vaulted concrete roof",
+        "category": "structure",
+        "attributes": [
+          "dark weathered concrete",
+          "arched vaults",
+          "repeating pattern"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "top and background",
+        "evidence": "large curved concrete ceiling with visible beams and light gaps across the top",
+        "confidence": 0.95
+      },
+      {
+        "id": "e2",
+        "label": "concrete support pillar",
+        "category": "structure",
+        "attributes": [
+          "tall",
+          "weathered light gray",
+          "stained surface"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right foreground",
+        "evidence": "vertical concrete column on right side extending from floor to roof",
+        "confidence": 0.95
+      },
+      {
+        "id": "e3",
+        "label": "stack of watermelons",
+        "category": "produce",
+        "attributes": [
+          "green striped",
+          "oval",
+          "piled high"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "left center",
+        "evidence": "large pile of green watermelons behind seated person on left",
+        "confidence": 0.95
+      },
+      {
+        "id": "e4",
+        "label": "stack of watermelons in background",
+        "category": "produce",
+        "attributes": [
+          "green striped",
+          "piled"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center background",
+        "evidence": "additional watermelons visible behind central standing person",
+        "confidence": 0.85
+      },
+      {
+        "id": "e5",
+        "label": "red mesh sacks on teal sack",
+        "category": "object",
+        "attributes": [
+          "bright red netting",
+          "bulging",
+          "on teal fabric sack"
+        ],
+        "count": 2,
+        "salience": 4,
+        "position": "center",
+        "evidence": "two red net bags resting on a large teal sack in middle ground",
+        "confidence": 0.9
+      },
+      {
+        "id": "e6",
+        "label": "trays of garlic bulbs",
+        "category": "produce",
+        "attributes": [
+          "brownish",
+          "small round bulbs",
+          "in plastic trays"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground bottom center",
+        "evidence": "close-up trays filled with garlic or similar bulbs at bottom of image",
+        "confidence": 0.85
+      },
+      {
+        "id": "e7",
+        "label": "seated person in teal shirt and blue cap",
+        "category": "person_group",
+        "attributes": [
+          "seated with back to camera",
+          "teal shirt",
+          "blue patterned cap"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left foreground",
+        "evidence": "person sitting in lower left facing away toward watermelons",
+        "confidence": 0.9
+      },
+      {
+        "id": "e8",
+        "label": "standing person in black shirt",
+        "category": "person_group",
+        "attributes": [
+          "standing",
+          "black t-shirt",
+          "facing left"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center",
+        "evidence": "person standing in middle ground near watermelon piles",
+        "confidence": 0.9
+      },
+      {
+        "id": "e9",
+        "label": "standing person in striped shirt and white cap",
+        "category": "person_group",
+        "attributes": [
+          "standing",
+          "black and white striped shirt",
+          "white cap"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "far left",
+        "evidence": "person on left edge in striped shirt facing right",
+        "confidence": 0.9
+      },
+      {
+        "id": "e10",
+        "label": "stall with colorful plastic bags and boxes",
+        "category": "object",
+        "attributes": [
+          "multicolored plastic bags",
+          "blue box with fruit images",
+          "red bundles"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right center",
+        "evidence": "assorted goods including blue, red, and white bags piled on right side",
+        "confidence": 0.85
+      },
+      {
+        "id": "e11",
+        "label": "woven basket with garlic",
+        "category": "object",
+        "attributes": [
+          "round",
+          "woven",
+          "filled with garlic"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right foreground",
+        "evidence": "basket containing garlic bulbs on right side near watermelons",
+        "confidence": 0.8
+      },
+      {
+        "id": "e12",
+        "label": "cardboard box with produce",
+        "category": "object",
+        "attributes": [
+          "brown cardboard",
+          "open",
+          "containing bulbs"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom center",
+        "evidence": "cardboard container holding garlic in immediate foreground",
+        "confidence": 0.85
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e7",
+        "predicate": "left_of",
+        "object": "e8",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e9",
+        "predicate": "left_of",
+        "object": "e7",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e3",
+        "predicate": "behind",
+        "object": "e7",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e8",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e5",
+        "predicate": "in_front_of",
+        "object": "e4",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e6",
+        "predicate": "in_front_of",
+        "object": "e5",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e1",
+        "predicate": "above",
+        "object": "e3",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e1",
+        "predicate": "above",
+        "object": "e6",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e2",
+        "predicate": "right_of",
+        "object": "e10",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e11",
+        "predicate": "near",
+        "object": "e10",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e6",
+        "predicate": "inside",
+        "object": "e12",
+        "confidence": 0.8
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 12,
+      "count_confidence": 0.65,
+      "faces_visible": true,
+      "activities": [
+        "standing",
+        "sitting",
+        "browsing produce",
+        "selling"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people in the blurred background is difficult to determine",
+      "Specific variety of bulbous produce in foreground trays and baskets beyond general appearance",
+      "Text on blue box and other packaging on the right is not legible due to blur and distance",
+      "Exact time of day beyond daylight and weather conditions outside the hall",
+      "Location or name of the market cannot be determined from the image"
+    ]
+  },
+  "privacy": {
+    "faces_visible": true,
+    "people_count": 12,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:13:06+00:00",
+        "raw_output_path": "data/annotations/raw/market_001_attempt1.txt",
+        "tokens": 12924
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

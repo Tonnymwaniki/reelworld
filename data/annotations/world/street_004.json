@@ -1,0 +1,379 @@
+{
+  "photo_id": "street_004",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_004.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Haile_Selassie_Avenue_(Nairobi),_2025_(02).jpg",
+    "title": "File:Haile Selassie Avenue (Nairobi), 2025 (02).jpg"
+  },
+  "observed": {
+    "caption": "An elevated view of a busy multi-lane urban street with heavy traffic, pedestrians on sidewalks, and tall buildings under an overcast sky.",
+    "description": "A wide multi-lane roadway extends into the distance through a dense urban area, with vehicles including a yellow minibus in the center lane and a green and red bus and many white vans queued in traffic on the right side. Pedestrians walk along paved sidewalks on both sides of the road, separated from the roadway by metal fences and rows of trees and planted greenery. Tall buildings of varying heights and designs line both sides of the street, including a tall glass and concrete high-rise on the right, a brown grid-patterned office building, a distant tower in the center background, and an unfinished building with scaffolding on the left. Billboards and signs are visible along the road, and the sky is overcast with diffused daylight illuminating the scene.",
+    "retrieval_queries": [
+      "busy city street with traffic and tall buildings from above",
+      "aerial view of urban highway with buses and pedestrians walking",
+      "downtown avenue with cars, buses, and high-rise buildings"
+    ],
+    "tags": [
+      "city street",
+      "urban traffic",
+      "high-rise buildings",
+      "pedestrians",
+      "buses",
+      "overcast daytime",
+      "aerial view"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast",
+      "lighting": "diffused natural daylight",
+      "crowd_level": "moderate",
+      "activity_summary": "vehicles in traffic and pedestrians walking along sidewalks"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "high",
+      "facing": "down the street toward the city skyline",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "busy urban roadway with traffic and surrounding buildings"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "multi-lane roadway",
+        "category": "structure",
+        "attributes": [
+          "paved",
+          "divided by metal fence",
+          "extending into distance"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "wide asphalt road with lane markings running through center of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "yellow minibus",
+        "category": "vehicle",
+        "attributes": [
+          "yellow",
+          "moving in center lane"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-foreground",
+        "evidence": "small yellow van driving on the road",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "green and red bus",
+        "category": "vehicle",
+        "attributes": [
+          "green with red trim",
+          "large",
+          "parked in traffic"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right-foreground",
+        "evidence": "long bus with green body and red lower section in right lane",
+        "confidence": 0.97
+      },
+      {
+        "id": "e4",
+        "label": "line of white and silver vans in traffic",
+        "category": "vehicle",
+        "attributes": [
+          "white and light colored",
+          "queued bumper to bumper",
+          "on right side"
+        ],
+        "count": 12,
+        "salience": 4,
+        "position": "right",
+        "evidence": "multiple vans and cars lined up along right side of road",
+        "confidence": 0.92
+      },
+      {
+        "id": "e5",
+        "label": "group of pedestrians on left sidewalk",
+        "category": "person_group",
+        "attributes": [
+          "walking",
+          "general clothing"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left",
+        "evidence": "people walking along paved walkway on left side of road",
+        "confidence": 0.88
+      },
+      {
+        "id": "e6",
+        "label": "group of pedestrians on right sidewalk",
+        "category": "person_group",
+        "attributes": [
+          "walking",
+          "general clothing"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right",
+        "evidence": "people walking along sidewalk on right side near parked traffic",
+        "confidence": 0.86
+      },
+      {
+        "id": "e7",
+        "label": "tall glass and concrete high-rise building",
+        "category": "building",
+        "attributes": [
+          "modern",
+          "glass windows",
+          "light colored"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right-background",
+        "evidence": "tall building with reflective glass on upper floors on far right",
+        "confidence": 0.95
+      },
+      {
+        "id": "e8",
+        "label": "brown grid-patterned office building",
+        "category": "building",
+        "attributes": [
+          "brown",
+          "rectangular",
+          "grid facade"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right",
+        "evidence": "large brown building with uniform window grid behind trees",
+        "confidence": 0.94
+      },
+      {
+        "id": "e9",
+        "label": "distant tower skyscraper",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "dark facade",
+          "antenna on top"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-background",
+        "evidence": "tall building rising above skyline in distance",
+        "confidence": 0.9
+      },
+      {
+        "id": "e10",
+        "label": "unfinished building with scaffolding",
+        "category": "building",
+        "attributes": [
+          "under construction",
+          "exposed concrete",
+          "scaffolding and netting"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left",
+        "evidence": "building on left edge covered in scaffolding",
+        "confidence": 0.93
+      },
+      {
+        "id": "e11",
+        "label": "trees and greenery along sidewalks",
+        "category": "plant",
+        "attributes": [
+          "green foliage",
+          "mature trees",
+          "planted beds"
+        ],
+        "count": 15,
+        "salience": 3,
+        "position": "both sides",
+        "evidence": "rows of trees lining the road and sidewalks",
+        "confidence": 0.92
+      },
+      {
+        "id": "e12",
+        "label": "billboard sign",
+        "category": "sign",
+        "attributes": [
+          "rectangular",
+          "white background",
+          "red and black text"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-right",
+        "evidence": "large sign on pole above trees near traffic",
+        "confidence": 0.9
+      },
+      {
+        "id": "e13",
+        "label": "metal road divider fence",
+        "category": "structure",
+        "attributes": [
+          "metal",
+          "low",
+          "running along road"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center",
+        "evidence": "fence separating lanes of traffic",
+        "confidence": 0.91
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e4",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e5",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e7",
+        "predicate": "right_of",
+        "object": "e8",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e10",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e12",
+        "predicate": "above",
+        "object": "e3",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e11",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e13",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.93
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "BOOK THESE SPACES",
+        "language": "en",
+        "entity_id": "e12",
+        "location_in_image": "center-right above traffic",
+        "legibility": "clear",
+        "confidence": 0.96
+      },
+      {
+        "text": "TIMES TOWER",
+        "language": "en",
+        "entity_id": "e7",
+        "location_in_image": "right side on building",
+        "legibility": "clear",
+        "confidence": 0.88
+      },
+      {
+        "text": "ISUZU",
+        "language": "en",
+        "entity_id": "e3",
+        "location_in_image": "front of green bus on right",
+        "legibility": "partial",
+        "confidence": 0.75
+      }
+    ],
+    "people": {
+      "count": 33,
+      "count_confidence": 0.62,
+      "faces_visible": false,
+      "activities": [
+        "walking along sidewalks"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "exact city and street name cannot be determined from image alone",
+      "exact number of pedestrians and vehicles due to distance and occlusion",
+      "text on distant billboards is blurry and not legible",
+      "phone number and smaller text on the BOOK THESE SPACES billboard is partially legible",
+      "vehicle makes, models, and license plates are not clearly readable",
+      "exact time of day and weather temperature cannot be determined",
+      "building names and functions beyond visible TIMES TOWER text are unknown"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 33,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:19:06+00:00",
+        "raw_output_path": "data/annotations/raw/street_004_attempt1.txt",
+        "tokens": 7161
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'ISUZU'"
+      ]
+    }
+  }
+}

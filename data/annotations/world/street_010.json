@@ -1,0 +1,410 @@
+{
+  "photo_id": "street_010",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_010.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Kenyatta_Avenue,_Nairobi,_2025_(01).jpg",
+    "title": "File:Kenyatta Avenue, Nairobi, 2025 (01).jpg"
+  },
+  "observed": {
+    "caption": "Colorful buses travel on a multi-lane road under a large archway toward twin cylindrical towers under an overcast sky.",
+    "description": "A wide paved multi-lane road stretches from the foreground into the distance with several buses and vehicles moving along it, including a prominent red and gray bus in the left foreground, a blue bus and a second red bus further down the road, and a silver van and a motorcycle on the right. A large arch with a striped pattern and a shield emblem on top spans the road in the middle distance. Behind the arch and to the left, a tall building with two striped cylindrical towers and a red lattice mast rises above lower commercial buildings with blue awnings and shop fronts. A tall leaning palm tree stands on the left sidewalk, dense green trees line the right side of the road, and a large yellow billboard is mounted on the lower portion of the tower building. The sky is overcast and gray with diffuse daylight.",
+    "retrieval_queries": [
+      "buses driving under Nairobi City County arch with twin tower building behind",
+      "busy city street with red buses and palm tree under cloudy sky",
+      "traffic on road passing under decorative archway toward striped cylindrical towers"
+    ],
+    "tags": [
+      "city street",
+      "buses",
+      "archway",
+      "twin towers",
+      "urban traffic",
+      "billboard",
+      "palm tree"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast",
+      "lighting": "overcast diffuse daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "vehicles traveling on city road under arch"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward arch and twin-tower building down the street",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "busy street with arch and buses"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "twin cylindrical tower building",
+        "category": "building",
+        "attributes": [
+          "striped facade",
+          "two cylindrical towers",
+          "tall",
+          "red lattice mast between towers"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center background",
+        "evidence": "two round striped towers with antenna mast between them rising behind lower buildings",
+        "confidence": 0.96
+      },
+      {
+        "id": "e2",
+        "label": "decorative arch gateway",
+        "category": "structure",
+        "attributes": [
+          "large arch spanning road",
+          "striped pattern",
+          "shield emblem on top"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center middle distance",
+        "evidence": "arch crossing the road with text and emblem visible on top",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "red and gray bus in foreground",
+        "category": "vehicle",
+        "attributes": [
+          "red lower body",
+          "gray middle stripe",
+          "moving"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "left foreground on road",
+        "evidence": "large bus on left side of road facing away from camera",
+        "confidence": 0.98
+      },
+      {
+        "id": "e4",
+        "label": "blue bus",
+        "category": "vehicle",
+        "attributes": [
+          "blue body",
+          "white roof"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right on road",
+        "evidence": "blue bus on road behind foreground bus facing away",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "red bus behind blue bus",
+        "category": "vehicle",
+        "attributes": [
+          "red body"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-right background on road",
+        "evidence": "second red bus further down road behind blue bus",
+        "confidence": 0.9
+      },
+      {
+        "id": "e6",
+        "label": "palm tree",
+        "category": "plant",
+        "attributes": [
+          "tall slender trunk",
+          "palm fronds at top",
+          "leaning"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left side near sidewalk",
+        "evidence": "tall palm tree with fronds on left edge of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e7",
+        "label": "multi-lane paved road",
+        "category": "terrain",
+        "attributes": [
+          "asphalt",
+          "lane markings",
+          "stretching into distance"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground to background center",
+        "evidence": "wide road with vehicles occupying lanes",
+        "confidence": 0.98
+      },
+      {
+        "id": "e8",
+        "label": "large billboard advertisement",
+        "category": "sign",
+        "attributes": [
+          "yellow background",
+          "bottle images",
+          "mounted on building"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center on lower part of tower building",
+        "evidence": "rectangular advertisement with yellow background and text",
+        "confidence": 0.95
+      },
+      {
+        "id": "e9",
+        "label": "low-rise commercial buildings with storefronts",
+        "category": "building",
+        "attributes": [
+          "blue awnings",
+          "multiple shop signs",
+          "weathered facades"
+        ],
+        "count": 3,
+        "salience": 4,
+        "position": "left to center below towers",
+        "evidence": "row of buildings with awnings and signs along left side of road",
+        "confidence": 0.92
+      },
+      {
+        "id": "e10",
+        "label": "motorcyclist",
+        "category": "person_group",
+        "attributes": [
+          "riding motorcycle",
+          "helmet",
+          "blue clothing"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right foreground on road",
+        "evidence": "person on motorcycle on right edge of road",
+        "confidence": 0.9
+      },
+      {
+        "id": "e11",
+        "label": "silver van",
+        "category": "vehicle",
+        "attributes": [
+          "silver",
+          "small van"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right side on road",
+        "evidence": "silver vehicle on road to left of motorcyclist",
+        "confidence": 0.92
+      },
+      {
+        "id": "e12",
+        "label": "trees and vegetation on right",
+        "category": "plant",
+        "attributes": [
+          "dense green foliage",
+          "tall trees"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right edge",
+        "evidence": "leafy trees lining right side of road",
+        "confidence": 0.95
+      },
+      {
+        "id": "e13",
+        "label": "overcast sky",
+        "category": "other",
+        "attributes": [
+          "gray clouds",
+          "diffuse light"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top background",
+        "evidence": "cloudy gray sky covering upper portion of image",
+        "confidence": 0.98
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e3",
+        "predicate": "left_of",
+        "object": "e4",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e6",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e2",
+        "predicate": "above",
+        "object": "e7",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e8",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e4",
+        "predicate": "in_front_of",
+        "object": "e5",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e10",
+        "predicate": "right_of",
+        "object": "e11",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e6",
+        "predicate": "beside",
+        "object": "e9",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e12",
+        "predicate": "right_of",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e1",
+        "predicate": "behind",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e7",
+        "predicate": "below",
+        "object": "e2",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e3",
+        "predicate": "near",
+        "object": "e6",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e11",
+        "predicate": "left_of",
+        "object": "e10",
+        "confidence": 0.95
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "NAIROBI CITY COUNTY",
+        "language": "en",
+        "entity_id": "e2",
+        "location_in_image": "on top of arch spanning road, center",
+        "legibility": "clear",
+        "confidence": 0.98
+      },
+      {
+        "text": "FOR A GREENER AND CLEANER CITY",
+        "language": "en",
+        "entity_id": "e2",
+        "location_in_image": "on arch below the county name, center",
+        "legibility": "clear",
+        "confidence": 0.96
+      },
+      {
+        "text": "OUR BOND",
+        "language": "en",
+        "entity_id": "e8",
+        "location_in_image": "on yellow billboard on tower building, center",
+        "legibility": "clear",
+        "confidence": 0.95
+      },
+      {
+        "text": "Cameo",
+        "language": "en",
+        "entity_id": "e9",
+        "location_in_image": "on brown facade of low-rise building, left-center",
+        "legibility": "clear",
+        "confidence": 0.92
+      },
+      {
+        "text": "oppo",
+        "language": "en",
+        "entity_id": "e9",
+        "location_in_image": "on blue awning of storefront, left-center",
+        "legibility": "clear",
+        "confidence": 0.95
+      },
+      {
+        "text": "SAMSUNG",
+        "language": "en",
+        "entity_id": "e9",
+        "location_in_image": "on blue awning next to oppo, left-center",
+        "legibility": "clear",
+        "confidence": 0.95
+      }
+    ],
+    "people": {
+      "count": 1,
+      "count_confidence": 0.85,
+      "faces_visible": false,
+      "activities": [
+        "riding a motorcycle"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of passengers inside buses is not discernible through windows",
+      "Text on distant billboards and small shop signs in the background is blurry or cut off and cannot be read reliably",
+      "Text on the side of the red bus in the foreground is partially blurred by motion",
+      "License plate numbers and other small vehicle markings are not legible",
+      "Exact time of day and weather conditions beyond overcast cannot be determined",
+      "Building names and interior details are not visible"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 1,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:20:27+00:00",
+        "raw_output_path": "data/annotations/raw/street_010_attempt1.txt",
+        "tokens": 11716
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

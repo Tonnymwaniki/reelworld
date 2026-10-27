@@ -1,0 +1,354 @@
+{
+  "photo_id": "hills_020",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_020.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bett Duncan",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ngong_Hills_wind_turbines.jpg",
+    "title": "File:Ngong Hills wind turbines.jpg"
+  },
+  "observed": {
+    "caption": "Multiple white wind turbines stand on a grassy hilltop overlooking a valley under a clear blue sky.",
+    "description": "A wide outdoor landscape shows a grassy hilltop in the foreground with several tall white wind turbines with three blades distributed across rolling green hills. The closest turbine is on the right side of the image with the word Vestas visible on its nacelle, with two more turbines partially visible behind it. Additional turbines are spaced across the midground hills to the left and center, with a distant hazy valley and scattered buildings and vegetation visible in the background beneath a clear pale blue sky. Sunlight casts shadows on the grass.",
+    "retrieval_queries": [
+      "wind turbines on a hill overlooking a town",
+      "Vestas wind farm on grassy hilltop with blue sky",
+      "aerial view of windmills on a hill in the countryside"
+    ],
+    "tags": [
+      "wind turbine",
+      "wind farm",
+      "Vestas",
+      "hilltop",
+      "renewable energy",
+      "landscape",
+      "grassy hill",
+      "valley view"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "clear and sunny",
+      "lighting": "bright daylight with shadows",
+      "crowd_level": "empty",
+      "activity_summary": "wind turbines on hilltop"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "across the hill toward the wind farm and valley",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "portrait",
+      "subject_focus": "wind turbines on hilltop"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "wind turbine in right foreground",
+        "category": "structure",
+        "attributes": [
+          "white",
+          "tall",
+          "three-bladed",
+          "closest to camera"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "right foreground",
+        "evidence": "large white tower with nacelle and three blades dominating right side",
+        "confidence": 0.99
+      },
+      {
+        "id": "e2",
+        "label": "wind turbine behind right foreground turbine",
+        "category": "structure",
+        "attributes": [
+          "white",
+          "tall",
+          "three-bladed"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right midground behind e1",
+        "evidence": "white tower and blades visible directly behind the closest turbine",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "partially visible wind turbine on far right",
+        "category": "structure",
+        "attributes": [
+          "white",
+          "partially obscured",
+          "three-bladed"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "far right background",
+        "evidence": "blades and partial tower visible behind e2",
+        "confidence": 0.9
+      },
+      {
+        "id": "e4",
+        "label": "wind turbine in lower center-left foreground",
+        "category": "structure",
+        "attributes": [
+          "white",
+          "three-bladed",
+          "on lower hill"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "lower center-left",
+        "evidence": "white turbine standing on grassy slope below the main ridge",
+        "confidence": 0.98
+      },
+      {
+        "id": "e5",
+        "label": "wind turbine on far left hill",
+        "category": "structure",
+        "attributes": [
+          "white",
+          "distant",
+          "three-bladed"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "far left background",
+        "evidence": "small white turbine on distant left ridge",
+        "confidence": 0.97
+      },
+      {
+        "id": "e6",
+        "label": "wind turbine on mid-left hill",
+        "category": "structure",
+        "attributes": [
+          "white",
+          "distant",
+          "three-bladed"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "mid-left background",
+        "evidence": "white turbine standing on ridge left of center",
+        "confidence": 0.97
+      },
+      {
+        "id": "e7",
+        "label": "wind turbine in center-left",
+        "category": "structure",
+        "attributes": [
+          "white",
+          "distant",
+          "three-bladed"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-left background",
+        "evidence": "white turbine on central ridge",
+        "confidence": 0.97
+      },
+      {
+        "id": "e8",
+        "label": "wind turbine in center",
+        "category": "structure",
+        "attributes": [
+          "white",
+          "distant",
+          "three-bladed"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center background",
+        "evidence": "white turbine on ridge near center of image",
+        "confidence": 0.96
+      },
+      {
+        "id": "e9",
+        "label": "wind turbine in center-right distance",
+        "category": "structure",
+        "attributes": [
+          "white",
+          "distant",
+          "three-bladed"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-right background",
+        "evidence": "small white turbine on ridge to the right of center",
+        "confidence": 0.95
+      },
+      {
+        "id": "e10",
+        "label": "grassy hilltop terrain in foreground",
+        "category": "terrain",
+        "attributes": [
+          "green",
+          "grassy",
+          "uneven",
+          "sunlit with shadows"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground bottom",
+        "evidence": "expansive green grass covering lower half of image with shadows",
+        "confidence": 0.99
+      },
+      {
+        "id": "e11",
+        "label": "sky",
+        "category": "terrain",
+        "attributes": [
+          "clear",
+          "pale blue",
+          "cloudless"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "upper two-thirds",
+        "evidence": "large expanse of blue sky occupying top portion of image",
+        "confidence": 0.99
+      },
+      {
+        "id": "e12",
+        "label": "distant valley with buildings and vegetation",
+        "category": "terrain",
+        "attributes": [
+          "hazy",
+          "expansive",
+          "with scattered buildings and trees"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "background center to right",
+        "evidence": "hazy lowland with clusters of buildings and green areas beyond the turbines",
+        "confidence": 0.92
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "right_of",
+        "object": "e4",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e2",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "behind",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e5",
+        "predicate": "left_of",
+        "object": "e6",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e6",
+        "predicate": "left_of",
+        "object": "e7",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e7",
+        "predicate": "left_of",
+        "object": "e8",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e8",
+        "predicate": "left_of",
+        "object": "e9",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e10",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e10",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e10",
+        "predicate": "below",
+        "object": "e11",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e12",
+        "predicate": "behind",
+        "object": "e5",
+        "confidence": 0.92
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "Vestas",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "on nacelle of foreground wind turbine on right side",
+        "legibility": "clear",
+        "confidence": 0.98
+      }
+    ],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.99,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "exact number of wind turbines in far distance due to haze and resolution",
+      "exact geographic location of the wind farm",
+      "time of day beyond daytime and weather conditions beyond clear",
+      "whether additional Vestas logos on distant turbines are present but not legible",
+      "details of buildings and vegetation in the distant valley due to haze"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:10:39+00:00",
+        "raw_output_path": "data/annotations/raw/hills_020_attempt1.txt",
+        "tokens": 7404
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

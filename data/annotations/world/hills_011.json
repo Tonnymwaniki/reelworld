@@ -1,0 +1,313 @@
+{
+  "photo_id": "hills_011",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_011.jpg",
+    "license": "CC BY-SA 3.0",
+    "author": "Rotsee2",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ngong_Hills.jpg",
+    "title": "File:Ngong Hills.jpg"
+  },
+  "observed": {
+    "caption": "Lush green forested ridge with a narrow dirt trail winding along its grassy crest under a bright partly cloudy sky.",
+    "description": "A wide landscape view shows rolling green hills covered in dense dark green forest and open grassy slopes in the foreground and along a central ridge. A narrow brown dirt trail runs up the grassy hillside toward the upper right. The middle ground is dominated by thick tree cover on undulating terrain, while the background reveals a hazy flat plain extending to the horizon on the left and a bright sky filled with white and light gray clouds above. Light is bright daylight casting soft shadows across the vegetation.",
+    "retrieval_queries": [
+      "green forested mountain ridge with dirt trail on top",
+      "lush grassy hills and cloudy sky landscape view",
+      "aerial view of rolling hills covered in trees and grass"
+    ],
+    "tags": [
+      "hills",
+      "forest",
+      "grassland",
+      "mountain ridge",
+      "trail",
+      "landscape",
+      "green hills",
+      "cloudy sky",
+      "nature"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "bright natural daylight",
+      "crowd_level": "empty",
+      "activity_summary": "natural landscape with no visible human activity"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "raised",
+      "facing": "across the hills toward the forested ridge",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "forested hill ridge and grassy slopes"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "forested mountain ridge",
+        "category": "terrain",
+        "attributes": [
+          "green",
+          "forested",
+          "rolling",
+          "undulating"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "large central hill mass covered in dense vegetation extending across middle of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "grassy foreground meadow",
+        "category": "terrain",
+        "attributes": [
+          "green",
+          "grassy",
+          "open",
+          "flat"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground bottom",
+        "evidence": "open grass field at bottom edge of image with short vegetation",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "narrow dirt trail",
+        "category": "terrain",
+        "attributes": [
+          "brown",
+          "narrow",
+          "winding",
+          "bare earth"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right",
+        "evidence": "thin brown line ascending the grassy slope on right side of ridge",
+        "confidence": 0.92
+      },
+      {
+        "id": "e4",
+        "label": "dense forest cover",
+        "category": "plant",
+        "attributes": [
+          "dark green",
+          "dense",
+          "lush",
+          "thick canopy"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-left",
+        "evidence": "dark green clustered trees covering left and central slopes",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "cloudy sky",
+        "category": "other",
+        "attributes": [
+          "bright",
+          "white",
+          "cloudy",
+          "overcast patches"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "top background",
+        "evidence": "upper portion of image filled with white and gray clouds and pale blue sky",
+        "confidence": 0.98
+      },
+      {
+        "id": "e6",
+        "label": "distant lowland plain",
+        "category": "terrain",
+        "attributes": [
+          "hazy",
+          "flat",
+          "pale blue",
+          "far"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "background left",
+        "evidence": "flat hazy area visible beyond hills on left horizon",
+        "confidence": 0.88
+      },
+      {
+        "id": "e7",
+        "label": "scattered small shrubs",
+        "category": "plant",
+        "attributes": [
+          "small",
+          "dark green",
+          "sparse",
+          "bushy"
+        ],
+        "count": 5,
+        "salience": 2,
+        "position": "center-right on grassy slope",
+        "evidence": "small dark bushes dotted along the grassy hillside near the trail",
+        "confidence": 0.85
+      },
+      {
+        "id": "e8",
+        "label": "rounded hill peaks",
+        "category": "terrain",
+        "attributes": [
+          "rounded",
+          "grassy",
+          "elevated",
+          "green"
+        ],
+        "count": 3,
+        "salience": 3,
+        "position": "background center-right",
+        "evidence": "higher rounded summits visible along the ridgeline in distance",
+        "confidence": 0.9
+      },
+      {
+        "id": "e9",
+        "label": "grassy hillside clearing",
+        "category": "terrain",
+        "attributes": [
+          "light green",
+          "open",
+          "sloped",
+          "grassy"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right center",
+        "evidence": "large light green open slope on right side of ridge without dense trees",
+        "confidence": 0.94
+      },
+      {
+        "id": "e10",
+        "label": "tree line edge",
+        "category": "plant",
+        "attributes": [
+          "dense",
+          "dark",
+          "irregular",
+          "border"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "foreground center",
+        "evidence": "dark line of trees and bushes separating foreground meadow from middle slopes",
+        "confidence": 0.9
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e9",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e6",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e9",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e8",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e10",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e9",
+        "predicate": "right_of",
+        "object": "e4",
+        "confidence": 0.94
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.99,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "exact geographic location and name of hills",
+      "elevation and scale of terrain",
+      "exact time of day and season",
+      "presence of small distant people or animals not resolvable",
+      "details of vegetation species",
+      "weather conditions beyond visible clouds"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:09:42+00:00",
+        "raw_output_path": "data/annotations/raw/hills_011_attempt1.txt",
+        "tokens": 6030
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

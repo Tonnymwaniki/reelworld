@@ -1,0 +1,341 @@
+{
+  "photo_id": "park_001",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_001.jpg",
+    "license": "CC BY 4.0",
+    "author": "AEira-WMF",
+    "source_url": "https://commons.wikimedia.org/wiki/File:A_lake_at_Uhuru_Park_in_Nairobi,_Kenya,_at_sunset.jpg",
+    "title": "File:A lake at Uhuru Park in Nairobi, Kenya, at sunset.jpg"
+  },
+  "observed": {
+    "caption": "A lily-covered pond in an urban park with tall city buildings and trees in the background under a pale evening sky.",
+    "description": "The foreground shows a grassy bank leading to a pond partially covered with lily pads and dark reflective water. Scattered trees including a flat-topped acacia on the left and palm trees on the right surround the pond, with a small turquoise footbridge crossing a narrow section on the right. In the midground more trees and open grass are visible, and in the background a cluster of tall yellow-brown high-rise buildings rises above the treeline with smaller white buildings nearby. Overhead cables stretch across the middle of the scene and the sky is pale with light clouds.",
+    "retrieval_queries": [
+      "city park pond with lily pads and skyline in background",
+      "urban park lake with tall buildings behind trees",
+      "pond with green bridge and downtown towers at sunset"
+    ],
+    "tags": [
+      "park",
+      "pond",
+      "lily pads",
+      "city skyline",
+      "urban park",
+      "trees",
+      "footbridge",
+      "evening"
+    ],
+    "scene": {
+      "type": "park",
+      "setting": "outdoor",
+      "time_of_day": "evening",
+      "weather": "clear with light clouds",
+      "lighting": "soft natural daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "people standing and walking near pond bridge"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "raised",
+      "facing": "toward the pond and city skyline",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "pond and urban skyline"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "pond with lily pads",
+        "category": "terrain",
+        "attributes": [
+          "dark reflective water",
+          "covered with green lily pads",
+          "curved shoreline"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-foreground",
+        "evidence": "large water body occupying lower half of image with floating vegetation and reflections",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "grassy bank foreground",
+        "category": "terrain",
+        "attributes": [
+          "green grass",
+          "slightly elevated",
+          "along pond edge"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "bottom foreground",
+        "evidence": "strip of green grass along bottom edge in front of pond",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "flat-topped acacia tree",
+        "category": "plant",
+        "attributes": [
+          "spreading canopy",
+          "thin trunk",
+          "green foliage"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left-center",
+        "evidence": "distinctive umbrella-shaped tree standing near left side of pond",
+        "confidence": 0.95
+      },
+      {
+        "id": "e4",
+        "label": "palm trees cluster",
+        "category": "plant",
+        "attributes": [
+          "fan-shaped fronds",
+          "dense green foliage",
+          "multiple trunks"
+        ],
+        "count": 4,
+        "salience": 4,
+        "position": "right-center",
+        "evidence": "group of palm trees with drooping fronds near the turquoise bridge",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "tall yellow high-rise buildings",
+        "category": "building",
+        "attributes": [
+          "yellow-brown facade",
+          "multiple towers",
+          "many windows",
+          "antennas on roof"
+        ],
+        "count": 3,
+        "salience": 5,
+        "position": "center-right background",
+        "evidence": "prominent tall buildings rising above treeline in center-right",
+        "confidence": 0.98
+      },
+      {
+        "id": "e6",
+        "label": "turquoise footbridge",
+        "category": "structure",
+        "attributes": [
+          "turquoise metal",
+          "low arch",
+          "crossing narrow water"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right midground",
+        "evidence": "small bright green-blue bridge spanning part of pond on right side",
+        "confidence": 0.94
+      },
+      {
+        "id": "e7",
+        "label": "overhead utility cables",
+        "category": "structure",
+        "attributes": [
+          "thin black wires",
+          "horizontal across image",
+          "supported by poles"
+        ],
+        "count": 2,
+        "salience": 2,
+        "position": "center across image",
+        "evidence": "thin dark lines stretching horizontally across middle of photo above trees",
+        "confidence": 0.92
+      },
+      {
+        "id": "e8",
+        "label": "person group near bridge",
+        "category": "person_group",
+        "attributes": [
+          "small distant figures",
+          "standing and walking",
+          "general clothing"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "far right",
+        "evidence": "few small human figures near the turquoise bridge and pond edge on right",
+        "confidence": 0.75
+      },
+      {
+        "id": "e9",
+        "label": "dense tree canopy background",
+        "category": "plant",
+        "attributes": [
+          "dark green foliage",
+          "varied tree shapes",
+          "lining pond"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "midground across",
+        "evidence": "continuous line of trees behind pond separating park from buildings",
+        "confidence": 0.96
+      },
+      {
+        "id": "e10",
+        "label": "sky with light clouds",
+        "category": "terrain",
+        "attributes": [
+          "pale blue",
+          "soft clouds",
+          "evening light"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "top background",
+        "evidence": "upper portion of image showing pale sky above buildings and trees",
+        "confidence": 0.98
+      },
+      {
+        "id": "e11",
+        "label": "smaller white mid-rise building",
+        "category": "building",
+        "attributes": [
+          "white facade",
+          "rectangular",
+          "distant"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center background",
+        "evidence": "white building visible between trees left of tall yellow towers",
+        "confidence": 0.88
+      },
+      {
+        "id": "e12",
+        "label": "reflective water surface",
+        "category": "terrain",
+        "attributes": [
+          "calm water",
+          "building reflection",
+          "dark tone"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-foreground",
+        "evidence": "smooth dark water in lower right reflecting the tall buildings",
+        "confidence": 0.95
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e3",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e4",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e6",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e8",
+        "predicate": "near",
+        "object": "e6",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e5",
+        "predicate": "behind",
+        "object": "e9",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e11",
+        "predicate": "behind",
+        "object": "e9",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e7",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e10",
+        "predicate": "above",
+        "object": "e5",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e1",
+        "predicate": "in_front_of",
+        "object": "e5",
+        "confidence": 0.96
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 3,
+      "count_confidence": 0.7,
+      "faces_visible": false,
+      "activities": [
+        "standing near pond edge",
+        "walking near footbridge"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people on far right is unclear due to small size and distance",
+      "Text on distant building banners is blurry and cannot be read with at least 3 clear letters",
+      "Species of trees and aquatic plants cannot be determined from image",
+      "Exact time of day and weather conditions beyond visible lighting",
+      "Details of buildings beyond general color and height due to distance"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 3,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:15:53+00:00",
+        "raw_output_path": "data/annotations/raw/park_001_attempt1.txt",
+        "tokens": 6645
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

@@ -1,0 +1,329 @@
+{
+  "photo_id": "park_009",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_009.jpg",
+    "license": "CC BY-SA 3.0",
+    "author": "Arthur Buliva",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Nairobi_uhuru_park.JPG",
+    "title": "File:Nairobi uhuru park.JPG"
+  },
+  "observed": {
+    "caption": "Wide elevated view of an urban park with a pond and scattered trees in the foreground and a dense city skyline under a partly cloudy blue sky in the background.",
+    "description": "The photo shows an outdoor urban park in the foreground with patches of green and brown grass, scattered trees with green foliage, and a small white signboard standing in the grass. A paved road and an open reddish-brown dirt area lie beyond the grass, with several low covered pavilions with light-colored roofs lined up in front of a narrow pond or lake. Behind the pond are more trees and open parkland. In the distance a dense cluster of high-rise buildings of varying heights, colors and shapes forms a city skyline, including a distinctive cylindrical tower on the right and tall brown and beige towers on the left. A white car is visible on a road on the left side. Several small human figures are scattered across the grass and near the road, some sitting under trees and some standing or walking. The sky above is bright blue with scattered white cumulus clouds, indicating daytime with bright natural daylight.",
+    "retrieval_queries": [
+      "city skyline with park and pond in foreground on a sunny day",
+      "aerial view of downtown high rises behind a green urban park",
+      "wide landscape photo of a city park with people sitting under trees"
+    ],
+    "tags": [
+      "city skyline",
+      "urban park",
+      "pond",
+      "high-rise buildings",
+      "daytime",
+      "trees",
+      "grass",
+      "pavilions",
+      "blue sky",
+      "clouds"
+    ],
+    "scene": {
+      "type": "park",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "bright natural daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "people sitting and walking in an urban park"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "high",
+      "facing": "toward the city skyline across the park",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "city skyline and park"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "city skyline with high-rise buildings",
+        "category": "building",
+        "attributes": [
+          "multiple tall buildings",
+          "varied heights and colors",
+          "dense cluster in background"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "background, across horizon",
+        "evidence": "numerous high-rise towers visible against the sky spanning the width of the image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "grassy park foreground",
+        "category": "terrain",
+        "attributes": [
+          "patchy green and brown grass",
+          "open area",
+          "in lower third of image"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground, bottom",
+        "evidence": "expansive grassy area with dry patches and small trees in the immediate foreground",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "scattered trees",
+        "category": "plant",
+        "attributes": [
+          "green foliage",
+          "varied sizes",
+          "scattered across park"
+        ],
+        "count": 15,
+        "salience": 4,
+        "position": "foreground and midground throughout park",
+        "evidence": "multiple trees with green canopies visible in the grassy area and around the pond",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "pond or lake",
+        "category": "terrain",
+        "attributes": [
+          "narrow water body",
+          "reflective surface",
+          "behind pavilions"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "midground, center",
+        "evidence": "elongated dark water area visible behind the row of covered structures",
+        "confidence": 0.88
+      },
+      {
+        "id": "e5",
+        "label": "covered pavilions with metal roofs",
+        "category": "structure",
+        "attributes": [
+          "low structures",
+          "light blue and dark wavy roofs",
+          "supported by pillars",
+          "lined up in a row"
+        ],
+        "count": 4,
+        "salience": 4,
+        "position": "midground, center to right",
+        "evidence": "row of open-sided shelters with flat and wavy roofs in front of the pond",
+        "confidence": 0.92
+      },
+      {
+        "id": "e6",
+        "label": "blue sky with white clouds",
+        "category": "other",
+        "attributes": [
+          "bright blue",
+          "scattered cumulus clouds",
+          "covers upper half"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "upper half, background",
+        "evidence": "large expanse of blue sky with white puffy clouds above the skyline",
+        "confidence": 0.99
+      },
+      {
+        "id": "e7",
+        "label": "group of people in park",
+        "category": "person_group",
+        "attributes": [
+          "small figures due to distance",
+          "sitting on grass",
+          "standing and walking"
+        ],
+        "count": 6,
+        "salience": 3,
+        "position": "foreground, bottom center and right",
+        "evidence": "several small human figures visible sitting under trees and walking near the road",
+        "confidence": 0.65
+      },
+      {
+        "id": "e8",
+        "label": "white car on road",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "small",
+          "on paved surface"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "left, midground near trees",
+        "evidence": "small white vehicle visible on the road at the left edge of the park",
+        "confidence": 0.75
+      },
+      {
+        "id": "e9",
+        "label": "small white signboard in grass",
+        "category": "sign",
+        "attributes": [
+          "white rectangular board",
+          "on two posts",
+          "in grassy area"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "foreground, center-bottom",
+        "evidence": "small white sign standing in the grassy foreground, text not legible at this distance",
+        "confidence": 0.85
+      },
+      {
+        "id": "e10",
+        "label": "open dirt ground and paved road",
+        "category": "terrain",
+        "attributes": [
+          "reddish-brown dirt",
+          "paved strip",
+          "between grass and pavilions"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "midground, below pavilions",
+        "evidence": "wide flat area of bare earth and pavement separating the foreground grass from the pavilions",
+        "confidence": 0.9
+      },
+      {
+        "id": "e11",
+        "label": "cylindrical tower building with top structure",
+        "category": "building",
+        "attributes": [
+          "tall cylindrical shape",
+          "dark top",
+          "distinctive"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right background, part of skyline",
+        "evidence": "tall round tower with a wider top section standing prominently on the right side of the skyline",
+        "confidence": 0.95
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e6",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e5",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e3",
+        "predicate": "inside",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e7",
+        "predicate": "inside",
+        "object": "e2",
+        "confidence": 0.7
+      },
+      {
+        "subject": "e9",
+        "predicate": "inside",
+        "object": "e2",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e10",
+        "predicate": "in_front_of",
+        "object": "e5",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e8",
+        "predicate": "left_of",
+        "object": "e5",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e5",
+        "predicate": "beside",
+        "object": "e4",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e11",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.85
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 6,
+      "count_confidence": 0.65,
+      "faces_visible": false,
+      "activities": [
+        "sitting on grass under trees",
+        "standing near tree",
+        "walking along road"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Text on the small white signboard in the foreground grass is not legible due to distance and resolution, so no text can be transcribed",
+      "Exact number of people in the distance is uncertain because figures are small and may be obscured by trees or structures",
+      "Specific identities, names or functions of buildings in the skyline cannot be determined from the image alone",
+      "Details of the white vehicle such as make, model or license plate are not discernible",
+      "Whether additional people are present near the pavilions or pond area is unclear due to distance and tree cover"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 6,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:16:40+00:00",
+        "raw_output_path": "data/annotations/raw/park_009_attempt1.txt",
+        "tokens": 7783
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

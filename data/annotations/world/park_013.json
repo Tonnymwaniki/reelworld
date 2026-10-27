@@ -1,0 +1,308 @@
+{
+  "photo_id": "park_013",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_013.jpg",
+    "license": "CC BY 2.0",
+    "author": "Ninara",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Parliament_Buildings_and_Uhuru_Park,_Nairobi.jpg",
+    "title": "File:Parliament Buildings and Uhuru Park, Nairobi.jpg"
+  },
+  "observed": {
+    "caption": "Aerial view of a city with a clock tower building complex in the foreground, a large green park with a lake in the center, and high-rise buildings and distant mountains in the background under a cloudy sky.",
+    "description": "The photo shows an elevated aerial view looking across a city. In the foreground is a large beige building complex with a tall central clock tower and multiple connected low-rise wings surrounded by trees, roads, and parking areas with numerous small vehicles. Behind the building complex lies a large urban park with expansive green grass fields including a rectangular sports field on the left, winding paved paths, dense scattered trees, and an irregular-shaped reflective lake near the center. Beyond the park is a dense urban area with mid-rise and high-rise buildings of varied heights and colors, interspersed with trees. In the far background a hazy blue-gray mountain range is visible on the horizon beneath a partly cloudy sky with white and gray clouds.",
+    "retrieval_queries": [
+      "aerial view of city park with lake and clock tower building",
+      "bird's eye view of green urban park surrounded by high rise buildings",
+      "aerial cityscape with clock tower in foreground and mountains in distance"
+    ],
+    "tags": [
+      "aerial",
+      "cityscape",
+      "park",
+      "clock tower",
+      "lake",
+      "skyline",
+      "urban",
+      "green space"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "natural daylight, overcast",
+      "crowd_level": "empty",
+      "activity_summary": "aerial view of city park and buildings"
+    },
+    "camera": {
+      "viewpoint": "aerial",
+      "height_estimate": "very_high",
+      "facing": "across the city toward distant hills",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "clock tower building complex and central park"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "building complex with clock tower",
+        "category": "building",
+        "attributes": [
+          "beige",
+          "multi-winged",
+          "central clock tower"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground center",
+        "evidence": "tall tower with clock face surrounded by connected low-rise buildings",
+        "confidence": 0.96
+      },
+      {
+        "id": "e2",
+        "label": "urban park with grass fields",
+        "category": "terrain",
+        "attributes": [
+          "green",
+          "open",
+          "grassy",
+          "expansive"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center middle",
+        "evidence": "large green open area with manicured lawns and fields behind building complex",
+        "confidence": 0.95
+      },
+      {
+        "id": "e3",
+        "label": "lake",
+        "category": "terrain",
+        "attributes": [
+          "reflective",
+          "irregular shape",
+          "light-colored water"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-middle inside park",
+        "evidence": "body of water surrounded by trees and paths in middle of park",
+        "confidence": 0.92
+      },
+      {
+        "id": "e4",
+        "label": "high-rise buildings",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "modern",
+          "varied heights and colors"
+        ],
+        "count": 15,
+        "salience": 4,
+        "position": "background across skyline",
+        "evidence": "cluster of tall buildings of different designs across horizon behind park",
+        "confidence": 0.9
+      },
+      {
+        "id": "e5",
+        "label": "mountain range",
+        "category": "terrain",
+        "attributes": [
+          "distant",
+          "hazy",
+          "blue-gray"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "far background horizon",
+        "evidence": "low ridge on horizon under cloudy sky",
+        "confidence": 0.88
+      },
+      {
+        "id": "e6",
+        "label": "trees and vegetation",
+        "category": "plant",
+        "attributes": [
+          "dense",
+          "green",
+          "scattered"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "throughout park and city",
+        "evidence": "numerous trees dotting park and surrounding urban areas",
+        "confidence": 0.92
+      },
+      {
+        "id": "e7",
+        "label": "roads and pathways",
+        "category": "structure",
+        "attributes": [
+          "paved",
+          "winding",
+          "intersecting"
+        ],
+        "count": 4,
+        "salience": 3,
+        "position": "middle and foreground bordering park",
+        "evidence": "visible roads bordering park and winding paths inside park",
+        "confidence": 0.9
+      },
+      {
+        "id": "e8",
+        "label": "parking area with vehicles",
+        "category": "vehicle",
+        "attributes": [
+          "parked",
+          "numerous",
+          "small"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "foreground bottom",
+        "evidence": "lot with many small light and dark vehicles near building complex",
+        "confidence": 0.86
+      },
+      {
+        "id": "e9",
+        "label": "cloudy sky",
+        "category": "other",
+        "attributes": [
+          "overcast",
+          "gray-white",
+          "partly cloudy"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "top across image",
+        "evidence": "sky filled with white and gray clouds above city",
+        "confidence": 0.96
+      },
+      {
+        "id": "e10",
+        "label": "sports field",
+        "category": "terrain",
+        "attributes": [
+          "rectangular",
+          "grass",
+          "marked"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "middle-left inside park",
+        "evidence": "large rectangular grass field with faint markings on left side of park",
+        "confidence": 0.9
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e3",
+        "predicate": "inside",
+        "object": "e2",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e10",
+        "predicate": "inside",
+        "object": "e2",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e5",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e7",
+        "predicate": "near",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e8",
+        "predicate": "near",
+        "object": "e1",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e9",
+        "predicate": "above",
+        "object": "e4",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e1",
+        "predicate": "below",
+        "object": "e9",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e6",
+        "predicate": "inside",
+        "object": "e2",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.95,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact geographic location and names of buildings cannot be determined from visible features alone",
+      "Number of people and individual activities cannot be discerned at this aerial distance",
+      "Text on signs, billboards, or building labels is not legible due to distance and resolution",
+      "Exact time of day and weather temperature cannot be determined",
+      "Number and types of vehicles are not individually countable"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:17:06+00:00",
+        "raw_output_path": "data/annotations/raw/park_013_attempt1.txt",
+        "tokens": 7738
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

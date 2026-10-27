@@ -1,0 +1,395 @@
+{
+  "photo_id": "street_017",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_017.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Kenyatta_Avenue,_Nairobi,_2025_(08).jpg",
+    "title": "File:Kenyatta Avenue, Nairobi, 2025 (08).jpg"
+  },
+  "observed": {
+    "caption": "A busy urban intersection with pedestrians and cars in front of a blue and white Bank of India building and a distinctive twin-tower high-rise with a red antenna.",
+    "description": "The photo shows a wide urban street intersection under an overcast sky. In the foreground a paved road with a dark hatchback driving toward the camera and a white SUV further back on the right. Traffic lights hang over the intersection from poles on the right. On the left a large leafy tree stands beside a sidewalk where a group of people are walking and standing near a crosswalk. In the center a low white building with blue trim and white vertical columns displays signage, with a freestanding post holding two clock faces in front of it. Behind it rises a tall building with two cylindrical striped towers and a tall red lattice antenna between them. To the right of the tall building a large yellow billboard is mounted above smaller shopfronts with blue awnings, and a red-brick multi-story building is visible further down the street. Streetlights, utility poles and additional vehicles are visible along the road.",
+    "retrieval_queries": [
+      "busy street intersection with Bank of India and twin tower building",
+      "Nairobi city center with striped cylindrical towers and traffic",
+      "urban crosswalk with clock and cars in front of tall building with antenna"
+    ],
+    "tags": [
+      "urban intersection",
+      "Bank of India",
+      "twin towers",
+      "city street",
+      "traffic lights",
+      "pedestrians",
+      "billboard"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast cloudy",
+      "lighting": "overcast daylight",
+      "crowd_level": "moderate",
+      "activity_summary": "pedestrians crossing and standing at intersection while vehicles drive"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward twin-tower building across the intersection",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "intersection with Bank of India building and twin towers"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "twin-tower high-rise building with striped facade",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "two cylindrical towers",
+          "horizontal white and gray stripes",
+          "flat roof"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-background",
+        "evidence": "two prominent cylindrical towers with striped pattern dominating skyline behind low building",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "low Bank of India building with blue and white facade",
+        "category": "building",
+        "attributes": [
+          "single story",
+          "white with blue trim",
+          "vertical white columns",
+          "flat roof"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "white building with blue accents and BANK OF INDIA lettering on roofline in middle ground",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "paved street intersection",
+        "category": "terrain",
+        "attributes": [
+          "asphalt",
+          "wide",
+          "road markings",
+          "intersection"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground",
+        "evidence": "gray asphalt road occupying lower half of image with cars driving on it",
+        "confidence": 0.97
+      },
+      {
+        "id": "e4",
+        "label": "dark hatchback car",
+        "category": "vehicle",
+        "attributes": [
+          "dark color",
+          "small",
+          "headlights on",
+          "driving toward camera"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground-right",
+        "evidence": "dark small car in lower right foreground on road with visible headlights",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "traffic light assembly on horizontal pole",
+        "category": "object",
+        "attributes": [
+          "black",
+          "multiple signals",
+          "mounted on pole",
+          "overhanging road"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "upper-right",
+        "evidence": "black traffic lights hanging from horizontal pole in upper right corner",
+        "confidence": 0.95
+      },
+      {
+        "id": "e6",
+        "label": "freestanding clock post with two clock faces",
+        "category": "structure",
+        "attributes": [
+          "white",
+          "two clocks",
+          "tall post",
+          "near sidewalk"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-left",
+        "evidence": "white post with square clock housing showing two visible clock faces in front of Bank of India building",
+        "confidence": 0.94
+      },
+      {
+        "id": "e7",
+        "label": "group of pedestrians on sidewalk and crosswalk",
+        "category": "person_group",
+        "attributes": [
+          "walking",
+          "standing",
+          "various clothing",
+          "on sidewalk"
+        ],
+        "count": 22,
+        "salience": 4,
+        "position": "center-left to center",
+        "evidence": "multiple small figures walking and standing along sidewalk and crossing area in front of Bank of India building",
+        "confidence": 0.75
+      },
+      {
+        "id": "e8",
+        "label": "large yellow billboard with advertisement",
+        "category": "sign",
+        "attributes": [
+          "yellow",
+          "large",
+          "rectangular",
+          "mounted on building"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-right",
+        "evidence": "large yellow billboard with images and text mounted above shops to right of tall building",
+        "confidence": 0.92
+      },
+      {
+        "id": "e9",
+        "label": "white SUV on road",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "SUV",
+          "parked or driving",
+          "on right side"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right",
+        "evidence": "white SUV visible on road on right side behind dark hatchback",
+        "confidence": 0.88
+      },
+      {
+        "id": "e10",
+        "label": "leafy tree",
+        "category": "plant",
+        "attributes": [
+          "large",
+          "green foliage",
+          "mature"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "far-left",
+        "evidence": "large tree with dense green leaves on far left edge of image",
+        "confidence": 0.93
+      },
+      {
+        "id": "e11",
+        "label": "red-brick multi-story building",
+        "category": "building",
+        "attributes": [
+          "red brick",
+          "multiple stories",
+          "rectangular windows"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right-background",
+        "evidence": "red brick building with multiple floors visible behind shops on right side",
+        "confidence": 0.9
+      },
+      {
+        "id": "e12",
+        "label": "tall red lattice antenna tower",
+        "category": "structure",
+        "attributes": [
+          "red",
+          "lattice",
+          "very tall",
+          "narrow"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center",
+        "evidence": "tall red metal lattice tower rising between the two cylindrical towers of the high-rise",
+        "confidence": 0.97
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e6",
+        "predicate": "beside",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e5",
+        "predicate": "above",
+        "object": "e3",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e7",
+        "predicate": "near",
+        "object": "e2",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e8",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e10",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e11",
+        "predicate": "right_of",
+        "object": "e8",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e12",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "BANK OF INDIA",
+        "language": "en",
+        "entity_id": "e2",
+        "location_in_image": "on facade of low white and blue building in center",
+        "legibility": "clear",
+        "confidence": 0.98
+      },
+      {
+        "text": "BOI",
+        "language": "en",
+        "entity_id": "e2",
+        "location_in_image": "on blue sign on side of low building left of center",
+        "legibility": "clear",
+        "confidence": 0.9
+      },
+      {
+        "text": "OUR BOND",
+        "language": "en",
+        "entity_id": "e8",
+        "location_in_image": "on large yellow billboard center-right",
+        "legibility": "partial",
+        "confidence": 0.85
+      },
+      {
+        "text": "oppo",
+        "language": "en",
+        "entity_id": null,
+        "location_in_image": "on shop sign below billboard on right",
+        "legibility": "clear",
+        "confidence": 0.92
+      },
+      {
+        "text": "SAMSUNG",
+        "language": "en",
+        "entity_id": null,
+        "location_in_image": "on shop sign next to oppo sign on right",
+        "legibility": "clear",
+        "confidence": 0.9
+      }
+    ],
+    "people": {
+      "count": 22,
+      "count_confidence": 0.65,
+      "faces_visible": false,
+      "activities": [
+        "walking",
+        "standing",
+        "crossing street"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people is uncertain due to distance, occlusion and small figure size",
+      "Full text on large yellow billboard is cut off and partially obscured, remaining words not legible",
+      "Text on distant billboards on far right including STREETWISE and numbers is blurry and incomplete",
+      "Text on base of clock post and small shop signs is not legible at this resolution",
+      "License plate characters on foreground car are visible but not reliably readable",
+      "Exact time of day and weather conditions beyond overcast cannot be determined",
+      "Building names beyond BANK OF INDIA and shop brands cannot be confirmed"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 22,
+    "license_plates_visible": true,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:21:21+00:00",
+        "raw_output_path": "data/annotations/raw/street_017_attempt1.txt",
+        "tokens": 9839
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'OUR BOND'"
+      ]
+    }
+  }
+}

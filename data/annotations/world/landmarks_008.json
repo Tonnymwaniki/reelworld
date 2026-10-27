@@ -1,0 +1,350 @@
+{
+  "photo_id": "landmarks_008",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/landmarks/landmarks_008.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "IndicibleEspace",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Kenyatta_International_Convention_Centre,_Nairobi,_by_Karl_Henrik_N%C3%B8stvik_architect,_lobby.jpg",
+    "title": "File:Kenyatta International Convention Centre, Nairobi, by Karl Henrik Nøstvik architect, lobby.jpg"
+  },
+  "observed": {
+    "caption": "Wide interior view of a brutalist lobby with red carpet runners, polished tile floors, and symmetrical concrete staircases under exposed beams.",
+    "description": "The image shows a spacious indoor lobby with a glossy brown tiled floor crossed by broad red carpet runners forming a central aisle and transverse path. Symmetrical sculptural concrete staircases with dark metal railings rise on both sides toward an upper level, framed by massive textured concrete beams and wooden slat ceiling panels with skylights. On the left, wooden double doors with glass panels sit beside a deep red wall partition, while on the right a yellow planter with a green plant stands near a concrete pillar supporting a small black screen, with wood-paneled walls and large glass windows visible in the background. The space is illuminated by natural daylight from above and the far end, reflecting off the polished floor.",
+    "retrieval_queries": [
+      "brutalist interior lobby with red carpet and concrete staircases",
+      "empty modernist hall with symmetrical stairs and polished tile floor",
+      "interior of concrete building with wooden ceiling slats and red carpet runner"
+    ],
+    "tags": [
+      "brutalist interior",
+      "red carpet lobby",
+      "concrete staircase",
+      "modernist architecture",
+      "polished tile floor"
+    ],
+    "scene": {
+      "type": "building",
+      "setting": "indoor",
+      "time_of_day": "daytime",
+      "weather": "unknown",
+      "lighting": "bright natural daylight with reflections",
+      "crowd_level": "empty",
+      "activity_summary": "empty lobby with no visible movement"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward central staircases down the hall",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "central corridor and symmetrical staircases"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "red carpet runners",
+        "category": "object",
+        "attributes": [
+          "red",
+          "broad",
+          "cross-shaped",
+          "central aisle"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center and foreground",
+        "evidence": "broad red carpet forming cross shape on glossy floor extending down central corridor",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "polished brown tile floor",
+        "category": "terrain",
+        "attributes": [
+          "glossy",
+          "brown",
+          "reflective",
+          "tiled"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground and midground",
+        "evidence": "shiny brown brick-patterned floor reflecting light and surrounding structures",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "left concrete staircase",
+        "category": "structure",
+        "attributes": [
+          "textured concrete",
+          "sculptural",
+          "with dark metal railings"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-left, midground",
+        "evidence": "concrete stairs with black railings ascending to upper level on left side of corridor",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "right concrete staircase",
+        "category": "structure",
+        "attributes": [
+          "textured concrete",
+          "sculptural",
+          "with dark metal railings",
+          "angular"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-right, midground",
+        "evidence": "concrete stairs with black railings ascending to upper level on right side, with angular underside",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "exposed concrete beams",
+        "category": "structure",
+        "attributes": [
+          "massive",
+          "textured",
+          "horizontal",
+          "brutalist"
+        ],
+        "count": 3,
+        "salience": 4,
+        "position": "upper center, spanning horizontally",
+        "evidence": "thick rough-textured concrete beams crossing the ceiling and mid-level",
+        "confidence": 0.95
+      },
+      {
+        "id": "e6",
+        "label": "wooden slat ceiling panels",
+        "category": "structure",
+        "attributes": [
+          "wooden",
+          "slatted",
+          "rectangular",
+          "with skylights"
+        ],
+        "count": 3,
+        "salience": 3,
+        "position": "ceiling, top and center",
+        "evidence": "wooden louvered panels set between concrete beams allowing daylight through",
+        "confidence": 0.94
+      },
+      {
+        "id": "e7",
+        "label": "wooden double doors with glass panels",
+        "category": "structure",
+        "attributes": [
+          "wooden",
+          "glass-paneled",
+          "double"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left foreground",
+        "evidence": "wood-framed doors with glass inserts set into wooden wall on left side",
+        "confidence": 0.93
+      },
+      {
+        "id": "e8",
+        "label": "deep red wall partition",
+        "category": "structure",
+        "attributes": [
+          "deep red",
+          "glossy",
+          "vertical"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left, beside doors",
+        "evidence": "shiny red wall section adjacent to wooden doors extending into midground",
+        "confidence": 0.92
+      },
+      {
+        "id": "e9",
+        "label": "potted plant in yellow planter",
+        "category": "plant",
+        "attributes": [
+          "green foliage",
+          "yellow rectangular planter"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right midground, near pillar",
+        "evidence": "small green plant in bright yellow pot on polished floor near concrete pillar",
+        "confidence": 0.96
+      },
+      {
+        "id": "e10",
+        "label": "black flat-screen monitor",
+        "category": "object",
+        "attributes": [
+          "black",
+          "rectangular",
+          "wall-mounted"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right midground, on pillar",
+        "evidence": "small black rectangular screen mounted on concrete pillar",
+        "confidence": 0.9
+      },
+      {
+        "id": "e11",
+        "label": "concrete pillar",
+        "category": "structure",
+        "attributes": [
+          "textured concrete",
+          "vertical",
+          "thick"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right midground",
+        "evidence": "thick rough concrete column supporting upper structure on right side",
+        "confidence": 0.95
+      },
+      {
+        "id": "e12",
+        "label": "wood-paneled wall with glass windows",
+        "category": "structure",
+        "attributes": [
+          "wood-paneled",
+          "with large glass windows",
+          "background"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right background",
+        "evidence": "wooden wall with vertical panels and large glass doors/windows letting in daylight on far right",
+        "confidence": 0.92
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "left_of",
+        "object": "e4",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e3",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e4",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e7",
+        "predicate": "beside",
+        "object": "e8",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e9",
+        "predicate": "beside",
+        "object": "e11",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e10",
+        "predicate": "on",
+        "object": "e11",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e5",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e6",
+        "predicate": "above",
+        "object": "e5",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e12",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e7",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e11",
+        "predicate": "right_of",
+        "object": "e4",
+        "confidence": 0.89
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.98,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact text on the small yellow sign above the wooden doors on the left is not legible due to blur and distance, at least 3 letters may be present but cannot be transcribed with confidence",
+      "Text on the small white sign on a stand near the red wall on the left is not legible",
+      "Specific building name, location, or function cannot be determined from the image alone",
+      "Exact time of day and weather outside cannot be determined beyond visible daylight illumination",
+      "Material composition of floors, walls, and beams beyond visual appearance cannot be confirmed"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:12:26+00:00",
+        "raw_output_path": "data/annotations/raw/landmarks_008_attempt1.txt",
+        "tokens": 11685
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

@@ -1,0 +1,351 @@
+{
+  "photo_id": "landmarks_001",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/landmarks/landmarks_001.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Aart Rietveld",
+    "source_url": "https://commons.wikimedia.org/wiki/File:ASC_Leiden_-_Rietveld_Collection_-_East_Africa_1975_-_05_-_010_-_Kenyatta_International_Convention_Centre._Modern_round_tower_apartment_and_conical_building_-_Nairobi,_Kenya.jpg",
+    "title": "File:ASC Leiden - Rietveld Collection - East Africa 1975 - 05 - 010 - Kenyatta International Convention Centre. Modern round tower apartment and conical building - Nairobi, Kenya.jpg"
+  },
+  "observed": {
+    "caption": "A tall cylindrical tower with a disc-shaped roof stands beside a conical-roof building behind a fenced plaza under a clear sky.",
+    "description": "A tall cylindrical high-rise tower with horizontal window bands and a flat disc-shaped roof dominates the center-left against a clear pale blue sky, with a low wide building with a dark conical roof to its right, both sitting on a dark horizontal podium structure. In the foreground a light-tiled paved walkway leads to a black metal grid fence and gate enclosing a plaza, with a patch of green grass and a white spherical garden lamp on the right, a row of tall thin flagpoles in front of the podium, a statue on a pedestal near the fence on the right, and low shrubbery and flower beds along the inside of the fence.",
+    "retrieval_queries": [
+      "tall cylindrical tower with disc roof next to conical building behind fence",
+      "modernist high rise tower and pyramid roof conference center with plaza",
+      "cylindrical skyscraper with round top and low cone shaped hall in foreground"
+    ],
+    "tags": [
+      "tower",
+      "cylindrical building",
+      "conical roof",
+      "modern architecture",
+      "plaza",
+      "fence",
+      "flagpoles",
+      "cityscape"
+    ],
+    "scene": {
+      "type": "building",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "clear",
+      "lighting": "bright daylight",
+      "crowd_level": "empty",
+      "activity_summary": "still scene with no visible activity"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the cylindrical tower and conical building",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "portrait",
+      "subject_focus": "cylindrical tower building"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "cylindrical high-rise tower",
+        "category": "building",
+        "attributes": [
+          "cylindrical",
+          "dark facade",
+          "horizontal window bands",
+          "flat disc roof",
+          "many floors"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-left, background",
+        "evidence": "tall cylindrical building with horizontal window bands and disc-shaped top dominates center",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "conical-roof building",
+        "category": "building",
+        "attributes": [
+          "conical roof",
+          "dark and light panels",
+          "low and wide"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right, midground",
+        "evidence": "low building with pointed conical roof to the right of the tower",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "podium base structure",
+        "category": "structure",
+        "attributes": [
+          "dark",
+          "horizontal",
+          "multi-level",
+          "connecting buildings"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center, midground",
+        "evidence": "dark horizontal structure connecting tower base and conical building",
+        "confidence": 0.9
+      },
+      {
+        "id": "e4",
+        "label": "metal fence and gate",
+        "category": "structure",
+        "attributes": [
+          "black metal",
+          "grid pattern",
+          "enclosing plaza"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-foreground",
+        "evidence": "black metal grid fence and gate spanning across lower third of image",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "paved walkway",
+        "category": "terrain",
+        "attributes": [
+          "light-colored tiles",
+          "rectangular"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom-left, foreground",
+        "evidence": "light tiled pavement leading to gate in foreground",
+        "confidence": 0.95
+      },
+      {
+        "id": "e6",
+        "label": "grass lawn",
+        "category": "terrain",
+        "attributes": [
+          "green",
+          "short grass",
+          "patchy"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom-right, foreground",
+        "evidence": "small grassy area in bottom right corner",
+        "confidence": 0.94
+      },
+      {
+        "id": "e7",
+        "label": "flagpoles",
+        "category": "object",
+        "attributes": [
+          "tall",
+          "thin",
+          "vertical",
+          "multiple"
+        ],
+        "count": 8,
+        "salience": 2,
+        "position": "center-right, midground",
+        "evidence": "row of tall thin poles in front of conical building and podium",
+        "confidence": 0.88
+      },
+      {
+        "id": "e8",
+        "label": "statue on pedestal",
+        "category": "object",
+        "attributes": [
+          "standing figure",
+          "on tall pedestal",
+          "light-colored"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right, midground",
+        "evidence": "statue atop rectangular pedestal near fence on right side",
+        "confidence": 0.85
+      },
+      {
+        "id": "e9",
+        "label": "spherical garden lamp",
+        "category": "object",
+        "attributes": [
+          "white sphere",
+          "short post",
+          "on grass edge"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom-right, foreground",
+        "evidence": "white spherical light on short post at edge of grass and fence",
+        "confidence": 0.9
+      },
+      {
+        "id": "e10",
+        "label": "sky",
+        "category": "other",
+        "attributes": [
+          "clear",
+          "pale blue",
+          "cloudless"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "background, upper",
+        "evidence": "clear pale blue sky occupying upper two-thirds of image",
+        "confidence": 0.99
+      },
+      {
+        "id": "e11",
+        "label": "shrubbery and flower beds",
+        "category": "plant",
+        "attributes": [
+          "low",
+          "dark foliage",
+          "along fence"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center-foreground, along fence",
+        "evidence": "dark low vegetation and flower beds along inside of fence",
+        "confidence": 0.88
+      },
+      {
+        "id": "e12",
+        "label": "scaffolding",
+        "category": "structure",
+        "attributes": [
+          "metal framework",
+          "behind conical building"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "center-right, background",
+        "evidence": "metal scaffolding structure visible behind conical roof building",
+        "confidence": 0.75
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e2",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e4",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e4",
+        "predicate": "in_front_of",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e5",
+        "predicate": "in_front_of",
+        "object": "e4",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e6",
+        "predicate": "right_of",
+        "object": "e5",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e7",
+        "predicate": "in_front_of",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e8",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e6",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e11",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e3",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e10",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.99
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.98,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "No sign, banner or label with at least 3 legible letters can be read; any distant text is too small or blurry to transcribe",
+      "Exact function, name or location of the buildings cannot be determined from the image alone",
+      "Number of flagpoles is approximate as some are partially obscured",
+      "Details of the statue figure and interior of buildings are not discernible",
+      "Exact time of day and date cannot be determined beyond daytime with clear weather"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:11:23+00:00",
+        "raw_output_path": "data/annotations/raw/landmarks_001_attempt1.txt",
+        "tokens": 9425
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

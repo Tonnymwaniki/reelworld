@@ -1,0 +1,401 @@
+{
+  "photo_id": "landmarks_004",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/landmarks/landmarks_004.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Kenyatta_International_Convention_Centre,_2025_(01).jpg",
+    "title": "File:Kenyatta International Convention Centre, 2025 (01).jpg"
+  },
+  "observed": {
+    "caption": "The stone entrance arch of the Kenyatta International Convention Centre with its cylindrical tower rising behind closed metal gates on a sunny day.",
+    "description": "A large stone entrance arch spans a paved driveway with yellow curbs, displaying red lettering on top and a white banner below. Closed grey metal gates with diamond patterns block the arch opening, with a white tent canopy visible behind them inside the compound. A tall cylindrical tower with horizontal striped bands and a flat disc roof rises directly behind the arch against a clear pale blue sky. To the right, a modern curved high-rise with blue glass and an angular top stands behind a dark conical-roof building, and a smaller pedestrian side entrance with an open gate is visible to the right of the main arch. Small green shrubs, potted plants, and short white bollards line the driveway and walkway, and several small figures are standing behind the gates inside the compound.",
+    "retrieval_queries": [
+      "KICC entrance gate with cylindrical tower behind in Nairobi",
+      "Kenyatta International Convention Centre front arch and tall round building",
+      "Nairobi landmark KICC tower viewed through main gates on a sunny day"
+    ],
+    "tags": [
+      "KICC",
+      "Nairobi",
+      "convention centre",
+      "tower",
+      "entrance arch",
+      "landmark",
+      "gate",
+      "Kenya"
+    ],
+    "scene": {
+      "type": "building",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "clear and sunny",
+      "lighting": "bright daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "people standing near entrance gates"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the entrance arch and tower",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "portrait",
+      "subject_focus": "entrance arch and tower behind"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "entrance arch with KICC signage",
+        "category": "structure",
+        "attributes": [
+          "stone arch",
+          "red lettering on top",
+          "white banner with red text"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center foreground",
+        "evidence": "large stone arch spanning driveway with KICC letters on top and banner below",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "cylindrical tower building",
+        "category": "building",
+        "attributes": [
+          "cylindrical",
+          "horizontal striped facade",
+          "flat disc roof",
+          "many windows"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center background",
+        "evidence": "tall round tower with horizontal bands rising directly behind arch",
+        "confidence": 0.99
+      },
+      {
+        "id": "e3",
+        "label": "metal entrance gates",
+        "category": "structure",
+        "attributes": [
+          "grey metal",
+          "ornate diamond pattern",
+          "closed"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center foreground",
+        "evidence": "closed metal gates with diamond patterns blocking arch opening",
+        "confidence": 0.97
+      },
+      {
+        "id": "e4",
+        "label": "white tent canopy",
+        "category": "structure",
+        "attributes": [
+          "white fabric",
+          "peaked roof"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center middle ground",
+        "evidence": "white tent visible behind gates inside compound",
+        "confidence": 0.9
+      },
+      {
+        "id": "e5",
+        "label": "paved driveway",
+        "category": "terrain",
+        "attributes": [
+          "asphalt surface",
+          "yellow curbs",
+          "central lane"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom center",
+        "evidence": "paved road leading to gates with yellow painted edges",
+        "confidence": 0.95
+      },
+      {
+        "id": "e6",
+        "label": "landscaped plants and shrubs",
+        "category": "plant",
+        "attributes": [
+          "green shrubs",
+          "small bushes",
+          "potted plants"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom right and near gates",
+        "evidence": "small green shrubs and potted plants along driveway and behind gates",
+        "confidence": 0.88
+      },
+      {
+        "id": "e7",
+        "label": "modern high-rise with blue glass facade",
+        "category": "building",
+        "attributes": [
+          "curved shape",
+          "blue glass facade",
+          "angular top"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right background",
+        "evidence": "tall curved building with blue glass on right side behind conical structure",
+        "confidence": 0.92
+      },
+      {
+        "id": "e8",
+        "label": "conical-roof building",
+        "category": "building",
+        "attributes": [
+          "dark conical roof",
+          "circular base"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right middle ground",
+        "evidence": "building with dark conical roof below blue glass tower",
+        "confidence": 0.9
+      },
+      {
+        "id": "e9",
+        "label": "person group near gates",
+        "category": "person_group",
+        "attributes": [
+          "standing",
+          "general clothing"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "center and left behind gates",
+        "evidence": "several small figures standing behind metal gates inside compound",
+        "confidence": 0.65
+      },
+      {
+        "id": "e10",
+        "label": "sky",
+        "category": "other",
+        "attributes": [
+          "clear",
+          "pale blue",
+          "bright"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top",
+        "evidence": "clear pale blue sky occupying upper half of image",
+        "confidence": 0.99
+      },
+      {
+        "id": "e11",
+        "label": "pedestrian side entrance",
+        "category": "structure",
+        "attributes": [
+          "grey metal gate",
+          "open doorway",
+          "small roof"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right foreground",
+        "evidence": "smaller gated entrance with open door to right of main arch",
+        "confidence": 0.9
+      },
+      {
+        "id": "e12",
+        "label": "white bollards",
+        "category": "object",
+        "attributes": [
+          "white cylindrical",
+          "short"
+        ],
+        "count": 4,
+        "salience": 1,
+        "position": "bottom right",
+        "evidence": "short white posts along walkway on right side",
+        "confidence": 0.85
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "in_front_of",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "inside",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e5",
+        "predicate": "in_front_of",
+        "object": "e3",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e6",
+        "predicate": "beside",
+        "object": "e5",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e7",
+        "predicate": "right_of",
+        "object": "e2",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e8",
+        "predicate": "below",
+        "object": "e7",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e9",
+        "predicate": "behind",
+        "object": "e3",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e11",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e12",
+        "predicate": "beside",
+        "object": "e5",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e10",
+        "predicate": "above",
+        "object": "e2",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.88
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "KICC",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "on top of entrance arch",
+        "legibility": "clear",
+        "confidence": 0.98
+      },
+      {
+        "text": "THE KENYATTA INTERNATIONAL CONVENTION CENTRE",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "on horizontal beam of entrance arch below KICC",
+        "legibility": "clear",
+        "confidence": 0.97
+      },
+      {
+        "text": "ENTRY ONLY",
+        "language": "en",
+        "entity_id": null,
+        "location_in_image": "on blue sign on left pillar of arch",
+        "legibility": "clear",
+        "confidence": 0.9
+      },
+      {
+        "text": "PEDESTRIAN ENTRANCE",
+        "language": "en",
+        "entity_id": "e11",
+        "location_in_image": "on blue sign on right pillar of arch",
+        "legibility": "clear",
+        "confidence": 0.88
+      },
+      {
+        "text": "KEEP LEFT",
+        "language": "en",
+        "entity_id": null,
+        "location_in_image": "on small blue sign behind gates inside compound",
+        "legibility": "partial",
+        "confidence": 0.65
+      },
+      {
+        "text": "CBK PENSION TOWERS",
+        "language": "en",
+        "entity_id": "e7",
+        "location_in_image": "on blue glass facade of tall building on right background",
+        "legibility": "partial",
+        "confidence": 0.7
+      }
+    ],
+    "people": {
+      "count": 3,
+      "count_confidence": 0.65,
+      "faces_visible": false,
+      "activities": [
+        "standing near gates",
+        "standing inside compound"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people behind gates due to distance, occlusion by gates and tent",
+      "Text on small red sign on guardhouse to the right and other distant small signs that are blurry or partially obscured",
+      "Details inside the white tent and inside the tower and other buildings",
+      "Exact time of day beyond daytime and specific weather conditions beyond clear sky",
+      "Whether additional people or vehicles are present outside the frame or obscured by structures"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 3,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:12:01+00:00",
+        "raw_output_path": "data/annotations/raw/landmarks_004_attempt1.txt",
+        "tokens": 12012
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'KEEP LEFT'",
+        "partially legible text: 'CBK PENSION TOWERS'"
+      ]
+    }
+  }
+}

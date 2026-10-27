@@ -1,0 +1,307 @@
+{
+  "photo_id": "cbd_009",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/cbd/cbd_009.jpg",
+    "license": "CC BY 2.0",
+    "author": "Dietrich Ayala",
+    "source_url": "https://commons.wikimedia.org/wiki/File:West_Nairobi_CBD.jpg",
+    "title": "File:West Nairobi CBD.jpg"
+  },
+  "observed": {
+    "caption": "Aerial twilight view of a wide city avenue lined with high-rise buildings and trees extending toward the horizon.",
+    "description": "The photo shows a wide urban avenue running from the foreground to the distant background, flanked on both sides by tall high-rise buildings with varied facades and numerous windows. The left side features a dark tall building with a large vertical advertisement and an adjacent brown tower, while the right side has a cluster of light and brown towers. A low white building with a reddish roof sits in the foreground center. The avenue contains small vehicles with visible headlights and is bordered by dense dark green trees and open park areas. In the middle distance a blue rectangular billboard structure spans near the road, and a solitary white high-rise stands beyond the tree line. The sky above is pale blue fading to bright near the horizon with scattered clouds, and distant hills are faintly visible under soft twilight lighting.",
+    "retrieval_queries": [
+      "aerial view of city avenue at dawn with tall buildings",
+      "twilight city skyline with boulevard and traffic",
+      "high angle photo of downtown with skyscrapers and tree-lined road"
+    ],
+    "tags": [
+      "city skyline",
+      "aerial view",
+      "high-rise buildings",
+      "avenue",
+      "twilight",
+      "urban landscape",
+      "boulevard",
+      "downtown"
+    ],
+    "scene": {
+      "type": "other",
+      "setting": "outdoor",
+      "time_of_day": "dawn",
+      "weather": "partly cloudy",
+      "lighting": "soft twilight, natural",
+      "crowd_level": "sparse",
+      "activity_summary": "vehicles moving along central avenue"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "very_high",
+      "facing": "down the avenue toward the horizon",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "city avenue and skyline at twilight"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "tall high-rise building on far left with vertical advertisement",
+        "category": "building",
+        "attributes": [
+          "dark facade",
+          "vertical windows",
+          "large light-colored advertisement on side"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "far left",
+        "evidence": "tall building occupying left edge with dark vertical window pattern and large advertisement panel",
+        "confidence": 0.96
+      },
+      {
+        "id": "e2",
+        "label": "brown high-rise building left of center",
+        "category": "building",
+        "attributes": [
+          "brown facade",
+          "rectangular",
+          "many windows"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left-center",
+        "evidence": "tall brown building with grid of windows standing beside the leftmost building",
+        "confidence": 0.95
+      },
+      {
+        "id": "e3",
+        "label": "wide central avenue with multiple lanes",
+        "category": "structure",
+        "attributes": [
+          "paved",
+          "multi-lane",
+          "lined with trees and lights"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center, running from foreground to background",
+        "evidence": "broad road extending through middle of image with lane markings and vehicles",
+        "confidence": 0.98
+      },
+      {
+        "id": "e4",
+        "label": "vehicles on the avenue",
+        "category": "vehicle",
+        "attributes": [
+          "small",
+          "cars and buses",
+          "headlights visible"
+        ],
+        "count": 15,
+        "salience": 3,
+        "position": "on central avenue",
+        "evidence": "small light and dark shapes with headlights moving along the road",
+        "confidence": 0.85
+      },
+      {
+        "id": "e5",
+        "label": "trees and green park area along avenue",
+        "category": "plant",
+        "attributes": [
+          "dark green",
+          "dense foliage",
+          "lining road and open area"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center and center-right",
+        "evidence": "clusters of dark trees bordering the avenue and filling open space between buildings",
+        "confidence": 0.91
+      },
+      {
+        "id": "e6",
+        "label": "cluster of high-rise buildings on right side",
+        "category": "building",
+        "attributes": [
+          "light and brown facades",
+          "multiple towers",
+          "varied heights"
+        ],
+        "count": 4,
+        "salience": 5,
+        "position": "right side",
+        "evidence": "group of tall buildings with rooftop structures on right half of image",
+        "confidence": 0.96
+      },
+      {
+        "id": "e7",
+        "label": "low-rise building with red roof in foreground center",
+        "category": "building",
+        "attributes": [
+          "white walls",
+          "red roof",
+          "multiple windows",
+          "ornate facade"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground center",
+        "evidence": "low building with white facade and reddish roof directly in front of avenue",
+        "confidence": 0.92
+      },
+      {
+        "id": "e8",
+        "label": "sky with scattered clouds at horizon",
+        "category": "other",
+        "attributes": [
+          "pale blue to bright gradient",
+          "scattered clouds",
+          "bright near horizon"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "top, background",
+        "evidence": "upper portion of image showing sky transitioning from blue to light near horizon with clouds",
+        "confidence": 0.98
+      },
+      {
+        "id": "e9",
+        "label": "distant white high-rise tower in center background",
+        "category": "building",
+        "attributes": [
+          "white facade",
+          "tall",
+          "isolated"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center background, distant",
+        "evidence": "tall white building standing alone beyond tree line in middle distance",
+        "confidence": 0.9
+      },
+      {
+        "id": "e10",
+        "label": "blue billboard structure beside avenue",
+        "category": "sign",
+        "attributes": [
+          "blue rectangular",
+          "elevated on supports"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center, just behind foreground buildings",
+        "evidence": "blue rectangular structure spanning near the avenue in middle ground",
+        "confidence": 0.76
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e2",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e3",
+        "predicate": "left_of",
+        "object": "e6",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e7",
+        "predicate": "in_front_of",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e5",
+        "predicate": "beside",
+        "object": "e3",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e9",
+        "predicate": "behind",
+        "object": "e5",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e10",
+        "predicate": "behind",
+        "object": "e7",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e8",
+        "predicate": "above",
+        "object": "e9",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e6",
+        "predicate": "right_of",
+        "object": "e3",
+        "confidence": 0.97
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.96,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Text on the large vertical advertisement on the leftmost building is not legible due to distance and blur, so no text can be transcribed",
+      "Whether the lighting shows dawn or dusk cannot be determined from the image alone",
+      "Exact number, types and colors of vehicles on the avenue cannot be determined",
+      "Names, heights and functions of individual buildings cannot be determined",
+      "Details of any people on streets or sidewalks are too small to discern"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:07:22+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_009_attempt1.txt",
+        "tokens": 7757
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

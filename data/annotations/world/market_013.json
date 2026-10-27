@@ -1,0 +1,384 @@
+{
+  "photo_id": "market_013",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_013.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Nairobi_City_Market,_2025_(01).jpg",
+    "title": "File:Nairobi City Market, 2025 (01).jpg"
+  },
+  "observed": {
+    "caption": "Colorful mural-covered Nairobi City Market building viewed across a street with parked vans and pedestrians under an overcast sky.",
+    "description": "A large stepped building with a vibrant multicolor mural covering its facade stands in the center, with two white signs reading NAIROBI CITY COUNTY and CITY MARKET above its central entrance and additional restaurant signs on its lower awnings. The building is flanked on the left by a tall beige high-rise with many windows and pink trim and on the right by smaller background high-rises and lower market extensions with patterned decoration. In the foreground a paved asphalt street with yellow curb markings holds several parked vehicles including a black van in the center, tan safari-style vans on the left and right, a black sedan and a white car, while several people in casual clothing walk and stand on the sidewalk and street, one pushing a cart. The sky above is overcast and gray, providing diffuse daylight over the outdoor urban market scene.",
+    "retrieval_queries": [
+      "colorful Nairobi City Market building with mural",
+      "Nairobi market street with safari vans and pedestrians",
+      "painted City Market facade in Kenya with cars in front"
+    ],
+    "tags": [
+      "Nairobi City Market",
+      "colorful mural",
+      "Kenya",
+      "street scene",
+      "market building",
+      "safari vans",
+      "urban market"
+    ],
+    "scene": {
+      "type": "market",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast",
+      "lighting": "diffuse overcast daylight",
+      "crowd_level": "moderate",
+      "activity_summary": "people walking and standing on sidewalk and street with parked vehicles in front of market"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the market building across the street",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "colorful market building"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "Nairobi City Market building with colorful mural",
+        "category": "building",
+        "attributes": [
+          "stepped facade",
+          "colorful mural",
+          "central entrance",
+          "two-story base with awning"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "large central building with painted mural and CITY MARKET signage",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "tall multi-story building on left",
+        "category": "building",
+        "attributes": [
+          "beige facade",
+          "many windows",
+          "pink trim",
+          "high-rise"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left background",
+        "evidence": "tall building with grid of windows on left edge",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "black van",
+        "category": "vehicle",
+        "attributes": [
+          "dark color",
+          "minivan",
+          "parked on street"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center foreground",
+        "evidence": "black van parked on road in front of market",
+        "confidence": 0.98
+      },
+      {
+        "id": "e4",
+        "label": "beige safari van on right",
+        "category": "vehicle",
+        "attributes": [
+          "tan color",
+          "extended body",
+          "off-road tires",
+          "roof rack"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right foreground",
+        "evidence": "tan Land Cruiser-style van parked on right side of street",
+        "confidence": 0.98
+      },
+      {
+        "id": "e5",
+        "label": "beige safari van on left",
+        "category": "vehicle",
+        "attributes": [
+          "tan color",
+          "off-road tires",
+          "partially visible"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left foreground",
+        "evidence": "tan van partially visible on left edge of street",
+        "confidence": 0.96
+      },
+      {
+        "id": "e6",
+        "label": "dark sedan",
+        "category": "vehicle",
+        "attributes": [
+          "black color",
+          "parked",
+          "four-door"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-left foreground",
+        "evidence": "black car parked behind black van",
+        "confidence": 0.92
+      },
+      {
+        "id": "e7",
+        "label": "white car",
+        "category": "vehicle",
+        "attributes": [
+          "white color",
+          "partially visible",
+          "parked"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "left foreground behind beige van",
+        "evidence": "white car visible behind left safari van",
+        "confidence": 0.9
+      },
+      {
+        "id": "e8",
+        "label": "group of people",
+        "category": "person_group",
+        "attributes": [
+          "walking",
+          "standing",
+          "casual clothing"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "foreground sidewalk and street",
+        "evidence": "several individuals on sidewalk and street near vehicles",
+        "confidence": 0.88
+      },
+      {
+        "id": "e9",
+        "label": "paved street",
+        "category": "terrain",
+        "attributes": [
+          "asphalt",
+          "yellow curb markings",
+          "foreground"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom foreground",
+        "evidence": "road surface with yellow painted curbs at bottom of image",
+        "confidence": 0.95
+      },
+      {
+        "id": "e10",
+        "label": "overcast sky",
+        "category": "other",
+        "attributes": [
+          "cloudy",
+          "gray",
+          "diffuse light"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top background",
+        "evidence": "gray cloudy sky above buildings",
+        "confidence": 0.96
+      },
+      {
+        "id": "e11",
+        "label": "background high-rise buildings on right",
+        "category": "building",
+        "attributes": [
+          "modern",
+          "glass and concrete",
+          "multiple stories"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "right background",
+        "evidence": "cluster of tall buildings behind market on right side",
+        "confidence": 0.93
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e11",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e3",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e4",
+        "predicate": "right_of",
+        "object": "e3",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e5",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e6",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e8",
+        "predicate": "near",
+        "object": "e3",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e9",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e10",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e9",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e9",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e8",
+        "predicate": "on",
+        "object": "e9",
+        "confidence": 0.88
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "NAIROBI CITY COUNTY",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "center facade, upper sign above entrance",
+        "legibility": "clear",
+        "confidence": 0.98
+      },
+      {
+        "text": "CITY MARKET",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "center facade, lower sign above entrance",
+        "legibility": "clear",
+        "confidence": 0.98
+      },
+      {
+        "text": "Marrwa City RESTAURANT",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "right awning below mural",
+        "legibility": "clear",
+        "confidence": 0.88
+      },
+      {
+        "text": "KENYA MEAT COMMISS O",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "left awning, upper line",
+        "legibility": "partial",
+        "confidence": 0.75
+      },
+      {
+        "text": "NYAMA HAVEN",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "left awning, lower line",
+        "legibility": "clear",
+        "confidence": 0.9
+      }
+    ],
+    "people": {
+      "count": 9,
+      "count_confidence": 0.72,
+      "faces_visible": false,
+      "activities": [
+        "walking",
+        "standing",
+        "pushing a cart"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people due to occlusion and distance",
+      "Full text of small awning signs under the market colonnade such as KMC RESTAURANT due to blur and distance",
+      "License plate numbers and specific vehicle makes or models",
+      "Interior layout or contents of the market building",
+      "Precise time of day beyond daytime overcast conditions",
+      "Details of distant background buildings and signage that are blurry or partially obscured"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 9,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:14:36+00:00",
+        "raw_output_path": "data/annotations/raw/market_013_attempt1.txt",
+        "tokens": 12935
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'KENYA MEAT COMMISS O'"
+      ]
+    }
+  }
+}

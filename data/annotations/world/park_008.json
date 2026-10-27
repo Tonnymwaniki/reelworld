@@ -1,0 +1,323 @@
+{
+  "photo_id": "park_008",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_008.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Ephymbaya",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Nairobi_skyline_from_Uhuru_Park.jpg",
+    "title": "File:Nairobi skyline from Uhuru Park.jpg"
+  },
+  "observed": {
+    "caption": "Hazy city skyline with a clock tower in the foreground flanked by two tall high-rise buildings and palm trees.",
+    "description": "The image shows a hazy, overcast city skyline viewed from an elevated position. A weathered greenish wall runs along the bottom foreground with several palm trees rising above it. Near the center foreground stands a light-colored clock tower with a visible clock face. To the left is a cylindrical high-rise building with an illuminated band near its roof, and to the right is a tall rectangular high-rise building with vertical windows. Multiple mid-rise buildings fill the middle ground between them, and a pale gray sky covers the upper portion of the image with a few small dark birds in flight on the right side.",
+    "retrieval_queries": [
+      "hazy city skyline with clock tower and tall buildings",
+      "cityscape with cylindrical tower and palm trees in foreground",
+      "overcast urban skyline with clock tower in center"
+    ],
+    "tags": [
+      "city skyline",
+      "clock tower",
+      "high-rise buildings",
+      "palm trees",
+      "hazy weather",
+      "urban landscape"
+    ],
+    "scene": {
+      "type": "building",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "hazy overcast",
+      "lighting": "diffuse overcast light",
+      "crowd_level": "empty",
+      "activity_summary": "still city view"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "raised",
+      "facing": "toward the city skyline",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "clock tower and surrounding high-rises"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "cylindrical high-rise building",
+        "category": "building",
+        "attributes": [
+          "cylindrical",
+          "brown facade",
+          "illuminated top band",
+          "tall"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "left",
+        "evidence": "tall round building on left side with horizontal lines and lit sign near roof",
+        "confidence": 0.95
+      },
+      {
+        "id": "e2",
+        "label": "tall rectangular high-rise building",
+        "category": "building",
+        "attributes": [
+          "rectangular",
+          "light gray",
+          "vertical windows",
+          "flat roof with equipment"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "right",
+        "evidence": "very tall light-colored tower on right side with vertical window strips",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "clock tower building",
+        "category": "building",
+        "attributes": [
+          "light stone facade",
+          "square tower",
+          "clock face",
+          "small rooftop structure"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-foreground",
+        "evidence": "tower with large clock face near center bottom above palm trees",
+        "confidence": 0.97
+      },
+      {
+        "id": "e4",
+        "label": "palm trees",
+        "category": "plant",
+        "attributes": [
+          "dark green",
+          "fan-shaped fronds",
+          "tall trunks"
+        ],
+        "count": 7,
+        "salience": 4,
+        "position": "foreground",
+        "evidence": "multiple palm trees with visible trunks and fronds in lower portion of image",
+        "confidence": 0.93
+      },
+      {
+        "id": "e5",
+        "label": "hazy sky",
+        "category": "terrain",
+        "attributes": [
+          "pale gray",
+          "overcast",
+          "hazy",
+          "featureless"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "background upper",
+        "evidence": "uniform light gray sky covering top two-thirds of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e6",
+        "label": "birds in flight",
+        "category": "animal",
+        "attributes": [
+          "small",
+          "dark",
+          "silhouetted",
+          "in flight"
+        ],
+        "count": 4,
+        "salience": 1,
+        "position": "right-center sky",
+        "evidence": "small dark specks in sky to the left of the tall rectangular building",
+        "confidence": 0.7
+      },
+      {
+        "id": "e7",
+        "label": "foreground wall parapet",
+        "category": "structure",
+        "attributes": [
+          "weathered",
+          "greenish",
+          "concrete",
+          "low"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom foreground",
+        "evidence": "low horizontal wall along very bottom edge of image",
+        "confidence": 0.88
+      },
+      {
+        "id": "e8",
+        "label": "mid-rise buildings",
+        "category": "building",
+        "attributes": [
+          "various heights",
+          "gray and beige",
+          "clustered",
+          "windows"
+        ],
+        "count": 6,
+        "salience": 3,
+        "position": "center middle-ground",
+        "evidence": "group of shorter buildings behind clock tower and palm trees",
+        "confidence": 0.9
+      },
+      {
+        "id": "e9",
+        "label": "illuminated sign on cylindrical building",
+        "category": "sign",
+        "attributes": [
+          "illuminated",
+          "blue background",
+          "white text",
+          "wrapping around roof"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "top of e1",
+        "evidence": "bright band with text near top of cylindrical building on left",
+        "confidence": 0.85
+      },
+      {
+        "id": "e10",
+        "label": "clock face",
+        "category": "object",
+        "attributes": [
+          "white dial",
+          "black hands and numerals",
+          "square frame"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "on e3",
+        "evidence": "round white clock with dark markings on front of tower",
+        "confidence": 0.92
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e2",
+        "predicate": "right_of",
+        "object": "e3",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "in_front_of",
+        "object": "e8",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e4",
+        "predicate": "in_front_of",
+        "object": "e8",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e7",
+        "predicate": "below",
+        "object": "e4",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e7",
+        "predicate": "in_front_of",
+        "object": "e3",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e10",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e6",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e6",
+        "predicate": "above",
+        "object": "e3",
+        "confidence": 0.75
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "KENYA SHINES",
+        "language": "en",
+        "entity_id": "e9",
+        "location_in_image": "near top of cylindrical building on left",
+        "legibility": "clear",
+        "confidence": 0.85
+      }
+    ],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.98,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Additional illuminated text on the left side of the cylindrical building is visible but too blurry to transcribe with at least 3 letters",
+      "Exact names and functions of the buildings cannot be determined from the image",
+      "Exact time of day and date cannot be determined beyond daytime",
+      "Whether haze is due to fog, smog, or dust cannot be determined",
+      "Details inside buildings and behind the foreground wall cannot be determined",
+      "Exact count of birds is uncertain due to small size and distance"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:16:40+00:00",
+        "raw_output_path": "data/annotations/raw/park_008_attempt1.txt",
+        "tokens": 7336
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

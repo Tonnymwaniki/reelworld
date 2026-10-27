@@ -1,0 +1,312 @@
+{
+  "photo_id": "market_015",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_015.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Nairobi_City_Market,_2025_(03).jpg",
+    "title": "File:Nairobi City Market, 2025 (03).jpg"
+  },
+  "observed": {
+    "caption": "Interior of a large arched market hall with a florist kiosk in the foreground.",
+    "description": "The photo shows the interior of a large hall with high vaulted arches and tall windows along the left wall letting in daylight. In the foreground center is a small enclosed florist kiosk with a white sign reading Pien Florist and phone numbers, decorated with images of flower bouquets and topped with red floral arrangements and cardboard boxes. To the right of the kiosk is a blue barrel holding red flowers and stacks of blue and green tarpaulins. To the left are wooden pallets and shelving with yellow containers. Behind the kiosk is an upper mezzanine level with blue tarpaulin covers, metal railings, and shelves holding dark objects. The far wall is light-colored brick with vertical pilasters, and the ceiling features repeating concrete arches and exposed beams.",
+    "retrieval_queries": [
+      "interior of arched market hall with florist stall",
+      "Pien Florist kiosk inside large vaulted building",
+      "empty indoor market with flower shop and blue tarps"
+    ],
+    "tags": [
+      "market hall",
+      "florist kiosk",
+      "vaulted ceiling",
+      "indoor market",
+      "flower stall"
+    ],
+    "scene": {
+      "type": "market",
+      "setting": "indoor",
+      "time_of_day": "daytime",
+      "weather": "unknown",
+      "lighting": "natural daylight from windows with artificial spot light",
+      "crowd_level": "empty",
+      "activity_summary": "empty market hall with unattended florist stall"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "raised",
+      "facing": "across the interior toward the far brick wall",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "portrait",
+      "subject_focus": "florist kiosk in market hall"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "florist kiosk",
+        "category": "structure",
+        "attributes": [
+          "rectangular",
+          "brown framed",
+          "glass panels",
+          "white sign on top",
+          "decorated with flower posters"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-foreground",
+        "evidence": "white sign reading Pien Florist on top, glass display panels with bouquet images",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "vaulted arched ceiling",
+        "category": "structure",
+        "attributes": [
+          "high",
+          "concrete",
+          "repeating arches",
+          "light beige"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "upper-center and background",
+        "evidence": "large curved concrete arches spanning the hall ceiling",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "tall windows",
+        "category": "structure",
+        "attributes": [
+          "rectangular",
+          "multi-pane",
+          "bright daylight",
+          "along left wall"
+        ],
+        "count": 8,
+        "salience": 4,
+        "position": "left wall, upper",
+        "evidence": "bright rectangular windows with visible frames letting in light",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "blue tarpaulin covers",
+        "category": "object",
+        "attributes": [
+          "bright blue",
+          "plastic",
+          "draped",
+          "covering stalls"
+        ],
+        "count": 3,
+        "salience": 3,
+        "position": "left-mid and right-foreground",
+        "evidence": "large blue plastic sheets covering structures on mezzanine and ground level",
+        "confidence": 0.95
+      },
+      {
+        "id": "e5",
+        "label": "flower bouquets on kiosk roof",
+        "category": "plant",
+        "attributes": [
+          "red",
+          "dried",
+          "arranged",
+          "decorative"
+        ],
+        "count": 2,
+        "salience": 3,
+        "position": "center, on top of kiosk",
+        "evidence": "red and beige floral arrangements placed on the kiosk sign",
+        "confidence": 0.92
+      },
+      {
+        "id": "e6",
+        "label": "blue barrel with red flowers",
+        "category": "object",
+        "attributes": [
+          "blue",
+          "cylindrical",
+          "holding red flowers",
+          "on platform edge"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom-right, beside kiosk",
+        "evidence": "blue container with red flower stems visible at bottom right corner",
+        "confidence": 0.94
+      },
+      {
+        "id": "e7",
+        "label": "wooden pallets",
+        "category": "object",
+        "attributes": [
+          "wooden",
+          "stacked",
+          "weathered",
+          "to left of kiosk"
+        ],
+        "count": 4,
+        "salience": 2,
+        "position": "left-foreground",
+        "evidence": "stacked wooden slatted platforms beside the kiosk",
+        "confidence": 0.93
+      },
+      {
+        "id": "e8",
+        "label": "upper mezzanine railing",
+        "category": "structure",
+        "attributes": [
+          "metal",
+          "dark",
+          "horizontal",
+          "behind kiosk"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center-mid, behind kiosk",
+        "evidence": "dark railing running across the mid-level behind the florist stall",
+        "confidence": 0.9
+      },
+      {
+        "id": "e9",
+        "label": "cardboard boxes",
+        "category": "object",
+        "attributes": [
+          "brown",
+          "flattened",
+          "stacked",
+          "on kiosk roof"
+        ],
+        "count": 5,
+        "salience": 2,
+        "position": "center, on top of kiosk",
+        "evidence": "brown cardboard pieces piled on the roof of the kiosk behind the sign",
+        "confidence": 0.91
+      },
+      {
+        "id": "e10",
+        "label": "brick far wall",
+        "category": "building",
+        "attributes": [
+          "light beige",
+          "brick texture",
+          "vertical pilasters",
+          "large and blank"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-background",
+        "evidence": "large light-colored brick wall with vertical divisions at the far end of the hall",
+        "confidence": 0.96
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "below",
+        "object": "e2",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e6",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e7",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e3",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e8",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.88
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "Pien Florist Call: 0763 468 050 / 0733 468 057",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "on white sign across front top of florist kiosk, center",
+        "legibility": "clear",
+        "confidence": 0.98
+      }
+    ],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.98,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Text on small posters and images inside the kiosk display cases is not legible",
+      "Contents under blue tarpaulins and inside cardboard boxes cannot be determined",
+      "Exact geographic location and name of the market hall cannot be determined from image alone",
+      "Whether the market is open for business or closed cannot be determined",
+      "Details of objects on the upper mezzanine shelves are blurry and indistinct"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:14:22+00:00",
+        "raw_output_path": "data/annotations/raw/market_015_attempt1.txt",
+        "tokens": 8002
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

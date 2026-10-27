@@ -1,0 +1,364 @@
+{
+  "photo_id": "market_020",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_020.jpg",
+    "license": "CC BY 4.0",
+    "author": "AEira-WMF",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Nairobi_City_Market_in_Kenya.jpg",
+    "title": "File:Nairobi City Market in Kenya.jpg"
+  },
+  "observed": {
+    "caption": "A large building covered in vibrant geometric murals stands behind a street with parked cars, motorcycles, pedestrians and flower vendors on the sidewalk.",
+    "description": "The image shows a large multi-story yellow building covered in colorful geometric murals and painted patterns occupying the center and right of the frame, with a lower wall featuring additional bright artwork and painted text. In the foreground a paved street holds a silver SUV and a white hatchback parked along the curb, a motorcycle with a rider wearing a red helmet and backpack traveling on the road, and several pedestrians walking on the street and sidewalk. On the right sidewalk buckets of flowers are displayed for sale near seated vendors and a parked motorcycle with a white box, while a red umbrella shades a market stall on the left near the building wall. In the background modern high-rise buildings with glass facades and a metal water tower with a billboard are visible under a bright sky, with green tree leaves hanging into the top edge of the frame.",
+    "retrieval_queries": [
+      "colorful mural building with geometric wall art and flower vendors on sidewalk",
+      "city street with parked cars in front of vibrant painted building",
+      "urban street scene with motorcycles and flower market beside mural-covered building"
+    ],
+    "tags": [
+      "colorful mural",
+      "painted building",
+      "geometric wall art",
+      "city street",
+      "flower market",
+      "parked cars",
+      "motorcycle",
+      "street vendors"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "clear",
+      "lighting": "bright daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "walking, riding motorcycle, vending flowers, parked vehicles"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the mural building across the street",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "mural-covered building and street activity"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "large multi-story building with colorful murals",
+        "category": "building",
+        "attributes": [
+          "yellow facade",
+          "geometric patterns",
+          "multiple floors",
+          "large windows"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center and center-right",
+        "evidence": "large building occupying center and right with bright murals covering walls",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "paved street",
+        "category": "terrain",
+        "attributes": [
+          "asphalt surface",
+          "worn and dusty"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground",
+        "evidence": "road surface in lower half with vehicles and pedestrians",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "silver SUV",
+        "category": "vehicle",
+        "attributes": [
+          "parked",
+          "rear visible",
+          "license plate on back"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center, on street edge",
+        "evidence": "silver sport utility vehicle parked facing away from camera",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "white hatchback car",
+        "category": "vehicle",
+        "attributes": [
+          "parked",
+          "rear visible"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right, beside silver SUV",
+        "evidence": "white car parked on street edge next to silver SUV",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "motorcycle with rider",
+        "category": "vehicle",
+        "attributes": [
+          "moving on street",
+          "rider wearing red helmet and backpack"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left-center, on street",
+        "evidence": "motorcycle traveling on road with rider visible",
+        "confidence": 0.94
+      },
+      {
+        "id": "e6",
+        "label": "group of pedestrians",
+        "category": "person_group",
+        "attributes": [
+          "walking",
+          "various clothing",
+          "on street and sidewalk"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "foreground and center-right",
+        "evidence": "several people walking on street and sidewalk",
+        "confidence": 0.9
+      },
+      {
+        "id": "e7",
+        "label": "flower stalls with buckets",
+        "category": "plant",
+        "attributes": [
+          "colorful flowers",
+          "blue buckets",
+          "displayed on sidewalk"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right, on sidewalk",
+        "evidence": "buckets of flowers displayed for sale along building wall",
+        "confidence": 0.92
+      },
+      {
+        "id": "e8",
+        "label": "water tower with billboard",
+        "category": "structure",
+        "attributes": [
+          "metal framework",
+          "elevated tank",
+          "billboard on top"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "background left",
+        "evidence": "tall water tower behind buildings on left side",
+        "confidence": 0.88
+      },
+      {
+        "id": "e9",
+        "label": "modern high-rise buildings",
+        "category": "building",
+        "attributes": [
+          "glass facade",
+          "tall",
+          "in background"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "background left and right",
+        "evidence": "tall buildings visible behind main building",
+        "confidence": 0.9
+      },
+      {
+        "id": "e10",
+        "label": "overhanging tree branches",
+        "category": "plant",
+        "attributes": [
+          "green leaves",
+          "at top edge"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "top center",
+        "evidence": "leaves hanging into frame from above",
+        "confidence": 0.85
+      },
+      {
+        "id": "e11",
+        "label": "parked motorcycle on sidewalk",
+        "category": "vehicle",
+        "attributes": [
+          "parked",
+          "with white box on back"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right foreground, on sidewalk",
+        "evidence": "motorcycle parked near flower stalls",
+        "confidence": 0.93
+      },
+      {
+        "id": "e12",
+        "label": "red umbrella at market stall",
+        "category": "object",
+        "attributes": [
+          "red",
+          "open",
+          "shading stall"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "left, near building wall",
+        "evidence": "red umbrella over market area on left side",
+        "confidence": 0.88
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e3",
+        "predicate": "beside",
+        "object": "e4",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e5",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e7",
+        "predicate": "right_of",
+        "object": "e4",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e11",
+        "predicate": "beside",
+        "object": "e7",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e8",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e9",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.87
+      },
+      {
+        "subject": "e10",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e12",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.86
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "KEEP THE CITY CLEAN",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "on lower left wall of main building",
+        "legibility": "clear",
+        "confidence": 0.92
+      },
+      {
+        "text": "STOP CORRUPTION",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "on lower center wall of main building",
+        "legibility": "clear",
+        "confidence": 0.95
+      },
+      {
+        "text": "KBM 300F",
+        "language": "en",
+        "entity_id": "e3",
+        "location_in_image": "on rear license plate of silver SUV",
+        "legibility": "clear",
+        "confidence": 0.93
+      },
+      {
+        "text": "KDD 427M",
+        "language": "en",
+        "entity_id": "e4",
+        "location_in_image": "on rear license plate of white car",
+        "legibility": "clear",
+        "confidence": 0.93
+      }
+    ],
+    "people": {
+      "count": 8,
+      "count_confidence": 0.75,
+      "faces_visible": true,
+      "activities": [
+        "walking on street and sidewalk",
+        "riding motorcycle",
+        "sitting and selling flowers"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact city or location of the building cannot be determined from the image alone",
+      "Full text of faded or partially obscured murals on upper floors is not legible",
+      "Text on the water tower billboard and on motorcycle license plates is blurry and not listed because fewer than 3 letters are clearly readable",
+      "Exact number of people partially obscured behind vehicles or market stalls is uncertain",
+      "Text printed on people's clothing was ignored per annotation rules"
+    ]
+  },
+  "privacy": {
+    "faces_visible": true,
+    "people_count": 8,
+    "license_plates_visible": true,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:15:15+00:00",
+        "raw_output_path": "data/annotations/raw/market_020_attempt1.txt",
+        "tokens": 11137
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

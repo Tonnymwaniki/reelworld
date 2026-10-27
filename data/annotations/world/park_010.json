@@ -1,0 +1,341 @@
+{
+  "photo_id": "park_010",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_010.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Name_sign,_Uhuru_Park,_2025_(01).jpg",
+    "title": "File:Name sign, Uhuru Park, 2025 (01).jpg"
+  },
+  "observed": {
+    "caption": "A close-up view of the curved concrete entrance wall to Uhuru Park displaying large black 3D letters and colorful vertical stripes.",
+    "description": "The image shows a curved gray concrete wall filling most of the frame, with large raised black letters spelling UHURU on the upper line, PARK on the middle line, and smaller dark letters spelling Karibu near the bottom. Above the text is a shiny circular metallic emblem with concentric layered patterns. Thin vertical stripes in red, green, black, and white run down the wall surface. A curved silver metallic trim caps the top edge of the wall. Green tree branches with leaves overhang the top left corner against a bright overexposed sky, and a dark green mesh fence is partially visible in the far left background.",
+    "retrieval_queries": [
+      "Uhuru Park Karibu entrance wall sign",
+      "concrete wall with UHURU PARK letters and colorful stripes",
+      "Uhuru Park welcome gate with circular emblem"
+    ],
+    "tags": [
+      "Uhuru Park",
+      "Karibu",
+      "entrance wall",
+      "park sign",
+      "colorful stripes"
+    ],
+    "scene": {
+      "type": "park",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "unknown",
+      "lighting": "natural daylight",
+      "crowd_level": "empty",
+      "activity_summary": "no visible activity"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the entrance wall",
+      "distance": "close",
+      "framing": "close_up",
+      "orientation": "portrait",
+      "subject_focus": "entrance wall signage"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "curved concrete entrance wall",
+        "category": "structure",
+        "attributes": [
+          "gray textured surface",
+          "vertical colored stripes",
+          "curved top edge"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center and right, filling frame",
+        "evidence": "large gray wall with black 3D letters and vertical red green black white stripes occupies most of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "3D letters spelling UHURU",
+        "category": "sign",
+        "attributes": [
+          "black",
+          "uppercase",
+          "raised"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "large black uppercase letters UHURU mounted on wall",
+        "confidence": 0.99
+      },
+      {
+        "id": "e3",
+        "label": "3D letters spelling PARK",
+        "category": "sign",
+        "attributes": [
+          "black",
+          "uppercase",
+          "raised"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center, below UHURU",
+        "evidence": "large black uppercase letters PARK mounted on wall below UHURU",
+        "confidence": 0.99
+      },
+      {
+        "id": "e4",
+        "label": "3D letters spelling Karibu",
+        "category": "sign",
+        "attributes": [
+          "dark gray",
+          "mixed case",
+          "smaller",
+          "raised"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "lower center",
+        "evidence": "smaller dark letters Karibu with capital K mounted near bottom of wall",
+        "confidence": 0.97
+      },
+      {
+        "id": "e5",
+        "label": "circular metallic emblem",
+        "category": "object",
+        "attributes": [
+          "silver",
+          "reflective",
+          "layered circular pattern"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center, above UHURU",
+        "evidence": "shiny circular layered sculpture mounted on wall above text",
+        "confidence": 0.96
+      },
+      {
+        "id": "e6",
+        "label": "vertical painted stripes",
+        "category": "object",
+        "attributes": [
+          "red",
+          "green",
+          "black",
+          "white",
+          "thin vertical lines"
+        ],
+        "count": 6,
+        "salience": 3,
+        "position": "across wall surface",
+        "evidence": "thin vertical lines in red green black white painted on gray wall",
+        "confidence": 0.95
+      },
+      {
+        "id": "e7",
+        "label": "overhanging tree branches with leaves",
+        "category": "plant",
+        "attributes": [
+          "green leaves",
+          "thin branches"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top left, above wall",
+        "evidence": "green foliage and branches hanging over top edge of wall against sky",
+        "confidence": 0.94
+      },
+      {
+        "id": "e8",
+        "label": "bright sky",
+        "category": "terrain",
+        "attributes": [
+          "overexposed",
+          "white"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "top left background",
+        "evidence": "bright white sky visible above wall and through leaves",
+        "confidence": 0.92
+      },
+      {
+        "id": "e9",
+        "label": "metal fence and gate",
+        "category": "structure",
+        "attributes": [
+          "dark green",
+          "mesh"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "far left background",
+        "evidence": "dark fence and gate partially visible behind wall on left edge",
+        "confidence": 0.88
+      },
+      {
+        "id": "e10",
+        "label": "curved metallic coping along wall top",
+        "category": "structure",
+        "attributes": [
+          "silver",
+          "curved",
+          "reflective"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top edge of wall",
+        "evidence": "shiny silver curved trim running along top of concrete wall",
+        "confidence": 0.93
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e5",
+        "predicate": "above",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e2",
+        "predicate": "above",
+        "object": "e3",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e3",
+        "predicate": "above",
+        "object": "e4",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e7",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e9",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e10",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e8",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.92
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "UHURU",
+        "language": "sw",
+        "entity_id": "e2",
+        "location_in_image": "center of wall, upper text line",
+        "legibility": "clear",
+        "confidence": 0.99
+      },
+      {
+        "text": "PARK",
+        "language": "en",
+        "entity_id": "e3",
+        "location_in_image": "center of wall, middle text line",
+        "legibility": "clear",
+        "confidence": 0.99
+      },
+      {
+        "text": "Karibu",
+        "language": "sw",
+        "entity_id": "e4",
+        "location_in_image": "lower center of wall, smaller text line",
+        "legibility": "clear",
+        "confidence": 0.97
+      }
+    ],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.99,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Interior of park behind the wall is not visible",
+      "Exact geographic location beyond what the sign text indicates cannot be confirmed from image alone",
+      "Material composition of wall, letters and emblem beyond visual appearance",
+      "Time and date the photo was taken cannot be determined",
+      "Whether additional signs or text exist outside the cropped frame"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:16:52+00:00",
+        "raw_output_path": "data/annotations/raw/park_010_attempt1.txt",
+        "tokens": 9092
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

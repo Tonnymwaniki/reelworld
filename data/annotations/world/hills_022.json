@@ -1,0 +1,287 @@
+{
+  "photo_id": "hills_022",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_022.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Underwaterbuffalo",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ngong_Ping,_Ma_On_Shan_01.jpg",
+    "title": "File:Ngong Ping, Ma On Shan 01.jpg"
+  },
+  "observed": {
+    "caption": "A foggy grassy mountain landscape with a mist-shrouded peak and a few distant hikers on a ridge.",
+    "description": "The photo shows a wide outdoor mountain landscape under overcast, foggy conditions. In the foreground is a dry, brownish-green grassy slope with a large mossy rock at the bottom left and scattered patches of taller grass and small shrubs. A midground grassy ridge extends diagonally with a small group of distant figures standing on it. Behind that rises a larger mountain with steep grassy slopes and exposed rocky cliff faces, its upper peak obscured by low-hanging white fog and clouds. Additional forested mountain ridges fade into the mist on the right side, and the sky is uniformly pale and overcast with diffuse lighting.",
+    "retrieval_queries": [
+      "misty mountain peak with hikers on grassy ridge",
+      "foggy hillside landscape with rocky cliffs",
+      "overcast grassland mountains with low clouds"
+    ],
+    "tags": [
+      "mountain",
+      "fog",
+      "mist",
+      "grassland",
+      "hiking",
+      "landscape",
+      "rocky cliff",
+      "overcast",
+      "ridge",
+      "wilderness"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "foggy and overcast",
+      "lighting": "soft diffuse daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "hiking on grassy mountain ridge"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward misty mountain peak",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "misty mountain and grassy slopes"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "misty mountain peak",
+        "category": "terrain",
+        "attributes": [
+          "large",
+          "steep",
+          "partially obscured by fog",
+          "rocky and grassy"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-background",
+        "evidence": "large mountain mass in center with upper portion covered by white fog",
+        "confidence": 0.95
+      },
+      {
+        "id": "e2",
+        "label": "grassy foreground slope",
+        "category": "terrain",
+        "attributes": [
+          "dry",
+          "brownish-green",
+          "uneven",
+          "grassy"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground",
+        "evidence": "expansive grassy ground occupying lower half of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "midground grassy ridge",
+        "category": "terrain",
+        "attributes": [
+          "grassy",
+          "sloping",
+          "dry vegetation"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "middle-left",
+        "evidence": "raised grassy hill between foreground and main mountain where figures stand",
+        "confidence": 0.92
+      },
+      {
+        "id": "e4",
+        "label": "rocky cliff face",
+        "category": "terrain",
+        "attributes": [
+          "gray",
+          "exposed rock",
+          "steep"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center",
+        "evidence": "visible gray rock outcrop on side of main mountain",
+        "confidence": 0.9
+      },
+      {
+        "id": "e5",
+        "label": "fog and low clouds",
+        "category": "other",
+        "attributes": [
+          "white",
+          "dense",
+          "low-hanging"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "top and background",
+        "evidence": "white mist covering mountain top and distant ridges",
+        "confidence": 0.96
+      },
+      {
+        "id": "e6",
+        "label": "distant forested mountain ridges",
+        "category": "terrain",
+        "attributes": [
+          "forested",
+          "hazy",
+          "layered"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right-background",
+        "evidence": "successive mountain slopes fading into mist on right side",
+        "confidence": 0.88
+      },
+      {
+        "id": "e7",
+        "label": "large boulder",
+        "category": "object",
+        "attributes": [
+          "mossy",
+          "gray-brown",
+          "rounded"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom-left",
+        "evidence": "large rock partially visible at bottom left corner on grass",
+        "confidence": 0.93
+      },
+      {
+        "id": "e8",
+        "label": "group of hikers",
+        "category": "person_group",
+        "attributes": [
+          "small",
+          "distant",
+          "indistinct clothing"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "middle-left on ridge",
+        "evidence": "two to three tiny colorful figures standing on midground ridge",
+        "confidence": 0.65
+      },
+      {
+        "id": "e9",
+        "label": "scattered shrubs and vegetation",
+        "category": "plant",
+        "attributes": [
+          "green",
+          "low",
+          "patchy"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "scattered across slopes",
+        "evidence": "small green bushes and tufts of taller grass on hillsides",
+        "confidence": 0.85
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e8",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.7
+      },
+      {
+        "subject": "e3",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e5",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e6",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e2",
+        "predicate": "in_front_of",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.8
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 2,
+      "count_confidence": 0.6,
+      "faces_visible": false,
+      "activities": [
+        "hiking",
+        "standing on ridge"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of distant figures on the ridge cannot be determined due to small size and distance",
+      "Clothing details, ages, genders and identities of the distant figures are not discernible",
+      "Exact geographic location and name of the mountain range cannot be determined",
+      "Precise time of day and temperature cannot be determined from overcast lighting",
+      "Text on any distant signs or markers, if present, is not legible"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 2,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:10:42+00:00",
+        "raw_output_path": "data/annotations/raw/hills_022_attempt1.txt",
+        "tokens": 5858
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

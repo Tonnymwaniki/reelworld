@@ -1,0 +1,328 @@
+{
+  "photo_id": "park_021",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_021.jpg",
+    "license": "CC BY-SA 3.0",
+    "author": "Bobokine",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Uhuru_Park.jpg",
+    "title": "File:Uhuru Park.jpg"
+  },
+  "observed": {
+    "caption": "A sunny urban park with benches and palm trees in the foreground and two tall high-rise buildings in the background under a clear blue sky.",
+    "description": "The photo shows an outdoor urban park in bright daylight. In the immediate foreground there is short grass with two concrete benches, one on the lower left and one on the lower right, with a person sitting on the right bench. A low trimmed hedge runs horizontally across the middle foreground behind the benches, bordering a larger dry grassy lawn enclosed by small black-and-white posts. Several palm trees and leafy green trees are scattered throughout the park, with a prominent tall palm on the right side. Behind the park a road with small distant vehicles is visible. In the background two tall multi-story buildings dominate the skyline, the left one with a tall antenna structure on its roof and the right one a brown rectangular tower, with additional smaller buildings and trees between them. The sky is clear and light blue.",
+    "retrieval_queries": [
+      "city park with benches and tall buildings in the background",
+      "urban park with palm trees and skyline on a sunny day",
+      "green park foreground with two high rise towers behind"
+    ],
+    "tags": [
+      "park",
+      "urban",
+      "skyline",
+      "high-rise",
+      "bench",
+      "palm tree",
+      "grass",
+      "daytime",
+      "city"
+    ],
+    "scene": {
+      "type": "park",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "clear and sunny",
+      "lighting": "bright daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "sitting and resting in park"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the buildings across the park",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "park with city skyline"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "tall building with antenna on left",
+        "category": "building",
+        "attributes": [
+          "multi-story",
+          "light-colored facade",
+          "tall antenna tower on roof",
+          "rectangular"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-left background",
+        "evidence": "large high-rise with vertical windows and lattice antenna extending above roofline",
+        "confidence": 0.96
+      },
+      {
+        "id": "e2",
+        "label": "tall brown building on right",
+        "category": "building",
+        "attributes": [
+          "multi-story",
+          "brown facade",
+          "rectangular",
+          "many windows"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "right background",
+        "evidence": "large rectangular tower with grid of windows occupying right side of skyline",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "foreground grass lawn",
+        "category": "terrain",
+        "attributes": [
+          "short grass",
+          "green and dry patches",
+          "flat"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground center",
+        "evidence": "grassy area in front of hedges and extending to bottom edge",
+        "confidence": 0.95
+      },
+      {
+        "id": "e4",
+        "label": "concrete bench on left",
+        "category": "object",
+        "attributes": [
+          "concrete",
+          "low",
+          "empty"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "lower left foreground",
+        "evidence": "gray bench with backrest sitting on grass",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "concrete bench on right",
+        "category": "object",
+        "attributes": [
+          "concrete",
+          "low",
+          "occupied"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "lower right foreground",
+        "evidence": "gray bench with backrest on grass with person sitting on it",
+        "confidence": 0.96
+      },
+      {
+        "id": "e6",
+        "label": "person sitting on bench",
+        "category": "person_group",
+        "attributes": [
+          "sitting",
+          "dark top",
+          "brown lower clothing",
+          "facing left"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "lower right on bench",
+        "evidence": "single figure seated on right bench with legs visible",
+        "confidence": 0.88
+      },
+      {
+        "id": "e7",
+        "label": "tall palm tree on right",
+        "category": "plant",
+        "attributes": [
+          "tall trunk",
+          "fan-shaped fronds",
+          "green"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right foreground",
+        "evidence": "prominent palm with slender trunk and large fronds extending near right edge",
+        "confidence": 0.97
+      },
+      {
+        "id": "e8",
+        "label": "trimmed hedge border",
+        "category": "plant",
+        "attributes": [
+          "low",
+          "dense",
+          "green",
+          "manicured"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "middle foreground horizontal",
+        "evidence": "continuous low shrub line separating foreground grass from central lawn",
+        "confidence": 0.94
+      },
+      {
+        "id": "e9",
+        "label": "street lamp post",
+        "category": "structure",
+        "attributes": [
+          "tall metal pole",
+          "dual lamp heads"
+        ],
+        "count": 2,
+        "salience": 2,
+        "position": "left midground and center midground",
+        "evidence": "vertical poles with light fixtures among trees on left side",
+        "confidence": 0.9
+      },
+      {
+        "id": "e10",
+        "label": "distant vehicles on road",
+        "category": "vehicle",
+        "attributes": [
+          "small",
+          "white and blue",
+          "blurry"
+        ],
+        "count": 5,
+        "salience": 2,
+        "position": "center background behind park",
+        "evidence": "small car and bus shapes along tree-lined road behind lawn",
+        "confidence": 0.75
+      },
+      {
+        "id": "e11",
+        "label": "scattered trees and palms in park",
+        "category": "plant",
+        "attributes": [
+          "green foliage",
+          "various heights",
+          "leafy and palm types"
+        ],
+        "count": 15,
+        "salience": 3,
+        "position": "throughout midground",
+        "evidence": "multiple trees and palms distributed across park and along road",
+        "confidence": 0.92
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e4",
+        "predicate": "left_of",
+        "object": "e5",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e5",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e7",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e7",
+        "predicate": "near",
+        "object": "e5",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e4",
+        "predicate": "in_front_of",
+        "object": "e8",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e5",
+        "predicate": "in_front_of",
+        "object": "e8",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e10",
+        "predicate": "behind",
+        "object": "e8",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e9",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e3",
+        "predicate": "in_front_of",
+        "object": "e8",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 1,
+      "count_confidence": 0.85,
+      "faces_visible": false,
+      "activities": [
+        "sitting on bench"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Text on distant billboard on building in center background is not legible due to distance and blur",
+      "Whether two small light-colored shapes in the far background on the right near the road are additional people cannot be determined",
+      "Exact number and type of distant vehicles behind the park cannot be determined",
+      "Names or functions of the buildings cannot be determined from the photo",
+      "Text on small circular sign near center-right among trees is not legible"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 1,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:18:00+00:00",
+        "raw_output_path": "data/annotations/raw/park_021_attempt1.txt",
+        "tokens": 7244
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

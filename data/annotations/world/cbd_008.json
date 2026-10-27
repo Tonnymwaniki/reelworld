@@ -1,0 +1,446 @@
+{
+  "photo_id": "cbd_008",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/cbd/cbd_008.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Teleposta_Towers,_2025_(01).jpg",
+    "title": "File:Teleposta Towers, 2025 (01).jpg"
+  },
+  "observed": {
+    "caption": "Twin-tower high-rise building with large TECNO advertisements viewed from a street intersection with vehicles and pedestrians.",
+    "description": "A tall beige twin-tower building with vertical window strips dominates the center, sitting on a multi-story podium with a curved facade and horizontal balconies. Large white advertisement banners wrap the podium and hang vertically on the right tower displaying TECNO branding. In the foreground a paved street intersection with cars, SUVs and vans, sidewalks, a metal fence, traffic signal poles and a double-arm streetlight pole are visible. A small dark kiosk stands on the sidewalk near the center, trees frame the left and right edges, additional high-rise buildings appear in the background to the right, and the sky above is pale blue with scattered clouds in bright daylight.",
+    "retrieval_queries": [
+      "tall building with TECNO CAMON 40 billboard in city center",
+      "Rehani House twin towers street view with traffic",
+      "high rise with vertical phone advertisement and busy intersection"
+    ],
+    "tags": [
+      "high-rise",
+      "twin towers",
+      "billboard",
+      "TECNO",
+      "street intersection",
+      "city",
+      "vehicles",
+      "urban"
+    ],
+    "scene": {
+      "type": "building",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "bright daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "vehicles on road and pedestrians near building"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the building across the street",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "portrait",
+      "subject_focus": "twin-tower building with advertisements"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "twin-tower high-rise building",
+        "category": "building",
+        "attributes": [
+          "beige facade",
+          "two connected towers",
+          "vertical window strips",
+          "flat roof with antenna"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "two tall rectangular towers with grid windows dominating center of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "podium base building",
+        "category": "building",
+        "attributes": [
+          "curved corner",
+          "multi-story",
+          "horizontal balconies",
+          "beige"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-bottom",
+        "evidence": "lower wide building with layered floors directly beneath towers",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "street intersection",
+        "category": "terrain",
+        "attributes": [
+          "asphalt",
+          "road markings",
+          "intersection"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom-center",
+        "evidence": "paved road with vehicles and lane markings in foreground",
+        "confidence": 0.95
+      },
+      {
+        "id": "e4",
+        "label": "sidewalk and curb",
+        "category": "terrain",
+        "attributes": [
+          "paved",
+          "reddish tiles",
+          "curb stones"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom",
+        "evidence": "paved pedestrian area with curb separating road and sidewalk",
+        "confidence": 0.9
+      },
+      {
+        "id": "e5",
+        "label": "group of vehicles",
+        "category": "vehicle",
+        "attributes": [
+          "white and silver SUVs",
+          "cars",
+          "vans",
+          "parked and moving"
+        ],
+        "count": 10,
+        "salience": 3,
+        "position": "bottom",
+        "evidence": "multiple cars and vans on road and near building entrance",
+        "confidence": 0.92
+      },
+      {
+        "id": "e6",
+        "label": "streetlight pole",
+        "category": "structure",
+        "attributes": [
+          "tall metal",
+          "double arm",
+          "in front of building"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center-bottom",
+        "evidence": "tall pole with two light arms standing in front of podium",
+        "confidence": 0.93
+      },
+      {
+        "id": "e7",
+        "label": "traffic signal pole",
+        "category": "structure",
+        "attributes": [
+          "metal pole",
+          "multiple signal heads",
+          "weathered"
+        ],
+        "count": 2,
+        "salience": 2,
+        "position": "left and right bottom",
+        "evidence": "poles with traffic lights on both sides of intersection",
+        "confidence": 0.9
+      },
+      {
+        "id": "e8",
+        "label": "trees",
+        "category": "plant",
+        "attributes": [
+          "green foliage",
+          "framing edges"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "left and right edges",
+        "evidence": "leafy branches visible on left side and right side framing the building",
+        "confidence": 0.94
+      },
+      {
+        "id": "e9",
+        "label": "vertical advertisement banner",
+        "category": "sign",
+        "attributes": [
+          "white",
+          "large",
+          "hanging on tower",
+          "TECNO branding"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right",
+        "evidence": "tall white banner covering side of right tower with phone images and text",
+        "confidence": 0.97
+      },
+      {
+        "id": "e10",
+        "label": "horizontal wrap advertisement banner",
+        "category": "sign",
+        "attributes": [
+          "white",
+          "wrapping podium",
+          "curved",
+          "TECNO branding"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-bottom",
+        "evidence": "wide banner wrapping around top of podium with logos and phone images",
+        "confidence": 0.96
+      },
+      {
+        "id": "e11",
+        "label": "kiosk pillar",
+        "category": "structure",
+        "attributes": [
+          "dark rectangular",
+          "on sidewalk",
+          "advertising panel"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center-bottom left",
+        "evidence": "dark freestanding structure on sidewalk island near streetlight",
+        "confidence": 0.88
+      },
+      {
+        "id": "e12",
+        "label": "metal fence",
+        "category": "structure",
+        "attributes": [
+          "black metal",
+          "low railing",
+          "along road"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "bottom-left",
+        "evidence": "black metal railing along edge of road near sidewalk",
+        "confidence": 0.85
+      },
+      {
+        "id": "e13",
+        "label": "background high-rise buildings",
+        "category": "building",
+        "attributes": [
+          "beige and brown",
+          "distant",
+          "multiple towers"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "right background",
+        "evidence": "additional tall buildings visible behind and to the right of main building",
+        "confidence": 0.9
+      },
+      {
+        "id": "e14",
+        "label": "sky",
+        "category": "terrain",
+        "attributes": [
+          "pale blue",
+          "scattered clouds",
+          "bright"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "top and background",
+        "evidence": "open sky with light clouds above buildings",
+        "confidence": 0.98
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "above",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e10",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e6",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e11",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e12",
+        "predicate": "beside",
+        "object": "e3",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e8",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e13",
+        "predicate": "behind",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e7",
+        "predicate": "beside",
+        "object": "e3",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e5",
+        "predicate": "in_front_of",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "beside",
+        "object": "e11",
+        "confidence": 0.85
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "TECNO",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "rooftop sign on right tower",
+        "legibility": "clear",
+        "confidence": 0.95
+      },
+      {
+        "text": "TECNO",
+        "language": "en",
+        "entity_id": "e9",
+        "location_in_image": "top of vertical banner on right tower",
+        "legibility": "clear",
+        "confidence": 0.92
+      },
+      {
+        "text": "CAMON 40",
+        "language": "en",
+        "entity_id": "e9",
+        "location_in_image": "middle of vertical banner on right tower",
+        "legibility": "clear",
+        "confidence": 0.88
+      },
+      {
+        "text": "TECNO AI",
+        "language": "en",
+        "entity_id": "e10",
+        "location_in_image": "center of horizontal banner on podium",
+        "legibility": "clear",
+        "confidence": 0.9
+      },
+      {
+        "text": "CAMON 40",
+        "language": "en",
+        "entity_id": "e10",
+        "location_in_image": "left side of horizontal banner on podium",
+        "legibility": "clear",
+        "confidence": 0.87
+      },
+      {
+        "text": "CAMON 40",
+        "language": "en",
+        "entity_id": "e10",
+        "location_in_image": "right side of horizontal banner on podium",
+        "legibility": "clear",
+        "confidence": 0.86
+      },
+      {
+        "text": "REHANI HOUSE",
+        "language": "en",
+        "entity_id": "e11",
+        "location_in_image": "on kiosk at sidewalk near center",
+        "legibility": "partial",
+        "confidence": 0.72
+      }
+    ],
+    "people": {
+      "count": 5,
+      "count_confidence": 0.65,
+      "faces_visible": false,
+      "activities": [
+        "standing near sidewalk",
+        "walking near building entrance",
+        "waiting near road"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people in distance near building entrance is unclear due to small size and occlusion",
+      "Small text on podium banner such as Powered by TECNO AI and Dolby is partially blurry and not fully legible",
+      "Text on small sign on podium facade is too blurry to read with confidence",
+      "Vehicle makes, models and license plates cannot be determined",
+      "Interior details of building and activity inside are not visible"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 5,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:07:14+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_008_attempt1.txt",
+        "tokens": 11319
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'REHANI HOUSE'"
+      ]
+    }
+  }
+}

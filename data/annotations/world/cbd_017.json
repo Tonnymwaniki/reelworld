@@ -1,0 +1,344 @@
+{
+  "photo_id": "cbd_017",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/cbd/cbd_017.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Kiprotich Towett",
+    "source_url": "https://commons.wikimedia.org/wiki/File:CITY_HALL_WAY,_NAIROBI.jpg",
+    "title": "File:CITY HALL WAY, NAIROBI.jpg"
+  },
+  "observed": {
+    "caption": "A busy street intersection with a large crowd gathered near parked cars and tall modern buildings under a clear blue sky.",
+    "description": "A wide paved road intersection with double yellow lines and white lane markings occupies the foreground, with several cars including a white sedan and a white SUV parked on the left curb and silver hatchbacks on the road. A large crowd of people is gathered along the sidewalks and around a central traffic island that holds a tall curved streetlight pole with a vertical banner. Dense green trees line the background behind the crowd, and several tall high-rise buildings with glass and concrete facades, including a distinctive cylindrical tower with a disc-shaped top and two curved glass towers, rise against a bright clear blue sky.",
+    "retrieval_queries": [
+      "busy city street with crowd and tall skyscrapers in background",
+      "crowd gathered at intersection with KICC tower and modern buildings",
+      "daytime street scene with cars, people and high-rise skyline"
+    ],
+    "tags": [
+      "city street",
+      "crowd",
+      "skyscrapers",
+      "traffic",
+      "intersection",
+      "daytime",
+      "urban skyline"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "clear and sunny",
+      "lighting": "bright daylight",
+      "crowd_level": "busy",
+      "activity_summary": "crowd gathering along street"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the crowd and skyline across the street",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "crowd and city skyline"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "cylindrical high-rise tower with disc top",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "cylindrical",
+          "concrete facade",
+          "disc-shaped top"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center background",
+        "evidence": "distinctive round tower with horizontal bands and flat circular roof visible above trees",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "twin curved glass towers",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "modern",
+          "glass facade",
+          "curved",
+          "paired"
+        ],
+        "count": 2,
+        "salience": 4,
+        "position": "center-left background",
+        "evidence": "two adjacent modern towers with reflective blue glass and angled tops",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "rectangular high-rise building",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "rectangular",
+          "concrete and glass"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left background",
+        "evidence": "tall rectangular tower with light facade on far left",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "crowd of people",
+        "category": "person_group",
+        "attributes": [
+          "large",
+          "gathered",
+          "standing and walking"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center to right midground",
+        "evidence": "dense group of many individuals along sidewalks and street edges",
+        "confidence": 0.95
+      },
+      {
+        "id": "e5",
+        "label": "paved road intersection",
+        "category": "structure",
+        "attributes": [
+          "asphalt",
+          "double yellow lines",
+          "white lane markings",
+          "wide"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground and center",
+        "evidence": "wide asphalt street with painted lines extending across frame",
+        "confidence": 0.99
+      },
+      {
+        "id": "e6",
+        "label": "white sedan car",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "sedan",
+          "parked"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left midground",
+        "evidence": "white four-door car parked at curb with yellow license plate",
+        "confidence": 0.97
+      },
+      {
+        "id": "e7",
+        "label": "white SUV with spare tire",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "SUV",
+          "rear spare tire",
+          "parked"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left-center midground",
+        "evidence": "white off-road vehicle with external rear spare wheel near traffic island",
+        "confidence": 0.96
+      },
+      {
+        "id": "e8",
+        "label": "silver hatchback car",
+        "category": "vehicle",
+        "attributes": [
+          "silver",
+          "hatchback",
+          "on road"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right midground",
+        "evidence": "silver small car on the road near the median",
+        "confidence": 0.96
+      },
+      {
+        "id": "e9",
+        "label": "green trees",
+        "category": "plant",
+        "attributes": [
+          "dense",
+          "leafy",
+          "green"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center to right background",
+        "evidence": "line of mature trees with full canopies behind the crowd",
+        "confidence": 0.98
+      },
+      {
+        "id": "e10",
+        "label": "streetlight pole with banner",
+        "category": "structure",
+        "attributes": [
+          "tall",
+          "curved arm",
+          "vertical banner"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center midground",
+        "evidence": "tall pole with curved light fixture and rectangular sign on traffic island",
+        "confidence": 0.97
+      },
+      {
+        "id": "e11",
+        "label": "traffic island median",
+        "category": "structure",
+        "attributes": [
+          "paved",
+          "curbed",
+          "black and white stripes",
+          "with bollards"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-right midground",
+        "evidence": "raised concrete median with striped curb and green posts in the road",
+        "confidence": 0.96
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e3",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e2",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e1",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e9",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e6",
+        "predicate": "left_of",
+        "object": "e7",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e7",
+        "predicate": "beside",
+        "object": "e11",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e10",
+        "predicate": "on",
+        "object": "e11",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e4",
+        "predicate": "beside",
+        "object": "e5",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e8",
+        "predicate": "right_of",
+        "object": "e4",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e5",
+        "predicate": "in_front_of",
+        "object": "e4",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e10",
+        "predicate": "near",
+        "object": "e4",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e9",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.96
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 90,
+      "count_confidence": 0.55,
+      "faces_visible": false,
+      "activities": [
+        "standing along sidewalk",
+        "walking across street",
+        "gathering in groups"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "exact number of people in dense crowd cannot be determined",
+      "text on vertical banner on streetlight pole is blurry and unreadable",
+      "text on red billboard and other distant signs is not legible with at least 3 letters",
+      "license plate numbers and vehicle details are not clearly readable",
+      "building names and specific functions cannot be determined from image alone",
+      "exact time of day beyond daytime"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 90,
+    "license_plates_visible": true,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:08:20+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_017_attempt1.txt",
+        "tokens": 7250
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

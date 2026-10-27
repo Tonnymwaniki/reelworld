@@ -1,0 +1,307 @@
+{
+  "photo_id": "park_015",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_015.jpg",
+    "license": "CC BY 4.0",
+    "author": "DesiBoy101",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Skyline_of_Nairobi_city_as_seen_from_a_lake_in_Uhuru_Park.jpg",
+    "title": "File:Skyline of Nairobi city as seen from a lake in Uhuru Park.jpg"
+  },
+  "observed": {
+    "caption": "A pond covered with lily pads and yellow flowers in an urban park with a city skyline and people along the grassy edge under an overcast sky.",
+    "description": "In the foreground a large pond is densely covered with green lily pads and small yellow flowers with patches of open water reflecting tall buildings. A strip of green grass borders the pond on the right and middle where numerous small figures of people are standing, walking and sitting. Two low green pedestrian bridges span a narrow channel of the pond in the middle distance. Behind the park a cluster of high-rise buildings with glass facades rises against a cloudy gray sky, including a prominent brown glass tower on the right and a blue glass twin-peaked tower near the center. Palm trees and other trees line the left and middle background, and a white car is parked on the grass on the right. The sky is overcast with diffuse daylight.",
+    "retrieval_queries": [
+      "city skyline reflected in pond with lily pads",
+      "urban park lake covered in water lilies with people walking",
+      "overcast day at park pond with downtown skyscrapers behind"
+    ],
+    "tags": [
+      "urban park",
+      "pond",
+      "lily pads",
+      "city skyline",
+      "skyscrapers",
+      "overcast",
+      "pedestrian bridge"
+    ],
+    "scene": {
+      "type": "park",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast cloudy",
+      "lighting": "diffuse overcast daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "people walking and relaxing by pond"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the city skyline across the pond",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "pond with lily pads and city skyline beyond"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "pond covered with lily pads and yellow flowers",
+        "category": "terrain",
+        "attributes": [
+          "shallow water",
+          "covered with green lily pads",
+          "scattered small yellow flowers",
+          "reflecting buildings"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground center",
+        "evidence": "large water area in lower half densely covered with floating leaves and blooms with building reflections",
+        "confidence": 0.96
+      },
+      {
+        "id": "e2",
+        "label": "city skyline with high-rise buildings",
+        "category": "building",
+        "attributes": [
+          "multiple tall buildings",
+          "glass facades",
+          "varied heights and designs"
+        ],
+        "count": 7,
+        "salience": 5,
+        "position": "background center",
+        "evidence": "cluster of tall buildings against cloudy sky across the horizon",
+        "confidence": 0.95
+      },
+      {
+        "id": "e3",
+        "label": "tall brown glass building",
+        "category": "building",
+        "attributes": [
+          "rectangular",
+          "brown-tinted glass facade",
+          "antenna on roof"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "background right",
+        "evidence": "prominent tall building on right side with reflective brown facade",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "blue glass twin-tower building",
+        "category": "building",
+        "attributes": [
+          "blue glass",
+          "two peaked tops",
+          "modern design"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "background center",
+        "evidence": "distinctive blue building with two pointed tops near center of skyline",
+        "confidence": 0.95
+      },
+      {
+        "id": "e5",
+        "label": "green pedestrian bridges",
+        "category": "structure",
+        "attributes": [
+          "green railings",
+          "low arch",
+          "spanning narrow water channel"
+        ],
+        "count": 2,
+        "salience": 3,
+        "position": "middle center",
+        "evidence": "two green-covered bridges crossing the pond inlet in middle distance",
+        "confidence": 0.88
+      },
+      {
+        "id": "e6",
+        "label": "grassy park area",
+        "category": "terrain",
+        "attributes": [
+          "green grass",
+          "flat",
+          "along pond edge"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "middle right",
+        "evidence": "strip of grass on right side where people and a white car are located",
+        "confidence": 0.92
+      },
+      {
+        "id": "e7",
+        "label": "group of people near pond",
+        "category": "person_group",
+        "attributes": [
+          "standing",
+          "walking",
+          "sitting on grass",
+          "small figures due to distance"
+        ],
+        "count": 22,
+        "salience": 3,
+        "position": "middle and right",
+        "evidence": "numerous small human figures scattered along pond edge, bridges and grass",
+        "confidence": 0.72
+      },
+      {
+        "id": "e8",
+        "label": "palm trees",
+        "category": "plant",
+        "attributes": [
+          "tall slender trunks",
+          "palm fronds",
+          "clustered"
+        ],
+        "count": 8,
+        "salience": 2,
+        "position": "middle left background",
+        "evidence": "row of palm trees silhouetted against sky on left side",
+        "confidence": 0.9
+      },
+      {
+        "id": "e9",
+        "label": "white car",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "sedan",
+          "parked on grass"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "middle right",
+        "evidence": "white vehicle parked on grass near trees on right",
+        "confidence": 0.88
+      },
+      {
+        "id": "e10",
+        "label": "overcast sky with clouds",
+        "category": "other",
+        "attributes": [
+          "gray clouds",
+          "diffuse light",
+          "covering upper half"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top background",
+        "evidence": "cloudy sky occupying upper portion of image above buildings",
+        "confidence": 0.97
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "in_front_of",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e6",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e6",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e3",
+        "predicate": "right_of",
+        "object": "e4",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e8",
+        "predicate": "left_of",
+        "object": "e4",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e10",
+        "predicate": "above",
+        "object": "e2",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e6",
+        "predicate": "near",
+        "object": "e1",
+        "confidence": 0.93
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 22,
+      "count_confidence": 0.65,
+      "faces_visible": false,
+      "activities": [
+        "walking along pond edge",
+        "standing near bridges",
+        "sitting on grass"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people is uncertain due to distance, small size and possible occlusion",
+      "Species of lily pads and flowers cannot be determined from image",
+      "Names, heights and functions of buildings cannot be determined",
+      "Exact time of day beyond daytime is uncertain due to overcast lighting",
+      "Legibility of any distant signage on buildings is uncertain due to distance and resolution",
+      "Details of clothing colors and individual activities are limited by distance"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 22,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:17:36+00:00",
+        "raw_output_path": "data/annotations/raw/park_015_attempt1.txt",
+        "tokens": 9252
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

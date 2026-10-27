@@ -1,0 +1,338 @@
+{
+  "photo_id": "cbd_014",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/cbd/cbd_014.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Queen Asali",
+    "source_url": "https://commons.wikimedia.org/wiki/File:A_glass_of_blue_lemonade.jpg",
+    "title": "File:A glass of blue lemonade.jpg"
+  },
+  "observed": {
+    "caption": "A tall glass of bright blue iced drink garnished with mint and citrus sits on a wooden table in a sunlit cafe.",
+    "description": "A tall, curved clear glass filled with bright blue liquid and ice sits on a light brown wooden table in the foreground, garnished with a green-yellow citrus slice on its left rim, a cluster of fresh green mint leaves on its right rim, and two black straws extending upward; in the blurred background, a person wearing a dark vest over a light shirt sits on a gray mesh chair at a wooden table, with additional chairs, a light reflective floor, a white patterned ceiling with red trim, and large bright windows with sheer curtains visible in a sunlit indoor cafe setting.",
+    "retrieval_queries": [
+      "close up of a bright blue cocktail with mint and lime on a cafe table",
+      "tall glass of blue iced drink with two black straws in a restaurant",
+      "blue tropical beverage garnished with mint leaves indoors"
+    ],
+    "tags": [
+      "blue drink",
+      "iced cocktail",
+      "mint garnish",
+      "cafe table",
+      "tropical beverage"
+    ],
+    "scene": {
+      "type": "building",
+      "setting": "indoor",
+      "time_of_day": "daytime",
+      "weather": "unknown",
+      "lighting": "bright natural daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "people sitting and dining in a cafe"
+    },
+    "camera": {
+      "viewpoint": "interior",
+      "height_estimate": "eye_level",
+      "facing": "toward the interior seating area",
+      "distance": "close",
+      "framing": "close_up",
+      "orientation": "portrait",
+      "subject_focus": "tall blue iced drink on table"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "tall glass with bright blue iced beverage",
+        "category": "object",
+        "attributes": [
+          "tall",
+          "curved",
+          "transparent",
+          "filled with bright blue liquid",
+          "condensation on surface"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center foreground",
+        "evidence": "large blue drink in clear glass dominates foreground on wooden table",
+        "confidence": 0.99
+      },
+      {
+        "id": "e2",
+        "label": "wooden table surface",
+        "category": "structure",
+        "attributes": [
+          "light brown",
+          "wood grain",
+          "flat"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "bottom center",
+        "evidence": "brown wooden tabletop under the glass extending to bottom edge",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "ice cubes",
+        "category": "object",
+        "attributes": [
+          "translucent",
+          "floating",
+          "irregular shape"
+        ],
+        "count": 3,
+        "salience": 3,
+        "position": "inside glass upper portion",
+        "evidence": "clear ice chunks visible near top of blue liquid",
+        "confidence": 0.95
+      },
+      {
+        "id": "e4",
+        "label": "citrus slice garnish",
+        "category": "produce",
+        "attributes": [
+          "green and yellow",
+          "thin round slice",
+          "on rim"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left side of glass rim",
+        "evidence": "green-yellow lime slice attached to left edge of glass",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "fresh mint leaves",
+        "category": "plant",
+        "attributes": [
+          "bright green",
+          "leafy",
+          "fresh"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "top right of glass",
+        "evidence": "cluster of bright green mint leaves resting on rim and extending to right",
+        "confidence": 0.98
+      },
+      {
+        "id": "e6",
+        "label": "black drinking straws",
+        "category": "object",
+        "attributes": [
+          "black",
+          "straight",
+          "thin"
+        ],
+        "count": 2,
+        "salience": 3,
+        "position": "inside glass extending upward",
+        "evidence": "two dark straws protruding from drink behind mint",
+        "confidence": 0.97
+      },
+      {
+        "id": "e7",
+        "label": "person sitting at table",
+        "category": "person_group",
+        "attributes": [
+          "wearing dark vest over light shirt",
+          "dark pants",
+          "white shoes",
+          "facing away"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right background",
+        "evidence": "figure seated on chair with back to camera at distant table",
+        "confidence": 0.88
+      },
+      {
+        "id": "e8",
+        "label": "metal mesh chair",
+        "category": "object",
+        "attributes": [
+          "gray",
+          "mesh back",
+          "metal frame"
+        ],
+        "count": 2,
+        "salience": 2,
+        "position": "right background near person",
+        "evidence": "gray woven chairs around background tables",
+        "confidence": 0.9
+      },
+      {
+        "id": "e9",
+        "label": "background dining table",
+        "category": "structure",
+        "attributes": [
+          "wooden",
+          "rectangular"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "center-right background",
+        "evidence": "wooden table with items on it behind the main subject",
+        "confidence": 0.85
+      },
+      {
+        "id": "e10",
+        "label": "light-colored tiled floor",
+        "category": "terrain",
+        "attributes": [
+          "light gray",
+          "reflective",
+          "smooth"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "right lower background",
+        "evidence": "pale floor surface reflecting light under chairs and tables",
+        "confidence": 0.92
+      },
+      {
+        "id": "e11",
+        "label": "ceiling with patterned tiles",
+        "category": "structure",
+        "attributes": [
+          "white",
+          "patterned",
+          "with red trim"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "top background",
+        "evidence": "white ceiling with decorative pattern and red border visible above",
+        "confidence": 0.87
+      },
+      {
+        "id": "e12",
+        "label": "window with sheer curtains",
+        "category": "structure",
+        "attributes": [
+          "large",
+          "bright",
+          "with translucent curtains"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "right background wall",
+        "evidence": "bright window area with light fabric curtains along right side",
+        "confidence": 0.89
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e3",
+        "predicate": "inside",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e6",
+        "predicate": "inside",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e7",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e8",
+        "predicate": "near",
+        "object": "e7",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e9",
+        "predicate": "near",
+        "object": "e7",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e10",
+        "predicate": "below",
+        "object": "e7",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e11",
+        "predicate": "above",
+        "object": "e7",
+        "confidence": 0.85
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 1,
+      "count_confidence": 0.85,
+      "faces_visible": false,
+      "activities": [
+        "sitting at a table"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact text on the red vertical sign on the wall behind the drink is unreadable due to blur and being cut off by the frame",
+      "Whether a second person is partially visible behind the background table (purple-clad legs) due to blur and occlusion",
+      "Exact ingredients, name, or flavor of the blue beverage cannot be determined from appearance alone",
+      "Details of the outdoor area beyond the windows are overexposed and blurred",
+      "Exact time of day beyond daylight and indoor lighting conditions"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 1,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:08:00+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_014_attempt1.txt",
+        "tokens": 11599
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

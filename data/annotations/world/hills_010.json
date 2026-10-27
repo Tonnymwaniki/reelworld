@@ -1,0 +1,297 @@
+{
+  "photo_id": "hills_010",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_010.jpg",
+    "license": "CC BY 4.0",
+    "author": "Mjr74",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ngong_Hills,_January_2017.jpg",
+    "title": "File:Ngong Hills, January 2017.jpg"
+  },
+  "observed": {
+    "caption": "Aerial view of an expansive arid landscape with a clustered settlement, winding roads, a small lake, and distant hazy mountains under a clear blue sky.",
+    "description": "The photo shows a high-altitude aerial view looking across a vast dry terrain with patches of scattered dark vegetation and a network of light-colored dirt roads. In the middle distance a denser cluster of small structures forms a settlement, with a small body of water visible to its right. To the left a darker elevated ridge extends across the midground, while the background fades into hazy flatlands and faint distant mountain silhouettes on the horizon. The upper portion is a clear blue sky with a few small white clouds near the horizon and a layer of pale haze over the distant land. Lighting is bright daylight with soft shadows.",
+    "retrieval_queries": [
+      "aerial photo of dry plains with a town and lake",
+      "view from airplane over arid countryside and hills",
+      "high altitude landscape with scattered buildings and distant mountains"
+    ],
+    "tags": [
+      "aerial view",
+      "arid landscape",
+      "settlement",
+      "dirt roads",
+      "lake",
+      "ridge",
+      "distant mountains",
+      "haze",
+      "daytime"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "clear with distant haze",
+      "lighting": "bright daylight",
+      "crowd_level": "empty",
+      "activity_summary": "aerial overview of terrain"
+    },
+    "camera": {
+      "viewpoint": "aerial",
+      "height_estimate": "very_high",
+      "facing": "down toward landscape and horizon",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "expansive arid terrain with settlement"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "sky",
+        "category": "other",
+        "attributes": [
+          "clear",
+          "blue",
+          "upper portion"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "top",
+        "evidence": "broad blue expanse occupying upper third of image",
+        "confidence": 0.99
+      },
+      {
+        "id": "e2",
+        "label": "arid plain",
+        "category": "terrain",
+        "attributes": [
+          "dry",
+          "brown",
+          "patchy",
+          "expansive"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center and foreground",
+        "evidence": "large light-brown ground area covering lower two-thirds with fields and scrub",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "scattered vegetation",
+        "category": "plant",
+        "attributes": [
+          "dark green",
+          "sparse",
+          "bushy"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "scattered across plain",
+        "evidence": "small dark green patches and dots across the brown terrain",
+        "confidence": 0.92
+      },
+      {
+        "id": "e4",
+        "label": "clustered settlement",
+        "category": "structure",
+        "attributes": [
+          "dense",
+          "small structures",
+          "central"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-midground",
+        "evidence": "concentrated area of small light and dark rooftops and plots",
+        "confidence": 0.95
+      },
+      {
+        "id": "e5",
+        "label": "dirt road network",
+        "category": "structure",
+        "attributes": [
+          "light-colored",
+          "winding",
+          "unpaved"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "crossing plain and settlement",
+        "evidence": "thin pale lines intersecting the terrain and connecting areas",
+        "confidence": 0.93
+      },
+      {
+        "id": "e6",
+        "label": "small water body",
+        "category": "terrain",
+        "attributes": [
+          "dark",
+          "still",
+          "irregular shape"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right-midground",
+        "evidence": "small gray-blue patch near settlement on right side",
+        "confidence": 0.88
+      },
+      {
+        "id": "e7",
+        "label": "elevated ridge",
+        "category": "terrain",
+        "attributes": [
+          "dark",
+          "elongated",
+          "vegetated"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left-midground",
+        "evidence": "darker raised landform extending horizontally left of center",
+        "confidence": 0.94
+      },
+      {
+        "id": "e8",
+        "label": "distant mountain range",
+        "category": "terrain",
+        "attributes": [
+          "faint",
+          "hazy",
+          "low"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "background horizon",
+        "evidence": "pale bluish silhouettes on far horizon under clouds",
+        "confidence": 0.85
+      },
+      {
+        "id": "e9",
+        "label": "small clouds",
+        "category": "other",
+        "attributes": [
+          "white",
+          "puffy",
+          "scattered"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "horizon center",
+        "evidence": "few small white cloud clusters just above haze line",
+        "confidence": 0.96
+      },
+      {
+        "id": "e10",
+        "label": "atmospheric haze",
+        "category": "other",
+        "attributes": [
+          "pale",
+          "diffuse",
+          "low-lying"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "mid-background",
+        "evidence": "grayish veil obscuring detail between foreground and distant mountains",
+        "confidence": 0.9
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "above",
+        "object": "e2",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e9",
+        "predicate": "above",
+        "object": "e8",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e4",
+        "predicate": "inside",
+        "object": "e2",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e6",
+        "predicate": "beside",
+        "object": "e4",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e7",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e8",
+        "predicate": "behind",
+        "object": "e7",
+        "confidence": 0.82
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.99,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact geographic location cannot be determined",
+      "Specific building types and road names not legible from altitude",
+      "Water body depth and name not determinable",
+      "Vegetation species not identifiable",
+      "Any small ground signs or text not legible due to distance and haze"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:09:47+00:00",
+        "raw_output_path": "data/annotations/raw/hills_010_attempt1.txt",
+        "tokens": 9061
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

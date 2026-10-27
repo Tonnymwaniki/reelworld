@@ -1,0 +1,355 @@
+{
+  "photo_id": "street_016",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_016.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Kenyatta_Avenue,_Nairobi,_2025_(07).jpg",
+    "title": "File:Kenyatta Avenue, Nairobi, 2025 (07).jpg"
+  },
+  "observed": {
+    "caption": "A busy urban street intersection with tall office buildings, cars, pedestrians, and a motorcyclist under an overcast sky.",
+    "description": "A wide paved urban roadway with lane markings and traffic light poles extends through the center and foreground, flanked by sidewalks and mature green trees. On the left side, a large light-gray multi-story office building with a grid of many small windows dominates the foreground, with a taller dark-brown high-rise and a narrow weathered concrete tower rising behind it; a distant white cylindrical building is visible in the center background. Vehicles including a black SUV in the center lane, a silver hatchback and white car near the left curb, a light blue car further down the road, and a bus in the distance occupy the roadway. A motorcycle with a rider in a yellow high-visibility jacket and blue helmet travels toward the camera in the foreground right. Multiple pedestrians in varied clothing are walking across crosswalks and standing along both sidewalks. A red double-sided street clock on a red and white pole stands near the left sidewalk corner, above a blue storefront awning. Traffic signals on metal poles hang over the intersection. The sky is overcast and cloudy with diffuse daylight.",
+    "retrieval_queries": [
+      "busy city intersection with tall buildings and traffic",
+      "urban street with motorcyclist and pedestrians crossing",
+      "downtown road with high rise office buildings and street clock"
+    ],
+    "tags": [
+      "urban street",
+      "city intersection",
+      "high-rise buildings",
+      "traffic",
+      "motorcycle",
+      "pedestrians",
+      "traffic lights",
+      "street clock",
+      "overcast day"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast cloudy",
+      "lighting": "diffuse daylight",
+      "crowd_level": "moderate",
+      "activity_summary": "vehicles driving and pedestrians crossing street"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "down the street toward buildings and intersection",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "urban street intersection with buildings"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "large gray office building with grid windows",
+        "category": "building",
+        "attributes": [
+          "rectangular",
+          "light gray facade",
+          "many small windows",
+          "multiple stories"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "left-center foreground",
+        "evidence": "prominent multi-story building with uniform window grid occupying left side of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "taller brown high-rise building behind gray building",
+        "category": "building",
+        "attributes": [
+          "dark brown facade",
+          "many windows",
+          "taller than foreground building"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-left behind e1",
+        "evidence": "high-rise rising above and behind the gray building with visible balconies and windows",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "narrow concrete tower",
+        "category": "structure",
+        "attributes": [
+          "tall",
+          "narrow",
+          "weathered concrete",
+          "vertical"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center between buildings",
+        "evidence": "tall slender tower with crane at top between the brown high-rise sections",
+        "confidence": 0.95
+      },
+      {
+        "id": "e4",
+        "label": "distant white cylindrical building",
+        "category": "building",
+        "attributes": [
+          "cylindrical",
+          "white with horizontal stripes",
+          "distant"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center background",
+        "evidence": "round white building with striped facade visible between trees and other structures",
+        "confidence": 0.88
+      },
+      {
+        "id": "e5",
+        "label": "paved urban roadway with intersection",
+        "category": "terrain",
+        "attributes": [
+          "asphalt",
+          "wide",
+          "lane markings",
+          "intersection"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground and center extending into distance",
+        "evidence": "broad street with vehicles, lane dividers and concrete medians stretching away",
+        "confidence": 0.99
+      },
+      {
+        "id": "e6",
+        "label": "traffic light poles and signals",
+        "category": "object",
+        "attributes": [
+          "metal poles",
+          "multiple black signal heads",
+          "over roadway"
+        ],
+        "count": 4,
+        "salience": 3,
+        "position": "right side and center over road",
+        "evidence": "vertical poles with traffic lights hanging over intersection",
+        "confidence": 0.97
+      },
+      {
+        "id": "e7",
+        "label": "red double-sided street clock on pole",
+        "category": "object",
+        "attributes": [
+          "red frame",
+          "two clock faces",
+          "white dials",
+          "on red and white pole"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left-center near sidewalk",
+        "evidence": "distinctive red clock with two faces mounted on pole at street corner",
+        "confidence": 0.96
+      },
+      {
+        "id": "e8",
+        "label": "group of pedestrians",
+        "category": "person_group",
+        "attributes": [
+          "various clothing including red and light colors",
+          "walking",
+          "standing on sidewalks"
+        ],
+        "count": 16,
+        "salience": 3,
+        "position": "sidewalks and crosswalks on both sides of street",
+        "evidence": "multiple small figures walking across street and along sidewalks",
+        "confidence": 0.72
+      },
+      {
+        "id": "e9",
+        "label": "motorcycle with rider in high-visibility jacket",
+        "category": "vehicle",
+        "attributes": [
+          "motorcycle",
+          "rider wearing yellow jacket and blue helmet"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground right on road",
+        "evidence": "motorcycle moving toward camera with rider in bright clothing",
+        "confidence": 0.98
+      },
+      {
+        "id": "e10",
+        "label": "black SUV",
+        "category": "vehicle",
+        "attributes": [
+          "black",
+          "SUV",
+          "on road"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center on road",
+        "evidence": "dark SUV driving away from camera in middle lane",
+        "confidence": 0.97
+      },
+      {
+        "id": "e11",
+        "label": "silver hatchback car",
+        "category": "vehicle",
+        "attributes": [
+          "silver",
+          "small",
+          "near curb"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "left-center near curb",
+        "evidence": "light-colored small car stopped at intersection near pedestrians",
+        "confidence": 0.95
+      },
+      {
+        "id": "e12",
+        "label": "trees lining street",
+        "category": "plant",
+        "attributes": [
+          "green foliage",
+          "mature",
+          "along road"
+        ],
+        "count": 8,
+        "salience": 2,
+        "position": "both sides of street middle to background",
+        "evidence": "leafy trees bordering roadway and sidewalks",
+        "confidence": 0.92
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e3",
+        "predicate": "beside",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e5",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e7",
+        "predicate": "near",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e5",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e10",
+        "predicate": "on",
+        "object": "e5",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e6",
+        "predicate": "beside",
+        "object": "e5",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e12",
+        "predicate": "beside",
+        "object": "e5",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e8",
+        "predicate": "near",
+        "object": "e5",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e11",
+        "predicate": "near",
+        "object": "e7",
+        "confidence": 0.85
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "GABA",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "on blue awning at base of large gray building, lower left",
+        "legibility": "clear",
+        "confidence": 0.88
+      }
+    ],
+    "people": {
+      "count": 16,
+      "count_confidence": 0.65,
+      "faces_visible": false,
+      "activities": [
+        "walking across street",
+        "standing on sidewalk",
+        "riding motorcycle"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "exact number of pedestrians in far background due to distance and occlusion",
+      "text on white signs below street clock is not legible at this resolution",
+      "text on distant billboard on right side is not legible",
+      "text on other storefront awnings and building signage is not legible",
+      "vehicle license plates and building names cannot be determined",
+      "exact time shown on street clock faces is uncertain due to resolution"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 16,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:21:19+00:00",
+        "raw_output_path": "data/annotations/raw/street_016_attempt1.txt",
+        "tokens": 8903
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

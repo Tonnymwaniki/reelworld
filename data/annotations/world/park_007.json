@@ -1,0 +1,305 @@
+{
+  "photo_id": "park_007",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_007.jpg",
+    "license": "CC BY-SA 3.0",
+    "author": "Arthur Buliva",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Nairobi_UhuruPark_Panorama_2010.jpg",
+    "title": "File:Nairobi UhuruPark Panorama 2010.jpg"
+  },
+  "observed": {
+    "caption": "A panoramic daytime view of a crowded urban park with trees, pavilions and a pond in the foreground and a dense city skyline with tall buildings under a partly cloudy sky in the background.",
+    "description": "The image shows a wide panoramic outdoor view with a grassy urban park in the foreground containing scattered green trees, open grassy areas, a small reflective pond on the center-right, and several long covered pavilions with metal roofs near clusters of parked light-colored vehicles. A large crowd of small distant figures is spread across the grass sitting and standing in groups. Behind the park, a dense skyline of numerous high-rise buildings of varying heights, shapes and colors stretches across the horizon, including a prominent yellow-brown twin-tower building with an antenna on the left-center and a tall narrow cylindrical tower on the right. The sky above is blue with scattered white cumulus clouds and the lighting is bright daylight.",
+    "retrieval_queries": [
+      "panoramic view of city skyline behind crowded park with pond",
+      "aerial view of downtown high rises over green park full of people",
+      "wide cityscape with tall buildings and park gathering in foreground"
+    ],
+    "tags": [
+      "city skyline",
+      "urban park",
+      "crowd",
+      "high-rise buildings",
+      "panoramic view",
+      "trees",
+      "pond",
+      "daytime",
+      "partly cloudy"
+    ],
+    "scene": {
+      "type": "park",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "bright daylight",
+      "crowd_level": "busy",
+      "activity_summary": "crowd gathering and sitting on grass in urban park"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "high",
+      "facing": "toward city skyline across park",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "city skyline beyond park"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "city skyline with high-rise buildings",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "dense",
+          "varied heights and designs"
+        ],
+        "count": 25,
+        "salience": 5,
+        "position": "background across horizon",
+        "evidence": "numerous tall buildings of different shapes and colors lining the horizon",
+        "confidence": 0.96
+      },
+      {
+        "id": "e2",
+        "label": "prominent yellow-brown twin-tower building with antenna",
+        "category": "building",
+        "attributes": [
+          "yellow-brown",
+          "tall",
+          "twin towers",
+          "antenna on top"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "left-center background",
+        "evidence": "tall yellow building with two connected towers and a spire antenna",
+        "confidence": 0.92
+      },
+      {
+        "id": "e3",
+        "label": "grassy park open ground",
+        "category": "terrain",
+        "attributes": [
+          "grassy",
+          "open",
+          "green and brown patches"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground center",
+        "evidence": "open grassy area with scattered people and trees",
+        "confidence": 0.93
+      },
+      {
+        "id": "e4",
+        "label": "crowd of people in park",
+        "category": "person_group",
+        "attributes": [
+          "small distant figures",
+          "scattered in groups",
+          "sitting and standing"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground center and left",
+        "evidence": "many small figures spread across the grassy park area",
+        "confidence": 0.88
+      },
+      {
+        "id": "e5",
+        "label": "trees and dense vegetation",
+        "category": "plant",
+        "attributes": [
+          "green",
+          "leafy",
+          "scattered and clustered"
+        ],
+        "count": 30,
+        "salience": 4,
+        "position": "foreground and midground throughout",
+        "evidence": "green leafy trees surrounding park and between buildings",
+        "confidence": 0.95
+      },
+      {
+        "id": "e6",
+        "label": "reflective pond or lake",
+        "category": "terrain",
+        "attributes": [
+          "reflective",
+          "small",
+          "surrounded by trees"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-right midground",
+        "evidence": "small body of water reflecting sky between trees and pavilions",
+        "confidence": 0.86
+      },
+      {
+        "id": "e7",
+        "label": "covered pavilions with metal roofs",
+        "category": "structure",
+        "attributes": [
+          "long",
+          "roofed",
+          "open-sided"
+        ],
+        "count": 3,
+        "salience": 3,
+        "position": "center midground",
+        "evidence": "long roofed structures with people gathered underneath near vehicles",
+        "confidence": 0.87
+      },
+      {
+        "id": "e8",
+        "label": "parked vehicles near pavilions",
+        "category": "vehicle",
+        "attributes": [
+          "white and light-colored",
+          "clustered",
+          "small due to distance"
+        ],
+        "count": 15,
+        "salience": 2,
+        "position": "center midground near pavilions",
+        "evidence": "cluster of white vans and cars parked beside the pavilions",
+        "confidence": 0.76
+      },
+      {
+        "id": "e9",
+        "label": "partly cloudy blue sky",
+        "category": "other",
+        "attributes": [
+          "blue",
+          "scattered white cumulus clouds",
+          "bright"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "top across image",
+        "evidence": "blue sky with scattered white clouds above skyline",
+        "confidence": 0.98
+      },
+      {
+        "id": "e10",
+        "label": "tall cylindrical tower on right",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "narrow",
+          "cylindrical",
+          "flat top"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right background",
+        "evidence": "narrow tall building standing apart on the right side of skyline",
+        "confidence": 0.89
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e3",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e5",
+        "predicate": "near",
+        "object": "e4",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e9",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e2",
+        "predicate": "left_of",
+        "object": "e10",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e7",
+        "predicate": "near",
+        "object": "e8",
+        "confidence": 0.82
+      },
+      {
+        "subject": "e6",
+        "predicate": "behind",
+        "object": "e7",
+        "confidence": 0.72
+      },
+      {
+        "subject": "e5",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 350,
+      "count_confidence": 0.45,
+      "faces_visible": false,
+      "activities": [
+        "gathering on grass",
+        "sitting in groups",
+        "standing and walking in park"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people in park cannot be determined due to distance and resolution",
+      "Text on banner on prominent yellow-brown building is illegible and cannot be read",
+      "Specific building names or functions cannot be determined from image alone",
+      "Exact geographic location or city name not visible as legible text",
+      "Purpose of the gathering in the park cannot be determined",
+      "Details of individual clothing, ages, or genders cannot be discerned",
+      "Vehicle models, license plates and other small details are not resolvable",
+      "Exact time of day beyond daytime and weather beyond partly cloudy cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 350,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:16:38+00:00",
+        "raw_output_path": "data/annotations/raw/park_007_attempt1.txt",
+        "tokens": 8143
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

@@ -1,0 +1,327 @@
+{
+  "photo_id": "landmarks_009",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/landmarks/landmarks_009.jpg",
+    "license": "CC0",
+    "author": "Francis Akuka for the Wikimedia Foundation",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Kenyatta_International_Convention_Centre.jpg",
+    "title": "File:Kenyatta International Convention Centre.jpg"
+  },
+  "observed": {
+    "caption": "A tall cylindrical tower with a circular observation deck at the top stands against a clear blue sky with people visible on the rooftop.",
+    "description": "A tall cylindrical high-rise building with alternating pinkish horizontal bands and dark window strips dominates the center of the image, topped by a wide flat circular observation platform with a dark underside and several small white dome-shaped objects on its roof. Small distant figures of people are standing along the railing of the rooftop deck. Behind the tower to the right is a beige rectangular building with a small yellow logo and text, and further to the right is another multi-story building with green signage and a low structure with a blue roof. A tall double-headed streetlight pole stands in the right foreground beside a light-colored elevated roadway or overpass that runs horizontally across the bottom of the image. The sky is clear and pale blue under bright daylight.",
+    "retrieval_queries": [
+      "tall round tower with observation deck and people on top",
+      "cylindrical high rise building against blue sky with rooftop viewing platform",
+      "city tower with circular top and streetlight in foreground"
+    ],
+    "tags": [
+      "tower",
+      "cylindrical building",
+      "observation deck",
+      "city skyline",
+      "daytime"
+    ],
+    "scene": {
+      "type": "building",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "clear sky",
+      "lighting": "bright daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "people standing on rooftop observation deck"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "raised",
+      "facing": "toward the tower",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "tall cylindrical tower with observation deck"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "tall cylindrical tower",
+        "category": "building",
+        "attributes": [
+          "cylindrical",
+          "pinkish horizontal bands",
+          "dark windows",
+          "many floors"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "dominant vertical structure occupying center from bottom to top with repeating window pattern",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "circular observation deck",
+        "category": "structure",
+        "attributes": [
+          "flat circular",
+          "wide overhang",
+          "dark underside"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "top-center",
+        "evidence": "wide disc-shaped platform capping the tower with visible underside and railing",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "group of people on rooftop",
+        "category": "person_group",
+        "attributes": [
+          "small distant figures",
+          "standing along railing"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "top of tower",
+        "evidence": "tiny human figures lined along the edge of the observation deck",
+        "confidence": 0.75
+      },
+      {
+        "id": "e4",
+        "label": "beige rectangular building behind tower",
+        "category": "building",
+        "attributes": [
+          "beige",
+          "rectangular",
+          "small windows on top"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center-right background",
+        "evidence": "light-colored building partially visible directly behind and to the right of the main tower",
+        "confidence": 0.85
+      },
+      {
+        "id": "e5",
+        "label": "building with green signage on right",
+        "category": "building",
+        "attributes": [
+          "multi-story",
+          "green signage",
+          "glass facade section"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right background",
+        "evidence": "building on right side with visible green logo and text on its side",
+        "confidence": 0.88
+      },
+      {
+        "id": "e6",
+        "label": "double-headed streetlight pole",
+        "category": "object",
+        "attributes": [
+          "tall",
+          "metal",
+          "two lamp heads"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right foreground",
+        "evidence": "tall slender pole with two curved arms and lights at top on right side",
+        "confidence": 0.92
+      },
+      {
+        "id": "e7",
+        "label": "elevated roadway or overpass",
+        "category": "structure",
+        "attributes": [
+          "concrete",
+          "light-colored",
+          "horizontal",
+          "with railing"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom foreground",
+        "evidence": "long horizontal concrete structure with barrier running across bottom of image",
+        "confidence": 0.9
+      },
+      {
+        "id": "e8",
+        "label": "clear blue sky",
+        "category": "other",
+        "attributes": [
+          "pale blue",
+          "clear",
+          "cloudless"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "background",
+        "evidence": "uniform light blue area filling most of background around tower",
+        "confidence": 0.99
+      },
+      {
+        "id": "e9",
+        "label": "low building with blue roof",
+        "category": "building",
+        "attributes": [
+          "low",
+          "blue roof",
+          "beige walls"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "lower right",
+        "evidence": "small structure with bright blue roofing visible below the green-sign building",
+        "confidence": 0.8
+      },
+      {
+        "id": "e10",
+        "label": "white dome-shaped objects on deck",
+        "category": "object",
+        "attributes": [
+          "white",
+          "dome-shaped",
+          "small"
+        ],
+        "count": 4,
+        "salience": 1,
+        "position": "top of tower",
+        "evidence": "small white spherical shapes spaced along the rooftop deck",
+        "confidence": 0.7
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e5",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e6",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e7",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e8",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e6",
+        "predicate": "beside",
+        "object": "e7",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e9",
+        "predicate": "below",
+        "object": "e5",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e10",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.75
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "National Bank",
+        "language": "en",
+        "entity_id": "e4",
+        "location_in_image": "on beige building behind tower, center-right",
+        "legibility": "partial",
+        "confidence": 0.6
+      },
+      {
+        "text": "CO-OP BANK",
+        "language": "en",
+        "entity_id": "e5",
+        "location_in_image": "on building on right side",
+        "legibility": "partial",
+        "confidence": 0.65
+      }
+    ],
+    "people": {
+      "count": 14,
+      "count_confidence": 0.55,
+      "faces_visible": false,
+      "activities": [
+        "standing on rooftop observation deck"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "exact number of people on rooftop due to small size and distance",
+      "exact wording and spelling of distant building signage due to low resolution",
+      "clothing details and identities of people on rooftop",
+      "building names, heights, and interior details not visible",
+      "text on smaller or blurry signs that show fewer than 3 legible letters"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 14,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:12:24+00:00",
+        "raw_output_path": "data/annotations/raw/landmarks_009_attempt1.txt",
+        "tokens": 7517
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'National Bank'",
+        "partially legible text: 'CO-OP BANK'"
+      ]
+    }
+  }
+}

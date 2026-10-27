@@ -1,0 +1,387 @@
+{
+  "photo_id": "cbd_007",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/cbd/cbd_007.jpg",
+    "license": "CC BY-SA 3.0",
+    "author": "FOTO:Fortepan — ID 85127: Adományozó/Donor: Métneki János dr.",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Broadway,_k%C3%B6z%C3%A9pen_a_Nyugati_43._utca_keresztez%C5%91d%C3%A9s%C3%A9n%C3%A9l_a_Times_Tower._Fortepan_85127.jpg",
+    "title": "File:Broadway, középen a Nyugati 43. utca kereszteződésénél a Times Tower. Fortepan 85127.jpg"
+  },
+  "observed": {
+    "caption": "A wide city street with cars and a bus passes beneath a large curved STAR! movie billboard, with a clock tower and a white Allied Chemical tower in the background under a clear blue sky.",
+    "description": "A wide multi-lane asphalt street with white lane markings extends into the distance, with a yellow taxi on the left, a dark sedan in the center lane, and a light-colored city bus on the right near the sidewalk. A large curved billboard wraps around a building on the right foreground displaying colorful graphics and large text. Below the billboard is a theater marquee. Behind the billboard rises a tall stepped stone tower with a clock face and a globe on top. On the left-center a tall white modern building with vertical dark windows and a rooftop sign stands along the street, with additional high-rise buildings lining both sides of the street in the background. A group of small pedestrian figures is visible on the sidewalk near the theater. Traffic lights and street lamps are visible over the street. The sky is clear and pale blue with bright daylight casting shadows.",
+    "retrieval_queries": [
+      "vintage city street with large STAR movie billboard and clock tower",
+      "1960s urban intersection with Allied Chemical building and theater marquee",
+      "busy downtown street with yellow taxi bus and big musical advertisement"
+    ],
+    "tags": [
+      "street",
+      "billboard",
+      "theater",
+      "city",
+      "cars",
+      "bus",
+      "clock tower",
+      "allied chemical",
+      "vintage",
+      "urban"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "clear and sunny",
+      "lighting": "bright daylight with strong shadows",
+      "crowd_level": "moderate",
+      "activity_summary": "vehicles driving on street and pedestrians on sidewalk near theater"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "down the street toward buildings and billboard",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "portrait",
+      "subject_focus": "billboard and street intersection"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "large curved billboard for STAR! musical",
+        "category": "sign",
+        "attributes": [
+          "curved",
+          "colorful",
+          "yellow and orange",
+          "large text",
+          "portrait graphic"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-right, foreground above theater",
+        "evidence": "wraps around building corner with large STAR! lettering and portrait image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "art deco clock tower building",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "stepped stone facade",
+          "clock face",
+          "globe on top"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-top, background behind billboard",
+        "evidence": "tall stepped tower with clock and spherical top rising behind billboard",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "white modern tower with rooftop sign",
+        "category": "building",
+        "attributes": [
+          "white",
+          "vertical dark windows",
+          "rectangular",
+          "rooftop sign"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left-center, mid-distance",
+        "evidence": "tall white building with dark vertical glazing and rooftop sign",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "multi-lane city street",
+        "category": "terrain",
+        "attributes": [
+          "asphalt",
+          "white lane markings",
+          "intersection"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "bottom-center, extending to background",
+        "evidence": "paved road with white lane lines and vehicles driving",
+        "confidence": 0.98
+      },
+      {
+        "id": "e5",
+        "label": "city bus",
+        "category": "vehicle",
+        "attributes": [
+          "light blue and white",
+          "rear view",
+          "windows along side"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "bottom-right, on street",
+        "evidence": "large bus on right side of street near sidewalk",
+        "confidence": 0.97
+      },
+      {
+        "id": "e6",
+        "label": "yellow taxi cab",
+        "category": "vehicle",
+        "attributes": [
+          "yellow",
+          "sedan",
+          "rear view"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom-left, on street",
+        "evidence": "yellow car on left side of street",
+        "confidence": 0.96
+      },
+      {
+        "id": "e7",
+        "label": "dark sedan car",
+        "category": "vehicle",
+        "attributes": [
+          "dark color",
+          "sedan",
+          "rear view"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom-center, on street",
+        "evidence": "dark car in center lane driving away",
+        "confidence": 0.95
+      },
+      {
+        "id": "e8",
+        "label": "theater marquee for Victoria",
+        "category": "sign",
+        "attributes": [
+          "illuminated",
+          "rectangular",
+          "below billboard"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right, below billboard",
+        "evidence": "marquee with VICTORIA lettering and film title panels",
+        "confidence": 0.94
+      },
+      {
+        "id": "e9",
+        "label": "group of pedestrians on sidewalk",
+        "category": "person_group",
+        "attributes": [
+          "small figures",
+          "standing and walking",
+          "dark clothing"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center, mid-distance on sidewalk",
+        "evidence": "cluster of people on sidewalk near theater entrance",
+        "confidence": 0.85
+      },
+      {
+        "id": "e10",
+        "label": "traffic light and street lamp pole",
+        "category": "object",
+        "attributes": [
+          "metal pole",
+          "traffic signal",
+          "street light"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "left foreground, extending into frame",
+        "evidence": "pole with traffic light and lamp on left edge",
+        "confidence": 0.9
+      },
+      {
+        "id": "e11",
+        "label": "clear blue sky",
+        "category": "other",
+        "attributes": [
+          "clear",
+          "pale blue",
+          "bright"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top, background",
+        "evidence": "open sky above buildings",
+        "confidence": 0.99
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "above",
+        "object": "e8",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e2",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e3",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e9",
+        "predicate": "near",
+        "object": "e8",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e8",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e4",
+        "predicate": "in_front_of",
+        "object": "e8",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e10",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.85
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "Allied Chemical",
+        "language": "en",
+        "entity_id": "e3",
+        "location_in_image": "top of white tower on left-center",
+        "legibility": "clear",
+        "confidence": 0.96
+      },
+      {
+        "text": "20TH CENTURY-FOX PRESENTS A ROBERT WISE FILM JULIE ANDREWS AS THE STAR! RICHARD CRENNA MICHAEL CRAIG DANIEL MASSEY SAUL CHAPLIN ROBERT WISE WILLIAM FAIRCHILD A TOTALLY WONDERFUL MUSICAL STAR! GALA PREMIERE OCT 22 UA RIVOLI 49TH S B'WAY",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "large curved billboard on right foreground",
+        "legibility": "partial",
+        "confidence": 0.88
+      },
+      {
+        "text": "VICTORIA",
+        "language": "en",
+        "entity_id": "e8",
+        "location_in_image": "above theater marquee center-right",
+        "legibility": "clear",
+        "confidence": 0.92
+      },
+      {
+        "text": "CLINT EASTWOOD HANG 'EM HIGH",
+        "language": "en",
+        "entity_id": "e8",
+        "location_in_image": "on theater marquee below billboard",
+        "legibility": "clear",
+        "confidence": 0.9
+      },
+      {
+        "text": "DELICATESSEN",
+        "language": "en",
+        "entity_id": null,
+        "location_in_image": "storefront sign on right below billboard near bus",
+        "legibility": "partial",
+        "confidence": 0.82
+      },
+      {
+        "text": "LIFE",
+        "language": "en",
+        "entity_id": "e3",
+        "location_in_image": "near base of white tower on left-center",
+        "legibility": "partial",
+        "confidence": 0.75
+      }
+    ],
+    "people": {
+      "count": 18,
+      "count_confidence": 0.6,
+      "faces_visible": false,
+      "activities": [
+        "walking on sidewalk",
+        "standing near theater entrance"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of pedestrians cannot be determined due to distance, small size and overlapping figures",
+      "Text on distant background buildings and small billboards is blurry and unreadable",
+      "Exact make, model and year of vehicles cannot be determined",
+      "License plate numbers and other small vehicle details are not legible",
+      "Exact date and time of day beyond daytime cannot be determined from image alone",
+      "Interior details of buildings and theater are not visible",
+      "Text on clothing or bags is ignored per rules and not transcribed",
+      "Some small credit text on the large billboard is partially obscured by angle and distance"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 18,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:07:01+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_007_attempt1.txt",
+        "tokens": 12524
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: \"20TH CENTURY-FOX PRESENTS A ROBERT WISE FILM JULIE ANDREWS AS THE STAR! RICHARD CRENNA MICHAEL CRAIG DANIEL MASSEY SAUL CHAPLIN ROBERT WISE WILLIAM FAIRCHILD A TOTALLY WONDERFUL MUSICAL STAR! GALA PREMIERE OCT 22 UA RIVOLI 49TH S B'WAY\"",
+        "partially legible text: 'DELICATESSEN'",
+        "partially legible text: 'LIFE'"
+      ]
+    }
+  }
+}

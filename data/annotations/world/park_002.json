@@ -1,0 +1,351 @@
+{
+  "photo_id": "park_002",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_002.jpg",
+    "license": "CC BY 2.0",
+    "author": "DEMOSH",
+    "source_url": "https://commons.wikimedia.org/wiki/File:City_view_from_Uhuru_Park,_Nairobi.jpg",
+    "title": "File:City view from Uhuru Park, Nairobi.jpg"
+  },
+  "observed": {
+    "caption": "Elevated wide view of a large urban park with a curved lake in the foreground and a dense city skyline of high-rise buildings under a cloudy sky.",
+    "description": "The photo shows an elevated, wide-angle outdoor view looking across a large urban park toward a city skyline. In the immediate foreground are four long, low covered pavilion structures with tiered seating and distinctive white zigzag and flat roofs lining a reddish-brown dirt area. Directly behind them is a large, curved, reflective lake surrounded by green lawns, scattered mature trees with dense canopies, pathways, and small circular fountain monuments. Beyond the park, a road with tiny vehicles runs horizontally, with clusters of mid-rise and high-rise buildings of varying heights and designs extending across the horizon, including a prominent cylindrical tower on the right side. A large parking area filled with numerous small light-colored cars is visible behind trees on the right. The upper portion of the image is filled with a bright overcast sky with thick white and gray clouds. Small indistinct human figures are visible on pathways and near the pavilions, with one more distinct figure walking on the dirt in the foreground center.",
+    "retrieval_queries": [
+      "aerial view of city park with lake and skyline",
+      "urban park with pond in front of downtown high rises",
+      "overhead photo of green park and tall buildings under cloudy sky"
+    ],
+    "tags": [
+      "aerial view",
+      "urban park",
+      "lake",
+      "city skyline",
+      "high-rise buildings",
+      "overcast sky",
+      "pavilions"
+    ],
+    "scene": {
+      "type": "park",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast and cloudy",
+      "lighting": "diffused overcast daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "people walking and gathering in urban park with city backdrop"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "very_high",
+      "facing": "across the park toward the city skyline",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "urban park lake and city skyline"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "curved lake",
+        "category": "terrain",
+        "attributes": [
+          "reflective water",
+          "curved shape",
+          "surrounded by grass and trees"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground center",
+        "evidence": "large dark water body reflecting sky in lower half of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "urban park with lawns",
+        "category": "terrain",
+        "attributes": [
+          "green grass",
+          "scattered trees",
+          "pathways"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "middle-ground center",
+        "evidence": "expansive green area with trees and paths between lake and city",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "covered pavilions with tiered seating",
+        "category": "structure",
+        "attributes": [
+          "white zigzag roofs",
+          "open-sided",
+          "concrete",
+          "long and low"
+        ],
+        "count": 4,
+        "salience": 4,
+        "position": "foreground bottom",
+        "evidence": "four long low structures with distinctive roofs along bottom edge facing dirt area",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "cluster of high-rise buildings",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "varied heights",
+          "glass and concrete facades"
+        ],
+        "count": 15,
+        "salience": 5,
+        "position": "background across horizon",
+        "evidence": "dense skyline of skyscrapers behind park",
+        "confidence": 0.98
+      },
+      {
+        "id": "e5",
+        "label": "cylindrical high-rise tower",
+        "category": "building",
+        "attributes": [
+          "cylindrical",
+          "tall",
+          "flat top"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "background right",
+        "evidence": "prominent round tower standing alone on right side of skyline",
+        "confidence": 0.97
+      },
+      {
+        "id": "e6",
+        "label": "vehicles on road",
+        "category": "vehicle",
+        "attributes": [
+          "small",
+          "on roadway",
+          "multiple"
+        ],
+        "count": 20,
+        "salience": 2,
+        "position": "middle-ground center",
+        "evidence": "tiny cars and buses along road bordering park",
+        "confidence": 0.75
+      },
+      {
+        "id": "e7",
+        "label": "overcast sky with clouds",
+        "category": "other",
+        "attributes": [
+          "cloudy",
+          "bright",
+          "overcast"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "top across image",
+        "evidence": "cloud-filled sky occupying upper third",
+        "confidence": 0.99
+      },
+      {
+        "id": "e8",
+        "label": "mature trees",
+        "category": "plant",
+        "attributes": [
+          "dense canopy",
+          "green",
+          "scattered"
+        ],
+        "count": 30,
+        "salience": 3,
+        "position": "throughout park and lake edge",
+        "evidence": "numerous dark green trees dotting park and surrounding lake",
+        "confidence": 0.95
+      },
+      {
+        "id": "e9",
+        "label": "person walking",
+        "category": "person_group",
+        "attributes": [
+          "small figure",
+          "walking",
+          "dark clothing"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "foreground bottom-center",
+        "evidence": "single small human figure on dirt ground in front of pavilions",
+        "confidence": 0.65
+      },
+      {
+        "id": "e10",
+        "label": "fountain monument in park",
+        "category": "structure",
+        "attributes": [
+          "circular",
+          "central",
+          "in grass"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "middle-ground center-right",
+        "evidence": "small circular structure with vertical elements in park lawn",
+        "confidence": 0.7
+      },
+      {
+        "id": "e11",
+        "label": "parking lot with cars",
+        "category": "vehicle",
+        "attributes": [
+          "parked",
+          "numerous",
+          "light-colored"
+        ],
+        "count": 50,
+        "salience": 2,
+        "position": "middle-ground right",
+        "evidence": "large paved area filled with small light vehicles behind trees",
+        "confidence": 0.8
+      },
+      {
+        "id": "e12",
+        "label": "low-rise white building",
+        "category": "building",
+        "attributes": [
+          "rectangular",
+          "white",
+          "multi-story"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "middle-ground left-center",
+        "evidence": "light-colored rectangular building at edge of park near trees",
+        "confidence": 0.85
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "in_front_of",
+        "object": "e4",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e9",
+        "predicate": "near",
+        "object": "e3",
+        "confidence": 0.7
+      },
+      {
+        "subject": "e2",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e5",
+        "predicate": "right_of",
+        "object": "e4",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e10",
+        "predicate": "inside",
+        "object": "e2",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e11",
+        "predicate": "behind",
+        "object": "e2",
+        "confidence": 0.82
+      },
+      {
+        "subject": "e7",
+        "predicate": "above",
+        "object": "e4",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e8",
+        "predicate": "inside",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e6",
+        "predicate": "near",
+        "object": "e2",
+        "confidence": 0.78
+      },
+      {
+        "subject": "e12",
+        "predicate": "left_of",
+        "object": "e5",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e3",
+        "predicate": "below",
+        "object": "e7",
+        "confidence": 0.97
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 1,
+      "count_confidence": 0.65,
+      "faces_visible": false,
+      "activities": [
+        "walking"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of distant people in park is unclear due to small size and resolution",
+      "Text on distant buildings or signs is not legible",
+      "Specific building names, functions, or heights cannot be determined",
+      "Vehicle makes, models, and license plates are not discernible",
+      "Exact time of day and weather temperature cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 1,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:16:08+00:00",
+        "raw_output_path": "data/annotations/raw/park_002_attempt1.txt",
+        "tokens": 7941
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

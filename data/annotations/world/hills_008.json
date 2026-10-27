@@ -1,0 +1,308 @@
+{
+  "photo_id": "hills_008",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_008.jpg",
+    "license": "CC BY-SA 3.0",
+    "author": "Siegmund Kamau",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ngong%27_Hills,_Nairobi,_Kenya.jpg",
+    "title": "File:Ngong' Hills, Nairobi, Kenya.jpg"
+  },
+  "observed": {
+    "caption": "A wide savanna landscape with lush green vegetation under a partly cloudy blue sky and distant hills on the horizon.",
+    "description": "The image shows an expansive outdoor savanna with dense green shrubs and scattered flat-topped trees covering rolling terrain that stretches to the horizon, where a low range of blue-hued hills is visible beneath a broad sky filled with layered white and gray-blue clouds; the foreground contains darker green foliage and tree canopies, the midground is bright yellow-green scrubland, and the background sky occupies the upper two-thirds of the frame with soft daylight illumination.",
+    "retrieval_queries": [
+      "wide green savanna with cloudy sky and distant mountains",
+      "lush african bush landscape with acacia trees on horizon",
+      "panoramic view of grassland and hills under dramatic clouds"
+    ],
+    "tags": [
+      "savanna",
+      "landscape",
+      "grassland",
+      "clouds",
+      "hills",
+      "vegetation",
+      "nature",
+      "panorama"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "bright natural daylight",
+      "crowd_level": "empty",
+      "activity_summary": "natural landscape with no visible activity"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "raised",
+      "facing": "across the savanna toward distant hills",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "savanna landscape and sky"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "sky with scattered clouds",
+        "category": "other",
+        "attributes": [
+          "blue",
+          "expansive",
+          "cloud-filled",
+          "upper two-thirds of frame"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "top and center",
+        "evidence": "broad blue area with white and gray cloud formations covering upper portion",
+        "confidence": 0.99
+      },
+      {
+        "id": "e2",
+        "label": "cumulus clouds",
+        "category": "other",
+        "attributes": [
+          "white",
+          "gray-blue",
+          "puffy",
+          "layered"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "top and center",
+        "evidence": "distinct white and shaded cloud masses across sky",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "distant mountain range",
+        "category": "terrain",
+        "attributes": [
+          "blue-hued",
+          "low",
+          "hazy",
+          "on horizon"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center background on horizon",
+        "evidence": "faint blue ridgeline behind vegetation along horizon",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "savanna shrubland",
+        "category": "terrain",
+        "attributes": [
+          "lush",
+          "green",
+          "yellow-green",
+          "dense",
+          "rolling"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center and lower",
+        "evidence": "expansive green vegetation covering middle and foreground",
+        "confidence": 0.99
+      },
+      {
+        "id": "e5",
+        "label": "scattered acacia trees",
+        "category": "plant",
+        "attributes": [
+          "flat-topped",
+          "sparse",
+          "dark green",
+          "isolated on horizon"
+        ],
+        "count": 7,
+        "salience": 3,
+        "position": "along horizon line",
+        "evidence": "distinct umbrella-shaped trees silhouetted against sky on horizon",
+        "confidence": 0.94
+      },
+      {
+        "id": "e6",
+        "label": "dense foreground vegetation",
+        "category": "plant",
+        "attributes": [
+          "dark green",
+          "leafy",
+          "bushy",
+          "detailed"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground bottom",
+        "evidence": "darker, closer tree canopies and shrubs at bottom edge",
+        "confidence": 0.97
+      },
+      {
+        "id": "e7",
+        "label": "open grassland",
+        "category": "terrain",
+        "attributes": [
+          "bright green",
+          "open",
+          "midground"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center midground",
+        "evidence": "lighter green open area between foreground and horizon",
+        "confidence": 0.96
+      },
+      {
+        "id": "e8",
+        "label": "isolated tree on horizon left-center",
+        "category": "plant",
+        "attributes": [
+          "solitary",
+          "flat-topped",
+          "silhouetted"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left-center background on horizon",
+        "evidence": "single tree standing alone above shrubland against sky",
+        "confidence": 0.95
+      },
+      {
+        "id": "e9",
+        "label": "isolated tree on horizon center",
+        "category": "plant",
+        "attributes": [
+          "solitary",
+          "slender",
+          "silhouetted"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center background on horizon",
+        "evidence": "single thin tree on horizon line near mountains",
+        "confidence": 0.94
+      },
+      {
+        "id": "e10",
+        "label": "horizon line",
+        "category": "other",
+        "attributes": [
+          "distant",
+          "straight",
+          "vegetation-sky boundary"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center background",
+        "evidence": "line where green vegetation meets sky and mountains",
+        "confidence": 0.97
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "above",
+        "object": "e4",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e2",
+        "predicate": "above",
+        "object": "e3",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e6",
+        "predicate": "in_front_of",
+        "object": "e4",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e6",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e8",
+        "predicate": "left_of",
+        "object": "e9",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e7",
+        "predicate": "below",
+        "object": "e3",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e4",
+        "predicate": "below",
+        "object": "e10",
+        "confidence": 0.97
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.99,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact geographic location cannot be determined from image alone",
+      "Specific time of day and season cannot be determined",
+      "Presence of small animals or people hidden in dense vegetation cannot be determined",
+      "Exact distance to mountains and scale of landscape cannot be determined",
+      "Weather conditions beyond visible clouds cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:09:21+00:00",
+        "raw_output_path": "data/annotations/raw/hills_008_attempt1.txt",
+        "tokens": 5530
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

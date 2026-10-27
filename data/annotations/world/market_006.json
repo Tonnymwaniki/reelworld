@@ -1,0 +1,367 @@
+{
+  "photo_id": "market_006",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_006.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bugsinmyfood",
+    "source_url": "https://commons.wikimedia.org/wiki/File:City_market_hall,_Nairobi.jpg",
+    "title": "File:City market hall, Nairobi.jpg"
+  },
+  "observed": {
+    "caption": "Interior view of a large arched market hall with stalls on two levels and people browsing below.",
+    "description": "A spacious indoor market hall with high vaulted arches and rows of tall multi-pane windows along the right wall letting in daylight. An upper balcony walkway runs along the left side with hanging colorful clothing, fabrics and bags displayed for sale, while the ground floor is filled with low market stalls with corrugated roofs, red fabric canopies, and displays of flower bouquets and clothing. Several people are visible on both levels, some sitting on the balcony edge, some standing, walking or bending near the stalls. The floor is stone-tiled and the far end of the hall is an empty arched wall.",
+    "retrieval_queries": [
+      "indoor market hall with arched ceiling and flower stalls",
+      "two level bazaar with clothing displays and high windows",
+      "elevated view of busy covered market interior"
+    ],
+    "tags": [
+      "market hall",
+      "arched ceiling",
+      "indoor bazaar",
+      "flower stalls",
+      "clothing displays",
+      "balcony",
+      "windows",
+      "vaulted roof"
+    ],
+    "scene": {
+      "type": "market",
+      "setting": "indoor",
+      "time_of_day": "daytime",
+      "weather": "unknown",
+      "lighting": "bright natural daylight through windows",
+      "crowd_level": "sparse",
+      "activity_summary": "browsing and vending at market stalls"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "raised",
+      "facing": "down the length of the hall toward the far arched wall",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "interior of the market hall and stalls"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "vaulted arched ceiling with beams",
+        "category": "structure",
+        "attributes": [
+          "high",
+          "cream-colored",
+          "curved arches",
+          "repeating pattern"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "top center",
+        "evidence": "large curved structural arches spanning the hall ceiling",
+        "confidence": 0.95
+      },
+      {
+        "id": "e2",
+        "label": "tall multi-pane windows along right wall",
+        "category": "structure",
+        "attributes": [
+          "rectangular",
+          "grid panes",
+          "bright",
+          "multiple rows"
+        ],
+        "count": 12,
+        "salience": 4,
+        "position": "right side",
+        "evidence": "rows of illuminated windows on the right wall letting in daylight",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "upper balcony walkway with railing",
+        "category": "structure",
+        "attributes": [
+          "concrete",
+          "left side",
+          "lined with goods",
+          "elevated"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left",
+        "evidence": "raised walkway on left where people sit and goods hang",
+        "confidence": 0.93
+      },
+      {
+        "id": "e4",
+        "label": "ground-floor market stalls with corrugated roofs",
+        "category": "structure",
+        "attributes": [
+          "low",
+          "makeshift roofs",
+          "wooden",
+          "clustered"
+        ],
+        "count": 8,
+        "salience": 5,
+        "position": "center and bottom",
+        "evidence": "rows of small stalls covering the lower floor area",
+        "confidence": 0.94
+      },
+      {
+        "id": "e5",
+        "label": "hanging colorful clothing and fabrics",
+        "category": "object",
+        "attributes": [
+          "multicolored",
+          "patterned",
+          "hung on display",
+          "textiles"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left and center",
+        "evidence": "dense displays of garments and fabrics hanging from stalls and balcony",
+        "confidence": 0.92
+      },
+      {
+        "id": "e6",
+        "label": "flower bouquets on display",
+        "category": "plant",
+        "attributes": [
+          "white",
+          "pink",
+          "yellow",
+          "arranged in bunches",
+          "on ground and tables"
+        ],
+        "count": 15,
+        "salience": 4,
+        "position": "bottom right and center",
+        "evidence": "clusters of cut flowers arranged on steps and crates near stalls",
+        "confidence": 0.9
+      },
+      {
+        "id": "e7",
+        "label": "red fabric stall canopy with white trim",
+        "category": "structure",
+        "attributes": [
+          "red",
+          "draped",
+          "white fringe",
+          "covering stall entrance"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "bottom right",
+        "evidence": "prominent red draped fabric covering a stall near the flower displays",
+        "confidence": 0.91
+      },
+      {
+        "id": "e8",
+        "label": "people on upper balcony",
+        "category": "person_group",
+        "attributes": [
+          "sitting",
+          "standing",
+          "casual clothing",
+          "one with backpack"
+        ],
+        "count": 4,
+        "salience": 3,
+        "position": "left",
+        "evidence": "several figures seated and standing along the upper walkway",
+        "confidence": 0.78
+      },
+      {
+        "id": "e9",
+        "label": "people on ground floor",
+        "category": "person_group",
+        "attributes": [
+          "standing",
+          "sitting",
+          "bending",
+          "walking",
+          "casual clothing"
+        ],
+        "count": 6,
+        "salience": 3,
+        "position": "bottom center and right",
+        "evidence": "figures near stalls and flower displays on the lower level",
+        "confidence": 0.75
+      },
+      {
+        "id": "e10",
+        "label": "hanging handbags",
+        "category": "object",
+        "attributes": [
+          "dark",
+          "suspended from ceiling",
+          "near clothing"
+        ],
+        "count": 4,
+        "salience": 2,
+        "position": "upper left",
+        "evidence": "bags hanging from the balcony structure above the clothing displays",
+        "confidence": 0.85
+      },
+      {
+        "id": "e11",
+        "label": "stone-tiled ground floor",
+        "category": "terrain",
+        "attributes": [
+          "gray",
+          "paved",
+          "worn"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom",
+        "evidence": "paved surface covering the lower market area",
+        "confidence": 0.88
+      },
+      {
+        "id": "e12",
+        "label": "small flags on balcony railing",
+        "category": "object",
+        "attributes": [
+          "multicolored",
+          "small",
+          "attached to railing"
+        ],
+        "count": 5,
+        "salience": 2,
+        "position": "center-left",
+        "evidence": "small flags lined along the edge of the upper balcony",
+        "confidence": 0.8
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e3",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e4",
+        "predicate": "below",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e4",
+        "predicate": "in_front_of",
+        "object": "e2",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e6",
+        "predicate": "near",
+        "object": "e7",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e8",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e9",
+        "predicate": "inside",
+        "object": "e4",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e10",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.82
+      },
+      {
+        "subject": "e1",
+        "predicate": "above",
+        "object": "e4",
+        "confidence": 0.96
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "BANANA HILL FLORIST",
+        "language": "en",
+        "entity_id": "e4",
+        "location_in_image": "center, on a dark sign above a ground-floor stall",
+        "legibility": "partial",
+        "confidence": 0.72
+      }
+    ],
+    "people": {
+      "count": 10,
+      "count_confidence": 0.68,
+      "faces_visible": false,
+      "activities": [
+        "sitting on balcony",
+        "standing and looking over railing",
+        "walking through aisle",
+        "sitting near stalls",
+        "bending over flowers",
+        "standing near flower display"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people due to occlusion and distance",
+      "Text on small green illuminated signs in the center is blurry and unreadable",
+      "Text on distant stalls and flags on the right side is not legible",
+      "Exact time of day beyond daylight",
+      "Details of goods on far stalls due to distance and blur",
+      "Whether additional people are obscured behind stalls"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 10,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:13:29+00:00",
+        "raw_output_path": "data/annotations/raw/market_006_attempt1.txt",
+        "tokens": 7185
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'BANANA HILL FLORIST'"
+      ]
+    }
+  }
+}

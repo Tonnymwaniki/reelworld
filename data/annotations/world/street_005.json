@@ -1,0 +1,334 @@
+{
+  "photo_id": "street_005",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_005.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Haile_Selassie_Avenue_(Nairobi),_2025_(03).jpg",
+    "title": "File:Haile Selassie Avenue (Nairobi), 2025 (03).jpg"
+  },
+  "observed": {
+    "caption": "An elevated view of a busy multi-lane urban avenue filled with buses, cars, and pedestrians under an overcast sky.",
+    "description": "A wide multi-lane paved avenue runs from the foreground into the distance, divided by a central median with a metal fence. Numerous buses, minibuses, cars, vans, and motorcycles occupy the lanes, with heavy traffic on the left side and lighter traffic on the right. Tall buildings line both sides, including a prominent beige high-rise with vertical dark glazing in the center background and a long brown concrete elevated pedestrian walkway on the right with people standing on its upper level. Green trees line the sidewalks, and pedestrians are visible walking on pavements on both sides and on the walkway. Billboards with text stand on the central median, and a white delivery truck is parked on the right roadside near bollards. The sky is overcast with gray-white clouds providing diffuse daylight.",
+    "retrieval_queries": [
+      "busy city avenue with buses and traffic jam from above",
+      "crowded urban street with tall buildings and billboards",
+      "elevated view of multi-lane road with pedestrians and vehicles"
+    ],
+    "tags": [
+      "busy street",
+      "city traffic",
+      "buses",
+      "urban avenue",
+      "overcast",
+      "pedestrians",
+      "high-rise building",
+      "billboard"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast",
+      "lighting": "diffuse overcast daylight",
+      "crowd_level": "busy",
+      "activity_summary": "heavy vehicle traffic and pedestrian movement"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "raised",
+      "facing": "down the avenue toward the distant skyline",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "busy urban avenue with traffic"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "multi-lane urban avenue",
+        "category": "terrain",
+        "attributes": [
+          "paved",
+          "divided by central median",
+          "lane markings"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center running from foreground to background",
+        "evidence": "visible road with vehicles, central fence, and lane lines extending into distance",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "buses and minibuses",
+        "category": "vehicle",
+        "attributes": [
+          "white, red, purple, orange",
+          "large",
+          "roof racks"
+        ],
+        "count": 8,
+        "salience": 5,
+        "position": "foreground and middle distance on road",
+        "evidence": "multiple large buses with distinct colors in traffic lanes",
+        "confidence": 0.95
+      },
+      {
+        "id": "e3",
+        "label": "cars and vans",
+        "category": "vehicle",
+        "attributes": [
+          "white, silver, black",
+          "various sizes"
+        ],
+        "count": 15,
+        "salience": 4,
+        "position": "scattered along road lanes",
+        "evidence": "numerous small vehicles interspersed with buses on the avenue",
+        "confidence": 0.92
+      },
+      {
+        "id": "e4",
+        "label": "tall modern high-rise building",
+        "category": "building",
+        "attributes": [
+          "beige facade",
+          "vertical dark stripe",
+          "CO-OP BANK signage on top"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center background",
+        "evidence": "prominent tall building with logo and text at top behind other buildings",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "elevated concrete pedestrian walkway",
+        "category": "structure",
+        "attributes": [
+          "brown concrete",
+          "multi-level",
+          "balcony with railings"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right side running along street",
+        "evidence": "long concrete structure with upper balcony and lower sidewalk, people standing on it",
+        "confidence": 0.97
+      },
+      {
+        "id": "e6",
+        "label": "street trees",
+        "category": "plant",
+        "attributes": [
+          "green foliage",
+          "tall",
+          "lining sidewalks"
+        ],
+        "count": 12,
+        "salience": 3,
+        "position": "both sides of avenue, left foreground and middle distance",
+        "evidence": "trees with trunks and canopies along sidewalks and median",
+        "confidence": 0.94
+      },
+      {
+        "id": "e7",
+        "label": "roadside billboards",
+        "category": "sign",
+        "attributes": [
+          "white background",
+          "black and red text",
+          "rectangular"
+        ],
+        "count": 3,
+        "salience": 3,
+        "position": "central median, middle distance",
+        "evidence": "upright signs with BOOK THESE SPACES text among traffic",
+        "confidence": 0.9
+      },
+      {
+        "id": "e8",
+        "label": "overcast sky",
+        "category": "other",
+        "attributes": [
+          "cloudy",
+          "gray-white",
+          "diffuse light"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top, background",
+        "evidence": "cloud-covered sky above buildings",
+        "confidence": 0.98
+      },
+      {
+        "id": "e9",
+        "label": "pedestrians",
+        "category": "person_group",
+        "attributes": [
+          "walking",
+          "standing",
+          "various clothing"
+        ],
+        "count": 45,
+        "salience": 3,
+        "position": "sidewalks on both sides and elevated walkway",
+        "evidence": "numerous small figures on pavements and walkway",
+        "confidence": 0.65
+      },
+      {
+        "id": "e10",
+        "label": "white delivery truck",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "box body",
+          "parked"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right roadside, lower middle",
+        "evidence": "small white truck parked beside sidewalk near bollards",
+        "confidence": 0.93
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e5",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e6",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e9",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e10",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e5",
+        "predicate": "above",
+        "object": "e10",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "CO-OP BANK",
+        "language": "en",
+        "entity_id": "e4",
+        "location_in_image": "top of tall building in center background",
+        "legibility": "clear",
+        "confidence": 0.95
+      },
+      {
+        "text": "BOOK THESE SPACES 0725 654 355",
+        "language": "en",
+        "entity_id": "e7",
+        "location_in_image": "billboard on central median, left side of road, middle distance",
+        "legibility": "clear",
+        "confidence": 0.9
+      },
+      {
+        "text": "BOOK THESE SPACES",
+        "language": "en",
+        "entity_id": "e7",
+        "location_in_image": "smaller billboard further down central median",
+        "legibility": "partial",
+        "confidence": 0.7
+      }
+    ],
+    "people": {
+      "count": 45,
+      "count_confidence": 0.6,
+      "faces_visible": false,
+      "activities": [
+        "walking on sidewalks",
+        "standing on elevated walkway",
+        "driving vehicles",
+        "riding motorcycles",
+        "vending at roadside"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people and vehicles is uncertain due to distance, occlusion, and small figure size",
+      "Text on distant billboards and other building signs is blurry or cut off and not fully legible",
+      "License plate numbers and small vehicle markings cannot be read",
+      "Text on people's clothing or bags was ignored per rules and not listed",
+      "Specific street name, city, and building names beyond CO-OP BANK cannot be determined from visible text",
+      "Exact time of day and weather details beyond overcast appearance cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 45,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:19:39+00:00",
+        "raw_output_path": "data/annotations/raw/street_005_attempt1.txt",
+        "tokens": 11393
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'BOOK THESE SPACES'"
+      ]
+    }
+  }
+}

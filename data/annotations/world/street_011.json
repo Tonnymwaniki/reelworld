@@ -1,0 +1,359 @@
+{
+  "photo_id": "street_011",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_011.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Kenyatta_Avenue,_Nairobi,_2025_(02).jpg",
+    "title": "File:Kenyatta Avenue, Nairobi, 2025 (02).jpg"
+  },
+  "observed": {
+    "caption": "Busy urban street intersection with cars, buses, motorcycles, pedestrians, traffic lights and multi-story buildings under a cloudy sky.",
+    "description": "A wide paved intersection with multiple lanes of traffic including a silver sedan in the center, a blue bus behind it, white cars parked along the left curb, and several motorcycles with riders on the road. A tall white multi-story building with balconies and dark windows stands on the left, with green trees in front of it and along the street. Traffic light poles with multiple signal heads and street lamp posts line the roads. Groups of people are walking on sidewalks and standing near vehicles, some riding motorcycles and one wearing a high-visibility vest near the silver car. Distant high-rise buildings are visible in the background under an overcast sky with white and gray clouds.",
+    "retrieval_queries": [
+      "busy city intersection with buses cars and motorcycles",
+      "white building on street corner with traffic lights and cloudy sky",
+      "urban street scene with blue bus and silver car at crossing"
+    ],
+    "tags": [
+      "street",
+      "intersection",
+      "traffic",
+      "buildings",
+      "bus",
+      "cars",
+      "motorcycles",
+      "trees",
+      "city"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast with clouds",
+      "lighting": "diffused daylight",
+      "crowd_level": "moderate",
+      "activity_summary": "vehicles and pedestrians moving through intersection"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "across the intersection toward buildings",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "street intersection with traffic"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "white multi-story building on left",
+        "category": "building",
+        "attributes": [
+          "white facade",
+          "multiple floors",
+          "balconies with railings",
+          "rectangular windows"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "left",
+        "evidence": "large white building with balconies occupies left side of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "paved street intersection",
+        "category": "terrain",
+        "attributes": [
+          "asphalt surface",
+          "multiple lanes",
+          "road markings"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center and foreground",
+        "evidence": "wide road surface with vehicles and lane markings across lower half",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "traffic light pole with signals",
+        "category": "structure",
+        "attributes": [
+          "gray metal pole",
+          "multiple black signal heads",
+          "mounted on sidewalk"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right foreground",
+        "evidence": "pole with clustered traffic lights on right edge near curb",
+        "confidence": 0.97
+      },
+      {
+        "id": "e4",
+        "label": "silver sedan car",
+        "category": "vehicle",
+        "attributes": [
+          "silver color",
+          "four-door",
+          "parked on road"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right foreground",
+        "evidence": "silver car in center right lane near person in high-visibility vest",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "blue public bus",
+        "category": "vehicle",
+        "attributes": [
+          "blue and green color",
+          "large size",
+          "text on front"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center",
+        "evidence": "blue bus behind silver car in middle of intersection",
+        "confidence": 0.95
+      },
+      {
+        "id": "e6",
+        "label": "motorcycles with riders",
+        "category": "vehicle",
+        "attributes": [
+          "two-wheeled",
+          "riders wearing helmets",
+          "on road"
+        ],
+        "count": 3,
+        "salience": 4,
+        "position": "center foreground",
+        "evidence": "motorcycles on road, one prominent in foreground with rider",
+        "confidence": 0.94
+      },
+      {
+        "id": "e7",
+        "label": "green trees along street",
+        "category": "plant",
+        "attributes": [
+          "green foliage",
+          "mature",
+          "lining sidewalk"
+        ],
+        "count": 6,
+        "salience": 3,
+        "position": "left and center",
+        "evidence": "trees with dense leaves in front of buildings and along road",
+        "confidence": 0.96
+      },
+      {
+        "id": "e8",
+        "label": "overcast sky with clouds",
+        "category": "other",
+        "attributes": [
+          "white and gray clouds",
+          "bright",
+          "covers upper portion"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "top and background",
+        "evidence": "cloudy sky occupying upper two-thirds of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e9",
+        "label": "distant high-rise buildings",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "varied facades",
+          "in background"
+        ],
+        "count": 3,
+        "salience": 3,
+        "position": "center background and right background",
+        "evidence": "taller buildings visible behind trees in distance",
+        "confidence": 0.92
+      },
+      {
+        "id": "e10",
+        "label": "street lamp posts",
+        "category": "structure",
+        "attributes": [
+          "tall metal poles",
+          "curved arms",
+          "along sidewalk"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "left and right midground",
+        "evidence": "lamp posts with lights along both sides of street",
+        "confidence": 0.93
+      },
+      {
+        "id": "e11",
+        "label": "group of pedestrians and riders",
+        "category": "person_group",
+        "attributes": [
+          "walking",
+          "standing",
+          "riding motorcycles",
+          "general clothing"
+        ],
+        "count": 15,
+        "salience": 4,
+        "position": "foreground and sidewalks",
+        "evidence": "multiple people on sidewalks and road, some on motorcycles, one near silver car",
+        "confidence": 0.65
+      },
+      {
+        "id": "e12",
+        "label": "white parked cars on left",
+        "category": "vehicle",
+        "attributes": [
+          "white color",
+          "small sedans",
+          "parked at curb"
+        ],
+        "count": 2,
+        "salience": 2,
+        "position": "left midground",
+        "evidence": "two white cars parked along left side near sidewalk",
+        "confidence": 0.9
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e9",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "right_of",
+        "object": "e4",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e4",
+        "predicate": "in_front_of",
+        "object": "e5",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e7",
+        "predicate": "near",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e5",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e11",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e10",
+        "predicate": "beside",
+        "object": "e2",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e12",
+        "predicate": "left_of",
+        "object": "e4",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "City Shuttle",
+        "language": "en",
+        "entity_id": "e5",
+        "location_in_image": "front top of blue bus in center",
+        "legibility": "partial",
+        "confidence": 0.75
+      },
+      {
+        "text": "TECNO",
+        "language": "en",
+        "entity_id": "e9",
+        "location_in_image": "on distant building on right side",
+        "legibility": "partial",
+        "confidence": 0.72
+      }
+    ],
+    "people": {
+      "count": 15,
+      "count_confidence": 0.62,
+      "faces_visible": false,
+      "activities": [
+        "walking on sidewalks",
+        "riding motorcycles",
+        "standing near vehicles"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people due to occlusion and distance",
+      "Text on red sign attached to right foreground pole is partially visible and cannot be fully read",
+      "Text on distant building signs beyond TECNO is blurry and cannot be reliably read",
+      "Text on shop fronts along left building ground floor is small and partially obscured",
+      "License plate numbers and vehicle details are not legible",
+      "Exact time of day beyond daytime and weather conditions beyond cloud cover"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 15,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:20:20+00:00",
+        "raw_output_path": "data/annotations/raw/street_011_attempt1.txt",
+        "tokens": 9040
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'City Shuttle'",
+        "partially legible text: 'TECNO'"
+      ]
+    }
+  }
+}

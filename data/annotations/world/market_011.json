@@ -1,0 +1,384 @@
+{
+  "photo_id": "market_011",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_011.jpg",
+    "license": "CC BY 4.0",
+    "author": "Ferfive",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Masai_Market_after_a_safari.jpg",
+    "title": "File:Masai Market after a safari.jpg"
+  },
+  "observed": {
+    "caption": "Indoor souvenir shop aisle lined with white display shelves holding wooden animal carvings, patterned stools, and hanging Africa map banners.",
+    "description": "White metal A-frame display shelves line both sides of a tiled aisle inside a covered shop with a corrugated metal roof and fluorescent tube lighting. The left shelves hold dark polished wooden sculptures of lions, rhinoceroses, leopards and other animals on the upper levels, small round stools painted with zebra stripes and giraffe spots on the middle level, and rows of dark wooden figurines and carved cattle groups on the lower level. Colorful fabric banners hanging from the ceiling show maps of Africa, and a large orange and red tapestry depicting a savanna sunset with zebras, acacia trees and birds hangs in the background. The right shelves display numerous small animal figurines, beaded crafts, and hanging masks. The floor is white tile with grey marble veining, and white support beams and additional hanging textiles are visible overhead.",
+    "retrieval_queries": [
+      "souvenir shop with wooden animal carvings and Africa map banners",
+      "indoor market stall selling zebra stools and carved lions",
+      "African craft store aisle with animal sculptures and masks"
+    ],
+    "tags": [
+      "souvenir shop",
+      "African crafts",
+      "wood carvings",
+      "market stall",
+      "animal sculptures",
+      "zebra stools",
+      "masks",
+      "tapestry"
+    ],
+    "scene": {
+      "type": "market",
+      "setting": "indoor",
+      "time_of_day": "unknown",
+      "weather": "unknown",
+      "lighting": "bright fluorescent and daylight",
+      "crowd_level": "empty",
+      "activity_summary": "displaying handcrafted souvenirs and carvings"
+    },
+    "camera": {
+      "viewpoint": "interior",
+      "height_estimate": "eye_level",
+      "facing": "down the aisle between display shelves",
+      "distance": "close",
+      "framing": "medium",
+      "orientation": "portrait",
+      "subject_focus": "souvenir display shelves with carvings"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "white metal display shelves left side",
+        "category": "structure",
+        "attributes": [
+          "white",
+          "metal",
+          "A-frame",
+          "multi-tiered"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "left foreground",
+        "evidence": "white shelves holding sculptures and stools along left side of aisle",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "carved wooden animal sculptures",
+        "category": "object",
+        "attributes": [
+          "dark brown and black polished wood",
+          "lion, rhinoceros, leopard shapes"
+        ],
+        "count": 10,
+        "salience": 5,
+        "position": "left upper shelves",
+        "evidence": "glossy dark wooden animal figures on top two levels of left shelves",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "zebra-striped wooden stools",
+        "category": "object",
+        "attributes": [
+          "black and white stripes",
+          "round",
+          "wooden"
+        ],
+        "count": 12,
+        "salience": 4,
+        "position": "left middle shelf",
+        "evidence": "small stools with zebra stripe pattern on middle level",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "giraffe-patterned wooden stools",
+        "category": "object",
+        "attributes": [
+          "brown with yellow spots",
+          "round",
+          "wooden"
+        ],
+        "count": 6,
+        "salience": 4,
+        "position": "left middle shelf",
+        "evidence": "small stools with giraffe spot pattern beside zebra stools",
+        "confidence": 0.95
+      },
+      {
+        "id": "e5",
+        "label": "red hanging banner with Africa map",
+        "category": "sign",
+        "attributes": [
+          "red and yellow",
+          "fabric",
+          "map graphic",
+          "hanging"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "top left",
+        "evidence": "red banner with map and text hanging from ceiling",
+        "confidence": 0.98
+      },
+      {
+        "id": "e6",
+        "label": "blue hanging banner with Africa map",
+        "category": "sign",
+        "attributes": [
+          "blue and yellow",
+          "fabric",
+          "map graphic",
+          "hanging"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "top center",
+        "evidence": "blue banner with map and text hanging from ceiling",
+        "confidence": 0.98
+      },
+      {
+        "id": "e7",
+        "label": "large savanna tapestry with zebras and sunset",
+        "category": "object",
+        "attributes": [
+          "orange and red",
+          "fabric",
+          "zebra and tree print",
+          "large"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center background",
+        "evidence": "large fabric with sunset, acacia trees, zebras and birds behind shelves",
+        "confidence": 0.96
+      },
+      {
+        "id": "e8",
+        "label": "fluorescent tube ceiling light",
+        "category": "object",
+        "attributes": [
+          "white",
+          "long tube",
+          "bright"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "top center-right",
+        "evidence": "bright white fluorescent light mounted on ceiling beam",
+        "confidence": 0.97
+      },
+      {
+        "id": "e9",
+        "label": "white marble-patterned tile floor",
+        "category": "terrain",
+        "attributes": [
+          "white with grey veining",
+          "glossy",
+          "tiled"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom and center aisle",
+        "evidence": "white floor tiles with grey marble pattern under and between shelves",
+        "confidence": 0.98
+      },
+      {
+        "id": "e10",
+        "label": "small wooden animal figurines on right shelves",
+        "category": "object",
+        "attributes": [
+          "small",
+          "brown and spotted",
+          "leopard and zebra shapes"
+        ],
+        "count": 30,
+        "salience": 4,
+        "position": "right shelves lower level",
+        "evidence": "rows of small carved animal figures on lower right display",
+        "confidence": 0.94
+      },
+      {
+        "id": "e11",
+        "label": "African masks and beaded crafts on right background",
+        "category": "object",
+        "attributes": [
+          "dark wood",
+          "painted",
+          "hanging",
+          "varied shapes"
+        ],
+        "count": 15,
+        "salience": 3,
+        "position": "right background",
+        "evidence": "masks and hanging beaded items on far right shelves",
+        "confidence": 0.92
+      },
+      {
+        "id": "e12",
+        "label": "corrugated metal roof with white support beams",
+        "category": "structure",
+        "attributes": [
+          "metal",
+          "corrugated",
+          "white beams"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top background",
+        "evidence": "metal roofing and white trusses visible above banners",
+        "confidence": 0.95
+      },
+      {
+        "id": "e13",
+        "label": "partially visible red banner on right",
+        "category": "sign",
+        "attributes": [
+          "red and yellow",
+          "fabric",
+          "partially cut off",
+          "hanging"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top right",
+        "evidence": "red banner with map partially visible on right side",
+        "confidence": 0.85
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e5",
+        "predicate": "above",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e6",
+        "predicate": "above",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e4",
+        "predicate": "beside",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e7",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e8",
+        "predicate": "above",
+        "object": "e7",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e10",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e9",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e13",
+        "predicate": "right_of",
+        "object": "e6",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "COUNTRIES OF AFRICA",
+        "language": "en",
+        "entity_id": "e5",
+        "location_in_image": "top left hanging banner",
+        "legibility": "clear",
+        "confidence": 0.98
+      },
+      {
+        "text": "COUNTRIES OF AFRICA",
+        "language": "en",
+        "entity_id": "e6",
+        "location_in_image": "top center hanging banner",
+        "legibility": "clear",
+        "confidence": 0.98
+      },
+      {
+        "text": "ES OF ICA",
+        "language": "en",
+        "entity_id": "e13",
+        "location_in_image": "top right hanging banner",
+        "legibility": "partial",
+        "confidence": 0.65
+      }
+    ],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.99,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact text on the partially cut-off banner on the top right beyond the visible letters",
+      "Text on small price tags attached to stools and sculptures is not legible",
+      "Material composition of sculptures and stools beyond visual appearance",
+      "Geographic location of the shop beyond what is depicted",
+      "Whether additional people or areas exist outside the frame"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:13:54+00:00",
+        "raw_output_path": "data/annotations/raw/market_011_attempt1.txt",
+        "tokens": 9444
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'ES OF ICA'"
+      ]
+    }
+  }
+}

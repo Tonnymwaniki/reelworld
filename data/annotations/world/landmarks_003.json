@@ -1,0 +1,367 @@
+{
+  "photo_id": "landmarks_003",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/landmarks/landmarks_003.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Giluwa",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Kenyatta_International_Convention_Center_Tower.jpg",
+    "title": "File:Kenyatta International Convention Center Tower.jpg"
+  },
+  "observed": {
+    "caption": "A bright daytime city skyline dominated by a tall cylindrical tower and a conical-roof pavilion with modern glass skyscrapers under a blue sky with scattered white clouds.",
+    "description": "A wide outdoor cityscape under a bright blue sky with scattered white cumulus clouds. On the left-center stands a tall cylindrical high-rise with horizontal pinkish-brown balconies and a flat disc-shaped roof. In the center foreground is a low circular pavilion with a dark brown conical roof on an elevated platform with walkways. Behind it are two taller buildings: a beige rectangular tower with vertical glass windows and a modern blue-glass skyscraper with an angular gold-accented top. Additional low beige buildings are visible on the far left. Green trees and palm trees line the right side and foreground, with numerous thin white vertical flagpoles arranged in rows across the bottom and right. Small figures of people are visible near large white block letters on the ground at the bottom center. The lighting is bright natural daylight.",
+    "retrieval_queries": [
+      "Nairobi skyline with KICC tower and blue sky",
+      "cylindrical high rise with conical pavilion in city center",
+      "Kenya cityscape with modern glass towers and flagpoles"
+    ],
+    "tags": [
+      "skyline",
+      "skyscraper",
+      "cylindrical tower",
+      "conical roof",
+      "cityscape",
+      "blue sky",
+      "clouds",
+      "urban architecture",
+      "flagpoles",
+      "palm trees"
+    ],
+    "scene": {
+      "type": "building",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "bright natural daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "city skyline view with architecture"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the skyline and upward at buildings",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "portrait",
+      "subject_focus": "tall cylindrical tower and surrounding skyline"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "cylindrical high-rise tower",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "cylindrical",
+          "brown-pink facade",
+          "horizontal balconies",
+          "flat disc-shaped roof"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "left-center",
+        "evidence": "tall cylindrical building with tiered balconies and disc roof dominates left side against blue sky",
+        "confidence": 0.99
+      },
+      {
+        "id": "e2",
+        "label": "conical-roof pavilion",
+        "category": "building",
+        "attributes": [
+          "low",
+          "circular",
+          "dark brown conical roof",
+          "elevated on platform"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-bottom",
+        "evidence": "dark conical roof structure in foreground center below the high-rises",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "rectangular mid-rise tower",
+        "category": "building",
+        "attributes": [
+          "beige",
+          "rectangular",
+          "vertical glass windows",
+          "flat roof with antenna"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center",
+        "evidence": "beige rectangular tower with blue glass strip behind conical pavilion",
+        "confidence": 0.97
+      },
+      {
+        "id": "e4",
+        "label": "modern glass skyscraper",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "blue glass facade",
+          "angular top",
+          "gold accent"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right-center",
+        "evidence": "tall blue glass building with slanted top on right side",
+        "confidence": 0.98
+      },
+      {
+        "id": "e5",
+        "label": "low-rise background buildings",
+        "category": "building",
+        "attributes": [
+          "beige",
+          "multi-story",
+          "rectangular",
+          "distant"
+        ],
+        "count": 2,
+        "salience": 1,
+        "position": "far left background",
+        "evidence": "two beige rectangular buildings visible on far left horizon",
+        "confidence": 0.9
+      },
+      {
+        "id": "e6",
+        "label": "trees and palm trees",
+        "category": "plant",
+        "attributes": [
+          "green",
+          "dense foliage",
+          "palm fronds",
+          "mature"
+        ],
+        "count": 10,
+        "salience": 3,
+        "position": "right and bottom",
+        "evidence": "clusters of green trees and palms along right side and foreground",
+        "confidence": 0.95
+      },
+      {
+        "id": "e7",
+        "label": "flagpoles",
+        "category": "structure",
+        "attributes": [
+          "tall",
+          "thin",
+          "white",
+          "vertical",
+          "numerous in rows"
+        ],
+        "count": 30,
+        "salience": 3,
+        "position": "foreground bottom and right",
+        "evidence": "many thin white vertical poles in foreground and along right edge",
+        "confidence": 0.96
+      },
+      {
+        "id": "e8",
+        "label": "sky",
+        "category": "other",
+        "attributes": [
+          "bright blue",
+          "clear",
+          "expansive"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "upper and background",
+        "evidence": "large bright blue sky occupying upper two-thirds of image",
+        "confidence": 0.99
+      },
+      {
+        "id": "e9",
+        "label": "clouds",
+        "category": "other",
+        "attributes": [
+          "white",
+          "fluffy",
+          "cumulus",
+          "scattered"
+        ],
+        "count": 5,
+        "salience": 2,
+        "position": "scattered across sky",
+        "evidence": "white cumulus clouds scattered across blue sky, large cluster behind towers",
+        "confidence": 0.98
+      },
+      {
+        "id": "e10",
+        "label": "group of people",
+        "category": "person_group",
+        "attributes": [
+          "small figures",
+          "standing and walking",
+          "general clothing indistinct"
+        ],
+        "count": 8,
+        "salience": 2,
+        "position": "bottom center",
+        "evidence": "small human figures near KENYA letters and walkways at bottom",
+        "confidence": 0.65
+      },
+      {
+        "id": "e11",
+        "label": "KENYA letter installation",
+        "category": "sign",
+        "attributes": [
+          "large white capital letters",
+          "ground-mounted",
+          "block letters"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom center",
+        "evidence": "white block letters spelling KENYA on ground level in foreground",
+        "confidence": 0.92
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e4",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e2",
+        "predicate": "in_front_of",
+        "object": "e3",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e4",
+        "predicate": "right_of",
+        "object": "e3",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e6",
+        "predicate": "right_of",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e7",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e7",
+        "predicate": "in_front_of",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e8",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e9",
+        "predicate": "above",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e10",
+        "predicate": "in_front_of",
+        "object": "e2",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e11",
+        "predicate": "in_front_of",
+        "object": "e2",
+        "confidence": 0.88
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "CBK PENSION TOWERS",
+        "language": "en",
+        "entity_id": "e4",
+        "location_in_image": "on blue glass facade of skyscraper on right-center",
+        "legibility": "clear",
+        "confidence": 0.96
+      },
+      {
+        "text": "KENYA",
+        "language": "en",
+        "entity_id": "e11",
+        "location_in_image": "on ground installation at bottom center",
+        "legibility": "clear",
+        "confidence": 0.93
+      }
+    ],
+    "people": {
+      "count": 8,
+      "count_confidence": 0.65,
+      "faces_visible": false,
+      "activities": [
+        "standing",
+        "walking"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people at bottom center due to small size, distance and occlusion",
+      "Text or logo on rooftop of beige rectangular tower in center is not legible enough to read",
+      "Whether flagpoles have flags attached cannot be determined",
+      "Interior details of buildings and pavilion not visible",
+      "Exact weather conditions beyond partly cloudy appearance",
+      "Small dark speck in upper left sky may be bird or artifact but cannot be confirmed"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 8,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:11:39+00:00",
+        "raw_output_path": "data/annotations/raw/landmarks_003_attempt1.txt",
+        "tokens": 10152
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

@@ -1,0 +1,355 @@
+{
+  "photo_id": "cbd_018",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/cbd/cbd_018.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Keshie Muchai",
+    "source_url": "https://commons.wikimedia.org/wiki/File:GPO,_Nairobi.jpg",
+    "title": "File:GPO, Nairobi.jpg"
+  },
+  "observed": {
+    "caption": "Silhouetted pedestrians walk along a busy urban road at twilight with a tall building and traffic on the left and large trees on the right.",
+    "description": "A paved multi-lane road with white lane markings stretches into the distance under a pale blue to warm twilight sky. On the left a tall brown high-rise building with many windows and antennas stands beside a lower building with a large billboard, with several dark cars and vans along the curb and moving in the lanes and green and yellow buses further down the road. Two silhouetted figures are on the roadway, one in the foreground walking away from the camera near the curb and another mid-distance crossing the lanes. On the right large trees with spreading branches overhang the scene, a metal railing runs along the sidewalk, and double-headed streetlight poles line both sides of the road. Distant high-rise buildings, smaller trees, and a low sun near the horizon are visible in the background, casting the foreground into shadow.",
+    "retrieval_queries": [
+      "city street at dusk with tall building and cars and silhouetted pedestrians",
+      "twilight view down a busy urban road lined with trees and traffic",
+      "person walking along roadside at sunset with high-rise buildings in background"
+    ],
+    "tags": [
+      "city street",
+      "twilight",
+      "high-rise building",
+      "urban road",
+      "traffic",
+      "silhouette",
+      "pedestrian",
+      "trees",
+      "streetlights",
+      "evening"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "evening",
+      "weather": "clear with faint clouds",
+      "lighting": "low twilight with silhouettes",
+      "crowd_level": "sparse",
+      "activity_summary": "pedestrians walking and vehicles moving along urban road"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "down the street toward the horizon",
+      "distance": "close",
+      "framing": "wide",
+      "orientation": "portrait",
+      "subject_focus": "pedestrian on urban road at twilight"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "tall brown high-rise building",
+        "category": "building",
+        "attributes": [
+          "rectangular",
+          "many windows",
+          "antennas on roof",
+          "sunlit facade"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "left, background",
+        "evidence": "large vertical building with grid of windows on left side of image",
+        "confidence": 0.95
+      },
+      {
+        "id": "e2",
+        "label": "paved multi-lane road",
+        "category": "terrain",
+        "attributes": [
+          "asphalt",
+          "white lane markings",
+          "stretching into distance"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center, foreground to background",
+        "evidence": "dark roadway with painted lines running through center of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "cars and vans on left side of road",
+        "category": "vehicle",
+        "attributes": [
+          "dark colored",
+          "parked and moving",
+          "various sizes"
+        ],
+        "count": 5,
+        "salience": 4,
+        "position": "left, foreground and mid-distance",
+        "evidence": "multiple vehicles including dark hatchback in foreground and white van and silver SUV behind",
+        "confidence": 0.92
+      },
+      {
+        "id": "e4",
+        "label": "buses on road in middle distance",
+        "category": "vehicle",
+        "attributes": [
+          "green and yellow",
+          "large",
+          "on roadway"
+        ],
+        "count": 3,
+        "salience": 3,
+        "position": "center, mid-distance",
+        "evidence": "large buses visible on road beyond the cars",
+        "confidence": 0.88
+      },
+      {
+        "id": "e5",
+        "label": "silhouetted person walking away in foreground",
+        "category": "person_group",
+        "attributes": [
+          "dark silhouette",
+          "walking away",
+          "general dark clothing"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-foreground, on road edge",
+        "evidence": "dark figure with back to camera walking on pavement near curb",
+        "confidence": 0.96
+      },
+      {
+        "id": "e6",
+        "label": "silhouetted person crossing road mid-distance",
+        "category": "person_group",
+        "attributes": [
+          "dark silhouette",
+          "walking across lanes",
+          "general dark clothing"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center, mid-distance on road",
+        "evidence": "small dark figure mid-road appearing to walk across lanes",
+        "confidence": 0.85
+      },
+      {
+        "id": "e7",
+        "label": "large tree with spreading branches on right",
+        "category": "plant",
+        "attributes": [
+          "dark silhouette",
+          "dense foliage",
+          "overhanging branches"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right, foreground, above",
+        "evidence": "large tree with branches extending across top of image on right side",
+        "confidence": 0.97
+      },
+      {
+        "id": "e8",
+        "label": "streetlight poles along road",
+        "category": "structure",
+        "attributes": [
+          "tall metal poles",
+          "double-headed lamps"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "center and right, along road",
+        "evidence": "vertical poles with horizontal arms and lamps lining the roadway",
+        "confidence": 0.9
+      },
+      {
+        "id": "e9",
+        "label": "metal railing along right sidewalk",
+        "category": "structure",
+        "attributes": [
+          "metal",
+          "vertical bars",
+          "along curb"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right, foreground to mid-distance",
+        "evidence": "fence-like railing separating sidewalk from road on right side",
+        "confidence": 0.9
+      },
+      {
+        "id": "e10",
+        "label": "distant high-rise buildings on horizon",
+        "category": "building",
+        "attributes": [
+          "light colored",
+          "multiple towers",
+          "far background"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "center-right, far background",
+        "evidence": "cluster of tall buildings visible near horizon beyond trees",
+        "confidence": 0.85
+      },
+      {
+        "id": "e11",
+        "label": "twilight sky",
+        "category": "other",
+        "attributes": [
+          "pale blue to warm glow near horizon",
+          "faint clouds",
+          "gradient"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center and top, background",
+        "evidence": "open sky occupying upper half of image with color transition",
+        "confidence": 0.98
+      },
+      {
+        "id": "e12",
+        "label": "roadside advertising sign",
+        "category": "sign",
+        "attributes": [
+          "vertical rectangular",
+          "small",
+          "on pole beside road"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center, mid-distance beside road",
+        "evidence": "small sign on pole in middle distance with visible text",
+        "confidence": 0.75
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e7",
+        "predicate": "right_of",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e7",
+        "predicate": "above",
+        "object": "e9",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e3",
+        "predicate": "beside",
+        "object": "e5",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e8",
+        "predicate": "beside",
+        "object": "e2",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e9",
+        "predicate": "beside",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e10",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.8
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "DuraCoat",
+        "language": "en",
+        "entity_id": "e3",
+        "location_in_image": "on side of vehicle/container on left side of road, mid-distance",
+        "legibility": "clear",
+        "confidence": 0.85
+      },
+      {
+        "text": "mika",
+        "language": "unknown",
+        "entity_id": "e12",
+        "location_in_image": "on vertical roadside sign in center mid-distance",
+        "legibility": "clear",
+        "confidence": 0.8
+      }
+    ],
+    "people": {
+      "count": 2,
+      "count_confidence": 0.85,
+      "faces_visible": false,
+      "activities": [
+        "walking along road edge",
+        "crossing street"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact time of day cannot be determined from light alone, whether dawn or dusk",
+      "Total number of distant pedestrians beyond the two clear silhouettes is unclear due to small size and blur",
+      "Content of large billboard on left building is cut off and blurry, only partial letters visible",
+      "Text on buses and other distant signs is too blurry to read with at least 3 letters",
+      "Vehicle makes, models and license plates are not legible",
+      "Building names and specific location cannot be determined from image",
+      "Weather beyond sky appearance cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 2,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:08:30+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_018_attempt1.txt",
+        "tokens": 10003
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

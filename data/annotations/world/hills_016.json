@@ -1,0 +1,357 @@
+{
+  "photo_id": "hills_016",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_016.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Singularity Preparation",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ngong_Hills_Wind_Farm.jpg",
+    "title": "File:Ngong Hills Wind Farm.jpg"
+  },
+  "observed": {
+    "caption": "A wind farm with multiple white turbines on a green grassy hill under a partly cloudy blue sky.",
+    "description": "The photo shows a green grassy hillside with scattered rocks in the foreground and a large white wind turbine on the right side. Multiple additional white wind turbines with three blades are visible along the ridge and hillside in the background. Below the ridge there is a cluster of low beige buildings with gray roofs enclosed by a fence containing electrical equipment, with several parked vehicles nearby including white and dark-colored cars and vans. Piles of gravel and stacks of large concrete pipes lie on the grass in the center foreground. A reddish-brown dirt road winds up the hill through dark green trees and shrubs. The sky above is blue with large white and gray cumulus clouds. Small human figures are visible walking on the grass and road on the lower right slope.",
+    "retrieval_queries": [
+      "wind turbines on green hill with cloudy sky",
+      "wind farm with buildings and parked cars on hillside",
+      "aerial view of windmills on grassy mountain with dirt road"
+    ],
+    "tags": [
+      "wind turbine",
+      "wind farm",
+      "grassy hill",
+      "cloudy sky",
+      "renewable energy",
+      "hillside",
+      "dirt road",
+      "substation"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "bright daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "wind farm on grassy hillside with vehicles and small figures walking"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "raised",
+      "facing": "toward wind farm across hillside",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "wind turbines on hill"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "large wind turbine in foreground",
+        "category": "structure",
+        "attributes": [
+          "white",
+          "tall",
+          "three blades",
+          "closest to camera"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-right foreground",
+        "evidence": "tall white tower with three blades dominates right side of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "wind turbines on hilltop ridge",
+        "category": "structure",
+        "attributes": [
+          "white",
+          "multiple",
+          "three blades",
+          "on ridge line"
+        ],
+        "count": 15,
+        "salience": 5,
+        "position": "background center to left",
+        "evidence": "numerous white turbines visible along horizon and hillside behind trees",
+        "confidence": 0.95
+      },
+      {
+        "id": "e3",
+        "label": "grassy hillside terrain",
+        "category": "terrain",
+        "attributes": [
+          "green",
+          "sloping",
+          "grassy",
+          "rocky patches"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground and midground across image",
+        "evidence": "expansive green grass covering foreground and slopes",
+        "confidence": 0.99
+      },
+      {
+        "id": "e4",
+        "label": "cloudy sky",
+        "category": "other",
+        "attributes": [
+          "blue",
+          "large white and gray cumulus clouds",
+          "partly cloudy"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "upper background",
+        "evidence": "blue sky with dense white and dark gray clouds above horizon",
+        "confidence": 0.99
+      },
+      {
+        "id": "e5",
+        "label": "low buildings with fenced compound",
+        "category": "building",
+        "attributes": [
+          "beige walls",
+          "gray roofs",
+          "fenced enclosure",
+          "electrical equipment inside"
+        ],
+        "count": 3,
+        "salience": 4,
+        "position": "center midground",
+        "evidence": "cluster of rectangular buildings with fence and substation structures",
+        "confidence": 0.92
+      },
+      {
+        "id": "e6",
+        "label": "parked vehicles",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "black",
+          "silver",
+          "cars and vans"
+        ],
+        "count": 7,
+        "salience": 3,
+        "position": "center midground and lower right",
+        "evidence": "several cars and vans parked near buildings and one dark vehicle on hillside road",
+        "confidence": 0.88
+      },
+      {
+        "id": "e7",
+        "label": "construction materials",
+        "category": "object",
+        "attributes": [
+          "stacks of concrete pipes",
+          "piles of gravel",
+          "wooden planks"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center foreground",
+        "evidence": "piles of gray gravel and cylindrical concrete rings on grass",
+        "confidence": 0.9
+      },
+      {
+        "id": "e8",
+        "label": "trees and shrubs on hillside",
+        "category": "plant",
+        "attributes": [
+          "dark green",
+          "dense",
+          "scattered"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "midground across hill",
+        "evidence": "dark green tree line covering middle slope below turbines",
+        "confidence": 0.96
+      },
+      {
+        "id": "e9",
+        "label": "dirt road winding up hill",
+        "category": "terrain",
+        "attributes": [
+          "reddish-brown",
+          "unpaved",
+          "winding"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center to right midground",
+        "evidence": "narrow brown dirt track curving up the green slope",
+        "confidence": 0.93
+      },
+      {
+        "id": "e10",
+        "label": "people on hillside",
+        "category": "person_group",
+        "attributes": [
+          "small figures",
+          "walking on grass and road",
+          "general clothing"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "lower right",
+        "evidence": "tiny human figures visible on grass and dirt road on right slope",
+        "confidence": 0.65
+      },
+      {
+        "id": "e11",
+        "label": "rocks in foreground grass",
+        "category": "terrain",
+        "attributes": [
+          "brown",
+          "scattered",
+          "mossy"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "lower left foreground",
+        "evidence": "irregular brown rocks protruding from green grass in lower left",
+        "confidence": 0.9
+      },
+      {
+        "id": "e12",
+        "label": "electrical substation equipment",
+        "category": "structure",
+        "attributes": [
+          "metal structures",
+          "inside fence",
+          "transformers"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center midground inside compound",
+        "evidence": "metal electrical infrastructure visible inside fenced area near buildings",
+        "confidence": 0.85
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e1",
+        "predicate": "right_of",
+        "object": "e5",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e4",
+        "predicate": "above",
+        "object": "e2",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e4",
+        "predicate": "above",
+        "object": "e3",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e5",
+        "predicate": "below",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "near",
+        "object": "e5",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e7",
+        "predicate": "in_front_of",
+        "object": "e5",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e8",
+        "predicate": "below",
+        "object": "e2",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e10",
+        "predicate": "right_of",
+        "object": "e7",
+        "confidence": 0.7
+      },
+      {
+        "subject": "e11",
+        "predicate": "left_of",
+        "object": "e7",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.85
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 3,
+      "count_confidence": 0.65,
+      "faces_visible": false,
+      "activities": [
+        "walking on grass",
+        "walking along dirt road"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "exact number of distant wind turbines is difficult to determine due to overlap and distance",
+      "exact number and clothing details of small human figures on hillside cannot be determined due to distance and resolution",
+      "legibility of any distant signs or labels on buildings and equipment cannot be determined",
+      "specific makes or models of vehicles cannot be determined",
+      "exact location name of the wind farm cannot be determined from the photo"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 3,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:10:23+00:00",
+        "raw_output_path": "data/annotations/raw/hills_016_attempt1.txt",
+        "tokens": 5940
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

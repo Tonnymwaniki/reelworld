@@ -1,0 +1,307 @@
+{
+  "photo_id": "market_024",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_024.jpg",
+    "license": "CC BY 4.0",
+    "author": "AEira-WMF",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Self_made_craft_work_being_sold_at_Nairobi_city_market_in_Kenya.jpg",
+    "title": "File:Self made craft work being sold at Nairobi city market in Kenya.jpg"
+  },
+  "observed": {
+    "caption": "A display of African-style souvenir crafts including carved masks, zebra figurines, and decorated gourds arranged on a speckled floor.",
+    "description": "On a speckled floor, an open cardboard box on a small stand holds several carved wooden masks with red and beige paint, two black-and-white zebra figurines, two light-colored animal figurines, and a pile of small dark carvings. Next to the box are two plain tan gourd vessels and a large red gourd decorated with white spiral and geometric patterns. Above the red gourd hangs a light wooden bowl with a carved rim and three zebras illustrated inside. Behind the gourds, a colorful painting with orange and yellow tones and a figure wearing blue and green patterned clothing is partially visible, and a dark corrugated table edge runs across the top of the image.",
+    "retrieval_queries": [
+      "African souvenir market with wooden masks and zebra carvings",
+      "decorated gourds and carved animal figurines on display",
+      "colorful African crafts with red patterned gourd and hanging bowl"
+    ],
+    "tags": [
+      "souvenir",
+      "African crafts",
+      "gourds",
+      "wooden masks",
+      "zebra figurines",
+      "market display",
+      "handmade"
+    ],
+    "scene": {
+      "type": "market",
+      "setting": "indoor",
+      "time_of_day": "unknown",
+      "weather": "unknown",
+      "lighting": "soft even lighting",
+      "crowd_level": "empty",
+      "activity_summary": "crafts displayed for sale"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "down at crafts on floor",
+      "distance": "close",
+      "framing": "close_up",
+      "orientation": "landscape",
+      "subject_focus": "souvenir crafts and gourds"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "cardboard box with carvings",
+        "category": "object",
+        "attributes": [
+          "brown",
+          "open",
+          "rectangular"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "left-center",
+        "evidence": "open cardboard box holding masks and figurines on a small stand",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "carved wooden masks",
+        "category": "object",
+        "attributes": [
+          "painted",
+          "red and beige",
+          "decorative"
+        ],
+        "count": 3,
+        "salience": 4,
+        "position": "left inside box",
+        "evidence": "three upright masks with eye holes and painted patterns inside box",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "zebra figurines",
+        "category": "object",
+        "attributes": [
+          "black and white striped",
+          "small",
+          "carved"
+        ],
+        "count": 2,
+        "salience": 4,
+        "position": "left-center on box edge",
+        "evidence": "two small zebra models with striped patterns leaning on box edge",
+        "confidence": 0.97
+      },
+      {
+        "id": "e4",
+        "label": "light animal figurines",
+        "category": "object",
+        "attributes": [
+          "beige",
+          "small",
+          "carved"
+        ],
+        "count": 2,
+        "salience": 3,
+        "position": "bottom-left inside box",
+        "evidence": "two light-colored carved quadruped figures inside box",
+        "confidence": 0.85
+      },
+      {
+        "id": "e5",
+        "label": "pile of dark small carvings",
+        "category": "object",
+        "attributes": [
+          "dark brown",
+          "numerous",
+          "small"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left inside box",
+        "evidence": "pile of small dark wooden carvings filling the box",
+        "confidence": 0.9
+      },
+      {
+        "id": "e6",
+        "label": "plain gourd vessels",
+        "category": "object",
+        "attributes": [
+          "tan",
+          "bulbous",
+          "dried"
+        ],
+        "count": 2,
+        "salience": 4,
+        "position": "center and bottom-center",
+        "evidence": "two light brown gourd containers with narrow necks on floor",
+        "confidence": 0.96
+      },
+      {
+        "id": "e7",
+        "label": "red patterned gourd vessel",
+        "category": "object",
+        "attributes": [
+          "red",
+          "decorated with white spirals",
+          "bulbous with narrow neck"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "right",
+        "evidence": "large red gourd with white geometric and spiral etchings",
+        "confidence": 0.98
+      },
+      {
+        "id": "e8",
+        "label": "hanging wooden bowl",
+        "category": "object",
+        "attributes": [
+          "light wood",
+          "carved rim",
+          "zebra illustration inside"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "upper right",
+        "evidence": "light wooden bowl hanging with three zebras painted inside and decorative edge",
+        "confidence": 0.97
+      },
+      {
+        "id": "e9",
+        "label": "colorful painting",
+        "category": "object",
+        "attributes": [
+          "orange and yellow background",
+          "partial figure with patterned clothing"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-background",
+        "evidence": "painting behind gourds showing lower body in blue and green patterned garment",
+        "confidence": 0.88
+      },
+      {
+        "id": "e10",
+        "label": "speckled floor",
+        "category": "terrain",
+        "attributes": [
+          "gray with dark speckles",
+          "flat"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom and background",
+        "evidence": "speckled floor surface beneath all objects",
+        "confidence": 0.95
+      },
+      {
+        "id": "e11",
+        "label": "dark table edge",
+        "category": "structure",
+        "attributes": [
+          "dark",
+          "corrugated edge",
+          "horizontal"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top",
+        "evidence": "dark horizontal structure with ridged edge across top of image",
+        "confidence": 0.9
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e6",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e2",
+        "predicate": "inside",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "left_of",
+        "object": "e7",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e8",
+        "predicate": "above",
+        "object": "e7",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e9",
+        "predicate": "behind",
+        "object": "e6",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e11",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e10",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.96
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.99,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "The text printed on the side of the cardboard box is blurry and cannot be read with at least 3 letters.",
+      "The exact location, market name, or geographic origin of the crafts cannot be determined from the image.",
+      "The materials, age, and maker of the carvings and gourds cannot be confirmed visually.",
+      "Whether the painting in the background is part of the display for sale or background decoration is unclear.",
+      "The meaning or cultural significance of the patterns on the red gourd cannot be determined from the photo alone."
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:15:57+00:00",
+        "raw_output_path": "data/annotations/raw/market_024_attempt1.txt",
+        "tokens": 11840
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

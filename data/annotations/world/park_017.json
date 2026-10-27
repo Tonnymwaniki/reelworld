@@ -1,0 +1,310 @@
+{
+  "photo_id": "park_017",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_017.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Dchiedo",
+    "source_url": "https://commons.wikimedia.org/wiki/File:UAP_Towers_seen_from_Uhuru_Park,_Nairobi.jpg",
+    "title": "File:UAP Towers seen from Uhuru Park, Nairobi.jpg"
+  },
+  "observed": {
+    "caption": "A calm pond reflects trees and a tall tower under a clear sky, framed by overhanging branches.",
+    "description": "In the foreground a grassy bank with scattered brown fallen leaves borders a large calm pond that fills the middle of the image and reflects the sky, trees and a tall building. Across the water a dense line of mature trees with dark green canopies stretches horizontally, and behind the treeline in the center distance a tall light-colored high-rise building with a pointed top rises above the canopy. Overhanging branches with small green leaves hang from the top left and top right edges against a pale clear sky that gradients to lighter near the horizon, with soft warm daylight illuminating the scene and creating a mirrored reflection of the building and treeline on the water surface. A small low light-colored structure is partially visible through the trees on the far right shore.",
+    "retrieval_queries": [
+      "calm park pond reflecting a tall building and trees",
+      "city park lake with skyline reflection at sunrise",
+      "pond in a green park with a tower behind the trees"
+    ],
+    "tags": [
+      "park",
+      "pond",
+      "lake",
+      "reflection",
+      "trees",
+      "skyline",
+      "urban park",
+      "nature"
+    ],
+    "scene": {
+      "type": "park",
+      "setting": "outdoor",
+      "time_of_day": "morning",
+      "weather": "clear",
+      "lighting": "warm soft natural daylight",
+      "crowd_level": "empty",
+      "activity_summary": "still landscape with water reflection"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "across the water toward the treeline and tall building",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "pond with building reflection"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "calm pond water",
+        "category": "terrain",
+        "attributes": [
+          "calm",
+          "reflective",
+          "dark surface"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center and middle",
+        "evidence": "large still water body occupying lower half reflecting sky and trees",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "grassy bank with fallen leaves",
+        "category": "terrain",
+        "attributes": [
+          "grassy",
+          "uneven",
+          "with brown fallen leaves"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground bottom",
+        "evidence": "strip of green grass and dark leaf litter along bottom edge in front of water",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "overhanging tree branches with green leaves",
+        "category": "plant",
+        "attributes": [
+          "leafy",
+          "thin branches",
+          "green leaves",
+          "backlit"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "top edge framing",
+        "evidence": "branches with small green leaves hanging from top left and top right corners against sky",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "tall high-rise building with pointed roof",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "light-colored",
+          "pointed top",
+          "multiple windows"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "background center",
+        "evidence": "tall tower rising above treeline in center distance with reflective facade",
+        "confidence": 0.98
+      },
+      {
+        "id": "e5",
+        "label": "dense treeline across the water",
+        "category": "plant",
+        "attributes": [
+          "dense",
+          "dark green",
+          "varied canopy",
+          "mature trees"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "middle distance across water",
+        "evidence": "continuous line of trees spanning horizontally behind the pond",
+        "confidence": 0.97
+      },
+      {
+        "id": "e6",
+        "label": "pale clear sky",
+        "category": "other",
+        "attributes": [
+          "pale blue",
+          "clear",
+          "soft gradient near horizon"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "upper background",
+        "evidence": "open sky above treeline and building with light color",
+        "confidence": 0.98
+      },
+      {
+        "id": "e7",
+        "label": "reflection of building and trees in water",
+        "category": "other",
+        "attributes": [
+          "mirrored",
+          "rippled",
+          "dark"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center in water",
+        "evidence": "mirrored image of building and treeline visible on pond surface",
+        "confidence": 0.95
+      },
+      {
+        "id": "e8",
+        "label": "fallen brown leaves on grass",
+        "category": "plant",
+        "attributes": [
+          "brown",
+          "scattered",
+          "dry"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "foreground bottom right",
+        "evidence": "clusters of brown leaves mixed with grass in immediate foreground",
+        "confidence": 0.9
+      },
+      {
+        "id": "e9",
+        "label": "low light-colored structure behind trees",
+        "category": "structure",
+        "attributes": [
+          "low",
+          "light-colored",
+          "partially obscured by trees"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "background right",
+        "evidence": "small light building or wall visible through trees on far right shore",
+        "confidence": 0.75
+      },
+      {
+        "id": "e10",
+        "label": "small indistinct shapes near far shore",
+        "category": "other",
+        "attributes": [
+          "tiny",
+          "blurry",
+          "dark specks"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "middle distance center-right near treeline",
+        "evidence": "very small blurred spots along far bank that are not clearly resolvable",
+        "confidence": 0.6
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e5",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e1",
+        "predicate": "in_front_of",
+        "object": "e5",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e2",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e3",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e3",
+        "predicate": "above",
+        "object": "e4",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e7",
+        "predicate": "inside",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e8",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e9",
+        "predicate": "right_of",
+        "object": "e4",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e6",
+        "predicate": "above",
+        "object": "e5",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e6",
+        "predicate": "above",
+        "object": "e4",
+        "confidence": 0.98
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.82,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact time of day cannot be determined from light alone, morning versus evening looks similar",
+      "Whether the tiny blurred specks along the far shore are people, objects, or vegetation cannot be determined due to distance and low resolution",
+      "Whether any distant signs or text exist behind trees or on the far building cannot be determined due to distance and blur",
+      "Specific identity and name of the tall building cannot be determined from this view",
+      "Exact geographic location cannot be determined from the image alone"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:17:38+00:00",
+        "raw_output_path": "data/annotations/raw/park_017_attempt1.txt",
+        "tokens": 9588
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

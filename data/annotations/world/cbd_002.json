@@ -1,0 +1,343 @@
+{
+  "photo_id": "cbd_002",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/cbd/cbd_002.jpg",
+    "license": "CC0",
+    "author": "Francis Akuka for the Wikimedia Foundation",
+    "source_url": "https://commons.wikimedia.org/wiki/File:CBK_Pension_Tower_015.jpg",
+    "title": "File:CBK Pension Tower 015.jpg"
+  },
+  "observed": {
+    "caption": "A tall modern glass skyscraper with gold lattice crowns rises behind a beige clock tower under a clear blue sky.",
+    "description": "A tall modern skyscraper with a blue glass facade and gold-colored lattice structures at the top dominates the center of the image against a pale blue sky with scattered small white clouds. In the foreground to the right, a beige clock tower with a large circular white and red clock face stands in front of the skyscraper, while a lower white and beige building with a grid of windows and three small flags on its roof is visible on the lower left. Two white streetlight poles with curved arms stand near the bottom center and bottom right, green treetops line the bottom edge, and additional low-rise buildings with flat roofs and beige and reddish walls are visible behind the clock tower on the right.",
+    "retrieval_queries": [
+      "tall blue glass skyscraper with gold top behind clock tower",
+      "modern high rise building with CBK Pension Towers sign and clock tower in front",
+      "city skyline with tall tower and street lights under blue sky"
+    ],
+    "tags": [
+      "skyscraper",
+      "clock tower",
+      "glass facade",
+      "high-rise",
+      "cityscape",
+      "modern architecture"
+    ],
+    "scene": {
+      "type": "building",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "clear with few clouds",
+      "lighting": "bright daylight",
+      "crowd_level": "empty",
+      "activity_summary": "static urban view"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the tall building and clock tower",
+      "distance": "far",
+      "framing": "medium",
+      "orientation": "portrait",
+      "subject_focus": "tall glass tower and clock tower"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "tall glass skyscraper with gold lattice top",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "modern",
+          "blue glass facade",
+          "curved shape",
+          "gold lattice crown",
+          "multiple balconies"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "dominant tall building with blue reflective glass and gold structures at top occupying center of frame",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "beige clock tower with clock face",
+        "category": "building",
+        "attributes": [
+          "beige",
+          "rectangular",
+          "large circular clock with red hands",
+          "decorative lattice top"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right foreground",
+        "evidence": "beige tower with large white clock face and red markings in lower right center in front of skyscraper",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "low-rise building with flags on roof",
+        "category": "building",
+        "attributes": [
+          "white and beige",
+          "multiple windows",
+          "flat roof",
+          "flags on roof"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom-left",
+        "evidence": "multi-story building with grid windows and three flags on poles at lower left",
+        "confidence": 0.92
+      },
+      {
+        "id": "e4",
+        "label": "streetlight pole on left",
+        "category": "structure",
+        "attributes": [
+          "tall",
+          "white",
+          "double curved arms",
+          "vertical banner attached"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom-center left",
+        "evidence": "white streetlight with two curved lamps near bottom center left in front of skyscraper",
+        "confidence": 0.95
+      },
+      {
+        "id": "e5",
+        "label": "streetlight pole on right",
+        "category": "structure",
+        "attributes": [
+          "tall",
+          "white",
+          "curved arm",
+          "vertical banner attached"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom-right",
+        "evidence": "white streetlight pole at far right edge",
+        "confidence": 0.95
+      },
+      {
+        "id": "e6",
+        "label": "sky with clouds",
+        "category": "terrain",
+        "attributes": [
+          "pale blue",
+          "clear",
+          "few small white clouds"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "background",
+        "evidence": "pale blue sky filling background with scattered small white clouds",
+        "confidence": 0.99
+      },
+      {
+        "id": "e7",
+        "label": "trees and vegetation along bottom",
+        "category": "plant",
+        "attributes": [
+          "green",
+          "sparse",
+          "small treetops"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom-center",
+        "evidence": "green treetops visible along bottom edge below buildings",
+        "confidence": 0.88
+      },
+      {
+        "id": "e8",
+        "label": "low-rise building on right behind clock tower",
+        "category": "building",
+        "attributes": [
+          "beige and reddish",
+          "flat roof",
+          "multiple windows",
+          "two stories"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom-right",
+        "evidence": "low building with beige and red walls visible to the right of clock tower",
+        "confidence": 0.9
+      },
+      {
+        "id": "e9",
+        "label": "flags on roof",
+        "category": "object",
+        "attributes": [
+          "small",
+          "colorful",
+          "on poles",
+          "waving"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "top of left building",
+        "evidence": "three small flags on poles atop the left low-rise building",
+        "confidence": 0.85
+      },
+      {
+        "id": "e10",
+        "label": "clock face",
+        "category": "object",
+        "attributes": [
+          "circular",
+          "white background",
+          "red numerals and hands",
+          "black border"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "on clock tower",
+        "evidence": "large circular clock with red markings on the beige clock tower",
+        "confidence": 0.96
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e3",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e4",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e5",
+        "predicate": "right_of",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e10",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e7",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e8",
+        "predicate": "right_of",
+        "object": "e2",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e6",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e4",
+        "predicate": "near",
+        "object": "e1",
+        "confidence": 0.82
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "CBK PENSION TOWERS",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "upper left side of tall glass building",
+        "legibility": "clear",
+        "confidence": 0.97
+      },
+      {
+        "text": "Hotel",
+        "language": "en",
+        "entity_id": "e5",
+        "location_in_image": "vertical banner on streetlight at bottom right",
+        "legibility": "partial",
+        "confidence": 0.62
+      },
+      {
+        "text": "Hotel",
+        "language": "en",
+        "entity_id": "e4",
+        "location_in_image": "vertical banner on streetlight at bottom center-left",
+        "legibility": "partial",
+        "confidence": 0.6
+      }
+    ],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.98,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Full text on small vertical banners on streetlights beyond the word Hotel is not legible due to distance and blur",
+      "Exact number of floors or interior details of buildings cannot be determined",
+      "Specific identities or colors of flags are not clearly discernible",
+      "Exact time shown on clock face is approximate due to image resolution",
+      "Whether additional people or vehicles are present inside buildings or behind structures cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:01:24+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_002_attempt1.txt",
+        "tokens": 10519
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'Hotel'",
+        "partially legible text: 'Hotel'"
+      ]
+    }
+  }
+}

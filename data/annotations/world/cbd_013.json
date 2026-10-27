@@ -1,0 +1,350 @@
+{
+  "photo_id": "cbd_013",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/cbd/cbd_013.jpg",
+    "license": "CC BY 4.0",
+    "author": "DesiBoy101",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Corner_House_(left)_and_Hilton_Nairobi_(right).jpg",
+    "title": "File:Corner House (left) and Hilton Nairobi (right).jpg"
+  },
+  "observed": {
+    "caption": "Two tall towers rise behind a low commercial building with shops and trees under an overcast sky.",
+    "description": "The photo shows an outdoor urban street scene with a low, multi-story commercial building in the foreground and two taller high-rise towers behind it, one rectangular on the left and one cylindrical with a vertical glass shaft on the right. The foreground building has a textured facade, rows of windows, and ground-floor shops with signage, with green trees in front and along the sidewalk. Several pedestrians are visible at street level near the shops and sidewalk, and a blue and yellow bus is on the right side of the street. The sky is heavily overcast with gray clouds, and the lighting is diffused daylight.",
+    "retrieval_queries": [
+      "city street with two tall towers and low shopping building under cloudy sky",
+      "cylindrical tower with glass elevator behind shops and trees",
+      "urban buildings with Co-operative Bank and City walk storefront"
+    ],
+    "tags": [
+      "city buildings",
+      "high-rise towers",
+      "urban street",
+      "overcast sky",
+      "commercial building",
+      "trees",
+      "bus",
+      "storefronts"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast",
+      "lighting": "diffused daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "pedestrians near shops on urban street"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward buildings and towers",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "low commercial building and two towers"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "cylindrical high-rise tower",
+        "category": "building",
+        "attributes": [
+          "cylindrical",
+          "beige facade",
+          "vertical glass shaft",
+          "many windows"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-right background",
+        "evidence": "tall round building with grid of windows and glass elevator shaft on right side",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "rectangular high-rise tower",
+        "category": "building",
+        "attributes": [
+          "rectangular",
+          "beige facade",
+          "dark glass windows"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "left background",
+        "evidence": "tall rectangular building with vertical strips of dark windows on left",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "low-rise commercial building",
+        "category": "building",
+        "attributes": [
+          "low",
+          "textured facade",
+          "rows of windows",
+          "flat roof"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center foreground",
+        "evidence": "long low building spanning width of image with patterned exterior and ground-floor shops",
+        "confidence": 0.97
+      },
+      {
+        "id": "e4",
+        "label": "trees",
+        "category": "plant",
+        "attributes": [
+          "green foliage",
+          "mature",
+          "leafy"
+        ],
+        "count": 5,
+        "salience": 3,
+        "position": "in front of low building",
+        "evidence": "leafy green trees lining sidewalk in front of low building",
+        "confidence": 0.9
+      },
+      {
+        "id": "e5",
+        "label": "vertical billboard on pole",
+        "category": "sign",
+        "attributes": [
+          "vertical",
+          "mounted on pole",
+          "colorful advertisement"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center near low building",
+        "evidence": "tall narrow billboard attached to pole in front of low building with visible graphics and text",
+        "confidence": 0.85
+      },
+      {
+        "id": "e6",
+        "label": "City walk storefront",
+        "category": "structure",
+        "attributes": [
+          "ground floor",
+          "glass entrance",
+          "sign above"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center bottom",
+        "evidence": "shop entrance with glass doors and signage reading City walk at center bottom of low building",
+        "confidence": 0.92
+      },
+      {
+        "id": "e7",
+        "label": "Co-operative Bank storefront",
+        "category": "structure",
+        "attributes": [
+          "ground floor",
+          "green signage",
+          "multiple bays"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "lower left",
+        "evidence": "shop front with green fascia and white lettering along left side of low building",
+        "confidence": 0.9
+      },
+      {
+        "id": "e8",
+        "label": "bus",
+        "category": "vehicle",
+        "attributes": [
+          "blue and yellow",
+          "on street"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom right",
+        "evidence": "partially visible bus with blue front and yellow side on road at bottom right",
+        "confidence": 0.88
+      },
+      {
+        "id": "e9",
+        "label": "pedestrians",
+        "category": "person_group",
+        "attributes": [
+          "small figures",
+          "standing and walking on sidewalk"
+        ],
+        "count": 12,
+        "salience": 2,
+        "position": "bottom along sidewalk",
+        "evidence": "multiple small human figures along bottom edge near shops and street",
+        "confidence": 0.65
+      },
+      {
+        "id": "e10",
+        "label": "overcast sky",
+        "category": "other",
+        "attributes": [
+          "cloudy",
+          "gray",
+          "diffused light"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "upper background",
+        "evidence": "gray cloudy sky filling upper portion of image above buildings",
+        "confidence": 0.98
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e3",
+        "predicate": "below",
+        "object": "e2",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e4",
+        "predicate": "in_front_of",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e5",
+        "predicate": "near",
+        "object": "e3",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e6",
+        "predicate": "inside",
+        "object": "e3",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e7",
+        "predicate": "inside",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e8",
+        "predicate": "right_of",
+        "object": "e6",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e9",
+        "predicate": "in_front_of",
+        "object": "e3",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e10",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e10",
+        "predicate": "above",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e4",
+        "predicate": "beside",
+        "object": "e5",
+        "confidence": 0.75
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "CO-OPERATIVE BANK",
+        "language": "en",
+        "entity_id": "e7",
+        "location_in_image": "lower left on green fascia of low building",
+        "legibility": "clear",
+        "confidence": 0.92
+      },
+      {
+        "text": "City walk",
+        "language": "en",
+        "entity_id": "e6",
+        "location_in_image": "center bottom above shop entrance",
+        "legibility": "clear",
+        "confidence": 0.9
+      },
+      {
+        "text": "City Shuttle",
+        "language": "en",
+        "entity_id": "e8",
+        "location_in_image": "bottom right on top of bus",
+        "legibility": "partial",
+        "confidence": 0.65
+      }
+    ],
+    "people": {
+      "count": 12,
+      "count_confidence": 0.6,
+      "faces_visible": false,
+      "activities": [
+        "walking on sidewalk",
+        "standing near storefronts"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of pedestrians is uncertain due to small size, distance and occlusion at bottom edge",
+      "Text on vertical billboard in center is not fully legible due to blur and distance, only partial numbers and graphics visible",
+      "Smaller tagline text under City walk sign and additional shop signs are not fully legible",
+      "Text on far left signs and on side of bus is not legible due to distance and blur",
+      "Building names, interior details, and street names cannot be determined from this view",
+      "Vehicle details beyond the partially visible bus cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 12,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:07:54+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_013_attempt1.txt",
+        "tokens": 10720
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'City Shuttle'"
+      ]
+    }
+  }
+}

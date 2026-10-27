@@ -1,0 +1,287 @@
+{
+  "photo_id": "cbd_010",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/cbd/cbd_010.jpg",
+    "license": "Public domain",
+    "author": "US Embassy",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Takudzwa_Ngwenya_2011.jpg",
+    "title": "File:Takudzwa Ngwenya 2011.jpg"
+  },
+  "observed": {
+    "caption": "A person in a dark suit and striped tie stands with a hand on their chest and mouth open in a warmly lit indoor space.",
+    "description": "In the foreground a person wearing a dark suit jacket, light blue collared shirt, and a red, white, and blue diagonally striped tie stands with the left hand placed on the chest and mouth open. A small light-colored pin is on the left lapel and a dark wristband with a metallic section is on the left wrist. Behind to the right a blurred person is visible, behind to the left another blurred person is visible, and a partial dark shape of another person appears on the far left edge. The background is out of focus with warm-toned wooden architectural elements and soft indoor lighting.",
+    "retrieval_queries": [
+      "person in suit with hand on chest singing indoors",
+      "man in dark suit and striped tie with hand over heart",
+      "close up of person in formal wear indoors with blurred people behind"
+    ],
+    "tags": [
+      "person in suit",
+      "hand on chest",
+      "striped tie",
+      "indoor ceremony",
+      "formal wear",
+      "blurred background"
+    ],
+    "scene": {
+      "type": "building",
+      "setting": "indoor",
+      "time_of_day": "unknown",
+      "weather": "unknown",
+      "lighting": "warm indoor lighting",
+      "crowd_level": "sparse",
+      "activity_summary": "standing with hand on chest"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the person",
+      "distance": "close",
+      "framing": "close_up",
+      "orientation": "portrait",
+      "subject_focus": "person in suit with hand on chest"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "person in dark suit with hand on chest",
+        "category": "person_group",
+        "attributes": [
+          "wearing dark suit jacket",
+          "wearing light blue collared shirt",
+          "wearing red white and blue striped tie",
+          "hand on chest",
+          "mouth open"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center foreground",
+        "evidence": "clearly visible in sharp focus occupying central foreground with hand on chest",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "blurred person behind to the right",
+        "category": "person_group",
+        "attributes": [
+          "blurred",
+          "standing behind main person"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-right background",
+        "evidence": "out-of-focus head and shoulders visible behind main person's right shoulder",
+        "confidence": 0.85
+      },
+      {
+        "id": "e3",
+        "label": "blurred person behind to the left",
+        "category": "person_group",
+        "attributes": [
+          "blurred",
+          "standing behind main person"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "left background",
+        "evidence": "out-of-focus head visible behind main person's right side",
+        "confidence": 0.75
+      },
+      {
+        "id": "e4",
+        "label": "partial person on far left edge",
+        "category": "person_group",
+        "attributes": [
+          "partially visible",
+          "wearing dark clothing"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "far left edge",
+        "evidence": "dark shoulder and edge of clothing visible at extreme left border",
+        "confidence": 0.7
+      },
+      {
+        "id": "e5",
+        "label": "dark suit jacket",
+        "category": "object",
+        "attributes": [
+          "dark color",
+          "formal",
+          "worn by main person"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center",
+        "evidence": "covers torso and arms of main person in foreground",
+        "confidence": 0.98
+      },
+      {
+        "id": "e6",
+        "label": "striped tie with red white and blue diagonal stripes",
+        "category": "object",
+        "attributes": [
+          "diagonal stripes",
+          "red white and blue"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center",
+        "evidence": "visible at collar of main person beneath suit jacket",
+        "confidence": 0.97
+      },
+      {
+        "id": "e7",
+        "label": "wristband on left wrist",
+        "category": "object",
+        "attributes": [
+          "dark band",
+          "metallic section"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center-right lower",
+        "evidence": "encircles left wrist of main person near hand on chest",
+        "confidence": 0.9
+      },
+      {
+        "id": "e8",
+        "label": "small lapel pin on left lapel",
+        "category": "object",
+        "attributes": [
+          "small",
+          "light-colored",
+          "on lapel"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center-right",
+        "evidence": "small rectangular pin attached to left lapel of suit jacket",
+        "confidence": 0.88
+      },
+      {
+        "id": "e9",
+        "label": "blurred indoor background with wooden architectural elements",
+        "category": "structure",
+        "attributes": [
+          "out of focus",
+          "warm tones",
+          "wooden columns and beams",
+          "soft lighting"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "background",
+        "evidence": "warm brown and beige blurred shapes behind people indicating interior architecture",
+        "confidence": 0.85
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "in_front_of",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e1",
+        "predicate": "in_front_of",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e4",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e2",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e3",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e8",
+        "predicate": "on",
+        "object": "e5",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.98
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 4,
+      "count_confidence": 0.75,
+      "faces_visible": true,
+      "activities": [
+        "standing with hand on chest",
+        "mouth open as if singing or speaking"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "exact location and type of indoor venue",
+      "occasion or event taking place",
+      "whether additional people are present outside the frame or more blurred figures in background",
+      "text or design details on the lapel pin",
+      "text or markings on the wristband",
+      "exact time of day and weather outside",
+      "what the people are saying or singing"
+    ]
+  },
+  "privacy": {
+    "faces_visible": true,
+    "people_count": 4,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "medium",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:07:26+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_010_attempt1.txt",
+        "tokens": 9658
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

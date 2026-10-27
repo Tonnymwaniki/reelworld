@@ -1,0 +1,425 @@
+{
+  "photo_id": "street_023",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_023.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Nairobi_Isuzu_NQR,_cnr_Tom_Mboya_Street_and_Haile_Selassie_Avenue,_2025_(02).jpg",
+    "title": "File:Nairobi Isuzu NQR, cnr Tom Mboya Street and Haile Selassie Avenue, 2025 (02).jpg"
+  },
+  "observed": {
+    "caption": "A bright blue decorated bus drives on an urban street lined with buildings and pedestrians.",
+    "description": "A large bright blue bus with colorful graphics and text on its side is on a paved road in the center of the image. The bus has multiple windows with passengers visible inside and a driver in the front cabin. Behind the bus is a yellow multi-story building with several signs on its facade, and tall gray modern buildings are visible in the background on the left. Trees with sparse foliage line the sidewalk on the right. Groups of people are walking on sidewalks on both sides of the street. The sky is overcast and the lighting is bright daylight.",
+    "retrieval_queries": [
+      "blue decorated matatu bus on city street",
+      "colorful bus with Faith Over Fear painting in Nairobi",
+      "busy urban street with bus and college building signs"
+    ],
+    "tags": [
+      "bus",
+      "matatu",
+      "street",
+      "urban",
+      "city",
+      "building",
+      "pedestrians",
+      "decorated bus",
+      "daytime"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast",
+      "lighting": "bright daylight",
+      "crowd_level": "moderate",
+      "activity_summary": "bus driving on street with pedestrians walking"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "across the street toward the bus and buildings",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "blue decorated bus"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "bright blue decorated bus",
+        "category": "vehicle",
+        "attributes": [
+          "bright blue",
+          "large",
+          "decorated with graphics and text",
+          "multiple windows"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "large blue vehicle occupying center foreground with painted text and images on side",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "yellow multi-story building with signs",
+        "category": "building",
+        "attributes": [
+          "yellow facade",
+          "curved balconies",
+          "multiple stories",
+          "signs mounted on exterior"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "background right",
+        "evidence": "yellow building behind bus with visible signage and balconies",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "tall gray modern buildings",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "gray",
+          "modern",
+          "multiple windows"
+        ],
+        "count": 3,
+        "salience": 3,
+        "position": "background left",
+        "evidence": "high-rise buildings in distance on left side of street",
+        "confidence": 0.94
+      },
+      {
+        "id": "e4",
+        "label": "paved asphalt road",
+        "category": "terrain",
+        "attributes": [
+          "paved",
+          "gray",
+          "worn surface"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "foreground",
+        "evidence": "road surface beneath and around bus",
+        "confidence": 0.97
+      },
+      {
+        "id": "e5",
+        "label": "sidewalk",
+        "category": "terrain",
+        "attributes": [
+          "paved",
+          "along street edge"
+        ],
+        "count": 2,
+        "salience": 2,
+        "position": "left and right edges",
+        "evidence": "paved walkways beside road where people are walking",
+        "confidence": 0.9
+      },
+      {
+        "id": "e6",
+        "label": "trees with sparse foliage",
+        "category": "plant",
+        "attributes": [
+          "tall",
+          "thin trunks",
+          "sparse leaves",
+          "along sidewalk"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "right side and background",
+        "evidence": "trees lining street with branches and trunks visible",
+        "confidence": 0.92
+      },
+      {
+        "id": "e7",
+        "label": "pedestrians walking on sidewalks",
+        "category": "person_group",
+        "attributes": [
+          "walking",
+          "various clothing colors"
+        ],
+        "count": 12,
+        "salience": 3,
+        "position": "left background and right foreground",
+        "evidence": "people walking on sidewalks on both sides of street",
+        "confidence": 0.85
+      },
+      {
+        "id": "e8",
+        "label": "passengers inside bus",
+        "category": "person_group",
+        "attributes": [
+          "seated",
+          "visible through windows"
+        ],
+        "count": 8,
+        "salience": 3,
+        "position": "inside bus center",
+        "evidence": "people seen through bus windows seated inside",
+        "confidence": 0.88
+      },
+      {
+        "id": "e9",
+        "label": "driver in bus cabin",
+        "category": "person_group",
+        "attributes": [
+          "seated in front cabin",
+          "operating vehicle"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "front right of bus",
+        "evidence": "person visible in driver seat at front of bus",
+        "confidence": 0.9
+      },
+      {
+        "id": "e10",
+        "label": "AIMS COLLEGE sign board with phone numbers",
+        "category": "sign",
+        "attributes": [
+          "white background",
+          "blue and black text",
+          "rectangular"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "middle of yellow building facade",
+        "evidence": "white sign with blue text mounted on building",
+        "confidence": 0.95
+      },
+      {
+        "id": "e11",
+        "label": "JUMBO AGROVET green sign",
+        "category": "sign",
+        "attributes": [
+          "green and white",
+          "rectangular",
+          "mounted above shop"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "far right building",
+        "evidence": "green sign with white text on building on right edge",
+        "confidence": 0.93
+      },
+      {
+        "id": "e12",
+        "label": "overcast sky",
+        "category": "terrain",
+        "attributes": [
+          "pale",
+          "overcast"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "top background",
+        "evidence": "pale sky visible between buildings",
+        "confidence": 0.85
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "in_front_of",
+        "object": "e2",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e7",
+        "predicate": "beside",
+        "object": "e4",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "beside",
+        "object": "e2",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e8",
+        "predicate": "inside",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e9",
+        "predicate": "inside",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e10",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e11",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e2",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e3",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "FAITH OVER FEAR",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "side of blue bus, center",
+        "legibility": "clear",
+        "confidence": 0.98
+      },
+      {
+        "text": "Jesus",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "side of blue bus, left-center",
+        "legibility": "clear",
+        "confidence": 0.96
+      },
+      {
+        "text": "SMART",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "top side of blue bus",
+        "legibility": "clear",
+        "confidence": 0.9
+      },
+      {
+        "text": "Ultimo Sacco",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "side of blue bus, center-right above window",
+        "legibility": "clear",
+        "confidence": 0.88
+      },
+      {
+        "text": "AS WE BREAK RULES BUT NOT HEARTS",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "front door area of blue bus",
+        "legibility": "clear",
+        "confidence": 0.9
+      },
+      {
+        "text": "OLLEGE OF USINESS ECHNOLOGY",
+        "language": "en",
+        "entity_id": "e2",
+        "location_in_image": "upper facade of yellow building, top center",
+        "legibility": "partial",
+        "confidence": 0.85
+      },
+      {
+        "text": "AIMS COLLEGE OF BUSINESS AND TECHNOLOGY",
+        "language": "en",
+        "entity_id": "e10",
+        "location_in_image": "middle facade of yellow building, upper sign",
+        "legibility": "clear",
+        "confidence": 0.96
+      },
+      {
+        "text": "AIMS COLLEGE OF BUSINESS AND TECHNOLOGY 0799 651 904 / 0111 490 959",
+        "language": "en",
+        "entity_id": "e10",
+        "location_in_image": "middle facade of yellow building, lower sign",
+        "legibility": "clear",
+        "confidence": 0.95
+      },
+      {
+        "text": "JUMBO AGROVET LTD",
+        "language": "en",
+        "entity_id": "e11",
+        "location_in_image": "right side building, green sign top",
+        "legibility": "clear",
+        "confidence": 0.94
+      },
+      {
+        "text": "JUMBO AGROVET LTD.",
+        "language": "en",
+        "entity_id": "e11",
+        "location_in_image": "right side building, below green sign",
+        "legibility": "partial",
+        "confidence": 0.88
+      }
+    ],
+    "people": {
+      "count": 22,
+      "count_confidence": 0.65,
+      "faces_visible": true,
+      "activities": [
+        "riding inside bus",
+        "driving bus",
+        "walking on sidewalk"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people inside bus and on distant sidewalks due to occlusion and blur",
+      "Full text of partially cut-off top building sign and small blurry signs in background",
+      "Text on people's clothing or bags not counted per rules",
+      "License plate details not legible",
+      "Exact time of day beyond daytime"
+    ]
+  },
+  "privacy": {
+    "faces_visible": true,
+    "people_count": 22,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:22:06+00:00",
+        "raw_output_path": "data/annotations/raw/street_023_attempt1.txt",
+        "tokens": 9689
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'OLLEGE OF USINESS ECHNOLOGY'",
+        "partially legible text: 'JUMBO AGROVET LTD.'"
+      ]
+    }
+  }
+}

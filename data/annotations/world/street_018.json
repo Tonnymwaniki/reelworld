@@ -1,0 +1,369 @@
+{
+  "photo_id": "street_018",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_018.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Kenyatta_Avenue,_Nairobi,_2025_(09).jpg",
+    "title": "File:Kenyatta Avenue, Nairobi, 2025 (09).jpg"
+  },
+  "observed": {
+    "caption": "A busy urban street lined with tall buildings and trees with pedestrians crossing the road under a cloudy sky.",
+    "description": "A wide asphalt street extends into the distance lined on both sides by multi-story buildings, including a tall glass skyscraper on the left and a large white building with balconies in the center, with mature green trees along the sidewalks, numerous pedestrians walking on the road and sidewalks, several cars and motorcycles on the street, street light poles, and an overcast cloudy sky above.",
+    "retrieval_queries": [
+      "busy downtown street with tall buildings and people crossing",
+      "wide city avenue lined with trees and high rises on a cloudy day",
+      "urban street scene with pedestrians and cars in city center"
+    ],
+    "tags": [
+      "city street",
+      "urban buildings",
+      "pedestrians crossing",
+      "downtown avenue",
+      "cloudy day"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "diffuse daylight",
+      "crowd_level": "moderate",
+      "activity_summary": "pedestrians crossing and walking along urban street with vehicles"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "down the street toward distant skyline",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "urban street with buildings and pedestrians"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "tall glass skyscraper",
+        "category": "building",
+        "attributes": [
+          "glass facade",
+          "reflective",
+          "tall with antenna"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "left background",
+        "evidence": "glass-covered high-rise with antenna on top visible above other buildings on left",
+        "confidence": 0.96
+      },
+      {
+        "id": "e2",
+        "label": "white multi-story building",
+        "category": "building",
+        "attributes": [
+          "white facade",
+          "many balconies",
+          "rectangular"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "large white building with multiple floors and balconies behind trees in center",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "paved street",
+        "category": "terrain",
+        "attributes": [
+          "asphalt",
+          "wide",
+          "with lane markings"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center foreground",
+        "evidence": "wide asphalt road extending into distance with pedestrians and vehicles on it",
+        "confidence": 0.98
+      },
+      {
+        "id": "e4",
+        "label": "trees along street",
+        "category": "plant",
+        "attributes": [
+          "green foliage",
+          "tall",
+          "leafy canopies"
+        ],
+        "count": 8,
+        "salience": 4,
+        "position": "both sides of street, center-left",
+        "evidence": "mature trees with dense canopies lining the sidewalks",
+        "confidence": 0.94
+      },
+      {
+        "id": "e5",
+        "label": "group of pedestrians",
+        "category": "person_group",
+        "attributes": [
+          "walking",
+          "crossing street",
+          "varied clothing"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "across street and sidewalks",
+        "evidence": "multiple people walking on road and sidewalks throughout scene",
+        "confidence": 0.9
+      },
+      {
+        "id": "e6",
+        "label": "cars on road",
+        "category": "vehicle",
+        "attributes": [
+          "white and black",
+          "parked and moving",
+          "four-wheeled"
+        ],
+        "count": 5,
+        "salience": 4,
+        "position": "on street, center and right",
+        "evidence": "several cars visible on the road including white car on left and black car on right",
+        "confidence": 0.92
+      },
+      {
+        "id": "e7",
+        "label": "sidewalk on right",
+        "category": "terrain",
+        "attributes": [
+          "paved",
+          "narrow",
+          "bordered by bollards"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right foreground",
+        "evidence": "paved pedestrian walkway along right edge with people walking",
+        "confidence": 0.93
+      },
+      {
+        "id": "e8",
+        "label": "overcast sky",
+        "category": "other",
+        "attributes": [
+          "cloudy",
+          "gray-white",
+          "overcast"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "top, background",
+        "evidence": "cloud-filled sky above buildings covering upper portion of image",
+        "confidence": 0.97
+      },
+      {
+        "id": "e9",
+        "label": "yellow and white building on right",
+        "category": "building",
+        "attributes": [
+          "yellow vertical stripe",
+          "multi-story",
+          "commercial ground floor"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right edge, foreground",
+        "evidence": "building with yellow accent on right side of image close to camera",
+        "confidence": 0.95
+      },
+      {
+        "id": "e10",
+        "label": "street light poles",
+        "category": "structure",
+        "attributes": [
+          "tall",
+          "metal",
+          "along sidewalk"
+        ],
+        "count": 4,
+        "salience": 2,
+        "position": "both sides of street",
+        "evidence": "vertical poles with light fixtures lining the road",
+        "confidence": 0.88
+      },
+      {
+        "id": "e11",
+        "label": "motorcycles",
+        "category": "vehicle",
+        "attributes": [
+          "small",
+          "two-wheeled",
+          "with riders"
+        ],
+        "count": 2,
+        "salience": 3,
+        "position": "center street",
+        "evidence": "motorbikes with riders on the road near center",
+        "confidence": 0.85
+      },
+      {
+        "id": "e12",
+        "label": "distant high-rise buildings",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "clustered",
+          "in background"
+        ],
+        "count": 3,
+        "salience": 3,
+        "position": "center-right background",
+        "evidence": "several tall buildings visible in far distance including one with spire",
+        "confidence": 0.9
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e2",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e3",
+        "predicate": "below",
+        "object": "e8",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e9",
+        "predicate": "right_of",
+        "object": "e3",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e4",
+        "predicate": "beside",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e7",
+        "predicate": "beside",
+        "object": "e9",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e11",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e10",
+        "predicate": "beside",
+        "object": "e3",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e12",
+        "predicate": "behind",
+        "object": "e3",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e4",
+        "predicate": "near",
+        "object": "e2",
+        "confidence": 0.87
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "YARD GLASSES\nND OPTICS\n763 970 175\nGROUND FLOOR",
+        "language": "en",
+        "entity_id": null,
+        "location_in_image": "left edge, on storefront sign",
+        "legibility": "partial",
+        "confidence": 0.75
+      },
+      {
+        "text": "TECNO",
+        "language": "en",
+        "entity_id": "e12",
+        "location_in_image": "on rooftop of distant building, center-right background",
+        "legibility": "clear",
+        "confidence": 0.92
+      }
+    ],
+    "people": {
+      "count": 32,
+      "count_confidence": 0.62,
+      "faces_visible": false,
+      "activities": [
+        "walking",
+        "crossing street",
+        "standing on sidewalk"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people is uncertain due to distance, occlusion and small size in background",
+      "Text on several distant or blurry signs and storefronts cannot be read, including blue rooftop sign in center background and small shop signs on right",
+      "Specific building names, functions and street name cannot be determined from visible details",
+      "Vehicle details such as license plates, makes and models are not legible",
+      "Exact time of day and weather conditions beyond cloud cover cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 32,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:21:36+00:00",
+        "raw_output_path": "data/annotations/raw/street_018_attempt1.txt",
+        "tokens": 10295
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'YARD GLASSES\\nND OPTICS\\n763 970 175\\nGROUND FLOOR'"
+      ]
+    }
+  }
+}

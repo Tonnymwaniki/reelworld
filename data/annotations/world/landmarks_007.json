@@ -1,0 +1,301 @@
+{
+  "photo_id": "landmarks_007",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/landmarks/landmarks_007.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "IndicibleEspace",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Kenyatta_International_Convention_Centre,_Nairobi,_by_Karl_Henrik_N%C3%B8stvik_architect,_grand_stairway.jpg",
+    "title": "File:Kenyatta International Convention Centre, Nairobi, by Karl Henrik Nøstvik architect, grand stairway.jpg"
+  },
+  "observed": {
+    "caption": "An overhead view looking down into a multi-level concrete stairwell with a central red carpet runner and zigzagging staircases on both sides.",
+    "description": "The photo shows the interior of a multi-story building viewed from above, looking down into an open atrium. A straight red carpet runs down the center of the main walkway and continues onto stair treads on lower levels. On both sides of the central walkway are angular concrete staircases with textured gray balustrades and dark metal handrails that zigzag between floors. A concrete bridge spans across the middle of the frame, connecting upper walkways. The floors show a mix of red carpet, greenish terrazzo, and reddish-brown brick-patterned tile. A small rectangular sign is mounted on the face of the central bridge. The lighting is even and diffused, and no people are visible.",
+    "retrieval_queries": [
+      "overhead view of red carpet staircase inside concrete building",
+      "looking down a multi-story stairwell with zigzag stairs and red runner",
+      "interior atrium with concrete balconies and central red carpet"
+    ],
+    "tags": [
+      "red carpet",
+      "concrete staircase",
+      "interior atrium",
+      "metal railing",
+      "multi-level building"
+    ],
+    "scene": {
+      "type": "building",
+      "setting": "indoor",
+      "time_of_day": "unknown",
+      "weather": "unknown",
+      "lighting": "even diffused indoor lighting",
+      "crowd_level": "empty",
+      "activity_summary": "empty stairwell with no visible activity"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "high",
+      "facing": "downward into stairwell atrium",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "central red-carpeted stairwell and surrounding staircases"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "central red carpet runner",
+        "category": "structure",
+        "attributes": [
+          "red",
+          "carpeted",
+          "straight",
+          "centered"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "long red strip running vertically through middle of frame from foreground to background",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "upper left zigzag staircase",
+        "category": "structure",
+        "attributes": [
+          "concrete",
+          "angular",
+          "with dark railing"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left-center",
+        "evidence": "concrete stairs with metal handrail descending along left side above the bridge level",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "lower left staircase",
+        "category": "structure",
+        "attributes": [
+          "concrete",
+          "angular",
+          "shadowed"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left-lower",
+        "evidence": "concrete stairs visible below the central walkway on the left side descending further down",
+        "confidence": 0.95
+      },
+      {
+        "id": "e4",
+        "label": "right side staircase complex",
+        "category": "structure",
+        "attributes": [
+          "concrete",
+          "multi-level",
+          "with dark railing",
+          "red carpet on lower treads"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right",
+        "evidence": "interconnected concrete stairs on right side with metal railings and red carpet visible on lower flights",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "dark metal handrails",
+        "category": "structure",
+        "attributes": [
+          "dark gray",
+          "metal",
+          "linear",
+          "along stair edges"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "throughout",
+        "evidence": "thin dark railings lining all staircases and balconies",
+        "confidence": 0.97
+      },
+      {
+        "id": "e6",
+        "label": "concrete overhead bridge",
+        "category": "structure",
+        "attributes": [
+          "textured gray concrete",
+          "horizontal",
+          "spanning atrium"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-top",
+        "evidence": "thick concrete beam crossing the atrium with railings on top and sign mounted on its face",
+        "confidence": 0.97
+      },
+      {
+        "id": "e7",
+        "label": "brick-patterned floor area",
+        "category": "structure",
+        "attributes": [
+          "reddish-brown",
+          "small tiles",
+          "brick pattern"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center-background",
+        "evidence": "tiled floor visible beyond the bridge at the far end of the red carpet",
+        "confidence": 0.9
+      },
+      {
+        "id": "e8",
+        "label": "rectangular wall sign",
+        "category": "sign",
+        "attributes": [
+          "small",
+          "rectangular",
+          "mounted on concrete",
+          "with text and symbol"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center-top",
+        "evidence": "small plaque centered on the face of the concrete bridge",
+        "confidence": 0.88
+      },
+      {
+        "id": "e9",
+        "label": "textured concrete balustrades",
+        "category": "structure",
+        "attributes": [
+          "light gray",
+          "rough textured",
+          "thick"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "throughout",
+        "evidence": "rough concrete walls forming the sides of stairs and balconies throughout the atrium",
+        "confidence": 0.96
+      },
+      {
+        "id": "e10",
+        "label": "greenish terrazzo floor sections",
+        "category": "structure",
+        "attributes": [
+          "greenish-gray",
+          "smooth",
+          "adjacent to red carpet"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center-lower",
+        "evidence": "smooth greenish floor visible on both sides of the central red carpet on lower levels",
+        "confidence": 0.89
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "below",
+        "object": "e6",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e2",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e4",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e3",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e8",
+        "predicate": "on",
+        "object": "e6",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e1",
+        "predicate": "between",
+        "object": "e3",
+        "confidence": 0.85
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "CCTV",
+        "language": "en",
+        "entity_id": "e8",
+        "location_in_image": "center on concrete bridge wall",
+        "legibility": "partial",
+        "confidence": 0.65
+      }
+    ],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.98,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Full text on the small rectangular sign on the bridge is not legible beyond the letters CCTV",
+      "Building name, location, and function cannot be determined from the photo",
+      "Exact number of floors or levels is not fully visible",
+      "Material composition of the red carpet and railings beyond visual appearance cannot be confirmed",
+      "Time of day and weather outside cannot be determined from this interior view"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:12:02+00:00",
+        "raw_output_path": "data/annotations/raw/landmarks_007_attempt1.txt",
+        "tokens": 6804
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'CCTV'"
+      ]
+    }
+  }
+}

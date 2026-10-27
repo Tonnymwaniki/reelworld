@@ -1,0 +1,375 @@
+{
+  "photo_id": "market_016",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_016.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Nairobi_City_Market,_2025_(04).jpg",
+    "title": "File:Nairobi City Market, 2025 (04).jpg"
+  },
+  "observed": {
+    "caption": "Colorful Nairobi City Market building with a large painted mural facade and parked vehicles on the street in front.",
+    "description": "A large stepped market building with a bright green, yellow and blue mural covering its facade stands in the center, with signage reading NAIROBI CITY COUNTY and CITY MARKET above its covered entrance canopy. To the left behind the market is a tall beige high-rise building with red trim and many windows, and further in the background are additional buildings with TECNO signage. In the foreground a paved street with yellow curbs holds three parked vehicles including a white minivan on the left, a red SUV in the center and a dark blue SUV on the right. Several people are standing and walking on the sidewalk in front of the market and near the vehicles. The sky above is pale blue with scattered white clouds and overhead utility wires run along the right side of the image.",
+    "retrieval_queries": [
+      "colorful Nairobi City Market building with mural facade",
+      "Nairobi City County market with parked cars in front",
+      "painted art deco market building in downtown Nairobi"
+    ],
+    "tags": [
+      "Nairobi City Market",
+      "colorful mural",
+      "market building",
+      "urban street",
+      "parked cars"
+    ],
+    "scene": {
+      "type": "market",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "bright daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "people standing on sidewalk and vehicles parked in front of market"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the market building across the street",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "colorful Nairobi City Market building"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "colorful market building with mural facade",
+        "category": "building",
+        "attributes": [
+          "stepped art deco shape",
+          "bright green yellow and blue mural",
+          "covered entrance canopy",
+          "multiple storefronts"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "large central building with NAIROBI CITY COUNTY and CITY MARKET signage and extensive painted mural",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "tall beige high-rise building with red trim",
+        "category": "building",
+        "attributes": [
+          "rectangular tower",
+          "beige facade with red edges",
+          "grid of windows",
+          "multi-story"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left background",
+        "evidence": "tall multi-story building with vertical window columns behind the market",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "white minivan",
+        "category": "vehicle",
+        "attributes": [
+          "white color",
+          "parked at curb",
+          "van shape"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left foreground",
+        "evidence": "white van parked on street near sidewalk on left side",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "red SUV",
+        "category": "vehicle",
+        "attributes": [
+          "red color",
+          "parked at curb",
+          "SUV shape"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center foreground",
+        "evidence": "red sport utility vehicle parked on street in front of market",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "dark blue SUV",
+        "category": "vehicle",
+        "attributes": [
+          "dark blue color",
+          "spare tire on rear",
+          "parked at curb"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-right foreground",
+        "evidence": "dark blue SUV with rear-mounted spare tire parked on street",
+        "confidence": 0.96
+      },
+      {
+        "id": "e6",
+        "label": "paved street with yellow curbs",
+        "category": "terrain",
+        "attributes": [
+          "asphalt surface",
+          "yellow painted curbs",
+          "sidewalk"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "foreground",
+        "evidence": "road and sidewalk running across bottom of image with yellow markings",
+        "confidence": 0.95
+      },
+      {
+        "id": "e7",
+        "label": "people on sidewalk",
+        "category": "person_group",
+        "attributes": [
+          "standing",
+          "walking",
+          "casual clothing"
+        ],
+        "count": 7,
+        "salience": 3,
+        "position": "foreground along sidewalk",
+        "evidence": "several small figures standing near vehicles and market entrances",
+        "confidence": 0.72
+      },
+      {
+        "id": "e8",
+        "label": "large colorful mural on facade",
+        "category": "object",
+        "attributes": [
+          "painted scenes",
+          "ships and city skyline",
+          "Kenyan flag colors",
+          "animals and figures"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center upper",
+        "evidence": "extensive painted artwork covering upper stepped facade of market building",
+        "confidence": 0.94
+      },
+      {
+        "id": "e9",
+        "label": "partly cloudy sky",
+        "category": "other",
+        "attributes": [
+          "pale blue",
+          "scattered white clouds",
+          "bright"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top background",
+        "evidence": "sky visible above buildings with light cloud cover",
+        "confidence": 0.98
+      },
+      {
+        "id": "e10",
+        "label": "utility poles with overhead wires",
+        "category": "structure",
+        "attributes": [
+          "vertical poles",
+          "horizontal wires"
+        ],
+        "count": 2,
+        "salience": 1,
+        "position": "right background",
+        "evidence": "poles and wires visible on right side against sky and buildings",
+        "confidence": 0.85
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e8",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e4",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e5",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e6",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e7",
+        "predicate": "near",
+        "object": "e1",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e1",
+        "predicate": "below",
+        "object": "e9",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e10",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.88
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "NAIROBI CITY COUNTY",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "center above CITY MARKET sign on market facade",
+        "legibility": "clear",
+        "confidence": 0.97
+      },
+      {
+        "text": "CITY MARKET",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "center on market facade below NAIROBI CITY COUNTY",
+        "legibility": "clear",
+        "confidence": 0.98
+      },
+      {
+        "text": "Marrwa City RESTAURANT",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "center-right under canopy of market building",
+        "legibility": "partial",
+        "confidence": 0.78
+      },
+      {
+        "text": "KENYA MEAT COMMISSION NYAMA HAVEN",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "left side under canopy of market building",
+        "legibility": "partial",
+        "confidence": 0.82
+      },
+      {
+        "text": "KMC RESTAURANT",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "left-center under canopy",
+        "legibility": "partial",
+        "confidence": 0.75
+      },
+      {
+        "text": "KMC NYAMA HAVEN",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "left-center under canopy beside KMC RESTAURANT",
+        "legibility": "partial",
+        "confidence": 0.75
+      },
+      {
+        "text": "TECNO",
+        "language": "en",
+        "entity_id": null,
+        "location_in_image": "on distant building in left background",
+        "legibility": "clear",
+        "confidence": 0.85
+      },
+      {
+        "text": "OPEN",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "vertical sign on right entrance of market building",
+        "legibility": "partial",
+        "confidence": 0.68
+      }
+    ],
+    "people": {
+      "count": 7,
+      "count_confidence": 0.65,
+      "faces_visible": false,
+      "activities": [
+        "standing on sidewalk",
+        "walking near vehicles",
+        "standing near market entrance"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people inside the shaded market entrances is unclear due to shadows and distance",
+      "Small secondary text below the Marrwa City RESTAURANT sign is not legible",
+      "Additional distant signage on high-rise buildings is blurry and only partially readable",
+      "License plate numbers and fine vehicle details cannot be determined",
+      "Interior layout and activity inside the market is not visible"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 7,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:14:38+00:00",
+        "raw_output_path": "data/annotations/raw/market_016_attempt1.txt",
+        "tokens": 8462
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'Marrwa City RESTAURANT'",
+        "partially legible text: 'KENYA MEAT COMMISSION NYAMA HAVEN'",
+        "partially legible text: 'KMC RESTAURANT'",
+        "partially legible text: 'KMC NYAMA HAVEN'",
+        "partially legible text: 'OPEN'"
+      ]
+    }
+  }
+}

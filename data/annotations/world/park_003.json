@@ -1,0 +1,340 @@
+{
+  "photo_id": "park_003",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_003.jpg",
+    "license": "CC BY 4.0",
+    "author": "DesiBoy101",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Closeup_view_of_Kenyan_Government_Buildings_from_Uhuru_Park.jpg",
+    "title": "File:Closeup view of Kenyan Government Buildings from Uhuru Park.jpg"
+  },
+  "observed": {
+    "caption": "People relaxing on a grassy hill under a cloudy sky with a tall flagpole flying the Kenyan flag and buildings in the background.",
+    "description": "A wide outdoor park scene shows a sloping green grassy hill where multiple people are standing, sitting, and lying on the grass in small groups. A tall white flagpole near the center-right flies a black, red, and green flag with white fimbriation. Behind the hill and scattered trees, several multi-story buildings are visible, including one with a blue roof directly behind the flagpole and another with a greenish facade to its left, plus a domed building with a spire on the far left. A tall palm tree stands on the far right edge, and a rocky outcrop is in the foreground on the right. The upper portion of the image is filled with an overcast gray and white cloudy sky providing diffuse daylight.",
+    "retrieval_queries": [
+      "people sitting on grassy hill with Kenyan flag and city buildings behind",
+      "overcast day at park with flagpole and crowd relaxing on lawn",
+      "grassy urban park with tall flag and people picnicking"
+    ],
+    "tags": [
+      "park",
+      "grassy hill",
+      "Kenyan flag",
+      "flagpole",
+      "outdoor recreation",
+      "cloudy sky",
+      "city buildings",
+      "palm tree"
+    ],
+    "scene": {
+      "type": "park",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast",
+      "lighting": "diffuse overcast daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "people standing, sitting and lying on grass relaxing"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward flagpole and buildings across the park",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "grassy hill with flagpole and people"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "grassy hill",
+        "category": "terrain",
+        "attributes": [
+          "green",
+          "sloped",
+          "open"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground and middle ground",
+        "evidence": "expansive green grass covering sloping ground where people are sitting and standing",
+        "confidence": 0.95
+      },
+      {
+        "id": "e2",
+        "label": "flagpole",
+        "category": "structure",
+        "attributes": [
+          "tall",
+          "metal",
+          "vertical"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-right, middle distance",
+        "evidence": "tall white pole extending high above trees with flag at top",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "Kenyan flag",
+        "category": "object",
+        "attributes": [
+          "black-red-green with white fimbriation",
+          "waving"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "top of flagpole, center-right",
+        "evidence": "horizontal tricolor flag with central emblem visible at top of pole",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "building with blue roof",
+        "category": "building",
+        "attributes": [
+          "multi-story",
+          "blue roof",
+          "glass windows"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right background behind trees",
+        "evidence": "rectangular building with blue pyramidal roof and light facade visible behind flagpole",
+        "confidence": 0.92
+      },
+      {
+        "id": "e5",
+        "label": "building with green facade",
+        "category": "building",
+        "attributes": [
+          "multi-story",
+          "flat roof",
+          "grid windows"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center background",
+        "evidence": "long building with greenish exterior partially obscured by trees to left of flagpole",
+        "confidence": 0.88
+      },
+      {
+        "id": "e6",
+        "label": "domed building with spire",
+        "category": "building",
+        "attributes": [
+          "domed roof",
+          "spire",
+          "light colored"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "left background",
+        "evidence": "small domed structure with pointed spire visible above tree line on left",
+        "confidence": 0.85
+      },
+      {
+        "id": "e7",
+        "label": "trees",
+        "category": "plant",
+        "attributes": [
+          "green foliage",
+          "scattered",
+          "various sizes"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "across middle ground and background",
+        "evidence": "multiple trees with dense canopies dotting the grassy hill and around buildings",
+        "confidence": 0.95
+      },
+      {
+        "id": "e8",
+        "label": "palm tree",
+        "category": "plant",
+        "attributes": [
+          "tall",
+          "slender trunk",
+          "palm fronds"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "far right edge",
+        "evidence": "tall palm tree with fronds at top standing near right border of image",
+        "confidence": 0.96
+      },
+      {
+        "id": "e9",
+        "label": "group of people standing",
+        "category": "person_group",
+        "attributes": [
+          "standing",
+          "clustered",
+          "casual clothing"
+        ],
+        "count": 4,
+        "salience": 4,
+        "position": "foreground center-left",
+        "evidence": "four individuals standing close together on grass near small sculpture",
+        "confidence": 0.9
+      },
+      {
+        "id": "e10",
+        "label": "people sitting on grass",
+        "category": "person_group",
+        "attributes": [
+          "sitting",
+          "lying",
+          "scattered"
+        ],
+        "count": 8,
+        "salience": 4,
+        "position": "foreground and middle ground across grass",
+        "evidence": "multiple individuals and small groups seated or reclined on grassy slope",
+        "confidence": 0.85
+      },
+      {
+        "id": "e11",
+        "label": "overcast sky",
+        "category": "other",
+        "attributes": [
+          "cloudy",
+          "gray",
+          "diffuse light"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "upper two-thirds of image",
+        "evidence": "expansive sky filled with gray and white clouds covering background",
+        "confidence": 0.98
+      },
+      {
+        "id": "e12",
+        "label": "rocky outcrop",
+        "category": "terrain",
+        "attributes": [
+          "gray",
+          "uneven",
+          "exposed rock"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "foreground right",
+        "evidence": "cluster of gray rocks along right edge of grassy area",
+        "confidence": 0.9
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e2",
+        "predicate": "near",
+        "object": "e4",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e7",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e5",
+        "predicate": "left_of",
+        "object": "e4",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e6",
+        "predicate": "left_of",
+        "object": "e5",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e8",
+        "predicate": "right_of",
+        "object": "e4",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e10",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e2",
+        "predicate": "above",
+        "object": "e7",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e12",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.88
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 16,
+      "count_confidence": 0.62,
+      "faces_visible": false,
+      "activities": [
+        "standing and conversing",
+        "sitting on grass",
+        "lying on grass"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people is uncertain due to small distant figures and occlusion",
+      "Text on distant building banner is illegible and cannot be transcribed",
+      "Specific identities, ages, or genders of people cannot be determined",
+      "Exact location name and building names cannot be determined from image alone",
+      "Time beyond daytime and temperature cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 16,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:16:15+00:00",
+        "raw_output_path": "data/annotations/raw/park_003_attempt1.txt",
+        "tokens": 7517
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

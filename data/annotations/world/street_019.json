@@ -1,0 +1,372 @@
+{
+  "photo_id": "street_019",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_019.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Koinange_Street,_2025_(01).jpg",
+    "title": "File:Koinange Street, 2025 (01).jpg"
+  },
+  "observed": {
+    "caption": "A wide urban street lined with trees and multi-story buildings with parked cars and a few pedestrians and motorcyclists under an overcast sky.",
+    "description": "A paved two-way street stretches into the distance, flanked on both sides by sidewalks, parked cars, and mature green trees with some pink flowering foliage on the left. On the right side, multi-story commercial buildings with storefronts occupy the foreground, including one with a large sign above glass windows and a black SUV parked on the sidewalk in front. On the left, a row of parked cars lines the curb. In the middle distance, motorcycles and cars are visible on the road, and several people are walking or standing on the sidewalks. Tall white and blue high-rise buildings rise in the background against a cloudy sky, with streetlights and small banners along the sidewalk.",
+    "retrieval_queries": [
+      "city street with Sumac bank and Habib Bank buildings",
+      "urban road lined with trees and parked cars in downtown",
+      "wide street view with motorcycles and high rise buildings"
+    ],
+    "tags": [
+      "urban street",
+      "city buildings",
+      "parked cars",
+      "trees",
+      "storefronts",
+      "motorcycles",
+      "downtown"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast cloudy",
+      "lighting": "diffuse daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "light traffic and pedestrians on urban street"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "down the street toward distant buildings",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "street lined with buildings and trees"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "commercial building with Sumac bank storefront on right",
+        "category": "building",
+        "attributes": [
+          "multi-story",
+          "concrete facade",
+          "glass storefront",
+          "blue and red signage"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "right foreground",
+        "evidence": "large building occupying right side with glass windows and prominent sign above entrance",
+        "confidence": 0.96
+      },
+      {
+        "id": "e2",
+        "label": "paved asphalt street",
+        "category": "structure",
+        "attributes": [
+          "wide",
+          "two-way",
+          "gray asphalt",
+          "center lane markings"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center foreground to background",
+        "evidence": "wide road extending from foreground to horizon with vehicles on it",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "parked cars along left curb",
+        "category": "vehicle",
+        "attributes": [
+          "multiple colors",
+          "parked in row",
+          "sedans and SUVs"
+        ],
+        "count": 8,
+        "salience": 4,
+        "position": "left foreground",
+        "evidence": "line of vehicles parked along left sidewalk",
+        "confidence": 0.92
+      },
+      {
+        "id": "e4",
+        "label": "black SUV parked on right sidewalk",
+        "category": "vehicle",
+        "attributes": [
+          "black",
+          "SUV",
+          "parked on sidewalk"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right foreground near building",
+        "evidence": "dark SUV parked on pavement in front of storefront",
+        "confidence": 0.95
+      },
+      {
+        "id": "e5",
+        "label": "row of mature trees lining street",
+        "category": "plant",
+        "attributes": [
+          "green foliage",
+          "tall",
+          "dense canopy",
+          "some pink flowering branches on left"
+        ],
+        "count": 10,
+        "salience": 4,
+        "position": "center and left middle distance",
+        "evidence": "large leafy trees along both sides of street",
+        "confidence": 0.94
+      },
+      {
+        "id": "e6",
+        "label": "group of people walking and riding",
+        "category": "person_group",
+        "attributes": [
+          "casual clothing",
+          "standing and walking",
+          "riding motorcycles"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "scattered along street and sidewalks",
+        "evidence": "small figures on sidewalks and on motorcycles on road",
+        "confidence": 0.72
+      },
+      {
+        "id": "e7",
+        "label": "motorcycles on road",
+        "category": "vehicle",
+        "attributes": [
+          "two-wheeled",
+          "on street",
+          "with riders"
+        ],
+        "count": 2,
+        "salience": 3,
+        "position": "center middle distance on street",
+        "evidence": "two motorcycles with riders traveling down street",
+        "confidence": 0.88
+      },
+      {
+        "id": "e8",
+        "label": "high-rise buildings in background",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "white and blue facades",
+          "multiple stories",
+          "modern"
+        ],
+        "count": 4,
+        "salience": 4,
+        "position": "background center and left",
+        "evidence": "tall buildings visible beyond trees in distance",
+        "confidence": 0.93
+      },
+      {
+        "id": "e9",
+        "label": "sidewalk pavement on right",
+        "category": "structure",
+        "attributes": [
+          "concrete",
+          "narrow",
+          "along building front"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right foreground",
+        "evidence": "paved walkway between street and buildings where SUV is parked",
+        "confidence": 0.9
+      },
+      {
+        "id": "e10",
+        "label": "overcast sky",
+        "category": "other",
+        "attributes": [
+          "cloudy",
+          "gray-white",
+          "diffuse light"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top background",
+        "evidence": "cloud-covered sky above buildings",
+        "confidence": 0.97
+      },
+      {
+        "id": "e11",
+        "label": "streetlight pole with banner",
+        "category": "structure",
+        "attributes": [
+          "metal pole",
+          "vertical banner attached",
+          "near sidewalk"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center-right near trees",
+        "evidence": "pole with light fixture and hanging sign beside sidewalk",
+        "confidence": 0.85
+      },
+      {
+        "id": "e12",
+        "label": "Habib Bank AG Zurich storefront",
+        "category": "building",
+        "attributes": [
+          "ground floor shop",
+          "dark awning",
+          "sign above entrance"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-right",
+        "evidence": "storefront with signage under trees behind sidewalk",
+        "confidence": 0.89
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e9",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e1",
+        "predicate": "right_of",
+        "object": "e2",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e3",
+        "predicate": "beside",
+        "object": "e2",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e5",
+        "predicate": "beside",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e8",
+        "predicate": "behind",
+        "object": "e5",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e11",
+        "predicate": "near",
+        "object": "e1",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e12",
+        "predicate": "inside",
+        "object": "e1",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e6",
+        "predicate": "near",
+        "object": "e1",
+        "confidence": 0.7
+      },
+      {
+        "subject": "e10",
+        "predicate": "above",
+        "object": "e8",
+        "confidence": 0.97
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "sumac MICRO FINANCE BANK",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "on facade of building on right side above storefront",
+        "legibility": "clear",
+        "confidence": 0.94
+      },
+      {
+        "text": "Habib Bank AG Zurich",
+        "language": "en",
+        "entity_id": "e12",
+        "location_in_image": "on storefront awning center-right behind trees",
+        "legibility": "clear",
+        "confidence": 0.92
+      },
+      {
+        "text": "Eagle Africa Insurance Brokers Limited",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "on blue sign above storefront on far right edge",
+        "legibility": "partial",
+        "confidence": 0.78
+      }
+    ],
+    "people": {
+      "count": 5,
+      "count_confidence": 0.68,
+      "faces_visible": false,
+      "activities": [
+        "walking on sidewalk",
+        "standing near building",
+        "riding motorcycle on street"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "exact number of people in far distance due to small size and occlusion",
+      "text on vertical banner attached to streetlight pole is blurry and unreadable",
+      "text on distant storefronts and small signs along street is not legible",
+      "license plate numbers and vehicle details are not discernible",
+      "exact building names and floors of background high-rises",
+      "weather conditions beyond overcast appearance"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 5,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:21:35+00:00",
+        "raw_output_path": "data/annotations/raw/street_019_attempt1.txt",
+        "tokens": 7944
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'Eagle Africa Insurance Brokers Limited'"
+      ]
+    }
+  }
+}

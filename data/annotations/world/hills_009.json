@@ -1,0 +1,299 @@
+{
+  "photo_id": "hills_009",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_009.jpg",
+    "license": "CC BY 2.0",
+    "author": "Ninara from Helsinki, Finland",
+    "source_url": "https://commons.wikimedia.org/wiki/File:NgongHillsKenya.jpg",
+    "title": "File:NgongHillsKenya.jpg"
+  },
+  "observed": {
+    "caption": "A lush green hill with a winding dirt trail leading to its summit under a partly cloudy sky, with grazing animals on the lower slope and a lone figure walking on the path.",
+    "description": "A large grass-covered hill dominates the center of the image, with a narrow light-brown dirt trail winding from the flat grassy foreground up the slope to the rounded summit. The hill is mostly open grass with scattered isolated trees and low shrubs, while dense dark green forest covers its left and right flanks. A herd of small white and dark grazing animals is spread across the lower center slope. A single small dark figure is visible walking on the middle section of the trail, and very tiny dark specks are aligned along the upper portion of the trail near the summit. The foreground is flat green grass with small bushes. Above the hill is a bright blue sky filled with large white cumulus clouds. The lighting is bright daylight.",
+    "retrieval_queries": [
+      "green grassy hill with a trail going to the top",
+      "cattle grazing on a lush mountain slope with a hiking path",
+      "aerial view of a green mountain with clouds and a dirt footpath"
+    ],
+    "tags": [
+      "hill",
+      "mountain",
+      "grass",
+      "trail",
+      "path",
+      "grazing animals",
+      "green landscape",
+      "clouds",
+      "hiking"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "bright daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "grazing and walking on trail"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the hill",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "grassy hill with trail"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "grassy hill",
+        "category": "terrain",
+        "attributes": [
+          "large",
+          "green",
+          "rounded summit",
+          "sloping"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "large vegetated hill occupying center and background",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "dirt trail",
+        "category": "terrain",
+        "attributes": [
+          "narrow",
+          "winding",
+          "light brown"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center",
+        "evidence": "visible path running from foreground up to hilltop",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "sky with clouds",
+        "category": "other",
+        "attributes": [
+          "blue",
+          "partly cloudy",
+          "bright"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "top",
+        "evidence": "blue sky with large white cumulus clouds above hill",
+        "confidence": 0.99
+      },
+      {
+        "id": "e4",
+        "label": "scattered trees",
+        "category": "plant",
+        "attributes": [
+          "isolated",
+          "dark green",
+          "small canopy"
+        ],
+        "count": 4,
+        "salience": 3,
+        "position": "center-left and center-right on slope",
+        "evidence": "few standalone trees on open grassy slope",
+        "confidence": 0.9
+      },
+      {
+        "id": "e5",
+        "label": "dense forest",
+        "category": "plant",
+        "attributes": [
+          "thick",
+          "dark green",
+          "wooded"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left and right flanks of hill",
+        "evidence": "dense tree cover on sides of hill",
+        "confidence": 0.93
+      },
+      {
+        "id": "e6",
+        "label": "grazing animals",
+        "category": "animal",
+        "attributes": [
+          "small",
+          "white and dark",
+          "herd"
+        ],
+        "count": 40,
+        "salience": 4,
+        "position": "lower center on slope",
+        "evidence": "numerous small animals scattered grazing on lower grass",
+        "confidence": 0.86
+      },
+      {
+        "id": "e7",
+        "label": "person walking on trail",
+        "category": "person_group",
+        "attributes": [
+          "small figure",
+          "dark clothing",
+          "walking"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center on middle section of trail",
+        "evidence": "single small dark figure on trail",
+        "confidence": 0.78
+      },
+      {
+        "id": "e8",
+        "label": "tiny distant figures on upper trail",
+        "category": "other",
+        "attributes": [
+          "very small",
+          "dark specks",
+          "linear arrangement"
+        ],
+        "count": 8,
+        "salience": 2,
+        "position": "upper center near summit",
+        "evidence": "tiny dark dots aligned along upper trail",
+        "confidence": 0.5
+      },
+      {
+        "id": "e9",
+        "label": "grassy foreground",
+        "category": "terrain",
+        "attributes": [
+          "flat",
+          "green",
+          "open"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "foreground bottom",
+        "evidence": "flat grassy area at bottom in front of hill",
+        "confidence": 0.96
+      },
+      {
+        "id": "e10",
+        "label": "shrubs and bushes",
+        "category": "plant",
+        "attributes": [
+          "low",
+          "dark green",
+          "scattered"
+        ],
+        "count": 6,
+        "salience": 2,
+        "position": "foreground and lower slope",
+        "evidence": "small bushy vegetation in foreground and near trail",
+        "confidence": 0.88
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e9",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e1",
+        "predicate": "below",
+        "object": "e3",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e8",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.55
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 1,
+      "count_confidence": 0.78,
+      "faces_visible": false,
+      "activities": [
+        "walking on trail"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Whether tiny dark specks on upper trail near summit are people, animals, or shadows cannot be determined due to distance and resolution",
+      "Exact count and species of grazing animals on lower slope cannot be determined",
+      "Clothing details, age, gender, or identity of the person on the trail cannot be determined",
+      "No legible text is visible; any distant signs would be too small or blurry to read",
+      "Exact geographic location and name of the hill cannot be determined from the image alone"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 1,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:09:46+00:00",
+        "raw_output_path": "data/annotations/raw/hills_009_attempt1.txt",
+        "tokens": 7229
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

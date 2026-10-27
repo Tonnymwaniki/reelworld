@@ -1,0 +1,310 @@
+{
+  "photo_id": "cbd_004",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/cbd/cbd_004.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Tall Black",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Nairobi%27s_Central_Business_District_Landmark_Skyscrapers..jpg",
+    "title": "File:Nairobi's Central Business District Landmark Skyscrapers..jpg"
+  },
+  "observed": {
+    "caption": "A city skyline with numerous high-rise buildings rises behind a green park with dense trees and an open grassy field under a bright blue sky with scattered white clouds.",
+    "description": "In the foreground a wide grassy field with patches of light brown and green stretches horizontally, with small bushes at the bottom edge. Behind the field a dense line of green trees and foliage extends across the middle of the image. Beyond the trees an elevated roadway or overpass runs horizontally. In the background a cluster of high-rise buildings of varying heights, colors and designs including brown glass, blue glass, white and gray towers dominates the skyline. The sky above is bright blue with scattered fluffy white clouds. The lighting is bright natural daylight.",
+    "retrieval_queries": [
+      "city skyline behind park with trees and grass field",
+      "downtown high rise buildings on a sunny day with blue sky and clouds",
+      "urban skyline view over green park and trees"
+    ],
+    "tags": [
+      "city skyline",
+      "downtown",
+      "high-rise buildings",
+      "urban landscape",
+      "park",
+      "trees",
+      "grass field",
+      "blue sky",
+      "clouds",
+      "daytime"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy and sunny",
+      "lighting": "bright natural daylight",
+      "crowd_level": "empty",
+      "activity_summary": "distant city view with no discernible activity"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "raised",
+      "facing": "toward the city skyline across the park",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "city skyline and park foreground"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "central brown glass high-rise building",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "rectangular",
+          "brown reflective glass",
+          "antenna on roof"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center background",
+        "evidence": "prominent dark brown tower with vertical glass facade standing taller than surrounding low buildings",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "dense tree line",
+        "category": "plant",
+        "attributes": [
+          "dense",
+          "green foliage",
+          "varied height"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "middle foreground across image",
+        "evidence": "continuous band of green trees and canopies between grass field and city buildings",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "open grassy field",
+        "category": "terrain",
+        "attributes": [
+          "flat",
+          "green and light brown grass",
+          "open"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground bottom",
+        "evidence": "wide flat expanse of grass occupying lower third of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e4",
+        "label": "blue sky with scattered white clouds",
+        "category": "other",
+        "attributes": [
+          "bright blue",
+          "fluffy white cumulus clouds",
+          "partly cloudy"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "upper background",
+        "evidence": "expansive sky covering top half of image with white clouds against blue",
+        "confidence": 0.99
+      },
+      {
+        "id": "e5",
+        "label": "blue-glass twin towers",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "blue reflective glass",
+          "gold-topped roofs"
+        ],
+        "count": 2,
+        "salience": 4,
+        "position": "right-center background",
+        "evidence": "two adjacent tall buildings with blue glass facades and distinctive light-colored tops",
+        "confidence": 0.96
+      },
+      {
+        "id": "e6",
+        "label": "cylindrical tower with helipad",
+        "category": "building",
+        "attributes": [
+          "cylindrical",
+          "gray",
+          "flat circular top"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center-right background",
+        "evidence": "round tower with flat top visible behind lower buildings to the right of center",
+        "confidence": 0.94
+      },
+      {
+        "id": "e7",
+        "label": "tall building with spire on far left",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "light colored",
+          "spire antenna on top"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "far left background",
+        "evidence": "slender tall building with pointed spire at extreme left edge of skyline",
+        "confidence": 0.95
+      },
+      {
+        "id": "e8",
+        "label": "elevated roadway or overpass",
+        "category": "structure",
+        "attributes": [
+          "long horizontal",
+          "gray",
+          "partially obscured by trees"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "behind tree line, middle",
+        "evidence": "horizontal gray structure with supports visible through gaps in trees",
+        "confidence": 0.88
+      },
+      {
+        "id": "e9",
+        "label": "low white building in front of central tower",
+        "category": "building",
+        "attributes": [
+          "low-rise",
+          "white",
+          "rectangular"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center background, below central tower",
+        "evidence": "white multi-story building directly in front of the central brown tower",
+        "confidence": 0.9
+      },
+      {
+        "id": "e10",
+        "label": "cluster of distant high-rise buildings",
+        "category": "building",
+        "attributes": [
+          "varied heights",
+          "mixed colors",
+          "urban skyline"
+        ],
+        "count": 15,
+        "salience": 3,
+        "position": "background across horizon",
+        "evidence": "numerous high-rise and mid-rise buildings forming continuous skyline from left to right",
+        "confidence": 0.96
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e3",
+        "predicate": "in_front_of",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e2",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e5",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e8",
+        "predicate": "behind",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e9",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e6",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e7",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e4",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e4",
+        "predicate": "above",
+        "object": "e2",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e3",
+        "predicate": "below",
+        "object": "e4",
+        "confidence": 0.99
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.98,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact city or location of the skyline cannot be determined from the image alone",
+      "Text on distant billboards and building signs is blurry and cut off, fewer than 3 legible letters can be read",
+      "Whether small indistinct figures or vehicles are present behind trees or on the distant roadway is not discernible",
+      "Exact time of day beyond daytime and weather conditions beyond partly cloudy",
+      "Names, heights and functions of individual buildings"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:06:42+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_004_attempt1.txt",
+        "tokens": 6252
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

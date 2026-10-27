@@ -1,0 +1,347 @@
+{
+  "photo_id": "park_020",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_020.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Uhuru_Park,_2025_(01).jpg",
+    "title": "File:Uhuru Park, 2025 (01).jpg"
+  },
+  "observed": {
+    "caption": "Two large dark funnel-shaped metal structures stand on a paved plaza in an urban park with additional similar structures, benches, trees, a pond, and high-rise buildings in the background under an overcast sky.",
+    "description": "The photo shows an outdoor urban park with four large dark brown funnel-shaped metal structures with rectangular cut-out openings, two prominent in the foreground on a light-colored paved plaza and two smaller in the midground. Green grass, small trees and shrubs surround the plaza, with several dark benches placed on the pavement and a small figure sitting on the central bench. A small pond is visible on the right side near trees, and a curved paved pathway is in the foreground. In the background, tall modern high-rise buildings with glass facades rise above the tree line under a cloudy overcast sky, and small colorful canopies with indistinct figures are visible in the distant left and center.",
+    "retrieval_queries": [
+      "large funnel shaped metal sculptures in a city park with skyline",
+      "urban park with benches pond and modern art structures on cloudy day",
+      "wide view of park plaza with mushroom like towers and tall buildings behind"
+    ],
+    "tags": [
+      "park",
+      "funnel sculptures",
+      "urban plaza",
+      "benches",
+      "pond",
+      "city skyline",
+      "overcast",
+      "green space"
+    ],
+    "scene": {
+      "type": "park",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast cloudy",
+      "lighting": "diffuse overcast daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "sitting on bench and sparse leisure in park"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "raised",
+      "facing": "across the park toward the skyline",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "large funnel-shaped structures on plaza"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "large funnel-shaped metal structure in left foreground",
+        "category": "structure",
+        "attributes": [
+          "dark brown-black",
+          "funnel-shaped",
+          "large",
+          "rectangular cut-outs",
+          "metal"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "left-center foreground",
+        "evidence": "dominant dark funnel structure occupying left foreground on paved base",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "large funnel-shaped metal structure in right foreground",
+        "category": "structure",
+        "attributes": [
+          "dark brown",
+          "funnel-shaped",
+          "large",
+          "rectangular cut-outs",
+          "metal"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "right-center foreground",
+        "evidence": "dominant dark funnel structure occupying right foreground on paved base",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "smaller funnel-shaped structure in center background",
+        "category": "structure",
+        "attributes": [
+          "dark brown",
+          "funnel-shaped",
+          "smaller",
+          "distant"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center background",
+        "evidence": "smaller funnel structure visible behind trees in mid-distance",
+        "confidence": 0.92
+      },
+      {
+        "id": "e4",
+        "label": "smaller funnel-shaped structure in right background",
+        "category": "structure",
+        "attributes": [
+          "dark brown",
+          "funnel-shaped",
+          "smaller",
+          "distant"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right background",
+        "evidence": "smaller funnel structure visible near pond and trees in mid-distance",
+        "confidence": 0.9
+      },
+      {
+        "id": "e5",
+        "label": "bench in center foreground",
+        "category": "object",
+        "attributes": [
+          "dark",
+          "wooden or metal",
+          "empty except for one figure"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center foreground on plaza",
+        "evidence": "dark bench on paved area between the two large structures",
+        "confidence": 0.95
+      },
+      {
+        "id": "e6",
+        "label": "paved plaza",
+        "category": "terrain",
+        "attributes": [
+          "light gray",
+          "paved",
+          "open"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center and midground",
+        "evidence": "light-colored paved ground surrounding the funnel structures and benches",
+        "confidence": 0.96
+      },
+      {
+        "id": "e7",
+        "label": "grassy lawn in foreground",
+        "category": "terrain",
+        "attributes": [
+          "green",
+          "grassy",
+          "well-maintained"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "foreground bottom",
+        "evidence": "expanse of green grass in lower portion of image",
+        "confidence": 0.97
+      },
+      {
+        "id": "e8",
+        "label": "trees and shrubs",
+        "category": "plant",
+        "attributes": [
+          "green",
+          "leafy",
+          "scattered",
+          "various sizes"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "scattered across park",
+        "evidence": "multiple green trees and bushes around plaza, near pond and in background",
+        "confidence": 0.96
+      },
+      {
+        "id": "e9",
+        "label": "pond on right side",
+        "category": "terrain",
+        "attributes": [
+          "dark water",
+          "small",
+          "bordered by trees"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right background",
+        "evidence": "dark water body visible on right behind trees and near green bridge",
+        "confidence": 0.88
+      },
+      {
+        "id": "e10",
+        "label": "high-rise buildings in distant background",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "modern",
+          "glass facades",
+          "blue and beige"
+        ],
+        "count": 3,
+        "salience": 3,
+        "position": "center and right background beyond trees",
+        "evidence": "tall buildings with glass windows rising above tree line in distance",
+        "confidence": 0.93
+      },
+      {
+        "id": "e11",
+        "label": "overcast sky",
+        "category": "other",
+        "attributes": [
+          "cloudy",
+          "gray-white",
+          "overcast"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "upper background",
+        "evidence": "cloud-covered sky occupying upper half of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e12",
+        "label": "person sitting on bench",
+        "category": "person_group",
+        "attributes": [
+          "sitting",
+          "small figure",
+          "dark clothing not clearly discernible"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center on bench e5",
+        "evidence": "small dark figure seated on central bench",
+        "confidence": 0.6
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e5",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e5",
+        "predicate": "near",
+        "object": "e1",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e7",
+        "predicate": "in_front_of",
+        "object": "e6",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e9",
+        "predicate": "right_of",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e10",
+        "predicate": "behind",
+        "object": "e3",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e12",
+        "predicate": "on",
+        "object": "e5",
+        "confidence": 0.65
+      },
+      {
+        "subject": "e8",
+        "predicate": "near",
+        "object": "e6",
+        "confidence": 0.85
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 1,
+      "count_confidence": 0.6,
+      "faces_visible": false,
+      "activities": [
+        "sitting on bench"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people in far background near colorful canopies is not determinable due to small size and blur",
+      "No legible text with at least 3 letters is visible on any sign, banner or label; distant signs if any are unreadable",
+      "Specific identities, names or functions of the high-rise buildings cannot be determined",
+      "Material and exact dimensions of the funnel-shaped structures cannot be determined from photo alone",
+      "Clothing details and facial features of the person on the bench are not discernible"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 1,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:17:59+00:00",
+        "raw_output_path": "data/annotations/raw/park_020_attempt1.txt",
+        "tokens": 7584
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

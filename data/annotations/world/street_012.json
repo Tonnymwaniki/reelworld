@@ -1,0 +1,380 @@
+{
+  "photo_id": "street_012",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_012.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Kenyatta_Avenue,_Nairobi,_2025_(03).jpg",
+    "title": "File:Kenyatta Avenue, Nairobi, 2025 (03).jpg"
+  },
+  "observed": {
+    "caption": "A busy urban intersection with buses, cars, traffic officers, and tall buildings under an overcast sky.",
+    "description": "The photo shows a wide urban street intersection viewed from a slightly elevated position. In the foreground and center, multiple vehicles including blue and white buses, a silver hatchback, and white parked cars occupy the asphalt road. Two individuals in high-visibility vests and white hats stand in the road directing traffic. Pedestrians walk along sidewalks on both sides. A tall traffic light pole with multiple signal heads and a square street clock above a red advertisement sign stand on the right. Trees line the street, and a skyline of modern high-rise buildings with glass and concrete facades rises in the background under a cloudy gray-white sky. The lighting is diffused daylight.",
+    "retrieval_queries": [
+      "busy city intersection with buses and traffic officers directing cars",
+      "downtown street with tall buildings traffic lights and a street clock",
+      "urban road with matatu buses cars and pedestrians on sidewalks"
+    ],
+    "tags": [
+      "city intersection",
+      "urban street",
+      "buses",
+      "traffic police",
+      "high-rise buildings",
+      "street clock",
+      "traffic lights",
+      "pedestrians",
+      "cars",
+      "downtown"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast cloudy",
+      "lighting": "diffused daylight",
+      "crowd_level": "moderate",
+      "activity_summary": "vehicles and pedestrians moving through busy intersection"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "raised",
+      "facing": "toward the city skyline down the street",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "busy intersection with traffic"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "buses",
+        "category": "vehicle",
+        "attributes": [
+          "blue and white",
+          "large",
+          "on road"
+        ],
+        "count": 3,
+        "salience": 5,
+        "position": "center-left",
+        "evidence": "three large buses visible on the road with passengers",
+        "confidence": 0.95
+      },
+      {
+        "id": "e2",
+        "label": "silver hatchback car",
+        "category": "vehicle",
+        "attributes": [
+          "silver",
+          "small",
+          "on road"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center",
+        "evidence": "silver car in the middle of the intersection",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "white parked cars",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "parked along curb",
+          "multiple"
+        ],
+        "count": 3,
+        "salience": 4,
+        "position": "bottom-right",
+        "evidence": "row of white cars lined on the right side of the road",
+        "confidence": 0.92
+      },
+      {
+        "id": "e4",
+        "label": "traffic officers",
+        "category": "person_group",
+        "attributes": [
+          "wearing high-visibility yellow vests",
+          "white hats",
+          "standing in road"
+        ],
+        "count": 2,
+        "salience": 5,
+        "position": "center",
+        "evidence": "two individuals in reflective vests standing in the road directing traffic",
+        "confidence": 0.9
+      },
+      {
+        "id": "e5",
+        "label": "pedestrians",
+        "category": "person_group",
+        "attributes": [
+          "various clothing",
+          "walking on sidewalks",
+          "standing near buses"
+        ],
+        "count": 14,
+        "salience": 3,
+        "position": "left and right sidewalks",
+        "evidence": "multiple individuals walking and standing along both sidewalks and near buses",
+        "confidence": 0.68
+      },
+      {
+        "id": "e6",
+        "label": "traffic light pole",
+        "category": "structure",
+        "attributes": [
+          "tall metal pole",
+          "multiple black signal heads"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right foreground",
+        "evidence": "large pole with traffic lights extending over the road on the right",
+        "confidence": 0.96
+      },
+      {
+        "id": "e7",
+        "label": "street clock",
+        "category": "object",
+        "attributes": [
+          "square white face",
+          "black hands and numerals",
+          "mounted on pole"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right side",
+        "evidence": "clock with white face mounted above red sign on the right",
+        "confidence": 0.92
+      },
+      {
+        "id": "e8",
+        "label": "DTB advertisement sign",
+        "category": "sign",
+        "attributes": [
+          "red rectangular",
+          "white text",
+          "below clock"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right side below clock",
+        "evidence": "red sign with white lettering mounted on pole below clock",
+        "confidence": 0.95
+      },
+      {
+        "id": "e9",
+        "label": "high-rise buildings",
+        "category": "building",
+        "attributes": [
+          "modern glass and concrete",
+          "multiple stories",
+          "skyline"
+        ],
+        "count": 7,
+        "salience": 4,
+        "position": "background",
+        "evidence": "tall buildings of varying heights forming skyline behind trees",
+        "confidence": 0.9
+      },
+      {
+        "id": "e10",
+        "label": "trees",
+        "category": "plant",
+        "attributes": [
+          "green foliage",
+          "lining street",
+          "dense canopy"
+        ],
+        "count": 8,
+        "salience": 3,
+        "position": "center and sides",
+        "evidence": "trees with dense leaves along the road and between buildings",
+        "confidence": 0.88
+      },
+      {
+        "id": "e11",
+        "label": "road intersection",
+        "category": "terrain",
+        "attributes": [
+          "asphalt",
+          "marked lanes",
+          "wide"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center and foreground",
+        "evidence": "paved road with vehicles and lane markings extending through center",
+        "confidence": 0.97
+      },
+      {
+        "id": "e12",
+        "label": "overcast sky",
+        "category": "terrain",
+        "attributes": [
+          "cloudy",
+          "gray-white",
+          "diffused light"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top",
+        "evidence": "cloud-covered sky visible above buildings",
+        "confidence": 0.92
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e11",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e11",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e11",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e7",
+        "predicate": "above",
+        "object": "e8",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e8",
+        "predicate": "below",
+        "object": "e7",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e6",
+        "predicate": "beside",
+        "object": "e7",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e9",
+        "predicate": "behind",
+        "object": "e10",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e10",
+        "predicate": "beside",
+        "object": "e11",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e6",
+        "predicate": "right_of",
+        "object": "e4",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e3",
+        "predicate": "right_of",
+        "object": "e2",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e5",
+        "predicate": "beside",
+        "object": "e11",
+        "confidence": 0.8
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "TECNO",
+        "language": "en",
+        "entity_id": "e9",
+        "location_in_image": "center background on building rooftop",
+        "legibility": "clear",
+        "confidence": 0.88
+      },
+      {
+        "text": "DTB Bank with us. Bank on us.",
+        "language": "en",
+        "entity_id": "e8",
+        "location_in_image": "right side on red sign below clock",
+        "legibility": "clear",
+        "confidence": 0.9
+      },
+      {
+        "text": "Divine",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "left side on blue bus",
+        "legibility": "clear",
+        "confidence": 0.85
+      }
+    ],
+    "people": {
+      "count": 16,
+      "count_confidence": 0.65,
+      "faces_visible": false,
+      "activities": [
+        "directing traffic",
+        "walking on sidewalks",
+        "standing near buses",
+        "waiting"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people is uncertain due to occlusion, distance and overlapping figures",
+      "Text on distant rooftop signs, bus destination boards and vehicle license plates is not fully legible and was omitted",
+      "Exact wording and punctuation on the red DTB sign beyond the main lines cannot be confirmed at this resolution",
+      "Precise time shown on the street clock and building names beyond TECNO cannot be determined",
+      "Weather details beyond overcast cloud cover and exact time of day cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 16,
+    "license_plates_visible": true,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:20:48+00:00",
+        "raw_output_path": "data/annotations/raw/street_012_attempt1.txt",
+        "tokens": 9134
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

@@ -1,0 +1,306 @@
+{
+  "photo_id": "hills_025",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_025.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Thagana peters",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ngong_hill_(view_from_kiserian).jpg",
+    "title": "File:Ngong hill (view from kiserian).jpg"
+  },
+  "observed": {
+    "caption": "A wide rural landscape with a muddy river, scattered houses and green fields in front of hazy mountains under a bright blue sky.",
+    "description": "The foreground is covered with uneven green grass and low vegetation with patches of darker soil. A narrow, muddy brown river runs horizontally across the middle ground with an eroded earthy bank on its far side. Beyond the river are clusters of small houses with varied light-colored roofs interspersed among dense dark green trees and shrubs. In the background a long, hazy greenish-gray mountain range stretches across the horizon. Above, a bright blue sky with scattered white clouds occupies the upper portion of the image, illuminated by bright daylight.",
+    "retrieval_queries": [
+      "wide view of a river with a village and mountains in the background",
+      "green fields and muddy river in front of small houses with hills behind",
+      "rural landscape with grassy foreground and distant mountains under blue sky"
+    ],
+    "tags": [
+      "river",
+      "village",
+      "mountains",
+      "grassland",
+      "rural landscape",
+      "cloudy sky"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "bright daylight",
+      "crowd_level": "empty",
+      "activity_summary": "quiet rural settlement by river"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "raised",
+      "facing": "toward the river and mountains",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "river valley and distant mountains"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "grassy field in foreground",
+        "category": "terrain",
+        "attributes": [
+          "green",
+          "uneven",
+          "vegetated"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground, bottom",
+        "evidence": "expansive green vegetation covering lower third of image",
+        "confidence": 0.95
+      },
+      {
+        "id": "e2",
+        "label": "river",
+        "category": "terrain",
+        "attributes": [
+          "muddy",
+          "brown",
+          "narrow",
+          "horizontal"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "middle, horizontal across image",
+        "evidence": "brown waterway stretching across middle ground",
+        "confidence": 0.95
+      },
+      {
+        "id": "e3",
+        "label": "scattered trees and shrubs",
+        "category": "plant",
+        "attributes": [
+          "green",
+          "dense in patches",
+          "small to medium"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "middle ground, along riverbank and near houses",
+        "evidence": "dark green clusters of foliage along river and around buildings",
+        "confidence": 0.9
+      },
+      {
+        "id": "e4",
+        "label": "cluster of houses",
+        "category": "building",
+        "attributes": [
+          "small",
+          "varied roof colors",
+          "scattered"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "middle ground, beyond river",
+        "evidence": "multiple small structures with light and colored roofs among trees",
+        "confidence": 0.88
+      },
+      {
+        "id": "e5",
+        "label": "mountain range",
+        "category": "terrain",
+        "attributes": [
+          "distant",
+          "hazy",
+          "greenish-gray",
+          "rolling"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "background, horizon",
+        "evidence": "long hazy ridge spanning horizon behind settlement",
+        "confidence": 0.96
+      },
+      {
+        "id": "e6",
+        "label": "sky",
+        "category": "other",
+        "attributes": [
+          "blue",
+          "bright",
+          "expansive"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "upper, top two-thirds",
+        "evidence": "large blue area occupying upper portion of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e7",
+        "label": "clouds",
+        "category": "other",
+        "attributes": [
+          "white",
+          "scattered",
+          "wispy and puffy"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "upper, scattered across sky",
+        "evidence": "white cloud formations in blue sky",
+        "confidence": 0.95
+      },
+      {
+        "id": "e8",
+        "label": "eroded riverbank",
+        "category": "terrain",
+        "attributes": [
+          "brown",
+          "steep in places",
+          "earthy"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "middle, along river edge",
+        "evidence": "exposed earth and uneven edge along far side of river",
+        "confidence": 0.85
+      },
+      {
+        "id": "e9",
+        "label": "foreground vegetation patches",
+        "category": "plant",
+        "attributes": [
+          "green",
+          "low",
+          "patchy"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "foreground, bottom",
+        "evidence": "clumps of low green plants and darker soil in grassy area",
+        "confidence": 0.87
+      },
+      {
+        "id": "e10",
+        "label": "distant settlement area",
+        "category": "other",
+        "attributes": [
+          "spread out",
+          "low density",
+          "rural"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "middle to background, left to right",
+        "evidence": "wider area of scattered buildings and trees extending toward mountains",
+        "confidence": 0.82
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "in_front_of",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e2",
+        "predicate": "in_front_of",
+        "object": "e4",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e2",
+        "predicate": "near",
+        "object": "e3",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e3",
+        "predicate": "beside",
+        "object": "e4",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e4",
+        "predicate": "in_front_of",
+        "object": "e5",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e5",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e6",
+        "predicate": "above",
+        "object": "e5",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e7",
+        "predicate": "inside",
+        "object": "e6",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e8",
+        "predicate": "beside",
+        "object": "e2",
+        "confidence": 0.87
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.98,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact geographic location, river name and mountain names cannot be determined from the image",
+      "Whether any text exists on distant buildings cannot be determined due to distance and low resolution",
+      "Number and condition of individual houses is uncertain due to haze and distance",
+      "Time of year and specific weather conditions beyond visible clouds cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:11:06+00:00",
+        "raw_output_path": "data/annotations/raw/hills_025_attempt1.txt",
+        "tokens": 7995
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

@@ -1,0 +1,331 @@
+{
+  "photo_id": "street_021",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_021.jpg",
+    "license": "CC BY 4.0",
+    "author": "Nakuruyouths",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Nairobi_Birdman_feeding_the_street_family.jpg",
+    "title": "File:Nairobi Birdman feeding the street family.jpg"
+  },
+  "observed": {
+    "caption": "A group of people gather at night under a graffiti-covered overpass around a large bird with outstretched wings perched on a person's head near cardboard boxes and sacks on the ground.",
+    "description": "An outdoor night scene illuminated by artificial light shows a crowd of people standing closely together on uneven dirt ground beneath a dark concrete overpass with graffiti-covered walls. In the center-right, a large brown bird of prey with wings partially spread is perched on the head of a person wearing an orange and gray jacket and a blue knit hat who is bending over a cardboard box and woven sacks on the ground. Surrounding individuals wear jackets, plaid shirts, and knit hats and are looking down toward the boxes, some holding mobile phones or small items. The background wall displays faded graffiti and text, and the overall lighting is harsh and uneven against the dark night.",
+    "retrieval_queries": [
+      "crowd gathered at night around a large bird perched on a person's head",
+      "people under a graffiti bridge looking at boxes with an eagle at night",
+      "nighttime outdoor gathering with bird of prey on someone's head"
+    ],
+    "tags": [
+      "night gathering",
+      "bird of prey",
+      "crowd under overpass",
+      "graffiti wall",
+      "outdoor night"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "night",
+      "weather": "unknown",
+      "lighting": "artificial harsh light at night",
+      "crowd_level": "moderate",
+      "activity_summary": "people gathered around bird and boxes on ground"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the crowd under the overpass",
+      "distance": "close",
+      "framing": "medium",
+      "orientation": "landscape",
+      "subject_focus": "group of people with bird perched on person"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "group of people gathered together",
+        "category": "person_group",
+        "attributes": [
+          "standing",
+          "wearing jackets and knit hats",
+          "looking down toward ground"
+        ],
+        "count": 12,
+        "salience": 5,
+        "position": "center and left to right",
+        "evidence": "multiple individuals standing closely together in foreground and background",
+        "confidence": 0.92
+      },
+      {
+        "id": "e2",
+        "label": "large bird of prey with outstretched wings",
+        "category": "animal",
+        "attributes": [
+          "brown feathers",
+          "wings spread",
+          "perched on person's head"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-right, above bending person",
+        "evidence": "large bird with visible wing feathers and talons on person's head",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "cardboard box on ground",
+        "category": "object",
+        "attributes": [
+          "open",
+          "light brown",
+          "on dirt ground"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "bottom center",
+        "evidence": "open cardboard box with hands reaching inside",
+        "confidence": 0.9
+      },
+      {
+        "id": "e4",
+        "label": "woven sacks and bags on ground",
+        "category": "object",
+        "attributes": [
+          "striped and white",
+          "bulging",
+          "on ground near box"
+        ],
+        "count": 3,
+        "salience": 3,
+        "position": "bottom center and bottom right",
+        "evidence": "large woven polypropylene sacks beside cardboard box",
+        "confidence": 0.88
+      },
+      {
+        "id": "e5",
+        "label": "graffiti-covered concrete wall",
+        "category": "structure",
+        "attributes": [
+          "dark",
+          "covered in faded graffiti",
+          "under overpass"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "background, across top",
+        "evidence": "concrete wall behind crowd with spray-painted markings and text",
+        "confidence": 0.9
+      },
+      {
+        "id": "e6",
+        "label": "dirt and uneven ground surface",
+        "category": "terrain",
+        "attributes": [
+          "uneven",
+          "littered",
+          "dirt"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom and center",
+        "evidence": "ground beneath people's feet with debris and dirt",
+        "confidence": 0.85
+      },
+      {
+        "id": "e7",
+        "label": "mobile phone held in hand",
+        "category": "object",
+        "attributes": [
+          "small",
+          "rectangular",
+          "illuminated screen"
+        ],
+        "count": 2,
+        "salience": 2,
+        "position": "center-right, in hands",
+        "evidence": "person in plaid coat and person in center holding phones",
+        "confidence": 0.82
+      },
+      {
+        "id": "e8",
+        "label": "concrete overpass or bridge structure",
+        "category": "structure",
+        "attributes": [
+          "dark",
+          "overhead",
+          "concrete"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top background",
+        "evidence": "dark overhead concrete structure above graffiti wall",
+        "confidence": 0.78
+      },
+      {
+        "id": "e9",
+        "label": "knit hats and beanies",
+        "category": "object",
+        "attributes": [
+          "wool",
+          "white and blue and dark",
+          "worn on heads"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "left and center-right and right",
+        "evidence": "white knit hat on left person, blue knit hat on bending person, blue beanie on right person",
+        "confidence": 0.9
+      },
+      {
+        "id": "e10",
+        "label": "plaid shirts and jackets",
+        "category": "object",
+        "attributes": [
+          "checkered",
+          "red and green and black and white",
+          "worn by people"
+        ],
+        "count": 3,
+        "salience": 3,
+        "position": "left and right-center",
+        "evidence": "checkered shirt on left person and red-green plaid coat on right person",
+        "confidence": 0.88
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e2",
+        "predicate": "above",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e6",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e4",
+        "predicate": "on",
+        "object": "e6",
+        "confidence": 0.93
+      },
+      {
+        "subject": "e1",
+        "predicate": "in_front_of",
+        "object": "e5",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e5",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e1",
+        "predicate": "near",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e8",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e7",
+        "predicate": "inside",
+        "object": "e1",
+        "confidence": 0.75
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "THE BIRDMAN FACE",
+        "language": "en",
+        "entity_id": null,
+        "location_in_image": "top right corner",
+        "legibility": "clear",
+        "confidence": 0.96
+      },
+      {
+        "text": "FABIO",
+        "language": "en",
+        "entity_id": "e5",
+        "location_in_image": "on wall, left-center",
+        "legibility": "clear",
+        "confidence": 0.88
+      },
+      {
+        "text": "VOST!",
+        "language": "en",
+        "entity_id": "e5",
+        "location_in_image": "on wall, left side below graffiti",
+        "legibility": "partial",
+        "confidence": 0.72
+      }
+    ],
+    "people": {
+      "count": 12,
+      "count_confidence": 0.72,
+      "faces_visible": true,
+      "activities": [
+        "standing in a group",
+        "gathering around boxes and sacks on ground",
+        "looking down",
+        "holding mobile phones"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people due to occlusion and darkness in background",
+      "Species of the bird of prey",
+      "Contents of cardboard box and woven sacks",
+      "Full text of faded and stylized graffiti on wall including partially visible words",
+      "Exact location and time the photo was taken",
+      "Text on clothing which was ignored per instructions"
+    ]
+  },
+  "privacy": {
+    "faces_visible": true,
+    "people_count": 12,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:21:47+00:00",
+        "raw_output_path": "data/annotations/raw/street_021_attempt1.txt",
+        "tokens": 8168
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'VOST!'"
+      ]
+    }
+  }
+}

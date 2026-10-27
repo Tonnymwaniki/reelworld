@@ -1,0 +1,339 @@
+{
+  "photo_id": "market_003",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_003.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Masssly",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Art_cafe_market_in_Nairobi-_Kenya_1.jpg",
+    "title": "File:Art cafe market in Nairobi- Kenya 1.jpg"
+  },
+  "observed": {
+    "caption": "Indoor dining area with wooden tables and folding chairs beside a stone arch and potted plants, with a wall sign in the background.",
+    "description": "The photo shows an indoor commercial dining space with light-colored tiled flooring and a stone-clad arch on the right foreground holding a black metal stand with three potted green plants. Several wooden-top tables with black metal folding chairs are arranged on the floor, some near the center and left. On the left, a person in a dark jacket and light pants sits at a table with hands near the face, beneath two framed pictures of food mounted on a white pillar. The ceiling has recessed round lights and a white surface. In the background, a dark counter with two silhouetted seated figures is visible against a blue-gray wall with large dark lettering, and hanging pendant lights and an illuminated exit sign hang from the ceiling. The far background shows a darker area with an escalator and additional ceiling fixtures.",
+    "retrieval_queries": [
+      "indoor cafe seating with stone arch and Artcaffe Market wall",
+      "empty restaurant tables and chairs inside mall dining area",
+      "Artcaffe Market interior with potted plants and tiled floor"
+    ],
+    "tags": [
+      "cafe",
+      "indoor dining",
+      "tables and chairs",
+      "stone arch",
+      "potted plants",
+      "mall interior",
+      "Artcaffe Market",
+      "tiled floor",
+      "ceiling lights"
+    ],
+    "scene": {
+      "type": "market",
+      "setting": "indoor",
+      "time_of_day": "unknown",
+      "weather": "unknown",
+      "lighting": "warm artificial ceiling lighting",
+      "crowd_level": "sparse",
+      "activity_summary": "people sitting in dining area"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the dining area and back wall",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "portrait",
+      "subject_focus": "indoor dining area with tables, arch and wall sign"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "stone archway",
+        "category": "structure",
+        "attributes": [
+          "light stone brick texture",
+          "large curved opening",
+          "right foreground"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "right foreground",
+        "evidence": "curved stone-clad structure framing the right side of the image",
+        "confidence": 0.96
+      },
+      {
+        "id": "e2",
+        "label": "tiered plant stand with potted plants",
+        "category": "plant",
+        "attributes": [
+          "black metal frame",
+          "three levels",
+          "green leafy plants in metal pots"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "right foreground beside arch",
+        "evidence": "vertical stand with three potted plants against the stone arch",
+        "confidence": 0.95
+      },
+      {
+        "id": "e3",
+        "label": "wooden tables and folding chairs",
+        "category": "object",
+        "attributes": [
+          "wooden tops",
+          "black metal folding frames",
+          "wooden slat seats"
+        ],
+        "count": 6,
+        "salience": 5,
+        "position": "center and left midground",
+        "evidence": "multiple small dining tables with matching folding chairs on tiled floor",
+        "confidence": 0.94
+      },
+      {
+        "id": "e4",
+        "label": "group of seated people",
+        "category": "person_group",
+        "attributes": [
+          "one person in dark jacket and light pants sitting with hands near face",
+          "two silhouetted figures sitting at counter in background"
+        ],
+        "count": 3,
+        "salience": 4,
+        "position": "left foreground and background center",
+        "evidence": "one clearly visible seated person on left and two dark figures behind counter in distance",
+        "confidence": 0.82
+      },
+      {
+        "id": "e5",
+        "label": "Artcaffe Market wall sign",
+        "category": "sign",
+        "attributes": [
+          "large dark letters on light wall",
+          "two lines of text"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "background center-right on wall",
+        "evidence": "large lettering on back wall partially obscured by plant",
+        "confidence": 0.88
+      },
+      {
+        "id": "e6",
+        "label": "framed food pictures",
+        "category": "object",
+        "attributes": [
+          "white frames",
+          "food images",
+          "mounted vertically on pillar"
+        ],
+        "count": 2,
+        "salience": 3,
+        "position": "left wall above seated person",
+        "evidence": "two framed artworks showing dishes on white pillar",
+        "confidence": 0.9
+      },
+      {
+        "id": "e7",
+        "label": "recessed ceiling lights",
+        "category": "object",
+        "attributes": [
+          "round white fixtures",
+          "embedded in white ceiling"
+        ],
+        "count": 10,
+        "salience": 2,
+        "position": "ceiling across image",
+        "evidence": "multiple small circular lights illuminated in ceiling",
+        "confidence": 0.92
+      },
+      {
+        "id": "e8",
+        "label": "tiled floor",
+        "category": "terrain",
+        "attributes": [
+          "large light beige tiles",
+          "dark grout lines",
+          "reflective surface"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center and foreground",
+        "evidence": "expansive light-colored tile flooring under tables and chairs",
+        "confidence": 0.96
+      },
+      {
+        "id": "e9",
+        "label": "service counter",
+        "category": "structure",
+        "attributes": [
+          "dark curved counter",
+          "in background against wall"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "background center",
+        "evidence": "dark counter structure with people seated behind it",
+        "confidence": 0.84
+      },
+      {
+        "id": "e10",
+        "label": "hanging pendant lights",
+        "category": "object",
+        "attributes": [
+          "metal shades",
+          "suspended from dark ceiling",
+          "in far background"
+        ],
+        "count": 7,
+        "salience": 2,
+        "position": "far background ceiling",
+        "evidence": "row of dome-shaped lights hanging in dimmer background area",
+        "confidence": 0.86
+      },
+      {
+        "id": "e11",
+        "label": "EXIT sign",
+        "category": "sign",
+        "attributes": [
+          "small rectangular illuminated sign",
+          "hanging from ceiling"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "background center above pendant lights",
+        "evidence": "small lit sign with text hanging in background",
+        "confidence": 0.88
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e3",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e4",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e6",
+        "predicate": "above",
+        "object": "e4",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e7",
+        "predicate": "above",
+        "object": "e8",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e9",
+        "predicate": "behind",
+        "object": "e3",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e5",
+        "predicate": "behind",
+        "object": "e9",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e11",
+        "predicate": "above",
+        "object": "e9",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e10",
+        "predicate": "above",
+        "object": "e9",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e3",
+        "predicate": "on",
+        "object": "e8",
+        "confidence": 0.96
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "Artcaffe Market",
+        "language": "en",
+        "entity_id": "e5",
+        "location_in_image": "on back wall center-right, partially obscured by plant",
+        "legibility": "partial",
+        "confidence": 0.84
+      },
+      {
+        "text": "EXIT",
+        "language": "en",
+        "entity_id": "e11",
+        "location_in_image": "hanging from ceiling in background center",
+        "legibility": "clear",
+        "confidence": 0.9
+      }
+    ],
+    "people": {
+      "count": 3,
+      "count_confidence": 0.82,
+      "faces_visible": true,
+      "activities": [
+        "sitting",
+        "resting head on hands"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact text on small menu stands near the counter is not legible due to distance and blur",
+      "Exact number of people in the dim background behind the counter is uncertain due to shadows and low light",
+      "Time of day and weather outside cannot be determined from this indoor photo with artificial lighting",
+      "Details of the far background area including escalator and distant walls are indistinct"
+    ]
+  },
+  "privacy": {
+    "faces_visible": true,
+    "people_count": 3,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:13:03+00:00",
+        "raw_output_path": "data/annotations/raw/market_003_attempt1.txt",
+        "tokens": 8965
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'Artcaffe Market'"
+      ]
+    }
+  }
+}

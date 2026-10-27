@@ -1,0 +1,367 @@
+{
+  "photo_id": "cbd_006",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/cbd/cbd_006.jpg",
+    "license": "CC BY 2.0",
+    "author": "street viewer",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Akiba_Tashiro_street_viewed_from_Tokyo_Times_Tower_entrance_east_side_(2010-05-04_16.13.16).jpg",
+    "title": "File:Akiba Tashiro street viewed from Tokyo Times Tower entrance east side (2010-05-04 16.13.16).jpg"
+  },
+  "observed": {
+    "caption": "A covered walkway extends along a paved urban street lined with hedges and trees toward commercial buildings with a large blue and yellow billboard in the background.",
+    "description": "The photo shows a paved asphalt street curving into the distance, bordered on the right by a long concrete covered walkway with recessed ceiling lights and a hanging metal chain in the foreground, and on the left by manicured green hedges and leafy trees. A large blue and yellow billboard with white Japanese characters stands behind the trees, with a gray multi-story building visible above it. At the far end of the street a modern building with large glass windows and storefronts is visible, with several people walking on the street and under the walkway, bicycles parked near orange traffic cones, and a white vehicle partially visible behind the foliage. The lighting is overcast daylight with artificial lights illuminated under the walkway, and a circular manhole cover is visible on the pavement in the foreground.",
+    "retrieval_queries": [
+      "covered walkway along a city street with a big blue billboard in Japan",
+      "urban street with hedges and people walking toward an amusement tower building",
+      "paved road with hanging chain under an overhang leading to shops"
+    ],
+    "tags": [
+      "street",
+      "walkway",
+      "billboard",
+      "urban",
+      "buildings",
+      "trees",
+      "hedges",
+      "people walking",
+      "pavement",
+      "Japan"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast",
+      "lighting": "overcast daylight with ceiling lights on",
+      "crowd_level": "sparse",
+      "activity_summary": "people walking along street and under walkway"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "down the street toward buildings",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "portrait",
+      "subject_focus": "covered walkway and street leading to buildings"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "covered walkway",
+        "category": "structure",
+        "attributes": [
+          "concrete",
+          "overhead canopy",
+          "with recessed ceiling lights"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "right, overhead extending into distance",
+        "evidence": "large concrete canopy on right side with ceiling lights running into background",
+        "confidence": 0.96
+      },
+      {
+        "id": "e2",
+        "label": "paved street",
+        "category": "terrain",
+        "attributes": [
+          "dark asphalt",
+          "curved",
+          "with manhole cover"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center, foreground to background",
+        "evidence": "dark paved surface occupying lower half of image curving toward buildings",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "large billboard",
+        "category": "sign",
+        "attributes": [
+          "blue and yellow",
+          "with Japanese text",
+          "illuminated"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left background, above trees",
+        "evidence": "large rectangular sign with blue top and yellow bottom behind trees",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "multi-story building behind billboard",
+        "category": "building",
+        "attributes": [
+          "gray",
+          "with windows",
+          "with balconies"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left background, above billboard",
+        "evidence": "tall gray building with multiple windows visible above billboard",
+        "confidence": 0.9
+      },
+      {
+        "id": "e5",
+        "label": "trees and hedges",
+        "category": "plant",
+        "attributes": [
+          "green",
+          "manicured hedges",
+          "leafy trees"
+        ],
+        "count": 4,
+        "salience": 3,
+        "position": "left, along roadside",
+        "evidence": "green shrubs lining road and trees in front of billboard",
+        "confidence": 0.95
+      },
+      {
+        "id": "e6",
+        "label": "people walking",
+        "category": "person_group",
+        "attributes": [
+          "walking",
+          "casual clothing"
+        ],
+        "count": 5,
+        "salience": 3,
+        "position": "center and right, mid-distance to foreground",
+        "evidence": "several figures walking on street and under walkway, one in foreground right carrying bag",
+        "confidence": 0.75
+      },
+      {
+        "id": "e7",
+        "label": "bicycles",
+        "category": "vehicle",
+        "attributes": [
+          "parked",
+          "multiple"
+        ],
+        "count": 5,
+        "salience": 2,
+        "position": "center, near orange cones",
+        "evidence": "cluster of bicycles parked near roadside at mid-distance",
+        "confidence": 0.85
+      },
+      {
+        "id": "e8",
+        "label": "traffic cones",
+        "category": "object",
+        "attributes": [
+          "orange",
+          "cone-shaped"
+        ],
+        "count": 2,
+        "salience": 2,
+        "position": "center, beside bicycles",
+        "evidence": "two orange cones on edge of road near bicycles",
+        "confidence": 0.9
+      },
+      {
+        "id": "e9",
+        "label": "rain chain",
+        "category": "object",
+        "attributes": [
+          "metal",
+          "hanging",
+          "linked rings"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right foreground, vertical",
+        "evidence": "metal chain hanging from roof edge along wall on right",
+        "confidence": 0.97
+      },
+      {
+        "id": "e10",
+        "label": "commercial building with glass facade",
+        "category": "building",
+        "attributes": [
+          "glass windows",
+          "with signage",
+          "two-story entrance"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center background",
+        "evidence": "building with large glass windows and entrance at end of street with visible signage",
+        "confidence": 0.92
+      },
+      {
+        "id": "e11",
+        "label": "parked vehicle",
+        "category": "vehicle",
+        "attributes": [
+          "white",
+          "van-like"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "left mid-distance, behind hedges",
+        "evidence": "white vehicle partially visible behind trees and hedges",
+        "confidence": 0.8
+      },
+      {
+        "id": "e12",
+        "label": "manhole cover",
+        "category": "object",
+        "attributes": [
+          "circular",
+          "metal",
+          "on asphalt"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "bottom center, foreground",
+        "evidence": "round metal cover on paved road near bottom edge",
+        "confidence": 0.95
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "right_of",
+        "object": "e2",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e3",
+        "predicate": "behind",
+        "object": "e5",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e5",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e7",
+        "predicate": "near",
+        "object": "e8",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "near",
+        "object": "e10",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e11",
+        "predicate": "behind",
+        "object": "e5",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e12",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e4",
+        "predicate": "above",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "inside",
+        "object": "e1",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e8",
+        "predicate": "beside",
+        "object": "e2",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e5",
+        "predicate": "in_front_of",
+        "object": "e3",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "法人買取大歓迎",
+        "language": "other",
+        "entity_id": "e3",
+        "location_in_image": "top of large blue billboard on left background",
+        "legibility": "clear",
+        "confidence": 0.95
+      },
+      {
+        "text": "AMUSEMENT TOWER",
+        "language": "en",
+        "entity_id": "e10",
+        "location_in_image": "above entrance of glass-front building in center background",
+        "legibility": "clear",
+        "confidence": 0.85
+      }
+    ],
+    "people": {
+      "count": 5,
+      "count_confidence": 0.75,
+      "faces_visible": false,
+      "activities": [
+        "walking",
+        "crossing street"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people in the far background is uncertain due to small size and blur",
+      "Full text on the lower yellow portion of the large billboard is obscured by tree foliage and is not fully legible",
+      "Text on smaller storefront signs and distant advertisements is too blurry to read and was omitted",
+      "Specific building names, addresses, and interior details cannot be determined",
+      "Exact time of day and weather conditions beyond overcast daylight cannot be determined from the image alone"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 5,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:06:57+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_006_attempt1.txt",
+        "tokens": 13094
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

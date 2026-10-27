@@ -1,0 +1,294 @@
+{
+  "photo_id": "hills_006",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_006.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "GeorgeMasila",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Green_vagetation_Ngong_Hill.jpg",
+    "title": "File:Green vagetation Ngong Hill.jpg"
+  },
+  "observed": {
+    "caption": "Wind turbines line green hills above a forested valley with scattered buildings and a waste pile under a hazy sky.",
+    "description": "The image shows a wide outdoor landscape with dense green trees and vegetation filling the foreground and lower half, several multi-story light-colored buildings with reddish roofs visible in the midground to the right among trees, and a large light-colored piled waste area on the far right. Behind the buildings, rolling green hills extend across the background, lined along the ridge with numerous white wind turbines and a few thin lattice communication towers. The sky above the hills is pale and hazy, and the scene is lit by bright daylight.",
+    "retrieval_queries": [
+      "wind turbines on green hills above a town with forest in foreground",
+      "aerial view of wind farm on hilltop overlooking buildings and landfill",
+      "landscape with many windmills on hills and dense trees below"
+    ],
+    "tags": [
+      "wind turbines",
+      "green hills",
+      "forest",
+      "buildings",
+      "landfill",
+      "landscape",
+      "hazy sky"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "hazy clear",
+      "lighting": "bright daylight",
+      "crowd_level": "empty",
+      "activity_summary": "wind turbines on hills overlooking vegetated valley and town"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "raised",
+      "facing": "toward distant hills with wind turbines",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "wind turbines on green hills"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "wind turbines",
+        "category": "structure",
+        "attributes": [
+          "white",
+          "tall",
+          "with blades"
+        ],
+        "count": 26,
+        "salience": 5,
+        "position": "along hilltop ridge in background",
+        "evidence": "multiple white turbine towers with blades silhouetted against sky on green hills",
+        "confidence": 0.95
+      },
+      {
+        "id": "e2",
+        "label": "green vegetated hills",
+        "category": "terrain",
+        "attributes": [
+          "green",
+          "rolling",
+          "vegetated"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "background across image",
+        "evidence": "rolling hills covered in green vegetation forming horizon line",
+        "confidence": 0.98
+      },
+      {
+        "id": "e3",
+        "label": "dense foreground trees and vegetation",
+        "category": "plant",
+        "attributes": [
+          "dense",
+          "green",
+          "leafy"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "foreground and lower center",
+        "evidence": "thick canopy of dark and light green trees filling lower half of image",
+        "confidence": 0.97
+      },
+      {
+        "id": "e4",
+        "label": "multi-story residential buildings",
+        "category": "building",
+        "attributes": [
+          "light-colored",
+          "multi-story",
+          "with reddish roofs"
+        ],
+        "count": 5,
+        "salience": 3,
+        "position": "midground center-right",
+        "evidence": "several light pink and beige buildings with multiple floors visible among trees",
+        "confidence": 0.9
+      },
+      {
+        "id": "e5",
+        "label": "waste dump or landfill pile",
+        "category": "other",
+        "attributes": [
+          "light-colored",
+          "piled",
+          "debris"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "midground far right",
+        "evidence": "large light gray and white piled area with scattered debris near buildings",
+        "confidence": 0.85
+      },
+      {
+        "id": "e6",
+        "label": "hazy sky",
+        "category": "other",
+        "attributes": [
+          "pale",
+          "hazy",
+          "bright"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "upper background",
+        "evidence": "pale grayish-white sky occupying upper half of image above hills",
+        "confidence": 0.98
+      },
+      {
+        "id": "e7",
+        "label": "communication towers",
+        "category": "structure",
+        "attributes": [
+          "tall",
+          "metal lattice",
+          "thin"
+        ],
+        "count": 2,
+        "salience": 2,
+        "position": "on hilltop left background",
+        "evidence": "thin lattice towers among wind turbines on left hill",
+        "confidence": 0.8
+      },
+      {
+        "id": "e8",
+        "label": "water tower",
+        "category": "structure",
+        "attributes": [
+          "tall",
+          "elevated tank"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "midground right behind buildings",
+        "evidence": "tall structure with tank on top visible among trees to right of center",
+        "confidence": 0.75
+      },
+      {
+        "id": "e9",
+        "label": "low-rise houses and structures",
+        "category": "building",
+        "attributes": [
+          "small",
+          "scattered",
+          "varied roofs"
+        ],
+        "count": 10,
+        "salience": 2,
+        "position": "midground right",
+        "evidence": "smaller buildings with various roof colors clustered near larger buildings and landfill",
+        "confidence": 0.85
+      },
+      {
+        "id": "e10",
+        "label": "distant tree-covered slopes",
+        "category": "terrain",
+        "attributes": [
+          "green",
+          "forested",
+          "sloping"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "middle distance below hills",
+        "evidence": "green forested slopes between foreground trees and hill ridge",
+        "confidence": 0.9
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e2",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e6",
+        "predicate": "above",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e2",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e3",
+        "predicate": "in_front_of",
+        "object": "e4",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e3",
+        "predicate": "below",
+        "object": "e2",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e4",
+        "predicate": "left_of",
+        "object": "e5",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e8",
+        "predicate": "near",
+        "object": "e4",
+        "confidence": 0.75
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.98,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "exact number of wind turbines due to distance and overlap",
+      "exact geographic location or name of hills and town",
+      "specific use or occupancy of the buildings",
+      "exact time of day beyond daylight",
+      "detailed composition of the waste pile",
+      "presence of small distant people or vehicles not resolvable"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:09:24+00:00",
+        "raw_output_path": "data/annotations/raw/hills_006_attempt1.txt",
+        "tokens": 7166
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

@@ -1,0 +1,317 @@
+{
+  "photo_id": "market_009",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/market/market_009.jpg",
+    "license": "CC BY 4.0",
+    "author": "BugWarp",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Maasai_Markets_at_the_The_Village_Market_-_BugWarp_01.jpg",
+    "title": "File:Maasai Markets at the The Village Market - BugWarp 01.jpg"
+  },
+  "observed": {
+    "caption": "A vibrant covered market stall displays colorful beaded necklaces, earring boards, and patterned garments under a corrugated metal roof.",
+    "description": "A densely packed market stall under a corrugated metal roof displays numerous colorful items. On the left and center, clusters of beaded necklaces in gold, black, blue, orange, yellow, red, brown and multicolor hang from hooks and a horizontal rack, including large circular collar necklaces near the top. In the foreground center, two wooden-framed boards with red backing are covered with dozens of hanging earrings in various colors and shapes. On the right, long patterned garments and dresses with swirl and elephant prints hang from a rack, with large fabric shoulder bags in orange, brown and pink geometric patterns hanging in front. A person with dark hair and dark clothing is partially visible standing behind the central necklace rack, facing away from the camera. Daylight enters from the open sides and roof gaps, illuminating the concrete floor where a red and white striped sack rests near the garment rack.",
+    "retrieval_queries": [
+      "colorful market stall with beaded necklaces and earrings",
+      "Kenya craft market display with patterned dresses and jewelry",
+      "close up of souvenir stall with hanging jewelry and clothes"
+    ],
+    "tags": [
+      "market stall",
+      "beaded necklaces",
+      "earrings display",
+      "patterned dresses",
+      "craft market",
+      "Kenya souvenir",
+      "colorful jewelry"
+    ],
+    "scene": {
+      "type": "market",
+      "setting": "mixed",
+      "time_of_day": "daytime",
+      "weather": "unknown",
+      "lighting": "bright natural daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "displaying jewelry and clothing for sale"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward the stall aisle",
+      "distance": "close",
+      "framing": "medium",
+      "orientation": "portrait",
+      "subject_focus": "jewelry and garment display"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "hanging beaded necklaces",
+        "category": "object",
+        "attributes": [
+          "multicolored",
+          "beaded",
+          "hanging from top left"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "left",
+        "evidence": "clusters of beaded necklaces hanging from upper left corner",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "circular beaded collar necklaces",
+        "category": "object",
+        "attributes": [
+          "large circular",
+          "yellow orange black beaded",
+          "hanging"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "upper center-left",
+        "evidence": "large flat circular beaded necklaces hanging from hooks near roof",
+        "confidence": 0.96
+      },
+      {
+        "id": "e3",
+        "label": "beaded necklaces on rack",
+        "category": "object",
+        "attributes": [
+          "chunky large beads",
+          "red brown green multicolor",
+          "on horizontal rack"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-left",
+        "evidence": "rows of thick beaded necklaces draped over a rack in middle",
+        "confidence": 0.97
+      },
+      {
+        "id": "e4",
+        "label": "earring display boards",
+        "category": "object",
+        "attributes": [
+          "wooden framed",
+          "red backing",
+          "covered with many earrings"
+        ],
+        "count": 2,
+        "salience": 5,
+        "position": "foreground center",
+        "evidence": "two hinged boards in foreground displaying dozens of earrings",
+        "confidence": 0.99
+      },
+      {
+        "id": "e5",
+        "label": "hanging patterned garments",
+        "category": "object",
+        "attributes": [
+          "colorful",
+          "patterned",
+          "elephant and swirl prints"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "right",
+        "evidence": "long dresses and fabrics hanging from rack on right side",
+        "confidence": 0.98
+      },
+      {
+        "id": "e6",
+        "label": "patterned fabric bags",
+        "category": "object",
+        "attributes": [
+          "orange brown geometric",
+          "fabric",
+          "hanging"
+        ],
+        "count": 3,
+        "salience": 4,
+        "position": "right foreground",
+        "evidence": "large shoulder bags with circular patterns hanging on right",
+        "confidence": 0.96
+      },
+      {
+        "id": "e7",
+        "label": "corrugated metal roof",
+        "category": "structure",
+        "attributes": [
+          "metal",
+          "corrugated",
+          "overhead"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "top",
+        "evidence": "metal roofing panels and dark beams above the stall",
+        "confidence": 0.98
+      },
+      {
+        "id": "e8",
+        "label": "person behind display",
+        "category": "person_group",
+        "attributes": [
+          "dark hair",
+          "dark clothing",
+          "standing"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center-left behind rack",
+        "evidence": "back of head and shoulders visible behind necklaces",
+        "confidence": 0.75
+      },
+      {
+        "id": "e9",
+        "label": "sign with KENYA text",
+        "category": "sign",
+        "attributes": [
+          "black background",
+          "white text",
+          "map outline"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center behind necklaces",
+        "evidence": "small black sign with white letters reading KENYA hanging in aisle",
+        "confidence": 0.92
+      },
+      {
+        "id": "e10",
+        "label": "concrete floor and striped sack",
+        "category": "terrain",
+        "attributes": [
+          "concrete floor",
+          "red and white striped sack"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom",
+        "evidence": "gray floor with striped fabric sack near garment rack base",
+        "confidence": 0.9
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e5",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e2",
+        "predicate": "above",
+        "object": "e3",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e3",
+        "predicate": "above",
+        "object": "e4",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e4",
+        "predicate": "below",
+        "object": "e3",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e5",
+        "predicate": "right_of",
+        "object": "e4",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e6",
+        "predicate": "beside",
+        "object": "e5",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e7",
+        "predicate": "above",
+        "object": "e5",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e8",
+        "predicate": "behind",
+        "object": "e3",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e9",
+        "predicate": "behind",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e10",
+        "predicate": "below",
+        "object": "e4",
+        "confidence": 0.95
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "KENYA",
+        "language": "en",
+        "entity_id": "e9",
+        "location_in_image": "center, hanging behind beaded necklaces",
+        "legibility": "clear",
+        "confidence": 0.95
+      }
+    ],
+    "people": {
+      "count": 1,
+      "count_confidence": 0.75,
+      "faces_visible": false,
+      "activities": [
+        "standing behind jewelry display",
+        "facing away from camera"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Whether additional people are present in the blurred background beyond the one partially visible person",
+      "Text on other distant or blurry signs in the background that is not legible with at least 3 letters",
+      "Exact materials, prices, or origins of the jewelry and garments",
+      "Weather conditions outside the covered market structure",
+      "Specific time of day beyond daylight illumination"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 1,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:14:01+00:00",
+        "raw_output_path": "data/annotations/raw/market_009_attempt1.txt",
+        "tokens": 11304
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

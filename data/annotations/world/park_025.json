@@ -1,0 +1,367 @@
+{
+  "photo_id": "park_025",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/park/park_025.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Obede Kevin",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Uhuru_park_dam.jpg",
+    "title": "File:Uhuru park dam.jpg"
+  },
+  "observed": {
+    "caption": "A wide view of a calm lake bordered by green grass and a dirt path with a city skyline and trees in the background under a cloudy sky.",
+    "description": "The foreground is covered with lush green grass and a narrow light-brown dirt path curving along the edge of a calm reflective lake that occupies the center of the image. Dense green trees line the far shore of the lake, with tall palm trees and a cluster of high-rise buildings visible behind them against a partly cloudy sky with blue patches. On the right side near the path, several small figures of people are gathered near colorful market umbrellas beside a white fence, and a tall thin light pole and a distinctive tower building with a rounded top structure are visible in the background above the trees.",
+    "retrieval_queries": [
+      "urban park lake with city skyline in the background",
+      "green grass field next to a pond with a dirt walking path",
+      "panoramic view of a lake surrounded by trees and tall buildings"
+    ],
+    "tags": [
+      "urban park lake",
+      "city skyline",
+      "green grass field",
+      "dirt pathway",
+      "reflective pond"
+    ],
+    "scene": {
+      "type": "park",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "bright natural daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "people walking and gathering near stalls"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "across the lake toward the city skyline",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "lake and park with city skyline"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "lake water",
+        "category": "terrain",
+        "attributes": [
+          "calm",
+          "reflective",
+          "curved shoreline"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "large reflective water body occupying middle of image with tree reflections",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "grassy field",
+        "category": "terrain",
+        "attributes": [
+          "lush",
+          "green",
+          "tall in foreground"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground",
+        "evidence": "dense green grass covering bottom half of image",
+        "confidence": 0.99
+      },
+      {
+        "id": "e3",
+        "label": "dirt pathway",
+        "category": "terrain",
+        "attributes": [
+          "narrow",
+          "curved",
+          "light brown"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right curving along lake",
+        "evidence": "winding dirt trail between grass and lake edge",
+        "confidence": 0.97
+      },
+      {
+        "id": "e4",
+        "label": "trees along shoreline",
+        "category": "plant",
+        "attributes": [
+          "dense",
+          "green foliage",
+          "varied height"
+        ],
+        "count": 12,
+        "salience": 4,
+        "position": "middle distance around lake",
+        "evidence": "line of trees bordering far side of lake and right side",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "high-rise city buildings",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "modern",
+          "clustered skyline"
+        ],
+        "count": 6,
+        "salience": 4,
+        "position": "background left and center",
+        "evidence": "multiple tall buildings behind trees on horizon",
+        "confidence": 0.94
+      },
+      {
+        "id": "e6",
+        "label": "palm trees",
+        "category": "plant",
+        "attributes": [
+          "tall",
+          "slender trunks",
+          "palm fronds"
+        ],
+        "count": 5,
+        "salience": 3,
+        "position": "background left",
+        "evidence": "distinct palm trees rising above other trees and buildings",
+        "confidence": 0.96
+      },
+      {
+        "id": "e7",
+        "label": "cloudy sky",
+        "category": "other",
+        "attributes": [
+          "partly cloudy",
+          "blue patches",
+          "bright"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "top",
+        "evidence": "sky with white and gray clouds above skyline",
+        "confidence": 0.98
+      },
+      {
+        "id": "e8",
+        "label": "people near path",
+        "category": "person_group",
+        "attributes": [
+          "small figures",
+          "standing and sitting",
+          "casual clothing"
+        ],
+        "count": 6,
+        "salience": 3,
+        "position": "right side near path",
+        "evidence": "small human figures gathered and walking along dirt path near umbrellas",
+        "confidence": 0.7
+      },
+      {
+        "id": "e9",
+        "label": "market umbrellas",
+        "category": "structure",
+        "attributes": [
+          "colorful",
+          "red and white",
+          "canopy"
+        ],
+        "count": 3,
+        "salience": 3,
+        "position": "right side near trees",
+        "evidence": "three umbrella canopies over stalls near path",
+        "confidence": 0.88
+      },
+      {
+        "id": "e10",
+        "label": "tall light pole",
+        "category": "structure",
+        "attributes": [
+          "tall",
+          "thin",
+          "metal"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center-right background",
+        "evidence": "vertical pole with light fixture behind trees",
+        "confidence": 0.85
+      },
+      {
+        "id": "e11",
+        "label": "tower with helipad",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "distinctive top structure",
+          "cylindrical"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "background right",
+        "evidence": "tall building with circular top structure visible above trees",
+        "confidence": 0.9
+      },
+      {
+        "id": "e12",
+        "label": "white fence",
+        "category": "structure",
+        "attributes": [
+          "white",
+          "low",
+          "vertical slats"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "far right",
+        "evidence": "white fence behind umbrellas along tree line",
+        "confidence": 0.82
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e3",
+        "predicate": "beside",
+        "object": "e2",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e4",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e5",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e6",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e8",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.75
+      },
+      {
+        "subject": "e9",
+        "predicate": "beside",
+        "object": "e3",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e9",
+        "predicate": "near",
+        "object": "e8",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e12",
+        "predicate": "behind",
+        "object": "e9",
+        "confidence": 0.8
+      },
+      {
+        "subject": "e10",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.82
+      },
+      {
+        "subject": "e11",
+        "predicate": "right_of",
+        "object": "e5",
+        "confidence": 0.88
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "OBEDE KEVIN",
+        "language": "en",
+        "entity_id": null,
+        "location_in_image": "bottom right corner overlay",
+        "legibility": "clear",
+        "confidence": 0.98
+      },
+      {
+        "text": "SPARK 4",
+        "language": "en",
+        "entity_id": null,
+        "location_in_image": "bottom left corner overlay",
+        "legibility": "clear",
+        "confidence": 0.96
+      }
+    ],
+    "people": {
+      "count": 6,
+      "count_confidence": 0.65,
+      "faces_visible": false,
+      "activities": [
+        "walking along path",
+        "gathering near stalls"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact geographic location and name of the park or city cannot be determined from the image",
+      "Exact number of people is uncertain due to distance, small size and occlusion",
+      "Text on the red banner on the far left building is blurry and unreadable with fewer than 3 clear letters",
+      "Details of goods or activities under the market umbrellas are not clear",
+      "Species of trees, grass, and whether the water is a natural lake or artificial pond cannot be determined",
+      "Exact time of day beyond daytime and season cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 6,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:18:40+00:00",
+        "raw_output_path": "data/annotations/raw/park_025_attempt1.txt",
+        "tokens": 10923
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

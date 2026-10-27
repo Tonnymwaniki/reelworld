@@ -1,0 +1,299 @@
+{
+  "photo_id": "hills_018",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/hills/hills_018.jpg",
+    "license": "CC BY 4.0",
+    "author": "Mjr74",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ngong_Hills_aerial_view,_January_2017.jpg",
+    "title": "File:Ngong Hills aerial view, January 2017.jpg"
+  },
+  "observed": {
+    "caption": "Aerial view of a vast arid plateau with a dark escarpment ridge under a clear blue sky and hazy distant horizon.",
+    "description": "The photo shows a high aerial view looking across a wide, dry landscape under a clear blue sky that fades to pale near the horizon. A layer of pale haze covers the middle distance. In the center a long, dark, steep escarpment ridge runs across the terrain. The foreground and surrounding terrain is brown and reddish with textured gullies, darker green vegetation patches, and thin light-tan winding dirt roads and tracks. Small white and light-colored clustered structures are scattered across the land. On the far right horizon a faint flat-topped mountain peak is visible above the haze, with a thin white horizontal cloud band stretching across the horizon.",
+    "retrieval_queries": [
+      "aerial view of arid plateau with escarpment and hazy horizon",
+      "airplane window view over dry brown landscape with ridge and distant mountain",
+      "high altitude photo of winding dirt roads on desert terrain under blue sky"
+    ],
+    "tags": [
+      "aerial",
+      "landscape",
+      "arid",
+      "plateau",
+      "escarpment",
+      "haze",
+      "blue sky",
+      "dirt roads"
+    ],
+    "scene": {
+      "type": "landscape",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "hazy",
+      "lighting": "bright daylight",
+      "crowd_level": "empty",
+      "activity_summary": "none visible"
+    },
+    "camera": {
+      "viewpoint": "aerial",
+      "height_estimate": "very_high",
+      "facing": "down at the terrain toward the horizon",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "arid plateau and escarpment"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "sky",
+        "category": "other",
+        "attributes": [
+          "clear",
+          "blue",
+          "gradient to pale near horizon"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "top",
+        "evidence": "upper half of image is solid blue fading to lighter near horizon",
+        "confidence": 0.99
+      },
+      {
+        "id": "e2",
+        "label": "atmospheric haze layer",
+        "category": "other",
+        "attributes": [
+          "pale gray",
+          "diffuse",
+          "covers middle distance"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "middle horizontal band",
+        "evidence": "translucent pale layer obscuring detail between foreground terrain and horizon",
+        "confidence": 0.95
+      },
+      {
+        "id": "e3",
+        "label": "escarpment ridge",
+        "category": "terrain",
+        "attributes": [
+          "dark",
+          "elongated",
+          "steep edge",
+          "central"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "long dark elevated ridge with shadowed slope running across middle of terrain",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "arid plateau terrain",
+        "category": "terrain",
+        "attributes": [
+          "brown",
+          "reddish",
+          "dry",
+          "textured with gullies"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "foreground and center",
+        "evidence": "expansive dry ground with varied brown tones and eroded channels filling lower two thirds",
+        "confidence": 0.98
+      },
+      {
+        "id": "e5",
+        "label": "dirt roads and tracks",
+        "category": "structure",
+        "attributes": [
+          "light tan",
+          "winding",
+          "thin lines"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "foreground center",
+        "evidence": "pale curving lines crossing the brown terrain",
+        "confidence": 0.92
+      },
+      {
+        "id": "e6",
+        "label": "scattered small buildings",
+        "category": "building",
+        "attributes": [
+          "small",
+          "white",
+          "clustered"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "left and center",
+        "evidence": "tiny white rectangular spots grouped on the terrain",
+        "confidence": 0.85
+      },
+      {
+        "id": "e7",
+        "label": "vegetation patches",
+        "category": "plant",
+        "attributes": [
+          "dark green",
+          "irregular",
+          "along gullies"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "across terrain",
+        "evidence": "darker green areas following low channels in the brown ground",
+        "confidence": 0.88
+      },
+      {
+        "id": "e8",
+        "label": "distant mountain peak",
+        "category": "terrain",
+        "attributes": [
+          "faint",
+          "flat-topped",
+          "pale",
+          "far horizon"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "far right horizon",
+        "evidence": "low pale elevated mass visible above haze on right horizon",
+        "confidence": 0.82
+      },
+      {
+        "id": "e9",
+        "label": "low cloud band on horizon",
+        "category": "other",
+        "attributes": [
+          "thin",
+          "white",
+          "horizontal"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "horizon line",
+        "evidence": "thin white line of clouds stretching across the horizon above haze",
+        "confidence": 0.9
+      },
+      {
+        "id": "e10",
+        "label": "lens glare streak",
+        "category": "other",
+        "attributes": [
+          "pale",
+          "vertical",
+          "translucent"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "right side",
+        "evidence": "faint light streak and reflection visible on right side of image",
+        "confidence": 0.75
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "above",
+        "object": "e4",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e2",
+        "predicate": "above",
+        "object": "e3",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e3",
+        "predicate": "inside",
+        "object": "e4",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e5",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e8",
+        "predicate": "behind",
+        "object": "e3",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e9",
+        "predicate": "behind",
+        "object": "e4",
+        "confidence": 0.88
+      }
+    ],
+    "visible_text": [],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.98,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact geographic location and names of landforms cannot be determined from the photo alone",
+      "Altitude, speed, and type of aircraft or camera platform are not visible",
+      "Details of small structures, roads, and vegetation types are too small to resolve",
+      "Any text on small ground structures is below legibility threshold and cannot be read, with fewer than 3 letters discernible",
+      "Presence of people, vehicles, or animals too small to resolve at this distance cannot be determined",
+      "Precise time of day, season, and weather conditions beyond visible haze and clear sky cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:10:30+00:00",
+        "raw_output_path": "data/annotations/raw/hills_018_attempt1.txt",
+        "tokens": 8639
+      }
+    ],
+    "human_review": {
+      "status": "none",
+      "notes": []
+    }
+  }
+}

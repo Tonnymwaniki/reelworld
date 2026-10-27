@@ -1,0 +1,389 @@
+{
+  "photo_id": "street_024",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_024.jpg",
+    "license": "CC0",
+    "author": "Shyamal",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Nairobi_street.jpg",
+    "title": "File:Nairobi street.jpg"
+  },
+  "observed": {
+    "caption": "A wide urban street with vehicles, pedestrians, billboards and a tall glass building under an overcast sky.",
+    "description": "A paved multi-lane road stretches into the distance with white lane markings, bordered by dirt verges and sidewalks. Several cars drive on the left lanes. Utility poles with overhead wires line the left side. Green trees and bushes line both sides of the road and the center median. A tall modern building with glass windows and an orange vertical stripe stands in the center background. Multiple billboards and signs are visible, including a large partially cut-off billboard on the right edge, a red and yellow billboard on the left, a blue and white directional sign in the center median, and a stacked signpost on the right sidewalk. Several small human figures in casual clothing walk along the right sidewalk and beside the road. The sky is pale gray and overcast.",
+    "retrieval_queries": [
+      "busy urban street with billboards and tall building",
+      "overcast day on a multi-lane road with cars and pedestrians",
+      "city road with MID YEAR SALE billboard and West Park Towers sign"
+    ],
+    "tags": [
+      "street",
+      "urban",
+      "road",
+      "billboard",
+      "building",
+      "cars",
+      "pedestrians",
+      "overcast"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "overcast",
+      "lighting": "diffuse overcast daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "vehicles driving and pedestrians walking along urban road"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "down the street toward high-rise building and billboards",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "urban street with billboards and high-rise building"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "paved multi-lane road",
+        "category": "terrain",
+        "attributes": [
+          "asphalt",
+          "marked lanes",
+          "stretching into distance"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center to foreground, extending to background",
+        "evidence": "wide asphalt road with white lane markings visible across lower and middle of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "vehicles on road",
+        "category": "vehicle",
+        "attributes": [
+          "cars",
+          "moving",
+          "on road"
+        ],
+        "count": 3,
+        "salience": 4,
+        "position": "left side of road, mid-distance",
+        "evidence": "three cars visible driving away on left lanes, including red and silver vehicles",
+        "confidence": 0.95
+      },
+      {
+        "id": "e3",
+        "label": "high-rise building with glass facade",
+        "category": "building",
+        "attributes": [
+          "multi-story",
+          "glass windows",
+          "orange vertical stripe",
+          "modern"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center background",
+        "evidence": "tall rectangular building with blue-tinted windows and orange accent behind trees",
+        "confidence": 0.97
+      },
+      {
+        "id": "e4",
+        "label": "large billboard on right",
+        "category": "sign",
+        "attributes": [
+          "large",
+          "blue and white",
+          "advertising",
+          "partially cut off"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "right edge, foreground to mid-height",
+        "evidence": "large vertical billboard on right side showing food display and text, cut off by image edge",
+        "confidence": 0.96
+      },
+      {
+        "id": "e5",
+        "label": "MID YEAR SALE billboard",
+        "category": "sign",
+        "attributes": [
+          "red and yellow",
+          "large",
+          "rectangular"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "left side, mid-distance",
+        "evidence": "red and yellow billboard with bold text on left side of road among trees",
+        "confidence": 0.94
+      },
+      {
+        "id": "e6",
+        "label": "Chowpaty directional sign",
+        "category": "sign",
+        "attributes": [
+          "blue and white",
+          "vertical",
+          "multilingual"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center median, middle distance",
+        "evidence": "small blue-framed sign in center median with text and arrow",
+        "confidence": 0.88
+      },
+      {
+        "id": "e7",
+        "label": "WEST PARK TOWERS signpost",
+        "category": "sign",
+        "attributes": [
+          "stacked signs",
+          "vertical pole",
+          "multiple advertisements"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right side, middle distance",
+        "evidence": "tall signpost on right sidewalk with multiple stacked rectangular signs",
+        "confidence": 0.92
+      },
+      {
+        "id": "e8",
+        "label": "utility poles with overhead wires",
+        "category": "structure",
+        "attributes": [
+          "wooden poles",
+          "electrical wires",
+          "tall"
+        ],
+        "count": 3,
+        "salience": 3,
+        "position": "left edge, foreground to background",
+        "evidence": "wooden utility poles with multiple black wires running along left side of road",
+        "confidence": 0.96
+      },
+      {
+        "id": "e9",
+        "label": "trees and roadside vegetation",
+        "category": "plant",
+        "attributes": [
+          "green",
+          "dense",
+          "lining road"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "both sides of road, middle to background",
+        "evidence": "green trees and bushes visible along road median and sidewalks",
+        "confidence": 0.95
+      },
+      {
+        "id": "e10",
+        "label": "group of pedestrians",
+        "category": "person_group",
+        "attributes": [
+          "walking",
+          "casual clothing"
+        ],
+        "count": 6,
+        "salience": 3,
+        "position": "sidewalks and road edge, foreground to mid-distance",
+        "evidence": "several small human figures walking on right sidewalk and along road edge",
+        "confidence": 0.75
+      },
+      {
+        "id": "e11",
+        "label": "overcast sky",
+        "category": "other",
+        "attributes": [
+          "cloudy",
+          "pale gray",
+          "overcast"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "upper portion, background",
+        "evidence": "pale gray cloudy sky covering upper two-thirds of image",
+        "confidence": 0.98
+      },
+      {
+        "id": "e12",
+        "label": "roadside sidewalk and verge",
+        "category": "terrain",
+        "attributes": [
+          "dirt and grass",
+          "unpaved edge",
+          "along road"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "right foreground and left foreground",
+        "evidence": "dirt and grassy verge beside paved road on both sides",
+        "confidence": 0.9
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e4",
+        "predicate": "right_of",
+        "object": "e3",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e5",
+        "predicate": "left_of",
+        "object": "e3",
+        "confidence": 0.94
+      },
+      {
+        "subject": "e10",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e8",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e9",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e7",
+        "predicate": "beside",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e4",
+        "predicate": "above",
+        "object": "e7",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e6",
+        "predicate": "near",
+        "object": "e1",
+        "confidence": 0.85
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "Kopo Kop Ndío Solulu Access credit & Lipa N Pay instantly to bank Kopo Ko simple tools for your b",
+        "language": "en",
+        "entity_id": "e4",
+        "location_in_image": "large billboard on right edge, from top to bottom, cut off on right",
+        "legibility": "partial",
+        "confidence": 0.85
+      },
+      {
+        "text": "WEST PARK TOWERS",
+        "language": "en",
+        "entity_id": "e7",
+        "location_in_image": "top of signpost on right side of road",
+        "legibility": "clear",
+        "confidence": 0.96
+      },
+      {
+        "text": "LIVE AD",
+        "language": "en",
+        "entity_id": "e7",
+        "location_in_image": "small white sign on right signpost below WEST PARK TOWERS",
+        "legibility": "partial",
+        "confidence": 0.82
+      },
+      {
+        "text": "MID YEAR SALE",
+        "language": "en",
+        "entity_id": "e5",
+        "location_in_image": "large red and yellow billboard on left side of road in mid-distance",
+        "legibility": "clear",
+        "confidence": 0.94
+      },
+      {
+        "text": "Chowpaty नमस्ते Chinese Living Room 华府",
+        "language": "other",
+        "entity_id": "e6",
+        "location_in_image": "blue and white directional sign in center median",
+        "legibility": "partial",
+        "confidence": 0.78
+      },
+      {
+        "text": "Facilities",
+        "language": "en",
+        "entity_id": "e7",
+        "location_in_image": "lower sign on right signpost",
+        "legibility": "partial",
+        "confidence": 0.75
+      }
+    ],
+    "people": {
+      "count": 6,
+      "count_confidence": 0.75,
+      "faces_visible": false,
+      "activities": [
+        "walking along sidewalk",
+        "walking beside road"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of distant pedestrians on left side due to small size and blur",
+      "Full text on lower portions of billboards and small print on MID YEAR SALE billboard is blurry and cut off",
+      "Phone numbers and small details on LIVE AD and Facilities signs are not fully legible",
+      "Vehicle makes, models and license plates are not discernible",
+      "Exact time of day beyond daytime overcast conditions"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 6,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:23:12+00:00",
+        "raw_output_path": "data/annotations/raw/street_024_attempt2.txt",
+        "tokens": 13201
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'Kopo Kop Ndío Solulu Access credit & Lipa N Pay instantly to bank Kopo Ko simple tools for your b'",
+        "partially legible text: 'LIVE AD'",
+        "partially legible text: 'Chowpaty नमस्ते Chinese Living Room 华府'",
+        "partially legible text: 'Facilities'"
+      ]
+    }
+  }
+}

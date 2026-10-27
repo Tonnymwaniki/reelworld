@@ -1,0 +1,421 @@
+{
+  "photo_id": "street_007",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/street/street_007.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Bahnfrend",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Haile_Selassie_Avenue_(Nairobi),_2025_(06).jpg",
+    "title": "File:Haile Selassie Avenue (Nairobi), 2025 (06).jpg"
+  },
+  "observed": {
+    "caption": "A busy urban street with pedestrians and vehicles in front of the Kahawa House building and nearby commercial structures under a partly cloudy sky.",
+    "description": "A wide outdoor street scene shows a large brown multi-story building with vertical lettering on its tower in the center-left, flanked by a tall green and white building and a historic stone building with a tiled roof on the right. A paved road with a dirt shoulder runs through the foreground with a light blue car, a white car, a red car parked on the right, a green and white bus, and several motorcycles. Numerous people in casual clothing are standing and walking along the roadside and near shopfronts with awnings that line the sidewalk beneath the main building. The sky above is blue with scattered white clouds and the lighting is bright daylight.",
+    "retrieval_queries": [
+      "busy street in front of Kahawa House Nairobi",
+      "Kahawa House building with traffic and pedestrians in Kenya",
+      "Nairobi city center with Coffee Plaza and matatu buses"
+    ],
+    "tags": [
+      "Kahawa House",
+      "Nairobi",
+      "urban street",
+      "Coffee Plaza",
+      "city traffic",
+      "commercial buildings",
+      "pedestrians",
+      "matatu bus"
+    ],
+    "scene": {
+      "type": "street",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "partly cloudy",
+      "lighting": "bright daylight",
+      "crowd_level": "moderate",
+      "activity_summary": "pedestrians walking and standing, vehicles moving and parked in commercial area"
+    },
+    "camera": {
+      "viewpoint": "ground_level",
+      "height_estimate": "eye_level",
+      "facing": "toward Kahawa House across the street",
+      "distance": "medium",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "Kahawa House building and street activity"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "Kahawa House building",
+        "category": "building",
+        "attributes": [
+          "brown concrete",
+          "multi-story",
+          "vertical signage",
+          "textured facade"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-left background",
+        "evidence": "large brown building with vertical KAHAWA HOUSE lettering on tower",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "Coffee Plaza building",
+        "category": "building",
+        "attributes": [
+          "green and white facade",
+          "multi-story",
+          "modern"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right background",
+        "evidence": "tall building with green side panels and white grid windows",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "historic stone building",
+        "category": "building",
+        "attributes": [
+          "light stone",
+          "two-story",
+          "tiled roof",
+          "arched windows"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right foreground",
+        "evidence": "stone building with brown roof on right edge",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "urban street and roadside",
+        "category": "terrain",
+        "attributes": [
+          "paved road",
+          "dirt shoulder",
+          "busy"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center foreground",
+        "evidence": "road with vehicles and dirt area where people stand",
+        "confidence": 0.98
+      },
+      {
+        "id": "e5",
+        "label": "pedestrians",
+        "category": "person_group",
+        "attributes": [
+          "casual clothing",
+          "standing and walking"
+        ],
+        "count": 35,
+        "salience": 4,
+        "position": "across foreground and midground",
+        "evidence": "numerous people gathered along roadside and crossing street",
+        "confidence": 0.7
+      },
+      {
+        "id": "e6",
+        "label": "red hatchback car",
+        "category": "vehicle",
+        "attributes": [
+          "red",
+          "small",
+          "parked"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right foreground",
+        "evidence": "bright red car parked on dirt near people",
+        "confidence": 0.99
+      },
+      {
+        "id": "e7",
+        "label": "light blue hatchback car",
+        "category": "vehicle",
+        "attributes": [
+          "light blue",
+          "moving"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "left-center foreground",
+        "evidence": "light blue car driving on road",
+        "confidence": 0.99
+      },
+      {
+        "id": "e8",
+        "label": "public bus",
+        "category": "vehicle",
+        "attributes": [
+          "green and white",
+          "large",
+          "parked"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "center midground",
+        "evidence": "long bus with green and white paint behind crowd",
+        "confidence": 0.97
+      },
+      {
+        "id": "e9",
+        "label": "motorcycles",
+        "category": "vehicle",
+        "attributes": [
+          "parked",
+          "multiple"
+        ],
+        "count": 3,
+        "salience": 2,
+        "position": "center midground",
+        "evidence": "several motorcycles parked near bus",
+        "confidence": 0.85
+      },
+      {
+        "id": "e10",
+        "label": "sky with clouds",
+        "category": "other",
+        "attributes": [
+          "partly cloudy",
+          "blue",
+          "bright"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top background",
+        "evidence": "blue sky with white clouds above buildings",
+        "confidence": 0.99
+      },
+      {
+        "id": "e11",
+        "label": "shopfronts and stalls",
+        "category": "structure",
+        "attributes": [
+          "low",
+          "covered",
+          "commercial"
+        ],
+        "count": 5,
+        "salience": 2,
+        "position": "center midground",
+        "evidence": "row of small shops with awnings along sidewalk",
+        "confidence": 0.88
+      },
+      {
+        "id": "e12",
+        "label": "advertising billboard",
+        "category": "sign",
+        "attributes": [
+          "white with red and black text",
+          "freestanding"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "center midground",
+        "evidence": "sign reading BOOK THESE SPACES near center",
+        "confidence": 0.92
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "left_of",
+        "object": "e2",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "right_of",
+        "object": "e2",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e6",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e8",
+        "predicate": "behind",
+        "object": "e5",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e6",
+        "predicate": "beside",
+        "object": "e5",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e10",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e11",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e9",
+        "predicate": "beside",
+        "object": "e8",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e4",
+        "predicate": "below",
+        "object": "e1",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e3",
+        "predicate": "near",
+        "object": "e6",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e12",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.8
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "KAHAWA HOUSE",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "vertical on tower of central brown building",
+        "legibility": "clear",
+        "confidence": 0.98
+      },
+      {
+        "text": "COFFEE BOARD OF KENYA",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "upper facade of central brown building",
+        "legibility": "partial",
+        "confidence": 0.75
+      },
+      {
+        "text": "JESUS TEACHING MINISTRY",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "banner along lower front of central brown building",
+        "legibility": "clear",
+        "confidence": 0.92
+      },
+      {
+        "text": "BOOK THESE SPACES",
+        "language": "en",
+        "entity_id": "e12",
+        "location_in_image": "billboard near center above shops",
+        "legibility": "clear",
+        "confidence": 0.9
+      },
+      {
+        "text": "COFFEE PLAZA",
+        "language": "en",
+        "entity_id": "e2",
+        "location_in_image": "top of green and white building",
+        "legibility": "clear",
+        "confidence": 0.88
+      },
+      {
+        "text": "easycoach",
+        "language": "en",
+        "entity_id": null,
+        "location_in_image": "billboard on right side above shops",
+        "legibility": "clear",
+        "confidence": 0.85
+      },
+      {
+        "text": "MILI",
+        "language": "en",
+        "entity_id": null,
+        "location_in_image": "side of bus on far right edge, cut off",
+        "legibility": "partial",
+        "confidence": 0.7
+      },
+      {
+        "text": "COLLECTION POINT",
+        "language": "en",
+        "entity_id": "e11",
+        "location_in_image": "awning of shop in center-right",
+        "legibility": "partial",
+        "confidence": 0.65
+      }
+    ],
+    "people": {
+      "count": 35,
+      "count_confidence": 0.65,
+      "faces_visible": false,
+      "activities": [
+        "walking",
+        "standing",
+        "waiting near vehicles"
+      ],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact number of people due to overlapping, distance and blur",
+      "Exact license plate numbers on cars due to resolution and angle",
+      "Full text of distant shop signs, bus destination displays and small billboards that are blurry or cut off",
+      "Text on people's clothing or bags which is ignored per rules",
+      "Precise time of day beyond daytime and specific weather conditions",
+      "Intent, destination or identity of pedestrians and vehicles"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 35,
+    "license_plates_visible": true,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:19:51+00:00",
+        "raw_output_path": "data/annotations/raw/street_007_attempt1.txt",
+        "tokens": 10262
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'COFFEE BOARD OF KENYA'",
+        "partially legible text: 'MILI'",
+        "partially legible text: 'COLLECTION POINT'"
+      ]
+    }
+  }
+}

@@ -1,0 +1,326 @@
+{
+  "photo_id": "cbd_003",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/cbd/cbd_003.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Matti Blume",
+    "source_url": "https://commons.wikimedia.org/wiki/File:CBK_Pension_Towers,_Nairobi_(20250808-P1048975).jpg",
+    "title": "File:CBK Pension Towers, Nairobi (20250808-P1048975).jpg"
+  },
+  "observed": {
+    "caption": "A tall modern CBK Pension Towers building with distinctive triangular peaks dominates an elevated daytime view over a hazy cityscape.",
+    "description": "The image shows a tall, modern high-rise building with three pointed grey-tiled peaks and gold structural accents, featuring a large blue glass facade with a triangular grid pattern and balconies along its sides, viewed from an elevated perspective. In the foreground a weathered dark concrete rooftop ledge is visible at the bottom edge. Surrounding the tower are smaller low-rise buildings with red and brown roofs, a white multi-story building with blue windows at the bottom right, patches of green trees and vegetation, and an elevated highway overpass curving through the midground on the right. In the background a hazy city skyline with distant high-rises stretches under a pale overcast sky.",
+    "retrieval_queries": [
+      "aerial view of CBK Pension Towers in Nairobi with triangular roof",
+      "modern high-rise building with blue glass facade and gold accents",
+      "elevated view of city skyline with highway and tall tower"
+    ],
+    "tags": [
+      "CBK Pension Towers",
+      "high-rise building",
+      "modern architecture",
+      "city skyline",
+      "elevated highway"
+    ],
+    "scene": {
+      "type": "building",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "hazy",
+      "lighting": "natural daylight",
+      "crowd_level": "empty",
+      "activity_summary": "static urban cityscape with no discernible human activity"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "high",
+      "facing": "toward the building across the city",
+      "distance": "medium",
+      "framing": "medium",
+      "orientation": "portrait",
+      "subject_focus": "CBK Pension Towers"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "CBK Pension Towers",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "modern",
+          "three triangular peaks",
+          "grey tiled exterior",
+          "blue glass facade with triangular grid",
+          "gold structural accents"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center",
+        "evidence": "dominant tall building with three pointed peaks, blue diamond-pattern glass front and gold beams at top",
+        "confidence": 0.99
+      },
+      {
+        "id": "e2",
+        "label": "glass curtain wall",
+        "category": "structure",
+        "attributes": [
+          "blue-tinted",
+          "triangular grid pattern",
+          "reflective",
+          "curved"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-right on tower",
+        "evidence": "large blue glass facade with diamond pattern covering front of main tower",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "Kenyatta University building",
+        "category": "building",
+        "attributes": [
+          "white facade",
+          "blue windows",
+          "multi-story",
+          "flat roof"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "bottom-right",
+        "evidence": "white building with blue window frames and rooftop signage at bottom right",
+        "confidence": 0.95
+      },
+      {
+        "id": "e4",
+        "label": "foreground rooftop ledge",
+        "category": "structure",
+        "attributes": [
+          "weathered",
+          "concrete",
+          "dark stained surface"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "bottom",
+        "evidence": "dark textured concrete edge at bottom of frame indicating elevated viewpoint",
+        "confidence": 0.92
+      },
+      {
+        "id": "e5",
+        "label": "elevated highway overpass",
+        "category": "structure",
+        "attributes": [
+          "concrete",
+          "elevated",
+          "curved",
+          "multiple lanes"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "middle-right background",
+        "evidence": "elevated roadway curving through midground with support pillars on right side",
+        "confidence": 0.93
+      },
+      {
+        "id": "e6",
+        "label": "low-rise buildings with red roofs",
+        "category": "building",
+        "attributes": [
+          "low-rise",
+          "red and brown roofs",
+          "clustered"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "lower midground",
+        "evidence": "group of smaller buildings with reddish rooftops surrounding tower base",
+        "confidence": 0.86
+      },
+      {
+        "id": "e7",
+        "label": "trees and vegetation",
+        "category": "plant",
+        "attributes": [
+          "green",
+          "dense clusters",
+          "scattered"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "midground",
+        "evidence": "patches of green trees interspersed among low buildings and along highway",
+        "confidence": 0.88
+      },
+      {
+        "id": "e8",
+        "label": "distant city skyline",
+        "category": "building",
+        "attributes": [
+          "hazy",
+          "multiple high-rises",
+          "distant"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "background left and right",
+        "evidence": "faint cluster of high-rise buildings on horizon under haze on both sides of tower",
+        "confidence": 0.82
+      },
+      {
+        "id": "e9",
+        "label": "sky",
+        "category": "other",
+        "attributes": [
+          "pale",
+          "hazy",
+          "overcast"
+        ],
+        "count": 1,
+        "salience": 1,
+        "position": "top",
+        "evidence": "pale grey-white sky occupying upper portion of image above tower",
+        "confidence": 0.96
+      },
+      {
+        "id": "e10",
+        "label": "maintenance crane arm",
+        "category": "object",
+        "attributes": [
+          "white",
+          "metallic",
+          "extended over rooftop"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "upper-right on tower",
+        "evidence": "white mechanical arm extending from rooftop near triangular opening",
+        "confidence": 0.85
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e1",
+        "predicate": "above",
+        "object": "e4",
+        "confidence": 0.95
+      },
+      {
+        "subject": "e3",
+        "predicate": "right_of",
+        "object": "e1",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e5",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e2",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e10",
+        "predicate": "on",
+        "object": "e1",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e7",
+        "predicate": "near",
+        "object": "e1",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e6",
+        "predicate": "near",
+        "object": "e1",
+        "confidence": 0.84
+      },
+      {
+        "subject": "e8",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.88
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "CBK PENSION TOWERS",
+        "language": "en",
+        "entity_id": "e1",
+        "location_in_image": "on the blue glass facade of the main tower, upper center-right",
+        "legibility": "clear",
+        "confidence": 0.98
+      },
+      {
+        "text": "KENYATTA UNIVERSITY CIT",
+        "language": "en",
+        "entity_id": "e3",
+        "location_in_image": "on the rooftop edge of the white building at bottom right",
+        "legibility": "partial",
+        "confidence": 0.85
+      },
+      {
+        "text": "KU PLAZA",
+        "language": "en",
+        "entity_id": "e3",
+        "location_in_image": "on the lower facade of the white building at bottom right",
+        "legibility": "partial",
+        "confidence": 0.75
+      }
+    ],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.95,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Whether any small figures are present on balconies or streets due to distance and resolution",
+      "Exact number of floors or interior layout of the tower",
+      "Content of distant blurry billboards and signs in the background cityscape",
+      "Specific weather conditions beyond visible haze",
+      "Exact time of day beyond daylight"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:01:19+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_003_attempt1.txt",
+        "tokens": 9859
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'KENYATTA UNIVERSITY CIT'",
+        "partially legible text: 'KU PLAZA'"
+      ]
+    }
+  }
+}

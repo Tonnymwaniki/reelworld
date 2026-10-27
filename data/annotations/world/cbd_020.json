@@ -1,0 +1,322 @@
+{
+  "photo_id": "cbd_020",
+  "schema_version": "0.1",
+  "collection": "world",
+  "provided": {
+    "file": "data/photos/world/cbd/cbd_020.jpg",
+    "license": "CC BY 2.0",
+    "author": "DEMOSH from Nairobi, Kenya",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Nairobi_view_1_(949939763).jpg",
+    "title": "File:Nairobi view 1 (949939763).jpg"
+  },
+  "observed": {
+    "caption": "Elevated wide view of a dense city skyline with high-rise towers, a foreground building with a large billboard, and a busy road along the right edge under hazy daylight.",
+    "description": "The photo shows an elevated wide view of a dense urban cityscape under hazy daylight. Prominent high-rise buildings dominate the scene, including a tall light-colored rectangular tower on the right and a cylindrical brown tower with a flat rooftop structure on the left. A stepped, light-colored building with a large advertisement billboard occupies the center-foreground, surrounded by smaller mid-rise buildings, patches of green trees, and a multi-lane road with numerous small vehicles along the right edge. The background extends to a sprawling low-rise urban area fading into a pale hazy sky.",
+    "retrieval_queries": [
+      "aerial view of city skyline with tall skyscrapers and cylindrical tower",
+      "downtown cityscape with large billboard on building and busy road",
+      "hazy daylight view of high-rise buildings and traffic in large city"
+    ],
+    "tags": [
+      "city skyline",
+      "high-rise buildings",
+      "urban cityscape",
+      "aerial view",
+      "billboard",
+      "traffic",
+      "downtown",
+      "hazy daylight"
+    ],
+    "scene": {
+      "type": "other",
+      "setting": "outdoor",
+      "time_of_day": "daytime",
+      "weather": "hazy",
+      "lighting": "natural daylight",
+      "crowd_level": "sparse",
+      "activity_summary": "city skyline with vehicular traffic"
+    },
+    "camera": {
+      "viewpoint": "elevated",
+      "height_estimate": "high",
+      "facing": "across the city skyline",
+      "distance": "far",
+      "framing": "wide",
+      "orientation": "landscape",
+      "subject_focus": "downtown high-rise buildings"
+    },
+    "entities": [
+      {
+        "id": "e1",
+        "label": "tall light-colored rectangular skyscraper",
+        "category": "building",
+        "attributes": [
+          "tall",
+          "rectangular",
+          "light-colored",
+          "many windows"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "right, background",
+        "evidence": "dominant vertical tower on right side extending above surrounding buildings",
+        "confidence": 0.98
+      },
+      {
+        "id": "e2",
+        "label": "cylindrical brown high-rise tower with rooftop structure",
+        "category": "building",
+        "attributes": [
+          "cylindrical",
+          "brown",
+          "tall",
+          "flat rooftop helipad-like structure"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "left, middle ground",
+        "evidence": "distinct round tower with horizontal top structure on left side of skyline",
+        "confidence": 0.97
+      },
+      {
+        "id": "e3",
+        "label": "stepped foreground building with large billboard",
+        "category": "building",
+        "attributes": [
+          "stepped facade",
+          "light-colored",
+          "multi-story",
+          "billboard on side"
+        ],
+        "count": 1,
+        "salience": 5,
+        "position": "center-foreground",
+        "evidence": "prominent terraced building in lower center with large advertisement covering one side",
+        "confidence": 0.96
+      },
+      {
+        "id": "e4",
+        "label": "multi-lane road with vehicles",
+        "category": "structure",
+        "attributes": [
+          "paved",
+          "multi-lane",
+          "lined with trees",
+          "vehicles present"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "right edge, foreground to background",
+        "evidence": "long road running vertically along right side with visible cars and bordered by trees",
+        "confidence": 0.95
+      },
+      {
+        "id": "e5",
+        "label": "cluster of mid-rise buildings",
+        "category": "building",
+        "attributes": [
+          "varied heights",
+          "light-colored",
+          "dense",
+          "urban"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center, middle ground",
+        "evidence": "numerous medium-height buildings filling the area between the two tall towers",
+        "confidence": 0.94
+      },
+      {
+        "id": "e6",
+        "label": "trees and vegetation",
+        "category": "plant",
+        "attributes": [
+          "green",
+          "scattered",
+          "between buildings and along roads"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "foreground and scattered throughout",
+        "evidence": "patches of green foliage in lower foreground and between structures",
+        "confidence": 0.93
+      },
+      {
+        "id": "e7",
+        "label": "large billboard advertisement",
+        "category": "sign",
+        "attributes": [
+          "large",
+          "rectangular",
+          "colorful",
+          "text and images of people with bicycles"
+        ],
+        "count": 1,
+        "salience": 4,
+        "position": "center-foreground, on building",
+        "evidence": "large advertisement mounted on side of foreground stepped building with visible text and figures",
+        "confidence": 0.92
+      },
+      {
+        "id": "e8",
+        "label": "hazy sky",
+        "category": "other",
+        "attributes": [
+          "pale",
+          "hazy",
+          "overcast",
+          "covers upper portion"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "top, background",
+        "evidence": "pale grayish sky occupying upper third of image above city",
+        "confidence": 0.98
+      },
+      {
+        "id": "e9",
+        "label": "vehicles on roads",
+        "category": "vehicle",
+        "attributes": [
+          "small",
+          "numerous",
+          "white and dark colored",
+          "on roadways"
+        ],
+        "count": 1,
+        "salience": 3,
+        "position": "right edge and lower foreground",
+        "evidence": "many small car shapes visible on the multi-lane road and intersections",
+        "confidence": 0.9
+      },
+      {
+        "id": "e10",
+        "label": "distant low-rise urban sprawl",
+        "category": "other",
+        "attributes": [
+          "low-rise",
+          "dense",
+          "fading into haze",
+          "extends to horizon"
+        ],
+        "count": 1,
+        "salience": 2,
+        "position": "background, horizon",
+        "evidence": "expansive area of smaller buildings stretching to the distant hazy horizon",
+        "confidence": 0.88
+      }
+    ],
+    "spatial_relations": [
+      {
+        "subject": "e2",
+        "predicate": "left_of",
+        "object": "e1",
+        "confidence": 0.98
+      },
+      {
+        "subject": "e3",
+        "predicate": "in_front_of",
+        "object": "e1",
+        "confidence": 0.9
+      },
+      {
+        "subject": "e7",
+        "predicate": "on",
+        "object": "e3",
+        "confidence": 0.97
+      },
+      {
+        "subject": "e4",
+        "predicate": "right_of",
+        "object": "e3",
+        "confidence": 0.96
+      },
+      {
+        "subject": "e9",
+        "predicate": "on",
+        "object": "e4",
+        "confidence": 0.92
+      },
+      {
+        "subject": "e6",
+        "predicate": "near",
+        "object": "e3",
+        "confidence": 0.85
+      },
+      {
+        "subject": "e5",
+        "predicate": "behind",
+        "object": "e3",
+        "confidence": 0.88
+      },
+      {
+        "subject": "e8",
+        "predicate": "above",
+        "object": "e1",
+        "confidence": 0.99
+      },
+      {
+        "subject": "e10",
+        "predicate": "behind",
+        "object": "e1",
+        "confidence": 0.9
+      }
+    ],
+    "visible_text": [
+      {
+        "text": "Sasa, tuongee bila ubaguzi!",
+        "language": "sw",
+        "entity_id": "e7",
+        "location_in_image": "on large billboard on foreground building, center-bottom",
+        "legibility": "partial",
+        "confidence": 0.82
+      }
+    ],
+    "people": {
+      "count": 0,
+      "count_confidence": 0.96,
+      "faces_visible": false,
+      "activities": [],
+      "identified": false
+    }
+  },
+  "inferred": {
+    "landmarks": [],
+    "place_candidates": [],
+    "uncertainties": [
+      "Exact city and building names cannot be determined from visible features alone",
+      "Smaller text below the main slogan on the billboard and the small logo in the corner are not legible due to distance and blur",
+      "Other distant signs and building labels are too small or blurry to read and are not listed",
+      "Exact number and types of vehicles on roads cannot be determined due to distance",
+      "Whether the figures depicted on the billboard are considered people in the scene is ambiguous; count refers to real people visible in the photo",
+      "Exact time of day and weather conditions beyond hazy daylight cannot be determined"
+    ]
+  },
+  "privacy": {
+    "faces_visible": false,
+    "people_count": 0,
+    "license_plates_visible": false,
+    "screens_or_documents_visible": false,
+    "private_space": false,
+    "sensitivity": "low",
+    "share_default": true
+  },
+  "provenance": {
+    "passes": [
+      {
+        "pass": "A",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passA-v2.1",
+        "run_at": "2026-10-27T12:09:04+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_020_attempt1.txt",
+        "tokens": 13244
+      }
+    ],
+    "human_review": {
+      "status": "flagged",
+      "notes": [
+        "partially legible text: 'Sasa, tuongee bila ubaguzi!'"
+      ]
+    }
+  }
+}
