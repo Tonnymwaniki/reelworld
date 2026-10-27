@@ -346,15 +346,52 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "WEST PARK TOWERS",
+        "key": "unknown/west-park-towers",
+        "type": "other",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "WEST PARK TOWERS"
+          }
+        ],
+        "confidence": 0.92
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact number of distant pedestrians on left side due to small size and blur",
       "Full text on lower portions of billboards and small print on MID YEAR SALE billboard is blurry and cut off",
       "Phone numbers and small details on LIVE AD and Facilities signs are not fully legible",
       "Vehicle makes, models and license plates are not discernible",
-      "Exact time of day beyond daytime overcast conditions"
-    ]
+      "Exact time of day beyond daytime overcast conditions",
+      "Exact street or avenue within Nairobi cannot be determined from visible text and description",
+      "Identity of tall modern building with glass windows and orange vertical stripe cannot be confirmed from provided information",
+      "Relationship between WEST PARK TOWERS signpost and nearby buildings is unclear from description alone",
+      "Full text on billboards and small print is partially legible and cannot be fully determined"
+    ],
+    "place": {
+      "name": "Nairobi",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Nairobi street"
+        }
+      ],
+      "confidence": 0.88
+    },
+    "place_key": "kenya/nairobi",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -374,6 +411,14 @@
         "run_at": "2026-10-27T12:23:12+00:00",
         "raw_output_path": "data/annotations/raw/street_024_attempt2.txt",
         "tokens": 13201
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:55:47+00:00",
+        "raw_output_path": "data/annotations/raw/street_024_passB_attempt1.txt",
+        "tokens": 7338
       }
     ],
     "human_review": {

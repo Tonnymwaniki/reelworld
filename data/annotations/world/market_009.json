@@ -279,15 +279,57 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "The Village Market",
+        "key": "unknown/the-village-market",
+        "type": "market",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Maasai Markets at the The Village Market - BugWarp 01"
+          }
+        ],
+        "confidence": 0.82
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Whether additional people are present in the blurred background beyond the one partially visible person",
       "Text on other distant or blurry signs in the background that is not legible with at least 3 letters",
       "Exact materials, prices, or origins of the jewelry and garments",
       "Weather conditions outside the covered market structure",
-      "Specific time of day beyond daylight illumination"
-    ]
+      "Specific time of day beyond daylight illumination",
+      "City and neighborhood within Kenya not specified beyond market name in title; no distinctive architecture visible to independently confirm location",
+      "Visible text KENYA confirms country only"
+    ],
+    "place": {
+      "name": "The Village Market",
+      "hierarchy": [
+        "Kenya"
+      ],
+      "key": "unknown/the-village-market",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Maasai Markets at the The Village Market - BugWarp 01"
+        },
+        {
+          "kind": "visible_text",
+          "detail": "KENYA"
+        },
+        {
+          "kind": "context",
+          "detail": "vibrant covered market stall displaying colorful beaded necklaces, earring boards and patterned garments under corrugated metal roof"
+        }
+      ],
+      "confidence": 0.84
+    },
+    "place_key": "unknown/the-village-market",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -307,6 +349,14 @@
         "run_at": "2026-10-27T12:14:01+00:00",
         "raw_output_path": "data/annotations/raw/market_009_attempt1.txt",
         "tokens": 11304
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:50:35+00:00",
+        "raw_output_path": "data/annotations/raw/market_009_passB_attempt1.txt",
+        "tokens": 6591
       }
     ],
     "human_review": {

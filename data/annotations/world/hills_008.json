@@ -270,15 +270,52 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Ngong Hills",
+        "key": "kenya/kajiado/ngong-hills",
+        "type": "natural",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Ngong' Hills, Nairobi, Kenya"
+          }
+        ],
+        "confidence": 0.85
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact geographic location cannot be determined from image alone",
       "Specific time of day and season cannot be determined",
       "Presence of small animals or people hidden in dense vegetation cannot be determined",
       "Exact distance to mountains and scale of landscape cannot be determined",
-      "Weather conditions beyond visible clouds cannot be determined"
-    ]
+      "Weather conditions beyond visible clouds cannot be determined",
+      "Visual content alone shows generic savanna shrubland with distant blue-hued hills and flat-topped acacia trees; specific identification as Ngong Hills relies solely on provided_title",
+      "Exact geographic location, scale, and distance to hills cannot be determined from image alone",
+      "No visible text, architecture, or human activity to independently confirm location"
+    ],
+    "place": {
+      "name": "Ngong Hills",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Ngong Hills"
+      ],
+      "key": "kenya/kajiado/ngong-hills",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Ngong' Hills, Nairobi, Kenya"
+        }
+      ],
+      "confidence": 0.85
+    },
+    "place_key": "kenya/kajiado/ngong-hills",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -298,6 +335,14 @@
         "run_at": "2026-10-27T12:09:21+00:00",
         "raw_output_path": "data/annotations/raw/hills_008_attempt1.txt",
         "tokens": 5530
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:48:01+00:00",
+        "raw_output_path": "data/annotations/raw/hills_008_passB_attempt1.txt",
+        "tokens": 4339
       }
     ],
     "human_review": {

@@ -331,15 +331,58 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Ngong Hills",
+        "key": "kenya/kajiado/ngong-hills",
+        "type": "natural",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Ngong Hills Photo"
+          },
+          {
+            "kind": "context",
+            "detail": "grassy hilltop with tall white wind turbines with three blades along ridge and multiple lattice communication towers, winding dirt road, and dry reddish-brown earth as described"
+          }
+        ],
+        "confidence": 0.9
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "exact number of people due to small size and distance",
       "text or logos on wind turbine nacelles not legible",
       "vehicle makes and models",
       "exact count of distant turbines and towers in far background",
-      "purpose of small buildings near communication tower"
-    ]
+      "purpose of small buildings near communication tower",
+      "Location identification relies solely on provided_title; no visible_text or independently distinctive architecture confirms location",
+      "Exact counts of people, turbines, towers and vehicle details not determinable due to distance and small size"
+    ],
+    "place": {
+      "name": "Ngong Hills",
+      "hierarchy": [
+        "Kenya",
+        "Ngong Hills"
+      ],
+      "key": "kenya/kajiado/ngong-hills",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Ngong Hills Photo"
+        },
+        {
+          "kind": "context",
+          "detail": "wide outdoor landscape shows grassy hilltop with several tall white wind turbines and multiple lattice communication towers scattered across the hill with winding dirt road"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "place_key": "kenya/kajiado/ngong-hills",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -359,6 +402,14 @@
         "run_at": "2026-10-27T12:10:03+00:00",
         "raw_output_path": "data/annotations/raw/hills_015_attempt1.txt",
         "tokens": 5547
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:48:23+00:00",
+        "raw_output_path": "data/annotations/raw/hills_015_passB_attempt1.txt",
+        "tokens": 3922
       }
     ],
     "human_review": {

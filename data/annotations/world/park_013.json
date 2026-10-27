@@ -270,15 +270,79 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Uhuru Park",
+        "key": "kenya/nairobi/uhuru-park",
+        "type": "park",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Parliament Buildings and Uhuru Park, Nairobi"
+          },
+          {
+            "kind": "context",
+            "detail": "large urban park with expansive green grass fields including a rectangular sports field on the left, winding paved paths, dense scattered trees, and an irregular-shaped reflective lake near the center behind the building complex"
+          }
+        ],
+        "confidence": 0.93
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Parliament Buildings and Uhuru Park, Nairobi"
+          },
+          {
+            "kind": "context",
+            "detail": "dense urban area with mid-rise and high-rise buildings of varied heights and colors interspersed with trees beyond the park"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
     "uncertainties": [
       "Exact geographic location and names of buildings cannot be determined from visible features alone",
       "Number of people and individual activities cannot be discerned at this aerial distance",
       "Text on signs, billboards, or building labels is not legible due to distance and resolution",
       "Exact time of day and weather temperature cannot be determined",
-      "Number and types of vehicles are not individually countable"
-    ]
+      "Number and types of vehicles are not individually countable",
+      "Exact names of individual high-rise buildings and distant mountain range cannot be determined from visible features alone",
+      "No visible text is legible to independently confirm location"
+    ],
+    "place": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Parliament Buildings and Uhuru Park, Nairobi"
+        },
+        {
+          "kind": "context",
+          "detail": "aerial view looking across a city with a large green park with a lake in the center behind a beige building complex with a tall central clock tower and dense urban area with high-rise buildings beyond the park"
+        }
+      ],
+      "confidence": 0.92
+    },
+    "place_key": "kenya/nairobi/uhuru-park",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -298,6 +362,14 @@
         "run_at": "2026-10-27T12:17:06+00:00",
         "raw_output_path": "data/annotations/raw/park_013_attempt1.txt",
         "tokens": 7738
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:52:40+00:00",
+        "raw_output_path": "data/annotations/raw/park_013_passB_attempt1.txt",
+        "tokens": 6696
       }
     ],
     "human_review": {

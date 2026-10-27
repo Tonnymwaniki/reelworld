@@ -273,15 +273,60 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Uhuru Park",
+        "key": "kenya/nairobi/uhuru-park",
+        "type": "park",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Ficus Mugumo tree at Uhuru Park in Nairobi"
+          },
+          {
+            "kind": "context",
+            "detail": "park scene with large tree with aerial roots, grassy open area, fence and distant city buildings"
+          }
+        ],
+        "confidence": 0.92
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact species of the central tree cannot be determined from photo alone",
       "Geographic location and name of park or city in background cannot be determined",
       "Exact time of day beyond daytime",
       "Any text on distant buildings is too blurry and small to read and is excluded",
-      "Whether fence encloses private property or public area cannot be determined"
-    ]
+      "Whether fence encloses private property or public area cannot be determined",
+      "Exact tree species cannot be determined from photo alone",
+      "Distant city buildings are too blurry to identify specifically",
+      "No visible text in image to independently confirm location; identification relies on provided_title"
+    ],
+    "place": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Ficus Mugumo tree at Uhuru Park in Nairobi"
+        },
+        {
+          "kind": "context",
+          "detail": "outdoor park setting with massive tree, grassy field and open area described as park"
+        }
+      ],
+      "confidence": 0.92
+    },
+    "place_key": "kenya/nairobi/uhuru-park",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -301,6 +346,14 @@
         "run_at": "2026-10-27T12:16:18+00:00",
         "raw_output_path": "data/annotations/raw/park_004_attempt1.txt",
         "tokens": 8168
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:51:56+00:00",
+        "raw_output_path": "data/annotations/raw/park_004_passB_attempt1.txt",
+        "tokens": 6170
       }
     ],
     "human_review": {

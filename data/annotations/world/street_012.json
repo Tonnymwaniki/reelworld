@@ -342,15 +342,52 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Kenyatta Avenue",
+        "key": "kenya/nairobi/cbd/kenyatta-avenue",
+        "type": "street",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta Avenue, Nairobi, 2025 (03)"
+          }
+        ],
+        "confidence": 0.92
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact number of people is uncertain due to occlusion, distance and overlapping figures",
       "Text on distant rooftop signs, bus destination boards and vehicle license plates is not fully legible and was omitted",
       "Exact wording and punctuation on the red DTB sign beyond the main lines cannot be confirmed at this resolution",
       "Precise time shown on the street clock and building names beyond TECNO cannot be determined",
-      "Weather details beyond overcast cloud cover and exact time of day cannot be determined"
-    ]
+      "Weather details beyond overcast cloud cover and exact time of day cannot be determined",
+      "Specific high-rise building identities beyond the visible TECNO sign cannot be determined",
+      "Exact time shown on the street clock cannot be determined",
+      "Full wording on distant rooftop signs and bus destination boards is not legible"
+    ],
+    "place": {
+      "name": "Kenyatta Avenue",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "CBD"
+      ],
+      "key": "kenya/nairobi/cbd/kenyatta-avenue",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Kenyatta Avenue, Nairobi, 2025 (03)"
+        }
+      ],
+      "confidence": 0.92
+    },
+    "place_key": "kenya/nairobi/cbd/kenyatta-avenue",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -370,6 +407,14 @@
         "run_at": "2026-10-27T12:20:48+00:00",
         "raw_output_path": "data/annotations/raw/street_012_attempt1.txt",
         "tokens": 9134
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:54:43+00:00",
+        "raw_output_path": "data/annotations/raw/street_012_passB_attempt1.txt",
+        "tokens": 7877
       }
     ],
     "human_review": {

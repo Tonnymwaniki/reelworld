@@ -261,15 +261,60 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Ngong Hills",
+        "key": "kenya/kajiado/ngong-hills",
+        "type": "natural",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "NgongHillsKenya"
+          },
+          {
+            "kind": "context",
+            "detail": "large grass-covered hill with narrow light-brown dirt trail winding from flat grassy foreground to rounded summit, scattered isolated trees, dense dark green forest on left and right flanks, bright blue sky with large white cumulus clouds"
+          }
+        ],
+        "confidence": 0.85
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Whether tiny dark specks on upper trail near summit are people, animals, or shadows cannot be determined due to distance and resolution",
       "Exact count and species of grazing animals on lower slope cannot be determined",
       "Clothing details, age, gender, or identity of the person on the trail cannot be determined",
       "No legible text is visible; any distant signs would be too small or blurry to read",
-      "Exact geographic location and name of the hill cannot be determined from the image alone"
-    ]
+      "Exact geographic location and name of the hill cannot be determined from the image alone",
+      "No visible text to confirm location; identification relies on provided_title NgongHillsKenya",
+      "Exact geographic location cannot be determined from image alone per uncertainties",
+      "Whether tiny dark specks on upper trail near summit are people, animals, or shadows cannot be determined",
+      "Clothing details, age, gender, or identity of person on trail cannot be determined"
+    ],
+    "place": {
+      "name": "Ngong Hills",
+      "hierarchy": [
+        "Kenya",
+        "Ngong Hills"
+      ],
+      "key": "kenya/kajiado/ngong-hills",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "NgongHillsKenya"
+        },
+        {
+          "kind": "context",
+          "detail": "large grass-covered hill with narrow light-brown dirt trail winding from flat grassy foreground to rounded summit, scattered isolated trees, dense dark green forest on left and right flanks, bright blue sky with large white cumulus clouds"
+        }
+      ],
+      "confidence": 0.85
+    },
+    "place_key": "kenya/kajiado/ngong-hills",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -289,6 +334,14 @@
         "run_at": "2026-10-27T12:09:46+00:00",
         "raw_output_path": "data/annotations/raw/hills_009_attempt1.txt",
         "tokens": 7229
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:48:08+00:00",
+        "raw_output_path": "data/annotations/raw/hills_009_passB_attempt1.txt",
+        "tokens": 5148
       }
     ],
     "human_review": {

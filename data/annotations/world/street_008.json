@@ -338,14 +338,83 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Kahawa House",
+        "key": "unknown/kahawa-house",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "KAHAWA HOUSE"
+          },
+          {
+            "kind": "architecture",
+            "detail": "tall brown concrete multi-story building with vertical sign on facade in center background"
+          }
+        ],
+        "confidence": 0.97
+      },
+      {
+        "name": "Haile Selassie Avenue",
+        "key": "kenya/nairobi/haile-selassie-avenue",
+        "type": "street",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Haile Selassie Avenue (Nairobi), 2025 (07)"
+          },
+          {
+            "kind": "context",
+            "detail": "paved urban street with reddish dirt shoulder in foreground and center with buses, cars and pedestrians"
+          }
+        ],
+        "confidence": 0.92
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "exact number of people inside the bus and in distant background due to occlusion and small size",
       "exact license plate numbers on buses and cars due to distance and blur",
       "text on distant billboards and small signs that is blurry or cut off by image edge",
       "text printed on people's clothing or bags which is ignored per rules",
-      "exact destination or route information on bus windshield in small red lettering"
+      "exact destination or route information on bus windshield in small red lettering",
+      "exact number of people inside bus and in distant background not determinable due to occlusion and small size",
+      "license plate numbers on buses and cars not legible due to distance and blur",
+      "text on distant billboards and small signs not legible"
+    ],
+    "place": {
+      "name": "Haile Selassie Avenue",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "CBD"
+      ],
+      "key": "kenya/nairobi/haile-selassie-avenue",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Haile Selassie Avenue (Nairobi), 2025 (07)"
+        },
+        {
+          "kind": "context",
+          "detail": "paved urban street with reddish dirt shoulder and high-rise buildings including Kahawa House in background with buses and pedestrians"
+        }
+      ],
+      "confidence": 0.92
+    },
+    "place_key": "kenya/nairobi/haile-selassie-avenue",
+    "taken_from": null,
+    "cultural_context": [
+      {
+        "term": "matatu",
+        "local_name": "matatu",
+        "language": "Swahili",
+        "evidence": "white and blue shuttle bus labeled REMBO SHUTTLE parked on road with pedestrians; tags include matatu"
+      }
     ]
   },
   "privacy": {
@@ -366,6 +435,14 @@
         "run_at": "2026-10-27T12:20:52+00:00",
         "raw_output_path": "data/annotations/raw/street_008_attempt2.txt",
         "tokens": 10677
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:54:26+00:00",
+        "raw_output_path": "data/annotations/raw/street_008_passB_attempt1.txt",
+        "tokens": 8148
       }
     ],
     "human_review": {

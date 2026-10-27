@@ -269,7 +269,29 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Ngong Hills",
+        "key": "kenya/kajiado/ngong-hills",
+        "type": "natural",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Ngong Hills Wind Power farm"
+          },
+          {
+            "kind": "architecture",
+            "detail": "white wind turbines with tall towers and blades lined along ridge"
+          },
+          {
+            "kind": "context",
+            "detail": "dry brownish ridge with scattered green vegetation lined with numerous white wind turbines overlooking patchwork farmland and settlements"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact geographic location cannot be determined from the photo alone",
@@ -277,8 +299,34 @@
       "Specific time of day beyond daylight cannot be determined",
       "Types of crops, vegetation species, or building functions cannot be determined",
       "Altitude of the aircraft and camera settings cannot be determined",
-      "Any small or distant text on the ground is not legible and was excluded"
-    ]
+      "Any small or distant text on the ground is not legible and was excluded",
+      "Exact geographic location cannot be determined from visual features alone; identification relies on provided_title",
+      "Viewpoint is high-altitude aerial from aircraft indicated by dark curved edge of airplane window visible in bottom left corner, but no geographic taken_from place can be determined",
+      "Precise number of wind turbines, crop types, vegetation species, and building functions cannot be determined"
+    ],
+    "place": {
+      "name": "Ngong Hills",
+      "hierarchy": [
+        "Kenya",
+        "Ngong Hills"
+      ],
+      "key": "kenya/kajiado/ngong-hills",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Ngong Hills Wind Power farm"
+        },
+        {
+          "kind": "context",
+          "detail": "Aerial view of white wind turbines lined along a dry hilltop ridge overlooking patchwork farmland and settlements under a pale blue sky"
+        }
+      ],
+      "confidence": 0.88
+    },
+    "place_key": "kenya/kajiado/ngong-hills",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -298,6 +346,14 @@
         "run_at": "2026-10-27T12:10:21+00:00",
         "raw_output_path": "data/annotations/raw/hills_017_attempt1.txt",
         "tokens": 8428
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:48:36+00:00",
+        "raw_output_path": "data/annotations/raw/hills_017_passB_attempt1.txt",
+        "tokens": 5475
       }
     ],
     "human_review": {

@@ -272,15 +272,92 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Uhuru Park",
+        "key": "kenya/nairobi/uhuru-park",
+        "type": "park",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "UAP Towers seen from Uhuru Park, Nairobi"
+          },
+          {
+            "kind": "context",
+            "detail": "park with calm pond reflecting trees and tall building, grassy bank with fallen leaves, dense treeline across water, overhanging branches, urban park setting"
+          }
+        ],
+        "confidence": 0.93
+      },
+      {
+        "name": "UAP Towers",
+        "key": "unknown/uap-towers",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "UAP Towers seen from Uhuru Park, Nairobi"
+          },
+          {
+            "kind": "architecture",
+            "detail": "tall light-colored high-rise building with pointed top rising above treeline in center distance"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "UAP Towers seen from Uhuru Park, Nairobi"
+          }
+        ],
+        "confidence": 0.9
+      }
+    ],
     "uncertainties": [
       "Exact time of day cannot be determined from light alone, morning versus evening looks similar",
       "Whether the tiny blurred specks along the far shore are people, objects, or vegetation cannot be determined due to distance and low resolution",
       "Whether any distant signs or text exist behind trees or on the far building cannot be determined due to distance and blur",
       "Specific identity and name of the tall building cannot be determined from this view",
-      "Exact geographic location cannot be determined from the image alone"
-    ]
+      "Exact geographic location cannot be determined from the image alone",
+      "Specific identity of tall building cannot be independently verified from image alone beyond provided title; tiny blurred specks along far shore cannot be determined; exact time of day cannot be determined from light alone"
+    ],
+    "place": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "UAP Towers seen from Uhuru Park, Nairobi"
+        },
+        {
+          "kind": "context",
+          "detail": "park setting with calm pond, grassy bank, dense treeline, and skyline reflection described as urban park"
+        }
+      ],
+      "confidence": 0.92
+    },
+    "place_key": "kenya/nairobi/uhuru-park",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -300,6 +377,14 @@
         "run_at": "2026-10-27T12:17:38+00:00",
         "raw_output_path": "data/annotations/raw/park_017_attempt1.txt",
         "tokens": 9588
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:53:09+00:00",
+        "raw_output_path": "data/annotations/raw/park_017_passB_attempt1.txt",
+        "tokens": 9863
       }
     ],
     "human_review": {

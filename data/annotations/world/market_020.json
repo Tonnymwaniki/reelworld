@@ -326,15 +326,58 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "City Market",
+        "key": "unknown/city-market",
+        "type": "market",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi City Market in Kenya"
+          },
+          {
+            "kind": "architecture",
+            "detail": "large multi-story yellow building covered in colorful geometric murals and painted patterns with flower stalls and buckets on sidewalk"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact city or location of the building cannot be determined from the image alone",
       "Full text of faded or partially obscured murals on upper floors is not legible",
       "Text on the water tower billboard and on motorcycle license plates is blurry and not listed because fewer than 3 letters are clearly readable",
       "Exact number of people partially obscured behind vehicles or market stalls is uncertain",
-      "Text printed on people's clothing was ignored per annotation rules"
-    ]
+      "Text printed on people's clothing was ignored per annotation rules",
+      "Exact city location cannot be determined from visual features alone; identification relies on provided title",
+      "Full text of faded murals on upper floors and text on water tower billboard not legible"
+    ],
+    "place": {
+      "name": "City Market",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "unknown/city-market",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Nairobi City Market in Kenya"
+        },
+        {
+          "kind": "context",
+          "detail": "flower vendors with buckets on sidewalk and market stalls in front of mural-covered building on city street"
+        }
+      ],
+      "confidence": 0.87
+    },
+    "place_key": "unknown/city-market",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": true,
@@ -354,6 +397,14 @@
         "run_at": "2026-10-27T12:15:15+00:00",
         "raw_output_path": "data/annotations/raw/market_020_attempt1.txt",
         "tokens": 11137
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:51:14+00:00",
+        "raw_output_path": "data/annotations/raw/market_020_passB_attempt1.txt",
+        "tokens": 6125
       }
     ],
     "human_review": {

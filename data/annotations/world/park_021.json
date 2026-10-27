@@ -290,15 +290,106 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Uhuru Park",
+        "key": "kenya/nairobi/uhuru-park",
+        "type": "park",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Uhuru Park"
+          },
+          {
+            "kind": "context",
+            "detail": "A sunny urban park with benches and palm trees in the foreground and two tall high-rise buildings in the background under a clear blue sky"
+          },
+          {
+            "kind": "architecture",
+            "detail": "outdoor urban park with short grass, two concrete benches, low trimmed hedge, palm trees and scattered trees"
+          }
+        ],
+        "confidence": 0.94
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "context",
+            "detail": "two tall multi-story buildings dominate the skyline behind the park, left with tall antenna tower on roof and right brown rectangular tower with many windows"
+          }
+        ],
+        "confidence": 0.62
+      },
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Uhuru Park"
+          },
+          {
+            "kind": "context",
+            "detail": "urban park with city skyline and high-rise buildings"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
     "uncertainties": [
       "Text on distant billboard on building in center background is not legible due to distance and blur",
       "Whether two small light-colored shapes in the far background on the right near the road are additional people cannot be determined",
       "Exact number and type of distant vehicles behind the park cannot be determined",
       "Names or functions of the buildings cannot be determined from the photo",
-      "Text on small circular sign near center-right among trees is not legible"
-    ]
+      "Text on small circular sign near center-right among trees is not legible",
+      "Names or functions of the two tall buildings in background cannot be determined from the photo",
+      "Text on distant billboard on building in center background and small circular sign near center-right not legible due to distance and blur",
+      "Whether two small light-colored shapes in far background on right near road are additional people cannot be determined"
+    ],
+    "place": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Uhuru Park"
+        },
+        {
+          "kind": "context",
+          "detail": "A sunny urban park with benches and palm trees in the foreground and two tall high-rise buildings in the background"
+        },
+        {
+          "kind": "architecture",
+          "detail": "park with grass lawn, concrete benches, trimmed hedge border, palm trees and two tall multi-story buildings in background, left one with tall antenna structure on roof and right one brown rectangular tower"
+        }
+      ],
+      "confidence": 0.93
+    },
+    "place_key": "kenya/nairobi/uhuru-park",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -318,6 +409,14 @@
         "run_at": "2026-10-27T12:18:00+00:00",
         "raw_output_path": "data/annotations/raw/park_021_attempt1.txt",
         "tokens": 7244
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:53:20+00:00",
+        "raw_output_path": "data/annotations/raw/park_021_passB_attempt1.txt",
+        "tokens": 6250
       }
     ],
     "human_review": {

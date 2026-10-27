@@ -329,7 +329,42 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Kenyatta International Convention Centre",
+        "key": "kenya/nairobi/cbd/kicc",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta International Convention Centre, Nairobi, by Karl Henrik Nøstvik architect, general"
+          },
+          {
+            "kind": "architecture",
+            "detail": "tall cylindrical building with horizontal balconies and wide circular top dominates center"
+          }
+        ],
+        "confidence": 0.98
+      },
+      {
+        "name": "CBK Pension Towers",
+        "key": "kenya/nairobi/cbd/cbk-pension-towers",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "C&K PENSION TOWERS"
+          },
+          {
+            "kind": "architecture",
+            "detail": "light-colored rectangular tower with grid of windows behind conical roof"
+          }
+        ],
+        "confidence": 0.85
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Text on plaque on statue pedestal is not legible due to distance and resolution",
@@ -337,8 +372,33 @@
       "Details of building interiors and exact number of floors cannot be determined",
       "License plate numbers and car models cannot be determined",
       "Exact time of day beyond daytime and weather beyond cloud cover cannot be determined",
-      "Names and identities of buildings and statue subject cannot be determined from image alone"
-    ]
+      "Names and identities of buildings and statue subject cannot be determined from image alone",
+      "Exact number of people on plaza and building floor counts cannot be determined from image alone"
+    ],
+    "place": {
+      "name": "Kenyatta International Convention Centre",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "CBD"
+      ],
+      "key": "kenya/nairobi/cbd/kicc",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Kenyatta International Convention Centre, Nairobi, by Karl Henrik Nøstvik architect, general"
+        },
+        {
+          "kind": "architecture",
+          "detail": "tall cylindrical building with horizontal balconies and wide circular top dominates center"
+        }
+      ],
+      "confidence": 0.97
+    },
+    "place_key": "kenya/nairobi/cbd/kicc",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -358,6 +418,14 @@
         "run_at": "2026-10-27T12:12:08+00:00",
         "raw_output_path": "data/annotations/raw/landmarks_006_attempt1.txt",
         "tokens": 9858
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:49:24+00:00",
+        "raw_output_path": "data/annotations/raw/landmarks_006_passB_attempt1.txt",
+        "tokens": 5759
       }
     ],
     "human_review": {

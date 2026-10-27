@@ -346,8 +346,31 @@
       "Text on yellow spare tire cover on silver vehicle is not legible",
       "License plate numbers on parked cars are not clearly readable",
       "Names and functions of distant high-rise buildings cannot be determined",
-      "Exact time of day beyond daytime overcast conditions cannot be determined"
-    ]
+      "Exact time of day beyond daytime overcast conditions cannot be determined",
+      "Exact street name cannot be determined from description",
+      "Specific market name for colorful stalls cannot be determined",
+      "Identities of distant high-rise buildings and beige multi-story building cannot be determined",
+      "Full text on banners and vehicle markings is partially legible and cannot be fully verified"
+    ],
+    "place": {
+      "name": "Nairobi",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Nairobi Aug 11 2024"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "place_key": "kenya/nairobi",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -367,6 +390,14 @@
         "run_at": "2026-10-27T12:14:07+00:00",
         "raw_output_path": "data/annotations/raw/market_012_attempt1.txt",
         "tokens": 9984
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:50:32+00:00",
+        "raw_output_path": "data/annotations/raw/market_012_passB_attempt1.txt",
+        "tokens": 4544
       }
     ],
     "human_review": {

@@ -331,14 +331,102 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "City Market",
+        "key": "unknown/city-market",
+        "type": "market",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "CITY MARKET"
+          },
+          {
+            "kind": "visible_text",
+            "detail": "NAIROBI CITY COUNTY"
+          },
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi City Market, 2025 (04)"
+          },
+          {
+            "kind": "architecture",
+            "detail": "stepped art deco shape with bright green, yellow and blue mural covering facade and covered entrance canopy"
+          }
+        ],
+        "confidence": 0.98
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "NAIROBI CITY COUNTY"
+          },
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi City Market, 2025 (04)"
+          }
+        ],
+        "confidence": 0.9
+      }
+    ],
     "uncertainties": [
       "Exact number of people inside the shaded market entrances is unclear due to shadows and distance",
       "Small secondary text below the Marrwa City RESTAURANT sign is not legible",
       "Additional distant signage on high-rise buildings is blurry and only partially readable",
       "License plate numbers and fine vehicle details cannot be determined",
-      "Interior layout and activity inside the market is not visible"
+      "Interior layout and activity inside the market is not visible",
+      "Tall beige high-rise building with red trim behind market cannot be identified as a specific named landmark from provided evidence",
+      "Interior layout and activity inside market not visible",
+      "Exact number of people in shaded entrances unclear due to shadows and distance"
+    ],
+    "place": {
+      "name": "City Market",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "unknown/city-market",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "visible_text",
+          "detail": "CITY MARKET"
+        },
+        {
+          "kind": "visible_text",
+          "detail": "NAIROBI CITY COUNTY"
+        },
+        {
+          "kind": "provided_title",
+          "detail": "Nairobi City Market, 2025 (04)"
+        },
+        {
+          "kind": "architecture",
+          "detail": "stepped market building with mural facade and covered entrance canopy"
+        }
+      ],
+      "confidence": 0.97
+    },
+    "place_key": "unknown/city-market",
+    "taken_from": null,
+    "cultural_context": [
+      {
+        "term": "nyama",
+        "local_name": "nyama",
+        "language": "Swahili",
+        "evidence": "visible_text 'KENYA MEAT COMMISSION NYAMA HAVEN' and 'KMC NYAMA HAVEN'"
+      }
     ]
   },
   "privacy": {
@@ -359,6 +447,14 @@
         "run_at": "2026-10-27T12:14:38+00:00",
         "raw_output_path": "data/annotations/raw/market_016_attempt1.txt",
         "tokens": 8462
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:50:59+00:00",
+        "raw_output_path": "data/annotations/raw/market_016_passB_attempt1.txt",
+        "tokens": 6953
       }
     ],
     "human_review": {

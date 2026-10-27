@@ -256,8 +256,38 @@
       "text or design details on the lapel pin",
       "text or markings on the wristband",
       "exact time of day and weather outside",
-      "what the people are saying or singing"
-    ]
+      "what the people are saying or singing",
+      "Exact geographic location and type of indoor venue cannot be determined",
+      "Occasion or event taking place cannot be determined",
+      "No distinctive architectural features or visible text to identify a landmark",
+      "Provided title does not provide location evidence"
+    ],
+    "place": {
+      "name": "Unknown",
+      "hierarchy": [
+        "Unknown"
+      ],
+      "key": "unknown/unknown",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "architecture",
+          "detail": "blurred indoor background with warm-toned wooden architectural elements is out of focus and non-distinctive"
+        },
+        {
+          "kind": "provided_title",
+          "detail": "provided_title is 'Takudzwa Ngwenya 2011' which does not denote a geographic place or landmark"
+        },
+        {
+          "kind": "context",
+          "detail": "scene is indoor building with warm indoor lighting and sparse crowd, insufficient to determine geographic location"
+        }
+      ],
+      "confidence": 1.0
+    },
+    "place_key": "unknown/unknown",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": true,
@@ -277,6 +307,14 @@
         "run_at": "2026-10-27T12:07:26+00:00",
         "raw_output_path": "data/annotations/raw/cbd_010_attempt1.txt",
         "tokens": 9658
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:46:51+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_010_passB_attempt1.txt",
+        "tokens": 5421
       }
     ],
     "human_review": {

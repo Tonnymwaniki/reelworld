@@ -295,8 +295,34 @@
       "Text or logos on paraglider canopies not legible due to distance and folding",
       "Specific location and identity of mountain not determinable from image",
       "Exact time of day and weather conditions beyond overcast appearance",
-      "Details of individual clothing and equipment not clear for distant figures"
-    ]
+      "Details of individual clothing and equipment not clear for distant figures",
+      "Exact number of people uncertain due to distance",
+      "Text or logos on paraglider canopies not legible",
+      "No visible_text or distinctive architecture to identify any listed Nairobi landmark",
+      "Exact time of day and weather beyond overcast not determinable"
+    ],
+    "place": {
+      "name": "Unknown",
+      "hierarchy": [
+        "Unknown"
+      ],
+      "key": "unknown/unknown",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Ngong Ping, Ma On Shan 04"
+        },
+        {
+          "kind": "context",
+          "detail": "Specific location and identity of mountain not determinable from image; no visible_text and no distinctive architecture linking to listed landmarks; scene shows generic dry grassy hilltop with rocky mountain peak and paragliding activity"
+        }
+      ],
+      "confidence": 0.92
+    },
+    "place_key": "unknown/unknown",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -316,6 +342,14 @@
         "run_at": "2026-10-27T12:11:02+00:00",
         "raw_output_path": "data/annotations/raw/hills_024_attempt1.txt",
         "tokens": 6933
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:49:19+00:00",
+        "raw_output_path": "data/annotations/raw/hills_024_passB_attempt2.txt",
+        "tokens": 5269
       }
     ],
     "human_review": {

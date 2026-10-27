@@ -334,8 +334,32 @@
       "Text on distant stalls and flags on the right side is not legible",
       "Exact time of day beyond daylight",
       "Details of goods on far stalls due to distance and blur",
-      "Whether additional people are obscured behind stalls"
-    ]
+      "Whether additional people are obscured behind stalls",
+      "No distinctive landmark architecture or legible signage confirms a specific market identity beyond the provided title; visible text 'BANANA HILL FLORIST' is a stall name and does not establish location; exact position within Nairobi cannot be determined from description alone"
+    ],
+    "place": {
+      "name": "Nairobi",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "City market hall, Nairobi"
+        },
+        {
+          "kind": "context",
+          "detail": "Interior view of a large arched market hall with stalls on two levels and people browsing below"
+        }
+      ],
+      "confidence": 0.84
+    },
+    "place_key": "kenya/nairobi",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -355,6 +379,14 @@
         "run_at": "2026-10-27T12:13:29+00:00",
         "raw_output_path": "data/annotations/raw/market_006_attempt1.txt",
         "tokens": 7185
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:50:19+00:00",
+        "raw_output_path": "data/annotations/raw/market_006_passB_attempt1.txt",
+        "tokens": 6130
       }
     ],
     "human_review": {

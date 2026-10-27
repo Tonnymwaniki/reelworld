@@ -283,15 +283,59 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Uhuru Gardens",
+        "key": "unknown/uhuru-gardens",
+        "type": "park",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Uhuru Gardens, Nairobi"
+          },
+          {
+            "kind": "architecture",
+            "detail": "tall stone obelisk tower with arched base, bronze statue group raising flag on stepped stone platform, and sculpted hand holding a dove visible through arch"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact text on small white sign on platform is not fully legible at this resolution and distance",
       "Exact colors and pattern details of the flag are not clearly distinguishable",
       "Identities, ages, and genders of people cannot be determined",
       "Exact location, name, and historical meaning of the monument cannot be determined from image alone",
-      "Precise time of day beyond daylight with low sun angle cannot be determined"
-    ]
+      "Precise time of day beyond daylight with low sun angle cannot be determined",
+      "Exact text on small white sign on platform is not fully legible",
+      "Historical meaning of the monument cannot be determined from image alone"
+    ],
+    "place": {
+      "name": "Uhuru Gardens",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Gardens"
+      ],
+      "key": "unknown/uhuru-gardens",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Uhuru Gardens, Nairobi"
+        },
+        {
+          "kind": "architecture",
+          "detail": "tall stone monument with bronze statues raising a flag and sculpted hand holding a dove stands on a stepped platform in an open plaza"
+        }
+      ],
+      "confidence": 0.88
+    },
+    "place_key": "unknown/uhuru-gardens",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -311,6 +355,14 @@
         "run_at": "2026-10-27T12:18:01+00:00",
         "raw_output_path": "data/annotations/raw/park_019_attempt1.txt",
         "tokens": 11854
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:53:07+00:00",
+        "raw_output_path": "data/annotations/raw/park_019_passB_attempt1.txt",
+        "tokens": 5497
       }
     ],
     "human_review": {

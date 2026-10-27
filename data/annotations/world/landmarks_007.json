@@ -261,15 +261,61 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Kenyatta International Convention Centre",
+        "key": "kenya/nairobi/cbd/kicc",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta International Convention Centre, Nairobi, by Karl Henrik Nøstvik architect, grand stairway"
+          },
+          {
+            "kind": "architecture",
+            "detail": "interior multi-level concrete stairwell with central red carpet runner and zigzagging staircases on both sides viewed from above into open atrium"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Full text on the small rectangular sign on the bridge is not legible beyond the letters CCTV",
       "Building name, location, and function cannot be determined from the photo",
       "Exact number of floors or levels is not fully visible",
       "Material composition of the red carpet and railings beyond visual appearance cannot be confirmed",
-      "Time of day and weather outside cannot be determined from this interior view"
-    ]
+      "Time of day and weather outside cannot be determined from this interior view",
+      "Building identification relies solely on provided_title; uncertainties state building name, location and function cannot be determined from photo alone",
+      "Full text on small rectangular sign on concrete bridge not legible beyond partial 'CCTV'",
+      "Exact number of floors, time of day and exterior weather cannot be determined from this interior view",
+      "No people visible; no local cultural terms shown"
+    ],
+    "place": {
+      "name": "Kenyatta International Convention Centre",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "CBD"
+      ],
+      "key": "kenya/nairobi/cbd/kicc",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Kenyatta International Convention Centre, Nairobi, by Karl Henrik Nøstvik architect, grand stairway"
+        },
+        {
+          "kind": "architecture",
+          "detail": "interior of a multi-story building viewed from above, looking down into an open atrium with straight red carpet and angular concrete staircases with textured gray balustrades and dark metal handrails"
+        }
+      ],
+      "confidence": 0.88
+    },
+    "place_key": "kenya/nairobi/cbd/kicc",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -289,6 +335,14 @@
         "run_at": "2026-10-27T12:12:02+00:00",
         "raw_output_path": "data/annotations/raw/landmarks_007_attempt1.txt",
         "tokens": 6804
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:49:40+00:00",
+        "raw_output_path": "data/annotations/raw/landmarks_007_passB_attempt1.txt",
+        "tokens": 8082
       }
     ],
     "human_review": {

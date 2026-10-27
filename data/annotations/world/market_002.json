@@ -261,8 +261,33 @@
       "Materials, age, and cultural origin of individual masks cannot be determined from image alone",
       "Whether items are for sale, exhibition, or storage cannot be confirmed beyond visual arrangement",
       "Any small markings or text on masks are not legible enough to read at least 3 letters",
-      "Time of day and weather conditions beyond natural daylight cannot be determined precisely"
-    ]
+      "Time of day and weather conditions beyond natural daylight cannot be determined precisely",
+      "Exact market name and precise location within Nairobi cannot be determined from visual content alone",
+      "No visible text, distinctive architecture, or identifiable landmark visible to confirm specific district or market"
+    ],
+    "place": {
+      "name": "Nairobi",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "African masks in Nairobi 01"
+        },
+        {
+          "kind": "context",
+          "detail": "outdoor market display of carved wooden masks and handicrafts"
+        }
+      ],
+      "confidence": 0.62
+    },
+    "place_key": "kenya/nairobi",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -282,6 +307,14 @@
         "run_at": "2026-10-27T12:12:52+00:00",
         "raw_output_path": "data/annotations/raw/market_002_attempt1.txt",
         "tokens": 7348
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:49:50+00:00",
+        "raw_output_path": "data/annotations/raw/market_002_passB_attempt1.txt",
+        "tokens": 4119
       }
     ],
     "human_review": {

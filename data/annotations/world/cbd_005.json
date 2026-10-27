@@ -341,8 +341,49 @@
       "Text on small or distant vertical signs that is not legible with at least 3 letters",
       "Building names, functions and interior details",
       "Exact time of day beyond daytime and precise weather conditions beyond overcast appearance",
-      "Details of individual faces, identities or clothing text"
-    ]
+      "Details of individual faces, identities or clothing text",
+      "No landmarks from the allowed Kenya list are visible; Tokyo Times Tower in title is distinct from Nairobi Times Tower",
+      "Japanese text on billboards is partially illegible and building names/functions cannot be verified",
+      "Exact street location beyond provided title cannot be independently verified from image description alone"
+    ],
+    "place": {
+      "name": "Unknown",
+      "hierarchy": [
+        "Japan",
+        "Tokyo"
+      ],
+      "key": "unknown/unknown",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Akiba Tashiro street viewed from Tokyo Times Tower entrance (2010-05-04 16.13.34)"
+        },
+        {
+          "kind": "context",
+          "detail": "urban plaza with billboards containing Japanese characters and no Nairobi landmarks visible"
+        }
+      ],
+      "confidence": 0.93
+    },
+    "place_key": "unknown/unknown",
+    "taken_from": {
+      "name": "Tokyo Times Tower entrance",
+      "hierarchy": [
+        "Japan",
+        "Tokyo"
+      ],
+      "key": "kenya/nairobi/cbd/times-tower",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Akiba Tashiro street viewed from Tokyo Times Tower entrance (2010-05-04 16.13.34)"
+        }
+      ],
+      "confidence": 0.85
+    },
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -362,6 +403,14 @@
         "run_at": "2026-10-27T12:07:06+00:00",
         "raw_output_path": "data/annotations/raw/cbd_005_attempt1.txt",
         "tokens": 14281
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:46:28+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_005_passB_attempt1.txt",
+        "tokens": 7460
       }
     ],
     "human_review": {

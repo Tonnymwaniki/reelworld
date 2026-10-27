@@ -338,15 +338,100 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Koinange Street",
+        "key": "unknown/koinange-street",
+        "type": "street",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Koinange Street, 2025 (02)"
+          },
+          {
+            "kind": "context",
+            "detail": "wide asphalt street extending into the distance, flanked on both sides by multi-story buildings with many windows and by mature trees"
+          }
+        ],
+        "confidence": 0.88
+      },
+      {
+        "name": "Consolidated Bank",
+        "key": "unknown/consolidated-bank",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "Consolidated Bank"
+          },
+          {
+            "kind": "visible_text",
+            "detail": "CONSOLIDATED BANK HO"
+          }
+        ],
+        "confidence": 0.9
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "Nairobi CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Koinange Street, 2025 (02)"
+          },
+          {
+            "kind": "context",
+            "detail": "wide urban street lined with multi-story commercial buildings in central business district setting"
+          }
+        ],
+        "confidence": 0.75
+      }
+    ],
     "uncertainties": [
       "Exact number of people in the far distance is unclear due to small size and blur",
       "Text on blue storefront signs on the left side is blurry and less than 3 letters are clearly readable, so it is omitted",
       "Full text of the upper right building sign is cut off by the image edge beyond HO",
       "Make, model and exact color of distant parked cars cannot be determined",
-      "Exact time of day beyond daytime overcast cannot be determined"
-    ]
+      "Exact time of day beyond daytime overcast cannot be determined",
+      "No visible street name sign to independently confirm Koinange Street; identification relies on provided_title",
+      "Full building name beyond CONSOLIDATED BANK HO is cut off by image edge and cannot be determined",
+      "Red and white striped cylindrical building in center distance cannot be identified by name from provided information",
+      "Exact number of people and make/model of distant parked cars cannot be determined"
+    ],
+    "place": {
+      "name": "Koinange Street",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Nairobi CBD"
+      ],
+      "key": "unknown/koinange-street",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Koinange Street, 2025 (02)"
+        },
+        {
+          "kind": "context",
+          "detail": "wide urban street lined with tall buildings and trees, with cars driving and parked along both sides"
+        }
+      ],
+      "confidence": 0.88
+    },
+    "place_key": "unknown/koinange-street",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -366,6 +451,14 @@
         "run_at": "2026-10-27T12:21:49+00:00",
         "raw_output_path": "data/annotations/raw/street_020_attempt1.txt",
         "tokens": 10068
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:55:23+00:00",
+        "raw_output_path": "data/annotations/raw/street_020_passB_attempt1.txt",
+        "tokens": 6430
       }
     ],
     "human_review": {

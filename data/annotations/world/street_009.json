@@ -314,7 +314,29 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "ICRAF Road",
+        "key": "unknown/icraf-road",
+        "type": "street",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "ICRAF Road, Nairobi (20250808-P1048951)"
+          },
+          {
+            "kind": "visible_text",
+            "detail": "ICRAF"
+          },
+          {
+            "kind": "context",
+            "detail": "long straight asphalt road receding to horizon with ICRAF directional sign at intersection"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact geographic location cannot be determined from the photo alone",
@@ -324,8 +346,36 @@
       "Full text of building sign cut off by edge cannot be determined",
       "Purpose of traffic cones and whether road is open or closed cannot be determined",
       "Species of trees and crops cannot be confirmed from image alone",
-      "Details of partially visible white vehicle behind fence cannot be determined"
-    ]
+      "Details of partially visible white vehicle behind fence cannot be determined",
+      "Exact geographic location cannot be determined from photo alone beyond provided title; visible text only shows ICRAF and partial ATURE TRA; species of trees and crops, purpose of traffic cones, and details of small building signage cannot be determined"
+    ],
+    "place": {
+      "name": "Nairobi",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "ICRAF Road, Nairobi (20250808-P1048951)"
+        },
+        {
+          "kind": "visible_text",
+          "detail": "ICRAF"
+        },
+        {
+          "kind": "context",
+          "detail": "paved intersection with long straight asphalt road lined with utility poles and flat-topped trees"
+        }
+      ],
+      "confidence": 0.86
+    },
+    "place_key": "kenya/nairobi",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -345,6 +395,14 @@
         "run_at": "2026-10-27T12:20:16+00:00",
         "raw_output_path": "data/annotations/raw/street_009_attempt1.txt",
         "tokens": 13865
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:54:24+00:00",
+        "raw_output_path": "data/annotations/raw/street_009_passB_attempt1.txt",
+        "tokens": 7548
       }
     ],
     "human_review": {

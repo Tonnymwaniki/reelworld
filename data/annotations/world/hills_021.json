@@ -281,7 +281,25 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Ngong Hills",
+        "key": "kenya/kajiado/ngong-hills",
+        "type": "natural",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Ngong Hills with my Subaru"
+          },
+          {
+            "kind": "context",
+            "detail": "grassy hilltop terrain overlooking distant hazy valley and lowlands"
+          }
+        ],
+        "confidence": 0.62
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "exact geographic location of hilltop cannot be determined",
@@ -289,8 +307,34 @@
       "person's identity and age cannot be determined",
       "vehicle ownership and condition history cannot be determined",
       "small badge text and stickers on rear window are blurry and not fully legible",
-      "weather temperature and wind conditions cannot be determined"
-    ]
+      "weather temperature and wind conditions cannot be determined",
+      "Exact geographic location of hilltop cannot be independently verified beyond provided title; no distinctive architecture or visible text confirms Ngong Hills",
+      "Camera viewpoint is ground_level on same grassy hilltop as subject, but taken_from is not separately evidenced",
+      "Person identity, vehicle ownership, and detailed weather conditions cannot be determined"
+    ],
+    "place": {
+      "name": "Ngong Hills",
+      "hierarchy": [
+        "Kenya",
+        "Ngong Hills"
+      ],
+      "key": "kenya/kajiado/ngong-hills",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Ngong Hills with my Subaru"
+        },
+        {
+          "kind": "context",
+          "detail": "SUV parked on patchy dry grass and brown dirt at edge of hilltop overlooking distant hazy valley and lowlands"
+        }
+      ],
+      "confidence": 0.6
+    },
+    "place_key": "kenya/kajiado/ngong-hills",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": true,
@@ -310,6 +354,14 @@
         "run_at": "2026-10-27T12:11:32+00:00",
         "raw_output_path": "data/annotations/raw/hills_021_attempt2.txt",
         "tokens": 10318
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:48:48+00:00",
+        "raw_output_path": "data/annotations/raw/hills_021_passB_attempt1.txt",
+        "tokens": 6027
       }
     ],
     "human_review": {

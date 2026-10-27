@@ -285,15 +285,71 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "CBK Pension Towers",
+        "key": "kenya/nairobi/cbd/cbk-pension-towers",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "CBK PENSION TOWERS"
+          },
+          {
+            "kind": "architecture",
+            "detail": "tall modern high-rise with three pointed grey-tiled peaks and gold structural accents, large blue glass facade with triangular grid pattern and balconies along its sides"
+          },
+          {
+            "kind": "provided_title",
+            "detail": "CBK Pension Towers, Nairobi (20250808-P1048975)"
+          },
+          {
+            "kind": "context",
+            "detail": "dominant tall building in elevated daytime view over hazy cityscape with elevated highway overpass and low-rise buildings with red and brown roofs"
+          }
+        ],
+        "confidence": 0.99
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Whether any small figures are present on balconies or streets due to distance and resolution",
       "Exact number of floors or interior layout of the tower",
       "Content of distant blurry billboards and signs in the background cityscape",
       "Specific weather conditions beyond visible haze",
-      "Exact time of day beyond daylight"
-    ]
+      "Exact time of day beyond daylight",
+      "taken_from location not determinable from provided information; elevated viewpoint indicated by weathered concrete rooftop ledge but no specific building named",
+      "exact district within Nairobi not specified beyond city level in provided_title",
+      "no cultural terms clearly shown"
+    ],
+    "place": {
+      "name": "CBK Pension Towers",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi/cbd/cbk-pension-towers",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "visible_text",
+          "detail": "CBK PENSION TOWERS"
+        },
+        {
+          "kind": "provided_title",
+          "detail": "CBK Pension Towers, Nairobi (20250808-P1048975)"
+        },
+        {
+          "kind": "architecture",
+          "detail": "tall modern high-rise with three pointed grey-tiled peaks and gold structural accents, large blue glass facade with triangular grid pattern"
+        }
+      ],
+      "confidence": 0.99
+    },
+    "place_key": "kenya/nairobi/cbd/cbk-pension-towers",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -313,6 +369,14 @@
         "run_at": "2026-10-27T12:01:19+00:00",
         "raw_output_path": "data/annotations/raw/cbd_003_attempt1.txt",
         "tokens": 9859
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:44:10+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_003_passB_attempt1.txt",
+        "tokens": 6067
       }
     ],
     "human_review": {

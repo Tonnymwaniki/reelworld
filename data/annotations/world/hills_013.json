@@ -269,15 +269,54 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Ngong Hills",
+        "key": "kenya/kajiado/ngong-hills",
+        "type": "natural",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Ngong Hills IMG 4747 (5849851051)"
+          }
+        ],
+        "confidence": 0.85
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Whether the low sun is sunrise or sunset cannot be determined from image alone",
       "Exact geographic location and identity of distant hills and settlement",
       "Details of distant buildings obscured by haze and trees",
       "Text on any distant signs if present is unreadable due to distance and haze",
-      "Exact species of trees and condition of foliage in shadow areas"
-    ]
+      "Exact species of trees and condition of foliage in shadow areas",
+      "Exact geographic location and identity of distant hills and settlement beyond provided title cannot be independently verified from visual features",
+      "No visible text to corroborate location"
+    ],
+    "place": {
+      "name": "Ngong Hills",
+      "hierarchy": [
+        "Kenya",
+        "Ngong Hills"
+      ],
+      "key": "kenya/kajiado/ngong-hills",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Ngong Hills IMG 4747 (5849851051)"
+        },
+        {
+          "kind": "context",
+          "detail": "wide elevated view of rolling green hills and valley at dawn with pale sky, scattered clouds and soft light over distant undulating grassy terrain"
+        }
+      ],
+      "confidence": 0.84
+    },
+    "place_key": "kenya/kajiado/ngong-hills",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -297,6 +336,14 @@
         "run_at": "2026-10-27T12:10:00+00:00",
         "raw_output_path": "data/annotations/raw/hills_013_attempt1.txt",
         "tokens": 6563
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:48:22+00:00",
+        "raw_output_path": "data/annotations/raw/hills_013_passB_attempt1.txt",
+        "tokens": 5091
       }
     ],
     "human_review": {

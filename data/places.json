@@ -1,0 +1,301 @@
+{
+  "kenya/nairobi/cbd/kicc": {
+    "name": "Kenyatta International Convention Centre",
+    "type": "building",
+    "aliases": [
+      "KICC",
+      "Kenyatta International Conference Centre",
+      "Kenyatta International Convention Center"
+    ]
+  },
+  "kenya/nairobi/cbd/cbk-pension-towers": {
+    "name": "CBK Pension Towers",
+    "type": "building",
+    "aliases": [
+      "Pension Towers",
+      "CBK Pension Tower",
+      "Central Bank Pension Towers"
+    ]
+  },
+  "kenya/nairobi/cbd/times-tower": {
+    "name": "Times Tower",
+    "type": "building",
+    "aliases": [
+      "KRA Times Tower"
+    ]
+  },
+  "kenya/nairobi/cbd/teleposta-towers": {
+    "name": "Teleposta Towers",
+    "type": "building",
+    "aliases": [
+      "Teleposta Tower"
+    ]
+  },
+  "kenya/nairobi/cbd/anniversary-towers": {
+    "name": "Anniversary Towers",
+    "type": "building",
+    "aliases": [
+      "Anniversary Tower"
+    ]
+  },
+  "kenya/nairobi/cbd/hilton-nairobi": {
+    "name": "Hilton Nairobi",
+    "type": "building",
+    "aliases": [
+      "Nairobi Hilton",
+      "Hilton Hotel Nairobi"
+    ]
+  },
+  "kenya/nairobi/cbd/kenyatta-avenue": {
+    "name": "Kenyatta Avenue",
+    "type": "street",
+    "aliases": [
+      "Kenyatta Ave"
+    ]
+  },
+  "kenya/nairobi/cbd/nairobi-railway-station": {
+    "name": "Nairobi Railway Station",
+    "type": "building",
+    "aliases": [
+      "Nairobi Station"
+    ]
+  },
+  "kenya/nairobi/cbd": {
+    "name": "Nairobi CBD",
+    "type": "district",
+    "aliases": [
+      "Nairobi central business district",
+      "Nairobi city centre",
+      "Nairobi city center",
+      "Nairobi downtown"
+    ]
+  },
+  "kenya/nairobi/uhuru-park": {
+    "name": "Uhuru Park",
+    "type": "park",
+    "aliases": [
+      "Uhuru Gardens Park"
+    ]
+  },
+  "kenya/nairobi/central-park": {
+    "name": "Central Park Nairobi",
+    "type": "park",
+    "aliases": [
+      "Central Park"
+    ]
+  },
+  "kenya/nairobi/nairobi-national-park": {
+    "name": "Nairobi National Park",
+    "type": "park",
+    "aliases": []
+  },
+  "kenya/nairobi/karura-forest": {
+    "name": "Karura Forest",
+    "type": "park",
+    "aliases": [
+      "Karura Forest Reserve"
+    ]
+  },
+  "kenya/nairobi/gikomba-market": {
+    "name": "Gikomba Market",
+    "type": "market",
+    "aliases": [
+      "Gikomba"
+    ]
+  },
+  "kenya/nairobi/marikiti-market": {
+    "name": "Marikiti Market",
+    "type": "market",
+    "aliases": [
+      "Marikiti"
+    ]
+  },
+  "kenya/nairobi": {
+    "name": "Nairobi",
+    "type": "city",
+    "aliases": []
+  },
+  "kenya/kajiado/ngong-hills": {
+    "name": "Ngong Hills",
+    "type": "natural",
+    "aliases": [
+      "Ngong Hill"
+    ]
+  },
+  "kenya/narok/maasai-mara": {
+    "name": "Maasai Mara",
+    "type": "natural",
+    "aliases": [
+      "Masai Mara",
+      "Maasai Mara National Reserve"
+    ]
+  },
+  "kenya/nakuru/lake-nakuru-national-park": {
+    "name": "Lake Nakuru National Park",
+    "type": "park",
+    "aliases": [
+      "Lake Nakuru"
+    ]
+  },
+  "kenya/kajiado/amboseli-national-park": {
+    "name": "Amboseli National Park",
+    "type": "park",
+    "aliases": [
+      "Amboseli"
+    ]
+  },
+  "kenya/nakuru/lake-naivasha": {
+    "name": "Lake Naivasha",
+    "type": "natural",
+    "aliases": [
+      "Naivasha"
+    ]
+  },
+  "kenya/mount-kenya": {
+    "name": "Mount Kenya",
+    "type": "natural",
+    "aliases": []
+  },
+  "kenya/mombasa": {
+    "name": "Mombasa",
+    "type": "city",
+    "aliases": []
+  },
+  "kenya/kisumu": {
+    "name": "Kisumu",
+    "type": "city",
+    "aliases": []
+  },
+  "kenya/nakuru": {
+    "name": "Nakuru",
+    "type": "city",
+    "aliases": [
+      "Nakuru town"
+    ]
+  },
+  "unknown/unidentified-rooftop-terrace-overlooking-urban-parkland-and-highway": {
+    "name": "Unidentified rooftop terrace overlooking urban parkland and highway",
+    "type": "other",
+    "aliases": []
+  },
+  "unknown/park-with-lakes-and-elevated-overlook": {
+    "name": "park with lakes and elevated overlook",
+    "type": "other",
+    "aliases": []
+  },
+  "unknown/unknown": {
+    "name": "Unknown",
+    "type": "other",
+    "aliases": []
+  },
+  "unknown/concrete-pedestrian-overpass": {
+    "name": "Concrete pedestrian overpass",
+    "type": "other",
+    "aliases": []
+  },
+  "japan/tokyo/akiba-tashiro-street/akiba-tashiro-street": {
+    "name": "Akiba Tashiro street",
+    "type": "other",
+    "aliases": []
+  },
+  "unknown/mama-ngina-street": {
+    "name": "Mama Ngina Street",
+    "type": "street",
+    "aliases": []
+  },
+  "unknown/nairobi-national-museum": {
+    "name": "Nairobi National Museum",
+    "type": "building",
+    "aliases": []
+  },
+  "unknown/ngong-ping-ma-on-shan": {
+    "name": "Ngong Ping, Ma On Shan",
+    "type": "other",
+    "aliases": []
+  },
+  "kenya/kiserian/kiserian": {
+    "name": "Kiserian",
+    "type": "other",
+    "aliases": []
+  },
+  "unknown/artcaffe-market": {
+    "name": "Artcaffe Market",
+    "type": "market",
+    "aliases": []
+  },
+  "unknown/artcaff-market": {
+    "name": "Artcaffè Market",
+    "type": "market",
+    "aliases": []
+  },
+  "unknown/national-house": {
+    "name": "National House",
+    "type": "building",
+    "aliases": []
+  },
+  "unknown/city-market": {
+    "name": "City Market",
+    "type": "market",
+    "aliases": []
+  },
+  "unknown/the-village-market": {
+    "name": "The Village Market",
+    "type": "market",
+    "aliases": []
+  },
+  "kenya/masai-market": {
+    "name": "Masai Market",
+    "type": "other",
+    "aliases": []
+  },
+  "unknown/uhuru-gardens": {
+    "name": "Uhuru Gardens",
+    "type": "park",
+    "aliases": []
+  },
+  "unknown/uap-towers": {
+    "name": "UAP Towers",
+    "type": "building",
+    "aliases": []
+  },
+  "kenya/nairobi/haile-selassie-avenue": {
+    "name": "Haile Selassie Avenue",
+    "type": "other",
+    "aliases": []
+  },
+  "unknown/nairobi-snake-park": {
+    "name": "Nairobi Snake Park",
+    "type": "park",
+    "aliases": []
+  },
+  "unknown/icraf-road": {
+    "name": "ICRAF Road",
+    "type": "street",
+    "aliases": []
+  },
+  "unknown/kahawa-house": {
+    "name": "Kahawa House",
+    "type": "building",
+    "aliases": []
+  },
+  "unknown/coffee-plaza": {
+    "name": "Coffee Plaza",
+    "type": "building",
+    "aliases": []
+  },
+  "unknown/koinange-street": {
+    "name": "Koinange Street",
+    "type": "street",
+    "aliases": []
+  },
+  "unknown/consolidated-bank": {
+    "name": "Consolidated Bank",
+    "type": "building",
+    "aliases": []
+  },
+  "unknown/west-park-towers": {
+    "name": "WEST PARK TOWERS",
+    "type": "other",
+    "aliases": []
+  }
+}

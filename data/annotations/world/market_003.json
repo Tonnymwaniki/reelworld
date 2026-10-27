@@ -300,14 +300,61 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Artcaffe Market",
+        "key": "unknown/artcaffe-market",
+        "type": "market",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "Artcaffe Market"
+          },
+          {
+            "kind": "provided_title",
+            "detail": "Art cafe market in Nairobi- Kenya 1"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact text on small menu stands near the counter is not legible due to distance and blur",
       "Exact number of people in the dim background behind the counter is uncertain due to shadows and low light",
       "Time of day and weather outside cannot be determined from this indoor photo with artificial lighting",
-      "Details of the far background area including escalator and distant walls are indistinct"
-    ]
+      "Details of the far background area including escalator and distant walls are indistinct",
+      "Exact location within Nairobi cannot be determined from indoor view with no exterior features",
+      "Time of day and weather cannot be determined due to indoor artificial lighting"
+    ],
+    "place": {
+      "name": "Artcaffe Market",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "unknown/artcaffe-market",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "visible_text",
+          "detail": "Artcaffe Market"
+        },
+        {
+          "kind": "provided_title",
+          "detail": "Art cafe market in Nairobi- Kenya 1"
+        },
+        {
+          "kind": "context",
+          "detail": "Indoor dining area with wooden tables and folding chairs beside a stone arch and potted plants, with a wall sign in the background"
+        }
+      ],
+      "confidence": 0.88
+    },
+    "place_key": "unknown/artcaffe-market",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": true,
@@ -327,6 +374,14 @@
         "run_at": "2026-10-27T12:13:03+00:00",
         "raw_output_path": "data/annotations/raw/market_003_attempt1.txt",
         "tokens": 8965
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:50:03+00:00",
+        "raw_output_path": "data/annotations/raw/market_003_passB_attempt1.txt",
+        "tokens": 5610
       }
     ],
     "human_review": {

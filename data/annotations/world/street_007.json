@@ -378,15 +378,103 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Kahawa House",
+        "key": "unknown/kahawa-house",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "KAHAWA HOUSE"
+          },
+          {
+            "kind": "architecture",
+            "detail": "large brown building with vertical KAHAWA HOUSE lettering on tower"
+          }
+        ],
+        "confidence": 0.98
+      },
+      {
+        "name": "Coffee Plaza",
+        "key": "unknown/coffee-plaza",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "COFFEE PLAZA"
+          },
+          {
+            "kind": "architecture",
+            "detail": "tall building with green side panels and white grid windows"
+          }
+        ],
+        "confidence": 0.97
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Haile Selassie Avenue (Nairobi), 2025 (06)"
+          },
+          {
+            "kind": "context",
+            "detail": "busy urban street with pedestrians and vehicles in Nairobi"
+          }
+        ],
+        "confidence": 0.9
+      }
+    ],
     "uncertainties": [
       "Exact number of people due to overlapping, distance and blur",
       "Exact license plate numbers on cars due to resolution and angle",
       "Full text of distant shop signs, bus destination displays and small billboards that are blurry or cut off",
       "Text on people's clothing or bags which is ignored per rules",
       "Precise time of day beyond daytime and specific weather conditions",
-      "Intent, destination or identity of pedestrians and vehicles"
+      "Intent, destination or identity of pedestrians and vehicles",
+      "Exact number of people and license plate numbers could not be determined due to distance and blur",
+      "Full text of distant shop signs and bus destination displays not legible"
+    ],
+    "place": {
+      "name": "Haile Selassie Avenue",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi/haile-selassie-avenue",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Haile Selassie Avenue (Nairobi), 2025 (06)"
+        },
+        {
+          "kind": "context",
+          "detail": "wide outdoor street scene with Kahawa House building and commercial structures under bright daylight"
+        }
+      ],
+      "confidence": 0.96
+    },
+    "place_key": "kenya/nairobi/haile-selassie-avenue",
+    "taken_from": null,
+    "cultural_context": [
+      {
+        "term": "matatu",
+        "local_name": "matatu",
+        "language": "Swahili",
+        "evidence": "green and white bus identified as matatu bus in tags"
+      }
     ]
   },
   "privacy": {
@@ -407,6 +495,14 @@
         "run_at": "2026-10-27T12:19:51+00:00",
         "raw_output_path": "data/annotations/raw/street_007_attempt1.txt",
         "tokens": 10262
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:54:40+00:00",
+        "raw_output_path": "data/annotations/raw/street_007_passB_attempt2.txt",
+        "tokens": 5946
       }
     ],
     "human_review": {

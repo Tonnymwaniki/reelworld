@@ -260,7 +260,21 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Ngong Hills",
+        "key": "kenya/kajiado/ngong-hills",
+        "type": "natural",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Ngong Hills aerial view, January 2017"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact geographic location and names of landforms cannot be determined from the photo alone",
@@ -268,8 +282,29 @@
       "Details of small structures, roads, and vegetation types are too small to resolve",
       "Any text on small ground structures is below legibility threshold and cannot be read, with fewer than 3 letters discernible",
       "Presence of people, vehicles, or animals too small to resolve at this distance cannot be determined",
-      "Precise time of day, season, and weather conditions beyond visible haze and clear sky cannot be determined"
-    ]
+      "Precise time of day, season, and weather conditions beyond visible haze and clear sky cannot be determined",
+      "Exact geographic location and names of landforms cannot be independently verified from visual features alone; location relies solely on provided title",
+      "Details of small structures, roads, vegetation, altitude, aircraft type, and distant mountain peak cannot be resolved at this distance"
+    ],
+    "place": {
+      "name": "Ngong Hills",
+      "hierarchy": [
+        "Kenya",
+        "Ngong Hills"
+      ],
+      "key": "kenya/kajiado/ngong-hills",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Ngong Hills aerial view, January 2017"
+        }
+      ],
+      "confidence": 0.88
+    },
+    "place_key": "kenya/kajiado/ngong-hills",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -289,6 +324,14 @@
         "run_at": "2026-10-27T12:10:30+00:00",
         "raw_output_path": "data/annotations/raw/hills_018_attempt1.txt",
         "tokens": 8639
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:48:33+00:00",
+        "raw_output_path": "data/annotations/raw/hills_018_passB_attempt1.txt",
+        "tokens": 4768
       }
     ],
     "human_review": {

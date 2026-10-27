@@ -364,7 +364,42 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "National House",
+        "key": "unknown/national-house",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "NATIONAL HOUSE"
+          },
+          {
+            "kind": "architecture",
+            "detail": "white and brown multi-story building with large windows on right foreground"
+          }
+        ],
+        "confidence": 0.96
+      },
+      {
+        "name": "City Market",
+        "key": "unknown/city-market",
+        "type": "market",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "City Market in Nairobi"
+          },
+          {
+            "kind": "architecture",
+            "detail": "large beige building with a prominent arched facade and stone detailing behind fence"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact spelling of CHAPACCOY sign is partially obscured and blurry",
@@ -372,8 +407,33 @@
       "Details of distant building facades and billboards are not legible",
       "Text on small green and red signs on left side is not legible (less than 3 clear letters)",
       "License plates and vehicle models cannot be determined",
-      "Exact time of day beyond daytime"
-    ]
+      "Exact time of day beyond daytime",
+      "Text on small green and red signs on left side is not legible",
+      "Specific street name of intersection cannot be determined from visible evidence"
+    ],
+    "place": {
+      "name": "Nairobi",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "City Market in Nairobi"
+        },
+        {
+          "kind": "context",
+          "detail": "elevated daytime view of busy urban street intersection with parked cars, buses, pedestrians and arched building"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "place_key": "kenya/nairobi",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -393,6 +453,14 @@
         "run_at": "2026-10-27T12:13:26+00:00",
         "raw_output_path": "data/annotations/raw/market_005_attempt1.txt",
         "tokens": 6869
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:50:18+00:00",
+        "raw_output_path": "data/annotations/raw/market_005_passB_attempt1.txt",
+        "tokens": 6905
       }
     ],
     "human_review": {

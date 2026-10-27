@@ -257,7 +257,21 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Nairobi Snake Park",
+        "key": "unknown/nairobi-snake-park",
+        "type": "park",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Boomslang (Dispholidus typus) at Nairobi Snake Park 3"
+          }
+        ],
+        "confidence": 0.85
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Species of snake cannot be determined from photo",
@@ -265,8 +279,35 @@
       "Geographic location not visible",
       "Time of day and weather conditions beyond natural daylight not determinable",
       "Whether snake is venomous or its behavior intent not determinable",
-      "No visible text signs meet the 3-letter legibility threshold"
-    ]
+      "No visible text signs meet the 3-letter legibility threshold",
+      "No visible text, signage, or distinctive architecture visible to independently verify location",
+      "Geographic location not visible in image content; location inferred solely from provided_title",
+      "Species, size, and enclosure details not determinable from photo alone"
+    ],
+    "place": {
+      "name": "Nairobi Snake Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Nairobi Snake Park"
+      ],
+      "key": "unknown/nairobi-snake-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Boomslang (Dispholidus typus) at Nairobi Snake Park 3"
+        },
+        {
+          "kind": "context",
+          "detail": "close-up of brown snake coiled on thin woody branch with green leaves in outdoor natural daylight setting"
+        }
+      ],
+      "confidence": 0.85
+    },
+    "place_key": "unknown/nairobi-snake-park",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -286,6 +327,14 @@
         "run_at": "2026-10-27T12:18:41+00:00",
         "raw_output_path": "data/annotations/raw/street_001_attempt1.txt",
         "tokens": 6966
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:54:06+00:00",
+        "raw_output_path": "data/annotations/raw/street_001_passB_attempt2.txt",
+        "tokens": 5460
       }
     ],
     "human_review": {

@@ -273,14 +273,51 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Uhuru Park",
+        "key": "kenya/nairobi/uhuru-park",
+        "type": "park",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "National Monument at Uhuru Park"
+          }
+        ],
+        "confidence": 0.9
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Text on the rectangular plaque on the lower left of the base is too blurry and small to transcribe; at least 3 letters cannot be read with certainty",
       "Exact material and construction date of the monument and statues cannot be determined from the photo",
       "Exact geographic location cannot be determined from the photo alone",
-      "Condition and cause of discoloration on the flag and statues cannot be determined"
-    ]
+      "Condition and cause of discoloration on the flag and statues cannot be determined",
+      "Plaque text on lower left of stone base is blurry and illegible and cannot be transcribed",
+      "Exact material, construction date, and cause of discoloration on statues and flag cannot be determined from photo alone",
+      "Geographic location inferred only from provided_title; no visible_text in image confirms location"
+    ],
+    "place": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "National Monument at Uhuru Park"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "place_key": "kenya/nairobi/uhuru-park",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -300,6 +337,14 @@
         "run_at": "2026-10-27T12:17:06+00:00",
         "raw_output_path": "data/annotations/raw/park_011_attempt1.txt",
         "tokens": 8687
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:52:25+00:00",
+        "raw_output_path": "data/annotations/raw/park_011_passB_attempt1.txt",
+        "tokens": 5460
       }
     ],
     "human_review": {

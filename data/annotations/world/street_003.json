@@ -244,15 +244,51 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Nairobi National Park",
+        "key": "kenya/nairobi/nairobi-national-park",
+        "type": "park",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Gyps rueppellii -Nairobi National Park, Kenya-8-4c"
+          }
+        ],
+        "confidence": 0.85
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "exact species of vulture cannot be determined from photo alone",
       "precise geographic location cannot be determined",
       "reason for bird's behavior such as taking off or landing cannot be determined",
       "exact time of day beyond daytime cannot be determined",
-      "whether other animals or people are outside the frame cannot be determined"
-    ]
+      "whether other animals or people are outside the frame cannot be determined",
+      "Visual content shows generic arid habitat with vulture, dry dusty ground, scattered rocks and dry grass tufts; location identification relies solely on provided_title",
+      "Exact species of vulture, precise geographic location beyond title, reason for bird's behavior, exact time of day beyond daytime, and presence of other animals or people outside frame cannot be determined"
+    ],
+    "place": {
+      "name": "Nairobi National Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Nairobi National Park"
+      ],
+      "key": "kenya/nairobi/nairobi-national-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Gyps rueppellii -Nairobi National Park, Kenya-8-4c"
+        }
+      ],
+      "confidence": 0.85
+    },
+    "place_key": "kenya/nairobi/nairobi-national-park",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -272,6 +308,14 @@
         "run_at": "2026-10-27T12:19:00+00:00",
         "raw_output_path": "data/annotations/raw/street_003_attempt1.txt",
         "tokens": 6056
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:53:49+00:00",
+        "raw_output_path": "data/annotations/raw/street_003_passB_attempt1.txt",
+        "tokens": 5575
       }
     ],
     "human_review": {

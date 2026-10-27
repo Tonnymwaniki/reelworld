@@ -334,7 +334,29 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Kenyatta International Convention Centre",
+        "key": "kenya/nairobi/cbd/kicc",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "THE KENYATTA INTERNATIONAL CONVENTION CENTRE"
+          },
+          {
+            "kind": "architecture",
+            "detail": "large concrete multi-level building with orange sign above glass entrance doors and wide concrete stairs leading up to entrance"
+          },
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta International Convention Centre - BugWarp (10)"
+          }
+        ],
+        "confidence": 0.99
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact number of people due to occlusion, distance and small figures on upper balcony",
@@ -342,8 +364,42 @@
       "Characters on vehicle license plate are not legible due to distance and blur",
       "Content of small digital screen above entrance doors is not legible",
       "Details of flags other than the Kenyan flag are not clearly distinguishable",
-      "Weather and time beyond visible bright overcast daylight cannot be determined"
-    ]
+      "Weather and time beyond visible bright overcast daylight cannot be determined",
+      "Exact number of people, text on vertical promotional banners, vehicle license plate, and content of small digital screen above entrance could not be determined due to distance, blur or occlusion",
+      "Identities of tall glass skyscraper and pinkish curved high-rise visible behind the centre and angular concrete roof structure on right could not be determined from provided information"
+    ],
+    "place": {
+      "name": "Kenyatta International Convention Centre",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "CBD"
+      ],
+      "key": "kenya/nairobi/cbd/kicc",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "visible_text",
+          "detail": "THE KENYATTA INTERNATIONAL CONVENTION CENTRE"
+        },
+        {
+          "kind": "provided_title",
+          "detail": "Kenyatta International Convention Centre - BugWarp (10)"
+        },
+        {
+          "kind": "architecture",
+          "detail": "large concrete multi-level building with glass entrance doors and wide concrete stairs leading up to entrance"
+        },
+        {
+          "kind": "context",
+          "detail": "Kenyan national flag flying above building and tall silver flagpoles lining plaza"
+        }
+      ],
+      "confidence": 0.99
+    },
+    "place_key": "kenya/nairobi/cbd/kicc",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": true,
@@ -363,6 +419,14 @@
         "run_at": "2026-10-27T12:12:35+00:00",
         "raw_output_path": "data/annotations/raw/landmarks_010_attempt1.txt",
         "tokens": 10565
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:49:42+00:00",
+        "raw_output_path": "data/annotations/raw/landmarks_010_passB_attempt1.txt",
+        "tokens": 7264
       }
     ],
     "human_review": {

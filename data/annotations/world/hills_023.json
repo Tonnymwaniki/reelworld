@@ -307,8 +307,33 @@
       "Exact geographic location, mountain name or trail name cannot be determined",
       "Exact time of day and temperature cannot be determined beyond daylight with overcast fog",
       "Whether any distant signs, markers or text exist is not determinable due to distance, fog and resolution",
-      "Details of terrain and vegetation obscured by fog in the background"
-    ]
+      "Details of terrain and vegetation obscured by fog in the background",
+      "Exact geographic location, mountain name and trail name cannot be determined from visual evidence alone",
+      "No visible text or distinctive architecture to identify a specific landmark",
+      "Provided title alone insufficient to confirm location without visual corroboration"
+    ],
+    "place": {
+      "name": "Unknown",
+      "hierarchy": [
+        "Unknown"
+      ],
+      "key": "unknown/unknown",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Ngong Ping, Ma On Shan 02"
+        },
+        {
+          "kind": "context",
+          "detail": "Exact geographic location, mountain name or trail name cannot be determined per uncertainties; description shows generic fog-shrouded mountain ridge with brown grassy hilltop, dirt trail and hikers and no distinctive landmark features or visible text"
+        }
+      ],
+      "confidence": 0.95
+    },
+    "place_key": "unknown/unknown",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -328,6 +353,14 @@
         "run_at": "2026-10-27T12:11:10+00:00",
         "raw_output_path": "data/annotations/raw/hills_023_attempt1.txt",
         "tokens": 13215
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:48:55+00:00",
+        "raw_output_path": "data/annotations/raw/hills_023_passB_attempt1.txt",
+        "tokens": 5575
       }
     ],
     "human_review": {

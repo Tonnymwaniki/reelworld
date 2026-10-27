@@ -312,14 +312,59 @@
   },
   "inferred": {
     "landmarks": [],
-    "place_candidates": [],
+    "place_candidates": [
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "context",
+            "detail": "distant high-rise city skyline with tall towers visible on horizon beyond congested road"
+          }
+        ],
+        "confidence": 0.55
+      }
+    ],
     "uncertainties": [
       "exact number of people due to distance, motion blur and occlusion",
       "text on additional distant billboards along the road which are blurry and unreadable",
       "vehicle license plate numbers and vehicle makes/models",
       "names or functions of buildings in the distant skyline",
-      "exact time of day beyond daytime under overcast conditions"
-    ]
+      "exact time of day beyond daytime under overcast conditions",
+      "names or functions of buildings in distant skyline not determinable",
+      "text on additional distant billboards along road blurry and unreadable",
+      "exact number of people, vehicle license plates and makes/models not determinable",
+      "exact time of day beyond daytime under overcast conditions not determinable"
+    ],
+    "place": {
+      "name": "Haile Selassie Avenue",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi/haile-selassie-avenue",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Haile Selassie Avenue (Nairobi), 2025 (04)"
+        },
+        {
+          "kind": "context",
+          "detail": "elevated wide view of divided multi-lane road filled with queued vehicles including green bus with roof rack, white vans, cars and motorcycles stretching into distance toward city skyline with tall towers, lined with trees and buildings under overcast sky"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "place_key": "kenya/nairobi/haile-selassie-avenue",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -339,6 +384,14 @@
         "run_at": "2026-10-27T12:19:36+00:00",
         "raw_output_path": "data/annotations/raw/street_006_attempt1.txt",
         "tokens": 8720
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:54:04+00:00",
+        "raw_output_path": "data/annotations/raw/street_006_passB_attempt1.txt",
+        "tokens": 6329
       }
     ],
     "human_review": {

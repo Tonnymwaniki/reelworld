@@ -302,15 +302,101 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Uhuru Park",
+        "key": "kenya/nairobi/uhuru-park",
+        "type": "park",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Closeup view of Kenyan Government Buildings from Uhuru Park"
+          },
+          {
+            "kind": "context",
+            "detail": "wide outdoor park scene shows sloping green grassy hill where multiple people are standing, sitting, and lying on the grass with tall flagpole flying Kenyan flag and scattered trees"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Closeup view of Kenyan Government Buildings from Uhuru Park"
+          },
+          {
+            "kind": "context",
+            "detail": "city buildings visible behind park including building with blue roof and building with green facade"
+          }
+        ],
+        "confidence": 0.6
+      }
+    ],
     "uncertainties": [
       "Exact number of people is uncertain due to small distant figures and occlusion",
       "Text on distant building banner is illegible and cannot be transcribed",
       "Specific identities, ages, or genders of people cannot be determined",
       "Exact location name and building names cannot be determined from image alone",
-      "Time beyond daytime and temperature cannot be determined"
-    ]
+      "Time beyond daytime and temperature cannot be determined",
+      "Specific identities of background government buildings cannot be determined from description alone",
+      "Exact number of people uncertain due to small distant figures",
+      "No visible text available to confirm building names"
+    ],
+    "place": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Closeup view of Kenyan Government Buildings from Uhuru Park"
+        },
+        {
+          "kind": "context",
+          "detail": "wide outdoor park scene shows sloping green grassy hill where multiple people are standing, sitting, and lying on the grass with tall white flagpole and city buildings in background"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "place_key": "kenya/nairobi/uhuru-park",
+    "taken_from": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Closeup view of Kenyan Government Buildings from Uhuru Park"
+        },
+        {
+          "kind": "context",
+          "detail": "ground_level viewpoint facing toward flagpole and buildings across the park"
+        }
+      ],
+      "confidence": 0.85
+    },
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -330,6 +416,14 @@
         "run_at": "2026-10-27T12:16:15+00:00",
         "raw_output_path": "data/annotations/raw/park_003_attempt1.txt",
         "tokens": 7517
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:51:46+00:00",
+        "raw_output_path": "data/annotations/raw/park_003_passB_attempt1.txt",
+        "tokens": 7438
       }
     ],
     "human_review": {

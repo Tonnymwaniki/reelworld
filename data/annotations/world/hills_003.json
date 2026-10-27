@@ -271,15 +271,82 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Ngong Hills",
+        "key": "kenya/kajiado/ngong-hills",
+        "type": "natural",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "FROM THE HILL TOPS OF NGONG"
+          },
+          {
+            "kind": "architecture",
+            "detail": "broad grassy hilltop with rolling green hills, wind turbines and lattice telecommunications tower on distant ridge"
+          },
+          {
+            "kind": "context",
+            "detail": "wide valley view from hilltop overlooking sprawling settlement under partly cloudy sky"
+          }
+        ],
+        "confidence": 0.9
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact geographic location of the hilltop and valley cannot be determined from the photo",
       "Exact number of wind turbines is uncertain due to haze and overlap in the distance",
       "Details and scale of the distant valley settlement cannot be determined due to haze",
       "Species of small light-colored animals grazing in the left mid-distance cannot be determined",
-      "Whether any distant signage exists and its legibility cannot be determined"
-    ]
+      "Whether any distant signage exists and its legibility cannot be determined",
+      "Identification relies on provided_title; visual features alone cannot confirm exact geographic location per uncertainties",
+      "No visible_text present to corroborate location",
+      "Exact number of wind turbines and details of distant valley settlement cannot be determined due to haze and distance"
+    ],
+    "place": {
+      "name": "Ngong Hills",
+      "hierarchy": [
+        "Kenya",
+        "Ngong Hills"
+      ],
+      "key": "kenya/kajiado/ngong-hills",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "FROM THE HILL TOPS OF NGONG"
+        },
+        {
+          "kind": "context",
+          "detail": "grassy hilltop field in foreground with rolling green hills, wind turbines and telecommunications tower on ridge overlooking wide valley settlement"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "place_key": "kenya/kajiado/ngong-hills",
+    "taken_from": {
+      "name": "Ngong Hills",
+      "hierarchy": [
+        "Kenya",
+        "Ngong Hills"
+      ],
+      "key": "kenya/kajiado/ngong-hills",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "FROM THE HILL TOPS OF NGONG"
+        },
+        {
+          "kind": "context",
+          "detail": "ground_level viewpoint across the hilltop toward the valley and distant ridge; people relaxing on grassy hilltop in foreground"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": true,
@@ -299,6 +366,14 @@
         "run_at": "2026-10-27T12:09:03+00:00",
         "raw_output_path": "data/annotations/raw/hills_003_attempt1.txt",
         "tokens": 7136
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:47:45+00:00",
+        "raw_output_path": "data/annotations/raw/hills_003_passB_attempt1.txt",
+        "tokens": 6823
       }
     ],
     "human_review": {

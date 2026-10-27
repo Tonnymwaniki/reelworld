@@ -269,15 +269,59 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Ngong Hills",
+        "key": "kenya/kajiado/ngong-hills",
+        "type": "natural",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Green land; Ngong Hill"
+          },
+          {
+            "kind": "context",
+            "detail": "rolling green hills with numerous white wind turbines lined along the ridgeline overlooking a dense forested valley"
+          }
+        ],
+        "confidence": 0.65
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "exact geographic location of the hills and town cannot be determined",
       "exact number of wind turbines is uncertain due to distance and resolution",
       "specific time of day beyond daylight is unclear",
       "details of distant buildings are obscured by trees and distance",
-      "any text on distant structures is unreadable"
-    ]
+      "any text on distant structures is unreadable",
+      "exact geographic location cannot be independently verified beyond provided title",
+      "exact number of wind turbines uncertain due to distance and resolution",
+      "details of distant buildings and town obscured by trees and distance"
+    ],
+    "place": {
+      "name": "Ngong Hills",
+      "hierarchy": [
+        "Kenya",
+        "Ngong Hills"
+      ],
+      "key": "kenya/kajiado/ngong-hills",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Green land; Ngong Hill"
+        },
+        {
+          "kind": "context",
+          "detail": "rolling green hills with white wind turbines on ridge and dense green trees filling valley as described in caption and description"
+        }
+      ],
+      "confidence": 0.62
+    },
+    "place_key": "kenya/kajiado/ngong-hills",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -297,6 +341,14 @@
         "run_at": "2026-10-27T12:09:23+00:00",
         "raw_output_path": "data/annotations/raw/hills_005_attempt1.txt",
         "tokens": 7159
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:47:51+00:00",
+        "raw_output_path": "data/annotations/raw/hills_005_passB_attempt1.txt",
+        "tokens": 5956
       }
     ],
     "human_review": {

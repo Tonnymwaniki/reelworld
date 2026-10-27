@@ -305,16 +305,82 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Kenyatta International Convention Centre",
+        "key": "kenya/nairobi/cbd/kicc",
+        "type": "building",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "architecture",
+            "detail": "distinctive round tower with horizontal bands and flat circular roof visible above trees"
+          },
+          {
+            "kind": "architecture",
+            "detail": "cylindrical high-rise tower with disc-shaped top"
+          }
+        ],
+        "confidence": 0.97
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "CITY HALL WAY, NAIROBI"
+          }
+        ],
+        "confidence": 0.95
+      }
+    ],
     "uncertainties": [
       "exact number of people in dense crowd cannot be determined",
       "text on vertical banner on streetlight pole is blurry and unreadable",
       "text on red billboard and other distant signs is not legible with at least 3 letters",
       "license plate numbers and vehicle details are not clearly readable",
       "building names and specific functions cannot be determined from image alone",
-      "exact time of day beyond daytime"
-    ]
+      "exact time of day beyond daytime",
+      "Text on vertical banner on streetlight pole and distant billboard is blurry and unreadable",
+      "Exact number of people in dense crowd cannot be determined",
+      "Building names and specific functions beyond KICC cannot be determined from image alone"
+    ],
+    "place": {
+      "name": "Nairobi CBD",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "CBD"
+      ],
+      "key": "kenya/nairobi/cbd",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "CITY HALL WAY, NAIROBI"
+        },
+        {
+          "kind": "architecture",
+          "detail": "cylindrical high-rise tower with disc-shaped top visible in skyline"
+        },
+        {
+          "kind": "context",
+          "detail": "busy street intersection with tall modern buildings, dense green trees and large crowd under clear blue sky"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "place_key": "kenya/nairobi/cbd",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -334,6 +400,14 @@
         "run_at": "2026-10-27T12:08:20+00:00",
         "raw_output_path": "data/annotations/raw/cbd_017_attempt1.txt",
         "tokens": 7250
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:47:25+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_017_passB_attempt1.txt",
+        "tokens": 7192
       }
     ],
     "human_review": {

@@ -249,15 +249,59 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Ngong Hills",
+        "key": "kenya/kajiado/ngong-hills",
+        "type": "natural",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Clouds ngong hills"
+          },
+          {
+            "kind": "context",
+            "detail": "green vegetated hill ridge stretching across horizon with several wind turbines silhouetted along its crest"
+          }
+        ],
+        "confidence": 0.78
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact geographic location of the hill cannot be determined from the photo",
       "Exact number of wind turbines is uncertain due to distance and partial occlusion by trees",
       "Time of day beyond daytime and weather conditions beyond visible clouds cannot be determined",
       "No text is legible on any sign or structure in the image",
-      "Presence or absence of people, animals, or vehicles in the distant valley cannot be confirmed due to distance and resolution"
-    ]
+      "Presence or absence of people, animals, or vehicles in the distant valley cannot be confirmed due to distance and resolution",
+      "Exact geographic location of the hill cannot be independently verified beyond provided_title",
+      "Exact number of wind turbines is uncertain due to distance and partial occlusion",
+      "No visible text, people, or distinctive architecture to confirm location beyond title and landscape features"
+    ],
+    "place": {
+      "name": "Ngong Hills",
+      "hierarchy": [
+        "Kenya",
+        "Ngong Hills"
+      ],
+      "key": "kenya/kajiado/ngong-hills",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Clouds ngong hills"
+        },
+        {
+          "kind": "context",
+          "detail": "green vegetated hill ridge with wind turbines silhouetted along its crest under cloudy sky"
+        }
+      ],
+      "confidence": 0.78
+    },
+    "place_key": "kenya/kajiado/ngong-hills",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -277,6 +321,14 @@
         "run_at": "2026-10-27T12:08:46+00:00",
         "raw_output_path": "data/annotations/raw/hills_002_attempt1.txt",
         "tokens": 5038
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:47:36+00:00",
+        "raw_output_path": "data/annotations/raw/hills_002_passB_attempt1.txt",
+        "tokens": 4559
       }
     ],
     "human_review": {

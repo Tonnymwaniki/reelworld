@@ -264,16 +264,100 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "The Village Market",
+        "key": "unknown/the-village-market",
+        "type": "other",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "The Maasai Markets in Nairobi on the rooftop at The Village Market 01"
+          }
+        ],
+        "confidence": 0.92
+      },
+      {
+        "name": "Masai Market",
+        "key": "kenya/masai-market",
+        "type": "market",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "The Maasai Markets in Nairobi on the rooftop at The Village Market 01"
+          }
+        ],
+        "confidence": 0.9
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "The Village Market",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "The Village Market"
+        ],
+        "key": "unknown/the-village-market",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "The Maasai Markets in Nairobi on the rooftop at The Village Market 01"
+          }
+        ],
+        "confidence": 0.85
+      }
+    ],
     "uncertainties": [
       "Exact number of people is uncertain due to crowding, occlusion and distance in background",
       "No signs with at least 3 legible letters are clearly readable; small labels on artwork and stalls are blurry or indistinct",
       "Specific text on merchandise, artwork titles or small price tags cannot be determined",
       "Exact location, name of market and geographic context cannot be determined from image",
       "Weather and time outside the covered structure cannot be determined beyond daylight",
-      "Details of individual stall goods beyond general categories of art, clothing and crafts are indistinct"
-    ]
+      "Details of individual stall goods beyond general categories of art, clothing and crafts are indistinct",
+      "No visible text or distinctive architectural detail in the image independently verifies location; identification relies solely on provided_title",
+      "Title spelling 'Maasai' normalized to exact name 'Masai Market' per allowed names list",
+      "Exact position on rooftop and orientation within The Village Market cannot be determined from image alone"
+    ],
+    "place": {
+      "name": "Masai Market",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "The Village Market"
+      ],
+      "key": "kenya/masai-market",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "The Maasai Markets in Nairobi on the rooftop at The Village Market 01"
+        }
+      ],
+      "confidence": 0.88
+    },
+    "place_key": "kenya/masai-market",
+    "taken_from": {
+      "name": "The Village Market",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "The Village Market"
+      ],
+      "key": "unknown/the-village-market",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "The Maasai Markets in Nairobi on the rooftop at The Village Market 01"
+        }
+      ],
+      "confidence": 0.88
+    },
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": true,
@@ -293,6 +377,14 @@
         "run_at": "2026-10-27T12:15:35+00:00",
         "raw_output_path": "data/annotations/raw/market_025_attempt1.txt",
         "tokens": 6803
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:51:41+00:00",
+        "raw_output_path": "data/annotations/raw/market_025_passB_attempt1.txt",
+        "tokens": 8723
       }
     ],
     "human_review": {

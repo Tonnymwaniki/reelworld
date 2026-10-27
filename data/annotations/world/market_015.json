@@ -274,14 +274,88 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "City Market",
+        "key": "unknown/city-market",
+        "type": "market",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi City Market, 2025 (03)"
+          },
+          {
+            "kind": "architecture",
+            "detail": "large hall with high vaulted arches and tall windows along left wall"
+          },
+          {
+            "kind": "context",
+            "detail": "Interior of a large arched market hall with a florist kiosk in the foreground"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi City Market, 2025 (03)"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
     "uncertainties": [
       "Text on small posters and images inside the kiosk display cases is not legible",
       "Contents under blue tarpaulins and inside cardboard boxes cannot be determined",
       "Exact geographic location and name of the market hall cannot be determined from image alone",
       "Whether the market is open for business or closed cannot be determined",
-      "Details of objects on the upper mezzanine shelves are blurry and indistinct"
+      "Details of objects on the upper mezzanine shelves are blurry and indistinct",
+      "Exact geographic location cannot be independently verified from image alone beyond provided_title; text on small posters inside kiosk, contents under blue tarpaulins and inside cardboard boxes, and objects on upper mezzanine shelves cannot be determined; whether market is open or closed cannot be determined"
+    ],
+    "place": {
+      "name": "City Market",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "unknown/city-market",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Nairobi City Market, 2025 (03)"
+        },
+        {
+          "kind": "architecture",
+          "detail": "large hall with high vaulted arches and tall windows"
+        },
+        {
+          "kind": "context",
+          "detail": "interior market hall with florist kiosk described as Pien Florist"
+        }
+      ],
+      "confidence": 0.88
+    },
+    "place_key": "unknown/city-market",
+    "taken_from": null,
+    "cultural_context": [
+      {
+        "term": "kiosk",
+        "local_name": "kiosk",
+        "language": "English",
+        "evidence": "florist kiosk in foreground with white sign reading Pien Florist"
+      }
     ]
   },
   "privacy": {
@@ -302,6 +376,14 @@
         "run_at": "2026-10-27T12:14:22+00:00",
         "raw_output_path": "data/annotations/raw/market_015_attempt1.txt",
         "tokens": 8002
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:50:52+00:00",
+        "raw_output_path": "data/annotations/raw/market_015_passB_attempt1.txt",
+        "tokens": 6436
       }
     ],
     "human_review": {

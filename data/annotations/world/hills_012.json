@@ -252,14 +252,54 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Ngong Hills",
+        "key": "kenya/kajiado/ngong-hills",
+        "type": "natural",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Ngong Hills Hike"
+          }
+        ],
+        "confidence": 0.85
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact geographic location cannot be determined from the photo",
       "Text on person's clothing is not transcribed per instruction and is not legible at this distance",
       "Exact time beyond daytime cannot be determined",
-      "Person's identity, age, and facial features cannot be determined due to distance and resolution"
-    ]
+      "Person's identity, age, and facial features cannot be determined due to distance and resolution",
+      "Exact geographic location cannot be independently verified from visual features alone; location inferred from provided_title only",
+      "No visible_text or distinctive architecture present to confirm location",
+      "Camera viewpoint is ground_level on the dirt trail facing up the hillside, but no explicit taken_from evidence beyond the trail itself"
+    ],
+    "place": {
+      "name": "Ngong Hills",
+      "hierarchy": [
+        "Kenya",
+        "Ngong Hills"
+      ],
+      "key": "kenya/kajiado/ngong-hills",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Ngong Hills Hike"
+        },
+        {
+          "kind": "context",
+          "detail": "grassy hillside with dirt trail and lone tree on crest under clear blue sky described as hiking scene"
+        }
+      ],
+      "confidence": 0.85
+    },
+    "place_key": "kenya/kajiado/ngong-hills",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -279,6 +319,14 @@
         "run_at": "2026-10-27T12:10:00+00:00",
         "raw_output_path": "data/annotations/raw/hills_012_attempt1.txt",
         "tokens": 7289
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:48:24+00:00",
+        "raw_output_path": "data/annotations/raw/hills_012_passB_attempt1.txt",
+        "tokens": 6014
       }
     ],
     "human_review": {

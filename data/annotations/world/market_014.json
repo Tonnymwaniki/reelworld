@@ -371,15 +371,108 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "City Market",
+        "key": "unknown/city-market",
+        "type": "market",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "NAIROBI CITY COUNTY"
+          },
+          {
+            "kind": "visible_text",
+            "detail": "CITY MARKET"
+          },
+          {
+            "kind": "architecture",
+            "detail": "multi-story building with colorful mural facade and stepped roofline"
+          },
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi City Market, 2025 (02)"
+          },
+          {
+            "kind": "context",
+            "detail": "caption describes Nairobi City County City Market building across street with parked vehicles; tags include Nairobi and City Market"
+          }
+        ],
+        "confidence": 0.98
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "NAIROBI CITY COUNTY"
+          },
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi City Market, 2025 (02)"
+          },
+          {
+            "kind": "context",
+            "detail": "tags include Nairobi, Kenya"
+          }
+        ],
+        "confidence": 0.95
+      }
+    ],
     "uncertainties": [
       "Exact number of people is uncertain due to occlusion, distance and overlapping figures",
       "Text on distant billboards and rooftop signage is small and partially legible, not fully transcribed",
       "Interior of market and shopfronts not visible from this exterior view",
       "Vehicle license plates and small awning text are not legible",
-      "Exact time of day and weather conditions beyond overcast appearance cannot be determined"
-    ]
+      "Exact time of day and weather conditions beyond overcast appearance cannot be determined",
+      "Exact number of people uncertain due to occlusion and distance",
+      "Interior of market and shopfronts not visible from exterior view",
+      "Text on distant billboards and rooftop signage partially legible and not fully transcribed",
+      "Vehicle license plates and small awning text not legible",
+      "Exact street name where camera was positioned not identified in provided information",
+      "Identity of tall beige high-rise building with pink trim behind market not determined",
+      "Exact time of day beyond overcast daylight not determined"
+    ],
+    "place": {
+      "name": "City Market",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "unknown/city-market",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "visible_text",
+          "detail": "NAIROBI CITY COUNTY CITY MARKET"
+        },
+        {
+          "kind": "architecture",
+          "detail": "central low-rise market building with large colorful mural depicting Kenyan flag, city skyline and ship"
+        },
+        {
+          "kind": "provided_title",
+          "detail": "Nairobi City Market, 2025 (02)"
+        },
+        {
+          "kind": "context",
+          "detail": "caption and description identify Nairobi City County City Market building across paved street with parked vehicles and pedestrians"
+        }
+      ],
+      "confidence": 0.98
+    },
+    "place_key": "unknown/city-market",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -399,6 +492,14 @@
         "run_at": "2026-10-27T12:14:31+00:00",
         "raw_output_path": "data/annotations/raw/market_014_attempt1.txt",
         "tokens": 11453
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:50:58+00:00",
+        "raw_output_path": "data/annotations/raw/market_014_passB_attempt1.txt",
+        "tokens": 8710
       }
     ],
     "human_review": {

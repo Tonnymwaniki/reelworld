@@ -376,15 +376,55 @@
   },
   "inferred": {
     "landmarks": [],
-    "place_candidates": [],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "I&M Building, Nairobi CBD"
+          }
+        ],
+        "confidence": 0.85
+      }
+    ],
     "uncertainties": [
       "Exact city or street name cannot be determined from visible signs",
       "Time of day beyond daytime and date of photo cannot be determined",
       "Make and model of vehicles beyond general type and color",
       "Text on distant billboards and small background signs that is blurry or too small to read",
       "Identities, ages, or facial features of people due to distance and resolution",
-      "Weather temperature, wind, or precise lighting conditions beyond overcast appearance"
-    ]
+      "Weather temperature, wind, or precise lighting conditions beyond overcast appearance",
+      "Exact street name cannot be determined from visible signs",
+      "Specific building identity beyond provided title cannot be independently verified from architecture alone",
+      "Time of day beyond daytime and date cannot be determined"
+    ],
+    "place": {
+      "name": "Nairobi CBD",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Nairobi CBD"
+      ],
+      "key": "kenya/nairobi/cbd",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "I&M Building, Nairobi CBD"
+        }
+      ],
+      "confidence": 0.85
+    },
+    "place_key": "kenya/nairobi/cbd",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -404,6 +444,14 @@
         "run_at": "2026-10-27T12:09:04+00:00",
         "raw_output_path": "data/annotations/raw/cbd_019_attempt1.txt",
         "tokens": 13770
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:47:32+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_019_passB_attempt1.txt",
+        "tokens": 7899
       }
     ],
     "human_review": {

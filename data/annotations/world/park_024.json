@@ -316,15 +316,140 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Uhuru Park",
+        "key": "kenya/nairobi/uhuru-park",
+        "type": "park",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Uhuru Park in Nairobi, Kenya, during sunset"
+          },
+          {
+            "kind": "architecture",
+            "detail": "grassy park with ponds and bridges, two small ponds with green footbridges surrounded by mown lawns, trees, and two small white buildings with turquoise trim"
+          },
+          {
+            "kind": "context",
+            "detail": "wide view of a grassy urban park with ponds and scattered people in the foreground and a cluster of modern high-rise buildings in the background under a pale sky"
+          }
+        ],
+        "confidence": 0.96
+      },
+      {
+        "name": "Kenyatta International Convention Centre",
+        "key": "kenya/nairobi/cbd/kicc",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "architecture",
+            "detail": "cylindrical tower with helipad, cylindrical brown flat top with structure, round tall building with flat top on left side of skyline"
+          },
+          {
+            "kind": "context",
+            "detail": "part of cluster of modern high-rise buildings in background dominated by several tall skyscrapers of varying designs"
+          }
+        ],
+        "confidence": 0.92
+      },
+      {
+        "name": "Nairobi CBD",
+        "key": "kenya/nairobi/cbd",
+        "type": "district",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Uhuru Park in Nairobi, Kenya, during sunset"
+          },
+          {
+            "kind": "context",
+            "detail": "cluster of modern high-rise buildings in the background including tall brown reflective skyscraper on right, twin blue-glass towers in center, and cylindrical tower on left"
+          }
+        ],
+        "confidence": 0.89
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Uhuru Park in Nairobi, Kenya, during sunset"
+          },
+          {
+            "kind": "context",
+            "detail": "urban park with city skyline of modern high-rise buildings in background"
+          }
+        ],
+        "confidence": 0.85
+      },
+      {
+        "name": "Teleposta Towers",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd/teleposta-towers",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "architecture",
+            "detail": "tall brown reflective skyscraper, brown glass facade, rectangular, tall, antenna on roof, dominant tall brown glass tower on right side of skyline reflecting light"
+          }
+        ],
+        "confidence": 0.62
+      }
+    ],
     "uncertainties": [
       "Exact number of people in the distant group on the grass cannot be determined due to distance and resolution",
       "Text or signage on distant high-rise buildings is not legible and cannot be transcribed",
       "Specific clothing details, ages, or genders of individuals are not discernible",
       "Exact time of day and weather conditions beyond clear daylight cannot be confirmed",
-      "Details of vehicles or activity on the distant elevated roadway are not visible"
-    ]
+      "Details of vehicles or activity on the distant elevated roadway are not visible",
+      "Exact number of people in distant group on grass cannot be determined due to distance and resolution",
+      "Details of vehicles or activity on distant elevated roadway are not visible",
+      "Exact time of day beyond clear daylight with warm late-afternoon light cannot be confirmed"
+    ],
+    "place": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Uhuru Park in Nairobi, Kenya, during sunset"
+        },
+        {
+          "kind": "architecture",
+          "detail": "grassy park with ponds and bridges, two small ponds with green footbridges, mown lawns, trees, and dirt pathway with people walking and sitting"
+        },
+        {
+          "kind": "context",
+          "detail": "wide view of a grassy urban park with ponds and scattered people in foreground and cluster of modern high-rise buildings in background"
+        }
+      ],
+      "confidence": 0.96
+    },
+    "place_key": "kenya/nairobi/uhuru-park",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -344,6 +469,14 @@
         "run_at": "2026-10-27T12:18:23+00:00",
         "raw_output_path": "data/annotations/raw/park_024_attempt1.txt",
         "tokens": 6470
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:53:38+00:00",
+        "raw_output_path": "data/annotations/raw/park_024_passB_attempt1.txt",
+        "tokens": 8511
       }
     ],
     "human_review": {

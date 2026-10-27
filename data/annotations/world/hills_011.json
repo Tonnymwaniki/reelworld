@@ -274,7 +274,21 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Ngong Hills",
+        "key": "kenya/kajiado/ngong-hills",
+        "type": "natural",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Ngong Hills"
+          }
+        ],
+        "confidence": 0.85
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "exact geographic location and name of hills",
@@ -282,8 +296,29 @@
       "exact time of day and season",
       "presence of small distant people or animals not resolvable",
       "details of vegetation species",
-      "weather conditions beyond visible clouds"
-    ]
+      "weather conditions beyond visible clouds",
+      "No visible text or distinctive architecture to independently verify location beyond provided title",
+      "Exact geographic location, elevation, scale, vegetation species, and time of day/season cannot be determined from image alone"
+    ],
+    "place": {
+      "name": "Ngong Hills",
+      "hierarchy": [
+        "Kenya",
+        "Ngong Hills"
+      ],
+      "key": "kenya/kajiado/ngong-hills",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Ngong Hills"
+        }
+      ],
+      "confidence": 0.85
+    },
+    "place_key": "kenya/kajiado/ngong-hills",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -303,6 +338,14 @@
         "run_at": "2026-10-27T12:09:42+00:00",
         "raw_output_path": "data/annotations/raw/hills_011_attempt1.txt",
         "tokens": 6030
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:48:12+00:00",
+        "raw_output_path": "data/annotations/raw/hills_011_passB_attempt1.txt",
+        "tokens": 4620
       }
     ],
     "human_review": {

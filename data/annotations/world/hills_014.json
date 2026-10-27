@@ -294,15 +294,59 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Ngong Hills",
+        "key": "kenya/kajiado/ngong-hills",
+        "type": "natural",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Ngong Hills Kenya"
+          },
+          {
+            "kind": "context",
+            "detail": "Panoramic view of expansive valley flanked by grassy hills under partly cloudy sky with bright sun glare"
+          }
+        ],
+        "confidence": 0.9
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact geographic location cannot be determined from the image alone",
       "Exact time of day and season cannot be determined beyond daytime with bright sun",
       "Details of the distant valley floor are obscured by haze, distance and glare",
       "Whether small people, animals or vehicles are present in the distant valley cannot be determined due to resolution",
-      "No sign with 3 or more legible letters is visible; any distant text or markings are unreadable or not discernible"
-    ]
+      "No sign with 3 or more legible letters is visible; any distant text or markings are unreadable or not discernible",
+      "Exact geographic location cannot be determined from image alone; location inferred from provided title",
+      "No visible text with 3 or more legible letters",
+      "Distant valley details obscured by haze, distance and glare"
+    ],
+    "place": {
+      "name": "Ngong Hills",
+      "hierarchy": [
+        "Kenya",
+        "Ngong Hills"
+      ],
+      "key": "kenya/kajiado/ngong-hills",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Ngong Hills Kenya"
+        },
+        {
+          "kind": "context",
+          "detail": "Panoramic view of expansive valley flanked by grassy hills under partly cloudy sky"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "place_key": "kenya/kajiado/ngong-hills",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -322,6 +366,14 @@
         "run_at": "2026-10-27T12:10:07+00:00",
         "raw_output_path": "data/annotations/raw/hills_014_attempt1.txt",
         "tokens": 7187
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:48:23+00:00",
+        "raw_output_path": "data/annotations/raw/hills_014_passB_attempt1.txt",
+        "tokens": 4944
       }
     ],
     "human_review": {

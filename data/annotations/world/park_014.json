@@ -290,15 +290,119 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Uhuru Park",
+        "key": "kenya/nairobi/uhuru-park",
+        "type": "park",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Skyline of Nairobi city as seen from Uhuru Park"
+          },
+          {
+            "kind": "context",
+            "detail": "green urban park with lake and white tents in foreground viewed from elevated position"
+          }
+        ],
+        "confidence": 0.96
+      },
+      {
+        "name": "Nairobi",
+        "key": "kenya/nairobi",
+        "type": "district",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Skyline of Nairobi city as seen from Uhuru Park"
+          },
+          {
+            "kind": "context",
+            "detail": "city skyline with numerous high-rise buildings of varying heights in background beyond elevated roadway"
+          }
+        ],
+        "confidence": 0.95
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "Nairobi CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Skyline of Nairobi city as seen from Uhuru Park"
+          },
+          {
+            "kind": "context",
+            "detail": "skyline of numerous high-rise buildings of varying heights, colors and designs behind elevated roadway"
+          }
+        ],
+        "confidence": 0.68
+      }
+    ],
     "uncertainties": [
       "Exact number of people is uncertain due to small size and distance",
       "Text on distant building facades and billboards is illegible and cannot be read",
       "Specific identities, functions or names of buildings cannot be determined",
       "Exact time of day beyond daytime and weather conditions beyond overcast cannot be determined",
-      "Details of vehicles or small objects in the distance are not discernible"
-    ]
+      "Details of vehicles or small objects in the distance are not discernible",
+      "Specific identities, functions or names of high-rise buildings cannot be determined; text on distant facades is illegible",
+      "Exact number of people uncertain due to small size and distance",
+      "Exact time of day beyond daytime and weather beyond overcast cannot be determined"
+    ],
+    "place": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Skyline of Nairobi city as seen from Uhuru Park"
+        },
+        {
+          "kind": "context",
+          "detail": "elevated wide view of green urban park with lake and white tents in foreground and cloudy city skyline in background"
+        }
+      ],
+      "confidence": 0.94
+    },
+    "place_key": "kenya/nairobi/uhuru-park",
+    "taken_from": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Skyline of Nairobi city as seen from Uhuru Park"
+        },
+        {
+          "kind": "context",
+          "detail": "photo shows outdoor urban park viewed from an elevated position facing across the park toward the city skyline"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -318,6 +422,14 @@
         "run_at": "2026-10-27T12:17:11+00:00",
         "raw_output_path": "data/annotations/raw/park_014_attempt1.txt",
         "tokens": 6311
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:52:51+00:00",
+        "raw_output_path": "data/annotations/raw/park_014_passB_attempt1.txt",
+        "tokens": 9051
       }
     ],
     "human_review": {

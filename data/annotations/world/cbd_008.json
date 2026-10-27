@@ -406,14 +406,70 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Teleposta Towers",
+        "key": "kenya/nairobi/cbd/teleposta-towers",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Teleposta Towers, 2025 (01)"
+          },
+          {
+            "kind": "architecture",
+            "detail": "twin-tower high-rise building with beige facade, vertical window strips, flat roof with antenna on multi-story podium with curved facade and horizontal balconies"
+          },
+          {
+            "kind": "context",
+            "detail": "viewed from paved street intersection with vehicles, sidewalks, metal fence, traffic signal poles and double-arm streetlight pole in bright daylight"
+          }
+        ],
+        "confidence": 0.97
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact number of people in distance near building entrance is unclear due to small size and occlusion",
       "Small text on podium banner such as Powered by TECNO AI and Dolby is partially blurry and not fully legible",
       "Text on small sign on podium facade is too blurry to read with confidence",
       "Vehicle makes, models and license plates cannot be determined",
-      "Interior details of building and activity inside are not visible"
+      "Interior details of building and activity inside are not visible",
+      "Exact street intersection name not determinable from provided information",
+      "Visible text 'REHANI HOUSE' is partially legible and not used as landmark due to uncertainty",
+      "Interior details of building, vehicle makes/models, and small banner text not determinable"
+    ],
+    "place": {
+      "name": "Teleposta Towers",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Nairobi CBD"
+      ],
+      "key": "kenya/nairobi/cbd/teleposta-towers",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Teleposta Towers, 2025 (01)"
+        },
+        {
+          "kind": "architecture",
+          "detail": "tall beige twin-tower building with vertical window strips dominating center on multi-story podium with curved facade and horizontal balconies"
+        }
+      ],
+      "confidence": 0.96
+    },
+    "place_key": "kenya/nairobi/cbd/teleposta-towers",
+    "taken_from": null,
+    "cultural_context": [
+      {
+        "term": "kiosk",
+        "local_name": "kiosk",
+        "language": "English",
+        "evidence": "description states 'A small dark kiosk stands on the sidewalk near the center' and entity labeled 'kiosk pillar' on sidewalk island"
+      }
     ]
   },
   "privacy": {
@@ -434,6 +490,14 @@
         "run_at": "2026-10-27T12:07:14+00:00",
         "raw_output_path": "data/annotations/raw/cbd_008_attempt1.txt",
         "tokens": 11319
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:46:43+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_008_passB_attempt1.txt",
+        "tokens": 6421
       }
     ],
     "human_review": {

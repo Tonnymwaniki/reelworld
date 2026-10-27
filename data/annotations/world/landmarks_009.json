@@ -286,15 +286,60 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Kenyatta International Convention Centre",
+        "key": "kenya/nairobi/cbd/kicc",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta International Convention Centre"
+          },
+          {
+            "kind": "architecture",
+            "detail": "tall cylindrical tower with alternating pinkish horizontal bands and dark window strips topped by wide flat circular observation platform with dark underside and small white dome-shaped objects on roof"
+          }
+        ],
+        "confidence": 0.98
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "exact number of people on rooftop due to small size and distance",
       "exact wording and spelling of distant building signage due to low resolution",
       "clothing details and identities of people on rooftop",
       "building names, heights, and interior details not visible",
-      "text on smaller or blurry signs that show fewer than 3 legible letters"
-    ]
+      "text on smaller or blurry signs that show fewer than 3 legible letters",
+      "exact number and identities of people on rooftop cannot be determined due to distance and small size",
+      "exact wording of distant building signage is partially legible (National Bank, CO-OP BANK)",
+      "camera location not specified in provided information"
+    ],
+    "place": {
+      "name": "Kenyatta International Convention Centre",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "CBD"
+      ],
+      "key": "kenya/nairobi/cbd/kicc",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Kenyatta International Convention Centre"
+        },
+        {
+          "kind": "architecture",
+          "detail": "tall cylindrical tower with alternating pinkish horizontal bands and dark window strips topped by wide flat circular observation platform with dark underside and people visible on rooftop deck"
+        }
+      ],
+      "confidence": 0.97
+    },
+    "place_key": "kenya/nairobi/cbd/kicc",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -314,6 +359,14 @@
         "run_at": "2026-10-27T12:12:24+00:00",
         "raw_output_path": "data/annotations/raw/landmarks_009_attempt1.txt",
         "tokens": 7517
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:49:32+00:00",
+        "raw_output_path": "data/annotations/raw/landmarks_009_passB_attempt1.txt",
+        "tokens": 5644
       }
     ],
     "human_review": {

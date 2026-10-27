@@ -328,16 +328,95 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Uhuru Park",
+        "key": "kenya/nairobi/uhuru-park",
+        "type": "park",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Uhuru park dam"
+          },
+          {
+            "kind": "context",
+            "detail": "wide view of a calm lake bordered by green grass and a dirt path with a city skyline and trees in the background"
+          }
+        ],
+        "confidence": 0.88
+      },
+      {
+        "name": "Kenyatta International Convention Centre",
+        "key": "kenya/nairobi/cbd/kicc",
+        "type": "building",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "architecture",
+            "detail": "tall building with circular top structure visible above trees"
+          },
+          {
+            "kind": "architecture",
+            "detail": "distinctive tower building with a rounded top structure are visible in the background above the trees"
+          }
+        ],
+        "confidence": 0.78
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "context",
+            "detail": "cluster of high-rise buildings visible behind trees against a partly cloudy sky"
+          }
+        ],
+        "confidence": 0.65
+      }
+    ],
     "uncertainties": [
       "Exact geographic location and name of the park or city cannot be determined from the image",
       "Exact number of people is uncertain due to distance, small size and occlusion",
       "Text on the red banner on the far left building is blurry and unreadable with fewer than 3 clear letters",
       "Details of goods or activities under the market umbrellas are not clear",
       "Species of trees, grass, and whether the water is a natural lake or artificial pond cannot be determined",
-      "Exact time of day beyond daytime and season cannot be determined"
-    ]
+      "Exact time of day beyond daytime and season cannot be determined",
+      "Exact geographic location and name of the park or city cannot be independently determined from image alone beyond provided title",
+      "Details of goods or activities under market umbrellas are not clear",
+      "Species of trees, grass, and whether water is natural lake or artificial pond cannot be determined"
+    ],
+    "place": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Uhuru park dam"
+        },
+        {
+          "kind": "context",
+          "detail": "calm reflective lake that occupies the center of the image bordered by lush green grass and a narrow light-brown dirt path with dense green trees and high-rise buildings behind them"
+        }
+      ],
+      "confidence": 0.87
+    },
+    "place_key": "kenya/nairobi/uhuru-park",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -357,6 +436,14 @@
         "run_at": "2026-10-27T12:18:40+00:00",
         "raw_output_path": "data/annotations/raw/park_025_attempt1.txt",
         "tokens": 10923
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:53:35+00:00",
+        "raw_output_path": "data/annotations/raw/park_025_passB_attempt1.txt",
+        "tokens": 6423
       }
     ],
     "human_review": {

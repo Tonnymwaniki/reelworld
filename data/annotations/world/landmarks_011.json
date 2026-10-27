@@ -258,14 +258,72 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Kenyatta International Convention Centre",
+        "key": "kenya/nairobi/cbd/kicc",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta International Convention Centre - BugWarp (11)"
+          },
+          {
+            "kind": "visible_text",
+            "detail": "HARAMBEE"
+          },
+          {
+            "kind": "context",
+            "detail": "golden coat of arms with two lions holding spears flanking central shield with rooster holding axe on rough gray stone pillar"
+          }
+        ],
+        "confidence": 0.92
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact geographic location and name of building or monument",
       "Material composition of stone pillar and metallic emblem",
       "Full context or purpose of the building entrance in background",
       "Details of people in background due to blur and partial visibility",
-      "Date and time photo was taken beyond daytime lighting"
+      "Date and time photo was taken beyond daytime lighting",
+      "Exact position of stone pillar within KICC grounds not determinable from close-up framing; background building facade is blurred and not distinctive"
+    ],
+    "place": {
+      "name": "Kenyatta International Convention Centre",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Nairobi CBD"
+      ],
+      "key": "kenya/nairobi/cbd/kicc",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Kenyatta International Convention Centre - BugWarp (11)"
+        },
+        {
+          "kind": "visible_text",
+          "detail": "HARAMBEE"
+        },
+        {
+          "kind": "context",
+          "detail": "close-up of golden coat of arms emblem with two lions, shield, crossed spears and ribbon banner mounted on stone pillar"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "place_key": "kenya/nairobi/cbd/kicc",
+    "taken_from": null,
+    "cultural_context": [
+      {
+        "term": "harambee",
+        "local_name": "Harambee",
+        "language": "Swahili",
+        "evidence": "visible_text HARAMBEE on ribbon banner below shield"
+      }
     ]
   },
   "privacy": {
@@ -286,6 +344,14 @@
         "run_at": "2026-10-27T12:12:29+00:00",
         "raw_output_path": "data/annotations/raw/landmarks_011_attempt1.txt",
         "tokens": 6843
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:50:05+00:00",
+        "raw_output_path": "data/annotations/raw/landmarks_011_passB_attempt2.txt",
+        "tokens": 4670
       }
     ],
     "human_review": {

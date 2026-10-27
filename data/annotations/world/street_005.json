@@ -293,16 +293,77 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Concrete pedestrian overpass",
+        "key": "unknown/concrete-pedestrian-overpass",
+        "type": "other",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "architecture",
+            "detail": "long brown concrete elevated pedestrian walkway on the right with people standing on its upper level, multi-level with balcony and railings"
+          },
+          {
+            "kind": "context",
+            "detail": "elevated concrete pedestrian walkway lining the avenue on the right side with pedestrians on upper level"
+          }
+        ],
+        "confidence": 0.97
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "Nairobi CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "context",
+            "detail": "tall modern high-rise buildings and heavy traffic on multi-lane avenue in dense urban setting, but no explicit CBD signage in visible text"
+          }
+        ],
+        "confidence": 0.55
+      }
+    ],
     "uncertainties": [
       "Exact number of people and vehicles is uncertain due to distance, occlusion, and small figure size",
       "Text on distant billboards and other building signs is blurry or cut off and not fully legible",
       "License plate numbers and small vehicle markings cannot be read",
       "Text on people's clothing or bags was ignored per rules and not listed",
       "Specific street name, city, and building names beyond CO-OP BANK cannot be determined from visible text",
-      "Exact time of day and weather details beyond overcast appearance cannot be determined"
-    ]
+      "Exact time of day and weather details beyond overcast appearance cannot be determined",
+      "Street name Haile Selassie Avenue appears only in provided_title and cannot be independently verified from visible text; visible text only shows CO-OP BANK and BOOK THESE SPACES 0725 654 355",
+      "Specific building identities beyond CO-OP BANK signage cannot be determined from visible text or architecture alone"
+    ],
+    "place": {
+      "name": "Nairobi",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Haile Selassie Avenue (Nairobi), 2025 (03)"
+        },
+        {
+          "kind": "context",
+          "detail": "wide multi-lane urban avenue with heavy bus and car traffic, tall buildings including prominent beige high-rise with CO-OP BANK signage, and dense urban setting"
+        }
+      ],
+      "confidence": 0.88
+    },
+    "place_key": "kenya/nairobi",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -322,6 +383,14 @@
         "run_at": "2026-10-27T12:19:39+00:00",
         "raw_output_path": "data/annotations/raw/street_005_attempt1.txt",
         "tokens": 11393
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:54:04+00:00",
+        "raw_output_path": "data/annotations/raw/street_005_passB_attempt1.txt",
+        "tokens": 7541
       }
     ],
     "human_review": {

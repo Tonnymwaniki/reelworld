@@ -370,15 +370,51 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Haile Selassie Avenue",
+        "key": "kenya/nairobi/haile-selassie-avenue",
+        "type": "street",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi Isuzu NQR, cnr Tom Mboya Street and Haile Selassie Avenue, 2025 (01)"
+          }
+        ],
+        "confidence": 0.9
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact number of people is uncertain due to occlusion inside bus and distance in background crowd",
       "Exact characters on bus license plate are not legible due to resolution",
       "Text on small distant signs and billboards in far background is not legible",
       "Text on far right edge sign is cut off and not fully legible",
-      "Specific destination or route of the bus cannot be determined from visible text"
-    ]
+      "Specific destination or route of the bus cannot be determined from visible text",
+      "Tom Mboya Street also mentioned in provided_title but not independently verifiable from visible features and not in allowed names list",
+      "Specific building identities (yellow building with COLLEGE signs, gray high-rise, red-brick building) cannot be matched to named landmarks without outside knowledge",
+      "License plate, distant bus signs and far background signs not legible"
+    ],
+    "place": {
+      "name": "Haile Selassie Avenue",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi/haile-selassie-avenue",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Nairobi Isuzu NQR, cnr Tom Mboya Street and Haile Selassie Avenue, 2025 (01)"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "place_key": "kenya/nairobi/haile-selassie-avenue",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": true,
@@ -398,6 +434,14 @@
         "run_at": "2026-10-27T12:22:10+00:00",
         "raw_output_path": "data/annotations/raw/street_022_attempt1.txt",
         "tokens": 11164
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:55:45+00:00",
+        "raw_output_path": "data/annotations/raw/street_022_passB_attempt1.txt",
+        "tokens": 9032
       }
     ],
     "human_review": {

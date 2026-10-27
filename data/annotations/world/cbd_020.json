@@ -282,15 +282,63 @@
   },
   "inferred": {
     "landmarks": [],
-    "place_candidates": [],
+    "place_candidates": [
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "context",
+            "detail": "dense urban cityscape with high-rise towers and downtown high-rise buildings"
+          },
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi view 1 (949939763)"
+          }
+        ],
+        "confidence": 0.52
+      }
+    ],
     "uncertainties": [
       "Exact city and building names cannot be determined from visible features alone",
       "Smaller text below the main slogan on the billboard and the small logo in the corner are not legible due to distance and blur",
       "Other distant signs and building labels are too small or blurry to read and are not listed",
       "Exact number and types of vehicles on roads cannot be determined due to distance",
       "Whether the figures depicted on the billboard are considered people in the scene is ambiguous; count refers to real people visible in the photo",
-      "Exact time of day and weather conditions beyond hazy daylight cannot be determined"
-    ]
+      "Exact time of day and weather conditions beyond hazy daylight cannot be determined",
+      "Exact city and building names cannot be determined from visible features alone per uncertainties",
+      "Smaller text below main billboard slogan and distant building signs not legible due to distance and blur",
+      "No evidence to confidently identify specific towers such as Kenyatta International Convention Centre or Times Tower from description alone"
+    ],
+    "place": {
+      "name": "Nairobi",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Nairobi view 1 (949939763)"
+        },
+        {
+          "kind": "context",
+          "detail": "Elevated wide view of a dense city skyline with high-rise towers and downtown high-rise buildings"
+        }
+      ],
+      "confidence": 0.88
+    },
+    "place_key": "kenya/nairobi",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -310,6 +358,14 @@
         "run_at": "2026-10-27T12:09:04+00:00",
         "raw_output_path": "data/annotations/raw/cbd_020_attempt1.txt",
         "tokens": 13244
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:47:28+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_020_passB_attempt1.txt",
+        "tokens": 6811
       }
     ],
     "human_review": {

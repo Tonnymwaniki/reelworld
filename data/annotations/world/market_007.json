@@ -275,14 +275,56 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Nairobi City Market",
+        "key": "unknown/city-market",
+        "type": "market",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Colorful beaded necklaces at Nairobi City Market in Kenya"
+          }
+        ],
+        "confidence": 0.9
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact materials and construction of necklaces and fabrics cannot be determined from photo",
       "Whether any small labels or price tags with text are present but too small or blurry to read",
       "Text or details on background shelves and footwear in the distant market interior are not legible",
       "Geographic location and cultural origin beyond visual style cannot be confirmed from image alone",
-      "Lighting source and time of day outside the indoor market cannot be determined"
+      "Lighting source and time of day outside the indoor market cannot be determined",
+      "No visible text or distinctive architecture to independently verify location; location inferred solely from provided_title",
+      "Exact stall position within market and precise geographic coordinates cannot be determined from image alone"
+    ],
+    "place": {
+      "name": "Nairobi City Market",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "unknown/city-market",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Colorful beaded necklaces at Nairobi City Market in Kenya"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "place_key": "unknown/city-market",
+    "taken_from": null,
+    "cultural_context": [
+      {
+        "term": "shuka",
+        "local_name": "shuka",
+        "language": "Maa",
+        "evidence": "plaid fringed shuka fabrics: four vertically hanging plaid cloths with tassels in blue, green, and red check patterns (tags: plaid shuka)"
+      }
     ]
   },
   "privacy": {
@@ -303,6 +345,14 @@
         "run_at": "2026-10-27T12:13:28+00:00",
         "raw_output_path": "data/annotations/raw/market_007_attempt1.txt",
         "tokens": 6948
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:50:22+00:00",
+        "raw_output_path": "data/annotations/raw/market_007_passB_attempt1.txt",
+        "tokens": 6721
       }
     ],
     "human_review": {

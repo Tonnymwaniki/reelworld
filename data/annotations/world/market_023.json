@@ -316,15 +316,67 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "The Village Market",
+        "key": "unknown/the-village-market",
+        "type": "market",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Overhead view of the Village Market, Nairobi"
+          },
+          {
+            "kind": "architecture",
+            "detail": "multi-level open-air shopping mall courtyard surrounded by buildings with balconies and glass railings with large white tensile fabric canopies stretched over upper balconies and the lower courtyard"
+          },
+          {
+            "kind": "context",
+            "detail": "Elevated view of a multi-level outdoor shopping mall courtyard with white tensile canopy sails, colorful glass storefronts, and people dining and walking on balconies and ground level"
+          }
+        ],
+        "confidence": 0.94
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact number of people is uncertain due to distance, occlusion, and blur",
       "Text on several small, blurry or partially cut-off signs including a green illuminated sign in the lower middle and a blue sign on the lower left cannot be read with at least 3 letters",
       "Exact time of day and weather conditions beyond evening lighting cannot be determined",
       "Details of merchandise and shop names inside illuminated interiors are not legible",
-      "Whether logos or text on red umbrellas and canopies are present cannot be determined"
-    ]
+      "Whether logos or text on red umbrellas and canopies are present cannot be determined",
+      "Exact shop names and small sign text not legible beyond partial 'EXPERIENCE' and 'REV'",
+      "Exact number of people and merchandise details uncertain due to distance, occlusion and blur",
+      "Weather conditions beyond evening lighting with warm artificial illumination cannot be determined"
+    ],
+    "place": {
+      "name": "The Village Market",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "unknown/the-village-market",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Overhead view of the Village Market, Nairobi"
+        },
+        {
+          "kind": "architecture",
+          "detail": "multi-level open-air shopping mall courtyard surrounded by buildings with balconies and glass railings with large white tensile fabric canopies and colorful stained-glass windows with red, blue, yellow and green panels"
+        },
+        {
+          "kind": "context",
+          "detail": "Elevated, wide view looking down into a multi-level open-air shopping mall courtyard with potted plants, red umbrellas and paved stone courtyard floor"
+        }
+      ],
+      "confidence": 0.94
+    },
+    "place_key": "unknown/the-village-market",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -344,6 +396,14 @@
         "run_at": "2026-10-27T12:15:56+00:00",
         "raw_output_path": "data/annotations/raw/market_023_attempt1.txt",
         "tokens": 12824
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:51:26+00:00",
+        "raw_output_path": "data/annotations/raw/market_023_passB_attempt1.txt",
+        "tokens": 5658
       }
     ],
     "human_review": {

@@ -360,15 +360,95 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Kenyatta International Convention Centre",
+        "key": "kenya/nairobi/cbd/kicc",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "THE KENYATTA INTERNATIONAL CONVENTION CENTRE"
+          },
+          {
+            "kind": "visible_text",
+            "detail": "KICC"
+          },
+          {
+            "kind": "architecture",
+            "detail": "tall cylindrical tower with horizontal striped bands and flat disc roof rising directly behind stone entrance arch"
+          },
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta International Convention Centre, 2025 (01)"
+          }
+        ],
+        "confidence": 0.99
+      },
+      {
+        "name": "CBK Pension Towers",
+        "key": "kenya/nairobi/cbd/cbk-pension-towers",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "CBK PENSION TOWERS"
+          },
+          {
+            "kind": "architecture",
+            "detail": "tall curved building with blue glass on right side behind conical structure with angular top"
+          }
+        ],
+        "confidence": 0.72
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact number of people behind gates due to distance, occlusion by gates and tent",
       "Text on small red sign on guardhouse to the right and other distant small signs that are blurry or partially obscured",
       "Details inside the white tent and inside the tower and other buildings",
       "Exact time of day beyond daytime and specific weather conditions beyond clear sky",
-      "Whether additional people or vehicles are present outside the frame or obscured by structures"
-    ]
+      "Whether additional people or vehicles are present outside the frame or obscured by structures",
+      "CBK Pension Towers identification based on partially legible visible_text; exact correspondence to blue glass high-rise uncertain due to distance",
+      "Exact number of people behind gates, details inside white tent, and text on small red sign on guardhouse could not be determined due to distance and occlusion"
+    ],
+    "place": {
+      "name": "Kenyatta International Convention Centre",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi/cbd/kicc",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "visible_text",
+          "detail": "THE KENYATTA INTERNATIONAL CONVENTION CENTRE"
+        },
+        {
+          "kind": "visible_text",
+          "detail": "KICC"
+        },
+        {
+          "kind": "architecture",
+          "detail": "large stone arch spanning driveway with KICC letters on top and cylindrical tower with horizontal striped bands behind"
+        },
+        {
+          "kind": "provided_title",
+          "detail": "Kenyatta International Convention Centre, 2025 (01)"
+        },
+        {
+          "kind": "context",
+          "detail": "tags include KICC, Nairobi, Kenya"
+        }
+      ],
+      "confidence": 0.98
+    },
+    "place_key": "kenya/nairobi/cbd/kicc",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -388,6 +468,14 @@
         "run_at": "2026-10-27T12:12:01+00:00",
         "raw_output_path": "data/annotations/raw/landmarks_004_attempt1.txt",
         "tokens": 12012
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:49:16+00:00",
+        "raw_output_path": "data/annotations/raw/landmarks_004_passB_attempt1.txt",
+        "tokens": 6379
       }
     ],
     "human_review": {

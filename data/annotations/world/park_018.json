@@ -334,15 +334,60 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Uhuru Park",
+        "key": "kenya/nairobi/uhuru-park",
+        "type": "park",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "UHURU PARK, NAIROBI"
+          },
+          {
+            "kind": "context",
+            "detail": "outdoor park scene with sloping grassy hill dotted with small trees and distant figures sitting and walking, paved parking area with buses and vans, described as outdoor park in daytime"
+          }
+        ],
+        "confidence": 0.9
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "exact number of people on hill due to distance and small size",
       "text on white vans and side of right bus is blurry and partially legible",
       "license plate numbers are small and partially obscured",
       "details of buildings on horizon are indistinct",
-      "text on small signs or distant structures cannot be read"
-    ]
+      "text on small signs or distant structures cannot be read",
+      "exact number of people on hill cannot be determined due to distance and small size",
+      "details of buildings on horizon are indistinct and cannot be identified",
+      "text on white vans and side of buses and license plates is blurry and not legible"
+    ],
+    "place": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "UHURU PARK, NAIROBI"
+        },
+        {
+          "kind": "context",
+          "detail": "scene type is park with grassy hill, scattered trees, people resting and walking, and paved parking area holding yellow school buses and white vans"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "place_key": "kenya/nairobi/uhuru-park",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -362,6 +407,14 @@
         "run_at": "2026-10-27T12:18:05+00:00",
         "raw_output_path": "data/annotations/raw/park_018_attempt2.txt",
         "tokens": 8538
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:53:05+00:00",
+        "raw_output_path": "data/annotations/raw/park_018_passB_attempt1.txt",
+        "tokens": 5956
       }
     ],
     "human_review": {

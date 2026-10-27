@@ -332,14 +332,93 @@
   },
   "inferred": {
     "landmarks": [],
-    "place_candidates": [],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta International Convention Centre - BugWarp (16)"
+          }
+        ],
+        "confidence": 0.58
+      },
+      {
+        "name": "Unknown",
+        "hierarchy": [
+          "Kenya"
+        ],
+        "key": "unknown/unknown",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "context",
+            "detail": "congested urban street with unfinished buildings and phone billboards; exact street and district not identifiable from visible features alone"
+          }
+        ],
+        "confidence": 0.4
+      }
+    ],
     "uncertainties": [
       "Exact number of pedestrians and vehicles cannot be determined due to distance, haze and small scale",
       "Text on several distant and blurry billboards including blue billboard in center-right and top-right phone billboard is not legible enough to transcribe",
       "Precise weather conditions, time of day and cause of haze cannot be determined",
       "Building names, floors and interior details beyond visible signage are not discernible",
-      "Vehicle types, license plates and individual clothing details are not distinguishable at this distance"
-    ]
+      "Vehicle types, license plates and individual clothing details are not distinguishable at this distance",
+      "No landmark from the allowed list is visibly identifiable by architecture or visible_text; GABERONE PLAZA, TUSKYS, vivo and Infinix HOT 60 PRO SERIES signage is visible but does not correspond to allowed landmark names",
+      "Exact street name, building names beyond visible signage, and precise location within CBD cannot be determined from description alone",
+      "Association with Nairobi CBD and Kenyatta International Convention Centre rests solely on provided_title, not on distinctive architectural features described"
+    ],
+    "place": {
+      "name": "Nairobi CBD",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "CBD"
+      ],
+      "key": "kenya/nairobi/cbd",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Kenyatta International Convention Centre - BugWarp (16)"
+        },
+        {
+          "kind": "context",
+          "detail": "elevated hazy view looking down along long straight street packed with dense clusters of vehicles and pedestrians lined with commercial buildings and unfinished concrete buildings"
+        }
+      ],
+      "confidence": 0.64
+    },
+    "place_key": "kenya/nairobi/cbd",
+    "taken_from": {
+      "name": "Kenyatta International Convention Centre",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "CBD"
+      ],
+      "key": "kenya/nairobi/cbd/kicc",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Kenyatta International Convention Centre - BugWarp (16)"
+        },
+        {
+          "kind": "context",
+          "detail": "elevated very_high viewpoint facing down along crowded street toward distant hazy skyline, consistent with view from tall tower"
+        }
+      ],
+      "confidence": 0.72
+    },
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -359,6 +438,14 @@
         "run_at": "2026-10-27T12:13:07+00:00",
         "raw_output_path": "data/annotations/raw/landmarks_012_attempt1.txt",
         "tokens": 13556
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:49:51+00:00",
+        "raw_output_path": "data/annotations/raw/landmarks_012_passB_attempt1.txt",
+        "tokens": 6859
       }
     ],
     "human_review": {

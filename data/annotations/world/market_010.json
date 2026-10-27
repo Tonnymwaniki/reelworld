@@ -300,8 +300,30 @@
       "Text on the red plastic crate is not legible enough to read at least 3 letters",
       "Prices, materials, and origins of the fabrics and crafts cannot be determined",
       "Identities, ages, and genders of the people cannot be determined",
-      "Whether the partially visible person on the far right is shopping or passing by cannot be determined"
-    ]
+      "Whether the partially visible person on the far right is shopping or passing by cannot be determined",
+      "Exact geographic location of the market cannot be determined from visual evidence alone",
+      "No visible text or distinctive architecture visible to confirm specific market location",
+      "Provided title suggests Masai Market in Nairobi but visual confirmation is limited to generic outdoor market stall with colorful fabrics and crafts"
+    ],
+    "place": {
+      "name": "Nairobi",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Masai Market Nairobi 01"
+        }
+      ],
+      "confidence": 0.65
+    },
+    "place_key": "kenya/nairobi",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -321,6 +343,14 @@
         "run_at": "2026-10-27T12:13:49+00:00",
         "raw_output_path": "data/annotations/raw/market_010_attempt1.txt",
         "tokens": 6437
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:50:36+00:00",
+        "raw_output_path": "data/annotations/raw/market_010_passB_attempt1.txt",
+        "tokens": 6079
       }
     ],
     "human_review": {

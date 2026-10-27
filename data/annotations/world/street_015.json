@@ -265,15 +265,59 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Kenyatta Avenue",
+        "key": "kenya/nairobi/cbd/kenyatta-avenue",
+        "type": "street",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta Avenue, Nairobi, 2025 (06)"
+          },
+          {
+            "kind": "context",
+            "detail": "wide tree-lined divided avenue with two carriageways separated by paved central median, flanked by green metal fences and mature leafy trees, with tall modern high-rise buildings in background"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact number of pedestrians is uncertain due to distance, occlusion by trees and fences, and small scale",
       "Text on banners attached to green fences and on building storefronts is blurry and cut off, fewer than 3 consecutive letters are clearly legible",
       "License plate characters on red car and other vehicles are not legible due to distance and blur",
       "Specific location, city, street name, building names, and vehicle makes/models cannot be determined",
-      "Exact time of day and weather conditions beyond overcast appearance cannot be determined"
-    ]
+      "Exact time of day and weather conditions beyond overcast appearance cannot be determined",
+      "No visible text confirms street name, building names, or location; visible_text is empty and banners/license plates are not legible",
+      "Specific building identities, vehicle makes/models, and exact time beyond overcast daylight cannot be determined",
+      "Location identification relies on provided_title; visual features alone show generic wide divided avenue with high-rise buildings"
+    ],
+    "place": {
+      "name": "Kenyatta Avenue",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi/cbd/kenyatta-avenue",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Kenyatta Avenue, Nairobi, 2025 (06)"
+        },
+        {
+          "kind": "context",
+          "detail": "wide divided urban roadway with central median, tree-lined sidewalks, green roadside fences, and tall high-rise buildings under overcast sky"
+        }
+      ],
+      "confidence": 0.88
+    },
+    "place_key": "kenya/nairobi/cbd/kenyatta-avenue",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -293,6 +337,14 @@
         "run_at": "2026-10-27T12:21:10+00:00",
         "raw_output_path": "data/annotations/raw/street_015_attempt1.txt",
         "tokens": 7075
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:54:51+00:00",
+        "raw_output_path": "data/annotations/raw/street_015_passB_attempt1.txt",
+        "tokens": 5596
       }
     ],
     "human_review": {

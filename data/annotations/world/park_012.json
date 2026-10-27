@@ -285,15 +285,80 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Uhuru Park",
+        "key": "kenya/nairobi/uhuru-park",
+        "type": "park",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Nyayo House as seen from Uhuru Park"
+          },
+          {
+            "kind": "context",
+            "detail": "outdoor urban park centered on a calm lake with grassy shoreline, people relaxing and boating, framed by large trees and tall city buildings reflected in water"
+          }
+        ],
+        "confidence": 0.92
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Nyayo House as seen from Uhuru Park"
+          },
+          {
+            "kind": "context",
+            "detail": "tall beige high-rise buildings with antennas behind park treeline indicating central Nairobi skyline"
+          }
+        ],
+        "confidence": 0.75
+      }
+    ],
     "uncertainties": [
       "exact number of people on far shore due to small size and distance",
       "text and logos on distant high-rise building banners are blurry and not legible for at least 3 letters",
       "specific identities, ages or genders of people",
       "exact time of day and weather conditions beyond overcast appearance",
-      "names or functions of the background buildings"
-    ]
+      "names or functions of the background buildings",
+      "Nyayo House is named in provided_title but background building identities are listed as uncertain with no visible text to confirm which tower is Nyayo House, so not listed as separate landmark",
+      "taken_from is inside the park itself (view across lake toward skyline) so left as null rather than duplicating place"
+    ],
+    "place": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Nyayo House as seen from Uhuru Park"
+        },
+        {
+          "kind": "context",
+          "detail": "outdoor urban park centered on a calm lake with grassy bank, trees, people along shores and boating, with city skyline behind treeline"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "place_key": "kenya/nairobi/uhuru-park",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -313,6 +378,14 @@
         "run_at": "2026-10-27T12:17:06+00:00",
         "raw_output_path": "data/annotations/raw/park_012_attempt1.txt",
         "tokens": 7620
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:52:36+00:00",
+        "raw_output_path": "data/annotations/raw/park_012_passB_attempt1.txt",
+        "tokens": 8381
       }
     ],
     "human_review": {

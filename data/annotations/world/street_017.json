@@ -353,8 +353,81 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Teleposta Towers",
+        "key": "kenya/nairobi/cbd/teleposta-towers",
+        "type": "building",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "architecture",
+            "detail": "two prominent cylindrical towers with striped pattern dominating skyline behind low building"
+          },
+          {
+            "kind": "architecture",
+            "detail": "tall red metal lattice tower rising between the two cylindrical towers of the high-rise"
+          }
+        ],
+        "confidence": 0.92
+      },
+      {
+        "name": "Kenyatta Avenue",
+        "key": "kenya/nairobi/cbd/kenyatta-avenue",
+        "type": "street",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta Avenue, Nairobi, 2025 (08)"
+          },
+          {
+            "kind": "context",
+            "detail": "wide urban street intersection with paved road, traffic lights and pedestrians"
+          }
+        ],
+        "confidence": 0.95
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta Avenue, Nairobi, 2025 (08)"
+          },
+          {
+            "kind": "context",
+            "detail": "busy urban intersection with high-rise buildings and commercial signage"
+          }
+        ],
+        "confidence": 0.88
+      },
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta Avenue, Nairobi, 2025 (08)"
+          }
+        ],
+        "confidence": 0.9
+      }
+    ],
     "uncertainties": [
       "Exact number of people is uncertain due to distance, occlusion and small figure size",
       "Full text on large yellow billboard is cut off and partially obscured, remaining words not legible",
@@ -362,8 +435,34 @@
       "Text on base of clock post and small shop signs is not legible at this resolution",
       "License plate characters on foreground car are visible but not reliably readable",
       "Exact time of day and weather conditions beyond overcast cannot be determined",
-      "Building names beyond BANK OF INDIA and shop brands cannot be confirmed"
-    ]
+      "Building names beyond BANK OF INDIA and shop brands cannot be confirmed",
+      "Exact number of pedestrians and full text on yellow billboard could not be determined due to distance and occlusion",
+      "Building names beyond BANK OF INDIA visible text cannot be confirmed"
+    ],
+    "place": {
+      "name": "Kenyatta Avenue",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "CBD"
+      ],
+      "key": "kenya/nairobi/cbd/kenyatta-avenue",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Kenyatta Avenue, Nairobi, 2025 (08)"
+        },
+        {
+          "kind": "context",
+          "detail": "wide urban street intersection with Bank of India building and twin-tower high-rise with red antenna"
+        }
+      ],
+      "confidence": 0.93
+    },
+    "place_key": "kenya/nairobi/cbd/kenyatta-avenue",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -383,6 +482,14 @@
         "run_at": "2026-10-27T12:21:21+00:00",
         "raw_output_path": "data/annotations/raw/street_017_attempt1.txt",
         "tokens": 9839
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:55:23+00:00",
+        "raw_output_path": "data/annotations/raw/street_017_passB_attempt2.txt",
+        "tokens": 6982
       }
     ],
     "human_review": {

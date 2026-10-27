@@ -374,16 +374,87 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Kenyatta Avenue",
+        "key": "kenya/nairobi/cbd/kenyatta-avenue",
+        "type": "street",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta Avenue, Nairobi, 2025 (05)"
+          },
+          {
+            "kind": "context",
+            "detail": "Busy urban street filled with buses, cars, vans and motorcycles lined by trees and high-rise buildings under an overcast sky."
+          },
+          {
+            "kind": "architecture",
+            "detail": "wide multi-lane asphalt road in the foreground and center filled with vehicles including white hatchback car, red bus, blue bus, white van, orange and white bus and motorcycles, with tall buildings lining the background"
+          }
+        ],
+        "confidence": 0.92
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta Avenue, Nairobi, 2025 (05)"
+          },
+          {
+            "kind": "architecture",
+            "detail": "tall buildings line the background, including a blue-glass modern high-rise with spires in the center distance and a tall brown rectangular building on the right"
+          }
+        ],
+        "confidence": 0.85
+      }
+    ],
     "uncertainties": [
       "Exact number of pedestrians in the far distance along the road",
       "Text on the overhead arch spanning the road in the center distance",
       "License plate numbers on vehicles which are small and blurry",
       "Text on distant building signs, billboards and shop fronts",
       "Text on the rear of the red bus on the left",
-      "Exact building names and heights beyond what is visible"
-    ]
+      "Exact building names and heights beyond what is visible",
+      "Exact building names and heights beyond what is visible could not be determined",
+      "Text on the overhead metal arch structure spanning the road in the far center not legible",
+      "License plate numbers and text on distant building signs and shop fronts not legible"
+    ],
+    "place": {
+      "name": "Kenyatta Avenue",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "CBD"
+      ],
+      "key": "kenya/nairobi/cbd/kenyatta-avenue",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Kenyatta Avenue, Nairobi, 2025 (05)"
+        },
+        {
+          "kind": "context",
+          "detail": "Busy urban street in Nairobi with heavy urban traffic and commuting, lined by high-rise buildings and large leafy green trees"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "place_key": "kenya/nairobi/cbd/kenyatta-avenue",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -403,6 +474,14 @@
         "run_at": "2026-10-27T12:21:04+00:00",
         "raw_output_path": "data/annotations/raw/street_014_attempt1.txt",
         "tokens": 11898
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:55:09+00:00",
+        "raw_output_path": "data/annotations/raw/street_014_passB_attempt2.txt",
+        "tokens": 6417
       }
     ],
     "human_review": {

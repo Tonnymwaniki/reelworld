@@ -332,15 +332,79 @@
   },
   "inferred": {
     "landmarks": [],
-    "place_candidates": [],
+    "place_candidates": [
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "Nairobi CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Koinange Street, 2025 (01)"
+          },
+          {
+            "kind": "context",
+            "detail": "wide urban street lined with multi-story commercial buildings in downtown setting"
+          }
+        ],
+        "confidence": 0.88
+      },
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Koinange Street, 2025 (01)"
+          }
+        ],
+        "confidence": 0.9
+      }
+    ],
     "uncertainties": [
       "exact number of people in far distance due to small size and occlusion",
       "text on vertical banner attached to streetlight pole is blurry and unreadable",
       "text on distant storefronts and small signs along street is not legible",
       "license plate numbers and vehicle details are not discernible",
       "exact building names and floors of background high-rises",
-      "weather conditions beyond overcast appearance"
-    ]
+      "weather conditions beyond overcast appearance",
+      "No landmark from the allowed list is distinctly identifiable; background high-rise names not legible",
+      "Exact block of Koinange Street not determinable from image alone"
+    ],
+    "place": {
+      "name": "Koinange Street",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Nairobi CBD"
+      ],
+      "key": "unknown/koinange-street",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Koinange Street, 2025 (01)"
+        },
+        {
+          "kind": "context",
+          "detail": "wide urban street lined with trees and multi-story commercial buildings with parked cars and storefronts"
+        }
+      ],
+      "confidence": 0.92
+    },
+    "place_key": "unknown/koinange-street",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -360,6 +424,14 @@
         "run_at": "2026-10-27T12:21:35+00:00",
         "raw_output_path": "data/annotations/raw/street_019_attempt1.txt",
         "tokens": 7944
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:55:51+00:00",
+        "raw_output_path": "data/annotations/raw/street_019_passB_attempt2.txt",
+        "tokens": 7994
       }
     ],
     "human_review": {

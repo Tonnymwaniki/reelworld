@@ -301,7 +301,28 @@
   },
   "inferred": {
     "landmarks": [],
-    "place_candidates": [],
+    "place_candidates": [
+      {
+        "name": "Masai Market",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/masai-market",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi Tourist market - panoramio"
+          },
+          {
+            "kind": "context",
+            "detail": "tourist market alley with hanging bags and accessories in Nairobi"
+          }
+        ],
+        "confidence": 0.42
+      }
+    ],
     "uncertainties": [
       "Exact geographic location of the market cannot be determined from the photo",
       "Text or markings on white container on floor near left stall are blurry and less than 3 letters are legible so it is not listed",
@@ -309,8 +330,34 @@
       "Identities, ages and facial features of people are not discernible",
       "Whether the partial braided hair at bottom right belongs to a separate person or is part of another figure is uncertain due to cropping",
       "Exact time of day and weather conditions outside the covered area cannot be determined",
-      "Text on bags and small labels is ignored per rules and not listed"
-    ]
+      "Text on bags and small labels is ignored per rules and not listed",
+      "Exact geographic location of the market cannot be determined from visual content alone; location inference relies solely on provided_title",
+      "No visible text or distinctive architecture is present to confirm specific market identity",
+      "No local cultural terms clearly shown in image"
+    ],
+    "place": {
+      "name": "Nairobi",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Nairobi Tourist market - panoramio"
+        },
+        {
+          "kind": "context",
+          "detail": "narrow covered market alley lined on both sides with stalls displaying hanging bags and accessories"
+        }
+      ],
+      "confidence": 0.68
+    },
+    "place_key": "kenya/nairobi",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -330,6 +377,14 @@
         "run_at": "2026-10-27T12:15:45+00:00",
         "raw_output_path": "data/annotations/raw/market_022_attempt1.txt",
         "tokens": 11775
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:51:23+00:00",
+        "raw_output_path": "data/annotations/raw/market_022_passB_attempt1.txt",
+        "tokens": 6443
       }
     ],
     "human_review": {

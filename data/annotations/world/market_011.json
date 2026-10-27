@@ -345,14 +345,53 @@
   },
   "inferred": {
     "landmarks": [],
-    "place_candidates": [],
+    "place_candidates": [
+      {
+        "name": "Masai Market",
+        "hierarchy": [
+          "Kenya"
+        ],
+        "key": "kenya/masai-market",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Masai Market after a safari"
+          }
+        ],
+        "confidence": 0.52
+      }
+    ],
     "uncertainties": [
       "Exact text on the partially cut-off banner on the top right beyond the visible letters",
       "Text on small price tags attached to stools and sculptures is not legible",
       "Material composition of sculptures and stools beyond visual appearance",
       "Geographic location of the shop beyond what is depicted",
-      "Whether additional people or areas exist outside the frame"
-    ]
+      "Whether additional people or areas exist outside the frame",
+      "Geographic location of the shop beyond what is depicted is listed as uncertain; visible text only shows 'COUNTRIES OF AFRICA' and partial 'ES OF ICA' with no city, street, or building name; no distinctive architecture identifies a specific landmark; provided title suggests Masai Market but lacks corroborating visible evidence"
+    ],
+    "place": {
+      "name": "Unknown",
+      "hierarchy": [
+        "Kenya"
+      ],
+      "key": "unknown/unknown",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "context",
+          "detail": "Indoor souvenir shop aisle lined with white display shelves holding wooden animal carvings, patterned stools, and hanging Africa map banners. Scene type is market, setting indoor."
+        },
+        {
+          "kind": "provided_title",
+          "detail": "Masai Market after a safari"
+        }
+      ],
+      "confidence": 0.38
+    },
+    "place_key": "unknown/unknown",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -372,6 +411,14 @@
         "run_at": "2026-10-27T12:13:54+00:00",
         "raw_output_path": "data/annotations/raw/market_011_attempt1.txt",
         "tokens": 9444
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:50:51+00:00",
+        "raw_output_path": "data/annotations/raw/market_011_passB_attempt1.txt",
+        "tokens": 10309
       }
     ],
     "human_review": {

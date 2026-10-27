@@ -328,16 +328,99 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Kenyatta International Convention Centre",
+        "key": "kenya/nairobi/cbd/kicc",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta International Convention Center Tower"
+          },
+          {
+            "kind": "architecture",
+            "detail": "tall cylindrical high-rise with horizontal pinkish-brown balconies and flat disc-shaped roof"
+          },
+          {
+            "kind": "architecture",
+            "detail": "low circular pavilion with dark brown conical roof on elevated platform"
+          }
+        ],
+        "confidence": 0.98
+      },
+      {
+        "name": "CBK Pension Towers",
+        "key": "kenya/nairobi/cbd/cbk-pension-towers",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "CBK PENSION TOWERS"
+          }
+        ],
+        "confidence": 0.99
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "context",
+            "detail": "city skyline dominated by Kenyatta International Convention Centre tower and conical pavilion with modern glass skyscrapers"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
     "uncertainties": [
       "Exact number of people at bottom center due to small size, distance and occlusion",
       "Text or logo on rooftop of beige rectangular tower in center is not legible enough to read",
       "Whether flagpoles have flags attached cannot be determined",
       "Interior details of buildings and pavilion not visible",
       "Exact weather conditions beyond partly cloudy appearance",
-      "Small dark speck in upper left sky may be bird or artifact but cannot be confirmed"
-    ]
+      "Small dark speck in upper left sky may be bird or artifact but cannot be confirmed",
+      "Identity of modern blue-glass skyscraper with angular gold-accented top not determined - no legible visible_text",
+      "Exact number of people and interior details not determinable due to distance and occlusion"
+    ],
+    "place": {
+      "name": "Kenyatta International Convention Centre",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "CBD"
+      ],
+      "key": "kenya/nairobi/cbd/kicc",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Kenyatta International Convention Center Tower"
+        },
+        {
+          "kind": "architecture",
+          "detail": "tall cylindrical high-rise with horizontal pinkish-brown balconies and flat disc-shaped roof"
+        },
+        {
+          "kind": "visible_text",
+          "detail": "KENYA"
+        }
+      ],
+      "confidence": 0.97
+    },
+    "place_key": "kenya/nairobi/cbd/kicc",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -357,6 +440,14 @@
         "run_at": "2026-10-27T12:11:39+00:00",
         "raw_output_path": "data/annotations/raw/landmarks_003_attempt1.txt",
         "tokens": 10152
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:49:12+00:00",
+        "raw_output_path": "data/annotations/raw/landmarks_003_passB_attempt1.txt",
+        "tokens": 5953
       }
     ],
     "human_review": {

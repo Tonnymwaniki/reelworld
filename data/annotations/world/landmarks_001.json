@@ -313,15 +313,66 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Kenyatta International Convention Centre",
+        "key": "kenya/nairobi/cbd/kicc",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "ASC Leiden - Rietveld Collection - East Africa 1975 - 05 - 010 - Kenyatta International Convention Centre. Modern round tower apartment and conical building - Nairobi, Kenya"
+          },
+          {
+            "kind": "architecture",
+            "detail": "tall cylindrical high-rise tower with horizontal window bands and flat disc-shaped roof beside low wide building with dark conical roof on dark horizontal podium structure"
+          },
+          {
+            "kind": "context",
+            "detail": "caption describes tall cylindrical tower with disc-shaped roof stands beside conical-roof building behind fenced plaza under clear sky"
+          }
+        ],
+        "confidence": 0.96
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "No sign, banner or label with at least 3 legible letters can be read; any distant text is too small or blurry to transcribe",
       "Exact function, name or location of the buildings cannot be determined from the image alone",
       "Number of flagpoles is approximate as some are partially obscured",
       "Details of the statue figure and interior of buildings are not discernible",
-      "Exact time of day and date cannot be determined beyond daytime with clear weather"
-    ]
+      "Exact time of day and date cannot be determined beyond daytime with clear weather",
+      "No legible visible_text in image; location identification relies on provided_title",
+      "Exact function, interior details and statue identity not discernible from image alone"
+    ],
+    "place": {
+      "name": "Kenyatta International Convention Centre",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi/cbd/kicc",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "ASC Leiden - Rietveld Collection - East Africa 1975 - 05 - 010 - Kenyatta International Convention Centre. Modern round tower apartment and conical building - Nairobi, Kenya"
+        },
+        {
+          "kind": "architecture",
+          "detail": "tall cylindrical high-rise tower with horizontal window bands and flat disc-shaped roof dominates center-left with low conical-roof building to its right, both on dark podium"
+        },
+        {
+          "kind": "context",
+          "detail": "provided_title locates subject in Nairobi, Kenya"
+        }
+      ],
+      "confidence": 0.96
+    },
+    "place_key": "kenya/nairobi/cbd/kicc",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -341,6 +392,14 @@
         "run_at": "2026-10-27T12:11:23+00:00",
         "raw_output_path": "data/annotations/raw/landmarks_001_attempt1.txt",
         "tokens": 9425
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:49:00+00:00",
+        "raw_output_path": "data/annotations/raw/landmarks_001_passB_attempt1.txt",
+        "tokens": 4782
       }
     ],
     "human_review": {

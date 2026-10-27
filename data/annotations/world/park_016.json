@@ -320,16 +320,112 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Uhuru Park",
+        "key": "kenya/nairobi/uhuru-park",
+        "type": "park",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Skyline of Nairobi city as seen from the lake in Uhuru Park"
+          },
+          {
+            "kind": "context",
+            "detail": "large still lake with grassy shoreline, palm trees and people along shore with city skyline of high-rise buildings beyond"
+          }
+        ],
+        "confidence": 0.97
+      },
+      {
+        "name": "Nairobi",
+        "key": "kenya/nairobi",
+        "type": "district",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Skyline of Nairobi city as seen from the lake in Uhuru Park"
+          },
+          {
+            "kind": "context",
+            "detail": "city skyline of high-rise buildings beyond park and elevated roadway"
+          }
+        ],
+        "confidence": 0.96
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "context",
+            "detail": "distant city skyline of high-rise buildings including tall brown glass tower, blue glass twin towers and cylindrical tower beyond park"
+          }
+        ],
+        "confidence": 0.72
+      },
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Skyline of Nairobi city as seen from the lake in Uhuru Park"
+          }
+        ],
+        "confidence": 0.9
+      }
+    ],
     "uncertainties": [
       "exact number of people is uncertain due to distance and small figure size",
       "text on top of tall brown building on right is blurry and unreadable, fewer than 3 letters can be confidently read",
       "specific names or identities of buildings cannot be determined from image alone",
       "exact time of day beyond daytime is unclear due to overcast lighting",
       "details of clothing colors and facial features of people are not discernible",
-      "purpose of white temporary structures on left side of park is unclear"
-    ]
+      "purpose of white temporary structures on left side of park is unclear",
+      "specific names or identities of high-rise buildings in skyline cannot be determined from image alone",
+      "text on tall brown building is blurry and unreadable",
+      "exact number and details of people along shore uncertain due to distance"
+    ],
+    "place": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Skyline of Nairobi city as seen from the lake in Uhuru Park"
+        },
+        {
+          "kind": "context",
+          "detail": "calm lake in park with palm trees and people along shore, with city skyline of high-rise buildings in background"
+        }
+      ],
+      "confidence": 0.96
+    },
+    "place_key": "kenya/nairobi/uhuru-park",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -349,6 +445,14 @@
         "run_at": "2026-10-27T12:17:27+00:00",
         "raw_output_path": "data/annotations/raw/park_016_attempt1.txt",
         "tokens": 6710
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:53:17+00:00",
+        "raw_output_path": "data/annotations/raw/park_016_passB_attempt2.txt",
+        "tokens": 5053
       }
     ],
     "human_review": {

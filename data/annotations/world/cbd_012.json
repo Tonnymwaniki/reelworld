@@ -366,7 +366,21 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Mama Ngina Street",
+        "key": "unknown/mama-ngina-street",
+        "type": "street",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Citi Hoppa UD MKB 210 368, Mama Ngina Street, 2025 (01)"
+          }
+        ],
+        "confidence": 0.96
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact number of people partially occluded behind buses, barriers and trees cannot be determined",
@@ -374,8 +388,31 @@
       "License plate of blue bus and other distant vehicles is not legible with certainty",
       "Text printed on people's clothing or bags was ignored per instructions",
       "Numeric-only signs such as 368 and 504 were omitted because they contain fewer than 3 letters",
-      "Specific destination, route or time information beyond visible bus signs cannot be determined"
-    ]
+      "Specific destination, route or time information beyond visible bus signs cannot be determined",
+      "No visible street-name sign in image; location derived solely from provided_title",
+      "Identities of tall cylindrical high-rise and rectangular high-rise buildings in background cannot be determined from description alone without outside knowledge",
+      "Exact bus routes, destinations and distant billboard text not legible"
+    ],
+    "place": {
+      "name": "Mama Ngina Street",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Nairobi CBD"
+      ],
+      "key": "unknown/mama-ngina-street",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Citi Hoppa UD MKB 210 368, Mama Ngina Street, 2025 (01)"
+        }
+      ],
+      "confidence": 0.94
+    },
+    "place_key": "unknown/mama-ngina-street",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": true,
@@ -395,6 +432,14 @@
         "run_at": "2026-10-27T12:07:59+00:00",
         "raw_output_path": "data/annotations/raw/cbd_012_attempt1.txt",
         "tokens": 13458
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:47:08+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_012_passB_attempt1.txt",
+        "tokens": 8026
       }
     ],
     "human_review": {

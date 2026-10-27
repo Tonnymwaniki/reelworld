@@ -339,15 +339,58 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Masai Market",
+        "key": "kenya/masai-market",
+        "type": "market",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi Maasai Market stand"
+          },
+          {
+            "kind": "context",
+            "detail": "tags include Kenya, market, indoor bazaar and description shows densely packed indoor craft stall with bowls, figurines, chess sets and textiles"
+          }
+        ],
+        "confidence": 0.85
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Text on hanging T-shirts and fabrics is visible but excluded per instruction to ignore text on clothing; many shirts are partially cut off or blurry and cannot be transcribed with certainty",
       "Exact count of small figurines, bowls and plates cannot be determined due to dense stacking and overlap",
       "Whether the foot at bottom right belongs to a customer or vendor cannot be determined",
       "Specific location, market name, and time of day cannot be determined from indoor lighting alone",
-      "Material and price of items cannot be determined from photo"
-    ]
+      "Material and price of items cannot be determined from photo",
+      "No visible text or distinctive architecture to independently verify market identity beyond provided title; text on hanging T-shirts excluded per instruction and cannot be transcribed",
+      "Exact location within Nairobi and time of day cannot be determined from indoor lighting alone"
+    ],
+    "place": {
+      "name": "Masai Market",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/masai-market",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Nairobi Maasai Market stand"
+        },
+        {
+          "kind": "context",
+          "detail": "tags include Kenya and scene type market indoor with activity selling handmade souvenirs and textiles"
+        }
+      ],
+      "confidence": 0.85
+    },
+    "place_key": "kenya/masai-market",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": true,
@@ -367,6 +410,14 @@
         "run_at": "2026-10-27T12:15:16+00:00",
         "raw_output_path": "data/annotations/raw/market_021_attempt1.txt",
         "tokens": 10511
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:51:15+00:00",
+        "raw_output_path": "data/annotations/raw/market_021_passB_attempt1.txt",
+        "tokens": 6022
       }
     ],
     "human_review": {

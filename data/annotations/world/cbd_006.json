@@ -336,8 +336,53 @@
       "Full text on the lower yellow portion of the large billboard is obscured by tree foliage and is not fully legible",
       "Text on smaller storefront signs and distant advertisements is too blurry to read and was omitted",
       "Specific building names, addresses, and interior details cannot be determined",
-      "Exact time of day and weather conditions beyond overcast daylight cannot be determined from the image alone"
-    ]
+      "Exact time of day and weather conditions beyond overcast daylight cannot be determined from the image alone",
+      "No Kenya-specific landmarks from the allowed list are visible; visible_text is Japanese and tags indicate Japan, so Nairobi/Kenya place names do not apply",
+      "Tokyo Times Tower referenced in provided_title is distinct from Nairobi Times Tower and is treated as viewpoint (taken_from) not as a visible landmark"
+    ],
+    "place": {
+      "name": "Akiba Tashiro street",
+      "hierarchy": [
+        "Japan",
+        "Tokyo",
+        "Akiba Tashiro street"
+      ],
+      "key": "japan/tokyo/akiba-tashiro-street/akiba-tashiro-street",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Akiba Tashiro street viewed from Tokyo Times Tower entrance east side (2010-05-04 16.13.16)"
+        },
+        {
+          "kind": "visible_text",
+          "detail": "法人買取大歓迎"
+        },
+        {
+          "kind": "context",
+          "detail": "tags include Japan and description of Japanese urban street scene"
+        }
+      ],
+      "confidence": 0.92
+    },
+    "place_key": "japan/tokyo/akiba-tashiro-street/akiba-tashiro-street",
+    "taken_from": {
+      "name": "Tokyo Times Tower entrance east side",
+      "hierarchy": [
+        "Japan",
+        "Tokyo"
+      ],
+      "key": "kenya/nairobi/cbd/times-tower",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Akiba Tashiro street viewed from Tokyo Times Tower entrance east side (2010-05-04 16.13.16)"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -357,6 +402,14 @@
         "run_at": "2026-10-27T12:06:57+00:00",
         "raw_output_path": "data/annotations/raw/cbd_006_attempt1.txt",
         "tokens": 13094
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:46:38+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_006_passB_attempt1.txt",
+        "tokens": 6373
       }
     ],
     "human_review": {

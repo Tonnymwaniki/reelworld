@@ -371,7 +371,38 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Kenyatta Avenue",
+        "key": "kenya/nairobi/cbd/kenyatta-avenue",
+        "type": "street",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta Avenue, Nairobi, 2025 (01)"
+          }
+        ],
+        "confidence": 0.92
+      },
+      {
+        "name": "Nairobi",
+        "key": "kenya/nairobi",
+        "type": "district",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "NAIROBI CITY COUNTY"
+          },
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta Avenue, Nairobi, 2025 (01)"
+          }
+        ],
+        "confidence": 0.98
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact number of passengers inside buses is not discernible through windows",
@@ -379,8 +410,37 @@
       "Text on the side of the red bus in the foreground is partially blurred by motion",
       "License plate numbers and other small vehicle markings are not legible",
       "Exact time of day and weather conditions beyond overcast cannot be determined",
-      "Building names and interior details are not visible"
-    ]
+      "Building names and interior details are not visible",
+      "Twin cylindrical tower building name and decorative arch gateway name not determinable from provided information; no evidence to identify specific building or arch beyond description",
+      "Exact position along Kenyatta Avenue and precise viewing direction beyond facing toward arch and towers not specified"
+    ],
+    "place": {
+      "name": "Kenyatta Avenue",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi/cbd/kenyatta-avenue",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Kenyatta Avenue, Nairobi, 2025 (01)"
+        },
+        {
+          "kind": "visible_text",
+          "detail": "NAIROBI CITY COUNTY"
+        },
+        {
+          "kind": "architecture",
+          "detail": "wide paved multi-lane road stretching into distance with buses and vehicles, large arch with striped pattern and shield emblem spanning road, twin cylindrical towers with striped facade and red lattice mast behind arch"
+        }
+      ],
+      "confidence": 0.93
+    },
+    "place_key": "kenya/nairobi/cbd/kenyatta-avenue",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -400,6 +460,14 @@
         "run_at": "2026-10-27T12:20:27+00:00",
         "raw_output_path": "data/annotations/raw/street_010_attempt1.txt",
         "tokens": 11716
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:54:21+00:00",
+        "raw_output_path": "data/annotations/raw/street_010_passB_attempt1.txt",
+        "tokens": 6992
       }
     ],
     "human_review": {

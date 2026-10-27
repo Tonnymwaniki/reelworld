@@ -339,7 +339,38 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Kenyatta International Convention Centre",
+        "key": "kenya/nairobi/cbd/kicc",
+        "type": "building",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "architecture",
+            "detail": "tall round building with horizontal bands and wide flat top on left side of skyline"
+          }
+        ],
+        "confidence": 0.98
+      },
+      {
+        "name": "CBK Pension Towers",
+        "key": "kenya/nairobi/cbd/cbk-pension-towers",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "CBA PENSION TOWERS"
+          },
+          {
+            "kind": "architecture",
+            "detail": "two connected tall glass buildings with blue windows and gold vertical elements on right"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact number of people is uncertain due to distance, occlusion by trees and small figure size",
@@ -347,8 +378,33 @@
       "Specific identities or names of buildings beyond visible signage cannot be determined",
       "Details of people's clothing, ages or genders cannot be determined due to distance",
       "Text on small or distant signs with fewer than 3 legible letters was omitted",
-      "Exact time of day beyond daytime and weather conditions beyond clear sky cannot be determined"
-    ]
+      "Exact time of day beyond daytime and weather conditions beyond clear sky cannot be determined",
+      "Specific identities or names of other mid-rise buildings beyond visible signage cannot be determined"
+    ],
+    "place": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Uhuru Park Nairobi 03"
+        },
+        {
+          "kind": "context",
+          "detail": "urban park with lake, palm trees, yellow pedal boat and grassy shoreline with people relaxing, walking and boating, with city skyline in background"
+        }
+      ],
+      "confidence": 0.96
+    },
+    "place_key": "kenya/nairobi/uhuru-park",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -368,6 +424,14 @@
         "run_at": "2026-10-27T12:19:19+00:00",
         "raw_output_path": "data/annotations/raw/park_022_attempt2.txt",
         "tokens": 9034
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:53:21+00:00",
+        "raw_output_path": "data/annotations/raw/park_022_passB_attempt1.txt",
+        "tokens": 6130
       }
     ],
     "human_review": {

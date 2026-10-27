@@ -269,15 +269,60 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "City Market",
+        "key": "unknown/city-market",
+        "type": "market",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Self made craft work being sold at Nairobi city market in Kenya"
+          },
+          {
+            "kind": "context",
+            "detail": "scene type market, indoor display of souvenir crafts for sale"
+          }
+        ],
+        "confidence": 0.65
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "The text printed on the side of the cardboard box is blurry and cannot be read with at least 3 letters.",
       "The exact location, market name, or geographic origin of the crafts cannot be determined from the image.",
       "The materials, age, and maker of the carvings and gourds cannot be confirmed visually.",
       "Whether the painting in the background is part of the display for sale or background decoration is unclear.",
-      "The meaning or cultural significance of the patterns on the red gourd cannot be determined from the photo alone."
-    ]
+      "The meaning or cultural significance of the patterns on the red gourd cannot be determined from the photo alone.",
+      "No visible_text or distinctive architecture visible to independently verify market identity; location inferred solely from provided_title",
+      "Exact stall location within market, materials, age and maker of carvings and gourds, and cultural significance of patterns cannot be determined from photo alone",
+      "Visible text on cardboard box is blurry and unreadable; no local terms such as matatu, kiosk, mkokoteni, or kanga clearly shown"
+    ],
+    "place": {
+      "name": "City Market",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "CBD"
+      ],
+      "key": "unknown/city-market",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Self made craft work being sold at Nairobi city market in Kenya"
+        },
+        {
+          "kind": "context",
+          "detail": "scene type market, indoor display of souvenir crafts for sale"
+        }
+      ],
+      "confidence": 0.65
+    },
+    "place_key": "unknown/city-market",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -297,6 +342,14 @@
         "run_at": "2026-10-27T12:15:57+00:00",
         "raw_output_path": "data/annotations/raw/market_024_attempt1.txt",
         "tokens": 11840
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:51:29+00:00",
+        "raw_output_path": "data/annotations/raw/market_024_passB_attempt1.txt",
+        "tokens": 6043
       }
     ],
     "human_review": {

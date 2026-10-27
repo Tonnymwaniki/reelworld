@@ -324,8 +324,29 @@
       "Text on buses and other distant signs is too blurry to read with at least 3 letters",
       "Vehicle makes, models and license plates are not legible",
       "Building names and specific location cannot be determined from image",
-      "Weather beyond sky appearance cannot be determined"
-    ]
+      "Weather beyond sky appearance cannot be determined",
+      "Exact building identities and street name cannot be determined from visual evidence alone; uncertainties note building names and specific location cannot be determined from image",
+      "Billboard content, bus text, vehicle makes/models and license plates not legible; exact time of day ambiguous between dawn/dusk"
+    ],
+    "place": {
+      "name": "Nairobi",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "GPO, Nairobi"
+        }
+      ],
+      "confidence": 0.85
+    },
+    "place_key": "kenya/nairobi",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -345,6 +366,14 @@
         "run_at": "2026-10-27T12:08:30+00:00",
         "raw_output_path": "data/annotations/raw/cbd_018_attempt1.txt",
         "tokens": 10003
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:47:23+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_018_passB_attempt1.txt",
+        "tokens": 5248
       }
     ],
     "human_review": {

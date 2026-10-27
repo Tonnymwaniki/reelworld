@@ -291,15 +291,123 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Uhuru Park",
+        "key": "kenya/nairobi/uhuru-park",
+        "type": "park",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Lascar Nairobi's skyline from Uhuru Park (4519272483)"
+          },
+          {
+            "kind": "context",
+            "detail": "Wide view of a dry park with scattered trees and covered stands in the foreground and a dense city skyline under a clear blue sky in the background."
+          },
+          {
+            "kind": "context",
+            "detail": "expansive outdoor park with dry patchy ground with reddish soil, scattered small trees, covered grandstands with zigzag roofs and tiered seating, green park area with dense trees and small pond reflecting sky"
+          }
+        ],
+        "confidence": 0.92
+      },
+      {
+        "name": "Nairobi",
+        "key": "kenya/nairobi",
+        "type": "district",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Lascar Nairobi's skyline from Uhuru Park (4519272483)"
+          },
+          {
+            "kind": "context",
+            "detail": "dense cluster of high-rise buildings and skyscrapers of varying heights and shapes forms a city skyline in far background under bright, clear blue sky"
+          }
+        ],
+        "confidence": 0.9
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "context",
+            "detail": "dense cluster of high-rise buildings and skyscrapers of varying heights and shapes forming city skyline in far background"
+          },
+          {
+            "kind": "provided_title",
+            "detail": "Lascar Nairobi's skyline from Uhuru Park (4519272483)"
+          }
+        ],
+        "confidence": 0.65
+      }
+    ],
     "uncertainties": [
       "Exact number of people under shelters and on grounds due to distance and small figure size",
       "Text on distant building banners and signs is too blurry to read at least 3 letters",
       "Specific building names, functions, or heights cannot be determined",
       "Exact species of trees and condition of vegetation beyond general appearance",
-      "Whether pond is natural or artificial and its depth"
-    ]
+      "Whether pond is natural or artificial and its depth",
+      "No visible text to identify specific buildings; specific building names, functions, or heights cannot be determined per uncertainties",
+      "Exact elevated position within park not specified beyond elevated viewpoint facing city skyline",
+      "Tall cylindrical tower with crown and brown twin-tower building visible in skyline but not identified to specific landmark without evidence"
+    ],
+    "place": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Lascar Nairobi's skyline from Uhuru Park (4519272483)"
+        },
+        {
+          "kind": "context",
+          "detail": "photo shows expansive outdoor park viewed from elevated position with dry patchy ground, scattered trees, covered grandstands with zigzag roofs, green park area with dense trees and small pond, with dense city skyline beyond"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "place_key": "kenya/nairobi/uhuru-park",
+    "taken_from": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Lascar Nairobi's skyline from Uhuru Park (4519272483)"
+        },
+        {
+          "kind": "context",
+          "detail": "camera viewpoint elevated, raised, facing toward city skyline across park"
+        }
+      ],
+      "confidence": 0.88
+    },
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -319,6 +427,14 @@
         "run_at": "2026-10-27T12:16:18+00:00",
         "raw_output_path": "data/annotations/raw/park_005_attempt1.txt",
         "tokens": 6914
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:52:10+00:00",
+        "raw_output_path": "data/annotations/raw/park_005_passB_attempt1.txt",
+        "tokens": 9029
       }
     ],
     "human_review": {

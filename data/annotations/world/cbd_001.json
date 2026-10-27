@@ -311,8 +311,58 @@
       "Text on distant billboards, rooftop signs, and building logos is not legible due to distance and blur and is therefore not transcribed",
       "Whether the warm light is sunrise or sunset cannot be determined from the image alone",
       "Exact number of vehicles, windows, and distant buildings cannot be determined due to scale and haze",
-      "Presence of people on streets or in buildings cannot be determined at this distance and resolution"
-    ]
+      "Presence of people on streets or in buildings cannot be determined at this distance and resolution",
+      "Exact identities of individual high-rise buildings cannot be determined from visible evidence alone",
+      "Whether the warm golden hour light is sunrise or sunset cannot be determined from the image alone"
+    ],
+    "place": {
+      "name": "Nairobi CBD",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "CBD"
+      ],
+      "key": "kenya/nairobi/cbd",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Aerial view of the Nairobi skyline from the KICC rooftop at golden hour"
+        },
+        {
+          "kind": "context",
+          "detail": "Elevated wide view of a dense city center with clustered high-rise buildings under a pale blue sky"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "place_key": "kenya/nairobi/cbd",
+    "taken_from": {
+      "name": "Kenyatta International Convention Centre",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "CBD"
+      ],
+      "key": "kenya/nairobi/cbd/kicc",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Aerial view of the Nairobi skyline from the KICC rooftop at golden hour"
+        },
+        {
+          "kind": "architecture",
+          "detail": "weathered concrete rooftop parapet runs across the bottom edge - rough dark concrete ledge spanning the entire bottom of the image"
+        },
+        {
+          "kind": "context",
+          "detail": "elevated very_high viewpoint looking across the city toward the horizon"
+        }
+      ],
+      "confidence": 0.92
+    },
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -332,6 +382,14 @@
         "run_at": "2026-10-27T12:01:17+00:00",
         "raw_output_path": "data/annotations/raw/cbd_001_attempt1.txt",
         "tokens": 9572
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:44:08+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_001_passB_attempt1.txt",
+        "tokens": 5136
       }
     ],
     "human_review": {

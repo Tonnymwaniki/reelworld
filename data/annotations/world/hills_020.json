@@ -316,15 +316,68 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Ngong Hills",
+        "key": "kenya/kajiado/ngong-hills",
+        "type": "natural",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Ngong Hills wind turbines"
+          },
+          {
+            "kind": "architecture",
+            "detail": "grassy hilltop with several tall white three-bladed wind turbines distributed across rolling green hills"
+          },
+          {
+            "kind": "context",
+            "detail": "wide outdoor landscape overlooking hazy valley with scattered buildings and vegetation under clear pale blue sky"
+          }
+        ],
+        "confidence": 0.85
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "exact number of wind turbines in far distance due to haze and resolution",
       "exact geographic location of the wind farm",
       "time of day beyond daytime and weather conditions beyond clear",
       "whether additional Vestas logos on distant turbines are present but not legible",
-      "details of buildings and vegetation in the distant valley due to haze"
-    ]
+      "details of buildings and vegetation in the distant valley due to haze",
+      "Exact number of wind turbines in far distance uncertain due to haze and resolution",
+      "Exact geographic location of wind farm beyond provided title cannot be independently verified from image alone",
+      "Details of buildings and vegetation in distant valley obscured by haze",
+      "Whether additional Vestas logos are present on distant turbines not legible"
+    ],
+    "place": {
+      "name": "Ngong Hills",
+      "hierarchy": [
+        "Kenya",
+        "Ngong Hills"
+      ],
+      "key": "kenya/kajiado/ngong-hills",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Ngong Hills wind turbines"
+        },
+        {
+          "kind": "architecture",
+          "detail": "grassy hilltop with several tall white three-bladed wind turbines distributed across rolling green hills overlooking valley"
+        },
+        {
+          "kind": "context",
+          "detail": "distant hazy valley with scattered buildings and vegetation visible beyond turbines"
+        }
+      ],
+      "confidence": 0.85
+    },
+    "place_key": "kenya/kajiado/ngong-hills",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -344,6 +397,14 @@
         "run_at": "2026-10-27T12:10:39+00:00",
         "raw_output_path": "data/annotations/raw/hills_020_attempt1.txt",
         "tokens": 7404
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:48:47+00:00",
+        "raw_output_path": "data/annotations/raw/hills_020_passB_attempt1.txt",
+        "tokens": 6192
       }
     ],
     "human_review": {

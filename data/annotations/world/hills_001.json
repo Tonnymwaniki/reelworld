@@ -281,15 +281,77 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Ngong Hills",
+        "key": "kenya/kajiado/ngong-hills",
+        "type": "natural",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Benches@NgongHills"
+          },
+          {
+            "kind": "context",
+            "detail": "dry grassy hilltop with two weathered concrete benches and table overlooking vast arid valley plain to hazy horizon with distant mountain range"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact geographic location cannot be determined from the photo",
       "Specific material composition of benches and table beyond weathered concrete appearance",
       "Precise time of day beyond daylight hours",
       "Details of distant valley floor due to haze and distance",
-      "Whether the overlook is part of a public park or other property"
-    ]
+      "Whether the overlook is part of a public park or other property",
+      "No visible text in image to independently confirm location; location inferred solely from provided_title Benches@NgongHills",
+      "Visual features alone show generic arid hilltop overlook; exact position within Ngong Hills and property status not determinable from image"
+    ],
+    "place": {
+      "name": "Ngong Hills",
+      "hierarchy": [
+        "Kenya",
+        "Ngong Hills"
+      ],
+      "key": "kenya/kajiado/ngong-hills",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Benches@NgongHills"
+        },
+        {
+          "kind": "context",
+          "detail": "hilltop overlook with concrete benches and table facing expansive arid valley plain"
+        }
+      ],
+      "confidence": 0.88
+    },
+    "place_key": "kenya/kajiado/ngong-hills",
+    "taken_from": {
+      "name": "Ngong Hills",
+      "hierarchy": [
+        "Kenya",
+        "Ngong Hills"
+      ],
+      "key": "kenya/kajiado/ngong-hills",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Benches@NgongHills"
+        },
+        {
+          "kind": "context",
+          "detail": "camera viewpoint elevated on hilltop facing across valley from benches"
+        }
+      ],
+      "confidence": 0.88
+    },
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -309,6 +371,14 @@
         "run_at": "2026-10-27T12:08:41+00:00",
         "raw_output_path": "data/annotations/raw/hills_001_attempt1.txt",
         "tokens": 7289
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:47:43+00:00",
+        "raw_output_path": "data/annotations/raw/hills_001_passB_attempt1.txt",
+        "tokens": 7205
       }
     ],
     "human_review": {

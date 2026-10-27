@@ -255,7 +255,29 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Ngong Hills",
+        "key": "kenya/kajiado/ngong-hills",
+        "type": "natural",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Green vagetation Ngong Hill"
+          },
+          {
+            "kind": "architecture",
+            "detail": "rolling green hills extend across the background, lined along the ridge with numerous white wind turbines"
+          },
+          {
+            "kind": "context",
+            "detail": "Wind turbines line green hills above a forested valley with scattered buildings and a waste pile under a hazy sky."
+          }
+        ],
+        "confidence": 0.62
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "exact number of wind turbines due to distance and overlap",
@@ -263,8 +285,34 @@
       "specific use or occupancy of the buildings",
       "exact time of day beyond daylight",
       "detailed composition of the waste pile",
-      "presence of small distant people or vehicles not resolvable"
-    ]
+      "presence of small distant people or vehicles not resolvable",
+      "exact geographic location or name of hills and town is listed as uncertain in photo record",
+      "no visible_text available to independently confirm location",
+      "exact number of wind turbines, specific use of buildings, and composition of waste pile could not be determined"
+    ],
+    "place": {
+      "name": "Ngong Hills",
+      "hierarchy": [
+        "Kenya",
+        "Ngong Hills"
+      ],
+      "key": "kenya/kajiado/ngong-hills",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Green vagetation Ngong Hill"
+        },
+        {
+          "kind": "context",
+          "detail": "wide outdoor landscape with dense green trees and rolling green hills lined along the ridge with numerous white wind turbines"
+        }
+      ],
+      "confidence": 0.6
+    },
+    "place_key": "kenya/kajiado/ngong-hills",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -284,6 +332,14 @@
         "run_at": "2026-10-27T12:09:24+00:00",
         "raw_output_path": "data/annotations/raw/hills_006_attempt1.txt",
         "tokens": 7166
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:47:58+00:00",
+        "raw_output_path": "data/annotations/raw/hills_006_passB_attempt1.txt",
+        "tokens": 5755
       }
     ],
     "human_review": {

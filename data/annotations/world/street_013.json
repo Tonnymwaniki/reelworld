@@ -373,15 +373,124 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Kenyatta Avenue",
+        "key": "kenya/nairobi/cbd/kenyatta-avenue",
+        "type": "street",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta Avenue, Nairobi, 2025 (04)"
+          },
+          {
+            "kind": "context",
+            "detail": "wide asphalt road stretches through a city center lined with multi-story buildings with moderate traffic at urban intersection"
+          }
+        ],
+        "confidence": 0.92
+      },
+      {
+        "name": "UAP Towers",
+        "key": "unknown/uap-towers",
+        "type": "building",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "architecture",
+            "detail": "tall blue-glass high-rise in the background center with blue-tinted glass facade and UAP logo on top"
+          }
+        ],
+        "confidence": 0.82
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "context",
+            "detail": "city center lined with multi-story buildings including tall blue-glass high-rise in background center"
+          },
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta Avenue, Nairobi, 2025 (04)"
+          }
+        ],
+        "confidence": 0.88
+      },
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta Avenue, Nairobi, 2025 (04)"
+          },
+          {
+            "kind": "context",
+            "detail": "tags include Nairobi and urban intersection with matatu buses"
+          }
+        ],
+        "confidence": 0.92
+      }
+    ],
     "uncertainties": [
       "Exact number of pedestrians on left sidewalk due to distance and occlusion",
       "Text on distant blue sign on right building and other small storefront signs is not legible enough to read 3 letters",
       "Text on motorcycle license plate and small windshield stickers is blurry and cannot be read reliably",
       "Exact make and model of distant vehicles beyond the foreground buses and white car",
       "Specific street name or city location cannot be determined from image alone",
-      "Exact time of day beyond daytime and weather conditions beyond overcast"
+      "Exact time of day beyond daytime and weather conditions beyond overcast",
+      "Specific street name or city location cannot be determined from image alone per uncertainties; location relies on provided_title",
+      "Exact number of pedestrians on left sidewalk cannot be determined due to distance and occlusion",
+      "Text on distant blue sign on right building and other small storefront signs is not legible",
+      "Exact make and model of distant vehicles beyond foreground buses and white car cannot be determined",
+      "No persons identified"
+    ],
+    "place": {
+      "name": "Kenyatta Avenue",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "CBD"
+      ],
+      "key": "kenya/nairobi/cbd/kenyatta-avenue",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Kenyatta Avenue, Nairobi, 2025 (04)"
+        },
+        {
+          "kind": "context",
+          "detail": "wide asphalt road through city center lined with multi-story buildings including tall blue-glass high-rise and red-brick building with green trees along both sides"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "place_key": "kenya/nairobi/cbd/kenyatta-avenue",
+    "taken_from": null,
+    "cultural_context": [
+      {
+        "term": "matatu",
+        "local_name": "matatu",
+        "language": "Swahili",
+        "evidence": "tags include matatu bus and description shows large orange and white Isuzu bus with BROOK and gray and orange bus with SHAYANI in moderate urban traffic"
+      }
     ]
   },
   "privacy": {
@@ -402,6 +511,14 @@
         "run_at": "2026-10-27T12:20:51+00:00",
         "raw_output_path": "data/annotations/raw/street_013_attempt1.txt",
         "tokens": 10076
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:54:38+00:00",
+        "raw_output_path": "data/annotations/raw/street_013_passB_attempt1.txt",
+        "tokens": 5914
       }
     ],
     "human_review": {

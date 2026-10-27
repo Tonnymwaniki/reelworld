@@ -384,14 +384,91 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Haile Selassie Avenue",
+        "key": "kenya/nairobi/haile-selassie-avenue",
+        "type": "street",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi Isuzu NQR, cnr Tom Mboya Street and Haile Selassie Avenue, 2025 (02)"
+          }
+        ],
+        "confidence": 0.92
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi Isuzu NQR, cnr Tom Mboya Street and Haile Selassie Avenue, 2025 (02)"
+          }
+        ],
+        "confidence": 0.96
+      },
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "context",
+            "detail": "urban street lined with buildings and pedestrians with tall gray modern buildings in background"
+          }
+        ],
+        "confidence": 0.62
+      }
+    ],
     "uncertainties": [
       "Exact number of people inside bus and on distant sidewalks due to occlusion and blur",
       "Full text of partially cut-off top building sign and small blurry signs in background",
       "Text on people's clothing or bags not counted per rules",
       "License plate details not legible",
-      "Exact time of day beyond daytime"
+      "Exact time of day beyond daytime",
+      "No visible street name signs in image; street location relies solely on provided_title",
+      "Tom Mboya Street also mentioned in provided_title but not listed separately as landmark",
+      "Building signs AIMS COLLEGE and JUMBO AGROVET visible but not in authorized landmark list"
+    ],
+    "place": {
+      "name": "Haile Selassie Avenue",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi/haile-selassie-avenue",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Nairobi Isuzu NQR, cnr Tom Mboya Street and Haile Selassie Avenue, 2025 (02)"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "place_key": "kenya/nairobi/haile-selassie-avenue",
+    "taken_from": null,
+    "cultural_context": [
+      {
+        "term": "matatu",
+        "local_name": "matatu",
+        "language": "Swahili",
+        "evidence": "bright blue decorated bus with colorful graphics and text; tags include 'matatu'"
+      }
     ]
   },
   "privacy": {
@@ -412,6 +489,14 @@
         "run_at": "2026-10-27T12:22:06+00:00",
         "raw_output_path": "data/annotations/raw/street_023_attempt1.txt",
         "tokens": 9689
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:55:42+00:00",
+        "raw_output_path": "data/annotations/raw/street_023_passB_attempt1.txt",
+        "tokens": 7139
       }
     ],
     "human_review": {

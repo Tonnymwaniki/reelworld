@@ -353,8 +353,36 @@
       "Partial text visible through tree foliage on building in background cannot be read completely",
       "License plate numbers on parked cars are not legible",
       "Exact number of floors and interior details of background building cannot be determined",
-      "Text at top of billboard above KIYOYO is blurry and cut off"
-    ]
+      "Text at top of billboard above KIYOYO is blurry and cut off",
+      "Specific street within Nairobi CBD cannot be determined from visible evidence",
+      "Visible text POST, OFFICE, KIYOYO on billboard does not identify a specific landmark in the allowed list",
+      "Background building details obscured by trees and distance, exact building identity cannot be determined",
+      "No owner_note available to indicate camera location"
+    ],
+    "place": {
+      "name": "Nairobi CBD",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "CBD"
+      ],
+      "key": "kenya/nairobi/cbd",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "A green post box in the central business district of Nairobi"
+        },
+        {
+          "kind": "context",
+          "detail": "outdoor urban street scene with paved sidewalk, asphalt street, parked cars, multi-story building and billboard consistent with central business district setting"
+        }
+      ],
+      "confidence": 0.88
+    },
+    "place_key": "kenya/nairobi/cbd",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -374,6 +402,14 @@
         "run_at": "2026-10-27T12:08:21+00:00",
         "raw_output_path": "data/annotations/raw/cbd_015_attempt1.txt",
         "tokens": 14876
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:47:11+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_015_passB_attempt1.txt",
+        "tokens": 4634
       }
     ],
     "human_review": {

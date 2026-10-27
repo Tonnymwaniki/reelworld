@@ -303,15 +303,59 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Uhuru Park",
+        "key": "kenya/nairobi/uhuru-park",
+        "type": "park",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "A lake at Uhuru Park in Nairobi, Kenya, at sunset"
+          },
+          {
+            "kind": "context",
+            "detail": "lily-covered pond in an urban park with tall city buildings and trees in the background under a pale evening sky"
+          }
+        ],
+        "confidence": 0.96
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact number of people on far right is unclear due to small size and distance",
       "Text on distant building banners is blurry and cannot be read with at least 3 clear letters",
       "Species of trees and aquatic plants cannot be determined from image",
       "Exact time of day and weather conditions beyond visible lighting",
-      "Details of buildings beyond general color and height due to distance"
-    ]
+      "Details of buildings beyond general color and height due to distance",
+      "No visible text available to identify background buildings; tall yellow-brown high-rise buildings cannot be named from description alone",
+      "Exact identities of distant buildings and tree species cannot be determined"
+    ],
+    "place": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "A lake at Uhuru Park in Nairobi, Kenya, at sunset"
+        },
+        {
+          "kind": "context",
+          "detail": "grassy bank leading to a pond partially covered with lily pads with scattered trees and turquoise footbridge, with tall high-rise buildings rising above treeline in background"
+        }
+      ],
+      "confidence": 0.96
+    },
+    "place_key": "kenya/nairobi/uhuru-park",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -331,6 +375,14 @@
         "run_at": "2026-10-27T12:15:53+00:00",
         "raw_output_path": "data/annotations/raw/park_001_attempt1.txt",
         "tokens": 6645
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:51:55+00:00",
+        "raw_output_path": "data/annotations/raw/park_001_passB_attempt2.txt",
+        "tokens": 4407
       }
     ],
     "human_review": {

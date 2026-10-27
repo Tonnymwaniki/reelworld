@@ -317,16 +317,91 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Kenyatta Avenue",
+        "key": "kenya/nairobi/cbd/kenyatta-avenue",
+        "type": "street",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta Avenue, Nairobi, 2025 (02)"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "Nairobi CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta Avenue, Nairobi, 2025 (02)"
+          }
+        ],
+        "confidence": 0.85
+      },
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta Avenue, Nairobi, 2025 (02)"
+          }
+        ],
+        "confidence": 0.87
+      }
+    ],
     "uncertainties": [
       "Exact number of people due to occlusion and distance",
       "Text on red sign attached to right foreground pole is partially visible and cannot be fully read",
       "Text on distant building signs beyond TECNO is blurry and cannot be reliably read",
       "Text on shop fronts along left building ground floor is small and partially obscured",
       "License plate numbers and vehicle details are not legible",
-      "Exact time of day beyond daytime and weather conditions beyond cloud cover"
-    ]
+      "Exact time of day beyond daytime and weather conditions beyond cloud cover",
+      "Exact intersection along Kenyatta Avenue cannot be determined from description",
+      "Specific building identities and distant high-rise names not legible beyond generic multi-story buildings",
+      "No distinctive architectural landmark visible to independently confirm location beyond provided title"
+    ],
+    "place": {
+      "name": "Kenyatta Avenue",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Nairobi CBD"
+      ],
+      "key": "kenya/nairobi/cbd/kenyatta-avenue",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Kenyatta Avenue, Nairobi, 2025 (02)"
+        },
+        {
+          "kind": "context",
+          "detail": "wide paved intersection with multiple lanes of traffic, multi-story buildings, traffic light poles, street lamp posts and moderate pedestrian activity"
+        }
+      ],
+      "confidence": 0.88
+    },
+    "place_key": "kenya/nairobi/cbd/kenyatta-avenue",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -346,6 +421,14 @@
         "run_at": "2026-10-27T12:20:20+00:00",
         "raw_output_path": "data/annotations/raw/street_011_attempt1.txt",
         "tokens": 9040
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:54:35+00:00",
+        "raw_output_path": "data/annotations/raw/street_011_passB_attempt1.txt",
+        "tokens": 7102
       }
     ],
     "human_review": {

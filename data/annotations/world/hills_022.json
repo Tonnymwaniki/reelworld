@@ -250,14 +250,52 @@
   },
   "inferred": {
     "landmarks": [],
-    "place_candidates": [],
+    "place_candidates": [
+      {
+        "name": "Ngong Ping, Ma On Shan",
+        "hierarchy": [
+          "Unknown"
+        ],
+        "key": "unknown/ngong-ping-ma-on-shan",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Ngong Ping, Ma On Shan 01"
+          }
+        ],
+        "confidence": 0.3
+      }
+    ],
     "uncertainties": [
       "Exact number of distant figures on the ridge cannot be determined due to small size and distance",
       "Clothing details, ages, genders and identities of the distant figures are not discernible",
       "Exact geographic location and name of the mountain range cannot be determined",
       "Precise time of day and temperature cannot be determined from overcast lighting",
-      "Text on any distant signs or markers, if present, is not legible"
-    ]
+      "Text on any distant signs or markers, if present, is not legible",
+      "Exact geographic location and name of the mountain range cannot be determined from visual evidence alone",
+      "No visible text or distinctive architecture present to identify landmarks",
+      "Provided title suggests Ngong Ping, Ma On Shan but visual features do not independently confirm location",
+      "Identities and details of distant figures on ridge not discernible"
+    ],
+    "place": {
+      "name": "Unknown",
+      "hierarchy": [
+        "Unknown"
+      ],
+      "key": "unknown/unknown",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "context",
+          "detail": "wide outdoor mountain landscape with foggy grassy slopes, mist-shrouded peak, rocky cliff faces and grassy ridge as described; no distinctive architecture or visible text to identify location"
+        }
+      ],
+      "confidence": 0.35
+    },
+    "place_key": "unknown/unknown",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -277,6 +315,14 @@
         "run_at": "2026-10-27T12:10:42+00:00",
         "raw_output_path": "data/annotations/raw/hills_022_attempt1.txt",
         "tokens": 5858
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:48:49+00:00",
+        "raw_output_path": "data/annotations/raw/hills_022_passB_attempt1.txt",
+        "tokens": 5366
       }
     ],
     "human_review": {

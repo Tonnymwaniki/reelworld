@@ -322,8 +322,33 @@
       "Exact location, name of wind farm, and time of day beyond daytime cannot be determined",
       "Facial features, ages, genders, and identities of people cannot be determined as they are seen from behind",
       "Make, model, and license plate of white vehicle cannot be determined",
-      "Details of fence and small structures on hilltop are not clear due to distance"
-    ]
+      "Details of fence and small structures on hilltop are not clear due to distance",
+      "Exact location and name of wind farm cannot be determined from provided information",
+      "No evidence to identify Ngong Hills or any other specific landmark from allowed list",
+      "Facial features, ages, genders and identities of people cannot be determined as they are seen from behind"
+    ],
+    "place": {
+      "name": "Unknown",
+      "hierarchy": [
+        "Kenya"
+      ],
+      "key": "unknown/unknown",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Home in Nature"
+        },
+        {
+          "kind": "context",
+          "detail": "No visible text, distinctive architecture, or location-specific features; generic wind turbines on grassy hill with dirt road insufficient to identify specific place"
+        }
+      ],
+      "confidence": 0.95
+    },
+    "place_key": "unknown/unknown",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -343,6 +368,14 @@
         "run_at": "2026-10-27T12:09:41+00:00",
         "raw_output_path": "data/annotations/raw/hills_007_attempt1.txt",
         "tokens": 13204
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:48:15+00:00",
+        "raw_output_path": "data/annotations/raw/hills_007_passB_attempt2.txt",
+        "tokens": 4699
       }
     ],
     "human_review": {

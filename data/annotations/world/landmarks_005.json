@@ -251,15 +251,57 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Kenyatta International Convention Centre",
+        "key": "kenya/nairobi/cbd/kicc",
+        "type": "building",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta International Convention Centre, Nairobi, by Karl Henrik Nøstvik architect, entrance"
+          },
+          {
+            "kind": "architecture",
+            "detail": "multi-level brutalist concrete building with cantilevered terraces, deep overhangs, and zigzagging exterior ramps with dark metal railings"
+          }
+        ],
+        "confidence": 0.92
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Text on brown stone sign on middle ramp is illegible and cut off, cannot be transcribed",
       "Small light-colored shape near blue pipes at bottom left cannot be confirmed as a person or object due to distance and blur",
       "Exact building name, location, and interior layout cannot be determined from exterior view alone",
       "Number of floors and rooms inside building not visible",
-      "Weather conditions beyond visible sky patch unknown"
-    ]
+      "Weather conditions beyond visible sky patch unknown",
+      "No visible_text available; text on brown stone sign on middle ramp is illegible and cut off",
+      "Small light-colored shape near blue pipes at bottom left cannot be confirmed as person or object",
+      "Exact building name cannot be determined from exterior view alone per uncertainties; identification relies solely on provided_title",
+      "Interior layout, number of floors and rooms not visible",
+      "Weather beyond visible partly cloudy sky patch unknown"
+    ],
+    "place": {
+      "name": "Kenyatta International Convention Centre",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi/cbd/kicc",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Kenyatta International Convention Centre, Nairobi, by Karl Henrik Nøstvik architect, entrance"
+        }
+      ],
+      "confidence": 0.92
+    },
+    "place_key": "kenya/nairobi/cbd/kicc",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -279,6 +321,14 @@
         "run_at": "2026-10-27T12:11:50+00:00",
         "raw_output_path": "data/annotations/raw/landmarks_005_attempt1.txt",
         "tokens": 5818
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:49:17+00:00",
+        "raw_output_path": "data/annotations/raw/landmarks_005_passB_attempt1.txt",
+        "tokens": 5305
       }
     ],
     "human_review": {

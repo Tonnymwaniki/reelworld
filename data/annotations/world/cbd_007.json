@@ -352,8 +352,35 @@
       "Exact date and time of day beyond daytime cannot be determined from image alone",
       "Interior details of buildings and theater are not visible",
       "Text on clothing or bags is ignored per rules and not transcribed",
-      "Some small credit text on the large billboard is partially obscured by angle and distance"
-    ]
+      "Some small credit text on the large billboard is partially obscured by angle and distance",
+      "Provided title mentions Broadway at West 43rd Street intersection at Times Tower, but no evidence confirms this is the Nairobi Times Tower from allowed list; no Kenya landmark can be determined with available information; location outside Kenya hierarchy cannot be confirmed from provided information alone"
+    ],
+    "place": {
+      "name": "Unknown",
+      "hierarchy": [
+        "Unknown"
+      ],
+      "key": "unknown/unknown",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Broadway, középen a Nyugati 43. utca kereszteződésénél a Times Tower. Fortepan 85127"
+        },
+        {
+          "kind": "context",
+          "detail": "No Kenya landmark from allowed list is identifiable in description, entities, or visible_text; visible architecture (stepped stone clock tower with globe, white modern tower with Allied Chemical rooftop sign, STAR! billboard) does not match allowed Kenya names"
+        },
+        {
+          "kind": "visible_text",
+          "detail": "Allied Chemical"
+        }
+      ],
+      "confidence": 0.96
+    },
+    "place_key": "unknown/unknown",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -373,6 +400,14 @@
         "run_at": "2026-10-27T12:07:01+00:00",
         "raw_output_path": "data/annotations/raw/cbd_007_attempt1.txt",
         "tokens": 12524
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:46:49+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_007_passB_attempt1.txt",
+        "tokens": 8167
       }
     ],
     "human_review": {

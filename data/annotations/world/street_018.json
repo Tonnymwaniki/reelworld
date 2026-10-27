@@ -330,14 +330,75 @@
   },
   "inferred": {
     "landmarks": [],
-    "place_candidates": [],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Kenyatta Avenue, Nairobi, 2025 (09)"
+          }
+        ],
+        "confidence": 0.9
+      },
+      {
+        "name": "Nairobi CBD",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi",
+          "CBD"
+        ],
+        "key": "kenya/nairobi/cbd",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "context",
+            "detail": "downtown avenue with tall buildings, moderate crowd, street setting"
+          }
+        ],
+        "confidence": 0.82
+      }
+    ],
     "uncertainties": [
       "Exact number of people is uncertain due to distance, occlusion and small size in background",
       "Text on several distant or blurry signs and storefronts cannot be read, including blue rooftop sign in center background and small shop signs on right",
       "Specific building names, functions and street name cannot be determined from visible details",
       "Vehicle details such as license plates, makes and models are not legible",
-      "Exact time of day and weather conditions beyond cloud cover cannot be determined"
-    ]
+      "Exact time of day and weather conditions beyond cloud cover cannot be determined",
+      "Specific building names, functions and street name cannot be determined from visible details beyond provided title",
+      "Text on several distant or blurry signs and storefronts cannot be read including blue rooftop sign in center background",
+      "Exact number of people and vehicle details not legible due to distance and occlusion"
+    ],
+    "place": {
+      "name": "Kenyatta Avenue",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "CBD"
+      ],
+      "key": "kenya/nairobi/cbd/kenyatta-avenue",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Kenyatta Avenue, Nairobi, 2025 (09)"
+        },
+        {
+          "kind": "context",
+          "detail": "wide asphalt street lined with multi-story buildings and mature trees, described as busy urban downtown avenue with pedestrians and vehicles"
+        }
+      ],
+      "confidence": 0.88
+    },
+    "place_key": "kenya/nairobi/cbd/kenyatta-avenue",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -357,6 +418,14 @@
         "run_at": "2026-10-27T12:21:36+00:00",
         "raw_output_path": "data/annotations/raw/street_018_attempt1.txt",
         "tokens": 10295
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:55:11+00:00",
+        "raw_output_path": "data/annotations/raw/street_018_passB_attempt1.txt",
+        "tokens": 7704
       }
     ],
     "human_review": {

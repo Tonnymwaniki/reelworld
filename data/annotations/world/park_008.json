@@ -292,8 +292,57 @@
       "Exact time of day and date cannot be determined beyond daytime",
       "Whether haze is due to fog, smog, or dust cannot be determined",
       "Details inside buildings and behind the foreground wall cannot be determined",
-      "Exact count of birds is uncertain due to small size and distance"
-    ]
+      "Exact count of birds is uncertain due to small size and distance",
+      "Exact names and functions of the cylindrical high-rise, rectangular high-rise, and clock tower buildings cannot be determined from the image",
+      "Additional illuminated text on the cylindrical building is visible but too blurry to transcribe"
+    ],
+    "place": {
+      "name": "Nairobi",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Nairobi skyline from Uhuru Park"
+        },
+        {
+          "kind": "visible_text",
+          "detail": "KENYA SHINES"
+        },
+        {
+          "kind": "context",
+          "detail": "Hazy city skyline with clock tower flanked by two tall high-rise buildings and palm trees"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "place_key": "kenya/nairobi",
+    "taken_from": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Nairobi skyline from Uhuru Park"
+        },
+        {
+          "kind": "context",
+          "detail": "elevated viewpoint with weathered greenish wall in foreground and palm trees rising above it"
+        }
+      ],
+      "confidence": 0.85
+    },
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -313,6 +362,14 @@
         "run_at": "2026-10-27T12:16:40+00:00",
         "raw_output_path": "data/annotations/raw/park_008_attempt1.txt",
         "tokens": 7336
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:52:11+00:00",
+        "raw_output_path": "data/annotations/raw/park_008_passB_attempt1.txt",
+        "tokens": 5940
       }
     ],
     "human_review": {

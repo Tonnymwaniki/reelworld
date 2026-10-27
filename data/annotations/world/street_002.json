@@ -370,8 +370,30 @@
       "License plate numbers are partially visible but blurry and not fully legible",
       "Exact number of parked vehicles in distance is obscured by perspective and lighting",
       "Text on smaller signs such as ALLS TO LET and other shop names is too blurry to read accurately",
-      "Whether the tall background building is under construction or completed cannot be confirmed"
-    ]
+      "Whether the tall background building is under construction or completed cannot be confirmed",
+      "Exact street and neighborhood within Nairobi cannot be determined from visible signs and architecture",
+      "No distinctive landmark from the allowed list is clearly visible; visible text SECUREREST HOUSE and KOONE SHOPPING MALL does not correspond to a listed landmark",
+      "Time of day ambiguous between dawn and dusk based on lighting alone"
+    ],
+    "place": {
+      "name": "Nairobi",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Early morning street view in Nairobi, Kenya"
+        }
+      ],
+      "confidence": 0.85
+    },
+    "place_key": "kenya/nairobi",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -391,6 +413,14 @@
         "run_at": "2026-10-27T12:19:50+00:00",
         "raw_output_path": "data/annotations/raw/street_002_attempt2.txt",
         "tokens": 10826
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:53:43+00:00",
+        "raw_output_path": "data/annotations/raw/street_002_passB_attempt1.txt",
+        "tokens": 4721
       }
     ],
     "human_review": {

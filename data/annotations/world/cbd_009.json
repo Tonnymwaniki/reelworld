@@ -270,14 +270,60 @@
   },
   "inferred": {
     "landmarks": [],
-    "place_candidates": [],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "West Nairobi CBD"
+          },
+          {
+            "kind": "context",
+            "detail": "wide urban avenue flanked on both sides by tall high-rise buildings with varied facades and numerous windows"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
     "uncertainties": [
       "Text on the large vertical advertisement on the leftmost building is not legible due to distance and blur, so no text can be transcribed",
       "Whether the lighting shows dawn or dusk cannot be determined from the image alone",
       "Exact number, types and colors of vehicles on the avenue cannot be determined",
       "Names, heights and functions of individual buildings cannot be determined",
-      "Details of any people on streets or sidewalks are too small to discern"
-    ]
+      "Details of any people on streets or sidewalks are too small to discern",
+      "No visible text available to confirm specific landmarks, streets or parks"
+    ],
+    "place": {
+      "name": "Nairobi CBD",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "CBD"
+      ],
+      "key": "kenya/nairobi/cbd",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "West Nairobi CBD"
+        },
+        {
+          "kind": "context",
+          "detail": "Aerial twilight view of a wide city avenue lined with high-rise buildings and trees extending toward the horizon"
+        }
+      ],
+      "confidence": 0.85
+    },
+    "place_key": "kenya/nairobi/cbd",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -297,6 +343,14 @@
         "run_at": "2026-10-27T12:07:22+00:00",
         "raw_output_path": "data/annotations/raw/cbd_009_attempt1.txt",
         "tokens": 7757
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:46:45+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_009_passB_attempt1.txt",
+        "tokens": 6657
       }
     ],
     "human_review": {

@@ -343,7 +343,37 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "City Market",
+        "key": "unknown/city-market",
+        "type": "market",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "CITY MARKET"
+          },
+          {
+            "kind": "visible_text",
+            "detail": "NAIROBI CITY COUNTY"
+          },
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi City Market, 2025 (01)"
+          },
+          {
+            "kind": "architecture",
+            "detail": "large stepped building with vibrant multicolor mural covering its facade and central entrance"
+          },
+          {
+            "kind": "context",
+            "detail": "caption describes colorful mural-covered Nairobi City Market building viewed across a street with parked vans and pedestrians"
+          }
+        ],
+        "confidence": 0.98
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact number of people due to occlusion and distance",
@@ -351,8 +381,46 @@
       "License plate numbers and specific vehicle makes or models",
       "Interior layout or contents of the market building",
       "Precise time of day beyond daytime overcast conditions",
-      "Details of distant background buildings and signage that are blurry or partially obscured"
-    ]
+      "Details of distant background buildings and signage that are blurry or partially obscured",
+      "Exact street name and precise camera position across the street not determinable from provided information",
+      "Interior layout or contents of market building not visible",
+      "Full text of small awning signs under colonnade partially legible and not used as evidence"
+    ],
+    "place": {
+      "name": "City Market",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "unknown/city-market",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "visible_text",
+          "detail": "CITY MARKET"
+        },
+        {
+          "kind": "visible_text",
+          "detail": "NAIROBI CITY COUNTY"
+        },
+        {
+          "kind": "provided_title",
+          "detail": "Nairobi City Market, 2025 (01)"
+        },
+        {
+          "kind": "architecture",
+          "detail": "large stepped building with vibrant multicolor mural covering its facade and central entrance"
+        },
+        {
+          "kind": "context",
+          "detail": "tags include Nairobi City Market, Kenya, street scene, market building"
+        }
+      ],
+      "confidence": 0.98
+    },
+    "place_key": "unknown/city-market",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -372,6 +440,14 @@
         "run_at": "2026-10-27T12:14:36+00:00",
         "raw_output_path": "data/annotations/raw/market_013_attempt1.txt",
         "tokens": 12935
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:50:45+00:00",
+        "raw_output_path": "data/annotations/raw/market_013_passB_attempt1.txt",
+        "tokens": 5738
       }
     ],
     "human_review": {

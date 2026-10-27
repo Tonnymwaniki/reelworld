@@ -303,14 +303,80 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Uhuru Park",
+        "key": "kenya/nairobi/uhuru-park",
+        "type": "park",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "visible_text",
+            "detail": "UHURU"
+          },
+          {
+            "kind": "visible_text",
+            "detail": "PARK"
+          },
+          {
+            "kind": "provided_title",
+            "detail": "Name sign, Uhuru Park, 2025 (01)"
+          },
+          {
+            "kind": "architecture",
+            "detail": "curved gray concrete entrance wall with large raised black 3D letters and vertical red, green, black and white stripes"
+          }
+        ],
+        "confidence": 0.98
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Interior of park behind the wall is not visible",
       "Exact geographic location beyond what the sign text indicates cannot be confirmed from image alone",
       "Material composition of wall, letters and emblem beyond visual appearance",
       "Time and date the photo was taken cannot be determined",
-      "Whether additional signs or text exist outside the cropped frame"
+      "Whether additional signs or text exist outside the cropped frame",
+      "Whether additional signs or text exist outside the cropped frame is unknown"
+    ],
+    "place": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "confirmed",
+      "evidence": [
+        {
+          "kind": "visible_text",
+          "detail": "UHURU"
+        },
+        {
+          "kind": "visible_text",
+          "detail": "PARK"
+        },
+        {
+          "kind": "provided_title",
+          "detail": "Name sign, Uhuru Park, 2025 (01)"
+        },
+        {
+          "kind": "architecture",
+          "detail": "curved concrete entrance wall displaying large black 3D letters spelling UHURU PARK"
+        }
+      ],
+      "confidence": 0.98
+    },
+    "place_key": "kenya/nairobi/uhuru-park",
+    "taken_from": null,
+    "cultural_context": [
+      {
+        "term": "Karibu",
+        "local_name": "Karibu",
+        "language": "Swahili",
+        "evidence": "visible_text 'Karibu' on entrance wall"
+      }
     ]
   },
   "privacy": {
@@ -331,6 +397,14 @@
         "run_at": "2026-10-27T12:16:52+00:00",
         "raw_output_path": "data/annotations/raw/park_010_attempt1.txt",
         "tokens": 9092
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:52:22+00:00",
+        "raw_output_path": "data/annotations/raw/park_010_passB_attempt1.txt",
+        "tokens": 5527
       }
     ],
     "human_review": {

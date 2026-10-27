@@ -278,15 +278,100 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Uhuru Park",
+        "key": "kenya/nairobi/uhuru-park",
+        "type": "park",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi's skyline from Uhuru Park"
+          },
+          {
+            "kind": "context",
+            "detail": "Wide elevated view of a grassy park with scattered trees, covered grandstands and a pond in the foreground, with a dense city skyline in the background"
+          }
+        ],
+        "confidence": 0.93
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi's skyline from Uhuru Park"
+          },
+          {
+            "kind": "context",
+            "detail": "dense cluster of high-rise buildings of varying heights, colors and designs including brown, red and blue-glass towers lining the horizon under bright cloudless blue sky"
+          }
+        ],
+        "confidence": 0.9
+      }
+    ],
     "uncertainties": [
       "Whether very small distant figures are present in grandstands or park due to low resolution",
       "Text on distant building signs, banners or billboards is not legible (less than 3 letters readable)",
       "Exact names, heights or functions of buildings in the skyline",
       "Exact time of day beyond daytime and time of year",
-      "Condition and use of paved plaza and grandstands"
-    ]
+      "Condition and use of paved plaza and grandstands",
+      "Exact names, heights or functions of buildings in the distant skyline cannot be determined; visible_text is empty and distant building signs not legible",
+      "Whether very small distant figures are present in grandstands or park cannot be determined due to low resolution"
+    ],
+    "place": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Nairobi's skyline from Uhuru Park"
+        },
+        {
+          "kind": "context",
+          "detail": "expansive patchy grassy field with scattered small leafy trees, paved plaza, three long low grandstand structures with zigzag roofs and tiered seating, narrow blue pond surrounded by dense green park trees and vegetation"
+        }
+      ],
+      "confidence": 0.92
+    },
+    "place_key": "kenya/nairobi/uhuru-park",
+    "taken_from": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Nairobi's skyline from Uhuru Park"
+        },
+        {
+          "kind": "context",
+          "detail": "elevated viewpoint facing toward the city skyline across the park"
+        }
+      ],
+      "confidence": 0.88
+    },
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -306,6 +391,14 @@
         "run_at": "2026-10-27T12:16:31+00:00",
         "raw_output_path": "data/annotations/raw/park_006_attempt1.txt",
         "tokens": 7905
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:52:13+00:00",
+        "raw_output_path": "data/annotations/raw/park_006_passB_attempt1.txt",
+        "tokens": 8357
       }
     ],
     "human_review": {

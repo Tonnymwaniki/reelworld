@@ -264,7 +264,25 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Uhuru Park",
+        "key": "kenya/nairobi/uhuru-park",
+        "type": "park",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi UhuruPark Panorama 2010"
+          },
+          {
+            "kind": "context",
+            "detail": "wide panoramic outdoor view with grassy urban park in foreground containing scattered green trees, open grassy areas, small reflective pond on center-right, and long covered pavilions with crowd gathering on grass"
+          }
+        ],
+        "confidence": 0.9
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact number of people in park cannot be determined due to distance and resolution",
@@ -274,8 +292,35 @@
       "Purpose of the gathering in the park cannot be determined",
       "Details of individual clothing, ages, or genders cannot be discerned",
       "Vehicle models, license plates and other small details are not resolvable",
-      "Exact time of day beyond daytime and weather beyond partly cloudy cannot be determined"
-    ]
+      "Exact time of day beyond daytime and weather beyond partly cloudy cannot be determined",
+      "Specific names and functions of high-rise buildings in skyline cannot be determined from image alone",
+      "Exact number and details of people in park cannot be determined due to distance and resolution",
+      "Exact time beyond daytime and weather beyond partly cloudy cannot be determined"
+    ],
+    "place": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Nairobi UhuruPark Panorama 2010"
+        },
+        {
+          "kind": "context",
+          "detail": "crowded urban park with trees, pavilions and pond in foreground and dense city skyline with high-rise buildings in background; scene type park with crowd gathering and sitting on grass"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "place_key": "kenya/nairobi/uhuru-park",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -295,6 +340,14 @@
         "run_at": "2026-10-27T12:16:38+00:00",
         "raw_output_path": "data/annotations/raw/park_007_attempt1.txt",
         "tokens": 8143
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:52:13+00:00",
+        "raw_output_path": "data/annotations/raw/park_007_passB_attempt1.txt",
+        "tokens": 6570
       }
     ],
     "human_review": {

@@ -272,15 +272,78 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Nairobi CBD",
+        "key": "kenya/nairobi/cbd",
+        "type": "district",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi's Central Business District Landmark Skyscrapers."
+          },
+          {
+            "kind": "context",
+            "detail": "cluster of high-rise buildings of varying heights, colors and designs including brown glass, blue glass, white and gray towers dominating skyline behind park"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Nairobi's Central Business District Landmark Skyscrapers."
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
     "uncertainties": [
       "Exact city or location of the skyline cannot be determined from the image alone",
       "Text on distant billboards and building signs is blurry and cut off, fewer than 3 legible letters can be read",
       "Whether small indistinct figures or vehicles are present behind trees or on the distant roadway is not discernible",
       "Exact time of day beyond daytime and weather conditions beyond partly cloudy",
-      "Names, heights and functions of individual buildings"
-    ]
+      "Names, heights and functions of individual buildings",
+      "No visible_text present; building names, heights and functions cannot be determined from image alone per uncertainties",
+      "Park foreground with grassy field and dense tree line cannot be identified to a specific named park (e.g., Uhuru Park or Central Park Nairobi) from description alone",
+      "Specific landmark buildings (e.g., cylindrical tower with helipad, brown glass high-rise, blue-glass twin towers) not named due to lack of legible text or explicit identification",
+      "Taken_from location unknown; elevated viewpoint noted but no owner_note or other evidence indicates specific building or terrace"
+    ],
+    "place": {
+      "name": "Nairobi CBD",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "CBD"
+      ],
+      "key": "kenya/nairobi/cbd",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Nairobi's Central Business District Landmark Skyscrapers."
+        },
+        {
+          "kind": "context",
+          "detail": "city skyline with numerous high-rise buildings rises behind a green park with dense trees and an open grassy field; description notes wide grassy field, dense line of green trees, elevated roadway and cluster of high-rise buildings"
+        }
+      ],
+      "confidence": 0.88
+    },
+    "place_key": "kenya/nairobi/cbd",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -300,6 +363,14 @@
         "run_at": "2026-10-27T12:06:42+00:00",
         "raw_output_path": "data/annotations/raw/cbd_004_attempt1.txt",
         "tokens": 6252
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:46:23+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_004_passB_attempt1.txt",
+        "tokens": 5951
       }
     ],
     "human_review": {

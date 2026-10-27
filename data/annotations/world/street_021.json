@@ -298,8 +298,30 @@
       "Contents of cardboard box and woven sacks",
       "Full text of faded and stylized graffiti on wall including partially visible words",
       "Exact location and time the photo was taken",
-      "Text on clothing which was ignored per instructions"
-    ]
+      "Text on clothing which was ignored per instructions",
+      "Exact street/overpass location within Nairobi cannot be determined from visible features; no identifiable landmark, street sign, or distinctive architecture visible",
+      "Species of bird of prey and contents of cardboard box and woven sacks not determinable",
+      "Full graffiti text not legible beyond THE BIRDMAN FACE, FABIO, VOST!"
+    ],
+    "place": {
+      "name": "Nairobi",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Nairobi Birdman feeding the street family"
+        }
+      ],
+      "confidence": 0.6
+    },
+    "place_key": "kenya/nairobi",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": true,
@@ -319,6 +341,14 @@
         "run_at": "2026-10-27T12:21:47+00:00",
         "raw_output_path": "data/annotations/raw/street_021_attempt1.txt",
         "tokens": 8168
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:55:25+00:00",
+        "raw_output_path": "data/annotations/raw/street_021_passB_attempt1.txt",
+        "tokens": 5403
       }
     ],
     "human_review": {

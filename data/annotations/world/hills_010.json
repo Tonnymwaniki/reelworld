@@ -259,15 +259,58 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Ngong Hills",
+        "key": "kenya/kajiado/ngong-hills",
+        "type": "natural",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Ngong Hills, January 2017"
+          },
+          {
+            "kind": "context",
+            "detail": "aerial view shows elevated ridge extending across midground and expansive arid terrain with distant hazy mountains"
+          }
+        ],
+        "confidence": 0.82
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact geographic location cannot be determined",
       "Specific building types and road names not legible from altitude",
       "Water body depth and name not determinable",
       "Vegetation species not identifiable",
-      "Any small ground signs or text not legible due to distance and haze"
-    ]
+      "Any small ground signs or text not legible due to distance and haze",
+      "Exact geographic location cannot be independently verified from visual details alone; reliance is on provided title",
+      "Specific settlement, water body, road names, building types and vegetation species not determinable due to altitude, distance and haze"
+    ],
+    "place": {
+      "name": "Ngong Hills",
+      "hierarchy": [
+        "Kenya",
+        "Ngong Hills"
+      ],
+      "key": "kenya/kajiado/ngong-hills",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Ngong Hills, January 2017"
+        },
+        {
+          "kind": "context",
+          "detail": "high-altitude aerial view of arid plain with elevated ridge, clustered settlement, small water body and distant hazy mountains"
+        }
+      ],
+      "confidence": 0.8
+    },
+    "place_key": "kenya/kajiado/ngong-hills",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -287,6 +330,14 @@
         "run_at": "2026-10-27T12:09:47+00:00",
         "raw_output_path": "data/annotations/raw/hills_010_attempt1.txt",
         "tokens": 9061
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:48:10+00:00",
+        "raw_output_path": "data/annotations/raw/hills_010_passB_attempt1.txt",
+        "tokens": 5459
       }
     ],
     "human_review": {

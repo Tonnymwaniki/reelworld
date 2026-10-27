@@ -307,8 +307,28 @@
       "Whether a second person is partially visible behind the background table (purple-clad legs) due to blur and occlusion",
       "Exact ingredients, name, or flavor of the blue beverage cannot be determined from appearance alone",
       "Details of the outdoor area beyond the windows are overexposed and blurred",
-      "Exact time of day beyond daylight and indoor lighting conditions"
-    ]
+      "Exact time of day beyond daylight and indoor lighting conditions",
+      "No identifiable landmark, signage, or location-specific architecture visible; exact geographic location cannot be determined from provided description",
+      "Exact ingredients or name of blue beverage cannot be determined from appearance alone"
+    ],
+    "place": {
+      "name": "Unknown",
+      "hierarchy": [
+        "Unknown"
+      ],
+      "key": "unknown/unknown",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "context",
+          "detail": "Photo shows generic indoor cafe interior with wooden tables, mesh chairs, and bright windows; no visible text, distinctive architecture, or geographic markers to identify location"
+        }
+      ],
+      "confidence": 0.99
+    },
+    "place_key": "unknown/unknown",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -328,6 +348,14 @@
         "run_at": "2026-10-27T12:08:00+00:00",
         "raw_output_path": "data/annotations/raw/cbd_014_attempt1.txt",
         "tokens": 11599
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:47:00+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_014_passB_attempt1.txt",
+        "tokens": 4292
       }
     ],
     "human_review": {

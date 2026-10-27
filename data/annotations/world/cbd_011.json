@@ -267,16 +267,70 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Hilton Nairobi",
+        "key": "kenya/nairobi/cbd/hilton-nairobi",
+        "type": "building",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Bravin Yuri at Hilton Inn Hotel in Nairobi, Kenya"
+          }
+        ],
+        "confidence": 0.65
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Bravin Yuri at Hilton Inn Hotel in Nairobi, Kenya"
+          }
+        ],
+        "confidence": 0.6
+      }
+    ],
     "uncertainties": [
       "Exact location, building name, or city where photo was taken cannot be determined",
       "Time of day, date, or light source outside the frame cannot be determined",
       "Person's identity, age, or other personal details cannot be determined",
       "Artist, title, or meaning of the abstract wall artworks cannot be determined",
       "Material composition of furniture, flooring, and wall beyond visual appearance cannot be determined",
-      "No legible text is visible on signs or labels; any text on wall art is not legible as letters"
-    ]
+      "No legible text is visible on signs or labels; any text on wall art is not legible as letters",
+      "No visible text or distinctive architectural features are visible to independently verify hotel or city; location inference relies solely on provided_title",
+      "Indoor setting shows generic furnishings (yellow patterned armchair, abstract wall artworks, side table, patterned rug) with no geographic indicators",
+      "Exact building name, city, time of day, and person identity cannot be determined from visual content alone"
+    ],
+    "place": {
+      "name": "Hilton Nairobi",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "CBD"
+      ],
+      "key": "kenya/nairobi/cbd/hilton-nairobi",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Bravin Yuri at Hilton Inn Hotel in Nairobi, Kenya"
+        }
+      ],
+      "confidence": 0.64
+    },
+    "place_key": "kenya/nairobi/cbd/hilton-nairobi",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": true,
@@ -296,6 +350,14 @@
         "run_at": "2026-10-27T12:07:36+00:00",
         "raw_output_path": "data/annotations/raw/cbd_011_attempt1.txt",
         "tokens": 10579
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:47:01+00:00",
+        "raw_output_path": "data/annotations/raw/cbd_011_passB_attempt1.txt",
+        "tokens": 6869
       }
     ],
     "human_review": {

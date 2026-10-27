@@ -319,15 +319,62 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Ngong Hills",
+        "key": "kenya/kajiado/ngong-hills",
+        "type": "natural",
+        "status": "confirmed",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Ngong Hills Wind Farm"
+          },
+          {
+            "kind": "architecture",
+            "detail": "multiple white wind turbines with three blades visible along the ridge and hillside"
+          },
+          {
+            "kind": "context",
+            "detail": "green grassy hillside with scattered rocks and a large white wind turbine on the right side with additional turbines along the ridge"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "exact number of distant wind turbines is difficult to determine due to overlap and distance",
       "exact number and clothing details of small human figures on hillside cannot be determined due to distance and resolution",
       "legibility of any distant signs or labels on buildings and equipment cannot be determined",
       "specific makes or models of vehicles cannot be determined",
-      "exact location name of the wind farm cannot be determined from the photo"
-    ]
+      "exact location name of the wind farm cannot be determined from the photo",
+      "Exact number of distant wind turbines and specific infrastructure details cannot be determined due to distance and overlap",
+      "No visible text or owner note to independently confirm location beyond provided title"
+    ],
+    "place": {
+      "name": "Ngong Hills",
+      "hierarchy": [
+        "Kenya",
+        "Ngong Hills"
+      ],
+      "key": "kenya/kajiado/ngong-hills",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Ngong Hills Wind Farm"
+        },
+        {
+          "kind": "context",
+          "detail": "A wind farm with multiple white turbines on a green grassy hill under a partly cloudy blue sky"
+        }
+      ],
+      "confidence": 0.85
+    },
+    "place_key": "kenya/kajiado/ngong-hills",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -347,6 +394,14 @@
         "run_at": "2026-10-27T12:10:23+00:00",
         "raw_output_path": "data/annotations/raw/hills_016_attempt1.txt",
         "tokens": 5940
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:48:32+00:00",
+        "raw_output_path": "data/annotations/raw/hills_016_passB_attempt1.txt",
+        "tokens": 4750
       }
     ],
     "human_review": {

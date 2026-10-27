@@ -276,8 +276,33 @@
       "Exact geographic location and name of the mountain cannot be determined from the photo",
       "Specific time of day beyond daytime and weather conditions beyond visible clouds cannot be determined",
       "Details of clothing, age, or gender of the distant figures cannot be discerned",
-      "No legible text is visible on any sign or label; no signs with 3 or more readable letters are present"
-    ]
+      "No legible text is visible on any sign or label; no signs with 3 or more readable letters are present",
+      "Exact geographic location and name of mountain cannot be determined from photo",
+      "No distinctive architecture or visible text to identify specific landmark",
+      "Provided title 'First Hill' does not correspond to a known landmark in the allowed list"
+    ],
+    "place": {
+      "name": "Unknown",
+      "hierarchy": [
+        "Kenya"
+      ],
+      "key": "unknown/unknown",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "context",
+          "detail": "Description shows generic forested mountain ridge with grassy clearing and dirt trail and no distinctive landmarks; uncertainties state exact geographic location and name of the mountain cannot be determined"
+        },
+        {
+          "kind": "context",
+          "detail": "visible_text is empty with no legible signs to identify location"
+        }
+      ],
+      "confidence": 0.93
+    },
+    "place_key": "unknown/unknown",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -297,6 +322,14 @@
         "run_at": "2026-10-27T12:09:03+00:00",
         "raw_output_path": "data/annotations/raw/hills_004_attempt1.txt",
         "tokens": 5282
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:47:57+00:00",
+        "raw_output_path": "data/annotations/raw/hills_004_passB_attempt1.txt",
+        "tokens": 8192
       }
     ],
     "human_review": {

@@ -275,15 +275,100 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Ngong Hills",
+        "key": "kenya/kajiado/ngong-hills",
+        "type": "natural",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Ngong Hills from Nairobi"
+          },
+          {
+            "kind": "context",
+            "detail": "faint ridgeline visible through haze behind the city spanning the horizon"
+          }
+        ],
+        "confidence": 0.64
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Ngong Hills from Nairobi"
+          },
+          {
+            "kind": "context",
+            "detail": "sprawling urban area with mid- and high-rise buildings emerging from dense trees in foreground and midground"
+          }
+        ],
+        "confidence": 0.55
+      }
+    ],
     "uncertainties": [
       "Exact geographic location and city name cannot be determined from the image",
       "Specific building names, functions, or heights cannot be determined due to distance and haze",
       "Whether any signs or text are present on distant buildings cannot be determined due to resolution and haze; no text with 3+ legible letters is discernible",
       "Exact time of day, weather conditions beyond hazy appearance, and season cannot be determined",
-      "Presence of people, vehicles, or small details on streets cannot be determined due to distance and tree cover"
-    ]
+      "Presence of people, vehicles, or small details on streets cannot be determined due to distance and tree cover",
+      "Exact geographic location and city name cannot be determined from image alone; identification relies on provided_title",
+      "Specific building names, functions, or heights cannot be determined due to distance, haze and tree cover",
+      "No visible text with 3+ legible letters discernible in image",
+      "Presence of people, vehicles, or small street details cannot be determined due to distance and haze"
+    ],
+    "place": {
+      "name": "Ngong Hills",
+      "hierarchy": [
+        "Kenya",
+        "Ngong Hills"
+      ],
+      "key": "kenya/kajiado/ngong-hills",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Ngong Hills from Nairobi"
+        },
+        {
+          "kind": "context",
+          "detail": "large muted mountain range spanning the horizon beyond sprawling urban area and dense tree canopy"
+        }
+      ],
+      "confidence": 0.62
+    },
+    "place_key": "kenya/kajiado/ngong-hills",
+    "taken_from": {
+      "name": "Nairobi",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Ngong Hills from Nairobi"
+        },
+        {
+          "kind": "context",
+          "detail": "elevated wide view looking across dense green tree canopy and high-rise buildings toward distant mountains"
+        }
+      ],
+      "confidence": 0.6
+    },
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -303,6 +388,14 @@
         "run_at": "2026-10-27T12:10:24+00:00",
         "raw_output_path": "data/annotations/raw/hills_019_attempt1.txt",
         "tokens": 5535
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:48:42+00:00",
+        "raw_output_path": "data/annotations/raw/hills_019_passB_attempt1.txt",
+        "tokens": 7517
       }
     ],
     "human_review": {

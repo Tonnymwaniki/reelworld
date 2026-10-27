@@ -268,16 +268,99 @@
     }
   },
   "inferred": {
-    "landmarks": [],
-    "place_candidates": [],
+    "landmarks": [
+      {
+        "name": "Uhuru Park",
+        "key": "kenya/nairobi/uhuru-park",
+        "type": "park",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Skyline of Nairobi city as seen from a lake in Uhuru Park"
+          },
+          {
+            "kind": "context",
+            "detail": "pond covered with lily pads and yellow flowers with grassy park area, green pedestrian bridges spanning narrow channel and people walking and relaxing by pond in urban park setting"
+          }
+        ],
+        "confidence": 0.96
+      },
+      {
+        "name": "Nairobi",
+        "key": "kenya/nairobi",
+        "type": "district",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Skyline of Nairobi city as seen from a lake in Uhuru Park"
+          },
+          {
+            "kind": "context",
+            "detail": "city skyline with high-rise buildings with glass facades rising behind the park against overcast sky"
+          }
+        ],
+        "confidence": 0.95
+      }
+    ],
+    "place_candidates": [
+      {
+        "name": "Nairobi",
+        "hierarchy": [
+          "Kenya",
+          "Nairobi"
+        ],
+        "key": "kenya/nairobi",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Skyline of Nairobi city as seen from a lake in Uhuru Park"
+          },
+          {
+            "kind": "context",
+            "detail": "city skyline with high-rise buildings with glass facades behind the park"
+          }
+        ],
+        "confidence": 0.88
+      }
+    ],
     "uncertainties": [
       "Exact number of people is uncertain due to distance, small size and possible occlusion",
       "Species of lily pads and flowers cannot be determined from image",
       "Names, heights and functions of buildings cannot be determined",
       "Exact time of day beyond daytime is uncertain due to overcast lighting",
       "Legibility of any distant signage on buildings is uncertain due to distance and resolution",
-      "Details of clothing colors and individual activities are limited by distance"
-    ]
+      "Details of clothing colors and individual activities are limited by distance",
+      "Specific building names, heights and functions cannot be determined from distance and resolution",
+      "Exact position within Uhuru Park cannot be determined beyond lake/pond area",
+      "No visible text to independently confirm location"
+    ],
+    "place": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi",
+        "Uhuru Park"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Skyline of Nairobi city as seen from a lake in Uhuru Park"
+        },
+        {
+          "kind": "context",
+          "detail": "pond covered with lily pads and yellow flowers, grassy park area, green pedestrian bridges and people along grassy edge in urban park with city skyline beyond"
+        }
+      ],
+      "confidence": 0.95
+    },
+    "place_key": "kenya/nairobi/uhuru-park",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -297,6 +380,14 @@
         "run_at": "2026-10-27T12:17:36+00:00",
         "raw_output_path": "data/annotations/raw/park_015_attempt1.txt",
         "tokens": 9252
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:52:53+00:00",
+        "raw_output_path": "data/annotations/raw/park_015_passB_attempt1.txt",
+        "tokens": 8946
       }
     ],
     "human_review": {

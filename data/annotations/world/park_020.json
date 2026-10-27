@@ -309,15 +309,59 @@
     }
   },
   "inferred": {
-    "landmarks": [],
+    "landmarks": [
+      {
+        "name": "Uhuru Park",
+        "key": "kenya/nairobi/uhuru-park",
+        "type": "park",
+        "status": "candidate",
+        "evidence": [
+          {
+            "kind": "provided_title",
+            "detail": "Uhuru Park, 2025 (01)"
+          },
+          {
+            "kind": "context",
+            "detail": "outdoor urban park with paved plaza, large dark funnel-shaped metal structures with rectangular cut-outs, benches, pond, trees, grass and high-rise skyline under overcast sky"
+          }
+        ],
+        "confidence": 0.9
+      }
+    ],
     "place_candidates": [],
     "uncertainties": [
       "Exact number of people in far background near colorful canopies is not determinable due to small size and blur",
       "No legible text with at least 3 letters is visible on any sign, banner or label; distant signs if any are unreadable",
       "Specific identities, names or functions of the high-rise buildings cannot be determined",
       "Material and exact dimensions of the funnel-shaped structures cannot be determined from photo alone",
-      "Clothing details and facial features of the person on the bench are not discernible"
-    ]
+      "Clothing details and facial features of the person on the bench are not discernible",
+      "No legible visible text is present to independently confirm location",
+      "Specific identities, names or functions of the high-rise buildings in the background cannot be determined",
+      "Exact dimensions, material and function of the funnel-shaped structures cannot be determined from photo alone"
+    ],
+    "place": {
+      "name": "Uhuru Park",
+      "hierarchy": [
+        "Kenya",
+        "Nairobi"
+      ],
+      "key": "kenya/nairobi/uhuru-park",
+      "status": "candidate",
+      "evidence": [
+        {
+          "kind": "provided_title",
+          "detail": "Uhuru Park, 2025 (01)"
+        },
+        {
+          "kind": "context",
+          "detail": "outdoor urban park with paved plaza, large funnel-shaped metal structures, benches, pond, trees and high-rise buildings in background"
+        }
+      ],
+      "confidence": 0.9
+    },
+    "place_key": "kenya/nairobi/uhuru-park",
+    "taken_from": null,
+    "cultural_context": []
   },
   "privacy": {
     "faces_visible": false,
@@ -337,6 +381,14 @@
         "run_at": "2026-10-27T12:17:59+00:00",
         "raw_output_path": "data/annotations/raw/park_020_attempt1.txt",
         "tokens": 7584
+      },
+      {
+        "pass": "B",
+        "model": "meta-models/muse-spark-open-1026",
+        "prompt_version": "passB-v1",
+        "run_at": "2026-10-27T20:53:17+00:00",
+        "raw_output_path": "data/annotations/raw/park_020_passB_attempt1.txt",
+        "tokens": 5455
       }
     ],
     "human_review": {
