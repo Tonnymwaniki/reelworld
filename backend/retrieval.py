@@ -172,13 +172,22 @@ def depth(key):
 
 
 def is_specific(key):
-    """A broad key is a city or district (kenya/nairobi/cbd); deeper keys are specific places."""
-    return depth(key) >= 4 or (depth(key) == 3 and key.split("/")[1] not in ("nairobi", "mombasa", "kisumu", "nakuru"))
+    """True for every place key except the known broad ones (country, city, CBD)."""
+    return key not in ("kenya", "kenya/nairobi", "kenya/mombasa",
+                       "kenya/kisumu", "kenya/nakuru", "kenya/nairobi/cbd")
 
 
 def related_area(a, b):
     """True if one key sits inside the other, e.g. kenya/nairobi/cbd and kenya/nairobi/cbd/kicc."""
-    return bool(a and b and a != b and (a.startswith(b + "/") or b.startswith(a + "/")))
+    if not (a and b and a != b):
+        return False
+    if a.startswith(b + "/"):
+        parent = b
+    elif b.startswith(a + "/"):
+        parent = a
+    else:
+        return False
+    return len(parent.split("/")) >= 3
 
 
 def like(photo_id, collection="world", top=8, vecs=None, meta=None):
