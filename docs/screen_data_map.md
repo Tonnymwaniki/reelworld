@@ -43,6 +43,7 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 | More like this | `POST /chat` "Show me photos like {photo_id}" |
 | Ask about this photo | `POST /api/ask` `{photo_id, question}` → `answer`; `source: image` → show `note` ("looked at the photo again"); `trace[]` under the answer (collapsed) |
 | Not this one | `POST /chat` "not this one" (rejects focus, re-searches) |
+| Share this finding | local canvas card, no endpoint | 1080×1350 PNG: `src` photo, `place.name` + Confirmed/Candidate badge, first 2 `place.evidence[]`, world `credit` line, ReelWorld + "Built with Muse Spark Open"; Web Share API when available, else PNG download; personal photos disabled + "private" note until explicit confirm, never when `people_count` > 0 |
 | Loading / error | skeleton panel; `{"detail"}` verbatim; 404 → "I could not find that photo." |
 
 ## 3. Add a photo and "Where is this?"

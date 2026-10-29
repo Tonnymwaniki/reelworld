@@ -613,6 +613,141 @@ function creditLine(credit) {
   return wrap;
 }
 
+/* ---------- share card: 1080x1350 PNG drawn in the browser ----------
+   Same-origin /photos/ bytes keep the canvas clean (no taint). Uses the
+   app tokens (parchment, espresso, ochre, forest) and Plus Jakarta Sans. */
+const SHARE_W = 1080, SHARE_H = 1350;
+
+function shareRoundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+
+function shareFit(ctx, text, maxW) {
+  let t = String(text || "").replace(/\s+/g, " ").trim();
+  if (ctx.measureText(t).width <= maxW) return t;
+  while (t.length > 1 && ctx.measureText(t + "…").width > maxW) t = t.slice(0, -1);
+  return t.trim() + "…";
+}
+
+function shareWrap(ctx, text, maxW, maxLines) {
+  const words = String(text || "").replace(/\s+/g, " ").trim().split(" ").filter(Boolean);
+  const lines = [];
+  let line = "";
+  words.forEach((w) => {
+    const t = line ? line + " " + w : w;
+    if (ctx.measureText(t).width > maxW && line) { lines.push(line); line = w; }
+    else line = t;
+  });
+  if (line) lines.push(line);
+  return lines.slice(0, maxLines);
+}
+
+function sharePill(ctx, x, y, text, font, fg, bg, stroke) {
+  ctx.font = font;
+  const w = ctx.measureText(text).width + 48, h = 54;
+  shareRoundRect(ctx, x, y, w, h, 27);
+  if (bg) { ctx.fillStyle = bg; ctx.fill(); }
+  if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = 3; ctx.stroke(); }
+  ctx.fillStyle = fg;
+  ctx.textBaseline = "middle";
+  ctx.fillText(text, x + 24, y + h / 2 + 2);
+  ctx.textBaseline = "alphabetic";
+  return w;
+}
+
+function shareLoadPhoto(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error("The photo file could not be loaded."));
+    img.src = src;
+  });
+}
+
+async function buildShareCard(d) {
+  try { await document.fonts.ready; } catch (e) { /* system fonts then */ }
+  const img = await shareLoadPhoto(d.src);
+  const cv = document.createElement("canvas");
+  cv.width = SHARE_W; cv.height = SHARE_H;
+  const ctx = cv.getContext("2d");
+  const FONT = '"Plus Jakarta Sans", system-ui, sans-serif';
+  const M = 72, CW = SHARE_W - M * 2; // margin, content width
+  ctx.fillStyle = "#F4EFEB";
+  ctx.fillRect(0, 0, SHARE_W, SHARE_H);
+  /* Header: brand left, engine pill right. */
+  ctx.fillStyle = "#151311";
+  ctx.font = '800 58px ' + FONT;
+  ctx.fillText("ReelWorld", M, 132);
+  ctx.font = '600 27px ' + FONT;
+  const pillText = "Built with Muse Spark Open";
+  const pillW = ctx.measureText(pillText).width + 48;
+  sharePill(ctx, SHARE_W - M - pillW, 82, pillText, '600 27px ' + FONT,
+            "#D35400", "#FAEEE7", "#C85A32");
+  /* Photo, cover-fit with rounded corners. */
+  const px = M, py = 188, pw = CW, ph = 580;
+  const s = Math.max(pw / img.naturalWidth, ph / img.naturalHeight);
+  const dw = img.naturalWidth * s, dh = img.naturalHeight * s;
+  ctx.save();
+  shareRoundRect(ctx, px, py, pw, ph, 28);
+  ctx.clip();
+  ctx.fillStyle = "#E4DCD2";
+  ctx.fillRect(px, py, pw, ph);
+  ctx.drawImage(img, px + (pw - dw) / 2, py + (ph - dh) / 2, dw, dh);
+  ctx.restore();
+  /* Place + status badge. */
+  let y = py + ph + 78;
+  const place = d.place || {};
+  ctx.fillStyle = "#151311";
+  ctx.font = '700 52px ' + FONT;
+  const nameLines = shareWrap(ctx, place.name || "Place unknown", CW, 2);
+  nameLines.forEach((ln) => { ctx.fillText(ln, M, y); y += 62; });
+  const st = place.status;
+  if (st === "confirmed" || st === "candidate") {
+    const label = st === "confirmed" ? "Confirmed" : "Candidate";
+    y += 14;
+    if (st === "confirmed") {
+      sharePill(ctx, M, y, label, '700 28px ' + FONT, "#FFFFFF", "#1E4732", null);
+    } else {
+      sharePill(ctx, M, y, label, '700 28px ' + FONT, "#C85A32", "#FEF8F4", "#C85A32");
+    }
+    y += 54;
+  }
+  /* Two short evidence lines. */
+  let evs = (place.evidence || []).map(
+    (ev) => (ev.kind ? String(ev.kind).replace(/_/g, " ") + ": " : "") + (ev.detail || ""));
+  if (!evs.length) evs = (d.uncertainties || []).slice(0, 2);
+  if (!evs.length) evs = ["No recorded evidence."];
+  ctx.fillStyle = "#4D4740";
+  ctx.font = '400 29px ' + FONT;
+  y += 52;
+  evs.slice(0, 2).forEach((ev) => {
+    ctx.fillText("• " + shareFit(ctx, ev, CW - 34), M, y);
+    y += 44;
+  });
+  /* Credit + footer, placed below the evidence (capped blocks above
+     guarantee this stays inside 1350px: worst case ends near y=1330). */
+  const divY = y + 36;
+  ctx.fillStyle = "#D8CFC3";
+  ctx.fillRect(M, divY, CW, 2);
+  ctx.fillStyle = "#686057";
+  ctx.font = '500 27px ' + FONT;
+  const credit = d.collection === "world"
+    ? "Photo by " + ((d.credit && d.credit.author) || "Unknown photographer") +
+      " • " + ((d.credit && d.credit.license) || "License unknown")
+    : "Your personal photo";
+  ctx.fillText(shareFit(ctx, credit, CW), M, divY + 60);
+  ctx.fillStyle = "#8A8074";
+  ctx.font = '500 25px ' + FONT;
+  ctx.fillText(d.photo_id + " • ReelWorld archive", M, divY + 112);
+  return new Promise((res) => cv.toBlob(res, "image/png"));
+}
+
 /* ---------- photo view ---------- */
 const SPINNER_SVG = '<svg class="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" fill="currentColor"></path></svg>';
 
@@ -682,6 +817,8 @@ const photo = {
       goHomeSearch("Show me photos like " + this.id);
     });
     $("#btn-reject", view).addEventListener("click", () => goHomeSearch("not this one"));
+    $("#btn-share", view).addEventListener("click", () => this.share());
+    $("#share-confirm", view).addEventListener("click", () => this.enableSharing());
     $("#bridge-close", view).addEventListener("click", () => hide($("#bridge-panel", view)));
     $("#bridge-groups", view).addEventListener("click", (e) => {
       if (placeLinkClick(e)) return;
@@ -941,6 +1078,85 @@ const photo = {
       $("[data-slot=label]", b).textContent = q;
       chips.appendChild(b);
     });
+    this.paintShare(d);
+  },
+
+  /* Share gating. World photos are public already; personal photos stay
+     private until the user explicitly enables sharing, and never when
+     people are visible (faces may be showing, and we cannot verify
+     otherwise from the fields /api/photo exposes). */
+  paintShare(d) {
+    const view = this.view;
+    const btn = $("#btn-share", view);
+    const row = $("#share-row", view);
+    const confirm = $("#share-confirm", view);
+    this.shareSay("");
+    if (d.collection !== "personal") {
+      btn.disabled = false;
+      hide(row);
+      return;
+    }
+    btn.disabled = true;
+    show(row);
+    if ((d.people_count || 0) > 0) {
+      hide(confirm);
+      $("#share-note", view).textContent =
+        "Sharing stays off for this photo: people are visible in it, so it can't be shared.";
+    } else {
+      $("#share-note", view).textContent =
+        "Personal photos are private. Sharing exports this photo as an image file.";
+      show(confirm);
+    }
+  },
+
+  enableSharing() {
+    const view = this.view;
+    hide($("#share-confirm", view));
+    $("#share-note", view).textContent = "Sharing enabled for this photo.";
+    $("#btn-share", view).disabled = false;
+  },
+
+  shareSay(text) {
+    const el = $("#share-status", this.view);
+    el.textContent = text || "";
+    el.classList.toggle("hidden", !text);
+  },
+
+  async share() {
+    const d = this.data;
+    if (!d) return;
+    if (d.collection === "personal" && (d.people_count || 0) > 0) {
+      this.shareSay("Sharing stays off for this photo: people are visible in it.");
+      return;
+    }
+    const btn = $("#btn-share", this.view);
+    setBtnLoading(btn, true, "Preparing…");
+    this.shareSay("");
+    try {
+      const blob = await buildShareCard(d);
+      if (!blob) throw new Error("The card could not be drawn.");
+      const name = "reelworld-" + d.photo_id + ".png";
+      const file = new File([blob], name, { type: "image/png" });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], title: "ReelWorld finding",
+          text: (d.place && d.place.name) || d.caption || d.photo_id });
+        this.shareSay("Shared.");
+      } else {
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = name;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+        this.shareSay("Card downloaded.");
+      }
+    } catch (e) {
+      if (e && e.name === "AbortError") this.shareSay("");
+      else this.shareSay("Sharing failed: " + String((e && e.message) || e));
+    } finally {
+      setBtnLoading(btn, false);
+    }
   },
 
   async ask(question) {

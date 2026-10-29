@@ -81,12 +81,25 @@
 <span class="material-symbols-outlined text-[19px] leading-none">chat_bubble_outline</span>
 <span class="">Ask about this photo</span>
 </button>
+<button class="min-h-[44px] px-4 rounded-xl border border-[#1e4732]/35 text-[#1e4732] hover:bg-[#eef5f0] hover:border-[#1e4732] font-medium text-sm flex items-center gap-2 transition-all duration-200 active:bg-[#dcefe1] disabled:opacity-45 disabled:pointer-events-none" id="btn-share">
+<span class="material-symbols-outlined text-[19px] leading-none">share</span>
+<span class="">Share this finding</span>
+</button>
 </div>
 <button class="min-h-[44px] px-3 rounded-lg text-stone-500 hover:text-stone-800 hover:bg-stone-200/40 font-medium text-sm flex items-center gap-1.5 transition-colors disabled:opacity-45 disabled:pointer-events-none" id="btn-reject" title="Reject this photo and re-search">
 <span class="material-symbols-outlined text-[18px]">close</span>
 <span class="">Not this one</span>
 </button>
 </div>
+<!-- Share row: privacy note, explicit confirm, and card status -->
+<div class="hidden items-center gap-3 flex-wrap" id="share-row">
+<span class="material-symbols-outlined text-[18px] text-stone-500">lock</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex-1 min-w-[200px]" id="share-note"></p>
+<button class="hidden min-h-[44px] px-4 rounded-xl bg-[#1e4732] hover:bg-[#173727] text-white font-medium text-sm items-center gap-2 shadow-sm transition-all flex-shrink-0" id="share-confirm" type="button">
+<span class="">I understand — enable sharing</span>
+</button>
+</div>
+<p class="hidden font-body-sm text-body-sm text-on-surface-variant" id="share-status"></p>
 <!-- Conversational Inquiry Sub-Deck (Expanded Inline Console) -->
 <div class="pt-3 bg-surface-container-low rounded-lg p-3.5 flex flex-col gap-3" id="ask-console">
 <form class="flex items-center gap-2" id="ask-form">
