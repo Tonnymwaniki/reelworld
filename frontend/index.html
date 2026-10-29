@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ReelWorld - Conversational Visual Archive</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="/styles.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            papyrus: {
+              50: '#FAF6F1',
+              100: '#F4EFEB',
+              200: '#ECE5DD',
+              300: '#E4DCD2',
+              400: '#D5CDC2',
+              500: '#CBC2B5',
+            },
+            parchment: {
+              card: '#ECE5DD',
+              input: '#F4EFEB',
+              border: '#D8CFC3',
+              hover: '#E2D8CC',
+              muted: '#DFD5C7',
+            },
+            espresso: {
+              950: '#151311',
+              900: '#1E1C1A',
+              850: '#282522',
+              800: '#35312C',
+              700: '#4D4740',
+              600: '#686057',
+              500: '#8A8074',
+            },
+            ochre: {
+              DEFAULT: '#C85A32',
+              dark: '#AF4A24',
+              clay: '#D35400',
+              glow: '#E0693E',
+              warm: '#D9822B',
+              soft: '#F4DFD2',
+              subtle: '#FAEEE7',
+            },
+            sage: {
+              900: '#1D2E24',
+              800: '#284133',
+              700: '#345241',
+              600: '#3D604E',
+              DEFAULT: '#476E5B',
+              light: '#E2ECE6',
+              border: '#B3C8BD',
+            },
+            // Referenced by the exports (Upload button, Ask button) but missing
+            // from their config; forest green from the photo-dossier theme.
+            secondary: {
+              DEFAULT: '#1e4732',
+              fixed: '#c9ead8',
+              'fixed-dim': '#aecebc',
+              container: '#c9ead8',
+            },
+            // Warm Archival Earth tokens (warm_archival_earth/DESIGN.md) used
+            // verbatim by the dossier/add/connected export markup.
+            surface: {
+              DEFAULT: '#fef8f4',
+              dim: '#ded9d5',
+              'container-lowest': '#ffffff',
+              'container-low': '#f8f3ef',
+              container: '#f2ede9',
+              'container-high': '#ece7e3',
+              'container-highest': '#e6e2de',
+              variant: '#e6e2de',
+            },
+            on: {
+              surface: '#1d1b19',
+              'surface-variant': '#45474b',
+              primary: '#ffffff',
+              secondary: '#ffffff',
+              tertiary: '#ffffff',
+              'primary-container': '#83868c',
+              'secondary-container': '#4d6b5c',
+              'secondary-fixed': '#032015',
+              'tertiary-container': '#d5643b',
+            },
+            background: {
+              DEFAULT: '#fef8f4',
+            },
+            primary: {
+              DEFAULT: '#030408',
+              container: '#1b1e23',
+            },
+            tertiary: {
+              container: '#3d0d00',
+              'fixed-dim': '#ffb59c',
+            },
+            outline: {
+              DEFAULT: '#76777b',
+              variant: '#c6c6cb',
+            },
+            forest: {
+              DEFAULT: '#1e4732',
+              hover: '#173727',
+              active: '#122b1e',
+              light: '#eef5f0',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            'label-sm': ['"Plus Jakarta Sans"', 'sans-serif'],
+            'label-md': ['"Plus Jakarta Sans"', 'sans-serif'],
+            'body-sm': ['"Plus Jakarta Sans"', 'sans-serif'],
+            'body-md': ['"Plus Jakarta Sans"', 'sans-serif'],
+            'headline-sm': ['"Plus Jakarta Sans"', 'sans-serif'],
+            'headline-md': ['"Plus Jakarta Sans"', 'sans-serif'],
+            'headline-lg': ['"Plus Jakarta Sans"', 'sans-serif'],
+            'display-lg': ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          fontSize: {
+            'label-sm': ['11px', { lineHeight: '14px' }],
+            'label-md': ['12px', { lineHeight: '16px' }],
+            'label-lg': ['14px', { lineHeight: '20px' }],
+            'body-sm': ['13px', { lineHeight: '20px' }],
+            'body-md': ['15px', { lineHeight: '24px' }],
+            'headline-sm': ['20px', { lineHeight: '28px' }],
+            'headline-md': ['24px', { lineHeight: '32px' }],
+            'headline-lg': ['32px', { lineHeight: '40px' }],
+            'display-lg': ['56px', { lineHeight: '64px' }],
+          },
+          boxShadow: {
+            archival: '0 1px 3px rgba(30,28,26,0.06), 0 1px 2px rgba(30,28,26,0.04)',
+            elevated: '0 10px 28px -4px rgba(30,28,26,0.09), 0 4px 10px -2px rgba(30,28,26,0.05)',
+            card: '0 4px 18px -2px rgba(30,28,26,0.07), 0 2px 6px -1px rgba(30,28,26,0.04)',
+            ochreGlow: '0 0 22px -3px rgba(200,90,50,0.32)',
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #F4EFEB;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #1E1C1A;
+      overflow-x: hidden;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 4px;
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: #D5CDC2;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-papyrus-100 text-espresso-900 flex flex-col antialiased selection:bg-ochre selection:text-white">
+<!-- Shared shell header (from the Stitch export; Curated Journals removed, tabs wired to routes) -->
+<header class="sticky top-0 z-50 w-full bg-parchment-card/90 backdrop-blur-xl border-b border-parchment-border transition-all">
+<div class="max-w-[1440px] mx-auto h-16 md:h-20 px-4 md:px-8 flex items-center justify-between gap-3 md:gap-6">
+<!-- Brand & Muse Spark Emblem -->
+<div class="flex items-center gap-3 md:gap-4 flex-shrink-0 min-w-0">
+<a class="flex items-center gap-3 group cursor-pointer" href="#/" aria-label="ReelWorld home">
+<!-- Geometric Lens Emblem -->
+<div class="relative w-9 h-9 md:w-10 md:h-10 rounded-xl bg-espresso-900 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform overflow-hidden border border-espresso-800">
+<div class="absolute inset-0 bg-gradient-to-tr from-espresso-950 via-espresso-900 to-espresso-850"></div>
+<div class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-ochre blur-sm opacity-80 animate-pulse"></div>
+<span class="material-symbols-outlined text-[20px] md:text-[22px] text-ochre-warm relative z-10 font-bold">flare</span>
+</div>
+<div class="flex flex-col">
+<span class="text-lg md:text-xl font-bold tracking-tight text-espresso-950 leading-none">ReelWorld</span>
+<span class="text-[10px] md:text-[11px] font-semibold tracking-wider text-espresso-600 uppercase">Visual Archive</span>
+</div>
+</a>
+<!-- Muse Spark Open Badge Pill -->
+<div class="h-6 w-px bg-parchment-border mx-1 hidden sm:block"></div>
+<div class="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-papyrus-200/90 border border-espresso-800/30 shadow-sm">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-ochre opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-ochre"></span>
+</span>
+<span class="text-xs font-bold text-espresso-950 tracking-tight whitespace-nowrap">Built with Muse Spark Open</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-extrabold bg-ochre text-white tracking-wide shadow-sm">v2.4</span>
+</div>
+</div>
+<!-- Center Desktop Navigation Tabs -->
+<nav class="hidden md:flex items-center gap-1 bg-papyrus-200/90 p-1.5 rounded-full border border-parchment-border shadow-inner" aria-label="Sections">
+<a class="js-tab px-5 py-2 rounded-full font-bold text-sm shadow-archival border transition-all flex items-center gap-2" data-tab="world" href="#/">
+<span class="material-symbols-outlined text-[18px]">public</span>
+<span class="">World</span>
+</a>
+<a class="js-tab px-5 py-2 rounded-full font-medium text-sm transition-colors flex items-center gap-2" data-tab="personal" href="#/">
+<span class="material-symbols-outlined text-[18px]">photo_library</span>
+<span class="">My Photos</span>
+<span class="ml-0.5 px-1.5 py-0.2 rounded-full bg-papyrus-300 text-[11px] font-semibold text-espresso-700" id="personal-count">–</span>
+</a>
+<a class="js-tab px-5 py-2 rounded-full font-medium text-sm transition-colors flex items-center gap-2" data-tab="connected" href="#/connected">
+<span class="material-symbols-outlined text-[18px]">sensors</span>
+<span class="">Connected</span>
+<span class="w-1.5 h-1.5 rounded-full bg-sage-600"></span>
+</a>
+</nav>
+<!-- Right Utility Bar -->
+<div class="flex items-center gap-2 md:gap-3">
+<!-- Assistant Status Indicator -->
+<span class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-papyrus-200 text-espresso-700 text-xs font-semibold border border-parchment-border" id="agent-status" title="Search agent status">
+<span class="material-symbols-outlined text-[16px] text-ochre">auto_awesome</span>
+<span class="" id="agent-status-text">Semantic Agent Active</span>
+</span>
+<!-- Lens / Camera Fast Tool -->
+<a class="w-10 h-10 rounded-full bg-papyrus-200 hover:bg-ochre-soft hover:text-ochre text-espresso-700 hidden sm:flex items-center justify-center transition-colors border border-parchment-border" href="#/add" title="Add a photo">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+</a>
+<!-- Primary Upload Action -->
+<a class="flex items-center gap-2 px-4 md:px-5 h-10 md:h-11 rounded-full bg-secondary hover:bg-secondary/90 text-white text-sm font-semibold shadow-archival transition-all active:scale-95 border border-secondary" href="#/add">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span class="hidden sm:inline">Upload Artifact</span>
+</a>
+</div>
+</div>
+<!-- Mobile spark pill row (label stays prominent on small screens) -->
+<div class="sm:hidden px-4 pb-2">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-papyrus-200/90 border border-espresso-800/30 shadow-sm">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-ochre opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-ochre"></span>
+</span>
+<span class="text-[11px] font-bold text-espresso-950 tracking-tight whitespace-nowrap">Built with Muse Spark Open</span>
+</div>
+</div>
+</header>
+<!-- Routed view mounts here -->
+<main class="w-full max-w-[1440px] mx-auto px-4 md:px-8 py-6 md:py-8 flex flex-col gap-6 md:gap-8 flex-1" id="view">
+</main>
+<!-- Mobile bottom navigation (responsive addition; exports are desktop-only) -->
+<nav class="md:hidden fixed bottom-0 inset-x-0 z-50 bg-parchment-card/95 backdrop-blur-xl border-t border-parchment-border" aria-label="Sections">
+<div class="grid grid-cols-4 gap-1 px-2 py-2" id="mobile-tabs">
+<a class="js-mtab flex flex-col items-center gap-0.5 py-1.5 rounded-xl text-espresso-700 font-semibold text-[11px]" data-tab="world" href="#/">
+<span class="material-symbols-outlined text-[22px]">public</span>
+<span>World</span>
+</a>
+<a class="js-mtab flex flex-col items-center gap-0.5 py-1.5 rounded-xl text-espresso-700 font-semibold text-[11px]" data-tab="personal" href="#/">
+<span class="material-symbols-outlined text-[22px]">photo_library</span>
+<span>My Photos</span>
+</a>
+<a class="js-mtab flex flex-col items-center gap-0.5 py-1.5 rounded-xl text-espresso-700 font-semibold text-[11px]" data-tab="connected" href="#/connected">
+<span class="material-symbols-outlined text-[22px]">sensors</span>
+<span>Connected</span>
+</a>
+<a class="js-mtab flex flex-col items-center gap-0.5 py-1.5 rounded-xl text-espresso-700 font-semibold text-[11px]" data-tab="add" href="#/add">
+<span class="material-symbols-outlined text-[22px]">add_a_photo</span>
+<span>Add</span>
+</a>
+</div>
+</nav>
+<!-- Shared footer (dead doc links removed; live API status instead) -->
+<footer class="w-full bg-espresso-950 border-t border-espresso-850 text-papyrus-300 mt-12 pb-20 md:pb-0">
+<div class="max-w-[1440px] mx-auto px-4 md:px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+<div class="flex items-center gap-3">
+<div class="w-7 h-7 rounded-lg bg-espresso-900 border border-espresso-800 flex items-center justify-center text-ochre-warm">
+<span class="material-symbols-outlined text-[16px]">flare</span>
+</div>
+<div>
+<span class="text-papyrus-100 font-bold">ReelWorld Kenya Semantic Visual Pipeline</span>
+<span class="mx-2 text-espresso-700">•</span>
+<span class="">Powered by Muse Spark Open Framework</span>
+</div>
+</div>
+<div class="flex items-center gap-2" id="api-status">
+<span class="w-2 h-2 rounded-full bg-sage-DEFAULT" id="api-status-dot"></span>
+<span class="text-papyrus-200" id="api-status-text">API: checking…</span>
+</div>
+</div>
+</footer>
+<script src="/app.js"></script>
+</body>
+</html>

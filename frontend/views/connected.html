@@ -1,0 +1,264 @@
+<!-- Connected view. Markup follows the
+     connected_your_photos_linked_to_the_world export. Removed: confidence
+     and archive-size fabrications, Filter Modality, Export dossier (kept
+     Refresh), EXIF/camera/dates/coords, personal-photo credit lines, the
+     empty-state demo toggle wrapper. Search filters the list for real. -->
+<section class="flex flex-col gap-6 mb-6" id="connected-banner">
+<div class="bg-surface-container-low p-6 rounded-xl shadow-sm flex flex-col xl:flex-row xl:items-center justify-between gap-6">
+<div class="flex flex-col gap-2 max-w-2xl">
+<div class="flex items-center gap-2.5 flex-wrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm uppercase tracking-wider font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+            Visual Bridge Index
+          </span>
+<span class="text-on-surface-variant font-label-sm text-label-sm" id="connected-sub">—</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight" id="connected-title">Your photos, linked to the world</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Each of your photos is matched against the World archive by place, viewpoint and look. Matches refresh after every upload.</p>
+</div>
+<div class="flex items-center flex-wrap gap-3">
+<button class="min-h-[44px] px-5 py-2.5 rounded bg-primary-container text-surface hover:bg-primary font-label-lg text-label-lg transition-all flex items-center gap-2 shadow-md hover:shadow-lg active:scale-95" id="connected-refresh" type="button">
+<span class="material-symbols-outlined text-[18px] text-on-tertiary-container">sync</span>
+<span class="">Refresh matches</span>
+</button>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start" id="connected-grid" hidden>
+<!-- LEFT COLUMN: Your Field Captures -->
+<aside class="lg:col-span-4 flex flex-col gap-5 lg:sticky lg:top-28">
+<div class="bg-surface-container-low p-5 rounded-xl shadow-sm flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[22px]">center_focus_strong</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Your Field Captures</h2>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm font-semibold" id="connected-count">—</span>
+</div>
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-outline">search</span>
+<input autocomplete="off" class="w-full pl-9 pr-3 py-2.5 min-h-[44px] rounded bg-surface-container text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm focus:outline-none" id="captures-filter" placeholder="Filter by caption, place, or id…" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-3" id="captures-list"></div>
+<a class="w-full py-3.5 px-4 rounded-xl bg-surface-container-highest hover:bg-surface-dim text-on-surface font-label-lg text-label-lg font-bold transition-all flex items-center justify-center gap-2.5 shadow-sm active:scale-[0.99] min-h-[44px]" href="#/add">
+<span class="material-symbols-outlined text-on-tertiary-container text-[20px]">add_photo_alternate</span>
+<span class="">+ Ingest another photo to discover links</span>
+</a>
+</aside>
+<!-- RIGHT AREA: Linked World Archive for Active Anchor -->
+<main class="lg:col-span-8 flex flex-col gap-10" id="anchor-main">
+<section class="relative p-6 rounded-2xl bg-surface-container-low shadow-sm border-2 border-on-tertiary-container/40 flex flex-col gap-5">
+<div class="flex flex-wrap items-center justify-between pb-3 border-b border-parchment-border/70 gap-3">
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2 px-2.5 py-1 rounded-full bg-on-tertiary-container/10 border border-on-tertiary-container/30 text-on-tertiary-container text-[11px] font-bold uppercase tracking-wider">
+<span class="w-2 h-2 rounded-full bg-on-tertiary-container animate-pulse"></span>
+<span class="">Visual Bridge Matrix</span>
+</div>
+<span class="text-xs text-on-surface-variant hidden sm:inline">Your photo, linked with the curated world repository</span>
+</div>
+<div class="flex items-center gap-4 text-xs font-semibold bg-surface-container-high/80 px-3 py-1.5 rounded-full border border-parchment-border">
+<span class="flex items-center gap-1.5 text-on-surface">
+<span class="w-2.5 h-2.5 rounded-full border-2 border-[#C85A32] bg-[#F4DFD2]"></span>
+<span class="text-[11px] font-bold text-on-tertiary-container">Terracotta: Your Photo</span>
+</span>
+<span class="text-outline-variant">•</span>
+<span class="flex items-center gap-1.5 text-on-surface">
+<span class="w-2.5 h-2.5 rounded-full border-2 border-[#3D604E] bg-secondary-container"></span>
+<span class="text-[11px] font-bold text-secondary">Green: World Photos</span>
+</span>
+</div>
+</div>
+<div class="flex flex-col md:flex-row gap-6 items-center">
+<div class="relative w-full md:w-56 h-48 rounded-xl bg-surface-container-highest p-2 flex-shrink-0 shadow-inner flex items-center justify-center border-2 border-[#C85A32] ring-4 ring-on-tertiary-container/10">
+<div class="absolute -top-3 left-3 px-2.5 py-0.5 rounded-full bg-on-tertiary-container text-white font-label-sm text-[11px] font-bold shadow-sm uppercase tracking-wider flex items-center gap-1.5 z-10">
+<span class="material-symbols-outlined text-[13px]">person_pin</span>
+<span class="">Your Photo</span>
+</div>
+<img alt="" class="rw-photo w-full h-full object-cover rounded shadow-sm" id="anchor-img"/>
+<span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-espresso-950/80 backdrop-blur-sm text-surface text-[10px] font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-ochre-warm">my_location</span>
+<span class="">Origin Node</span>
+</span>
+</div>
+<div class="flex flex-col gap-2.5 flex-1 min-w-0">
+<div class="flex flex-wrap items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-on-tertiary-container/10 text-on-tertiary-container font-label-sm text-label-sm font-bold uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">pin_drop</span>
+          Active Spatial Anchor
+        </span>
+<span class="text-on-surface-variant font-label-sm text-label-sm" id="anchor-id">—</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface tracking-tight break-words" id="anchor-caption">—</h2>
+<div class="flex flex-wrap items-center gap-3 text-on-surface-variant font-body-sm text-body-sm">
+<span class="text-secondary font-semibold" id="anchor-links">—</span>
+</div>
+<div class="pt-2 flex items-center gap-4 flex-wrap">
+<a class="inline-flex items-center gap-1.5 text-on-tertiary-container font-label-lg text-label-lg font-bold hover:underline min-h-[44px] py-2" href="#/" id="anchor-dossier">
+<span class="">View Full Evidence Dossier</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<div class="pt-2 mt-1 border-t border-parchment-border/60 text-xs text-on-surface-variant flex flex-wrap items-center gap-2">
+<span class="font-semibold text-on-surface">Field Specimen Capture</span>
+<span class="">•</span>
+<span class="">Your photo</span>
+<span class="">•</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-medium">Private by default</span>
+</div>
+</div>
+</div>
+<div class="mt-1 pt-3 border-t border-parchment-border/60 hidden sm:flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full border-2 border-[#C85A32] bg-[#F4DFD2]"></span>
+<span class="text-[11px] font-bold text-on-tertiary-container uppercase tracking-wide">Your Field Specimen</span>
+</div>
+<div class="flex-1 mx-4 relative flex items-center justify-center">
+<div class="w-full border-t-2 border-dashed border-[#C85A32]/50"></div>
+<span class="absolute px-3 py-0.5 rounded-full bg-surface-container-high border border-parchment-border text-[10px] font-bold text-on-surface-variant tracking-wider uppercase shadow-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-on-tertiary-container">hub</span>
+        Semantic Raycast Distribution
+      </span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[11px] font-bold text-secondary uppercase tracking-wide">Archive World Nodes</span>
+<span class="w-2.5 h-2.5 rounded-full border-2 border-[#3D604E] bg-secondary-container"></span>
+</div>
+</div>
+</section>
+<div class="flex flex-col gap-10" id="anchor-groups"></div>
+<p class="hidden font-body-md text-body-md text-on-surface-variant" id="anchor-nolinks">This photo has no world matches yet. Photos connect by place, viewpoint and look — try uploading one with clear landmarks or signs.</p>
+</main>
+</div>
+<!-- Loading skeleton -->
+<div class="flex-col gap-8 animate-pulse" id="connected-loading" hidden>
+<div class="h-40 rounded-xl bg-surface-container-low"></div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<div class="lg:col-span-4 flex flex-col gap-3">
+<div class="h-28 rounded-xl bg-surface-container-low"></div>
+<div class="h-24 rounded-xl bg-surface-container-low"></div>
+<div class="h-24 rounded-xl bg-surface-container-low"></div>
+</div>
+<div class="lg:col-span-8 flex flex-col gap-6">
+<div class="h-64 rounded-2xl bg-surface-container-low"></div>
+<div class="h-48 rounded-xl bg-surface-container-low"></div>
+</div>
+</div>
+</div>
+<!-- Empty state: no personal photos (or none linked) -->
+<div class="bg-surface-container-low p-8 rounded-xl shadow-sm flex-col md:flex-row items-center gap-8" id="connected-empty" hidden>
+<div class="w-32 h-32 rounded-full bg-surface-container-highest flex items-center justify-center flex-shrink-0 shadow-inner relative">
+<div class="absolute inset-2 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-[44px] text-on-tertiary-container">satellite_alt</span>
+</div>
+<span class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-secondary"></span>
+</div>
+<div class="flex flex-col gap-3 text-center md:text-left flex-1">
+<h4 class="font-headline-sm text-headline-sm text-on-surface">No linked photos yet</h4>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl">Add a photo from your camera roll or field camera. ReelWorld will match its architecture, signs, and terrain against the Kenya visual archive.</p>
+<div class="pt-2">
+<a class="px-5 py-2.5 rounded bg-on-tertiary-container text-surface hover:bg-tertiary-container font-label-lg text-label-lg font-bold transition-all shadow-md active:scale-95 inline-flex items-center gap-2 min-h-[44px]" href="#/add">
+<span class="material-symbols-outlined text-[18px]">add_a_photo</span>
+<span class="">Add your first photo</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Error state with retry -->
+<div class="w-full rounded-2xl bg-parchment-card border border-ochre/50 p-6 shadow-archival flex-col sm:flex-row items-start sm:items-center gap-4 max-w-2xl" id="connected-error" hidden>
+<div class="w-10 h-10 rounded-xl bg-ochre-soft border border-ochre/30 text-ochre-clay flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">cloud_off</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-headline-sm text-headline-sm text-[15px] text-espresso-950">The bridge index failed to load</p>
+<p class="font-body-sm text-body-sm text-espresso-700 leading-relaxed" id="connected-error-text">The request failed.</p>
+</div>
+<button class="min-h-[44px] px-6 py-2.5 rounded bg-forest hover:bg-forest-hover active:bg-forest-active text-papyrus-100 font-label-lg text-label-lg font-bold shadow-archival transition-all flex items-center gap-2 flex-shrink-0" id="connected-retry" type="button">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+<span class="">Retry connection</span>
+</button>
+</div>
+<!-- Templates -->
+<template id="tpl-capture">
+<button class="p-4 rounded-xl transition-all cursor-pointer shadow-sm group text-left min-h-[44px] w-full" data-slot="row" type="button">
+<div class="flex gap-3.5">
+<div class="w-20 h-20 rounded overflow-hidden flex-shrink-0 bg-surface-container-highest p-1 shadow-inner relative">
+<img alt="" class="rw-photo w-full h-full object-cover rounded" data-slot="img" loading="lazy"/>
+</div>
+<div class="flex flex-col justify-between flex-1 min-w-0">
+<div>
+<div class="flex items-center justify-between gap-1 mb-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider truncate" data-slot="place">—</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold flex-shrink-0" data-slot="links">—</span>
+</div>
+<h3 class="font-label-lg text-label-lg text-on-surface font-bold truncate group-hover:text-on-tertiary-container transition-colors" data-slot="caption">—</h3>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm mt-1 gap-2">
+<span class="font-mono text-[11px] truncate" data-slot="pid">—</span>
+<span class="hidden px-1.5 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface flex-shrink-0" data-slot="anchor-chip">Anchor Specimen</span>
+</div>
+</div>
+</div>
+</button>
+</template>
+<template id="tpl-cgroup">
+<section class="relative flex flex-col gap-4">
+<div class="w-full h-10 -mb-2 relative pointer-events-none hidden sm:block">
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 800 40" fill="none">
+<path d="M 400 0 C 400 24 200 12 200 40" stroke="#3D604E" stroke-width="2" stroke-dasharray="4 4" stroke-opacity="0.75"></path>
+<path d="M 400 0 C 400 24 600 12 600 40" stroke="#3D604E" stroke-width="2" stroke-dasharray="4 4" stroke-opacity="0.75"></path>
+<circle cx="400" cy="2" r="4.5" fill="#C85A32" stroke="#F4DFD2" stroke-width="2"></circle>
+<circle cx="200" cy="38" r="4.5" fill="#3D604E" stroke="#c9ead8" stroke-width="2"></circle>
+<circle cx="600" cy="38" r="4.5" fill="#3D604E" stroke="#c9ead8" stroke-width="2"></circle>
+</svg>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-highest border border-secondary/30 text-secondary text-[10px] font-bold uppercase tracking-wider shadow-sm flex items-center gap-1 whitespace-nowrap">
+<span class="material-symbols-outlined text-[12px]" data-slot="arc-icon">near_me</span>
+<span data-slot="arc-label">Bridge</span>
+</span>
+</div>
+</div>
+<div class="flex items-center justify-between gap-2 flex-wrap">
+<div class="flex items-center gap-3">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full" data-slot="dot"></span>
+<span data-slot="title">Group</span>
+</h3>
+<span class="px-2.5 py-0.5 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold" data-slot="count"></span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-on-surface-variant font-label-sm text-label-sm hidden md:inline" data-slot="note"></span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed text-[10px] font-bold border border-secondary/30">World Provenance</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5" data-slot="cards"></div>
+</section>
+</template>
+<template id="tpl-cmatch">
+<article class="bg-surface-container-low rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col gap-3 group border-2 border-[#3D604E]/50 relative hover:border-[#3D604E] cursor-pointer" data-slot="card">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed text-[10px] font-bold border border-[#3D604E]/30 uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+          World Photo
+        </span>
+<span class="text-[11px] font-bold text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">hub</span>
+          Bridged Anchor
+        </span>
+</div>
+<div class="w-full h-48 rounded bg-surface-container-highest p-2 overflow-hidden shadow-inner relative border border-[#3D604E]/30">
+<img alt="" class="rw-photo w-full h-full object-cover rounded group-hover:scale-[1.02] transition-transform duration-300" data-slot="img" loading="lazy"/>
+<span class="absolute top-3 right-3 px-2 py-1 rounded bg-primary-container text-surface font-label-sm text-label-sm font-bold shadow-md" data-slot="match"></span>
+<span class="absolute bottom-3 left-3 px-2 py-0.5 rounded bg-surface-container-highest/90 text-on-surface font-label-sm text-label-sm backdrop-blur-sm" data-slot="vp"></span>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm gap-2">
+<span class="truncate" data-slot="byline">—</span>
+<span class="font-mono text-[11px] flex-shrink-0" data-slot="pid">—</span>
+</div>
+<h4 class="font-label-lg text-label-lg text-on-surface font-bold leading-snug" data-slot="title">—</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" data-slot="reason">—</p>
+<div class="pt-2 mt-1 border-t border-parchment-border/60 text-[11px] text-on-surface-variant" data-slot="credit"></div>
+</div>
+</article>
+</template>

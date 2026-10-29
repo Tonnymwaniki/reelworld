@@ -40,7 +40,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 from supabase import create_client
 
-from retrieval import get_model, is_specific, related_area, tokens
+from retrieval import get_model, score_against, tokens
 
 ROOT = Path(__file__).resolve().parent.parent
 load_dotenv(ROOT / ".env")
@@ -230,44 +230,13 @@ class Engine:
         emb = src["embedding"]
         emb = json.loads(emb) if isinstance(emb, str) else emb
         rows = self.rpc_search(emb, spec, set(exclude) | {anchor_id}, count=60, use_filters=False)
-        src_lms = set(src.get("landmark_keys") or [])
-        k = 1.0 if angle_mode else 0.3  # "more like this" is visual first; place is a small bonus
         found_angle = False
         for r in rows:
-            bonus, reasons, subject = 0.0, [], False
-            cand_lms = set(r.get("landmark_keys") or [])
-            if src["place_key"] and src["place_key"] == r["place_key"]:
-                if is_specific(r["place_key"]):
-                    bonus += 0.60
-                    reasons.append(f"same place: {r['place_key']}")
-                    subject = True
-                else:
-                    bonus += 0.20
-                    reasons.append(f"same area: {r['place_key']}")
-            elif r["place_key"] in src_lms:
-                bonus += 0.60
-                reasons.append(f"shows a landmark in your photo: {r['place_key']}")
-                subject = True
-            elif src["place_key"] in cand_lms:
-                bonus += 0.20
-                reasons.append(f"your photo's place is visible in it: {src['place_key']}")
-            elif related_area(src["place_key"], r["place_key"]):
-                bonus += 0.10
-                reasons.append(f"same area: {r['place_key']}")
-            if src.get("taken_from_key") and src["taken_from_key"] == r["place_key"]:
-                bonus += 0.15
-                reasons.append(f"shows where your photo was taken: {r['place_key']}")
-            different = src["viewpoint"] != r["viewpoint"]
+            score, reasons, subject, different, _ = score_against(src, r, angle_mode)
             if subject and different:
-                reasons.append(f"another angle ({r['viewpoint']} vs {src['viewpoint']})")
                 found_angle = found_angle or angle_mode
-            score = r["similarity"] + k * bonus
-            if r["viewpoint"] == "interior" and src["viewpoint"] != "interior":
-                score -= 0.15
-            if angle_mode and subject and different:
-                score += 0.5
             r["score"] = score
-            r["reasons"] = reasons or [f"meaning {r['similarity']:.2f}"]
+            r["reasons"] = reasons
         note = None
         if angle_mode and not found_angle:
             rows.sort(key=lambda r: r["similarity"], reverse=True)
@@ -299,7 +268,7 @@ class Engine:
         m = re.fullmatch(r"\s*open\s+(\d)\s*", message, re.I)
         if m and st["last"] and 1 <= int(m.group(1)) <= len(st["last"]):
             st["focus"] = st["last"][int(m.group(1)) - 1]
-            return {"text": f"Focused on {st['focus']['photo_id']}: {st['focus']['caption']}", "results": []}
+            return {"text": f"Focused on {st['focus']['photo_id']}: {st['focus']['caption']}", "results": [], "kind": "ok"}
 
         intent = self.parse(message)
         idx = intent.get("focus_index")
@@ -312,27 +281,29 @@ class Engine:
 
         if action == "question":
             if not st["focus"]:
-                return {"text": "Open a photo first (say 'open 1'), then ask about it.", "results": []}
+                return {"text": "Open a photo first (say 'open 1'), then ask about it.", "results": [], "kind": "need_focus"}
             q = intent.get("question") or message
-            return {"text": self.answer(st["focus"]["photo_id"], q), "results": []}
+            return {"text": self.answer(st["focus"]["photo_id"], q), "results": [], "kind": "question_answer"}
 
         if action in ("another_angle", "more_like_this"):
             anchor = intent.get("anchor")
             if (anchor is None or (isinstance(anchor, str)
                     and anchor.strip().lower() in ("", "focus"))) and not st["focus"]:
                 return {"text": "Search for a photo first, then ask for other angles of it.",
-                        "results": []}
+                        "results": [], "kind": "need_focus"}
             anchor_id = st["focus"]["photo_id"] if anchor in (None, "focus") and st["focus"] else anchor
             if not anchor_id:
-                return {"text": "Tell me which photo, or search first so there is one in focus.", "results": []}
+                return {"text": "Tell me which photo, or search first so there is one in focus.", "results": [], "kind": "need_focus"}
             if not self.fetch_photo(anchor_id, "photo_id"):
-                return {"text": "I could not find that photo.", "results": []}
+                return {"text": "I could not find that photo.", "results": [], "kind": "not_found"}
             rows, note = self.related(anchor_id, st["spec"], st["rejected"], action == "another_angle")
             label = "other angles of" if action == "another_angle" else "photos like"
-            return {"text": note or f"Showing {label} {anchor_id}:", "results": rows}
+            kind = "no_other_angle" if note else "ok"
+            return {"text": note or f"Showing {label} {anchor_id}:", "results": rows, "kind": kind}
 
         rows, note = self.search(st["spec"], st["rejected"])
-        return {"text": note or "Here is what I found:", "results": rows}
+        kind = "no_strong_match" if note else "ok"
+        return {"text": note or "Here is what I found:", "results": rows, "kind": kind}
 
 
 def show(rows):

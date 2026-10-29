@@ -1,0 +1,784 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>ReelWorld - Conversational Visual Archive</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            papyrus: {
+              50: '#FAF6F1',
+              100: '#F4EFEB',
+              200: '#ECE5DD',
+              300: '#E4DCD2',
+              400: '#D5CDC2',
+              500: '#CBC2B5',
+            },
+            parchment: {
+              card: '#ECE5DD',
+              input: '#F4EFEB',
+              border: '#D8CFC3',
+              hover: '#E2D8CC',
+              muted: '#DFD5C7',
+            },
+            espresso: {
+              950: '#151311',
+              900: '#1E1C1A',
+              850: '#282522',
+              800: '#35312C',
+              700: '#4D4740',
+              600: '#686057',
+              500: '#8A8074',
+            },
+            ochre: {
+              DEFAULT: '#C85A32',
+              dark: '#AF4A24',
+              clay: '#D35400',
+              glow: '#E0693E',
+              warm: '#D9822B',
+              soft: '#F4DFD2',
+              subtle: '#FAEEE7',
+            },
+            sage: {
+              900: '#1D2E24',
+              800: '#284133',
+              700: '#345241',
+              600: '#3D604E',
+              DEFAULT: '#476E5B',
+              light: '#E2ECE6',
+              border: '#B3C8BD',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          boxShadow: {
+            archival: '0 1px 3px rgba(30,28,26,0.06), 0 1px 2px rgba(30,28,26,0.04)',
+            elevated: '0 10px 28px -4px rgba(30,28,26,0.09), 0 4px 10px -2px rgba(30,28,26,0.05)',
+            card: '0 4px 18px -2px rgba(30,28,26,0.07), 0 2px 6px -1px rgba(30,28,26,0.04)',
+            ochreGlow: '0 0 22px -3px rgba(200,90,50,0.32)',
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #F4EFEB;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #1E1C1A;
+      overflow-x: hidden;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 4px;
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: #D5CDC2;
+      border-radius: 9999px;
+    }
+  </style>
+<meta content="web_standard" name="shell-type"></head>
+<body class="min-h-screen bg-papyrus-100 text-espresso-900 flex flex-col antialiased selection:bg-ochre selection:text-white">
+<!-- Desktop Sticky Header (1440px target) -->
+<header class="sticky top-0 z-50 w-full bg-parchment-card/90 backdrop-blur-xl border-b border-parchment-border transition-all">
+<div class="max-w-[1440px] mx-auto h-20 px-8 flex items-center justify-between gap-6">
+<!-- Brand & Muse Spark Emblem -->
+<div class="flex items-center gap-4 flex-shrink-0">
+<div class="flex items-center gap-3 group cursor-pointer">
+<!-- Geometric Lens Emblem -->
+<div class="relative w-10 h-10 rounded-xl bg-espresso-900 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform overflow-hidden border border-espresso-800">
+<div class="absolute inset-0 bg-gradient-to-tr from-espresso-950 via-espresso-900 to-espresso-850"></div>
+<div class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-ochre blur-sm opacity-80 animate-pulse"></div>
+<span class="material-symbols-outlined text-[22px] text-ochre-warm relative z-10 font-bold">flare</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xl font-bold tracking-tight text-espresso-950 leading-none">ReelWorld</span>
+<span class="text-[11px] font-semibold tracking-wider text-espresso-600 uppercase">Visual Archive</span>
+</div>
+</div>
+<!-- Muse Spark Open Badge Pill -->
+<div class="h-6 w-px bg-parchment-border mx-1"></div>
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-papyrus-200 border border-parchment-border hover:border-ochre/50 transition-colors">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-ochre opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-ochre"></span>
+</span>
+<span class="text-xs font-semibold text-espresso-800 tracking-tight">Built with Muse Spark Open</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-ochre-soft text-ochre-clay tracking-wide">v2.4</span>
+</div>
+</div>
+<!-- Center Desktop Navigation Tabs -->
+<nav class="flex items-center gap-1 bg-papyrus-200/90 p-1.5 rounded-full border border-parchment-border shadow-inner">
+<a class="px-5 py-2 rounded-full bg-papyrus-100 text-espresso-950 font-bold text-sm shadow-archival border border-parchment-border transition-all flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[18px] text-ochre">public</span>
+<span class="">World</span>
+</a>
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px]">photo_library</span>
+<span class="">My Photos</span>
+<span class="ml-0.5 px-1.5 py-0.2 rounded-full bg-papyrus-300 text-[11px] font-semibold text-espresso-700">84</span>
+</a>
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px]">sensors</span>
+<span class="">Connected</span>
+<span class="w-1.5 h-1.5 rounded-full bg-sage-600"></span>
+</a>
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px]">auto_stories</span>
+<span class="">Curated Journals</span>
+</a>
+</nav>
+<!-- Right Utility Bar -->
+<div class="flex items-center gap-3">
+<!-- Assistant Status Indicator -->
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-papyrus-200 hover:bg-parchment-hover text-espresso-700 text-xs font-semibold transition-colors border border-parchment-border">
+<span class="material-symbols-outlined text-[16px] text-ochre">auto_awesome</span>
+<span class="">Semantic Agent Active</span>
+</button>
+<!-- Lens / Camera Fast Tool -->
+<button class="w-10 h-10 rounded-full bg-papyrus-200 hover:bg-ochre-soft hover:text-ochre text-espresso-700 flex items-center justify-center transition-colors border border-parchment-border" title="Fast Capture Lens">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+</button>
+<!-- Primary Upload Action -->
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-espresso-900 text-papyrus-100 hover:bg-espresso-800 text-sm font-semibold shadow-archival transition-all active:scale-95 group border border-espresso-800">
+<span class="material-symbols-outlined text-[18px] text-ochre-warm group-hover:rotate-90 transition-transform">add</span>
+<span class="">Upload Artifact</span>
+</button>
+<div class="h-6 w-px bg-parchment-border"></div>
+<!-- User Profile Avatar with Connected Pill -->
+<div class="flex items-center gap-2.5 pl-1 cursor-pointer group">
+<div class="relative">
+<div class="w-10 h-10 rounded-full bg-gradient-to-tr from-espresso-850 to-espresso-700 flex items-center justify-center text-papyrus-100 ring-2 ring-parchment-border shadow-archival">
+<span class="material-symbols-outlined text-[20px]">person</span>
+</div>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-sage-600 rounded-full ring-2 ring-papyrus-100"></span>
+</div>
+<div class="hidden xl:flex flex-col text-left">
+<span class="text-xs font-bold text-espresso-950 group-hover:text-ochre transition-colors">Dr. A. Ochieng</span>
+<span class="text-[11px] text-espresso-600">Archivist Lead</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Space (Max 1440px Container) -->
+<main class="w-full max-w-[1440px] mx-auto px-8 py-8 flex flex-col gap-8 flex-1"><div class="flex flex-col w-full">
+<!-- Top Archival Workflow Ribbon -->
+<section class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 bg-surface-container rounded-xl shadow-sm mb-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-tertiary-container flex items-center justify-center text-on-tertiary shadow-sm">
+<span class="material-symbols-outlined text-headline-sm">travel_explore</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">Spatial Intelligence Pipeline</span>
+<span class="px-2 py-0.5 rounded bg-surface-variant font-label-sm text-label-sm text-on-surface-variant">Muse Spark v2.4</span>
+</div>
+<h1 class="font-headline-md text-headline-md text-on-surface">Geospatial Landmark Ingestion &amp; Inference</h1>
+</div>
+</div>
+<!-- 3-Phase State Flow Switcher Bar -->
+<div class="inline-flex items-center p-1.5 bg-surface-dim rounded-full shadow-inner gap-1 self-start md:self-auto">
+<button class="workflow-tab px-3.5 py-1.5 rounded-full font-label-md text-label-md flex items-center gap-1.5 transition-all text-on-surface-variant hover:text-on-surface" id="tab-btn-1" onclick="switchWorkflowTab(1)">
+<span class="w-5 h-5 rounded-full bg-secondary text-on-secondary flex items-center justify-center text-[10px] font-bold">1</span>
+<span class="">Upload &amp; Input</span>
+</button>
+<button class="workflow-tab px-3.5 py-1.5 rounded-full font-label-md text-label-md flex items-center gap-1.5 transition-all text-on-surface-variant hover:text-on-surface" id="tab-btn-2" onclick="switchWorkflowTab(2)">
+<span class="w-5 h-5 rounded-full bg-secondary text-on-secondary flex items-center justify-center text-[10px] font-bold">2</span>
+<span class="">Neural Stepper</span>
+</button>
+<button class="workflow-tab px-4 py-1.5 rounded-full font-label-md text-label-md flex items-center gap-1.5 bg-primary text-on-primary shadow-sm font-semibold" id="tab-btn-3" onclick="switchWorkflowTab(3)">
+<span class="w-5 h-5 rounded-full bg-on-tertiary-container text-on-tertiary flex items-center justify-center text-[10px] font-bold">3</span>
+<span class="">Confirmed Result</span>
+<span class="relative flex h-2 w-2 ml-0.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary-fixed opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
+</span>
+</button>
+<button class="workflow-tab px-3 py-1.5 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface flex items-center gap-1 transition-all" id="tab-btn-all" onclick="switchWorkflowTab(0)">
+<span class="material-symbols-outlined text-[15px]">splitscreen</span>
+<span class="">Inspection View</span>
+</button>
+</div>
+</section>
+<!-- Interactive 12-Column Archival Inspection Dashboard -->
+<div class="grid grid-cols-12 gap-8 items-start">
+<!-- LEFT COLUMN: State 1 (Upload Dropzone) & State 2 (Vertical Stepper Progress) -->
+<div class="col-span-12 lg:col-span-5 flex flex-col gap-6" id="flow-left-pane">
+<!-- STATE 1: Ingestion Dropzone & Active Specimen Card -->
+<div class="bg-surface-container-low rounded-xl p-6 shadow-sm flex flex-col gap-5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-variant font-label-sm text-label-sm text-secondary font-bold">STATE 01</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Ingest &amp; Specimen Influx</h2>
+</div>
+<span class="material-symbols-outlined text-outline text-[18px]">drag_indicator</span>
+</div>
+<!-- Tactile Drop Zone -->
+<div class="p-6 bg-surface-container rounded-lg flex flex-col items-center justify-center text-center shadow-inner relative overflow-hidden group hover:bg-surface-container-high transition-colors">
+<div class="w-14 h-14 rounded-full bg-surface-container-high flex items-center justify-center text-on-tertiary-container mb-3 shadow-sm group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-headline-lg">add_a_photo</span>
+</div>
+<h3 class="font-label-lg text-label-lg text-on-surface">Where was this captured?</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xs mt-1">
+            Drag and drop RAW, JPEG, or HEIC captures from your field camera or mobile roll.
+          </p>
+<div class="flex items-center gap-3 mt-4">
+<button class="px-4 py-2 bg-primary text-on-primary rounded font-label-md text-label-md flex items-center gap-2 shadow-sm hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[16px]">file_upload</span>
+<span class="">Add a photo</span>
+</button>
+<button class="px-4 py-2 bg-surface-variant text-on-surface rounded font-label-md text-label-md flex items-center gap-2 hover:bg-surface-dim active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[16px]">photo_camera</span>
+<span class="">Snap photo</span>
+</button>
+</div>
+<!-- Privacy Seal Notice -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-variant text-on-surface-variant font-label-sm text-label-sm mt-5 shadow-sm">
+<span class="material-symbols-outlined text-[13px] text-secondary">verified_user</span>
+<span class="">Your photo stays private by default.</span>
+</div>
+</div>
+<!-- Specimen Spec Sheet & Mounted Thumbnail -->
+<div class="p-4 bg-surface-container rounded-lg shadow-sm flex flex-col gap-3">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="">SPECIMEN MOUNTED</span>
+</span>
+<span class="font-mono text-outline">EXIF 2.3.1</span>
+</div>
+<div class="flex gap-4 items-center">
+<!-- Mounted Mat Board Photo Preview -->
+<div class="relative w-24 h-24 p-1.5 bg-surface-dim rounded shadow-inner flex-shrink-0">
+<img class="w-full h-full object-cover rounded" data-alt="Editorial close architectural photo of the Kenyatta International Convention Centre entrance tower in Nairobi under golden hour sunlight, terracotta fluted circular facade, slight perspective upward, warm sepia archival grading, dust particles in sunbeams." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDs4coI4demgtUqY2SjvxvPF5rdh8wzNqTxbxp2eYmn7-RWb9yo-a74kiHOxXDOpk6PchRxlfdBREXZxjVJvFQzvbJzBZGT0gPEFKxMxc5_0pjOeZheyq_NEyV_qbwllKG086mMugpm3bRtxTVotm_rQhw0WMZWYI3w_4YVPc2eedpsaX2FXvMhBaI19jh_2t-pseIO5XyU00U0vt273rShD4ugfrduJs3CQ_ZoCzo">
+<span class="absolute bottom-2 right-2 px-1 py-0.5 bg-primary/80 text-on-primary font-mono text-[9px] rounded">RAW</span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<div class="font-label-lg text-label-lg text-on-surface truncate">IMG_2024_NBO_7419.JPG</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">4.2 MB • Nairobi CBD Street Level</div>
+<div class="flex items-center gap-2 mt-2">
+<span class="px-2 py-0.5 rounded bg-surface-variant font-label-sm text-label-sm text-secondary font-medium">35mm f/2.8</span>
+<span class="px-2 py-0.5 rounded bg-surface-variant font-label-sm text-label-sm text-on-surface-variant">ISO 100</span>
+<span class="px-2 py-0.5 rounded bg-surface-variant font-label-sm text-label-sm text-on-surface-variant">1/500s</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- STATE 2: Neural Verification & Stepper Progress -->
+<div class="bg-surface-container-low rounded-xl p-6 shadow-sm flex flex-col gap-5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-variant font-label-sm text-label-sm text-secondary font-bold">STATE 02</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Neural Verification</h2>
+</div>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[13px] animate-spin">sync</span>
+<span class="">Estimated time: about a minute</span>
+</div>
+</div>
+<!-- Vertical Archival Stepper -->
+<div class="relative pl-6 flex flex-col gap-6 my-2">
+<!-- Stepper Central Line -->
+<div class="absolute left-[11px] top-3 bottom-3 w-0.5 bg-surface-dim"></div>
+<!-- Step 1: Uploaded (Completed) -->
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-6 w-6 h-6 rounded-full bg-secondary text-on-secondary flex items-center justify-center shadow-sm z-10">
+<span class="material-symbols-outlined text-[14px] font-bold">check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface">Uploaded</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Payload ingested into sandboxed buffer (4,210 KB verified).</span>
+</div>
+</div>
+<!-- Step 2: Looking at the photo (Completed) -->
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-6 w-6 h-6 rounded-full bg-secondary text-on-secondary flex items-center justify-center shadow-sm z-10">
+<span class="material-symbols-outlined text-[14px] font-bold">check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface">Looking at the photo</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+                128 deep feature descriptors isolated; Latin OCR extracted sign banner text with 99.4% confidence.
+              </span>
+</div>
+</div>
+<!-- Step 3: Working out the place (Completed) -->
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-6 w-6 h-6 rounded-full bg-secondary text-on-secondary flex items-center justify-center shadow-sm z-10">
+<span class="material-symbols-outlined text-[14px] font-bold">check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface">Working out the place</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+                Architectural facade matched to Kenyan modernist brutalist registry; spatial polygon anchored to -1.2884, 36.8233.
+              </span>
+</div>
+</div>
+<!-- Step 4: Connecting to the world (ACTIVE) -->
+<div class="relative flex items-start gap-4 p-3 bg-surface-container rounded-lg shadow-sm">
+<div class="absolute -left-6 w-6 h-6 rounded-full bg-tertiary-container text-on-tertiary flex items-center justify-center shadow-ochreGlow z-10 ring-2 ring-background">
+<span class="material-symbols-outlined text-[14px] animate-spin">progress_activity</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">Connecting to the world</span>
+<span class="px-1.5 py-0.2 rounded bg-tertiary-container text-on-tertiary text-[10px] font-bold tracking-wider">ACTIVE</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                Linking regional archives, intersecting observer vectors, and querying co-present collections across Nairobi.
+              </span>
+<!-- Mini Progress Bar Indicator -->
+<div class="w-full bg-surface-dim h-1.5 rounded-full overflow-hidden mt-2">
+<div class="bg-on-tertiary-container h-full rounded-full w-4/5 animate-pulse"></div>
+</div>
+</div>
+</div>
+<!-- Step 5: Done (Pending) -->
+<div class="relative flex items-start gap-4 opacity-50">
+<div class="absolute -left-6 w-6 h-6 rounded-full bg-surface-dim text-on-surface-variant flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-[14px]">flag</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface">Done</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+                Curator verification stamp applied and immutable provenance cataloged.
+              </span>
+</div>
+</div>
+</div>
+<!-- Telemetry Micro-Stats Bar -->
+<div class="p-3 bg-surface-container rounded flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-secondary">database</span>
+<span class="">1,420 regional Kenya captures scanned</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-on-tertiary-container">hub</span>
+<span class="">28 feature anchors locked</span>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: State 3 (Identification Result, Evidences & World Connection) -->
+<div class="col-span-12 lg:col-span-7 flex flex-col gap-6" id="flow-right-pane">
+<!-- Confirmed Identification Master Showcase -->
+<div class="bg-surface-container-low rounded-xl p-8 shadow-sm flex flex-col gap-6 relative overflow-hidden">
+<div class="flex flex-col gap-2">
+<div class="flex flex-wrap items-center justify-between gap-2">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-variant font-label-sm text-label-sm text-secondary font-bold">STATE 03</span>
+<span class="px-2.5 py-1 rounded bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+<span class="">CONFIRMED MATCH</span>
+</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Confidence Index</span>
+<span class="font-mono font-bold text-headline-sm text-secondary">99.2%</span>
+</div>
+</div>
+<h2 class="font-display-lg text-headline-lg lg:text-display-lg text-on-surface tracking-tight mt-1">
+            Kenyatta International Convention Centre
+          </h2>
+<div class="flex items-center gap-3 text-on-surface-variant font-body-sm text-body-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-on-tertiary-container">location_on</span>
+<span class="">City Square, Nairobi Central Business District</span>
+</span>
+<span class="">•</span>
+<span class="font-mono text-outline">-1.2884° S, 36.8233° E</span>
+<span class="">•</span>
+<span class="">Completed 1973</span>
+</div>
+</div>
+<!-- Evidence Corroboration Tray -->
+<div class="bg-surface-container rounded-lg p-5 flex flex-col gap-3 shadow-inner">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Corroborated Evidence Chain</span>
+<span class="font-label-sm text-label-sm text-outline">3 Independent Vector Matches</span>
+</div>
+<ul class="flex flex-col gap-2.5 font-body-sm text-body-sm text-on-surface">
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-secondary flex-shrink-0 mt-0.5">spellcheck</span>
+<div>
+<strong class="font-semibold text-on-surface">Typography OCR:</strong>
+<span class="text-on-surface-variant"> The entrance archway banner reads </span>
+<span class="font-mono bg-surface-variant px-1.5 py-0.5 rounded text-on-surface text-[12px]">"KENYATTA INTERNATIONAL CONVENTION CENTRE"</span>
+<span class="text-on-surface-variant"> with 99.4% optical character recognition certainty.</span>
+</div>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-secondary flex-shrink-0 mt-0.5">apartment</span>
+<div>
+<strong class="font-semibold text-on-surface">Architectural Morphology:</strong>
+<span class="text-on-surface-variant"> Distinctive 28-story fluted terracotta cylindrical tower paired with the conical saucer-shaped plenary amphitheatre (Karl Henrik Nøstvik design).</span>
+</div>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-secondary flex-shrink-0 mt-0.5">explore</span>
+<div>
+<strong class="font-semibold text-on-surface">Spatial Alignment:</strong>
+<span class="text-on-surface-variant"> Camera azimuth 042° NE facing Harambee Avenue and Parliament Road pedestrian axis confirmed against satellite shadow profiles.</span>
+</div>
+</li>
+</ul>
+</div>
+<!-- Other Possibilities Ranked Confidence List -->
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<h3 class="font-label-lg text-label-lg text-on-surface font-semibold">Other Evaluated Possibilities</h3>
+<span class="font-label-sm text-label-sm text-outline">Rejected Alternate Hypotheses</span>
+</div>
+<div class="flex flex-col gap-2.5">
+<!-- Alternative 1 -->
+<div class="p-3 bg-surface-container rounded flex items-center justify-between gap-4">
+<div class="flex items-center gap-3 min-w-0">
+<span class="font-mono text-outline font-bold text-label-sm">02</span>
+<div class="truncate">
+<span class="font-label-lg text-label-lg text-on-surface">Times Tower</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant ml-1.5">(Haile Selassie Ave)</span>
+</div>
+</div>
+<div class="flex items-center gap-3 flex-shrink-0">
+<div class="w-32 bg-surface-dim h-2 rounded-full overflow-hidden">
+<div class="bg-outline h-full rounded-full" style="width: 14.2%;"></div>
+</div>
+<span class="font-mono font-bold text-label-sm text-on-surface-variant w-12 text-right">14.2%</span>
+</div>
+</div>
+<!-- Alternative 2 -->
+<div class="p-3 bg-surface-container rounded flex items-center justify-between gap-4">
+<div class="flex items-center gap-3 min-w-0">
+<span class="font-mono text-outline font-bold text-label-sm">03</span>
+<div class="truncate">
+<span class="font-label-lg text-label-lg text-on-surface">Supreme Court of Kenya</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant ml-1.5">(City Hall Way)</span>
+</div>
+</div>
+<div class="flex items-center gap-3 flex-shrink-0">
+<div class="w-32 bg-surface-dim h-2 rounded-full overflow-hidden">
+<div class="bg-outline h-full rounded-full" style="width: 6.8%;"></div>
+</div>
+<span class="font-mono font-bold text-label-sm text-on-surface-variant w-12 text-right">6.8%</span>
+</div>
+</div>
+<!-- Alternative 3 -->
+<div class="p-3 bg-surface-container rounded flex items-center justify-between gap-4">
+<div class="flex items-center gap-3 min-w-0">
+<span class="font-mono text-outline font-bold text-label-sm">04</span>
+<div class="truncate">
+<span class="font-label-lg text-label-lg text-on-surface">National Social Security Fund</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant ml-1.5">(NSSF Building, Community)</span>
+</div>
+</div>
+<div class="flex items-center gap-3 flex-shrink-0">
+<div class="w-32 bg-surface-dim h-2 rounded-full overflow-hidden">
+<div class="bg-outline h-full rounded-full" style="width: 3.1%;"></div>
+</div>
+<span class="font-mono font-bold text-label-sm text-on-surface-variant w-12 text-right">3.1%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- "Connected to the World" Mat-Mounted Exhibition Grid -->
+<div class="flex flex-col gap-4 mt-2">
+  <div class="flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-secondary text-[20px]">hub</span>
+      <h3 class="font-headline-sm text-headline-sm text-on-surface">Connected to the World</h3>
+      <span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-[11px] font-bold uppercase tracking-wider">Signature Visual Bridge</span>
+    </div>
+    <span class="font-label-sm text-label-sm text-secondary font-semibold">3 Cross-Referenced Perspectives Found</span>
+  </div>
+
+  <!-- Signature Visual Bridge Interactive Layout Container -->
+  <div class="relative bg-surface-container rounded-xl p-5 border border-parchment-border shadow-inner flex flex-col gap-6 overflow-hidden">
+    <!-- Decorative Background Grid Accent -->
+    <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(#1E1C1A 1px, transparent 1px); background-size: 16px 16px;"></div>
+
+    <!-- Top Origin: User Uploaded Specimen Card (Terracotta Accent) -->
+    <div class="relative z-10 flex flex-col items-center">
+      <div class="w-full max-w-md bg-surface-container-lowest rounded-lg p-3 shadow-md border-2 border-ochre/60 ring-4 ring-ochre-soft/30 flex items-center gap-4 transition-all hover:border-ochre">
+        <!-- Specimen Image Preview -->
+        <div class="relative w-20 h-20 rounded overflow-hidden flex-shrink-0 border border-ochre/30 bg-surface-dim">
+          <img class="w-full h-full object-cover" data-alt="User uploaded specimen of KICC entrance tower" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDs4coI4demgtUqY2SjvxvPF5rdh8wzNqTxbxp2eYmn7-RWb9yo-a74kiHOxXDOpk6PchRxlfdBREXZxjVJvFQzvbJzBZGT0gPEFKxMxc5_0pjOeZheyq_NEyV_qbwllKG086mMugpm3bRtxTVotm_rQhw0WMZWYI3w_4YVPc2eedpsaX2FXvMhBaI19jh_2t-pseIO5XyU00U0vt273rShD4ugfrduJs3CQ_ZoCzo">
+          <span class="absolute bottom-1 right-1 px-1 py-0.2 bg-primary/90 text-on-primary font-mono text-[9px] rounded font-bold">RAW</span>
+        </div>
+        <!-- Specimen Metadata -->
+        <div class="flex flex-col min-w-0 flex-1">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="px-2 py-0.5 rounded-full bg-ochre-soft text-ochre-clay font-label-sm text-[11px] font-bold flex items-center gap-1 border border-ochre/30">
+              <span class="w-1.5 h-1.5 rounded-full bg-ochre animate-pulse"></span>
+              <span class="">Your Photo Specimen</span>
+            </span>
+            <span class="font-mono text-[11px] text-outline ml-auto">IMG_2024_NBO_7419</span>
+          </div>
+          <div class="font-label-md text-on-surface font-bold truncate">Kenyatta Int. Convention Centre</div>
+          <span class="font-body-sm text-body-sm text-on-surface-variant text-[12px]">Spatial Influx Anchor • Harambee Ave &amp; Parliament Rd</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Visual Bridge Intermediate Ribbon & Connectors (Curved Paths with Dots & Floating Pills) -->
+    <div class="relative w-full py-2 flex flex-col items-center justify-center -my-2">
+      <!-- SVG Dotted Cubic Bezier Curves with End Nodes -->
+      <svg class="w-full h-20 overflow-visible" preserveAspectRatio="none" viewBox="0 0 900 80">
+        <defs>
+          <linearGradient id="bridgeGlowOchre" x1="0%" x2="100%" y1="0%" y2="100%">
+            <stop offset="0%" stop-color="#C85A32"></stop>
+            <stop offset="100%" stop-color="#476556"></stop>
+          </linearGradient>
+        </defs>
+
+        <!-- Central Anchor Dot from User Photo -->
+        <circle cx="450" cy="4" fill="#C85A32" r="5"></circle>
+        <circle cx="450" cy="4" fill="none" opacity="0.5" r="8" stroke="#C85A32" stroke-width="1.5"></circle>
+
+        <!-- Path to Left Card (Same Place) -->
+        <path d="M 450 4 C 450 45, 150 25, 150 76" fill="none" stroke="#C85A32" stroke-dasharray="4,4" stroke-linecap="round" stroke-width="2" opacity="0.75"></path>
+        <circle cx="150" cy="76" fill="#476556" r="4.5"></circle>
+        <circle cx="150" cy="76" fill="none" opacity="0.6" r="7" stroke="#476556" stroke-width="1.5"></circle>
+
+        <!-- Path to Middle Card (Another Angle) -->
+        <path d="M 450 4 C 450 35, 450 45, 450 76" fill="none" stroke="#D35400" stroke-dasharray="4,4" stroke-linecap="round" stroke-width="2" opacity="0.8"></path>
+        <circle cx="450" cy="76" fill="#476556" r="4.5"></circle>
+        <circle cx="450" cy="76" fill="none" opacity="0.6" r="7" stroke="#476556" stroke-width="1.5"></circle>
+
+        <!-- Path to Right Card (Taken from here) -->
+        <path d="M 450 4 C 450 45, 750 25, 750 76" fill="none" stroke="#C85A32" stroke-dasharray="4,4" stroke-linecap="round" stroke-width="2" opacity="0.75"></path>
+        <circle cx="750" cy="76" fill="#476556" r="4.5"></circle>
+        <circle cx="750" cy="76" fill="none" opacity="0.6" r="7" stroke="#476556" stroke-width="1.5"></circle>
+      </svg>
+
+      <!-- Floating Relationship Label Pills positioned along the bridges -->
+      <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-4 px-2 -mt-10 relative z-20 pointer-events-none">
+        <div class="flex justify-center">
+          <span class="pointer-events-auto inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-lowest border border-ochre/40 text-on-surface font-label-sm text-[11px] font-bold shadow-md hover:scale-105 transition-transform">
+            <span class="w-2 h-2 rounded-full bg-primary"></span>
+            <span class="">Same place</span>
+          </span>
+        </div>
+        <div class="flex justify-center">
+          <span class="pointer-events-auto inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-lowest border border-ochre/40 text-on-surface font-label-sm text-[11px] font-bold shadow-md hover:scale-105 transition-transform">
+            <span class="w-2 h-2 rounded-full bg-tertiary-container"></span>
+            <span class="">Another angle</span>
+          </span>
+        </div>
+        <div class="flex justify-center">
+          <span class="pointer-events-auto inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-lowest border border-secondary/50 text-on-surface font-label-sm text-[11px] font-bold shadow-md hover:scale-105 transition-transform">
+            <span class="w-2 h-2 rounded-full bg-secondary"></span>
+            <span class="">Taken from here</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Destination: 3 Matching World Photos Grid with Forest Green Borders & Badges -->
+    <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
+      <!-- Card 1: Same place -->
+      <div class="bg-surface-container-lowest rounded-lg p-3 flex flex-col gap-2.5 shadow-sm border-2 border-secondary/60 hover:border-secondary hover:-translate-y-1 transition-all group ring-1 ring-secondary-container/40">
+        <div class="relative w-full aspect-[4/3] bg-surface-dim rounded overflow-hidden p-1 shadow-inner border border-secondary/20">
+          <img class="w-full h-full object-cover rounded group-hover:scale-105 transition-transform duration-500" data-alt="Street level archival shot of Kenyatta International Convention Centre ground plaza fountain and entrance colonnade with Kenyan flagpoles and Royal palm trees on a clear afternoon in Nairobi." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0ia3TnOM2_vviwT2h7rWcnDILSBKg7DJ_VqGtB2GrSao4TfLOPDwJl92SZN0QrBMsmI8UDxa5Qv0M1W1PjqarE6uaAaVKuu321XhEUgJGxKWU9jJ8zQHmMGhs2t8WuHKsugC7AnBhY7iZcVGcf5XT8ZakXmUcBG3ymLvhJnpVjT6_kQnjsYpMnI3WGbMrXJJI8svGJATEzb6gzNxNTWLYFZAl0KG_SqoRLILoPgs">
+          <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5 flex-wrap">
+            <span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container font-label-sm text-[10px] font-bold shadow-sm border border-secondary/30 flex items-center gap-1">
+              <span class="material-symbols-outlined text-[12px]">public</span>
+              <span class="">World Photo</span>
+            </span>
+            <span class="px-2 py-0.5 rounded bg-primary text-on-primary font-label-sm text-[10px] font-bold shadow-sm">
+              Same place
+            </span>
+          </div>
+        </div>
+        <div class="flex flex-col px-0.5">
+          <div class="flex items-center justify-between">
+            <span class="font-label-md text-label-md text-on-surface font-bold">Harambee Plaza Axis</span>
+            <span class="font-mono text-[10px] text-secondary font-bold">Vector #01</span>
+          </div>
+          <span class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-0.5 text-[12px]">
+            Matched ground level entrance facade &amp; surrounding palm tree perimeter.
+          </span>
+          <div class="flex items-center justify-between mt-2 pt-2 border-t border-parchment-border">
+            <span class="font-label-sm text-[11px] text-outline font-mono">By M. Mwangi • 2023</span>
+            <span class="font-mono text-[10px] text-secondary font-semibold">99.1% match</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Another angle -->
+      <div class="bg-surface-container-lowest rounded-lg p-3 flex flex-col gap-2.5 shadow-sm border-2 border-secondary/60 hover:border-secondary hover:-translate-y-1 transition-all group ring-1 ring-secondary-container/40">
+        <div class="relative w-full aspect-[4/3] bg-surface-dim rounded overflow-hidden p-1 shadow-inner border border-secondary/20">
+          <img class="w-full h-full object-cover rounded group-hover:scale-105 transition-transform duration-500" data-alt="Telephoto western angle of the KICC amphitheatre saucer and high-rise tower seen across Uhuru Park greenery with jacaranda blooms and Nairobi CBD silhouettes in warm afternoon sun." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLXmvwTo-yGYw5m9__CjiMScAg1w2UqGOJdCdrEHlE6asGgIS0dQh4NzhfgKMBIYqDAkdw5SVSS9oF7oni0Kl_2WuUoqNRef6MzKL44O9D2yMJ4ZG69fiaByEATcg3yqjvSc2gl8T7RiNRaQpnktdfnzgeQ5qrKsyKvQt9pqrUPqPhA6j4xKKkO18TjXgXKj3KHcmhZpsIW_fh0xjJm-DdeMHVyj-QP817YfvHBx4">
+          <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5 flex-wrap">
+            <span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container font-label-sm text-[10px] font-bold shadow-sm border border-secondary/30 flex items-center gap-1">
+              <span class="material-symbols-outlined text-[12px]">public</span>
+              <span class="">World Photo</span>
+            </span>
+            <span class="px-2 py-0.5 rounded bg-tertiary-container text-on-tertiary font-label-sm text-[10px] font-bold shadow-sm">
+              Another angle
+            </span>
+          </div>
+        </div>
+        <div class="flex flex-col px-0.5">
+          <div class="flex items-center justify-between">
+            <span class="font-label-md text-label-md text-on-surface font-bold">Uhuru Park Elevation</span>
+            <span class="font-mono text-[10px] text-secondary font-bold">Vector #02</span>
+          </div>
+          <span class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-0.5 text-[12px]">
+            Elevation view from western ridge showcasing the helipad disk and saucer geometry.
+          </span>
+          <div class="flex items-center justify-between mt-2 pt-2 border-t border-parchment-border">
+            <span class="font-label-sm text-[11px] text-outline font-mono">Archive Registry #904</span>
+            <span class="font-mono text-[10px] text-secondary font-semibold">97.8% match</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Taken from here -->
+      <div class="bg-surface-container-lowest rounded-lg p-3 flex flex-col gap-2.5 shadow-sm border-2 border-secondary/60 hover:border-secondary hover:-translate-y-1 transition-all group ring-1 ring-secondary-container/40">
+        <div class="relative w-full aspect-[4/3] bg-surface-dim rounded overflow-hidden p-1 shadow-inner border border-secondary/20">
+          <img class="w-full h-full object-cover rounded group-hover:scale-105 transition-transform duration-500" data-alt="Dramatic high-altitude bird's eye panoramic vista captured looking out from KICC rooftop helipad platform toward Parliament Road, Upper Hill skyscrapers, and the Nairobi skyline at sunset." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0hW49G233heYsLn5OlV2-g4rzKn_IICpdDNw7cchD52-4PVxgIN8EDSxYI3-Mt-HeGufCwEy_VtZeDH-ckdofgXTFWO6TGSuTDtMm2-YogS9B7movohC8Zu0pwWYKSGc6TMEhUo6L4C19CamW2nGLHGO6YfHi-lzsZLtnr6CI45U7rNE2-vJ1oY3SxDZ1UIhcIPPlsV5sER1uow_ixylHVcmU5n1pmtKAG0mGGD4">
+          <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5 flex-wrap">
+            <span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container font-label-sm text-[10px] font-bold shadow-sm border border-secondary/30 flex items-center gap-1">
+              <span class="material-symbols-outlined text-[12px]">public</span>
+              <span class="">World Photo</span>
+            </span>
+            <span class="px-2 py-0.5 rounded bg-secondary text-on-secondary font-label-sm text-[10px] font-bold shadow-sm">
+              Taken from here
+            </span>
+          </div>
+        </div>
+        <div class="flex flex-col px-0.5">
+          <div class="flex items-center justify-between">
+            <span class="font-label-md text-label-md text-on-surface font-bold">28th-Floor Rooftop Helipad</span>
+            <span class="font-mono text-[10px] text-secondary font-bold">Vector #03</span>
+          </div>
+          <span class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-0.5 text-[12px]">
+            Panoramic vantage captured directly from the observation deck looking South-West.
+          </span>
+          <div class="flex items-center justify-between mt-2 pt-2 border-t border-parchment-border">
+            <span class="font-label-sm text-[11px] text-outline font-mono">By S. Kamau • 2024</span>
+            <span class="font-mono text-[10px] text-secondary font-semibold">98.4% match</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Archival Curatorial Action Footer -->
+<div class="flex flex-wrap items-center justify-between gap-4 pt-4 mt-2">
+<div class="flex items-center gap-3">
+<button class="px-5 py-2.5 bg-primary text-on-primary rounded font-label-lg text-label-lg font-bold flex items-center gap-2 shadow-sm hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]">bookmark_add</span>
+<span class="">Save to My Photos</span>
+</button>
+<button class="px-4 py-2.5 bg-surface-variant text-on-surface rounded font-label-lg text-label-lg flex items-center gap-2 hover:bg-surface-dim active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px] text-secondary">forum</span>
+<span class="">Ask evidence question</span>
+</button>
+</div>
+<button class="px-4 py-2.5 bg-tertiary-container text-on-tertiary rounded font-label-lg text-label-lg font-bold flex items-center gap-2 shadow-sm hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]">explore</span>
+<span class="">Explore connected archive</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function switchWorkflowTab(stateNum) {
+    const leftPane = document.getElementById('flow-left-pane');
+    const rightPane = document.getElementById('flow-right-pane');
+    const buttons = document.querySelectorAll('.workflow-tab');
+
+    // Reset button appearances
+    buttons.forEach(btn => {
+      btn.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm', 'font-semibold');
+      btn.classList.add('text-on-surface-variant');
+    });
+
+    if (stateNum === 0) {
+      // Inspection View: Show both panels side by side
+      leftPane.classList.remove('hidden', 'lg:col-span-12');
+      leftPane.classList.add('lg:col-span-5');
+      rightPane.classList.remove('hidden', 'lg:col-span-12');
+      rightPane.classList.add('lg:col-span-7');
+      const activeBtn = document.getElementById('tab-btn-all');
+      if (activeBtn) {
+        activeBtn.classList.add('bg-primary', 'text-on-primary', 'shadow-sm', 'font-semibold');
+        activeBtn.classList.remove('text-on-surface-variant');
+      }
+    } else if (stateNum === 1 || stateNum === 2) {
+      // Focus left panel with states 1 and 2
+      leftPane.classList.remove('hidden', 'lg:col-span-5');
+      leftPane.classList.add('lg:col-span-12');
+      rightPane.classList.add('hidden');
+      const activeBtn = document.getElementById(`tab-btn-${stateNum}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-primary', 'text-on-primary', 'shadow-sm', 'font-semibold');
+        activeBtn.classList.remove('text-on-surface-variant');
+      }
+    } else if (stateNum === 3) {
+      // Focus right confirmed result panel
+      leftPane.classList.add('hidden');
+      rightPane.classList.remove('hidden', 'lg:col-span-7');
+      rightPane.classList.add('lg:col-span-12');
+      const activeBtn = document.getElementById('tab-btn-3');
+      if (activeBtn) {
+        activeBtn.classList.add('bg-primary', 'text-on-primary', 'shadow-sm', 'font-semibold');
+        activeBtn.classList.remove('text-on-surface-variant');
+      }
+    }
+  }
+</script></main>
+<!-- Desktop Persistent Footer / System Status Bar -->
+<footer class="w-full bg-espresso-950 border-t border-espresso-850 text-papyrus-300 mt-12">
+<div class="max-w-[1440px] mx-auto px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+<div class="flex items-center gap-3">
+<div class="w-7 h-7 rounded-lg bg-espresso-900 border border-espresso-800 flex items-center justify-center text-ochre-warm">
+<span class="material-symbols-outlined text-[16px]">flare</span>
+</div>
+<div>
+<span class="text-papyrus-100 font-bold">ReelWorld Kenya Semantic Visual Pipeline</span>
+<span class="mx-2 text-espresso-700">•</span>
+<span class="">Powered by Muse Spark Open Framework</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-sage-DEFAULT"></span>
+<span class="text-papyrus-200">Nairobi Edge Cluster: Online (32ms)</span>
+</div>
+<a class="hover:text-ochre-warm transition-colors" href="#">Documentation</a>
+<a class="hover:text-ochre-warm transition-colors" href="#">Archive Telemetry</a>
+<a class="hover:text-ochre-warm transition-colors" href="#">Privacy &amp; Provenance</a>
+</div>
+</div>
+</footer>
+<script>
+    function setQuery(text) {
+      const input = document.getElementById('conversational-input');
+      if (input) {
+        input.value = text;
+        input.focus();
+        input.parentElement.parentElement.classList.add('ring-2', 'ring-ochre');
+        setTimeout(() => {
+          input.parentElement.parentElement.classList.remove('ring-2', 'ring-ochre');
+        }, 800);
+      }
+    }
+  </script>
+
+
+</body></html>

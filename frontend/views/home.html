@@ -1,0 +1,226 @@
+<!-- Home + search view. Markup follows the reelworld_desktop Stitch export;
+     Image Match / Voice Query / Add Constraint / sort menu / provenance card
+     were removed (no such features); fake counters replaced with live values. -->
+<section class="w-full flex flex-col gap-4">
+<!-- Top Command Bar: Omnibar Search Box -->
+<div class="relative w-full rounded-2xl bg-parchment-card border border-parchment-border shadow-elevated p-2 flex items-center gap-3 transition-all focus-within:ring-2 focus-within:ring-ochre/40 focus-within:border-ochre">
+<div class="flex items-center justify-center w-12 h-12 rounded-xl bg-espresso-900 text-papyrus-100 flex-shrink-0 shadow-sm border border-espresso-800">
+<span class="material-symbols-outlined text-[22px] text-ochre-warm">travel_explore</span>
+</div>
+<div class="flex-1 flex flex-col justify-center min-w-0 pr-2">
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold uppercase tracking-wider text-ochre-clay bg-ochre-soft px-2 py-0.5 rounded border border-ochre/20 whitespace-nowrap">Natural Language Index</span>
+<span class="text-[11px] text-espresso-600 hidden sm:inline">Type free-form scene description, altitude, or mood</span>
+</div>
+<form id="search-form" class="w-full flex items-center gap-2">
+<input autocomplete="off" class="w-full bg-transparent border-0 outline-none text-espresso-950 font-semibold text-base placeholder:text-espresso-500 placeholder:font-normal p-0 focus:ring-0 truncate" id="conversational-input" placeholder="Describe a photo you want to see (e.g., bustling market at twilight)..." type="text"/>
+<button aria-label="Search" class="w-10 h-10 rounded-xl bg-espresso-900 text-papyrus-100 flex items-center justify-center hover:bg-espresso-800 transition-colors border border-espresso-850 flex-shrink-0" type="submit">
+<span class="material-symbols-outlined text-[19px]">arrow_forward</span>
+</button>
+</form>
+</div>
+<div class="hidden md:flex items-center gap-2 flex-shrink-0 pr-2">
+<div class="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-papyrus-200 text-espresso-700 text-xs font-mono font-medium border border-parchment-border" title="Press Ctrl+K or Cmd+K to focus search">
+<kbd class="text-[11px]">⌘</kbd><kbd class="text-[11px]">K</kbd>
+</div>
+</div>
+</div>
+<!-- Agent Reasoning Bubble & Interactive Filter Strip -->
+<div class="w-full rounded-2xl bg-parchment-card border border-parchment-border shadow-archival p-5 hidden flex-col lg:flex-row lg:items-center justify-between gap-5 relative overflow-hidden" id="cog-bubble">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-ochre via-ochre-warm to-espresso-900"></div>
+<div class="flex items-start gap-4 min-w-0 pl-2">
+<div class="w-10 h-10 rounded-xl bg-espresso-900 text-ochre-warm flex items-center justify-center flex-shrink-0 shadow-sm mt-0.5 border border-espresso-800">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+</div>
+<div class="flex flex-col gap-1 min-w-0">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-bold text-xs uppercase tracking-wider text-espresso-950">ReelWorld Cognitive Search</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-sage-light text-sage-900 border border-sage-border" id="cog-kind">
+<span class="w-1.5 h-1.5 rounded-full bg-sage-600 mr-1 animate-pulse"></span>
+<span id="cog-kind-text">Semantic Model Synced</span>
+</span>
+</div>
+<p class="text-sm text-espresso-700 leading-relaxed max-w-3xl" id="cog-text"></p>
+</div>
+</div>
+<div class="flex items-center flex-wrap gap-2 flex-shrink-0 lg:border-l lg:border-parchment-border lg:pl-6" id="chips">
+<span class="text-xs font-semibold text-espresso-600 mr-1" id="chips-label">Active Criteria:</span>
+</div>
+</div>
+<!-- Quick Archival Warm Starters Drawer -->
+<div class="flex items-start sm:items-center justify-between gap-3 sm:gap-4 px-2 py-1 flex-col sm:flex-row">
+<div class="flex items-center gap-2 text-xs font-bold text-espresso-600 uppercase tracking-wider flex-shrink-0">
+<span class="material-symbols-outlined text-[16px] text-ochre">flare</span>
+<span class="">Archival Quick Queries:</span>
+</div>
+<div class="flex items-center gap-2 overflow-x-auto custom-scrollbar pb-1 w-full sm:w-auto" id="quick-queries">
+<button class="px-3.5 py-1.5 rounded-full bg-parchment-card hover:bg-papyrus-200 border border-parchment-border text-espresso-800 text-xs font-semibold whitespace-nowrap shadow-archival hover:border-ochre transition-all" data-query="a busy street market" type="button">“a busy street market”</button>
+<button class="px-3.5 py-1.5 rounded-full bg-parchment-card hover:bg-papyrus-200 border border-parchment-border text-espresso-800 text-xs font-semibold whitespace-nowrap shadow-archival hover:border-ochre transition-all" data-query="view of the city from above" type="button">“view of the city from above”</button>
+<button class="px-3.5 py-1.5 rounded-full bg-parchment-card hover:bg-papyrus-200 border border-parchment-border text-espresso-800 text-xs font-semibold whitespace-nowrap shadow-archival hover:border-ochre transition-all" data-query="the entrance of KICC" type="button">“the entrance of KICC”</button>
+<button class="px-3.5 py-1.5 rounded-full bg-parchment-card hover:bg-papyrus-200 border border-parchment-border text-espresso-800 text-xs font-semibold whitespace-nowrap shadow-archival hover:border-ochre transition-all" data-query="matatus at dusk on Moi Avenue" type="button">“matatus at dusk on Moi Avenue”</button>
+<button class="px-3.5 py-1.5 rounded-full bg-parchment-card hover:bg-papyrus-200 border border-parchment-border text-espresso-800 text-xs font-semibold whitespace-nowrap shadow-archival hover:border-ochre transition-all" data-query="reflection of Upper Hill towers from Uhuru Park" type="button">“reflection of Upper Hill towers”</button>
+</div>
+</div>
+</section>
+<!-- Results Header / Layout Tooling Bar -->
+<div class="flex items-center justify-between pt-2 border-t border-parchment-border gap-3 flex-wrap">
+<div class="flex items-center gap-3 flex-wrap">
+<div class="flex items-center gap-2">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-ochre opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-ochre"></span>
+</span>
+<h2 class="text-lg md:text-xl font-bold text-espresso-950 tracking-tight" id="results-title">World Archive</h2>
+</div>
+<span class="text-xs font-medium text-espresso-700 bg-papyrus-200 px-2.5 py-1 rounded-full border border-parchment-border" id="results-scope">Browsing the collection</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="hidden sm:flex items-center gap-1.5 text-xs font-semibold text-espresso-800 bg-parchment-card border border-parchment-border px-3 py-1.5 rounded-xl shadow-archival">
+<span class="material-symbols-outlined text-[16px] text-ochre">tune</span>
+<span class="">Ranked by semantic fit</span>
+</div>
+<div class="flex items-center bg-papyrus-200 p-1 rounded-lg border border-parchment-border" role="group" aria-label="Grid density">
+<button class="p-1.5 rounded bg-papyrus-100 text-espresso-950 shadow-archival" data-density="grid" title="Grid">
+<span class="material-symbols-outlined text-[18px]">dashboard</span>
+</button>
+<button class="p-1.5 rounded text-espresso-600 hover:text-espresso-950" data-density="list" title="List">
+<span class="material-symbols-outlined text-[18px]">view_agenda</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Results grid (cards rendered by app.js from #card-template) -->
+<section class="w-full">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 items-start" data-density="grid" id="results-grid">
+</div>
+<!-- Empty state: honest message, no grid -->
+<div class="hidden w-full rounded-2xl bg-parchment-card border border-parchment-border p-8 shadow-archival flex-col items-center text-center gap-3" id="empty-state">
+<div class="w-12 h-12 rounded-xl bg-papyrus-200 border border-parchment-border flex items-center justify-center text-espresso-600">
+<span class="material-symbols-outlined text-[26px]">image_search</span>
+</div>
+<p class="text-sm font-semibold text-espresso-950" id="empty-title">No photos to show</p>
+<p class="text-sm text-espresso-700 leading-relaxed max-w-md" id="empty-text">Try one of the quick queries above, or describe a photo in the search bar.</p>
+</div>
+<!-- Error state with retry -->
+<div class="hidden w-full rounded-2xl bg-parchment-card border border-ochre/50 p-6 shadow-archival flex-col sm:flex-row items-start sm:items-center gap-4" id="error-state">
+<div class="w-10 h-10 rounded-xl bg-ochre-soft border border-ochre/30 text-ochre-clay flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">cloud_off</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold text-espresso-950">Something went wrong</p>
+<p class="text-sm text-espresso-700 leading-relaxed" id="error-text">The request failed.</p>
+</div>
+<button class="min-h-[44px] inline-flex items-center gap-1.5 px-6 py-2.5 rounded bg-forest hover:bg-forest-hover active:bg-forest-active text-papyrus-100 font-label-lg text-label-lg font-bold shadow-archival transition-all flex-shrink-0" id="error-retry" type="button">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+<span>Retry connection</span>
+</button>
+</div>
+</section>
+<!-- Loading state: skeleton ribbon with live elapsed time -->
+<section class="w-full mt-2 hidden" id="loading">
+<div class="rounded-2xl bg-parchment-card border border-parchment-border p-6 shadow-archival flex flex-col gap-5 relative overflow-hidden">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-ochre-soft border border-ochre/30 text-ochre-clay flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px] animate-spin">sync</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-bold text-sm text-espresso-950">Looking through the photos...</h3>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-ochre-soft text-ochre-clay text-xs font-bold border border-ochre/25" id="loading-elapsed">0s</span>
+</div>
+<p class="text-xs text-espresso-600 mt-0.5">Searching the photo archive. Replies can take 15–40 seconds.</p>
+</div>
+</div>
+<div class="flex items-center gap-4 flex-shrink-0">
+<div class="w-32 h-2 rounded-full bg-papyrus-300 overflow-hidden">
+<div class="h-full bg-gradient-to-r from-ochre to-ochre-clay rounded-full w-4/5 animate-pulse"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 pt-1" id="skeleton-row">
+<div class="flex flex-col gap-2">
+<div class="w-full aspect-[4/3] rounded-xl bg-papyrus-200 border border-parchment-border animate-pulse flex items-center justify-center text-espresso-500"><span class="material-symbols-outlined text-[20px]">image</span></div>
+<div class="h-2 w-3/4 bg-papyrus-300 rounded-full animate-pulse"></div>
+<div class="h-2 w-1/2 bg-papyrus-200 rounded-full animate-pulse"></div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="w-full aspect-[4/3] rounded-xl bg-papyrus-200 border border-parchment-border animate-pulse flex items-center justify-center text-espresso-500"><span class="material-symbols-outlined text-[20px]">image</span></div>
+<div class="h-2 w-4/5 bg-papyrus-300 rounded-full animate-pulse"></div>
+<div class="h-2 w-2/3 bg-papyrus-200 rounded-full animate-pulse"></div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="w-full aspect-[4/3] rounded-xl bg-papyrus-200 border border-parchment-border animate-pulse flex items-center justify-center text-espresso-500"><span class="material-symbols-outlined text-[20px]">image</span></div>
+<div class="h-2 w-2/3 bg-papyrus-300 rounded-full animate-pulse"></div>
+<div class="h-2 w-1/3 bg-papyrus-200 rounded-full animate-pulse"></div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="w-full aspect-[4/3] rounded-xl bg-papyrus-200 border border-parchment-border animate-pulse flex items-center justify-center text-espresso-500"><span class="material-symbols-outlined text-[20px]">image</span></div>
+<div class="h-2 w-3/4 bg-papyrus-300 rounded-full animate-pulse"></div>
+<div class="h-2 w-1/2 bg-papyrus-200 rounded-full animate-pulse"></div>
+</div>
+<div class="hidden md:flex flex-col gap-2">
+<div class="w-full aspect-[4/3] rounded-xl bg-papyrus-200 border border-parchment-border animate-pulse flex items-center justify-center text-espresso-500"><span class="material-symbols-outlined text-[20px]">image</span></div>
+<div class="h-2 w-5/6 bg-papyrus-300 rounded-full animate-pulse"></div>
+<div class="h-2 w-3/5 bg-papyrus-200 rounded-full animate-pulse"></div>
+</div>
+<div class="hidden md:flex flex-col gap-2">
+<div class="w-full aspect-[4/3] rounded-xl bg-papyrus-200 border border-parchment-border animate-pulse flex items-center justify-center text-espresso-500"><span class="material-symbols-outlined text-[20px]">image</span></div>
+<div class="h-2 w-2/3 bg-papyrus-300 rounded-full animate-pulse"></div>
+<div class="h-2 w-1/2 bg-papyrus-200 rounded-full animate-pulse"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Result card template (Stitch card, wired with data hooks) -->
+<template id="card-template">
+<article class="rw-card flex flex-col rounded-2xl bg-parchment-card border border-parchment-border overflow-hidden shadow-card hover:shadow-elevated transition-all group duration-300 cursor-pointer">
+<div class="rw-thumb relative w-full bg-papyrus-300 overflow-hidden">
+<img alt="" class="rw-photo w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" data-slot="img"/>
+<div class="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between z-10 pointer-events-none">
+<span class="hidden items-center gap-1.5 px-3 py-1 rounded-full bg-espresso-950/85 backdrop-blur-md font-bold text-xs shadow-archival border" data-slot="status">
+<span class="w-1.5 h-1.5 rounded-full" data-slot="status-dot"></span>
+<span data-slot="status-text"></span>
+</span>
+<span class="hidden items-center gap-1 px-2.5 py-1 rounded-lg bg-espresso-950/85 backdrop-blur-md text-ochre-warm text-[11px] font-mono font-semibold border border-ochre/20" data-slot="pct"></span>
+</div>
+<div class="absolute bottom-3 left-3 z-10">
+<span class="hidden items-center gap-1.5 px-2.5 py-1 rounded-lg bg-espresso-950/85 backdrop-blur-md text-papyrus-100 font-medium text-xs border border-parchment-border/30" data-slot="vp">
+<span class="material-symbols-outlined text-[14px] text-ochre" data-slot="vp-icon">height</span>
+<span data-slot="vp-text"></span>
+</span>
+</div>
+<div class="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-espresso-950/80 via-espresso-950/20 to-transparent pointer-events-none"></div>
+</div>
+<div class="p-4 flex flex-col gap-3 flex-1">
+<div>
+<div class="flex items-center justify-between text-xs text-espresso-600 mb-1 gap-2">
+<span class="truncate" data-slot="place"></span>
+<span class="font-mono flex-shrink-0" data-slot="pid"></span>
+</div>
+<h3 class="font-bold text-base text-espresso-950 leading-snug group-hover:text-ochre transition-colors rw-clamp-2" data-slot="caption"></h3>
+</div>
+<div class="hidden p-2 rounded-xl bg-papyrus-200 border border-parchment-border text-xs text-espresso-800 items-start gap-1.5" data-slot="matched">
+<span class="material-symbols-outlined text-[16px] text-ochre flex-shrink-0 mt-0.5">check_circle</span>
+<span class="leading-tight"><strong class="text-espresso-950">Matched:</strong> <span data-slot="matched-text"></span></span>
+</div>
+<div class="pt-2 border-t border-parchment-border flex flex-col gap-2.5 mt-auto">
+<div class="text-[11px] text-espresso-700 font-medium leading-snug" data-slot="credit"></div>
+<span class="w-full h-11 px-4 rounded-xl bg-papyrus-100 hover:bg-papyrus-200 text-espresso-950 font-semibold text-xs flex items-center justify-center gap-2 transition-colors border border-espresso-800/30 shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-espresso-900">info</span>
+<span class="">Examine Metadata</span>
+</span>
+</div>
+</div>
+</article>
+</template>
+<!-- Chip template (Stitch filter chip with a working remove button) -->
+<template id="chip-template">
+<span class="inline-flex items-center gap-1.5 h-8 pl-3 pr-1.5 rounded-lg bg-papyrus-200 border border-parchment-border text-espresso-900 font-semibold text-xs transition-colors hover:bg-papyrus-300">
+<span class="material-symbols-outlined text-[14px] text-ochre" data-slot="icon">sell</span>
+<span data-slot="label"></span>
+<button aria-label="Remove filter" class="chip-x w-4 h-4 rounded hover:bg-parchment-border flex items-center justify-center text-espresso-600 hover:text-espresso-950 transition-colors" data-slot="x" type="button">
+<span class="material-symbols-outlined text-[13px]">close</span>
+</button>
+</span>
+</template>

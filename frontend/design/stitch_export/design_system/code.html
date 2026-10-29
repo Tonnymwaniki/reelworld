@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ReelWorld - Conversational Visual Archive</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            papyrus: {
+              50: '#FAF6F1',
+              100: '#F4EFEB',
+              200: '#ECE5DD',
+              300: '#E4DCD2',
+              400: '#D5CDC2',
+              500: '#CBC2B5',
+            },
+            parchment: {
+              card: '#ECE5DD',
+              input: '#F4EFEB',
+              border: '#D8CFC3',
+              hover: '#E2D8CC',
+              muted: '#DFD5C7',
+            },
+            espresso: {
+              950: '#151311',
+              900: '#1E1C1A',
+              850: '#282522',
+              800: '#35312C',
+              700: '#4D4740',
+              600: '#686057',
+              500: '#8A8074',
+            },
+            ochre: {
+              DEFAULT: '#C85A32',
+              dark: '#AF4A24',
+              clay: '#D35400',
+              glow: '#E0693E',
+              warm: '#D9822B',
+              soft: '#F4DFD2',
+              subtle: '#FAEEE7',
+            },
+            sage: {
+              900: '#1D2E24',
+              800: '#284133',
+              700: '#345241',
+              600: '#3D604E',
+              DEFAULT: '#476E5B',
+              light: '#E2ECE6',
+              border: '#B3C8BD',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          boxShadow: {
+            archival: '0 1px 3px rgba(30,28,26,0.06), 0 1px 2px rgba(30,28,26,0.04)',
+            elevated: '0 10px 28px -4px rgba(30,28,26,0.09), 0 4px 10px -2px rgba(30,28,26,0.05)',
+            card: '0 4px 18px -2px rgba(30,28,26,0.07), 0 2px 6px -1px rgba(30,28,26,0.04)',
+            ochreGlow: '0 0 22px -3px rgba(200,90,50,0.32)',
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #F4EFEB;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #1E1C1A;
+      overflow-x: hidden;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 4px;
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: #D5CDC2;
+      border-radius: 9999px;
+    }
+  </style>
+<meta content="web_standard" name="shell-type"/></head>
+<body class="min-h-screen bg-papyrus-100 text-espresso-900 flex flex-col antialiased selection:bg-ochre selection:text-white">
+<!-- Desktop Sticky Header (1440px target) -->
+<header class="sticky top-0 z-50 w-full bg-parchment-card/90 backdrop-blur-xl border-b border-parchment-border transition-all">
+<div class="max-w-[1440px] mx-auto h-20 px-8 flex items-center justify-between gap-6">
+<!-- Brand & Muse Spark Emblem -->
+<div class="flex items-center gap-4 flex-shrink-0">
+<div class="flex items-center gap-3 group cursor-pointer">
+<!-- Geometric Lens Emblem -->
+<div class="relative w-10 h-10 rounded-xl bg-espresso-900 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform overflow-hidden border border-espresso-800">
+<div class="absolute inset-0 bg-gradient-to-tr from-espresso-950 via-espresso-900 to-espresso-850"></div>
+<div class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-ochre blur-sm opacity-80 animate-pulse"></div>
+<span class="material-symbols-outlined text-[22px] text-ochre-warm relative z-10 font-bold">flare</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xl font-bold tracking-tight text-espresso-950 leading-none">ReelWorld</span>
+<span class="text-[11px] font-semibold tracking-wider text-espresso-600 uppercase">Visual Archive</span>
+</div>
+</div>
+<!-- Muse Spark Open Badge Pill -->
+<div class="h-6 w-px bg-parchment-border mx-1"></div>
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-papyrus-200 border border-parchment-border hover:border-ochre/50 transition-colors">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-ochre opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-ochre"></span>
+</span>
+<span class="text-xs font-semibold text-espresso-800 tracking-tight">Built with Muse Spark Open</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-ochre-soft text-ochre-clay tracking-wide">v2.4</span>
+</div>
+</div>
+<!-- Center Desktop Navigation Tabs -->
+<nav class="flex items-center gap-1 bg-papyrus-200/90 p-1.5 rounded-full border border-parchment-border shadow-inner">
+<a class="px-5 py-2 rounded-full bg-papyrus-100 text-espresso-950 font-bold text-sm shadow-archival border border-parchment-border transition-all flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[18px] text-ochre">public</span>
+<span>World</span>
+</a>
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px]">photo_library</span>
+<span>My Photos</span>
+<span class="ml-0.5 px-1.5 py-0.2 rounded-full bg-papyrus-300 text-[11px] font-semibold text-espresso-700">84</span>
+</a>
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px]">sensors</span>
+<span>Connected</span>
+<span class="w-1.5 h-1.5 rounded-full bg-sage-600"></span>
+</a>
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px]">auto_stories</span>
+<span>Curated Journals</span>
+</a>
+</nav>
+<!-- Right Utility Bar -->
+<div class="flex items-center gap-3">
+<!-- Assistant Status Indicator -->
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-papyrus-200 hover:bg-parchment-hover text-espresso-700 text-xs font-semibold transition-colors border border-parchment-border">
+<span class="material-symbols-outlined text-[16px] text-ochre">auto_awesome</span>
+<span>Semantic Agent Active</span>
+</button>
+<!-- Lens / Camera Fast Tool -->
+<button class="w-10 h-10 rounded-full bg-papyrus-200 hover:bg-ochre-soft hover:text-ochre text-espresso-700 flex items-center justify-center transition-colors border border-parchment-border" title="Fast Capture Lens">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+</button>
+<!-- Primary Upload Action -->
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-espresso-900 text-papyrus-100 hover:bg-espresso-800 text-sm font-semibold shadow-archival transition-all active:scale-95 group border border-espresso-800">
+<span class="material-symbols-outlined text-[18px] text-ochre-warm group-hover:rotate-90 transition-transform">add</span>
+<span>Upload Artifact</span>
+</button>
+<div class="h-6 w-px bg-parchment-border"></div>
+<!-- User Profile Avatar with Connected Pill -->
+<div class="flex items-center gap-2.5 pl-1 cursor-pointer group">
+<div class="relative">
+<div class="w-10 h-10 rounded-full bg-gradient-to-tr from-espresso-850 to-espresso-700 flex items-center justify-center text-papyrus-100 ring-2 ring-parchment-border shadow-archival">
+<span class="material-symbols-outlined text-[20px]">person</span>
+</div>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-sage-600 rounded-full ring-2 ring-papyrus-100"></span>
+</div>
+<div class="hidden xl:flex flex-col text-left">
+<span class="text-xs font-bold text-espresso-950 group-hover:text-ochre transition-colors">Dr. A. Ochieng</span>
+<span class="text-[11px] text-espresso-600">Archivist Lead</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Space (Max 1440px Container) -->
+<main class="w-full max-w-[1440px] mx-auto px-8 py-8 flex flex-col gap-8 flex-1"><div class="flex flex-col w-full">
+<div class="flex flex-col gap-12 max-w-[1400px] mx-auto w-full pb-20">
+<!-- Document Header / Meta Bar -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 bg-surface-container-low p-8 rounded-xl shadow-sm">
+<div class="flex flex-col gap-3 max-w-3xl">
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-secondary-fixed text-on-secondary-fixed-variant font-label-sm text-label-sm tracking-widest uppercase">
+            System Codex • v2.4
+          </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
+            Built with Muse Spark Open v2.4
+          </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">
+          ReelWorld Design System — Warm Archival Earth Architecture
+        </h1>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          System tokens, typography scale, elevation, interaction mechanics, and complete component states for the ReelWorld visual knowledge network. Designed for tactile archival endurance, high epistemic clarity, and rigorous museum-grade cataloging.
+        </p>
+</div>
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-surface-container p-4 rounded-lg">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Target Standard</span>
+<span class="font-label-lg text-label-lg text-on-surface">WCAG 2.2 Level AAA</span>
+</div>
+<div class="w-px h-8 bg-surface-variant hidden sm:block"></div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Spatial System</span>
+<span class="font-label-lg text-label-lg text-on-surface">4px / 8px Metric</span>
+</div>
+<div class="w-px h-8 bg-surface-variant hidden sm:block"></div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Active Theme</span>
+<span class="font-label-lg text-label-lg text-secondary">Archival Papyrus</span>
+</div>
+</div>
+</section>
+<!-- SECTION 1: Color Palette System -->
+<section class="flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest font-bold">01 / Foundations</span>
+<span class="text-on-surface-variant">•</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Color Scale &amp; Pigment Harmonies</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Color Palette &amp; Contrast Verifications</h2>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-3 py-1.5 rounded">All text contrast ≥ 7.0:1 AAA</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Palette Column 1: Surfaces -->
+<div class="flex flex-col gap-3 p-5 bg-surface-container-low rounded-xl">
+<div class="flex items-center justify-between pb-2">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider font-semibold">Surface Substrates</span>
+<span class="material-symbols-outlined text-secondary text-sm">layers</span>
+</div>
+<div class="flex flex-col gap-2">
+<div class="p-3 rounded-lg bg-surface flex items-center justify-between shadow-sm">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Papyrus Light (Surface)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">#fef8f4</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container text-on-surface">Base Canvas</span>
+</div>
+<div class="p-3 rounded-lg bg-surface-container-low flex items-center justify-between shadow-sm">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Papyrus Dim (Container Low)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">#f8f3ef</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-variant text-on-surface">Tray Inset</span>
+</div>
+<div class="p-3 rounded-lg bg-surface-dim flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Archival Base (Dim)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">#ded9d5</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container text-on-surface">Mat Board</span>
+</div>
+<div class="p-3 rounded-lg bg-surface-container-lowest flex items-center justify-between shadow-sm">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Crisp Specimen (Lowest)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">#ffffff</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container text-on-surface">High Lumen</span>
+</div>
+</div>
+</div>
+<!-- Palette Column 2: Ingest & Candidate Pigments -->
+<div class="flex flex-col gap-3 p-5 bg-surface-container-low rounded-xl">
+<div class="flex items-center justify-between pb-2">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider font-semibold">Ingest &amp; Specimen Brand</span>
+<span class="material-symbols-outlined text-on-tertiary-container text-sm">palette</span>
+</div>
+<div class="flex flex-col gap-2">
+<div class="p-3 rounded-lg bg-tertiary-container text-on-tertiary flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-surface-bright">Terracotta Ochre Deep</span>
+<span class="font-label-sm text-label-sm opacity-80 font-mono">#3d0d00</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-on-tertiary-fixed-variant text-surface-bright">User Photo</span>
+</div>
+<div class="p-3 rounded-lg bg-tertiary-fixed flex items-center justify-between text-on-tertiary-fixed-variant">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold">Soft Terracotta Tint</span>
+<span class="font-label-sm text-label-sm opacity-90 font-mono">#ffdbcf</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface text-on-tertiary-fixed-variant">Candidate Inset</span>
+</div>
+<div class="p-3 rounded-lg bg-surface-container flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-tertiary-container font-semibold">Warm Ochre Accent</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">#c85a32</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed">Origin Node</span>
+</div>
+<div class="p-3 rounded-lg bg-surface-container-highest flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Amber Candidate</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">#df8727</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface text-on-surface-variant">Hypothesis</span>
+</div>
+</div>
+</div>
+<!-- Palette Column 3: Knowledge & Verification -->
+<div class="flex flex-col gap-3 p-5 bg-surface-container-low rounded-xl">
+<div class="flex items-center justify-between pb-2">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider font-semibold">Knowledge &amp; Verification</span>
+<span class="material-symbols-outlined text-secondary text-sm">verified</span>
+</div>
+<div class="flex flex-col gap-2">
+<div class="p-3 rounded-lg bg-secondary text-on-secondary flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold">Archival Forest Green</span>
+<span class="font-label-sm text-label-sm opacity-80 font-mono">#1e4732 / #476556</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed">Confirmed 10:1</span>
+</div>
+<div class="p-3 rounded-lg bg-secondary-fixed text-on-secondary-fixed-variant flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold">Sage Light Pill</span>
+<span class="font-label-sm text-label-sm opacity-90 font-mono">#c9ead8</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface text-secondary">Verified Sub</span>
+</div>
+<div class="p-3 rounded-lg bg-surface-container flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-secondary font-semibold">Deep World Verification</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">#163625</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed">World Match</span>
+</div>
+<div class="p-3 rounded-lg bg-surface flex items-center justify-between shadow-sm">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-secondary-container font-semibold">Acacia Mineral Stroke</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">#3d604e</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container text-on-surface-variant">Hairline 1px</span>
+</div>
+</div>
+</div>
+<!-- Palette Column 4: Ink & Archival Lead -->
+<div class="flex flex-col gap-3 p-5 bg-surface-container-low rounded-xl">
+<div class="flex items-center justify-between pb-2">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider font-semibold">Ink &amp; Typographic Pigments</span>
+<span class="material-symbols-outlined text-primary text-sm">history_edu</span>
+</div>
+<div class="flex flex-col gap-2">
+<div class="p-3 rounded-lg bg-primary-container text-surface-bright flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold">Roasted Espresso Ink</span>
+<span class="font-label-sm text-label-sm text-primary-fixed-dim font-mono">#1b1e23</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-primary text-surface-bright">AAA 13.8:1</span>
+</div>
+<div class="p-3 rounded-lg bg-surface-container-high flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface-variant font-semibold">Muted Archival Lead</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">#56524a / #45474b</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface text-on-surface-variant">AAA 7.4:1</span>
+</div>
+<div class="p-3 rounded-lg bg-surface-container-highest flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Subtle Mat Inset</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">#d9d2c5 / #e6e2de</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface text-on-surface-variant">Delimiter</span>
+</div>
+<div class="p-3 rounded-lg bg-surface-container flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Archival Slate Accent</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">#76777b</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface text-on-surface-variant">Metadata Stamp</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: Typography Scale -->
+<section class="flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest font-bold">02 / Typography</span>
+<span class="text-on-surface-variant">•</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Plus Jakarta Sans &amp; Archival Monospace</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Scale, Kerning &amp; Vertical Metric Hierarchy</h2>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-3 py-1.5 rounded">Optical baseline balanced</span>
+</div>
+<div class="bg-surface-container-low rounded-xl p-6 sm:p-8 flex flex-col gap-8 shadow-sm">
+<!-- Display / Hero -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 bg-surface-container p-6 rounded-lg">
+<div class="flex flex-col gap-1 max-w-xl">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase">Display / Hero</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">28px – 36px • font-headline-lg</span>
+</div>
+<p class="font-headline-lg text-headline-lg text-on-surface tracking-tight">
+              Kikuyu Escarpment Geological Survey, 1954
+            </p>
+</div>
+<div class="flex items-center gap-4 text-right">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Line Height</span>
+<span class="font-label-md text-label-md text-on-surface font-mono">40px</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Tracking</span>
+<span class="font-label-md text-label-md text-on-surface font-mono">-0.01em</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Weight</span>
+<span class="font-label-md text-label-md text-on-surface font-mono">600 (Semibold)</span>
+</div>
+</div>
+</div>
+<!-- Title / Section -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 bg-surface-container p-6 rounded-lg">
+<div class="flex flex-col gap-1 max-w-xl">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase">Title / Section</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">20px – 24px • font-headline-md</span>
+</div>
+<p class="font-headline-md text-headline-md text-on-surface">
+              Semantic Visual Spatial Triangulation
+            </p>
+</div>
+<div class="flex items-center gap-4 text-right">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Line Height</span>
+<span class="font-label-md text-label-md text-on-surface font-mono">32px</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Tracking</span>
+<span class="font-label-md text-label-md text-on-surface font-mono">-0.005em</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Weight</span>
+<span class="font-label-md text-label-md text-on-surface font-mono">600 (Semibold)</span>
+</div>
+</div>
+</div>
+<!-- Subhead / Card Titles -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 bg-surface-container p-6 rounded-lg">
+<div class="flex flex-col gap-1 max-w-xl">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase">Subhead / Card Titles</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">16px – 18px • font-body-lg</span>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface font-semibold">
+              Artifact Provenance #RW-89412 — Rift Valley Riftline Specimen
+            </p>
+</div>
+<div class="flex items-center gap-4 text-right">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Line Height</span>
+<span class="font-label-md text-label-md text-on-surface font-mono">28px</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Tracking</span>
+<span class="font-label-md text-label-md text-on-surface font-mono">Normal</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Weight</span>
+<span class="font-label-md text-label-md text-on-surface font-mono">600 (Semibold)</span>
+</div>
+</div>
+</div>
+<!-- Body Standard -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 bg-surface-container p-6 rounded-lg">
+<div class="flex flex-col gap-1 max-w-xl">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase">Body Standard</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">14px – 15px • font-body-md</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Curatorial verification indicates identical solar azimuth angle within 1.4 degrees of national archive negative #4190. Photographed at sunrise from the northern basalt crest.
+            </p>
+</div>
+<div class="flex items-center gap-4 text-right">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Line Height</span>
+<span class="font-label-md text-label-md text-on-surface font-mono">24px</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Tracking</span>
+<span class="font-label-md text-label-md text-on-surface font-mono">Normal</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Weight</span>
+<span class="font-label-md text-label-md text-on-surface font-mono">400 (Regular)</span>
+</div>
+</div>
+</div>
+<!-- Label & Metadata -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 bg-surface-container p-6 rounded-lg">
+<div class="flex flex-col gap-1 max-w-xl">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase">Label &amp; Metadata</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">12px – 13px • font-label-md</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-label-md text-label-md text-secondary font-semibold uppercase tracking-wider">Confirmed Origin</span>
+<span class="text-on-surface-variant">•</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Camera: Leica M3 (Summarit 50mm f/1.5)</span>
+</div>
+</div>
+<div class="flex items-center gap-4 text-right">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Line Height</span>
+<span class="font-label-md text-label-md text-on-surface font-mono">16px</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Tracking</span>
+<span class="font-label-md text-label-md text-on-surface font-mono">+0.04em</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Weight</span>
+<span class="font-label-md text-label-md text-on-surface font-mono">600 (Semibold)</span>
+</div>
+</div>
+</div>
+<!-- Archival Monospace Quoted -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-surface-container p-6 rounded-lg">
+<div class="flex flex-col gap-1 max-w-xl">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase">Archival Monospace Quoted</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">11px – 13px • font-mono</span>
+</div>
+<p class="font-mono text-body-sm text-on-surface-variant bg-surface p-3 rounded">
+              HASH_SHA256: 8a4c10ef923bc4d0012e87aa55291e0a811c • LAT: -1.286389 • LON: 36.817223 • ELEV: 1684m
+            </p>
+</div>
+<div class="flex items-center gap-4 text-right">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Line Height</span>
+<span class="font-label-md text-label-md text-on-surface font-mono">20px</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Tracking</span>
+<span class="font-label-md text-label-md text-on-surface font-mono">+0.02em</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Family</span>
+<span class="font-label-md text-label-md text-on-surface font-mono">Courier Prime / Monospace</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: Spacing & Corner Radius (Shape Architecture) -->
+<section class="flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest font-bold">03 / Geometry &amp; Scale</span>
+<span class="text-on-surface-variant">•</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Spacing Grids &amp; Radius Architecture</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Spacing Scale &amp; Corner Inset Geometry</h2>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-3 py-1.5 rounded">Modular 4/8/16 System</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Spacing Scale Box -->
+<div class="flex flex-col gap-4 p-6 bg-surface-container-low rounded-xl shadow-sm">
+<div class="flex items-center justify-between pb-2">
+<span class="font-headline-sm text-headline-sm text-on-surface">Spacing Metrics</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">space-*</span>
+</div>
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between p-3 bg-surface rounded">
+<div class="flex items-center gap-3">
+<div class="h-4 w-1 bg-secondary rounded"></div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">space-xs (4px)</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Tight groupings, micro tags</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface rounded">
+<div class="flex items-center gap-3">
+<div class="h-4 w-2 bg-secondary rounded"></div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">space-sm (8px)</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Element gaps, button paddings</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface rounded">
+<div class="flex items-center gap-3">
+<div class="h-4 w-3 bg-secondary rounded"></div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">space-md (12px)</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Card insets, mat-board margin</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface rounded">
+<div class="flex items-center gap-3">
+<div class="h-4 w-4 bg-secondary rounded"></div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">space-base (16px)</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Standard container padding</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface rounded">
+<div class="flex items-center gap-3">
+<div class="h-4 w-6 bg-secondary rounded"></div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">space-lg (24px)</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Gutter splits, panel shifts</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface rounded">
+<div class="flex items-center gap-3">
+<div class="h-4 w-8 bg-secondary rounded"></div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">space-xl (32px)</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Card group boundaries</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface rounded">
+<div class="flex items-center gap-3">
+<div class="h-4 w-12 bg-secondary rounded"></div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">space-2xl (48px)</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Macro exhibition breaks</span>
+</div>
+</div>
+</div>
+<!-- Corner Radius Scale Box -->
+<div class="flex flex-col gap-4 p-6 bg-surface-container-low rounded-xl shadow-sm">
+<div class="flex items-center justify-between pb-2">
+<span class="font-headline-sm text-headline-sm text-on-surface">Corner Radius Architecture</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">rounded-*</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="p-4 bg-surface rounded-sm flex flex-col justify-between h-28">
+<span class="font-label-md text-label-md text-on-surface font-semibold">rounded-sm (4px)</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Inputs, data tables, micro tags</p>
+<span class="font-mono text-label-sm text-secondary">radius: 4px</span>
+</div>
+<div class="p-4 bg-surface rounded-md flex flex-col justify-between h-28">
+<span class="font-label-md text-label-md text-on-surface font-semibold">rounded-md (8px)</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Standard buttons, dropdown chips</p>
+<span class="font-mono text-label-sm text-secondary">radius: 8px</span>
+</div>
+<div class="p-4 bg-surface rounded-lg flex flex-col justify-between h-28">
+<span class="font-label-md text-label-md text-on-surface font-semibold">rounded-lg (12px)</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Specimen cards, conversational trays</p>
+<span class="font-mono text-label-sm text-secondary">radius: 12px</span>
+</div>
+<div class="p-4 bg-surface rounded-xl flex flex-col justify-between h-28">
+<span class="font-label-md text-label-md text-on-surface font-semibold">rounded-xl (16px)</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Portfolio mounts, major sections</p>
+<span class="font-mono text-label-sm text-secondary">radius: 16px</span>
+</div>
+<div class="p-4 bg-surface rounded-full col-span-1 sm:col-span-2 flex items-center justify-between px-6">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">rounded-full (9999px)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Status badges, verification pills, round icons</span>
+</div>
+<span class="font-mono text-label-sm text-secondary">radius: 9999px</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 4: Unified Button Component System -->
+<section class="flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest font-bold">04 / Interaction Dynamics</span>
+<span class="text-on-surface-variant">•</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Touch Targets &amp; Complete State Matrix</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Unified Button Component System</h2>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-3 py-1.5 rounded">Min 44px Touch Target Compliant</span>
+</div>
+<!-- Button State Matrix Table -->
+<div class="bg-surface-container-low rounded-xl p-6 sm:p-8 flex flex-col gap-8 shadow-sm overflow-x-auto">
+<!-- Row 1: Primary Action Button -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between pb-2">
+<div class="flex items-center gap-3">
+<span class="font-headline-sm text-headline-sm text-on-surface">Primary Action Button</span>
+<span class="font-label-sm text-label-sm bg-secondary-fixed text-on-secondary-fixed px-2 py-0.5 rounded">Solid Forest Green (#1e4732)</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Used for primary triggers, upload, &amp; world triangulation</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 items-center">
+<!-- 1. Default -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Default State</span>
+<button class="h-11 px-5 rounded-md bg-secondary text-on-secondary font-label-md text-label-md flex items-center justify-center gap-2 shadow-sm transition-all hover:bg-secondary/90">
+<span class="material-symbols-outlined text-lg">public</span>
+<span>Find in the world</span>
+</button>
+</div>
+<!-- 2. Hover (Emulated via static class) -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Hover State (Simulated)</span>
+<button class="h-11 px-5 rounded-md bg-secondary text-on-secondary font-label-md text-label-md flex items-center justify-center gap-2 shadow-md -translate-y-0.5">
+<span class="material-symbols-outlined text-lg">add_a_photo</span>
+<span>Upload photo</span>
+</button>
+</div>
+<!-- 3. Pressed -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Pressed / Active State</span>
+<button class="h-11 px-5 rounded-md bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-2 scale-[0.98]">
+<span class="material-symbols-outlined text-lg">public</span>
+<span>Find in the world</span>
+</button>
+</div>
+<!-- 4. Loading with CSS Spinner -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Loading State</span>
+<button class="h-11 px-5 rounded-md bg-secondary text-on-secondary font-label-md text-label-md flex items-center justify-center gap-2 cursor-wait opacity-90">
+<svg class="animate-spin h-4 w-4 text-white" fill="none" viewbox="0 0 24 24">
+<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+<path class="opacity-75" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" fill="currentColor"></path>
+</svg>
+<span>Triangulating...</span>
+</button>
+</div>
+<!-- 5. Disabled -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Disabled State</span>
+<button class="h-11 px-5 rounded-md bg-surface-dim text-on-surface-variant font-label-md text-label-md flex items-center justify-center gap-2 cursor-not-allowed opacity-60" disabled="">
+<span class="material-symbols-outlined text-lg">public</span>
+<span>Upload photo</span>
+</button>
+</div>
+</div>
+</div>
+<div class="h-px bg-surface-variant"></div>
+<!-- Row 2: Secondary Outlined Button -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between pb-2">
+<div class="flex items-center gap-3">
+<span class="font-headline-sm text-headline-sm text-on-surface">Secondary Outlined Button</span>
+<span class="font-label-sm text-label-sm bg-surface text-on-surface-variant px-2 py-0.5 rounded">Pale green fill on hover (#eef5f0)</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Used for contextual inquiry, vantage rotation, &amp; similar queries</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 items-center">
+<!-- 1. Default -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Default State</span>
+<button class="h-11 px-5 rounded-md bg-surface-container text-on-surface font-label-md text-label-md flex items-center justify-center gap-2 transition-colors hover:bg-secondary-fixed/50">
+<span class="material-symbols-outlined text-lg text-secondary">filter_none</span>
+<span>Another angle</span>
+</button>
+</div>
+<!-- 2. Hover (Simulated) -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Hover State (Simulated)</span>
+<button class="h-11 px-5 rounded-md bg-secondary-fixed/60 text-secondary font-label-md text-label-md flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-lg text-secondary">auto_awesome</span>
+<span>More like this</span>
+</button>
+</div>
+<!-- 3. Pressed -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Pressed / Active State</span>
+<button class="h-11 px-5 rounded-md bg-secondary-container text-secondary font-label-md text-label-md flex items-center justify-center gap-2 scale-[0.98]">
+<span class="material-symbols-outlined text-lg">chat_bubble</span>
+<span>Ask about photo</span>
+</button>
+</div>
+<!-- 4. Loading with CSS Spinner -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Loading State</span>
+<button class="h-11 px-5 rounded-md bg-surface-container text-on-surface font-label-md text-label-md flex items-center justify-center gap-2 cursor-wait">
+<svg class="animate-spin h-4 w-4 text-secondary" fill="none" viewbox="0 0 24 24">
+<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+<path class="opacity-75" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" fill="currentColor"></path>
+</svg>
+<span>Searching angles...</span>
+</button>
+</div>
+<!-- 5. Disabled -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Disabled State</span>
+<button class="h-11 px-5 rounded-md bg-surface text-on-surface-variant/40 font-label-md text-label-md flex items-center justify-center gap-2 cursor-not-allowed" disabled="">
+<span class="material-symbols-outlined text-lg opacity-40">filter_none</span>
+<span>Another angle</span>
+</button>
+</div>
+</div>
+</div>
+<div class="h-px bg-surface-variant"></div>
+<!-- Row 3: Quiet Text Button -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between pb-2">
+<div class="flex items-center gap-3">
+<span class="font-headline-sm text-headline-sm text-on-surface">Quiet Text Button</span>
+<span class="font-label-sm text-label-sm bg-surface text-on-surface-variant px-2 py-0.5 rounded">Dismiss / Candidate Disqualification</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">For non-destructive rejections without visual clutter</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 items-center">
+<!-- 1. Default -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Default State</span>
+<button class="h-11 px-4 rounded-md text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-base">close</span>
+<span>Not this one</span>
+</button>
+</div>
+<!-- 2. Hover (Simulated) -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Hover State (Simulated)</span>
+<button class="h-11 px-4 rounded-md bg-surface text-on-surface font-label-md text-label-md flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-base text-on-surface">close</span>
+<span>Not this one</span>
+</button>
+</div>
+<!-- 3. Pressed -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Pressed / Active State</span>
+<button class="h-11 px-4 rounded-md bg-surface-variant text-on-surface font-label-md text-label-md flex items-center justify-center gap-1.5 scale-95">
+<span class="material-symbols-outlined text-base">close</span>
+<span>Not this one</span>
+</button>
+</div>
+<!-- 4. Loading -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Loading State</span>
+<button class="h-11 px-4 rounded-md text-on-surface-variant font-label-md text-label-md flex items-center justify-center gap-1.5 cursor-wait">
+<svg class="animate-spin h-3.5 w-3.5 text-on-surface-variant" fill="none" viewbox="0 0 24 24">
+<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+<path class="opacity-75" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" fill="currentColor"></path>
+</svg>
+<span>Dismissing</span>
+</button>
+</div>
+<!-- 5. Disabled -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Disabled State</span>
+<button class="h-11 px-4 rounded-md text-on-surface-variant/30 font-label-md text-label-md flex items-center justify-center gap-1.5 cursor-not-allowed" disabled="">
+<span class="material-symbols-outlined text-base">close</span>
+<span>Not this one</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 5: Badge & Status System -->
+<section class="flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest font-bold">05 / Taxonomy &amp; Evidence</span>
+<span class="text-on-surface-variant">•</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Verification Badges &amp; Confidence Gauges</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Badge &amp; Status System</h2>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-3 py-1.5 rounded">Multi-attribute Taxonomy</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Status Badges Group -->
+<div class="flex flex-col gap-5 p-6 bg-surface-container-low rounded-xl shadow-sm">
+<span class="font-headline-sm text-headline-sm text-on-surface">Verification Status Badges</span>
+<div class="flex flex-wrap gap-4 items-center">
+<!-- Confirmed -->
+<div class="flex flex-col gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Confirmed Match</span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary text-on-secondary font-label-md text-label-md font-semibold shadow-sm">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>Confirmed</span>
+</span>
+</div>
+<!-- Candidate -->
+<div class="flex flex-col gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Hypothesis Specimen</span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-md text-label-md font-semibold">
+<span class="material-symbols-outlined text-[16px]">explore</span>
+<span>Candidate</span>
+</span>
+</div>
+<!-- Clear -->
+<div class="flex flex-col gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant">High Confidence / Clear</span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-label-md text-label-md font-semibold">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Clear</span>
+</span>
+</div>
+<!-- Partial -->
+<div class="flex flex-col gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Partial Vantage</span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-md text-label-md font-semibold">
+<span class="w-2 h-2 rounded-full bg-on-tertiary-container"></span>
+<span>Partial</span>
+</span>
+</div>
+</div>
+<div class="pt-4 flex flex-col gap-2 bg-surface p-4 rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Accessibility &amp; Contrast Validation</span>
+<div class="grid grid-cols-2 gap-3 text-body-sm font-body-sm text-on-surface">
+<div class="flex items-center justify-between">
+<span>Confirmed on Light Canvas:</span>
+<span class="font-mono text-secondary font-bold">10.2:1 (Pass AAA)</span>
+</div>
+<div class="flex items-center justify-between">
+<span>Sage Light Text Contrast:</span>
+<span class="font-mono text-secondary font-bold">8.4:1 (Pass AAA)</span>
+</div>
+<div class="flex items-center justify-between">
+<span>Terracotta Tint Ratio:</span>
+<span class="font-mono text-on-tertiary-container font-bold">9.1:1 (Pass AAA)</span>
+</div>
+<div class="flex items-center justify-between">
+<span>Amber Hypothesis Ratio:</span>
+<span class="font-mono text-on-surface font-bold">7.2:1 (Pass AAA)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Slender Confidence Meters -->
+<div class="flex flex-col gap-5 p-6 bg-surface-container-low rounded-xl shadow-sm">
+<span class="font-headline-sm text-headline-sm text-on-surface">Slender Confidence Bar Meters</span>
+<div class="flex flex-col gap-5">
+<!-- 99% Confidence -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<div class="flex items-center gap-2">
+<span class="font-semibold text-on-surface">High Epistemic Parity</span>
+<span class="text-on-surface-variant text-body-sm font-body-sm">(Geographical + Azimuth match)</span>
+</div>
+<span class="font-mono font-bold text-secondary">99% Confidence</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden">
+<div class="h-full bg-secondary rounded-full transition-all duration-500" style="width: 99%"></div>
+</div>
+</div>
+<!-- 85% Confidence -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<div class="flex items-center gap-2">
+<span class="font-semibold text-on-surface">Structural Silhouette Parity</span>
+<span class="text-on-surface-variant text-body-sm font-body-sm">(Focal variation detected)</span>
+</div>
+<span class="font-mono font-bold text-secondary">85% Confidence</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden">
+<div class="h-full bg-secondary rounded-full transition-all duration-500" style="width: 85%"></div>
+</div>
+</div>
+<!-- 60% Confidence -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<div class="flex items-center gap-2">
+<span class="font-semibold text-on-surface">Atmospheric Hypothesis</span>
+<span class="text-on-surface-variant text-body-sm font-body-sm">(Seasonal foliage discrepancy)</span>
+</div>
+<span class="font-mono font-bold text-on-tertiary-container">60% Confidence</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden">
+<div class="h-full bg-on-tertiary-container rounded-full transition-all duration-500" style="width: 60%"></div>
+</div>
+</div>
+</div>
+<div class="p-3 bg-surface rounded-lg flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-lg">info</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+              Meters normalize multi-vector perceptual hashes and archival georeferencing metadata into unified visual certainty index.
+            </span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 6: Card Component Architecture -->
+<section class="flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest font-bold">06 / Archival Assemblies</span>
+<span class="text-on-surface-variant">•</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Specimen Mounts &amp; Semantic Triangulation Bridge</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Card Component Architecture &amp; Bridge Node</h2>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-3 py-1.5 rounded">Museum Specimen Matting</span>
+</div>
+<!-- Triangulation Card Layout with Connecting Bridge Node -->
+<div class="bg-surface-container-low rounded-xl p-6 sm:p-8 flex flex-col shadow-sm">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+<!-- Card A: Archival Specimen Card (User Photo) -->
+<div class="lg:col-span-5 flex flex-col bg-surface rounded-xl p-4 shadow-sm relative">
+<div class="flex items-center justify-between pb-3">
+<span class="font-label-sm text-label-sm text-on-tertiary-container uppercase tracking-widest font-bold">
+                Specimen Node • Ingest
+              </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+<span>Your Photo</span>
+</span>
+</div>
+<!-- Photo Mat Frame -->
+<div class="bg-surface-container-high p-3 rounded-lg flex flex-col gap-3">
+<div class="relative w-full h-56 rounded bg-cover bg-center overflow-hidden" data-alt="Vintage 35mm film photograph of acacia trees at dusk on the Kenyan savanna, soft golden dust glowing in horizontal twilight light, earth tones and warm grain texture." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDs1oqm2HZUC9ONe8dvlHund6SbTurJ0np72UTTYnVPUxr3C6cnkG8pWxzU0oF2hZ1eSjAJTaTQtKKAQaCEv7WMnTE14yQ4REO8RFn890WmmoSzMz3RrvNjrWGtBLdqoPsqlJ7x910hrxRp0Mnwl34fBfP7-ybHe8W6uM4BTZkIkonQr6pwGlsMlg1mFW5eGTp0diC6rBOq5nTBBGueUXvwBdLi_Zl03nV05_bXYck')">
+<div class="absolute bottom-2 left-2 px-2 py-1 rounded bg-primary-container/80 backdrop-blur-sm text-surface-bright font-mono text-label-sm">
+                  RW-INGEST-0824.RAW
+                </div>
+</div>
+</div>
+<!-- Attribution & Metadata -->
+<div class="flex flex-col gap-2 pt-4">
+<h3 class="font-body-lg text-body-lg text-on-surface font-semibold">
+                Acacia Tortilis Canopy at Northern Horizon
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Uploaded by Field Researcher • Samburu Basin, Kenya
+              </p>
+<div class="flex items-center justify-between pt-2 border-t border-surface-variant">
+<span class="font-mono text-label-sm text-on-surface-variant">ISO 400 • f/4.0 • 1/250s</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Spatial Candidate</span>
+</div>
+</div>
+</div>
+<!-- Connecting Bridge Node (Curved / Dotted Connector) -->
+<div class="lg:col-span-2 flex flex-col items-center justify-center py-4 lg:py-0">
+<div class="flex flex-col items-center gap-3 w-full">
+<!-- Visual Node Badge -->
+<span class="px-3 py-1.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm tracking-wide font-bold shadow-sm uppercase">
+                Same Place
+              </span>
+<!-- SVG Curving Dynamic Connector Line -->
+<div class="w-full flex items-center justify-center">
+<svg class="w-full h-12 text-secondary" fill="none" viewbox="0 0 160 48">
+<path d="M 0,24 C 50,24 60,8 80,8 C 100,8 110,40 160,24" fill="none" stroke="currentColor" stroke-dasharray="4 4" stroke-width="2"></path>
+<circle cx="80" cy="8" fill="currentColor" r="4"></circle>
+</svg>
+</div>
+<!-- Vantage Delta Descriptor -->
+<div class="flex flex-col items-center text-center">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">9.4m Shift</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Another angle (32° CCW)</span>
+</div>
+</div>
+</div>
+<!-- Card B: World Archive Match Card -->
+<div class="lg:col-span-5 flex flex-col bg-surface rounded-xl p-4 shadow-sm relative">
+<div class="flex items-center justify-between pb-3">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest font-bold">
+                World Knowledge Node
+              </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-xs">verified</span>
+<span>Confirmed Match</span>
+</span>
+</div>
+<!-- Photo Mat Frame -->
+<div class="bg-surface-container-high p-3 rounded-lg flex flex-col gap-3">
+<div class="relative w-full h-56 rounded bg-cover bg-center overflow-hidden" data-alt="Archival black and white medium format photograph of Samburu geological rocky ridge in East Africa, crisp archival tones, sharp contrast, historical preservation scan quality." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAtfrtIuwrf1Jr8ie18WlylzB9CKoPbOn6xYyBngqdwT3AXPkEHmiKtAfSQ0Oq7GiHfZ06hDk0iddP4VZyCGfYfUG93eLKkt3ThlydXN0W4fMJyL4wATnEG8PYplfAoJtoaIxtJLjDJwJf7L2-ywSPtTOewaQt779AH0Kmf3OLfgZ11m7lEZcJBgwZYPAf2l-IhwSTDv3Eh1f7k9JpjlSNY03WQ6Iw3K9tghsuajiw')">
+<div class="absolute bottom-2 left-2 px-2 py-1 rounded bg-secondary/90 backdrop-blur-sm text-on-secondary font-mono text-label-sm">
+                  ARCHIVE-KE-1961-042
+                </div>
+</div>
+</div>
+<!-- Attribution & Metadata -->
+<div class="flex flex-col gap-2 pt-4">
+<h3 class="font-body-lg text-body-lg text-on-surface font-semibold">
+                Basalt Ridge &amp; Riverbank Solitary Acacia
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Photo by Jonathan K. Miller (1961) • CC BY-SA 4.0 Archival Trust
+              </p>
+<div class="flex items-center justify-between pt-2 border-t border-surface-variant">
+<span class="font-label-sm text-label-sm bg-surface-container px-2 py-0.5 rounded text-on-surface">Viewpoint: Ridge Crest</span>
+<span class="font-mono text-label-sm text-secondary font-bold">99.4% Epistemic Match</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Curatorial Footnote on Specimen Architecture -->
+<div class="mt-8 pt-6 border-t border-surface-variant flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-sm">museum</span>
+<span class="font-body-sm text-body-sm">
+              Archival mounts adhere to museum-grade mat spacing (12px inset mat border, zero stark white borders).
+            </span>
+</div>
+<span class="font-mono text-label-sm">Specification Compliance: REELWORLD-DOCS-SPEC-2025</span>
+</div>
+</div>
+</section>
+<!-- Interactive Token Inspector Sandbox -->
+<section class="bg-surface-container-high p-8 rounded-xl flex flex-col gap-6 shadow-sm">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest font-bold">Interactive Sandbox</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Live Token State Inspector</h3>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 bg-surface rounded text-on-surface font-label-sm text-label-sm hover:bg-secondary-fixed transition-colors" id="inspect-primary-btn" onclick="testInteractiveFeedback('primary')">
+            Toggle Primary Feedback
+          </button>
+<button class="px-3 py-1.5 bg-surface rounded text-on-surface font-label-sm text-label-sm hover:bg-tertiary-fixed transition-colors" id="inspect-card-btn" onclick="testInteractiveFeedback('card')">
+            Simulate Triangulation
+          </button>
+</div>
+</div>
+<div class="p-4 bg-surface rounded-lg font-mono text-body-sm text-on-surface-variant flex items-center justify-between" id="inspector-output">
+<span>Active Focus: None • System Tokens Primed</span>
+<span class="text-secondary font-bold">Status: Synchronized (Muse Spark Open v2.4)</span>
+</div>
+</section>
+</div>
+<script>
+    function testInteractiveFeedback(type) {
+      const output = document.getElementById('inspector-output');
+      if (!output) return;
+
+      if (type === 'primary') {
+        output.innerHTML = '<span>Active Token: <strong class="text-secondary">bg-secondary (#1e4732)</strong> • Touch target: 44px • Contrast: 10.2:1 AAA</span><span class="text-secondary font-bold">Action Confirmed</span>';
+      } else if (type === 'card') {
+        output.innerHTML = '<span>Bridge Node: <strong class="text-on-tertiary-container">Triangulation Resolved</strong> • Distance Vector: 9.4m • Curatorial Confidence: 99%</span><span class="text-secondary font-bold">Match Validated</span>';
+      }
+    }
+  </script>
+</div></main>
+<!-- Desktop Persistent Footer / System Status Bar -->
+<footer class="w-full bg-espresso-950 border-t border-espresso-850 text-papyrus-300 mt-12">
+<div class="max-w-[1440px] mx-auto px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+<div class="flex items-center gap-3">
+<div class="w-7 h-7 rounded-lg bg-espresso-900 border border-espresso-800 flex items-center justify-center text-ochre-warm">
+<span class="material-symbols-outlined text-[16px]">flare</span>
+</div>
+<div>
+<span class="text-papyrus-100 font-bold">ReelWorld Kenya Semantic Visual Pipeline</span>
+<span class="mx-2 text-espresso-700">•</span>
+<span>Powered by Muse Spark Open Framework</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-sage-DEFAULT"></span>
+<span class="text-papyrus-200">Nairobi Edge Cluster: Online (32ms)</span>
+</div>
+<a class="hover:text-ochre-warm transition-colors" href="#">Documentation</a>
+<a class="hover:text-ochre-warm transition-colors" href="#">Archive Telemetry</a>
+<a class="hover:text-ochre-warm transition-colors" href="#">Privacy &amp; Provenance</a>
+</div>
+</div>
+</footer>
+<script>
+    function setQuery(text) {
+      const input = document.getElementById('conversational-input');
+      if (input) {
+        input.value = text;
+        input.focus();
+        input.parentElement.parentElement.classList.add('ring-2', 'ring-ochre');
+        setTimeout(() => {
+          input.parentElement.parentElement.classList.remove('ring-2', 'ring-ochre');
+        }, 800);
+      }
+    }
+  </script>
+</body></html>

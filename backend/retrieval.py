@@ -190,6 +190,57 @@ def related_area(a, b):
     return len(parent.split("/")) >= 3
 
 
+def score_against(src, cand, angle_mode):
+    """Score one candidate photo against the source photo.
+
+    src and cand are dicts with place_key, taken_from_key, landmark_keys,
+    viewpoint, and (cand only) similarity. With angle_mode the place match
+    weighs fully and true other views get a boost ("another angle");
+    otherwise the look leads and place is a small bonus ("more like this").
+
+    Returns (score, reasons, subject, different_view, taken_from), where
+    subject means the candidate shows the same subject and taken_from means
+    it shows the spot the source was taken from. Shared by
+    chat.Engine.related and the bridge API so both rank alike.
+    """
+    src_lms = set(src.get("landmark_keys") or [])
+    cand_lms = set(cand.get("landmark_keys") or [])
+    bonus, reasons, subject = 0.0, [], False
+    taken_from = False
+    if src["place_key"] and src["place_key"] == cand["place_key"]:
+        if is_specific(cand["place_key"]):
+            bonus += 0.60
+            reasons.append(f"same place: {cand['place_key']}")
+            subject = True
+        else:
+            bonus += 0.20
+            reasons.append(f"same area: {cand['place_key']}")
+    elif cand["place_key"] in src_lms:
+        bonus += 0.60
+        reasons.append(f"shows a landmark in your photo: {cand['place_key']}")
+        subject = True
+    elif src["place_key"] in cand_lms:
+        bonus += 0.20
+        reasons.append(f"your photo's place is visible in it: {src['place_key']}")
+    elif related_area(src["place_key"], cand["place_key"]):
+        bonus += 0.10
+        reasons.append(f"same area: {cand['place_key']}")
+    if src.get("taken_from_key") and src["taken_from_key"] == cand["place_key"]:
+        bonus += 0.15
+        reasons.append(f"shows where your photo was taken: {cand['place_key']}")
+        taken_from = True
+    different = src["viewpoint"] != cand["viewpoint"]
+    if subject and different:
+        reasons.append(f"another angle ({cand['viewpoint']} vs {src['viewpoint']})")
+    k = 1.0 if angle_mode else 0.3  # "more like this" is visual first; place is a small bonus
+    score = cand["similarity"] + k * bonus
+    if cand["viewpoint"] == "interior" and src["viewpoint"] != "interior":
+        score -= 0.15
+    if angle_mode and subject and different:
+        score += 0.5
+    return score, reasons or [f"meaning {cand['similarity']:.2f}"], subject, different, taken_from
+
+
 def like(photo_id, collection="world", top=8, vecs=None, meta=None):
     """Photos related to photo_id, ranked by subject match first, background second."""
     if vecs is None:

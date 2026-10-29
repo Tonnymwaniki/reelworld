@@ -1,0 +1,77 @@
+/* ReelWorld shared tokens + small responsive fixes.
+   Component styling comes from the Stitch export markup (Tailwind classes);
+   this file only holds tokens, active states, and phone-size adjustments. */
+
+:root {
+  --papyrus-100: #F4EFEB;
+  --papyrus-200: #ECE5DD;
+  --papyrus-300: #E4DCD2;
+  --parchment-card: #ECE5DD;
+  --parchment-border: #D8CFC3;
+  --espresso-900: #1E1C1A;
+  --espresso-950: #151311;
+  --ochre: #C85A32;
+  --ochre-warm: #D9822B;
+  --sage: #476E5B;
+  --forest: #1e4732;
+}
+
+/* Desktop tab active / inactive states (toggled by JS). */
+.js-tab[data-active="true"] {
+  background-color: var(--papyrus-100);
+  color: var(--espresso-950);
+  font-weight: 700;
+  border: 1px solid var(--parchment-border);
+  box-shadow: 0 1px 3px rgba(30, 28, 26, 0.06), 0 1px 2px rgba(30, 28, 26, 0.04);
+}
+.js-tab[data-active="true"] .material-symbols-outlined { color: var(--ochre); }
+.js-tab[data-active="false"] { color: #4D4740; }
+.js-tab[data-active="false"]:hover { background-color: rgba(244, 239, 235, 0.7); }
+
+/* Mobile bottom-nav active state. */
+.js-mtab[data-active="true"] { color: var(--ochre); }
+
+/* Broken-image fallback: hide the img so the mat + caption still render. */
+img.rw-photo { background-color: var(--papyrus-300); }
+img.rw-photo[data-broken="true"] { visibility: hidden; }
+
+/* Larger touch target for chip remove buttons (visual stays small). */
+.chip-x { position: relative; min-width: 28px; min-height: 28px; }
+.chip-x::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+}
+
+/* Clamp long captions to two lines in cards. */
+.rw-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* List-density toggle on home: single column, horizontal cards. */
+#results-grid[data-density="list"] { grid-template-columns: 1fr; }
+#results-grid[data-density="list"] article { flex-direction: row; }
+#results-grid[data-density="list"] article .rw-thumb {
+  width: 38%;
+  min-width: 38%;
+  aspect-ratio: auto;
+  min-height: 160px;
+}
+
+@media (max-width: 767px) {
+  /* Keep the phone chrome clear of the bottom nav. */
+  #view { padding-bottom: 1rem; }
+  /* List density is single-column on phones anyway. */
+  #results-grid[data-density="list"] article { flex-direction: column; }
+  #results-grid[data-density="list"] article .rw-thumb { width: 100%; min-width: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

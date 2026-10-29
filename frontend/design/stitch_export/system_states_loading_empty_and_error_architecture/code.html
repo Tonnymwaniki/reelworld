@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ReelWorld - Conversational Visual Archive</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            papyrus: {
+              50: '#FAF6F1',
+              100: '#F4EFEB',
+              200: '#ECE5DD',
+              300: '#E4DCD2',
+              400: '#D5CDC2',
+              500: '#CBC2B5',
+            },
+            parchment: {
+              card: '#ECE5DD',
+              input: '#F4EFEB',
+              border: '#D8CFC3',
+              hover: '#E2D8CC',
+              muted: '#DFD5C7',
+            },
+            espresso: {
+              950: '#151311',
+              900: '#1E1C1A',
+              850: '#282522',
+              800: '#35312C',
+              700: '#4D4740',
+              600: '#686057',
+              500: '#8A8074',
+            },
+            ochre: {
+              DEFAULT: '#C85A32',
+              dark: '#AF4A24',
+              clay: '#D35400',
+              glow: '#E0693E',
+              warm: '#D9822B',
+              soft: '#F4DFD2',
+              subtle: '#FAEEE7',
+            },
+            sage: {
+              900: '#1D2E24',
+              800: '#284133',
+              700: '#345241',
+              600: '#3D604E',
+              DEFAULT: '#476E5B',
+              light: '#E2ECE6',
+              border: '#B3C8BD',
+            },
+            forest: {
+              DEFAULT: '#1e4732',
+              hover: '#173727',
+              active: '#122b1e',
+              light: '#eef5f0',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          boxShadow: {
+            archival: '0 1px 3px rgba(30,28,26,0.06), 0 1px 2px rgba(30,28,26,0.04)',
+            elevated: '0 10px 28px -4px rgba(30,28,26,0.09), 0 4px 10px -2px rgba(30,28,26,0.05)',
+            card: '0 4px 18px -2px rgba(30,28,26,0.07), 0 2px 6px -1px rgba(30,28,26,0.04)',
+            ochreGlow: '0 0 22px -3px rgba(200,90,50,0.32)',
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #F4EFEB;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #1E1C1A;
+      overflow-x: hidden;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 4px;
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: #D5CDC2;
+      border-radius: 9999px;
+    }
+  </style>
+<meta content="web_standard" name="shell-type"/></head>
+<body class="min-h-screen bg-papyrus-100 text-espresso-900 flex flex-col antialiased selection:bg-ochre selection:text-white">
+<!-- Desktop Sticky Header (1440px target) -->
+<header class="sticky top-0 z-50 w-full bg-parchment-card/90 backdrop-blur-xl border-b border-parchment-border transition-all">
+<div class="max-w-[1440px] mx-auto h-20 px-8 flex items-center justify-between gap-6">
+<!-- Brand & Muse Spark Emblem -->
+<div class="flex items-center gap-4 flex-shrink-0">
+<div class="flex items-center gap-3 group cursor-pointer">
+<!-- Geometric Lens Emblem -->
+<div class="relative w-10 h-10 rounded-xl bg-espresso-900 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform overflow-hidden border border-espresso-800">
+<div class="absolute inset-0 bg-gradient-to-tr from-espresso-950 via-espresso-900 to-espresso-850"></div>
+<div class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-ochre blur-sm opacity-80 animate-pulse"></div>
+<span class="material-symbols-outlined text-[22px] text-ochre-warm relative z-10 font-bold">flare</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xl font-bold tracking-tight text-espresso-950 leading-none">ReelWorld</span>
+<span class="text-[11px] font-semibold tracking-wider text-espresso-600 uppercase">Visual Archive</span>
+</div>
+</div>
+<!-- Muse Spark Open Badge Pill -->
+<div class="h-6 w-px bg-parchment-border mx-1"></div>
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-papyrus-200 border border-parchment-border hover:border-ochre/50 transition-colors">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-ochre opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-ochre"></span>
+</span>
+<span class="text-xs font-semibold text-espresso-800 tracking-tight">Built with Muse Spark Open</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-ochre-soft text-ochre-clay tracking-wide">v2.4</span>
+</div>
+</div>
+<!-- Center Desktop Navigation Tabs -->
+<nav class="flex items-center gap-1 bg-papyrus-200/90 p-1.5 rounded-full border border-parchment-border shadow-inner">
+<a class="px-5 py-2 rounded-full bg-papyrus-100 text-espresso-950 font-bold text-sm shadow-archival border border-parchment-border transition-all flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[18px] text-ochre">public</span>
+<span class="">World</span>
+</a>
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px]">photo_library</span>
+<span class="">My Photos</span>
+<span class="ml-0.5 px-1.5 py-0.2 rounded-full bg-papyrus-300 text-[11px] font-semibold text-espresso-700">84</span>
+</a>
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px]">sensors</span>
+<span class="">Connected</span>
+<span class="w-1.5 h-1.5 rounded-full bg-sage-600"></span>
+</a>
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px]">auto_stories</span>
+<span class="">Curated Journals</span>
+</a>
+</nav>
+<!-- Right Utility Bar -->
+<div class="flex items-center gap-3">
+<!-- Assistant Status Indicator -->
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-papyrus-200 hover:bg-parchment-hover text-espresso-700 text-xs font-semibold transition-colors border border-parchment-border">
+<span class="material-symbols-outlined text-[16px] text-ochre">auto_awesome</span>
+<span class="">Semantic Agent Active</span>
+</button>
+<!-- Lens / Camera Fast Tool -->
+<button class="w-10 h-10 rounded-full bg-papyrus-200 hover:bg-ochre-soft hover:text-ochre text-espresso-700 flex items-center justify-center transition-colors border border-parchment-border" title="Fast Capture Lens">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+</button>
+<!-- Primary Upload Action -->
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-espresso-900 text-papyrus-100 hover:bg-espresso-800 text-sm font-semibold shadow-archival transition-all active:scale-95 group border border-espresso-800">
+<span class="material-symbols-outlined text-[18px] text-ochre-warm group-hover:rotate-90 transition-transform">add</span>
+<span class="">Upload Artifact</span>
+</button>
+<div class="h-6 w-px bg-parchment-border"></div>
+<!-- User Profile Avatar with Connected Pill -->
+<div class="flex items-center gap-2.5 pl-1 cursor-pointer group">
+<div class="relative">
+<div class="w-10 h-10 rounded-full bg-gradient-to-tr from-espresso-850 to-espresso-700 flex items-center justify-center text-papyrus-100 ring-2 ring-parchment-border shadow-archival">
+<span class="material-symbols-outlined text-[20px]">person</span>
+</div>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-sage-600 rounded-full ring-2 ring-papyrus-100"></span>
+</div>
+<div class="hidden xl:flex flex-col text-left">
+<span class="text-xs font-bold text-espresso-950 group-hover:text-ochre transition-colors">Dr. A. Ochieng</span>
+<span class="text-[11px] text-espresso-600">Archivist Lead</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Space (Max 1440px Container) -->
+<main class="w-full max-w-[1440px] mx-auto px-8 py-8 flex flex-col gap-8 flex-1"><div class="flex flex-col w-full">
+<div class="flex flex-col gap-10">
+<!-- Sub-header & Breadcrumb Archival Bar -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-2 border-b border-parchment-border">
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center gap-2 text-espresso-600 font-label-sm text-label-sm uppercase tracking-wider">
+<span>System Architecture</span>
+<span class="text-espresso-500">/</span>
+<span>Runtime Resilience</span>
+<span class="text-espresso-500">/</span>
+<span class="text-ochre font-semibold">Diagnostic Sandbox</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-espresso-950 tracking-tight">System Experience States</h1>
+<p class="font-body-md text-body-md text-espresso-700 max-w-2xl">
+          Visual documentation of ReelWorld multimodal lifecycles: non-blocking visual queries, neural ingestion progressions, graceful semantic degradation, and edge cache isolation.
+        </p>
+</div>
+<!-- State Navigation Indicator Pills -->
+<div class="flex flex-wrap items-center gap-2">
+<a class="px-3 py-1.5 rounded-full bg-parchment-card text-espresso-800 text-label-sm font-label-sm hover:bg-parchment-hover transition-colors flex items-center gap-1.5 border border-parchment-border" href="#state-search">
+<span class="w-1.5 h-1.5 rounded-full bg-ochre"></span>
+          01. Query Scan
+        </a>
+<a class="px-3 py-1.5 rounded-full bg-parchment-card text-espresso-800 text-label-sm font-label-sm hover:bg-parchment-hover transition-colors flex items-center gap-1.5 border border-parchment-border" href="#state-ingest">
+<span class="w-1.5 h-1.5 rounded-full bg-sage-600"></span>
+          02. Multimodal Ingest
+        </a>
+<a class="px-3 py-1.5 rounded-full bg-parchment-card text-espresso-800 text-label-sm font-label-sm hover:bg-parchment-hover transition-colors flex items-center gap-1.5 border border-parchment-border" href="#state-empty">
+<span class="w-1.5 h-1.5 rounded-full bg-espresso-600"></span>
+          03. Semantic Fallback
+        </a>
+<a class="px-3 py-1.5 rounded-full bg-parchment-card text-espresso-800 text-label-sm font-label-sm hover:bg-parchment-hover transition-colors flex items-center gap-1.5 border border-parchment-border" href="#state-resilience">
+<span class="w-1.5 h-1.5 rounded-full bg-forest"></span>
+          04. Node Resilience
+        </a>
+</div>
+</div>
+<!-- SHOWCASE 1: Loading while Searching -->
+<section class="flex flex-col gap-5 p-8 rounded-lg bg-papyrus-50 shadow-archival border border-parchment-border relative overflow-hidden" id="state-search">
+<!-- Section Tag -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="px-2 py-0.5 rounded bg-espresso-900 text-papyrus-100 font-label-sm text-label-sm">STATE 01</span>
+<span class="font-headline-sm text-headline-sm text-espresso-950">Active Semantic Retrieval</span>
+</div>
+<span class="font-label-sm text-label-sm text-espresso-600 uppercase tracking-widest">Pipeline: Embeddings Cosine-K</span>
+</div>
+<!-- Context Query Mock Bar -->
+<div class="w-full p-2.5 rounded bg-papyrus-200 border border-parchment-border flex items-center gap-3">
+<span class="material-symbols-outlined text-ochre text-[20px] ml-2">travel_explore</span>
+<div class="flex-1 font-body-md text-body-md text-espresso-950 font-medium">
+          terracotta colonial tower in late afternoon shadow
+        </div>
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-1 rounded-full bg-ochre-soft text-ochre-dark font-label-sm text-label-sm flex items-center gap-1.5 animate-pulse">
+<span class="w-1.5 h-1.5 rounded-full bg-ochre"></span>
+            Embedding vectors matching
+          </span>
+<button class="w-8 h-8 rounded bg-papyrus-300 text-espresso-700 flex items-center justify-center hover:bg-papyrus-400 transition-colors">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+</div>
+<!-- Telemetry Status Line -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
+<div class="flex items-center gap-3">
+<div class="relative flex items-center justify-center w-5 h-5">
+<span class="animate-spin material-symbols-outlined text-ochre text-[18px]">progress_activity</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-espresso-900 text-[18px]">Looking through the photos...</span>
+<span class="text-espresso-500">•</span>
+<span class="font-body-sm text-body-sm text-espresso-700 font-mono">Scanned 420 of 1,420 regional archival nodes</span>
+</div>
+<div class="flex items-center gap-2 text-espresso-600 font-label-sm text-label-sm font-mono">
+<span>Latency: ~210ms</span>
+<span>•</span>
+<span>Index: Rift-East-v2.09</span>
+</div>
+</div>
+<!-- Shimmer Skeleton Grid with Laser Scanning Line Effect -->
+<div class="relative w-full rounded-md p-1">
+<!-- Laser Scanning Line Overlay -->
+<div class="absolute inset-y-0 w-32 bg-gradient-to-r from-transparent via-ochre/15 to-transparent pointer-events-none z-10 animate-[scanLaser_3s_ease-in-out_infinite]"></div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+<!-- Skeleton Card 1 -->
+<div class="flex flex-col bg-papyrus-200/70 p-3 rounded border border-parchment-border">
+<div class="relative w-full aspect-[4/3] rounded bg-papyrus-300/80 overflow-hidden mb-3">
+<div class="absolute inset-0 -translate-x-full animate-[shimmerWave_2s_infinite] bg-gradient-to-r from-transparent via-papyrus-100/50 to-transparent"></div>
+<div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-papyrus-400/60 w-16 h-4"></div>
+</div>
+<div class="h-4 w-3/4 rounded bg-papyrus-300/80 mb-2"></div>
+<div class="h-3 w-1/2 rounded bg-papyrus-300/50 mb-3"></div>
+<div class="flex items-center justify-between pt-2 border-t border-parchment-border/60">
+<div class="h-3 w-20 rounded bg-papyrus-300/60"></div>
+<div class="h-3 w-10 rounded bg-papyrus-300/60"></div>
+</div>
+</div>
+<!-- Skeleton Card 2 -->
+<div class="flex flex-col bg-papyrus-200/70 p-3 rounded border border-parchment-border">
+<div class="relative w-full aspect-[4/3] rounded bg-papyrus-300/80 overflow-hidden mb-3">
+<div class="absolute inset-0 -translate-x-full animate-[shimmerWave_2s_infinite] bg-gradient-to-r from-transparent via-papyrus-100/50 to-transparent"></div>
+<div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-papyrus-400/60 w-20 h-4"></div>
+</div>
+<div class="h-4 w-5/6 rounded bg-papyrus-300/80 mb-2"></div>
+<div class="h-3 w-2/5 rounded bg-papyrus-300/50 mb-3"></div>
+<div class="flex items-center justify-between pt-2 border-t border-parchment-border/60">
+<div class="h-3 w-16 rounded bg-papyrus-300/60"></div>
+<div class="h-3 w-8 rounded bg-papyrus-300/60"></div>
+</div>
+</div>
+<!-- Skeleton Card 3 -->
+<div class="flex flex-col bg-papyrus-200/70 p-3 rounded border border-parchment-border">
+<div class="relative w-full aspect-[4/3] rounded bg-papyrus-300/80 overflow-hidden mb-3">
+<div class="absolute inset-0 -translate-x-full animate-[shimmerWave_2s_infinite] bg-gradient-to-r from-transparent via-papyrus-100/50 to-transparent"></div>
+<div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-papyrus-400/60 w-14 h-4"></div>
+</div>
+<div class="h-4 w-2/3 rounded bg-papyrus-300/80 mb-2"></div>
+<div class="h-3 w-1/3 rounded bg-papyrus-300/50 mb-3"></div>
+<div class="flex items-center justify-between pt-2 border-t border-parchment-border/60">
+<div class="h-3 w-24 rounded bg-papyrus-300/60"></div>
+<div class="h-3 w-12 rounded bg-papyrus-300/60"></div>
+</div>
+</div>
+<!-- Skeleton Card 4 -->
+<div class="flex flex-col bg-papyrus-200/70 p-3 rounded border border-parchment-border">
+<div class="relative w-full aspect-[4/3] rounded bg-papyrus-300/80 overflow-hidden mb-3">
+<div class="absolute inset-0 -translate-x-full animate-[shimmerWave_2s_infinite] bg-gradient-to-r from-transparent via-papyrus-100/50 to-transparent"></div>
+<div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-papyrus-400/60 w-18 h-4"></div>
+</div>
+<div class="h-4 w-4/5 rounded bg-papyrus-300/80 mb-2"></div>
+<div class="h-3 w-3/5 rounded bg-papyrus-300/50 mb-3"></div>
+<div class="flex items-center justify-between pt-2 border-t border-parchment-border/60">
+<div class="h-3 w-14 rounded bg-papyrus-300/60"></div>
+<div class="h-3 w-10 rounded bg-papyrus-300/60"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SHOWCASE 2: Loading while a Photo is Being Understood -->
+<section class="flex flex-col gap-6 p-8 rounded-lg bg-papyrus-50 shadow-archival border border-parchment-border" id="state-ingest">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+<div class="flex items-center gap-2.5">
+<span class="px-2 py-0.5 rounded bg-espresso-900 text-papyrus-100 font-label-sm text-label-sm">STATE 02</span>
+<h2 class="font-headline-sm text-headline-sm text-espresso-950">Specimen Ingestion &amp; Multimodal Inference in Progress</h2>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-block w-2 h-2 rounded-full bg-ochre animate-ping"></span>
+<span class="font-label-sm text-label-sm text-ochre-clay font-bold tracking-wide">STAGE 03 / 05 ACTIVE</span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left: Specimen Card (5 cols) -->
+<div class="lg:col-span-5 flex flex-col p-4 bg-papyrus-200 rounded border-2 border-ochre/80 shadow-md relative">
+<!-- Inset Photo Mat -->
+<div class="relative w-full aspect-[4/3] rounded bg-papyrus-300 overflow-hidden mb-4 group">
+<img class="w-full h-full object-cover grayscale-[30%] contrast-[1.05]" data-alt="A sun-bleached photographic scan of 1970s architectural brick facade in central Nairobi Kenya with dramatic golden hour shadow, warm ochre and terracotta stones, medium format film grain, archival document label in frame." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcZuQEbxsKCB7N-H45bLd9aY3wzDLzOaPEtzTw3ehwSFPUOG60y6lrFDwiOX062tNxj8fod7IA0K0coUOpOHLPrhxXODasafc271fOztfXNt0Vwz0tGrLF3SIxj6fv4G0JzBnJGSRg8qgOG_llwcP6_zZB0uFd4vYHe-iZNPhkEB-AF3vkTr7pSSlUFeorhAFQlH0rvwCwpEb2q3wEgbC6pQWRzZYJUKRzxA1ypCI"/>
+<!-- Focus Reticle Overlay Animation -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="w-36 h-36 border border-ochre/70 rounded-full animate-ping opacity-30"></div>
+<div class="absolute w-24 h-24 border border-ochre/90 rounded flex items-center justify-center">
+<span class="w-1.5 h-1.5 bg-ochre rounded-full animate-pulse"></span>
+<span class="absolute -top-1.5 -left-1.5 w-3 h-3 border-t-2 border-l-2 border-ochre"></span>
+<span class="absolute -top-1.5 -right-1.5 w-3 h-3 border-t-2 border-r-2 border-ochre"></span>
+<span class="absolute -bottom-1.5 -left-1.5 w-3 h-3 border-b-2 border-l-2 border-ochre"></span>
+<span class="absolute -bottom-1.5 -right-1.5 w-3 h-3 border-b-2 border-r-2 border-ochre"></span>
+</div>
+</div>
+<!-- Telemetry Stamp -->
+<div class="absolute bottom-2 left-2 px-2 py-1 bg-espresso-950/80 backdrop-blur rounded text-papyrus-100 font-mono text-[10px] tracking-tight flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-sage-DEFAULT"></span>
+<span>1200 DPI SCAN • SEED: #89F2A</span>
+</div>
+</div>
+<!-- Specimen Details -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-[16px] text-espresso-950 font-mono">IMG_2024_NBO_7419.RAW</span>
+<span class="px-2 py-0.5 rounded bg-papyrus-300 text-espresso-800 font-label-sm text-label-sm font-semibold">48.2 MB</span>
+</div>
+<div class="flex flex-wrap items-center gap-1.5 pt-1">
+<span class="px-2 py-0.5 rounded bg-papyrus-300 text-espresso-700 font-label-sm text-label-sm">ISO 100</span>
+<span class="px-2 py-0.5 rounded bg-papyrus-300 text-espresso-700 font-label-sm text-label-sm">50mm f/1.8</span>
+<span class="px-2 py-0.5 rounded bg-papyrus-300 text-espresso-700 font-label-sm text-label-sm">Nairobi Central CBD</span>
+<span class="px-2 py-0.5 rounded bg-sage-light text-sage-800 font-label-sm text-label-sm font-semibold">Hasselblad X2D</span>
+</div>
+</div>
+</div>
+<!-- Right: Sequence of Stage Cards (7 cols) -->
+<div class="lg:col-span-7 flex flex-col gap-3">
+<!-- Stage 1 -->
+<div class="flex items-center justify-between p-3.5 rounded bg-papyrus-200 border border-parchment-border">
+<div class="flex items-center gap-3.5">
+<div class="w-8 h-8 rounded-full bg-sage-light text-sage-DEFAULT flex items-center justify-center border border-sage-border">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-espresso-950 font-semibold">Stage 1: Ingest &amp; Checksum Integrity</span>
+<span class="font-body-sm text-body-sm text-espresso-600">SHA-256 cryptographic proof recorded • Verified authentic scan</span>
+</div>
+</div>
+<span class="font-mono text-label-sm text-sage-800 font-semibold">DONE • 1.2s</span>
+</div>
+<!-- Stage 2 -->
+<div class="flex items-center justify-between p-3.5 rounded bg-papyrus-200 border border-parchment-border">
+<div class="flex items-center gap-3.5">
+<div class="w-8 h-8 rounded-full bg-sage-light text-sage-DEFAULT flex items-center justify-center border border-sage-border">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-espresso-950 font-semibold">Stage 2: Feature Geometry &amp; Archival OCR</span>
+<span class="font-body-sm text-body-sm text-espresso-600">Discovered 3 colonial signboards, 1 stonework mason mark</span>
+</div>
+</div>
+<span class="font-mono text-label-sm text-sage-800 font-semibold">DONE • 4.8s</span>
+</div>
+<!-- Stage 3: Current Pulsing Stage -->
+<div class="flex flex-col p-4 rounded bg-ochre-subtle border-2 border-ochre shadow-sm transition-all">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-3.5">
+<div class="relative w-8 h-8 rounded-full bg-ochre text-white flex items-center justify-center shadow-ochreGlow">
+<span class="material-symbols-outlined text-[18px] animate-spin">cyclone</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-label-lg text-espresso-950 font-bold">Stage 3: Morphological Spatial Vectoring</span>
+<span class="px-2 py-0.5 rounded bg-ochre text-papyrus-100 font-label-sm text-label-sm font-semibold tracking-wider uppercase animate-pulse">Inference Active</span>
+</div>
+<span class="font-body-sm text-body-sm text-espresso-800 font-medium">Extracting 3D perspectives, façade depth maps, and colonial cornice profiles</span>
+</div>
+</div>
+<span class="font-mono text-label-sm text-ochre-clay font-bold">WORKING</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full h-1.5 bg-papyrus-300 rounded-full overflow-hidden mt-2">
+<div class="h-full bg-ochre rounded-full w-3/5 transition-all duration-300"></div>
+</div>
+</div>
+<!-- Stage 4 -->
+<div class="flex items-center justify-between p-3.5 rounded bg-papyrus-100 opacity-60 border border-parchment-border">
+<div class="flex items-center gap-3.5">
+<div class="w-8 h-8 rounded-full bg-papyrus-200 text-espresso-500 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">public</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-espresso-800 font-medium">Stage 4: World Knowledge Bridging</span>
+<span class="font-body-sm text-body-sm text-espresso-500">Cross-referencing National Archives of Kenya urban registries</span>
+</div>
+</div>
+<span class="font-mono text-label-sm text-espresso-500">QUEUED</span>
+</div>
+<!-- Stage 5 -->
+<div class="flex items-center justify-between p-3.5 rounded bg-papyrus-100 opacity-60 border border-parchment-border">
+<div class="flex items-center gap-3.5">
+<div class="w-8 h-8 rounded-full bg-papyrus-200 text-espresso-500 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-espresso-800 font-medium">Stage 5: Final Dossier Generation &amp; Indexing</span>
+<span class="font-body-sm text-body-sm text-espresso-500">Compiling semantic captions, entity graphs, and geographic bounds</span>
+</div>
+</div>
+<span class="font-mono text-label-sm text-espresso-500">QUEUED</span>
+</div>
+<!-- Inference Subtitle Note -->
+<div class="flex items-center gap-2 p-3 rounded bg-papyrus-200/50 text-espresso-700 font-body-sm text-body-sm border border-parchment-border/70 mt-1">
+<span class="material-symbols-outlined text-ochre text-[18px]">hourglass_top</span>
+<span>Calculating azimuthal solar angles and cross-referencing Nairobi 1970s cadastral blueprints... about 18s remaining.</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SHOWCASE 3: Empty Search Results & Closest Matches -->
+<section class="flex flex-col gap-6 p-8 rounded-lg bg-papyrus-50 shadow-archival border border-parchment-border" id="state-empty">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="px-2 py-0.5 rounded bg-espresso-900 text-papyrus-100 font-label-sm text-label-sm">STATE 03</span>
+<h2 class="font-headline-sm text-headline-sm text-espresso-950">Semantic Fallback &amp; Archival Proximity</h2>
+</div>
+<span class="font-label-sm text-label-sm text-espresso-600 uppercase tracking-widest">Confidence Threshold: &lt;45% Exact</span>
+</div>
+<!-- Active Search Query Simulation -->
+<div class="w-full p-2.5 rounded bg-papyrus-200 border border-parchment-border flex items-center gap-3">
+<span class="material-symbols-outlined text-espresso-600 text-[20px] ml-2">search</span>
+<div class="flex-1 font-body-md text-body-md text-espresso-900 font-medium">
+          electric street trams on Kenyatta Avenue in 1995
+        </div>
+<span class="px-2 py-0.5 rounded bg-papyrus-300 text-espresso-700 font-label-sm text-label-sm font-mono">0 Exact Matches</span>
+</div>
+<!-- Friendly Empty State Card -->
+<div class="flex flex-col items-center text-center p-8 rounded bg-papyrus-200/50 border border-parchment-border">
+<!-- Lens Icon Motif -->
+<div class="w-16 h-16 rounded-2xl bg-papyrus-200 flex items-center justify-center text-ochre mb-4 border border-parchment-border shadow-inner">
+<span class="material-symbols-outlined text-[34px]">history_edu</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-espresso-950 max-w-xl mb-2">
+          “I could not find a photo that clearly shows that. Here are the closest matches.”
+        </h3>
+<p class="font-body-md text-body-md text-espresso-700 max-w-2xl mb-6">
+          Nairobi’s electric tramway proposals in the mid-90s left few photographic traces in our public registry, but we found historic diesel bus routes and adjacent streetscapes from the same municipal archives.
+        </p>
+<!-- Interactive Suggestion Chips -->
+<div class="flex flex-col items-center gap-2 w-full max-w-xl">
+<span class="font-label-sm text-label-sm text-espresso-600 uppercase tracking-wider">Try related curated queries:</span>
+<div class="flex flex-wrap items-center justify-center gap-2">
+<button class="px-3.5 py-1.5 rounded-full bg-papyrus-100 hover:bg-papyrus-300 text-espresso-900 font-label-md text-label-md transition-colors border border-parchment-border flex items-center gap-1.5" onclick="setQuery('Harambee Avenue at golden hour')">
+<span class="material-symbols-outlined text-ochre text-[14px]">auto_awesome</span>
+              “Harambee Avenue at golden hour”
+            </button>
+<button class="px-3.5 py-1.5 rounded-full bg-papyrus-100 hover:bg-papyrus-300 text-espresso-900 font-label-md text-label-md transition-colors border border-parchment-border flex items-center gap-1.5" onclick="setQuery('Brutalist architecture in central Nairobi CBD')">
+<span class="material-symbols-outlined text-ochre text-[14px]">auto_awesome</span>
+              “Brutalist architecture in central Nairobi CBD”
+            </button>
+<button class="px-3.5 py-1.5 rounded-full bg-papyrus-100 hover:bg-papyrus-300 text-espresso-900 font-label-md text-label-md transition-colors border border-parchment-border flex items-center gap-1.5" onclick="setQuery('Vintage city market stalls and timber vaults (1980s)')">
+<span class="material-symbols-outlined text-ochre text-[14px]">auto_awesome</span>
+              “Vintage city market stalls and timber vaults (1980s)”
+            </button>
+</div>
+</div>
+</div>
+<!-- Closest Corroborated Matches (3 Column Row) -->
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-espresso-900 font-bold uppercase tracking-wide">Closest Corroborated Matches</span>
+<span class="font-label-sm text-label-sm text-espresso-600">Ranked by spatiotemporal semantic proximity</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<!-- Match 1 -->
+<div class="flex flex-col bg-papyrus-200 p-3 rounded border border-parchment-border group hover:border-ochre/60 transition-colors">
+<div class="relative w-full aspect-[4/3] rounded bg-papyrus-300 overflow-hidden mb-3">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Vintage photograph of Kenyatta Avenue Nairobi in late 1990s with city commuter buses, acacia trees in center divide, pedestrians in period attire, warm sunlight, muted archival color film scan." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATULOgLCGbAFmX__T00l6O3Xun6K__SleFekxFpXTYRANA7fPTR5TId1nks6LqoYakx-SLX9CrOjmEru1IyhwD7wa18uSev-V0MsRHMnxlO56bJhMin-LPXm1WWZi8RC04WH9BAiXM585AJT4OvX3x2e2VMAM2BSjJoMCQTgp3AvmeGlUU4VjONLivkn_TsDWITDDWRtEZOOIpLVy7J1r9MMqH1LWOPwrDgLcjxvU"/>
+<div class="absolute top-2 right-2 px-2 py-0.5 rounded bg-ochre text-white font-mono text-[10px] font-bold shadow-sm">
+                74% SPATIAL PROXIMITY
+              </div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-lg text-label-lg text-espresso-950 font-bold">Kenyatta Ave Commuter Corridor (1994)</span>
+<p class="font-body-sm text-body-sm text-espresso-600 line-clamp-2">Documenting diesel fleet transitions directly adjacent to the proposed tram terminus.</p>
+<div class="flex items-center justify-between pt-2 border-t border-parchment-border/70 mt-1">
+<span class="font-label-sm text-label-sm text-espresso-500">Registry #KNA-94-B12</span>
+<span class="text-ochre-clay font-bold text-label-sm text-label-sm flex items-center gap-0.5">Inspect <span class="material-symbols-outlined text-[14px]">arrow_forward</span></span>
+</div>
+</div>
+</div>
+<!-- Match 2 -->
+<div class="flex flex-col bg-papyrus-200 p-3 rounded border border-parchment-border group hover:border-ochre/60 transition-colors">
+<div class="relative w-full aspect-[4/3] rounded bg-papyrus-300 overflow-hidden mb-3">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Archival document showing municipal blueprint of railway interchange near Nairobi Railway Station in 1993, sepia blueprints, technical surveyor notes in ink, hand-drawn street plan." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA39swKlnMWj-bcn2Om8aVwvyi32-vzAuE43JyDJzO5SbNVHwAaNMBWWLCMAJMTiP_S5t8N5PPEF9pHHd5c5MVX1g_NfppBYALGd3rOSM8fxQrt633ia6okI5DCrsfz47JqtTC59Un9voKGWe_f_wjXG7f61NCXSRWq_eh9Hh_oo2j6M165K8fDtijwxK59g4miMzQdNuF71MMkI6Ol0PWr08NTI7UQE0IYYxqG3DQ"/>
+<div class="absolute top-2 right-2 px-2 py-0.5 rounded bg-sage-DEFAULT text-white font-mono text-[10px] font-bold shadow-sm">
+                68% CHRONO PROXIMITY
+              </div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-lg text-label-lg text-espresso-950 font-bold">Haile Selassie Light Rail Blueprint</span>
+<p class="font-body-sm text-body-sm text-espresso-600 line-clamp-2">Municipal feasibility survey schematics for downtown urban transit dated October 1995.</p>
+<div class="flex items-center justify-between pt-2 border-t border-parchment-border/70 mt-1">
+<span class="font-label-sm text-label-sm text-espresso-500">Registry #MUC-URB-95</span>
+<span class="text-ochre-clay font-bold text-label-sm text-label-sm flex items-center gap-0.5">Inspect <span class="material-symbols-outlined text-[14px]">arrow_forward</span></span>
+</div>
+</div>
+</div>
+<!-- Match 3 -->
+<div class="flex flex-col bg-papyrus-200 p-3 rounded border border-parchment-border group hover:border-ochre/60 transition-colors">
+<div class="relative w-full aspect-[4/3] rounded bg-papyrus-300 overflow-hidden mb-3">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Wide angle archival print of Government Road now Moi Avenue Nairobi circa 1991 with street traffic, retro storefront awnings, pedestrians, soft afternoon dust haze, warm terracotta toning." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5kQJP5jZv072EgIUTKCGs--3_HnrbzvFl0ho2O9TwMz1afaiffxrzN51e_EWP3NYiQaFp6xjyvL3U1PT2BGMZ73k-kfANzrAicG5S6hXyYqgncqONLrn6bl0DH0eIk8WseRRurYQ84H5NxcxMB6MYiFC4yuzjUr8EL2Suf6ep0kFvNQmN1c9hM7Xkqpu6UAxox0W_qYseQ2p_sl6WzwyigZdNtP-zXGkvRbdGKFc"/>
+<div class="absolute top-2 right-2 px-2 py-0.5 rounded bg-espresso-800 text-papyrus-100 font-mono text-[10px] font-bold shadow-sm">
+                61% CONTEXTUAL
+              </div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-lg text-label-lg text-espresso-950 font-bold">Moi Avenue Commercial Spine (1991)</span>
+<p class="font-body-sm text-body-sm text-espresso-600 line-clamp-2">Concurrent municipal transport network photography, showing overhead telephone and early utility poles.</p>
+<div class="flex items-center justify-between pt-2 border-t border-parchment-border/70 mt-1">
+<span class="font-label-sm text-label-sm text-espresso-500">Registry #PHO-91-M08</span>
+<span class="text-ochre-clay font-bold text-label-sm text-label-sm flex items-center gap-0.5">Inspect <span class="material-symbols-outlined text-[14px]">arrow_forward</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SHOWCASE 4: Calm Resilience & Error State -->
+<section class="flex flex-col gap-5 p-8 rounded-lg bg-papyrus-50 shadow-archival border border-parchment-border" id="state-resilience">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="px-2 py-0.5 rounded bg-espresso-900 text-papyrus-100 font-label-sm text-label-sm">STATE 04</span>
+<h2 class="font-headline-sm text-headline-sm text-espresso-950">Calm Resilience &amp; Edge Node Fault Handling</h2>
+</div>
+<span class="font-label-sm text-label-sm text-forest font-semibold uppercase tracking-widest">Status: Graceful Recovery Available</span>
+</div>
+<!-- Serene, Trustworthy Error Box -->
+<div class="flex flex-col md:flex-row gap-6 p-7 rounded bg-papyrus-200 border-l-4 border-l-forest border border-parchment-border">
+<!-- Node State Indicator Emblem -->
+<div class="flex-shrink-0">
+<div class="w-14 h-14 rounded-lg bg-papyrus-100 border border-parchment-border flex items-center justify-center text-forest shadow-sm">
+<span class="material-symbols-outlined text-[32px]">cloud_sync</span>
+</div>
+</div>
+<!-- Error Narrative & Actions -->
+<div class="flex flex-col gap-4 flex-1">
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-0.5 rounded bg-forest-light text-forest text-label-sm font-label-sm font-semibold uppercase">Connection Timeout / Offline Field Node</span>
+<span class="font-mono text-label-sm text-espresso-500">ERR_ARCHIVE_GATEWAY_304</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-espresso-950">Unable to reach the Nairobi archive node</h3>
+<p class="font-body-md text-body-md text-espresso-700 max-w-3xl leading-relaxed">
+              The edge inference cluster is experiencing higher than usual latency while synchronizing high-resolution RAW tiles. Your uploaded specimen is safely cached in your browser sandbox and will not be lost.
+            </p>
+</div>
+<!-- Archival Action Buttons -->
+<div class="flex flex-wrap items-center gap-3 pt-2">
+<!-- Primary Retry Button: Forest Green -->
+<button class="min-h-[44px] px-6 py-2.5 rounded bg-forest hover:bg-forest-hover active:bg-forest-active text-papyrus-100 font-label-lg text-label-lg font-bold shadow-archival transition-all flex items-center gap-2 cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+<span>Retry connection</span>
+</button>
+<!-- Secondary Outlined Button -->
+<button class="min-h-[44px] px-5 py-2.5 rounded bg-papyrus-100 hover:bg-papyrus-300 text-espresso-900 border border-parchment-border font-label-lg text-label-lg font-semibold transition-colors flex items-center gap-2 cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">folder_special</span>
+<span>Browse cached offline captures (12)</span>
+</button>
+<!-- Quiet Dismiss Text Button -->
+<button class="min-h-[44px] px-4 py-2 rounded text-espresso-600 hover:text-espresso-950 font-label-lg text-label-lg transition-colors flex items-center gap-1.5 ml-auto cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">close</span>
+<span>Dismiss</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Resilient Offline Telemetry Strip -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+<div class="p-3.5 rounded bg-papyrus-100 border border-parchment-border flex items-center gap-3">
+<span class="material-symbols-outlined text-forest text-[22px]">inventory_2</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase text-espresso-500">Local Sandbox</span>
+<span class="font-headline-sm text-headline-sm text-[15px] text-espresso-900">4 Items Queued for Sync</span>
+</div>
+</div>
+<div class="p-3.5 rounded bg-papyrus-100 border border-parchment-border flex items-center gap-3">
+<span class="material-symbols-outlined text-ochre text-[22px]">shield</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase text-espresso-500">Data Integrity</span>
+<span class="font-headline-sm text-headline-sm text-[15px] text-espresso-900">Local Checksums Validated</span>
+</div>
+</div>
+<div class="p-3.5 rounded bg-papyrus-100 border border-parchment-border flex items-center gap-3">
+<span class="material-symbols-outlined text-espresso-600 text-[22px]">hub</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase text-espresso-500">Fallback Peer</span>
+<span class="font-headline-sm text-headline-sm text-[15px] text-espresso-900">Mombasa Relay Standby</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div></main>
+<!-- Desktop Persistent Footer / System Status Bar -->
+<footer class="w-full bg-espresso-950 border-t border-espresso-850 text-papyrus-300 mt-12">
+<div class="max-w-[1440px] mx-auto px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+<div class="flex items-center gap-3">
+<div class="w-7 h-7 rounded-lg bg-espresso-900 border border-espresso-800 flex items-center justify-center text-ochre-warm">
+<span class="material-symbols-outlined text-[16px]">flare</span>
+</div>
+<div>
+<span class="text-papyrus-100 font-bold">ReelWorld Kenya Semantic Visual Pipeline</span>
+<span class="mx-2 text-espresso-700">•</span>
+<span class="">Powered by Muse Spark Open Framework</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-sage-DEFAULT"></span>
+<span class="text-papyrus-200">Nairobi Edge Cluster: Online (32ms)</span>
+</div>
+<a class="hover:text-ochre-warm transition-colors" href="#">Documentation</a>
+<a class="hover:text-ochre-warm transition-colors" href="#">Archive Telemetry</a>
+<a class="hover:text-ochre-warm transition-colors" href="#">Privacy &amp; Provenance</a>
+</div>
+</div>
+</footer>
+<script>
+    function setQuery(text) {
+      const input = document.getElementById('conversational-input');
+      if (input) {
+        input.value = text;
+        input.focus();
+        input.parentElement.parentElement.classList.add('ring-2', 'ring-ochre');
+        setTimeout(() => {
+          input.parentElement.parentElement.classList.remove('ring-2', 'ring-ochre');
+        }, 800);
+      }
+    }
+  </script>
+</body></html>
