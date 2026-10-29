@@ -748,6 +748,76 @@ async function buildShareCard(d) {
   return new Promise((res) => cv.toBlob(res, "image/png"));
 }
 
+/* Story cover card: same builder, tokens and pills as the photo card. */
+async function buildStoryCard(d) {
+  const chapters = d.chapters || [];
+  const cover = chapters.length && chapters[0].photos && chapters[0].photos[0];
+  if (!cover) throw new Error("The story has no photos to share.");
+  try { await document.fonts.ready; } catch (e) { /* system fonts then */ }
+  const img = await shareLoadPhoto(cover.src);
+  const cv = document.createElement("canvas");
+  cv.width = SHARE_W; cv.height = SHARE_H;
+  const ctx = cv.getContext("2d");
+  const FONT = '"Plus Jakarta Sans", system-ui, sans-serif';
+  const M = 72, CW = SHARE_W - M * 2;
+  ctx.fillStyle = "#F4EFEB";
+  ctx.fillRect(0, 0, SHARE_W, SHARE_H);
+  ctx.fillStyle = "#151311";
+  ctx.font = '800 58px ' + FONT;
+  ctx.fillText("ReelWorld", M, 132);
+  ctx.font = '600 27px ' + FONT;
+  const pillText = "Built with Muse Spark Open";
+  const pillW = ctx.measureText(pillText).width + 48;
+  sharePill(ctx, SHARE_W - M - pillW, 82, pillText, '600 27px ' + FONT,
+            "#D35400", "#FAEEE7", "#C85A32");
+  /* Cover photo. */
+  const px = M, py = 188, pw = CW, ph = 440;
+  const s = Math.max(pw / img.naturalWidth, ph / img.naturalHeight);
+  const dw = img.naturalWidth * s, dh = img.naturalHeight * s;
+  ctx.save();
+  shareRoundRect(ctx, px, py, pw, ph, 28);
+  ctx.clip();
+  ctx.fillStyle = "#E4DCD2";
+  ctx.fillRect(px, py, pw, ph);
+  ctx.drawImage(img, px + (pw - dw) / 2, py + (ph - dh) / 2, dw, dh);
+  ctx.restore();
+  /* Title, intro, chapter list. */
+  let y = py + ph + 72;
+  ctx.fillStyle = "#151311";
+  ctx.font = '700 52px ' + FONT;
+  shareWrap(ctx, d.title || d.theme || "Photo story", CW, 2).forEach((ln) => {
+    ctx.fillText(ln, M, y); y += 60;
+  });
+  ctx.fillStyle = "#4D4740";
+  ctx.font = '400 29px ' + FONT;
+  y += 50;
+  ctx.fillText(shareFit(ctx, d.intro || "", CW), M, y);
+  y += 40;
+  const nPhotos = chapters.reduce((n, ch) => n + ((ch.photos || []).length), 0);
+  chapters.slice(0, 5).forEach((ch, i) => {
+    const n = (ch.photos || []).length;
+    ctx.fillText((i + 1) + ". " + shareFit(ctx,
+      (ch.heading || "") + " — " + n + (n === 1 ? " photo" : " photos"), CW - 44), M, y);
+    y += 44;
+  });
+  /* Credit + footer. */
+  const divY = y + 36;
+  ctx.fillStyle = "#D8CFC3";
+  ctx.fillRect(M, divY, CW, 2);
+  const authors = (d.credits || []).map((c) => c.author).filter(Boolean);
+  const credit = authors.length
+    ? "Photos by " + authors.slice(0, 2).join(", ") +
+      (authors.length > 2 ? " +" + (authors.length - 2) + " more" : "")
+    : (d.collection === "personal" ? "Your personal photos" : "Photographer unknown");
+  ctx.fillStyle = "#686057";
+  ctx.font = '500 27px ' + FONT;
+  ctx.fillText(shareFit(ctx, credit + " • " + nPhotos + " photos", CW), M, divY + 60);
+  ctx.fillStyle = "#8A8074";
+  ctx.font = '500 25px ' + FONT;
+  ctx.fillText("ReelWorld photo story", M, divY + 112);
+  return new Promise((res) => cv.toBlob(res, "image/png"));
+}
+
 /* ---------- photo view ---------- */
 const SPINNER_SVG = '<svg class="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" fill="currentColor"></path></svg>';
 
@@ -1964,6 +2034,7 @@ const connected = {
 const TRACE_LABELS = {
   understood: "Understood", searched: "Searched", rejected: "Skipped",
   fallback: "Fallback", reinspected: "Looked again", answered: "Answered",
+  planned: "Planned", dropped: "Dropped", written: "Written",
 };
 
 function renderTrace(ol, trace) {
@@ -2188,6 +2259,182 @@ function placeLinkClick(e) {
   return true;
 }
 
+/* ---------- story view ---------- */
+const story = {
+  view: null,
+  collection: "world",
+  timer: null,
+  data: null,
+  lastTheme: "",
+
+  mount(view) {
+    this.view = view;
+    this.data = null;
+    $("#story-form", view).addEventListener("submit", (e) => {
+      e.preventDefault();
+      const t = $("#story-input", view).value.trim();
+      if (t) this.make(t);
+    });
+    $$("#story-coll-wrap [data-coll]", view).forEach((b) => b.addEventListener("click", () => {
+      this.collection = b.dataset.coll;
+      this.paintColl();
+    }));
+    $("#story-retry", view).addEventListener("click", () => {
+      if (this.lastTheme) this.make(this.lastTheme);
+    });
+    $("#story-share", view).addEventListener("click", () => this.share());
+    this.paintColl();
+  },
+
+  paintColl() {
+    $$("#story-coll-wrap [data-coll]", this.view).forEach((b) => {
+      const on = b.dataset.coll === this.collection;
+      b.className = on
+        ? "px-3 py-1.5 rounded text-xs font-semibold bg-papyrus-100 text-espresso-950 shadow-archival"
+        : "px-3 py-1.5 rounded text-xs font-semibold text-espresso-600 hover:text-espresso-950";
+    });
+  },
+
+  setLoading(on) {
+    const view = this.view;
+    if (on) {
+      hide($("#story-article", view)); hide($("#story-error", view));
+      show($("#story-loading", view));
+      const t0 = Date.now();
+      const tick = () => {
+        $("#story-elapsed", view).textContent = Math.floor((Date.now() - t0) / 1000) + "s";
+      };
+      tick();
+      this.timer = setInterval(tick, 1000);
+    } else {
+      if (this.timer) { clearInterval(this.timer); this.timer = null; }
+      hide($("#story-loading", view));
+    }
+  },
+
+  async make(theme) {
+    this.lastTheme = theme;
+    this.setLoading(true);
+    try {
+      const data = await api("/api/story", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ theme, collection: this.collection }),
+      });
+      if (!this.view.isConnected) return;
+      this.setLoading(false);
+      this.data = data;
+      this.render(data);
+    } catch (e) {
+      if (!this.view || !this.view.isConnected) return;
+      this.setLoading(false);
+      this.data = null;
+      $("#story-error-text", this.view).textContent = String((e && e.message) || e);
+      show($("#story-error", this.view));
+    }
+  },
+
+  render(d) {
+    const view = this.view;
+    $("#story-title", view).textContent = d.title || d.theme;
+    $("#story-intro", view).textContent = d.intro || "";
+    const box = $("#story-chapters", view);
+    box.innerHTML = "";
+    (d.chapters || []).forEach((ch, i) => {
+      const sec = document.createElement("section");
+      sec.className = "rounded-2xl bg-parchment-card border border-parchment-border p-5 shadow-archival flex flex-col gap-4";
+      const h = document.createElement("h3");
+      h.className = "text-lg font-bold text-espresso-950 tracking-tight";
+      h.textContent = (i + 1) + ". " + ch.heading;
+      const grid = document.createElement("div");
+      grid.className = "grid gap-4 " + ((ch.photos || []).length > 1
+        ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1");
+      (ch.photos || []).forEach((p) => {
+        const a = document.createElement("a");
+        a.href = "#/photo/" + p.photo_id;
+        a.className = "flex flex-col gap-2 group";
+        const img = document.createElement("img");
+        img.src = p.src || "";
+        img.alt = p.caption || p.photo_id;
+        img.loading = "lazy";
+        img.className = "rw-photo w-full aspect-[4/3] object-cover rounded-xl bg-papyrus-300 border border-parchment-border";
+        img.addEventListener("error", () => img.setAttribute("data-broken", "true"));
+        const cap = document.createElement("span");
+        cap.className = "text-xs text-espresso-700 leading-snug";
+        const b = document.createElement("strong");
+        b.className = "text-espresso-950 font-mono";
+        b.textContent = p.photo_id;
+        cap.append(b, document.createTextNode(" · " + (p.caption || "")));
+        a.append(img, cap);
+        grid.appendChild(a);
+      });
+      const t = document.createElement("p");
+      t.className = "text-sm text-espresso-900 leading-relaxed";
+      t.textContent = ch.text || "";
+      sec.append(h, grid, t);
+      box.appendChild(sec);
+    });
+    if (!(d.chapters || []).length) {
+      const p = document.createElement("p");
+      p.className = "text-sm text-espresso-700 px-1";
+      p.textContent = "No chapters — the trace below says what happened.";
+      box.appendChild(p);
+    }
+    const credits = d.credits || [];
+    const cBox = $("#story-credits", view);
+    cBox.innerHTML = "";
+    credits.forEach((c) => {
+      const li = document.createElement("li");
+      li.appendChild(creditLine({ author: c.author, license: c.license,
+                                  source_url: c.source_url }));
+      cBox.appendChild(li);
+    });
+    $("#story-credits-empty", view).classList.toggle("hidden", credits.length > 0);
+    renderTrace($("#story-trace-steps", view), d.trace || []);
+    $("#story-trace", view).open = false;
+    $("#story-share", view).disabled = !(d.chapters || []).length;
+    this.shareSay("");
+    show($("#story-article", view));
+  },
+
+  async share() {
+    const d = this.data;
+    if (!d || !(d.chapters || []).length) return;
+    const btn = $("#story-share", this.view);
+    setBtnLoading(btn, true, "Preparing…");
+    this.shareSay("");
+    try {
+      const blob = await buildStoryCard(d);
+      if (!blob) throw new Error("The card could not be drawn.");
+      const file = new File([blob], "reelworld-story.png", { type: "image/png" });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], title: d.title, text: d.intro });
+        this.shareSay("Shared.");
+      } else {
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "reelworld-story.png";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+        this.shareSay("Card downloaded.");
+      }
+    } catch (e) {
+      if (e && e.name === "AbortError") this.shareSay("");
+      else this.shareSay("Sharing failed: " + String((e && e.message) || e));
+    } finally {
+      setBtnLoading(btn, false);
+    }
+  },
+
+  shareSay(text) {
+    const el = $("#story-share-status", this.view);
+    el.textContent = text || "";
+    el.classList.toggle("hidden", !text);
+  },
+};
+
 /* ---------- router ---------- */
 let pendingSearch = null;
 const viewCache = new Map();
@@ -2224,6 +2471,7 @@ async function route() {
   const hash = location.hash || "#/";
   clearInterval(home.loadingTimer);
   if (add.pollTimer) { clearInterval(add.pollTimer); add.pollTimer = null; }
+  if (story.timer) { clearInterval(story.timer); story.timer = null; }
   if (hash.startsWith("#/place/")) {
     const key = decodeURIComponent(hash.slice("#/place/".length));
     setActiveTab("");
@@ -2256,6 +2504,17 @@ async function route() {
       add.mount($("#view"));
     } catch (e) {
       stubView("The add-photo view failed to load", String((e && e.message) || e));
+    }
+    return;
+  }
+  if (hash.startsWith("#/story")) {
+    setActiveTab("story");
+    try {
+      const html = await loadView("story");
+      $("#view").innerHTML = html;
+      story.mount($("#view"));
+    } catch (e) {
+      stubView("The story view failed to load", String((e && e.message) || e));
     }
     return;
   }

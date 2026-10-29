@@ -185,6 +185,43 @@ the other, signs read, and place; says when the records cannot tell.
 - Unknown photo id → 404 "I could not find that photo.";
   `photo_a` equal to `photo_b` → 400.
 
+## `POST /api/story`
+
+A small agent builds a photo story: it plans 3–5 chapters for the
+theme, runs a real `Engine.search` per chapter, keeps 1–2 unused
+photos per chapter (never repeating a photo), and writes one or two
+sentences per chapter using ONLY facts in the chosen photos' stored
+records (the prompt forbids outside facts). Chapters the collection
+cannot support are dropped and named in the trace instead of padded, as are chapters whose text does not come back.
+
+```json
+// request
+{ "theme": "Nairobi's markets", "collection": "world", "lang": "en" }
+```
+
+- `theme`: non-empty string. `collection`: `world` (default),
+  `personal`, `both`. `lang`: `"en"` only for now.
+
+```json
+// response
+{ "theme": "Nairobi's markets", "collection": "world",
+  "title": "…", "intro": "…",
+  "chapters": [{"heading": "…",
+    "photos": [{"photo_id": "…", "collection": "world",
+      "src": "/photos/…", "caption": "…"}],
+    "text": "…"}],
+  "credits": [{"author": "…", "license": "…", "source_url": "…"}],
+  "trace": [{"step": "planned", "detail": "…"}] }
+```
+
+- `intro` states only the title and chapter count (no factual claims).
+  `credits` are de-duplicated world-photo author/license pairs.
+  `trace` steps are `planned`, `searched`, `dropped`, `written`,
+  recorded from the run. Empty story (no chapters) is honest, not an
+  error.
+- Unknown collection or non-`"en"` lang → 400. No usable chapters is
+  still 200 with `chapters: []`.
+
 ## `GET /api/photo/{photo_id}`
 
 Stable evidence-panel shape for one photo.

@@ -83,3 +83,15 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 | Photographers | same → `credits[]` | `author`, `license` (linked to `source_url`) |
 | Related places | same → `related[]` | `name` × `photos`, links to `#/place/<key>` |
 | Loading / error | skeleton blocks while waiting; error panel + Retry button on failure |
+
+## 6. Story (`#/story`)
+
+| Element | Endpoint | Fields |
+|---|---|---|
+| Theme input + collection toggle | `POST /api/story` `{theme, collection}` | send `theme` + `world`/`personal`/`both`; read `title`, `intro` |
+| Progress | — | spinner + "Writing your story..." + live elapsed seconds |
+| Chapters | `chapters[]` | `heading`, `photos[]` (`src`, `caption`, link to `#/photo/<photo_id>`), `text` verbatim |
+| Photographers | `credits[]` | `author`, `license` (linked to `source_url`) |
+| Share this story | local canvas card, no endpoint | 1080×1350 PNG reusing the photo-card builder: cover photo, title, chapter list, credit line; Web Share API when available, else download |
+| Trace | `trace[]` | `planned` / `searched` / `dropped` / `written` + `detail`, collapsed |
+| Empty / error | no chapters → honest line + trace; HTTP status → `{"detail"}` verbatim + retry |

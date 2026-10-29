@@ -38,6 +38,7 @@ import os
 import re
 import sys
 import threading
+import time
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
@@ -66,7 +67,7 @@ FRONTEND_DIR = ROOT / "frontend"
 INDEX_HTML = FRONTEND_DIR / "index.html"
 # Hash views the app may fetch. Anything else under frontend/ (notably
 # frontend/design/) is never served, so exports stay out of the page bundle.
-VIEW_NAMES = ("home", "photo", "add", "connected", "place")
+VIEW_NAMES = ("home", "photo", "add", "connected", "place", "story")
 
 # ----- share one embedding model across all sessions -----
 _model_lock = threading.Lock()
@@ -579,6 +580,157 @@ def compare(req: CompareRequest):
     return {"photo_a": req.photo_a, "photo_b": req.photo_b,
             "question": req.question, "answer": answer,
             "differences": diffs, "source": "annotation"}
+
+
+class StoryRequest(BaseModel):
+    theme: str = Field(min_length=1)
+    collection: str = "world"
+    lang: Optional[str] = "en"
+
+
+STORY_PLAN_PROMPT = """You plan a photo story: a short visual tour of one theme told with photos from a Nairobi photo archive.
+Theme: {theme}
+Return ONE JSON object and nothing else:
+{{"title": "a short story title", "chapters": [{{"heading": "...", "query": "..."}}]}}
+Rules: 3 to 5 chapters. Every chapter query must be a plain, concrete, visual photo-search query in English that a photo archive could answer (things, places, views, times of day). Do not repeat queries. Do not plan chapters that need dates, names of people, or outside facts."""
+
+STORY_TEXT_PROMPT = """You write one chapter of a photo story. Chapter heading: {heading}
+You may use ONLY facts stated in the photo records below. Never add outside facts: no dates, no history, no causes, no names of people, no claims about anything not in the records. If the records say little, write little. Write one or two sentences. Never identify a person (people only by count, activity or clothing).
+Records:
+{records}
+Return ONE JSON object and nothing else: {{"text": "..."}}"""
+
+
+def _story_search(eng, query, collection, used):
+    spec = dict(EMPTY_SPEC)
+    spec["query"] = query
+    spec["collection"] = collection
+    rows, _note, _trace = eng.search(spec, used)
+    return [r for r in rows if r["photo_id"] not in used]
+
+
+def _story_credits(photo_ids):
+    credits, seen = [], set()
+    if not photo_ids:
+        return credits
+    try:
+        recs = (get_sb().table("photos").select("photo_id,collection,record")
+                .in_("photo_id", photo_ids).execute().data or [])
+    except Exception:
+        return credits
+    for r in recs:
+        if r.get("collection") != "world":
+            continue
+        prov = ((r.get("record") or {}).get("provided")) or {}
+        if not prov.get("author") and not prov.get("license"):
+            continue
+        if (prov.get("author"), prov.get("license")) in seen:
+            continue
+        seen.add((prov.get("author"), prov.get("license")))
+        credits.append({"author": prov.get("author"), "license": prov.get("license"),
+                        "source_url": prov.get("source_url")})
+    return credits
+
+
+def _llm_json(prompt, temperature, max_tokens, tries=3):
+    """One JSON-object model call, retried for transient API failures."""
+    last = None
+    for attempt in range(tries):
+        try:
+            resp = get_llm().chat.completions.create(
+                model=PARSER_MODEL, temperature=temperature, max_tokens=max_tokens,
+                messages=[{"role": "user", "content": prompt}])
+            return extract_json(resp.choices[0].message.content or "")
+        except Exception as e:
+            last = e
+            time.sleep(2 * (attempt + 1))
+    raise last
+
+
+@app.post("/api/story")
+def story(req: StoryRequest):
+    """A small agent: plan chapters, run a real engine search per chapter,
+    pick 1-2 unused photos each, and write record-only chapter text."""
+    theme = req.theme.strip()
+    if not theme:
+        raise HTTPException(status_code=400, detail="theme must be a non-empty string.")
+    if req.collection not in ("world", "personal", "both"):
+        raise HTTPException(status_code=400,
+                            detail="collection must be 'world', 'personal' or 'both'.")
+    if (req.lang or "en").lower() != "en":
+        raise HTTPException(status_code=400, detail="only 'en' is supported.")
+    try:
+        eng = get_engine("story")
+    except Exception as e:
+        raise HTTPException(status_code=503, detail=f"engine unavailable: {e}")
+    try:
+        plan = _llm_json(STORY_PLAN_PROMPT.format(theme=theme), 0.3, 4000)
+    except Exception:
+        raise HTTPException(status_code=502, detail="story planning failed.")
+    raw = plan.get("chapters") or []
+    if not isinstance(raw, list):
+        raise HTTPException(status_code=502, detail="story planning failed: bad plan shape.")
+    trace = [{"step": "planned",
+              "detail": f"Planned {len(raw[:5])} chapters for {theme!r}."}]
+    chapters, used, photo_ids = [], set(), []
+    for ch in raw[:5]:
+        if not isinstance(ch, dict):
+            continue
+        heading = str(ch.get("heading") or "").strip()
+        query = str(ch.get("query") or "").strip()
+        if not heading or not query:
+            trace.append({"step": "dropped",
+                          "detail": "Skipped a planned chapter with no heading or query."})
+            continue
+        try:
+            with _turn_lock:
+                found = _story_search(eng, query, req.collection, used)
+        except Exception as e:
+            raise HTTPException(status_code=502, detail=f"story search failed: {e}")
+        picked = found[:2]
+        if not picked:
+            trace.append({"step": "dropped", "detail":
+                          f"Dropped {heading!r}: the {req.collection} collection has "
+                          f"no unused photo for {query!r}."})
+            continue
+        trace.append({"step": "searched", "detail":
+                      f"{heading!r}: searched {query!r}; kept "
+                      + ", ".join(r["photo_id"] for r in picked) + "."})
+        text, attempt_sets = None, [picked, picked[:1]]
+        for att in attempt_sets:
+            try:
+                recs = [{r["photo_id"]: _compact_record(_record_or_404(r["photo_id"]))}
+                        for r in att]
+                text = str(_llm_json(STORY_TEXT_PROMPT.format(
+                    heading=heading, records=json.dumps(recs, ensure_ascii=False)),
+                    0.2, 8000, tries=1).get("text") or "").strip()
+                if text:
+                    picked = att
+                    break
+            except Exception:
+                text = None
+        if not text:
+            trace.append({"step": "dropped", "detail":
+                          f"Dropped {heading!r}: no chapter text came back."})
+            continue
+        for r in picked:
+            used.add(r["photo_id"])
+            photo_ids.append(r["photo_id"])
+        trace.append({"step": "written", "detail":
+                      f"Wrote {heading!r} from {len(picked)} photo record(s)."})
+        chapters.append({"heading": heading,
+                         "photos": [{"photo_id": r["photo_id"], "collection": r.get("collection"),
+                                     "src": photo_url(r.get("file")), "caption": r.get("caption")}
+                                    for r in picked],
+                         "text": text})
+    title = str(plan.get("title") or theme).strip() or theme
+    if chapters:
+        n = len(chapters)
+        intro = f"{title} — a photo story in {n} chapter{'s' if n != 1 else ''}."
+    else:
+        intro = f"I could not build a photo story about {theme!r} from this collection."
+    return {"theme": theme, "collection": req.collection, "title": title, "intro": intro,
+            "chapters": chapters, "credits": _story_credits(photo_ids), "trace": trace}
 
 
 # ----- photo uploads: background annotation jobs -----
