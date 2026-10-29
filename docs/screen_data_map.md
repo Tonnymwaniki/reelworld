@@ -53,7 +53,7 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 | Stage progress | `GET /api/jobs/{job_id}` polled | `stage` (`uploaded` → `looking` → `placing` → `connecting` → `done`), `stage_index`/`stage_count`, `elapsed_seconds`, `eta_seconds`; `status: error` → `error` + failed `stage` |
 | Result place | done `result.identify` | `primary` (`name`, `status`, `confidence`, `evidence`) |
 | Other possibilities | done `result.identify` | `candidates[]` (`name`, `confidence`, `evidence`), up to 3 |
-| Connected world photos | done `result.bridge.groups` | `same_place[]`, `another_angle[]`, `taken_from_here[]`, `similar_look[]` (labelled "Looks similar"); item `src`, `caption`, `reason_text` |
+| Connected world photos | done `result.bridge.groups` | `same_place[]`, `another_angle[]`, `taken_from_here[]`, `similar_look[]` (labelled "Looks similar"); item `src`, `caption`, `reason_text`; `place` links to `#/place/<place_key>` |
 | Result photo panel | done `result.photo` | full `/api/photo` shape |
 | Standalone verdict | `GET /api/identify/{photo_id}` | same `primary`/`candidates`/`nearest_world_photos` for any existing photo |
 | Loading / empty / error | job states | `queued` → "Uploaded, waiting…"; `error` → message + retry (re-upload); identify `primary: null` → "Place unknown" |
@@ -64,7 +64,7 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 |---|---|---|
 | Summary line | `GET /api/connected` → `summary` | `photos_connected`, `places_connected`, `matches_total` (place-based links only, never similar_look), e.g. "9 of your photos connect to 6 places" |
 | User photo rows | `photos[]` → `photo` | `photo_id`, `src`, `caption` |
-| Grouped world matches | `photos[]` → `groups` | `same_place`, `another_angle`, `taken_from_here` only (no `similar_look`); item `src`, `caption`, `reason_text`, `score`; `?limit=` (default 2, max 8) per group |
+| Grouped world matches | `photos[]` → `groups` | `same_place`, `another_angle`, `taken_from_here` only (no `similar_look`); item `src`, `caption`, `reason_text`, `score`; `place` links to `#/place/<place_key>`; `?limit=` (default 2, max 8) per group |
 | Match count | `photos[]` | `match_count` (place-based matches, pre-limit) |
 | Loading | first build takes seconds | skeleton rows; later reads are cached (`updated_at` tells staleness) |
 | Empty | `count: 0` or all `match_count: 0` | "Upload a photo to see what it connects to" |

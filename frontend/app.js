@@ -663,6 +663,7 @@ const photo = {
     $("#btn-reject", view).addEventListener("click", () => goHomeSearch("not this one"));
     $("#bridge-close", view).addEventListener("click", () => hide($("#bridge-panel", view)));
     $("#bridge-groups", view).addEventListener("click", (e) => {
+      if (placeLinkClick(e)) return;
       const m = e.target.closest("[data-target]");
       if (m) location.hash = "#/photo/" + m.dataset.target;
     });
@@ -986,6 +987,7 @@ const photo = {
     img.addEventListener("error", () => img.setAttribute("data-broken", "true"));
     $("[data-slot=caption]", node).textContent =
       (item.caption || item.photo_id) + "  ·  " + item.photo_id;
+    fillPlaceLink(node, item);
     $("[data-slot=reason]", node).textContent = item.reason_text || "match";
     $("[data-slot=score]", node).textContent =
       typeof item.score === "number" ? item.score.toFixed(2) : "";
@@ -1136,6 +1138,7 @@ const add = {
       location.hash = "#/photo/" + this.photoId;
     });
     $("#bridge-cards", view).addEventListener("click", (e) => {
+      if (placeLinkClick(e)) return;
       const c = e.target.closest("[data-target]");
       if (c) location.hash = "#/photo/" + c.dataset.target;
     });
@@ -1461,6 +1464,7 @@ const add = {
       $("[data-slot=title]", card).textContent = item.place || (item.caption || "").slice(0, 40);
       $("[data-slot=pid]", card).textContent = item.photo_id;
       $("[data-slot=caption]", card).textContent = item.caption || "";
+      fillPlaceLink(card, item);
       $("[data-slot=credit]", card).textContent =
         (item.credit && item.credit.author) ? "By " + item.credit.author : item.photo_id;
       $("[data-slot=match]", card).textContent = typeof item.similarity === "number"
@@ -1507,6 +1511,7 @@ const connected = {
       if (b) this.select(b.dataset.pid);
     });
     $("#anchor-groups", view).addEventListener("click", (e) => {
+      if (placeLinkClick(e)) return;
       const c = e.target.closest("article[data-target]");
       if (c) location.hash = "#/photo/" + c.dataset.target;
     });
@@ -1681,6 +1686,9 @@ const connected = {
     $("[data-slot=pid]", node).textContent = item.photo_id;
     $("[data-slot=title]", node).textContent =
       item.place || (item.caption || item.photo_id).slice(0, 60);
+    fillPlaceLink(node, item);
+    const plc = $("[data-slot=place]", node);
+    if (plc && item.place_key) plc.href = "#/place/" + item.place_key;
     $("[data-slot=reason]", node).textContent = item.reason_text || "match";
     const credit = $("[data-slot=credit]", node);
     if (item.credit && (item.credit.author || item.credit.license)) {
@@ -1913,6 +1921,28 @@ const place = {
     $("#place-rel-empty", view).classList.toggle("hidden", rel.length > 0);
   },
 };
+
+/* ---------- shared match-card place link ---------- */
+function fillPlaceLink(node, item) {
+  const el = $("[data-slot=place]", node);
+  if (!el) return;
+  if (item.place_key) {
+    $("[data-slot=place-text]", el).textContent = item.place || "Place page";
+    el.dataset.placeLink = item.place_key;
+    el.classList.remove("hidden");
+    el.classList.add("inline-flex");
+  } else {
+    el.classList.add("hidden");
+    el.classList.remove("inline-flex");
+  }
+}
+
+function placeLinkClick(e) {
+  const pl = e.target.closest("[data-place-link]");
+  if (!pl) return false;
+  if (pl.tagName !== "A") location.hash = "#/place/" + pl.dataset.placeLink;
+  return true;
+}
 
 /* ---------- router ---------- */
 let pendingSearch = null;
