@@ -17,7 +17,7 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 | Photographer line on card | same row | `credit.author`, `credit.license` (null for personal photos) |
 | Card place name | same row | `place` text links to `#/place/<place_key>` when `place_key` is set |
 | Empty (no search yet) | — | static suggestions; no call |
-| `no_strong_match` | `kind` + `text` | show `text` verbatim above the closest-match grid |
+| `no_strong_match` | `kind` + `text` | show `text` verbatim above the closest-match grid, plus the "Add the first one" card; its button opens `#/add` and the `spec.query` is remembered for the note field |
 | `need_focus` / `not_found` | `kind` + `text` | show `text` verbatim, no grid |
 | Loading | — | spinner + "Searching…"; replies take 15–40s |
 | Error | HTTP status | `{"detail"}` message verbatim |
@@ -49,7 +49,7 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 
 | Element | Endpoint | Fields |
 |---|---|---|
-| Upload picker | `POST /api/upload` | multipart field `photo` (JPEG/PNG ≤ 10 MB) + `owner_note`; or raw bytes with `Content-Type: image/*`. Immediate 202: `job_id`, `status`, `stage` |
+| Upload picker | `POST /api/upload` | multipart field `photo` (JPEG/PNG ≤ 10 MB) + `note` (200 chars max, prefilled from a remembered no-match search when present); or raw bytes with `Content-Type: image/*`. Immediate 202: `job_id`, `status`, `stage` |
 | Stage progress | `GET /api/jobs/{job_id}` polled | `stage` (`uploaded` → `looking` → `placing` → `connecting` → `done`), `stage_index`/`stage_count`, `elapsed_seconds`, `eta_seconds`; `status: error` → `error` + failed `stage` |
 | Result place | done `result.identify` | `primary` (`name`, `status`, `confidence`, `evidence`) |
 | Other possibilities | done `result.identify` | `candidates[]` (`name`, `confidence`, `evidence`), up to 3 |

@@ -47,6 +47,20 @@
 <span class="text-xs font-semibold text-espresso-600 mr-1" id="chips-label">Active Criteria:</span>
 </div>
 </div>
+<!-- Add the first photo: shown under the message when a search ends with no strong match -->
+<div class="hidden w-full rounded-2xl bg-parchment-card border border-ochre/40 shadow-archival p-5 flex-col sm:flex-row sm:items-center gap-4" id="add-first">
+<div class="w-10 h-10 rounded-xl bg-ochre-soft border border-ochre/30 text-ochre-clay flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">add_a_photo</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold text-espresso-950">Nobody has added a photo of this yet. Add the first one.</p>
+<p class="text-sm text-espresso-700 leading-relaxed" id="add-first-query"></p>
+</div>
+<button class="min-h-[44px] inline-flex items-center gap-1.5 px-6 py-2.5 rounded bg-forest hover:bg-forest-hover active:bg-forest-active text-papyrus-100 font-label-lg text-label-lg font-bold shadow-archival transition-all flex-shrink-0" id="add-first-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">file_upload</span>
+<span>Add a photo</span>
+</button>
+</div>
 <!-- Quick Archival Warm Starters Drawer -->
 <div class="flex items-start sm:items-center justify-between gap-3 sm:gap-4 px-2 py-1 flex-col sm:flex-row">
 <div class="flex items-center gap-2 text-xs font-bold text-espresso-600 uppercase tracking-wider flex-shrink-0">

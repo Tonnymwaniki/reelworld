@@ -279,12 +279,12 @@ Accepts one photo and annotates it in the background as a personal photo.
 Primary form is `multipart/form-data` with fields:
 
 - `photo`: image file, required. JPEG or PNG, at most 10 MB.
-- `owner_note`: text, optional. Stored in `data/personal_manifest.csv` and
-  used by Pass B as the owner's note (a hint, never proof on its own).
+- `note`: text, optional, 200 characters max (longer notes are truncated). Stored as the `owner_note` in `data/personal_manifest.csv` — one correctly quoted line per photo — and used by Pass B as the owner's note (a hint, never proof on its own). Stored nowhere else. `owner_note` is accepted as an alias.
+
 
 Fallback (no extra package needed): POST the raw image bytes as the body
 with `Content-Type: image/jpeg` (or `image/png`) and an optional
-`?owner_note=` query parameter.
+`?note=` (or `?owner_note=`) query parameter.
 
 Response is immediate; the work continues in the job:
 

@@ -749,9 +749,9 @@ def run_upload_job(job_id, photo_id, owner_note):
 
 @app.post("/api/upload", status_code=202)
 async def upload(request: Request, background_tasks: BackgroundTasks,
-                 owner_note: Optional[str] = None):
+                 owner_note: Optional[str] = None, note: Optional[str] = None):
     ctype = (request.headers.get("content-type") or "").split(";")[0].strip().lower()
-    data, note = None, owner_note
+    data, text = None, (note or owner_note)
     if ctype.startswith("multipart/"):
         try:
             form = await request.form(max_part_size=MAX_UPLOAD)
@@ -763,8 +763,8 @@ async def upload(request: Request, background_tasks: BackgroundTasks,
         if up is None or not hasattr(up, "read"):
             raise HTTPException(400, "multipart field 'photo' with an image file is required")
         data = await up.read()
-        if form.get("owner_note"):
-            note = str(form.get("owner_note"))
+        if form.get("note") or form.get("owner_note"):
+            text = str(form.get("note") or form.get("owner_note"))
     elif ctype in RAW_IMAGE_TYPES:
         data = await request.body()
     else:
@@ -785,7 +785,7 @@ async def upload(request: Request, background_tasks: BackgroundTasks,
     (UPLOAD_DIR / f"{photo_id}{ext}").write_bytes(data)
     job = _job_new(photo_id)
     background_tasks.add_task(run_upload_job, job["job_id"], photo_id,
-                              (note or "").strip() or None)
+                              (text or "").strip()[:200] or None)
     return {"job_id": job["job_id"], "status": "queued", "stage": "uploaded"}
 
 

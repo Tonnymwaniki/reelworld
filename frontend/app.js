@@ -102,6 +102,7 @@ const home = {
   compareSel: [],
   lastRows: {},
   lastRun: null, // () => void, for retry
+  lastQuery: "",
   loadingTimer: null,
   view: null,
 
@@ -142,6 +143,12 @@ const home = {
       if (card) location.hash = "#/photo/" + card.dataset.photoId;
     });
     $("#compare-close", view).addEventListener("click", () => this.clearCompare());
+    $("#add-first-btn", view).addEventListener("click", () => {
+      try {
+        if (this.lastQuery) sessionStorage.setItem("rw.pendingNote", this.lastQuery.slice(0, 200));
+      } catch (e) { /* private mode */ }
+      location.hash = "#/add";
+    });
     if (pendingSearch) {
       const m = pendingSearch;
       pendingSearch = null;
@@ -170,6 +177,7 @@ const home = {
       const box = $("#loading", view);
       show(box, "block");
       hide($("#cog-bubble", view));
+      hide($("#add-first", view));
       $("#how-found", view).hidden = true;
       const t0 = Date.now();
       const tick = () => {
@@ -188,6 +196,7 @@ const home = {
     this.lastRun = retry || null;
     $("#error-text", this.view).textContent = String((err && err.message) || err);
     hide($("#results-grid", this.view)); hide($("#empty-state", this.view));
+    hide($("#add-first", this.view));
     $("#how-found", this.view).hidden = true;
     show($("#error-state", this.view));
   },
@@ -202,6 +211,7 @@ const home = {
       const data = await api("/api/photos?collection=" + collection + "&limit=24");
       this.setLoading(false);
       hide($("#cog-bubble", this.view));
+      hide($("#add-first", this.view));
       hide($("#error-state", this.view));
       $("#results-title", this.view).textContent =
         collection === "world" ? "World Archive" : "My Photos";
@@ -265,6 +275,17 @@ const home = {
     badge.className = warm
       ? "inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-ochre-soft text-ochre-clay border border-ochre/25"
       : "inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-sage-light text-sage-900 border border-sage-border";
+    /* No strong match: invite the user to add the first photo, remembering
+       the query so the Add view can prefill it as the note. */
+    this.lastQuery = (data.spec && data.spec.query) || "";
+    const af = $("#add-first", this.view);
+    if (data.kind === "no_strong_match") {
+      $("#add-first-query", this.view).textContent =
+        this.lastQuery ? "You searched for: " + this.lastQuery : "";
+      show(af);
+    } else {
+      hide(af);
+    }
     this.renderChips(data.spec || {});
     const hf = $("#how-found", this.view);
     if (data.trace && data.trace.length) {
@@ -1142,6 +1163,13 @@ const add = {
       const c = e.target.closest("[data-target]");
       if (c) location.hash = "#/photo/" + c.dataset.target;
     });
+    try {
+      const pending = sessionStorage.getItem("rw.pendingNote");
+      if (pending) {
+        sessionStorage.removeItem("rw.pendingNote");
+        $("#owner-note", view).value = pending.slice(0, 200);
+      }
+    } catch (e) { /* private mode */ }
     this.renderStepper(-1);
     this.switchPhase(0);
   },
@@ -1242,7 +1270,7 @@ const add = {
       const form = new FormData();
       form.append("photo", this.file, this.file.name || "photo.jpg");
       const note = $("#owner-note", this.view).value.trim();
-      if (note) form.append("owner_note", note);
+      if (note) form.append("note", note.slice(0, 200));
       const data = await api("/api/upload", { method: "POST", body: form });
       this.jobId = data.job_id;
       this.photoId = data.photo_id;
