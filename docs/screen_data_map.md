@@ -7,11 +7,13 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 
 | Element | Endpoint | Fields |
 |---|---|---|
-| Chat bar | `POST /chat` `{session_id, message}` | send `message` (English, Swahili, Sheng or mixed); read `text`, `kind`, `lang` |
+| Chat bar | `POST /chat` `{session_id, message}` | send `message`; read `text`, `kind` |
 | Filter chips | `POST /chat` → `spec` | `viewpoints`, `max_people`, `collection`, `must_include`, `avoid_terms`; removing one sends the spec minus that filter to `POST /api/search` `{session_id, spec}` |
 | Results grid | `POST /chat` / `POST /api/search` → `results[]` | `photo_id`, `file` → `/photos/…` URL, `caption`, `reasons`, `score` |
 | Card "why it matched" line | same row | `reasons` joined with " · " |
 | "How I found this" (under results, collapsed) | `POST /chat` / `POST /api/search` → `trace[]` | `step` (plain label) + `detail` verbatim, in order |
+| Compare toggle (each card) | local selection, max 2 (third replaces oldest) | `photo_id` per card |
+| Compare panel | `POST /api/compare` `{photo_a, photo_b}` | side-by-side `src` + `caption`, `answer`, `differences[]` (`aspect`, `a`, `b`); Close clears selection |
 | Photographer line on card | same row | `credit.author`, `credit.license` (null for personal photos) |
 | Empty (no search yet) | — | static suggestions; no call |
 | `no_strong_match` | `kind` + `text` | show `text` verbatim above the closest-match grid |
@@ -38,7 +40,7 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 | Compare with mine (world only) | `POST /chat` "Show me photos in my photos like {photo_id}" |
 | Another angle | `POST /chat` "Show me another angle of {photo_id}"; `kind: no_other_angle` → show `text` |
 | More like this | `POST /chat` "Show me photos like {photo_id}" |
-| Ask about this photo | `POST /api/ask` `{photo_id, question}` → `answer` written in the question's language (`lang`); `source: image` → show `note` ("looked at the photo again"); `trace[]` under the answer (collapsed) |
+| Ask about this photo | `POST /api/ask` `{photo_id, question}` → `answer`; `source: image` → show `note` ("looked at the photo again"); `trace[]` under the answer (collapsed) |
 | Not this one | `POST /chat` "not this one" (rejects focus, re-searches) |
 | Loading / error | skeleton panel; `{"detail"}` verbatim; 404 → "I could not find that photo." |
 

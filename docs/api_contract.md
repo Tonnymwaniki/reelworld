@@ -33,8 +33,7 @@ Request:
 ```
 
 - `session_id`: string, default `"default"`, blank becomes `"default"`
-- `message`: non-empty string in English, Swahili, Sheng or mixed
-  Swahili-English. `"open N"` focuses result N of the last reply.
+- `message`: non-empty string. `"open N"` focuses result N of the last reply.
 
 Response:
 
@@ -77,14 +76,7 @@ Response:
   `place_name`, `taken_from_key`, `landmark_keys`, …). `embedding` and
   `lex` are never sent. `credit` is the world's `{author, license,
   source_url, title}` and null for personal photos.
-- `text` is shown to the user verbatim, in the user's language.
-- `lang` is `"en"` or `"sw"`, detected from the message (Swahili,
-  Sheng and mixed Swahili-English all return `"sw"`). The search
-  `query`, `must_include` and `avoid_terms` are always translated to
-  English for the embedding model; answers and fixed engine messages
-  (no-match, no-other-angle, focus prompts) come back in `lang` —
-  fixed messages via one cached model translation each. The `trace`
-  and all interface labels stay English.
+- `text` is shown to the user verbatim.
 - `trace` is the "How I found this" list: ordered `{step, detail}`
   entries recorded from the steps that really ran — `understood` (the
   parsed spec in plain words), `searched` (collection, filters, how
@@ -121,10 +113,9 @@ of `world`, `personal`, `both`, `viewpoints` from `ground_level`,
 
 Response: the same shape as `/chat` (`session_id`, `text`, `results`
 with credit, `focus_photo_id`, `spec`, `kind`, where `kind` is `ok` or
-`no_strong_match`, plus `trace` and the session's stored `lang`). The
-trace holds `searched`, `rejected` (when any) and `answered` — never
-`understood`, since no message was parsed. The reply text follows the
-stored `lang`.
+`no_strong_match`, plus `trace`). The trace holds `searched`,
+`rejected` (when any) and `answered` — never `understood`, since no
+message was parsed.
 
 - 400 invalid spec, 422 invalid body, 503 engine unavailable, 502 failed
 
@@ -161,6 +152,36 @@ Response:
 ```
 
 - 400 unknown collection, 502 list failed
+
+## `POST /api/compare`
+
+Compares two photos from their stored annotation records only (compact
+records, as `/api/ask` uses — never the image files, never outside
+facts): viewpoint, time of day, scene, what is present in one and not
+the other, signs read, and place; says when the records cannot tell.
+
+```json
+// request
+{ "photo_a": "personal_006", "photo_b": "personal_002",
+  "question": "Which one shows more of the street?" }
+```
+
+- `question` is optional; empty means "summarise the main differences".
+
+```json
+// response
+{ "photo_a": "personal_006", "photo_b": "personal_002",
+  "question": null, "answer": "…",
+  "differences": [{"aspect": "viewpoint", "a": "…", "b": "…"}],
+  "source": "annotation" }
+```
+
+- `answer` stays under 150 words, names the evidence, states
+  uncertainty, never identifies people. `differences` holds at most 6
+  `{aspect, a, b}` entries; a side the records do not cover reads
+  "not stated in the record".
+- Unknown photo id → 404 "I could not find that photo.";
+  `photo_a` equal to `photo_b` → 400.
 
 ## `GET /api/photo/{photo_id}`
 
@@ -224,16 +245,13 @@ Request:
 ```
 
 `photo_id` and `question` are required non-empty strings; `session_id`
-is accepted and currently unused. Optional `lang` (`"en"`/`"sw"`)
-forces the answer language; otherwise the question's language is
-detected with one short call (Swahili, Sheng and mixed return `"sw"`).
-The answer is written in `lang`, which is also returned.
+is accepted and currently unused.
 
 Response:
 
 ```json
 { "photo_id": "street_024", "question": "…",
-  "answer": "…", "source": "annotation", "note": null, "lang": "en",
+  "answer": "…", "source": "annotation", "note": null,
   "trace": [{"step": "answered", "detail": "…"}] }
 ```
 

@@ -99,6 +99,8 @@ const KIND_BADGE = {
 
 const home = {
   collection: "world",
+  compareSel: [],
+  lastRows: {},
   lastRun: null, // () => void, for retry
   loadingTimer: null,
   view: null,
@@ -124,9 +126,16 @@ const home = {
       if (this.lastRun) this.lastRun();
     });
     $("#results-grid", view).addEventListener("click", (e) => {
+      const cmp = e.target.closest("[data-slot=compare]");
+      if (cmp) {
+        const card = cmp.closest("article[data-photo-id]");
+        if (card) this.toggleCompare(card.dataset.photoId);
+        return;
+      }
       const card = e.target.closest("article[data-photo-id]");
       if (card) location.hash = "#/photo/" + card.dataset.photoId;
     });
+    $("#compare-close", view).addEventListener("click", () => this.clearCompare());
     if (pendingSearch) {
       const m = pendingSearch;
       pendingSearch = null;
@@ -336,6 +345,11 @@ const home = {
   renderGrid(rows, withReasons, grouped) {
     const grid = $("#results-grid", this.view);
     grid.innerHTML = "";
+    this.compareSel = [];
+    const panel = $("#compare-panel", this.view);
+    if (panel) hide(panel);
+    this.lastRows = {};
+    rows.forEach((r) => { this.lastRows[r.photo_id] = r; });
     const tpl = $("#card-template");
     let i = 0;
     const addRow = (row) => {
@@ -357,6 +371,108 @@ const home = {
       rows.forEach(addRow);
     }
     show(grid, "grid");
+  },
+
+  clearCompare() {
+    this.compareSel = [];
+    const panel = $("#compare-panel", this.view);
+    if (panel) hide(panel);
+    $$("[data-slot=compare]", this.view).forEach((b) => this.paintCompare(b, false));
+  },
+
+  paintCompare(btn, on) {
+    btn.setAttribute("aria-pressed", String(on));
+    $("[data-slot=compare-label]", btn).textContent = on ? "Selected" : "Compare";
+    $("[data-slot=compare-icon]", btn).textContent = on ? "check_circle" : "compare";
+    btn.classList.toggle("bg-ochre-soft", on);
+    btn.classList.toggle("border-ochre/40", on);
+    btn.classList.toggle("text-ochre-clay", on);
+    btn.classList.toggle("border-parchment-border", !on);
+    btn.classList.toggle("text-espresso-700", !on);
+  },
+
+  toggleCompare(pid) {
+    const i = this.compareSel.indexOf(pid);
+    if (i >= 0) this.compareSel.splice(i, 1);
+    else {
+      this.compareSel.push(pid);
+      if (this.compareSel.length > 2) this.compareSel.shift();
+    }
+    $$("#results-grid article[data-photo-id]", this.view).forEach((card) => {
+      const btn = $("[data-slot=compare]", card);
+      if (btn) this.paintCompare(btn, this.compareSel.includes(card.dataset.photoId));
+    });
+    if (this.compareSel.length === 2) this.openCompare();
+    else hide($("#compare-panel", this.view));
+  },
+
+  async openCompare() {
+    const sel = this.compareSel.slice();
+    const view = this.view;
+    const panel = $("#compare-panel", view);
+    show(panel);
+    panel.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    show($("#compare-loading", view));
+    hide($("#compare-body", view));
+    hide($("#compare-error", view));
+    try {
+      const data = await api("/api/compare", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ photo_a: sel[0], photo_b: sel[1] }),
+      });
+      if (!view.isConnected) return;
+      if (this.compareSel[0] !== sel[0] || this.compareSel[1] !== sel[1]) return;
+      this.renderCompare(data);
+    } catch (e) {
+      if (!view.isConnected) return;
+      if (this.compareSel[0] !== sel[0] || this.compareSel[1] !== sel[1]) return;
+      hide($("#compare-loading", view));
+      const err = $("#compare-error", view);
+      err.textContent = String((e && e.message) || e);
+      show(err, "block");
+    }
+  },
+
+  renderCompare(data) {
+    const view = this.view;
+    hide($("#compare-loading", view));
+    const ra = this.lastRows[data.photo_a] || {};
+    const rb = this.lastRows[data.photo_b] || {};
+    [["a", data.photo_a, ra], ["b", data.photo_b, rb]].forEach(([s, pid, row]) => {
+      $("#compare-link-" + s, view).href = "#/photo/" + pid;
+      const img = $("#compare-img-" + s, view);
+      img.src = row.photo_id ? srcOf(row) : "";
+      img.alt = row.caption || pid;
+      $("#compare-pid-" + s, view).textContent = pid;
+      $("#compare-cap-" + s, view).textContent = row.caption || "";
+    });
+    $("#compare-answer", view).textContent = data.answer || "(no answer)";
+    const ul = $("#compare-diffs", view);
+    ul.innerHTML = "";
+    (data.differences || []).forEach((d) => {
+      const li = document.createElement("li");
+      li.className = "p-3 rounded-xl bg-papyrus-200 border border-parchment-border flex flex-col gap-1.5";
+      const h = document.createElement("div");
+      h.className = "text-xs font-bold text-espresso-950";
+      h.textContent = d.aspect || "Difference";
+      const grid = document.createElement("div");
+      grid.className = "grid grid-cols-1 sm:grid-cols-2 gap-2 text-[13px] leading-relaxed";
+      [[data.photo_a, d.a], [data.photo_b, d.b]].forEach(([pid, val]) => {
+        const cell = document.createElement("div");
+        const lab = document.createElement("span");
+        lab.className = "font-mono text-[11px] text-espresso-600 font-bold";
+        lab.textContent = pid + ": ";
+        const tx = document.createElement("span");
+        tx.className = "text-espresso-800";
+        tx.textContent = val || "";
+        cell.append(lab, tx);
+        grid.appendChild(cell);
+      });
+      li.append(h, grid);
+      ul.appendChild(li);
+    });
+    show($("#compare-body", view));
   },
 
   card(tpl, row, withReasons, i) {

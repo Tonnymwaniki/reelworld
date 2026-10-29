@@ -116,6 +116,38 @@
 </button>
 </div>
 </section>
+<!-- Compare panel: two photos side by side plus the records-based answer -->
+<section class="w-full rounded-2xl bg-parchment-card border border-parchment-border shadow-archival p-5 hidden flex-col gap-4" id="compare-panel">
+<div class="flex items-center justify-between gap-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-ochre">compare</span>
+<h3 class="text-base font-bold text-espresso-950 tracking-tight">Compare photos</h3>
+</div>
+<button class="inline-flex items-center gap-1 h-9 px-3 rounded-xl text-espresso-700 hover:bg-papyrus-200 font-semibold text-xs transition-colors border border-parchment-border" id="compare-close" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+<span>Close</span>
+</button>
+</div>
+<div class="hidden items-center gap-3" id="compare-loading">
+<span class="material-symbols-outlined text-[20px] text-ochre animate-spin">sync</span>
+<span class="text-sm text-espresso-700">Comparing the two records…</span>
+</div>
+<p class="hidden text-sm text-espresso-800 leading-relaxed" id="compare-error"></p>
+<div class="hidden flex-col gap-4" id="compare-body">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<a class="flex flex-col gap-2 group" href="#/" id="compare-link-a">
+<img alt="" class="rw-photo w-full aspect-[4/3] object-cover rounded-xl bg-papyrus-300 border border-parchment-border" id="compare-img-a"/>
+<span class="text-xs text-espresso-700 leading-snug"><strong class="text-espresso-950 font-mono" id="compare-pid-a"></strong> · <span id="compare-cap-a"></span></span>
+</a>
+<a class="flex flex-col gap-2 group" href="#/" id="compare-link-b">
+<img alt="" class="rw-photo w-full aspect-[4/3] object-cover rounded-xl bg-papyrus-300 border border-parchment-border" id="compare-img-b"/>
+<span class="text-xs text-espresso-700 leading-snug"><strong class="text-espresso-950 font-mono" id="compare-pid-b"></strong> · <span id="compare-cap-b"></span></span>
+</a>
+</div>
+<p class="text-sm text-espresso-900 leading-relaxed" id="compare-answer"></p>
+<ul class="flex flex-col gap-2" id="compare-diffs"></ul>
+</div>
+</section>
 <!-- How I found this: collapsible agent trace, collapsed by default -->
 <details class="w-full rounded-2xl bg-parchment-card border border-parchment-border shadow-archival px-5 py-3" id="how-found" hidden>
 <summary class="how-summary flex items-center justify-between gap-2 cursor-pointer list-none text-sm font-semibold text-espresso-800 min-h-[32px]">
@@ -221,6 +253,10 @@
 <span class="material-symbols-outlined text-[18px] text-espresso-900">info</span>
 <span class="">Examine Metadata</span>
 </span>
+<button class="rw-compare w-full h-9 px-4 rounded-xl font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors border border-parchment-border text-espresso-700 hover:bg-papyrus-200" data-slot="compare" type="button" aria-pressed="false">
+<span class="material-symbols-outlined text-[16px]" data-slot="compare-icon">compare</span>
+<span data-slot="compare-label">Compare</span>
+</button>
 </div>
 </div>
 </article>

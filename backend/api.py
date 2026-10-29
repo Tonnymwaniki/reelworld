@@ -56,8 +56,8 @@ from supabase import create_client
 import annotate as annotate_mod
 import chat as chat_module
 import place_pass as place_pass_mod
-from chat import (ANSWER_PROMPT, EMPTY_SPEC, LANG_NAMES, PARSER_BASE_URL, PARSER_KEY,
-                  PARSER_MODEL, Engine, translate)
+from chat import (ANSWER_PROMPT, EMPTY_SPEC, PARSER_BASE_URL, PARSER_KEY, PARSER_MODEL,
+                  Engine, extract_json)
 from retrieval import meta_for, score_against, search_text
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -178,7 +178,6 @@ class ChatResponse(BaseModel):
     spec: Dict[str, Any] = Field(default_factory=dict)
     kind: str = "ok"
     trace: List[dict] = Field(default_factory=list)
-    lang: str = "en"
 
 
 app = FastAPI(title="ReelWorld API")
@@ -242,7 +241,6 @@ def chat(req: ChatRequest):
             eng.state["focus"] = out["results"][0]
         focus = eng.state.get("focus") or {}
         spec = eng.state.get("spec") or {}
-        lang = eng.state.get("lang", "en")
     rows = [public_row(r) for r in out.get("results", [])]
     attach_credits(rows)
     return {
@@ -254,7 +252,6 @@ def chat(req: ChatRequest):
                                           "max_people", "must_include", "avoid_terms")},
         "kind": out.get("kind", "ok"),
         "trace": out.get("trace", []),
-        "lang": lang,
     }
 
 
@@ -303,9 +300,8 @@ def api_search(req: SearchRequest):
     except Exception as e:
         raise HTTPException(status_code=503, detail=f"engine unavailable: {e}")
     with _turn_lock:
-        lang = eng.state.get("lang", "en")
         try:
-            rows, note, trace = eng.search(spec, eng.state["rejected"], lang)
+            rows, note, trace = eng.search(spec, eng.state["rejected"])
         except Exception as e:
             raise HTTPException(status_code=502, detail=f"search failed: {e}")
         eng.state["spec"] = spec
@@ -320,14 +316,13 @@ def api_search(req: SearchRequest):
                    else f"Showing {len(rows)} photos.")})
     return {
         "session_id": sid,
-        "text": note if note is not None else translate("Here is what I found:", lang),
+        "text": note or "Here is what I found:",
         "results": out_rows,
         "focus_photo_id": focus.get("photo_id"),
         "spec": {k: spec.get(k) for k in ("query", "collection", "viewpoints",
                                           "max_people", "must_include", "avoid_terms")},
         "kind": "no_strong_match" if note else "ok",
         "trace": trace,
-        "lang": lang,
     }
 
 
@@ -343,18 +338,44 @@ class AskRequest(BaseModel):
     photo_id: str = Field(min_length=1)
     question: str = Field(min_length=1)
     session_id: Optional[str] = None
-    lang: Optional[str] = None
 
 
-ANNOTATION_MISS = ("cannot tell", "can't tell", "can not tell", "don't know",
-                     "do not know", "siwezi", "sijui")
+class CompareRequest(BaseModel):
+    photo_a: str = Field(min_length=1)
+    photo_b: str = Field(min_length=1)
+    question: Optional[str] = None
+
+
+ANNOTATION_MISS = ("cannot tell", "can't tell", "can not tell")
+
+COMPARE_PROMPT = """You compare two stored photo records, A and B. Answer ONLY from
+the records below; never add outside facts.
+Rules: keep "answer" under 150 words; name the evidence (say which record
+each claim comes from); state uncertainty plainly ("the records cannot
+tell"); never identify a person (no names; people only by count,
+activity or clothing).
+Compare viewpoint, time of day, scene, what is present in one and not
+the other, signs read, and place. If the question below is empty,
+summarise the main differences; otherwise answer it from the records.
+Return ONE JSON object and nothing else:
+{{"answer": "...", "differences": [{{"aspect": "...", "a": "...", "b": "..."}}]}}
+Include one entry per aspect you can compare (at most 6). Where a side
+is not covered, write "not stated in the record" for that side.
+
+Record A ({photo_a}):
+{record_a}
+
+Record B ({photo_b}):
+{record_b}
+
+Question: {question}"""
 
 IMAGE_ANSWER_PROMPT = """Look at the attached photo and answer the question. The stored
 annotation below is context, but what you can see in the photo wins.
-Rules: write the answer in {language}; answer only what is visible; keep it
-under 120 words; never identify a person (no names; describe people only by
-count, activity or clothing). If the photo does not show the answer, say you
-cannot tell from the photo.
+Rules: answer only what is visible; keep it under 120 words; never
+identify a person (no names; describe people only by count, activity or
+clothing). If the photo does not show the answer, say you cannot tell
+from the photo.
 
 Stored annotation:
 {record}
@@ -461,21 +482,6 @@ def _photo_detail_shape(r):
     }
 
 
-def detect_lang(text):
-    """One short call: sw for Swahili, Sheng or mixed Swahili-English, else en."""
-    try:
-        resp = get_llm().chat.completions.create(
-            model=PARSER_MODEL, temperature=0.0, max_tokens=1000,
-            messages=[{"role": "user", "content":
-                       "Reply with exactly one word, sw or en. Reply sw if this message "
-                       "is Swahili, Sheng street slang, or mixed Swahili-English; "
-                       "otherwise en. Message: " + text}])
-        out = (resp.choices[0].message.content or "").strip().lower()
-        return "sw" if out.startswith("sw") else "en"
-    except Exception:
-        return "en"
-
-
 @app.post("/api/ask")
 def ask(req: AskRequest):
     pid = req.photo_id.strip()
@@ -487,29 +493,24 @@ def ask(req: AskRequest):
     if not rows:
         raise HTTPException(status_code=404, detail="I could not find that photo.")
     rec = rows[0]["record"]
-    if req.lang and req.lang.strip():
-        lang = "sw" if req.lang.strip().lower().startswith("sw") else "en"
-    else:
-        lang = detect_lang(req.question)
     compact = _compact_record(rec)
     try:
         resp = get_llm().chat.completions.create(
             model=PARSER_MODEL, temperature=0.1, max_tokens=3000,
             messages=[{"role": "user", "content": ANSWER_PROMPT.format(
-                record=json.dumps(compact, ensure_ascii=False), question=req.question,
-                language=LANG_NAMES.get(lang, "English"))}])
+                record=json.dumps(compact, ensure_ascii=False), question=req.question)}])
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"answer failed: {e}")
     answer = (resp.choices[0].message.content or "").strip()
     if not any(p in answer.lower() for p in ANNOTATION_MISS):
         return {"photo_id": pid, "question": req.question, "answer": answer,
-                "source": "annotation", "note": None, "lang": lang,
+                "source": "annotation", "note": None,
                 "trace": [{"step": "answered",
                            "detail": "Answered from the stored annotation."}]}
     img_path = ROOT / str(rows[0].get("file") or "")
     if not img_path.exists():
         return {"photo_id": pid, "question": req.question, "answer": answer,
-                "source": "annotation", "note": None, "lang": lang,
+                "source": "annotation", "note": None,
                 "trace": [{"step": "answered",
                            "detail": "Answered from the stored annotation."}]}
     mime = "image/png" if img_path.suffix.lower() == ".png" else "image/jpeg"
@@ -520,21 +521,63 @@ def ask(req: AskRequest):
             model=annotate_mod.MODEL, temperature=0.1, max_tokens=3000,
             messages=[{"role": "user", "content": [
                 {"type": "text", "text": IMAGE_ANSWER_PROMPT.format(
-                    record=json.dumps(compact, ensure_ascii=False), question=req.question,
-                    language=LANG_NAMES.get(lang, "English"))},
+                    record=json.dumps(compact, ensure_ascii=False), question=req.question)},
                 {"type": "image_url", "image_url": {"url": f"data:{mime};base64,{b64}"}},
             ]}])
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"image look failed: {e}")
     img_answer = " ".join((resp.choices[0].message.content or "").strip().split()[:120])
     return {"photo_id": pid, "question": req.question, "answer": img_answer,
-            "source": "image",
-            "note": translate("This answer came from looking at the photo again.", lang),
-            "lang": lang,
+            "source": "image", "note": "This answer came from looking at the photo again.",
             "trace": [{"step": "reinspected",
                        "detail": "The stored annotation could not answer, so I looked at the photo again."},
                       {"step": "answered",
                        "detail": "Answered from looking at the photo again."}]}
+
+
+def _record_or_404(pid):
+    try:
+        rows = (get_sb().table("photos").select("record")
+                .eq("photo_id", pid.strip()).execute().data or [])
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"photo lookup failed: {e}")
+    if not rows:
+        raise HTTPException(status_code=404, detail="I could not find that photo.")
+    return rows[0]["record"]
+
+
+@app.post("/api/compare")
+def compare(req: CompareRequest):
+    if req.photo_a == req.photo_b:
+        raise HTTPException(status_code=400, detail="photo_a and photo_b must be different.")
+    rec_a = _record_or_404(req.photo_a)
+    rec_b = _record_or_404(req.photo_b)
+    try:
+        resp = get_llm().chat.completions.create(
+            model=PARSER_MODEL, temperature=0.1, max_tokens=8000,
+            messages=[{"role": "user", "content": COMPARE_PROMPT.format(
+                photo_a=req.photo_a,
+                record_a=json.dumps(_compact_record(rec_a), ensure_ascii=False),
+                photo_b=req.photo_b,
+                record_b=json.dumps(_compact_record(rec_b), ensure_ascii=False),
+                question=req.question or "(no question: summarise the main differences)")}])
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"compare failed: {e}")
+    try:
+        data = extract_json(resp.choices[0].message.content or "")
+    except Exception:
+        raise HTTPException(status_code=502, detail="compare failed: bad model reply.")
+    diffs = []
+    raw = data.get("differences") or []
+    if isinstance(raw, list):
+        for d in raw[:6]:
+            if isinstance(d, dict):
+                diffs.append({"aspect": str(d.get("aspect", "")),
+                              "a": str(d.get("a", "")), "b": str(d.get("b", ""))})
+    answer = " ".join(str(data.get("answer", "")).split()[:150])
+    return {"photo_a": req.photo_a, "photo_b": req.photo_b,
+            "question": req.question, "answer": answer,
+            "differences": diffs, "source": "annotation"}
 
 
 # ----- photo uploads: background annotation jobs -----
