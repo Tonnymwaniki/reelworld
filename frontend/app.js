@@ -2035,6 +2035,7 @@ const TRACE_LABELS = {
   understood: "Understood", searched: "Searched", rejected: "Skipped",
   fallback: "Fallback", reinspected: "Looked again", answered: "Answered",
   planned: "Planned", dropped: "Dropped", written: "Written",
+  rewrote: "Rewrote",
 };
 
 function renderTrace(ol, trace) {

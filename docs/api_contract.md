@@ -191,7 +191,7 @@ A small agent builds a photo story: it plans 3–5 chapters for the
 theme, runs a real `Engine.search` per chapter, keeps 1–2 unused
 photos per chapter (never repeating a photo), and writes one or two
 sentences per chapter using ONLY facts in the chosen photos' stored
-records (the prompt forbids outside facts). Chapters the collection
+records (the prompt forbids outside facts). Every planned heading is checked against its photos' stored time, setting and viewpoint; a contradicted heading is rewritten from the records or the chapter is dropped (`rewrote` in the trace). Chapters the collection
 cannot support are dropped and named in the trace instead of padded, as are chapters whose text does not come back.
 
 ```json
@@ -216,7 +216,7 @@ cannot support are dropped and named in the trace instead of padded, as are chap
 
 - `intro` states only the title and chapter count (no factual claims).
   `credits` are de-duplicated world-photo author/license pairs.
-  `trace` steps are `planned`, `searched`, `dropped`, `written`,
+  `trace` steps are `planned`, `searched`, `rewrote`, `dropped`, `written`,
   recorded from the run. Empty story (no chapters) is honest, not an
   error.
 - Unknown collection or non-`"en"` lang → 400. No usable chapters is

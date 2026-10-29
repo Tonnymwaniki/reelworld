@@ -93,5 +93,5 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 | Chapters | `chapters[]` | `heading`, `photos[]` (`src`, `caption`, link to `#/photo/<photo_id>`), `text` verbatim |
 | Photographers | `credits[]` | `author`, `license` (linked to `source_url`) |
 | Share this story | local canvas card, no endpoint | 1080×1350 PNG reusing the photo-card builder: cover photo, title, chapter list, credit line; Web Share API when available, else download |
-| Trace | `trace[]` | `planned` / `searched` / `dropped` / `written` + `detail`, collapsed |
+| Trace | `trace[]` | `planned` / `searched` / `rewrote` / `dropped` / `written` + `detail`, collapsed |
 | Empty / error | no chapters → honest line + trace; HTTP status → `{"detail"}` verbatim + retry |

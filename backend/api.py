@@ -600,6 +600,102 @@ Records:
 {records}
 Return ONE JSON object and nothing else: {{"text": "..."}}"""
 
+STORY_HEADING_PROMPT = """A photo-story chapter heading contradicts the photos chosen for it.
+Old heading: {heading}
+Problem: {problem}
+What the chapter photos actually show (facts from their stored records, one line per photo):
+{facts}
+Write a replacement heading of at most 8 words that these photos support, or reply {{"drop": true}} if no honest heading fits. Draw only on the facts above; add nothing.
+Return ONE JSON object and nothing else: {{"heading": "..."}} or {{"drop": true}}"""
+
+
+# Closed-vocabulary claim checks: words in a planned heading against the
+# stored facts (scene time_of_day, setting, row viewpoint) of its photos.
+TIME_GROUPS = {"night": "night", "nighttime": "night",
+               "evening": "twilight", "dawn": "twilight",
+               "daytime": "day", "morning": "day"}
+VP_GROUPS = {"aerial": "aerial", "elevated": "elevated",
+             "ground_level": "ground", "water_level": "ground",
+             "interior": "interior"}
+CLAIM_RES = {
+    "night": re.compile(r"\bnight\b|\bmidnight\b|\bafter dark\b|\bnight-?time\b"),
+    "day": re.compile(r"\bday-?time\b|\bday-?light\b|\bmorning\b|\bafternoon\b"
+                      r"|\bmidday\b|\bnoon\b|\bday\b"),
+    "twilight": re.compile(r"\bdusk\b|\bdawn\b|\btwilight\b|\bsunset\b|\bsunrise\b"
+                           r"|\bevening\b|\bgolden\b|\bsundown\b"),
+    "indoor": re.compile(r"\bindoors?\b|\binterior\b|\binside\b"),
+    "outdoor": re.compile(r"\boutdoors?\b|\bopen-?air\b|\bstreets?\b|\bavenue\b|\broad\b"),
+    "above": re.compile(r"\baerial\b|\bfrom above\b|\bbird'?s?[ -]?eye\b|\babove\b"
+                      r"|\belevated\b"),
+    "ground": re.compile(r"\bstreet[ -]?level\b|\bground[ -]?level\b|\beye[ -]?level\b"),
+}
+
+
+def _words(vals):
+    uniq = list(dict.fromkeys(vals))
+    if len(uniq) == 1:
+        return uniq[0]
+    return ", ".join(uniq[:-1]) + " and " + uniq[-1]
+
+
+def _photo_fact(row, compact):
+    scene = (compact.get("observed") or {}).get("scene") or {}
+    setting = str(scene.get("setting") or "").lower()
+    return {
+        "time": TIME_GROUPS.get(str(scene.get("time_of_day") or "").lower()),
+        "setting": setting if setting in ("outdoor", "indoor", "mixed") else None,
+        "viewpoint": VP_GROUPS.get(row.get("viewpoint")),
+    }
+
+
+def _heading_problems(heading, facts):
+    """Plain-language contradictions between heading claims and photo facts.
+    A claim contradicts only when NO photo supports it and at least one
+    photo positively opposes it; unknown values abstain."""
+    h = heading.lower()
+    problems = []
+    times = [f["time"] for f in facts if f["time"]]
+    if CLAIM_RES["night"].search(h) and times and "night" not in times:
+        problems.append(f"claims night but the photos are {_words(times)}")
+    if CLAIM_RES["day"].search(h) and times and not (set(times) & {"day", "twilight"}):
+        problems.append(f"claims daytime but the photos are {_words(times)}")
+    if CLAIM_RES["twilight"].search(h) and times and not (set(times) & {"twilight", "night"}):
+        problems.append(f"claims dusk/evening but the photos are {_words(times)}")
+    settings = [f["setting"] for f in facts if f["setting"]]
+    if CLAIM_RES["indoor"].search(h) and settings and not (set(settings) & {"indoor", "mixed"}):
+        problems.append(f"claims indoors but the photos are {_words(settings)}")
+    if CLAIM_RES["outdoor"].search(h) and settings and not (set(settings) & {"outdoor", "mixed"}):
+        problems.append(f"claims outdoors but the photos are {_words(settings)}")
+    vps = [f["viewpoint"] for f in facts if f["viewpoint"]]
+    if CLAIM_RES["above"].search(h) and vps and not (set(vps) & {"aerial", "elevated"}):
+        problems.append(f"claims a view from above but the photos are {_words(vps)}")
+    if CLAIM_RES["ground"].search(h) and vps and not (set(vps) & {"ground", "elevated", "interior"}):
+        problems.append(f"claims street level but the photos are {_words(vps)}")
+    return problems
+
+
+def _photo_brief(row, compact):
+    obs = compact.get("observed") or {}
+    ents = sorted(obs.get("entities") or [], key=lambda e: e.get("salience", 0), reverse=True)
+    things = ", ".join(e.get("label") for e in ents[:4] if e.get("label"))
+    f = _photo_fact(row, compact)
+    bits = [f"{k} {v}" for k, v in
+            (("time", f["time"]), ("setting", f["setting"]), ("view", f["viewpoint"])) if v]
+    cap = str(obs.get("caption") or "")[:200]
+    return f"{row['photo_id']} ({'; '.join(bits)}; shows: {things or 'nothing notable'}): {cap}"
+
+
+def _rewrite_heading(heading, problem, briefs):
+    try:
+        data = _llm_json(STORY_HEADING_PROMPT.format(
+            heading=heading, problem=problem, facts="\n".join(briefs)),
+            0.2, 4000, tries=2)
+    except Exception:
+        return None
+    if data.get("drop"):
+        return None
+    return str(data.get("heading") or "").strip() or None
+
 
 def _story_search(eng, query, collection, used):
     spec = dict(EMPTY_SPEC)
@@ -696,11 +792,31 @@ def story(req: StoryRequest):
         trace.append({"step": "searched", "detail":
                       f"{heading!r}: searched {query!r}; kept "
                       + ", ".join(r["photo_id"] for r in picked) + "."})
+        try:
+            compacts = [(r, _compact_record(_record_or_404(r["photo_id"]))) for r in picked]
+        except Exception:
+            trace.append({"step": "dropped", "detail":
+                          f"Dropped {heading!r}: a photo record went missing."})
+            continue
+        facts = [_photo_fact(r, c) for r, c in compacts]
+        problems = _heading_problems(heading, facts)
+        if problems:
+            problem = "; ".join(problems)
+            new_heading = _rewrite_heading(
+                heading, problem, [_photo_brief(r, c) for r, c in compacts])
+            if new_heading and not _heading_problems(new_heading, facts):
+                trace.append({"step": "rewrote", "detail":
+                              f"Rewrote {heading!r} as {new_heading!r}: {problem}."})
+                heading = new_heading
+            else:
+                trace.append({"step": "dropped", "detail":
+                              f"Dropped {heading!r}: {problem}; no honest heading fit."})
+                continue
         text, attempt_sets = None, [picked, picked[:1]]
         for att in attempt_sets:
             try:
-                recs = [{r["photo_id"]: _compact_record(_record_or_404(r["photo_id"]))}
-                        for r in att]
+                ids = {r["photo_id"] for r in att}
+                recs = [{r["photo_id"]: c} for r, c in compacts if r["photo_id"] in ids]
                 text = str(_llm_json(STORY_TEXT_PROMPT.format(
                     heading=heading, records=json.dumps(recs, ensure_ascii=False)),
                     0.2, 8000, tries=1).get("text") or "").strip()
