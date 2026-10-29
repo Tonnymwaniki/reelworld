@@ -60,6 +60,34 @@ COLL_FROM = {"world": "the world archive", "personal": "your photos",
              "both": "your photos and the world archive"}
 
 
+LANG_NAMES = {"en": "English", "sw": "Swahili"}
+_translations = {}
+
+
+def translate(text, lang):
+    """A fixed engine message into the user's language. English passes
+    through; anything else costs one short model call per distinct message,
+    cached per message and language."""
+    if lang != "sw" or not text:
+        return text
+    key = (text, lang)
+    if key in _translations:
+        return _translations[key]
+    try:
+        llm = OpenAI(base_url=PARSER_BASE_URL, api_key=PARSER_KEY)
+        resp = llm.chat.completions.create(
+            model=PARSER_MODEL, temperature=0.1, max_tokens=2000,
+            messages=[{"role": "user", "content":
+                       "Translate the message below into Swahili. Return only the "
+                       "translation, with no quotes and no explanation. Keep photo ids "
+                       "like personal_003 exactly as they are.\n\nMessage: " + text}])
+        out = (resp.choices[0].message.content or "").strip() or text
+    except Exception:
+        out = text
+    _translations[key] = out
+    return out
+
+
 def spec_words(spec):
     """The parsed spec in plain words, for the understood trace step."""
     bits = []
@@ -128,7 +156,8 @@ Return:
   "anchor": null,
   "focus_index": null,
   "reject_focus": false,
-  "question": null
+  "question": null,
+  "lang": "en"
 }}
 
 Rules:
@@ -153,6 +182,11 @@ Rules:
   search or refine when the user names specific objects. Include only words they
   actually used or clearly implied.
 - avoid_terms: things they do not want, as single lowercase words.
+- Detect the user's language in "lang": "sw" if the message is Swahili, Sheng
+  (Nairobi street slang) or mixed Swahili-English, otherwise "en".
+- ALWAYS write "query", "must_include" and "avoid_terms" in English, translating
+  the user's words (soko = market, mboga = vegetables, mtaa = street, juu = above,
+  picha = photo, jengo = building, ishara = sign, watu = people).
 """
 
 ANSWER_PROMPT = """You answer a question about ONE photo using ONLY the stored annotation below.
@@ -161,6 +195,7 @@ Rules:
   annotation, and suggest looking at the photo itself.
 - Mention the evidence (signs, objects, where they are) and anything uncertain,
   including partial text or low confidence.
+- Write the answer in {language}.
 - Never identify a person. Keep the answer under 120 words.
 
 Annotation:
@@ -186,7 +221,8 @@ class Engine:
         self.sb = create_client(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SERVICE_KEY"])
         self.llm = OpenAI(base_url=PARSER_BASE_URL, api_key=PARSER_KEY)
         self.embedder = get_model()
-        self.state = {"spec": dict(EMPTY_SPEC), "focus": None, "last": [], "rejected": set()}
+        self.state = {"spec": dict(EMPTY_SPEC), "focus": None, "last": [],
+                      "rejected": set(), "lang": "en"}
 
     # ----- helpers -----
 
@@ -230,15 +266,17 @@ class Engine:
             if not spec["query"]:
                 spec["query"] = message
             data["spec"] = spec
+            detected = str(data.get("lang") or "en").strip().lower()
+            data["lang"] = "sw" if detected.startswith("sw") else "en"
             return data, False
         except Exception as e:
             print(f"(could not understand the message structure: {e}; treating it as a new search)")
             return ({"action": "search", "spec": {**EMPTY_SPEC, "query": message}, "anchor": None,
-                    "focus_index": None, "reject_focus": False, "question": None}, True)
+                    "focus_index": None, "reject_focus": False, "question": None, "lang": "en"}, True)
 
     # ----- the actions -----
 
-    def search(self, spec, exclude):
+    def search(self, spec, exclude, lang="en"):
         trace = []
         if exclude:
             trace.append(rejected_step(exclude))
@@ -280,6 +318,7 @@ class Engine:
         if words and not any(any(w.lower() in r["lex"] for w in words) for r in top):
             note = ("I could not find a photo that clearly shows " + ", ".join(words)
                     + ". Here are the closest matches:")
+            note = translate(note, lang)
         else:
             note = None
         return top, note, trace
@@ -288,7 +327,7 @@ class Engine:
         data = self.sb.table("photos").select(columns).eq("photo_id", photo_id).execute().data
         return data[0] if data else None
 
-    def related(self, anchor_id, spec, exclude, angle_mode):
+    def related(self, anchor_id, spec, exclude, angle_mode, lang="en"):
         """Returns (rows, note). note is set when no true other view of the place exists."""
         cols = "photo_id,collection,file,caption,place_key,taken_from_key,landmark_keys,viewpoint,embedding"
         src = self.fetch_photo(anchor_id, cols)
@@ -319,13 +358,14 @@ class Engine:
                 r["reasons"] = [f"looks similar ({r['similarity']:.2f})"]
             note = (f"I could not find another view of the same place as {anchor_id} in this "
                     f"collection. Here are the most similar photos instead:")
+            note = translate(note, lang)
             trace.append({"step": "fallback", "detail":
                           "No other view of the same place exists, so I showed the most similar photos instead."})
         else:
             rows.sort(key=lambda r: r["score"], reverse=True)
         return rows[:5], note, trace
 
-    def answer(self, photo_id, question):
+    def answer(self, photo_id, question, lang="en"):
         row = self.fetch_photo(photo_id, "record")
         if not row:
             return "I could not find that photo."
@@ -336,7 +376,9 @@ class Engine:
                    "inferred": {k: rec["inferred"].get(k) for k in
                                 ["landmarks", "place", "taken_from", "cultural_context", "uncertainties"]}}
         return self.ask(ANSWER_PROMPT.format(record=json.dumps(compact, ensure_ascii=False),
-                                             question=question), max_tokens=3000).strip()
+                                             question=question,
+                                             language=LANG_NAMES.get(lang, "English")),
+                            max_tokens=3000).strip()
 
     # ----- one conversation turn -----
 
@@ -348,9 +390,11 @@ class Engine:
             st["focus"] = st["last"][int(m.group(1)) - 1]
             trace.append({"step": "answered",
                           "detail": f"Focused on result {m.group(1)}: {st['focus']['photo_id']}."})
-            return {"text": f"Focused on {st['focus']['photo_id']}: {st['focus']['caption']}", "results": [], "kind": "ok", "trace": trace}
+            text = translate(f"Focused on {st['focus']['photo_id']}: {st['focus']['caption']}", st.get("lang", "en"))
+            return {"text": text, "results": [], "kind": "ok", "trace": trace}
 
         intent, fell_back = self.parse(message)
+        st["lang"] = intent.get("lang", "en")
         idx = intent.get("focus_index")
         if isinstance(idx, int) and st["last"] and 1 <= idx <= len(st["last"]):
             st["focus"] = st["last"][idx - 1]
@@ -363,9 +407,10 @@ class Engine:
             if not st["focus"]:
                 trace.append(understood_step(intent, st["spec"], question=intent.get("question") or message, fell_back=fell_back))
                 trace.append({"step": "answered", "detail": "No photo is in focus, so I asked you to open one first."})
-                return {"text": "Open a photo first (say 'open 1'), then ask about it.", "results": [], "kind": "need_focus", "trace": trace}
+                text = translate("Open a photo first (say 'open 1'), then ask about it.", st["lang"])
+                return {"text": text, "results": [], "kind": "need_focus", "trace": trace}
             q = intent.get("question") or message
-            text = self.answer(st["focus"]["photo_id"], q)
+            text = self.answer(st["focus"]["photo_id"], q, st["lang"])
             trace.append(understood_step(intent, st["spec"], question=q, fell_back=fell_back))
             trace.append({"step": "answered", "detail": "Answered from the stored annotation."})
             return {"text": text, "results": [], "kind": "question_answer", "trace": trace}
@@ -379,19 +424,21 @@ class Engine:
                     and anchor.strip().lower() in ("", "focus"))) and not st["focus"]:
                 trace.append(understood_step(intent, st["spec"], anchor_txt=anchor_txt, fell_back=fell_back))
                 trace.append({"step": "answered", "detail": "No photo to work from, so I asked you to search first."})
-                return {"text": "Search for a photo first, then ask for other angles of it.",
-                        "results": [], "kind": "need_focus"}
+                text = translate("Search for a photo first, then ask for other angles of it.", st["lang"])
+                return {"text": text, "results": [], "kind": "need_focus", "trace": trace}
             anchor_id = st["focus"]["photo_id"] if anchor in (None, "focus") and st["focus"] else anchor
             anchor_txt = anchor_id or anchor_txt
             if not anchor_id:
                 trace.append(understood_step(intent, st["spec"], anchor_txt=anchor_txt, fell_back=fell_back))
                 trace.append({"step": "answered", "detail": "No photo to work from, so I asked you to search first."})
-                return {"text": "Tell me which photo, or search first so there is one in focus.", "results": [], "kind": "need_focus", "trace": trace}
+                text = translate("Tell me which photo, or search first so there is one in focus.", st["lang"])
+                return {"text": text, "results": [], "kind": "need_focus", "trace": trace}
             if not self.fetch_photo(anchor_id, "photo_id"):
                 trace.append(understood_step(intent, st["spec"], anchor_txt=anchor_txt, fell_back=fell_back))
                 trace.append({"step": "answered", "detail": f"{anchor_id} is not in the archive."})
-                return {"text": "I could not find that photo.", "results": [], "kind": "not_found", "trace": trace}
-            rows, note, sub = self.related(anchor_id, st["spec"], st["rejected"], action == "another_angle")
+                text = translate("I could not find that photo.", st["lang"])
+                return {"text": text, "results": [], "kind": "not_found", "trace": trace}
+            rows, note, sub = self.related(anchor_id, st["spec"], st["rejected"], action == "another_angle", st["lang"])
             label = "other angles of" if action == "another_angle" else "photos like"
             kind = "no_other_angle" if note else "ok"
             trace.append(understood_step(intent, st["spec"], anchor_txt=anchor_id, fell_back=fell_back))
@@ -399,16 +446,18 @@ class Engine:
             trace.append({"step": "answered", "detail":
                           (f"Showed the {len(rows)} most similar photos instead." if note
                            else f"Showing {label} {anchor_id}.")})
-            return {"text": note or f"Showing {label} {anchor_id}:", "results": rows, "kind": kind, "trace": trace}
+            text = note if note is not None else translate(f"Showing {label} {anchor_id}:", st["lang"])
+            return {"text": text, "results": rows, "kind": kind, "trace": trace}
 
-        rows, note, sub = self.search(st["spec"], st["rejected"])
+        rows, note, sub = self.search(st["spec"], st["rejected"], st["lang"])
         kind = "no_strong_match" if note else "ok"
         trace.append(understood_step(intent, st["spec"], fell_back=fell_back))
         trace.extend(sub)
         trace.append({"step": "answered", "detail":
                       (f"Nothing clearly matched; showing the {len(rows)} closest photos." if note
                        else f"Showing {len(rows)} photos.")})
-        return {"text": note or "Here is what I found:", "results": rows, "kind": kind, "trace": trace}
+        text = note if note is not None else translate("Here is what I found:", st["lang"])
+        return {"text": text, "results": rows, "kind": kind, "trace": trace}
 
 
 def show(rows):

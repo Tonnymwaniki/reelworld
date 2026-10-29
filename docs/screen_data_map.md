@@ -7,7 +7,7 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 
 | Element | Endpoint | Fields |
 |---|---|---|
-| Chat bar | `POST /chat` `{session_id, message}` | send `message`; read `text`, `kind` |
+| Chat bar | `POST /chat` `{session_id, message}` | send `message` (English, Swahili, Sheng or mixed); read `text`, `kind`, `lang` |
 | Filter chips | `POST /chat` → `spec` | `viewpoints`, `max_people`, `collection`, `must_include`, `avoid_terms`; removing one sends the spec minus that filter to `POST /api/search` `{session_id, spec}` |
 | Results grid | `POST /chat` / `POST /api/search` → `results[]` | `photo_id`, `file` → `/photos/…` URL, `caption`, `reasons`, `score` |
 | Card "why it matched" line | same row | `reasons` joined with " · " |
@@ -38,7 +38,7 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 | Compare with mine (world only) | `POST /chat` "Show me photos in my photos like {photo_id}" |
 | Another angle | `POST /chat` "Show me another angle of {photo_id}"; `kind: no_other_angle` → show `text` |
 | More like this | `POST /chat` "Show me photos like {photo_id}" |
-| Ask about this photo | `POST /api/ask` `{photo_id, question}` → `answer`; `source: image` → show `note` ("looked at the photo again"); `trace[]` under the answer (collapsed) |
+| Ask about this photo | `POST /api/ask` `{photo_id, question}` → `answer` written in the question's language (`lang`); `source: image` → show `note` ("looked at the photo again"); `trace[]` under the answer (collapsed) |
 | Not this one | `POST /chat` "not this one" (rejects focus, re-searches) |
 | Loading / error | skeleton panel; `{"detail"}` verbatim; 404 → "I could not find that photo." |
 
