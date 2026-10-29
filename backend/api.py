@@ -749,7 +749,10 @@ def job_status(job_id: str):
 
 # ----- the bridge: matches from the other collection, grouped by reason -----
 BRIDGE_GROUPS = (("same_place", "Same place"), ("another_angle", "Another angle"),
-                 ("taken_from_here", "Taken from here"), ("similar_look", "Similar look"))
+                 ("taken_from_here", "Taken from here"), ("similar_look", "Looks similar"))
+# Reasons that count as a real place-based connection. similar_look is shown
+# only in the photo detail view, never in /api/connected or its summary.
+PLACE_LINKED = ("same_place", "another_angle", "taken_from_here")
 BRIDGE_COLS = ("photo_id,collection,file,caption,place_key,place_name,taken_from_key,"
                "landmark_keys,viewpoint,embedding")
 
@@ -818,7 +821,7 @@ def _bridge_groups(scored, limit):
 
 @app.get("/api/bridge/{photo_id}")
 def bridge(photo_id: str, limit: int = 4):
-    limit = max(1, min(int(limit), 12))
+    limit = max(1, min(int(limit), 8))
     src = _bridge_src(photo_id)
     other = "personal" if src["collection"] == "world" else "world"
     cands = _bridge_candidates(_coerce_embedding(src["embedding"]), other, src["photo_id"])
@@ -873,7 +876,7 @@ def identify(photo_id: str):
 
 _connected = {"updated_at": None, "photos": None, "summary": None}
 _connected_lock = threading.Lock()
-_CONNECTED_LIMIT = 4
+_CONNECTED_LIMIT = 8
 
 
 def refresh_connected():
@@ -894,12 +897,15 @@ def refresh_connected():
         attach_credits(matches)
         photos.append({"photo_id": src["photo_id"], "src": photo_url(src.get("file")),
                        "caption": src.get("caption"), "matches": matches})
-    places = {m.get("place_key") for p in photos for m in p["matches"] if m.get("place_key")}
+    linked = [m for p in photos for m in p["matches"] if m["reason"] in PLACE_LINKED]
+    places = {m.get("place_key") for m in linked if m.get("place_key")}
     snap = {"updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "photos": photos,
-            "summary": {"photos_connected": sum(1 for p in photos if p["matches"]),
+            "summary": {"photos_connected": sum(
+                            1 for p in photos
+                            if any(m["reason"] in PLACE_LINKED for m in p["matches"])),
                         "places_connected": len(places),
-                        "matches_total": sum(len(p["matches"]) for p in photos)}}
+                        "matches_total": len(linked)}}
     with _connected_lock:
         _connected.clear()
         _connected.update(snap)
@@ -917,9 +923,12 @@ def connected(limit: int = 2):
     for p in snap["photos"]:
         groups = {}
         for reason, _label in BRIDGE_GROUPS:
+            if reason not in PLACE_LINKED:
+                continue  # similar_look lives only in the photo detail view
             groups[reason] = [m for m in p["matches"] if m["reason"] == reason][:limit]
+        linked = [m for m in p["matches"] if m["reason"] in PLACE_LINKED]
         out.append({"photo": {"photo_id": p["photo_id"], "src": p["src"],
                               "caption": p["caption"]},
-                    "groups": groups, "match_count": len(p["matches"])})
+                    "groups": groups, "match_count": len(linked)})
     return {"updated_at": snap["updated_at"], "count": len(out),
             "summary": snap["summary"], "photos": out}

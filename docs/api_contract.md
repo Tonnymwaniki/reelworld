@@ -303,9 +303,10 @@ Jobs live in server memory and are lost on restart.
 Matching photos from the *other* collection, grouped by why they match
 (personal → world is "find in the world"; world → personal backs
 "compare with mine"). Candidates are ranked look-first with the same
-shared scoring as chat's related photos, then grouped.
+shared scoring as chat's related photos, then grouped. This is the only
+endpoint that returns `similar_look` matches (labelled "Looks similar").
 
-- `limit`: integer per group, default 4, clamped to 1–12
+- `limit`: integer per group, default 4, clamped to 1–8
 
 Response:
 
@@ -315,7 +316,7 @@ Response:
   "collection": "personal",
   "other_collection": "world",
   "labels": {"same_place": "Same place", "another_angle": "Another angle",
-             "taken_from_here": "Taken from here", "similar_look": "Similar look"},
+             "taken_from_here": "Taken from here", "similar_look": "Looks similar"},
   "groups": {
     "same_place": [
       {"photo_id": "cbd_018", "collection": "world",
@@ -346,11 +347,15 @@ Response:
 ## `GET /api/connected?limit=`
 
 For every personal photo, its grouped world matches, plus a summary.
+Only real place-based links count here: `same_place`, `another_angle`
+and `taken_from_here`. `similar_look` matches are never returned by
+this endpoint and never counted (they appear only in `/api/bridge`,
+which backs the photo detail view).
 Served from an in-memory cache that is built on first request and
 rebuilt after each upload job finishes (also lost on restart, like
 jobs; no new database tables).
 
-- `limit`: matches per group, default 2, clamped to 1–4
+- `limit`: matches per group, default 2, clamped to 1–8
 
 Response:
 
@@ -364,16 +369,19 @@ Response:
       "photo": {"photo_id": "personal_002",
                 "src": "/photos/personal/personal_002.jpg", "caption": "…"},
       "groups": {"same_place": ["<same item shape as /api/bridge>"],
-                 "another_angle": [], "taken_from_here": [], "similar_look": []},
-      "match_count": 60
+                 "another_angle": [], "taken_from_here": []},
+      "match_count": 12
     }
   ]
 }
 ```
 
-- `match_count` counts all matches before `limit` slicing; the summary
-  is computed over those totals, so it never shifts with `limit`.
-- `places_connected` counts distinct matched place keys.
+- `match_count` counts place-based matches before `limit` slicing; the
+  summary is computed over those totals, so it never shifts with
+  `limit`. `photos_connected` counts personal photos with at least one
+  place-based link.
+- `places_connected` counts distinct matched place keys among
+  place-based matches only.
 
 - 502 connected index failed (first build only; cached reads never touch the DB)
 
