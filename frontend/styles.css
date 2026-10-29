@@ -51,6 +51,13 @@ img.rw-photo[data-broken="true"] { visibility: hidden; }
   overflow: hidden;
 }
 
+/* "How I found this" disclosure: quiet summary, chevron rotates open. */
+.how-summary { list-style: none; }
+.how-summary::-webkit-details-marker { display: none; }
+.how-summary::marker { content: ""; }
+details[open] .how-chev { transform: rotate(180deg); }
+.how-chev { transition: transform 0.2s ease; }
+
 /* List-density toggle on home: single column, horizontal cards. */
 #results-grid[data-density="list"] { grid-template-columns: 1fr; }
 #results-grid[data-density="list"] article { flex-direction: row; }

@@ -176,6 +176,7 @@ class ChatResponse(BaseModel):
     focus_photo_id: Optional[str] = None
     spec: Dict[str, Any] = Field(default_factory=dict)
     kind: str = "ok"
+    trace: List[dict] = Field(default_factory=list)
 
 
 app = FastAPI(title="ReelWorld API")
@@ -249,6 +250,7 @@ def chat(req: ChatRequest):
         "spec": {k: spec.get(k) for k in ("query", "collection", "viewpoints",
                                           "max_people", "must_include", "avoid_terms")},
         "kind": out.get("kind", "ok"),
+        "trace": out.get("trace", []),
     }
 
 
@@ -298,7 +300,7 @@ def api_search(req: SearchRequest):
         raise HTTPException(status_code=503, detail=f"engine unavailable: {e}")
     with _turn_lock:
         try:
-            rows, note = eng.search(spec, eng.state["rejected"])
+            rows, note, trace = eng.search(spec, eng.state["rejected"])
         except Exception as e:
             raise HTTPException(status_code=502, detail=f"search failed: {e}")
         eng.state["spec"] = spec
@@ -308,6 +310,9 @@ def api_search(req: SearchRequest):
         focus = eng.state.get("focus") or {}
     out_rows = [public_row(r) for r in rows]
     attach_credits(out_rows)
+    trace.append({"step": "answered", "detail":
+                  (f"Nothing clearly matched; showing the {len(rows)} closest photos." if note
+                   else f"Showing {len(rows)} photos.")})
     return {
         "session_id": sid,
         "text": note or "Here is what I found:",
@@ -316,6 +321,7 @@ def api_search(req: SearchRequest):
         "spec": {k: spec.get(k) for k in ("query", "collection", "viewpoints",
                                           "max_people", "must_include", "avoid_terms")},
         "kind": "no_strong_match" if note else "ok",
+        "trace": trace,
     }
 
 
@@ -469,11 +475,15 @@ def ask(req: AskRequest):
     answer = (resp.choices[0].message.content or "").strip()
     if not any(p in answer.lower() for p in ANNOTATION_MISS):
         return {"photo_id": pid, "question": req.question, "answer": answer,
-                "source": "annotation", "note": None}
+                "source": "annotation", "note": None,
+                "trace": [{"step": "answered",
+                           "detail": "Answered from the stored annotation."}]}
     img_path = ROOT / str(rows[0].get("file") or "")
     if not img_path.exists():
         return {"photo_id": pid, "question": req.question, "answer": answer,
-                "source": "annotation", "note": None}
+                "source": "annotation", "note": None,
+                "trace": [{"step": "answered",
+                           "detail": "Answered from the stored annotation."}]}
     mime = "image/png" if img_path.suffix.lower() == ".png" else "image/jpeg"
     b64 = base64.b64encode(img_path.read_bytes()).decode()
     try:
@@ -489,7 +499,11 @@ def ask(req: AskRequest):
         raise HTTPException(status_code=502, detail=f"image look failed: {e}")
     img_answer = " ".join((resp.choices[0].message.content or "").strip().split()[:120])
     return {"photo_id": pid, "question": req.question, "answer": img_answer,
-            "source": "image", "note": "This answer came from looking at the photo again."}
+            "source": "image", "note": "This answer came from looking at the photo again.",
+            "trace": [{"step": "reinspected",
+                       "detail": "The stored annotation could not answer, so I looked at the photo again."},
+                      {"step": "answered",
+                       "detail": "Answered from looking at the photo again."}]}
 
 
 # ----- photo uploads: background annotation jobs -----
@@ -825,10 +839,18 @@ def bridge(photo_id: str, limit: int = 4):
     src = _bridge_src(photo_id)
     other = "personal" if src["collection"] == "world" else "world"
     cands = _bridge_candidates(_coerce_embedding(src["embedding"]), other, src["photo_id"])
+    groups = _bridge_groups(_score_bridge(src, cands), limit)
+    kept = sum(len(g) for g in groups.values())
+    used = sum(1 for g in groups.values() if g)
     return {"photo_id": src["photo_id"], "collection": src["collection"],
             "other_collection": other,
             "labels": {reason: label for reason, label in BRIDGE_GROUPS},
-            "groups": _bridge_groups(_score_bridge(src, cands), limit)}
+            "groups": groups,
+            "trace": [{"step": "searched",
+                       "detail": f"Compared {src['photo_id']} with {len(cands)} candidates "
+                                 f"from the {other} collection."},
+                      {"step": "answered",
+                       "detail": f"Kept {kept} matches in {used} groups."}]}
 
 
 def _identify_shape(photo_id):

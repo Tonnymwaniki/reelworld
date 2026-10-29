@@ -98,7 +98,7 @@ const KIND_BADGE = {
 };
 
 const home = {
-  browse: "world",
+  collection: "world",
   lastRun: null, // () => void, for retry
   loadingTimer: null,
   view: null,
@@ -133,7 +133,7 @@ const home = {
       $("#conversational-input", view).value = m;
       this.search(m);
     } else {
-      this.browse(this.browse);
+      this.browse(this.collection);
     }
   },
 
@@ -155,6 +155,7 @@ const home = {
       const box = $("#loading", view);
       show(box, "block");
       hide($("#cog-bubble", view));
+      $("#how-found", view).hidden = true;
       const t0 = Date.now();
       const tick = () => {
         $("#loading-elapsed", view).textContent = Math.floor((Date.now() - t0) / 1000) + "s";
@@ -172,12 +173,13 @@ const home = {
     this.lastRun = retry || null;
     $("#error-text", this.view).textContent = String((err && err.message) || err);
     hide($("#results-grid", this.view)); hide($("#empty-state", this.view));
+    $("#how-found", this.view).hidden = true;
     show($("#error-state", this.view));
   },
 
   /* Browse tab listing (no search yet). */
   async browse(collection) {
-    this.browse = collection;
+    this.collection = collection;
     setActiveTab(collection);
     this.lastRun = () => this.browse(collection);
     this.setLoading(true);
@@ -188,6 +190,7 @@ const home = {
       hide($("#error-state", this.view));
       $("#results-title", this.view).textContent =
         collection === "world" ? "World Archive" : "My Photos";
+      $("#how-found", this.view).hidden = true;
       $("#results-scope", this.view).textContent =
         data.count + (data.count === 1 ? " photo" : " photos");
       if (!data.photos.length) {
@@ -248,6 +251,14 @@ const home = {
       ? "inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-ochre-soft text-ochre-clay border border-ochre/25"
       : "inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-sage-light text-sage-900 border border-sage-border";
     this.renderChips(data.spec || {});
+    const hf = $("#how-found", this.view);
+    if (data.trace && data.trace.length) {
+      renderTrace($("#how-steps", this.view), data.trace);
+      hf.hidden = false;
+      hf.open = false;
+    } else {
+      hf.hidden = true;
+    }
     /* Results. */
     const rows = data.results || [];
     if (!rows.length) {
@@ -775,6 +786,7 @@ const photo = {
     panel.classList.remove("hidden");
     panel.classList.add("flex");
     $("#ask-text", view).textContent = "Thinking…";
+    $("#ask-how", view).classList.add("hidden");
     const src = $("#ask-source", view);
     src.classList.add("hidden");
     const send = $("#ask-send", view);
@@ -787,6 +799,12 @@ const photo = {
       });
       if (!view.isConnected) return;
       $("#ask-text", view).textContent = data.answer || "(no answer)";
+      if (data.trace && data.trace.length) {
+        renderTrace($("#ask-steps", view), data.trace);
+        const ah = $("#ask-how", view);
+        ah.classList.remove("hidden");
+        ah.open = false;
+      }
       if (data.source === "image" && data.note) {
         src.textContent = data.note;
         src.classList.remove("hidden");
@@ -794,6 +812,7 @@ const photo = {
     } catch (e) {
       if (!view.isConnected) return;
       $("#ask-text", view).textContent = String((e && e.message) || e);
+      $("#ask-how", view).classList.add("hidden");
     } finally {
       send.disabled = false;
     }
@@ -1548,6 +1567,28 @@ const connected = {
   },
 };
 
+/* ---------- agent trace ---------- */
+const TRACE_LABELS = {
+  understood: "Understood", searched: "Searched", rejected: "Skipped",
+  fallback: "Fallback", reinspected: "Looked again", answered: "Answered",
+};
+
+function renderTrace(ol, trace) {
+  ol.innerHTML = "";
+  (trace || []).forEach((s) => {
+    const li = document.createElement("li");
+    li.className = "flex items-start gap-2 text-[13px] leading-relaxed";
+    const tag = document.createElement("span");
+    tag.className = "flex-shrink-0 mt-0.5 px-2 py-0.5 rounded bg-papyrus-200 border border-parchment-border text-espresso-700 text-[11px] font-semibold whitespace-nowrap";
+    tag.textContent = TRACE_LABELS[s.step] || s.step;
+    const d = document.createElement("span");
+    d.className = "text-espresso-800";
+    d.textContent = s.detail || "";
+    li.append(tag, d);
+    ol.appendChild(li);
+  });
+}
+
 /* ---------- router ---------- */
 let pendingSearch = null;
 const viewCache = new Map();
@@ -1639,7 +1680,7 @@ $$(".js-tab, .js-mtab").forEach((a) => {
     const tab = a.dataset.tab;
     if (tab === "world" || tab === "personal") {
       e.preventDefault();
-      home.browse = tab;
+      home.collection = tab;
       if ((location.hash || "#/") !== "#/") { location.hash = "#/"; return; }
       if (home.view && home.view.isConnected) home.browse(tab);
       else route();

@@ -77,6 +77,13 @@ Response:
   `lex` are never sent. `credit` is the world's `{author, license,
   source_url, title}` and null for personal photos.
 - `text` is shown to the user verbatim.
+- `trace` is the "How I found this" list: ordered `{step, detail}`
+  entries recorded from the steps that really ran — `understood` (the
+  parsed spec in plain words), `searched` (collection, filters, how
+  many candidates), `rejected` (photos skipped as user-rejected, only
+  when any), `fallback` (e.g. no other view exists, similar photos
+  shown instead), `answered` (what the reply does). Steps that did not
+  run are absent: `open N` has only `answered`, for example.
 
 - 422 invalid body, 503 engine unavailable, 502 search failed
 
@@ -106,7 +113,9 @@ of `world`, `personal`, `both`, `viewpoints` from `ground_level`,
 
 Response: the same shape as `/chat` (`session_id`, `text`, `results`
 with credit, `focus_photo_id`, `spec`, `kind`, where `kind` is `ok` or
-`no_strong_match`).
+`no_strong_match`, plus `trace`). The trace holds `searched`,
+`rejected` (when any) and `answered` — never `understood`, since no
+message was parsed.
 
 - 400 invalid spec, 422 invalid body, 503 engine unavailable, 502 failed
 
@@ -212,12 +221,16 @@ Response:
 
 ```json
 { "photo_id": "street_024", "question": "…",
-  "answer": "…", "source": "annotation", "note": null }
+  "answer": "…", "source": "annotation", "note": null,
+  "trace": [{"step": "answered", "detail": "…"}] }
 ```
 
 - `source` is `annotation`, or `image` when the answer came from
   re-reading the photo — then `note` reads "This answer came from
   looking at the photo again."
+- `trace` is `answered` alone, or `reinspected` ("the stored
+  annotation could not answer, so I looked at the photo again")
+  followed by `answered`, matching the branch that really ran.
 - Image answers stay under 120 words and never identify people.
 
 - 422 invalid body, 404 unknown photo, 502 answer/look failed
@@ -340,6 +353,8 @@ Response:
   taken from), `similar_look` (everything else, best look-alike first).
 - Each item is a standard result row (`credit` included) plus
   `reason_text`, the human reasons joined for the "why it matched" line.
+- `trace` holds `searched` (how many candidates were compared) and
+  `answered` (how many matches were kept, in how many groups).
 
 - 404 unknown photo id, same message as `/api/photo/{photo_id}`
 - 502 bridge search failed
