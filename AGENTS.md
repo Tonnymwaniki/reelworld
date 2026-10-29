@@ -40,9 +40,9 @@ pad results.
 
 1. `backend/api.py`: FastAPI app wrapping `Engine`. Share the heavy parts (embedding
    model, clients) across sessions but keep conversation state per `session_id`.
-   Endpoints: `POST /api/chat`, `GET /api/photos?collection=&limit=`,
-   `GET /api/photo/{photo_id}` (record summary for the evidence panel),
-   `GET /api/related/{photo_id}?mode=angle|similar&collection=`, `POST /api/ask`.
+   Endpoints: `POST /chat`, `GET /health`, `POST /sessions/{session_id}/reset`,
+   `GET /api/photos?collection=&limit=`, `GET /api/photo/{photo_id}`
+   (record summary for the evidence panel), `POST /api/ask`.
    Serve photos from `data/photos` at `/photos/...`.
 2. `frontend/index.html`: one responsive page (vanilla JS and CSS, no build step,
    mobile first). Tabs World / My Photos, a chat-style search bar, a photo grid, a

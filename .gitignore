@@ -2,4 +2,6 @@
 .venv/
 __pycache__/
 node_modules/
-data/photos/
+data/photos/data/annotations/personal/
+data/annotations/raw/
+data/index/
