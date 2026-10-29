@@ -1,0 +1,26 @@
+{
+  "collection": "world",
+  "note": "Plain-language retrieval queries. Each spec is the literal reading of its message (filters only where the message states them). Parsing (message -> spec) is NOT evaluated here, only retrieval given the spec.",
+  "queries": [
+    {"id": "q01", "query": "a busy street market with vegetable stalls"},
+    {"id": "q02", "query": "market traders selling fruit"},
+    {"id": "q03", "query": "a crowded city street with matatus"},
+    {"id": "q04", "query": "Moi Avenue at dusk"},
+    {"id": "q05", "query": "Nairobi skyline with tall towers"},
+    {"id": "q06", "query": "city skyline at sunset"},
+    {"id": "q07", "query": "a green park with people relaxing"},
+    {"id": "q08", "query": "Uhuru Park"},
+    {"id": "q09", "query": "hills outside the city"},
+    {"id": "q10", "query": "Ngong Hills"},
+    {"id": "q11", "query": "the KICC building"},
+    {"id": "q12", "query": "the entrance of KICC"},
+    {"id": "q13", "query": "a photo with a readable shop sign"},
+    {"id": "q14", "query": "billboard advertisement on a building"},
+    {"id": "q15", "query": "view of the city from above", "viewpoints": ["elevated", "aerial"]},
+    {"id": "q16", "query": "an aerial photo of Nairobi", "viewpoints": ["aerial"]},
+    {"id": "q17", "query": "an empty street with no people", "max_people": 0},
+    {"id": "q18", "query": "a building interior with no people", "viewpoints": ["interior"], "max_people": 0},
+    {"id": "q19", "query": "street food vendors at night"},
+    {"id": "q20", "query": "reflection of towers in glass"}
+  ]
+}
