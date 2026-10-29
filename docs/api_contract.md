@@ -130,6 +130,8 @@ Forgets one conversation. Next `/chat` call with that id starts fresh.
 Photo grid listing, ordered by `photo_id`.
 
 - `collection`: `world` (default) or `personal`
+- Rows include `place_key` (null when unplaced) so clients can link
+  the place name to its place page.
 - `limit`: integer, default 24, clamped to 1–200
 
 Response:
@@ -340,6 +342,36 @@ Response:
 Jobs live in server memory and are lost on restart.
 
 - 404 unknown job id
+
+## `GET /api/place/{place_key}?collection=`
+
+Everything about one place, from `data/places.json` plus the stored
+records. A photo counts for the place only if its `place_key` matches
+or it has a confirmed landmark with the place's key.
+
+```json
+// GET /api/place/kenya/nairobi/cbd/kicc
+{ "key": "kenya/nairobi/cbd/kicc",
+  "name": "Kenyatta International Convention Centre", "type": "building",
+  "aliases": ["KICC"], "hierarchy": [{"key": "…", "name": "…"}],
+  "collection": "world", "total_photos": 13,
+  "by_viewpoint": {"ground_level": [{"photo_id": "…", "collection": "world",
+    "src": "/photos/…", "caption": "…"}]},
+  "signs": [{"text": "THE KENYATTA INTERNATIONAL CONVENTION CENTRE", "photos": 2}],
+  "credits": [{"author": "…", "license": "…", "source_url": "…"}],
+  "related": [{"key": "…", "name": "…", "photos": 3, "via": ["landmark"]}] }
+```
+
+- `hierarchy` lists the ancestor key prefixes found in `places.json`,
+  then the place itself.
+- World photos are always included; personal photos are added only
+  with `?collection=personal` (or `both`). Signs, credits, related
+  places and the total all derive from the included photos.
+- `signs` counts distinct clear-legibility sign texts and how many
+  included photos show each. `credits` are de-duplicated
+  author/license pairs. `related` covers co-appearing landmark places
+  and `taken_from` links, excluding the place itself.
+- Unknown key → 404 "I could not find that place."
 
 ## `GET /api/bridge/{photo_id}?limit=`
 

@@ -66,7 +66,7 @@ FRONTEND_DIR = ROOT / "frontend"
 INDEX_HTML = FRONTEND_DIR / "index.html"
 # Hash views the app may fetch. Anything else under frontend/ (notably
 # frontend/design/) is never served, so exports stay out of the page bundle.
-VIEW_NAMES = ("home", "photo", "add", "connected")
+VIEW_NAMES = ("home", "photo", "add", "connected", "place")
 
 # ----- share one embedding model across all sessions -----
 _model_lock = threading.Lock()
@@ -399,14 +399,15 @@ def list_photos(collection: str = "world", limit: int = 24):
     limit = max(1, min(int(limit), 200))
     try:
         rows = (get_sb().table("photos")
-                .select("photo_id,collection,file,caption,viewpoint,place_name")
+                .select("photo_id,collection,file,caption,viewpoint,place_name,place_key")
                 .eq("collection", collection).order("photo_id").limit(limit).execute().data or [])
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"photo list failed: {e}")
     return {"collection": collection, "count": len(rows),
             "photos": [{"photo_id": r["photo_id"], "collection": r["collection"],
                         "src": photo_url(r.get("file")), "caption": r.get("caption"),
-                        "viewpoint": r.get("viewpoint"), "place": r.get("place_name")}
+                        "viewpoint": r.get("viewpoint"), "place": r.get("place_name"),
+                        "place_key": r.get("place_key")}
                        for r in rows]}
 
 
@@ -833,6 +834,131 @@ def job_status(job_id: str):
     job["elapsed_seconds"] = round(elapsed, 1)
     job["eta_seconds"] = eta
     return job
+
+
+PLACES_PATH = ROOT / "data" / "places.json"
+_places_cache = None
+_places_lock = threading.Lock()
+
+
+def load_places():
+    """data/places.json, cached in memory (restart picks up edits)."""
+    global _places_cache
+    with _places_lock:
+        if _places_cache is None:
+            try:
+                _places_cache = json.loads(PLACES_PATH.read_text(encoding="utf-8"))
+            except Exception:
+                _places_cache = {}
+        return _places_cache
+
+
+@app.get("/api/place/{place_key:path}")
+def place_page(place_key: str, collection: str = "world"):
+    key = (place_key or "").strip().strip("/").lower()
+    places = load_places()
+    info = places.get(key)
+    if not info:
+        raise HTTPException(status_code=404, detail="I could not find that place.")
+    if collection not in ("world", "personal", "both"):
+        raise HTTPException(status_code=400,
+                            detail="collection must be 'world', 'personal' or 'both'.")
+    want_personal = collection in ("personal", "both")
+    try:
+        rows = (get_sb().table("photos")
+                .select("photo_id,collection,file,caption,viewpoint,place_key,record")
+                .order("photo_id").execute().data or [])
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"place lookup failed: {e}")
+    counted = []
+    for r in rows:
+        inf = (r.get("record") or {}).get("inferred") or {}
+        if (r.get("place_key") or inf.get("place_key")) == key:
+            counted.append(r)
+            continue
+        for lm in inf.get("landmarks") or []:
+            if (isinstance(lm, dict) and lm.get("key") == key
+                    and lm.get("status") == "confirmed"):
+                counted.append(r)
+                break
+    shown = [r for r in counted
+             if r.get("collection") == "world"
+             or (want_personal and r.get("collection") == "personal")]
+    by_viewpoint = {}
+    for r in shown:
+        by_viewpoint.setdefault(r.get("viewpoint") or "unknown", []).append(
+            {"photo_id": r["photo_id"], "collection": r.get("collection"),
+             "src": photo_url(r.get("file")), "caption": r.get("caption")})
+    signs = {}
+    for r in shown:
+        seen_here = set()
+        vt = ((r.get("record") or {}).get("observed") or {}).get("visible_text") or []
+        for s in vt:
+            if not isinstance(s, dict):
+                continue
+            if str(s.get("legibility") or "").lower() != "clear":
+                continue
+            t = str(s.get("text") or "").strip()
+            if not t:
+                continue
+            n = t.casefold()
+            e = signs.setdefault(n, {"text": t, "photos": 0})
+            if n not in seen_here:
+                seen_here.add(n)
+                e["photos"] += 1
+    sign_list = sorted(({"text": e["text"], "photos": e["photos"]}
+                        for e in signs.values()),
+                       key=lambda d: (-d["photos"], d["text"]))
+    credits, seen_c = [], set()
+    for r in shown:
+        prov = ((r.get("record") or {}).get("provided")) or {}
+        if not prov.get("author") and not prov.get("license"):
+            continue
+        if (prov.get("author"), prov.get("license")) in seen_c:
+            continue
+        seen_c.add((prov.get("author"), prov.get("license")))
+        credits.append({"author": prov.get("author"), "license": prov.get("license"),
+                        "source_url": prov.get("source_url")})
+    related = {}
+    for r in shown:
+        inf = (r.get("record") or {}).get("inferred") or {}
+        seen_rel = set()
+        for lm in inf.get("landmarks") or []:
+            if not isinstance(lm, dict) or not lm.get("key") or lm.get("key") == key:
+                continue
+            e = related.setdefault(lm["key"], {"key": lm["key"],
+                                               "name": lm.get("name"), "photos": 0, "via": set()})
+            if lm["key"] not in seen_rel:
+                seen_rel.add(lm["key"])
+                e["photos"] += 1
+            e["via"].add("landmark")
+            if not e["name"]:
+                e["name"] = places.get(lm["key"], {}).get("name") or lm.get("name")
+        tf = inf.get("taken_from") or {}
+        if isinstance(tf, dict) and tf.get("key") and tf.get("key") != key:
+            e = related.setdefault(tf["key"], {"key": tf["key"],
+                                               "name": tf.get("name"), "photos": 0, "via": set()})
+            if tf["key"] not in seen_rel:
+                seen_rel.add(tf["key"])
+                e["photos"] += 1
+            e["via"].add("taken_from")
+            if not e["name"]:
+                e["name"] = places.get(tf["key"], {}).get("name") or tf.get("name")
+    rel_list = sorted(({"key": e["key"], "name": e["name"], "photos": e["photos"],
+                        "via": sorted(e["via"])} for e in related.values()),
+                      key=lambda d: (-d["photos"], d["key"]))
+    parts = key.split("/")
+    hierarchy = []
+    for i in range(1, len(parts)):
+        pre = "/".join(parts[:i])
+        if pre in places:
+            hierarchy.append({"key": pre, "name": places[pre].get("name")})
+    hierarchy.append({"key": key, "name": info.get("name")})
+    return {"key": key, "name": info.get("name"), "type": info.get("type"),
+            "aliases": info.get("aliases") or [], "hierarchy": hierarchy,
+            "collection": collection, "total_photos": len(shown),
+            "by_viewpoint": by_viewpoint, "signs": sign_list,
+            "credits": credits, "related": rel_list}
 
 
 # ----- the bridge: matches from the other collection, grouped by reason -----

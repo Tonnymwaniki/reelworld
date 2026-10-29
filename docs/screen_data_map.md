@@ -15,6 +15,7 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 | Compare toggle (each card) | local selection, max 2 (third replaces oldest) | `photo_id` per card |
 | Compare panel | `POST /api/compare` `{photo_a, photo_b}` | side-by-side `src` + `caption`, `answer`, `differences[]` (`aspect`, `a`, `b`); Close clears selection |
 | Photographer line on card | same row | `credit.author`, `credit.license` (null for personal photos) |
+| Card place name | same row | `place` text links to `#/place/<place_key>` when `place_key` is set |
 | Empty (no search yet) | — | static suggestions; no call |
 | `no_strong_match` | `kind` + `text` | show `text` verbatim above the closest-match grid |
 | `need_focus` / `not_found` | `kind` + `text` | show `text` verbatim, no grid |
@@ -29,7 +30,7 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 | Caption | `caption`, `description` |
 | Things seen | `things[]`: `label`, `attributes`, `salience`, `confidence` |
 | Signs | `signs[]`: `text` (exact), `legibility`, `confidence`, `where`; empty list → "No signs read" |
-| Place + status + evidence | `place.name`, `place.status` (Confirmed/Candidate), `place.evidence[]` (`kind`, `detail`), `place.confidence`; null → "Place unknown" |
+| Place + status + evidence | `place.name` (links to `#/place/<key>` when `key` is set), `place.status` (Confirmed/Candidate), `place.evidence[]` (`kind`, `detail`), `place.confidence`; null → "Place unknown" |
 | Taken from | `taken_from` (same shape) or hide when null |
 | Landmarks | `landmarks[]`: `name`, `status`, `evidence[]` |
 | Uncertainties | `uncertainties[]` or "None recorded" |
@@ -68,3 +69,16 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 | Loading | first build takes seconds | skeleton rows; later reads are cached (`updated_at` tells staleness) |
 | Empty | `count: 0` or all `match_count: 0` | "Upload a photo to see what it connects to" |
 | Error | HTTP status | `{"detail"}` verbatim |
+
+## 5. Place (`#/place/<key>`)
+
+| Element | Endpoint | Fields |
+|---|---|---|
+| Title, type, aliases, breadcrumbs | `GET /api/place/<key>` | `name`, `type`, `aliases`, `hierarchy[]` (`key`, `name`) |
+| Photo count | same | `total_photos`; "Only one photo of this place so far." when 1; empty state when 0 |
+| World / World+mine toggle | same + `?collection=` | `world` default; `personal` adds the user's photos |
+| Viewpoint groups | same → `by_viewpoint` | group per viewpoint with `photo_id`, `src`, `caption`, `collection`; cards open the dossier |
+| Signs | same → `signs[]` | `text` + `photos` count (clear legibility only) |
+| Photographers | same → `credits[]` | `author`, `license` (linked to `source_url`) |
+| Related places | same → `related[]` | `name` × `photos`, links to `#/place/<key>` |
+| Loading / error | skeleton blocks while waiting; error panel + Retry button on failure |

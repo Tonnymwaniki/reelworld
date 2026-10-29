@@ -126,6 +126,12 @@ const home = {
       if (this.lastRun) this.lastRun();
     });
     $("#results-grid", view).addEventListener("click", (e) => {
+      const pl = e.target.closest("[data-place-link]");
+      if (pl) {
+        e.preventDefault();
+        location.hash = "#/place/" + pl.dataset.placeLink;
+        return;
+      }
       const cmp = e.target.closest("[data-slot=compare]");
       if (cmp) {
         const card = cmp.closest("article[data-photo-id]");
@@ -498,7 +504,18 @@ const home = {
       chip.classList.remove("hidden");
       chip.classList.add("inline-flex");
     }
-    $("[data-slot=place]", node).textContent = row.place_name || row.place || "Place unknown";
+    const placeEl = $("[data-slot=place]", node);
+    if (row.place_key) {
+      const a = document.createElement("a");
+      a.href = "#/place/" + row.place_key;
+      a.className = "hover:text-ochre hover:underline";
+      a.textContent = row.place_name || row.place || "Place unknown";
+      a.dataset.placeLink = row.place_key;
+      placeEl.innerHTML = "";
+      placeEl.appendChild(a);
+    } else {
+      placeEl.textContent = row.place_name || row.place || "Place unknown";
+    }
     $("[data-slot=pid]", node).textContent = row.photo_id;
     $("[data-slot=caption]", node).textContent = row.caption || row.photo_id;
     if (withReasons && row.reasons && row.reasons.length) {
@@ -820,6 +837,14 @@ const photo = {
       const wrap = $("#place-evidence-wrap", view);
       wrap.classList.add("hidden");
       wrap.classList.remove("flex");
+    }
+    const pn = $("#place-name", view);
+    if (d.place && d.place.key) {
+      pn.href = "#/place/" + d.place.key;
+      pn.classList.add("hover:text-ochre", "hover:underline", "cursor-pointer");
+    } else {
+      pn.removeAttribute("href");
+      pn.classList.remove("hover:text-ochre", "hover:underline", "cursor-pointer");
     }
     const tf = $("#taken-from", view);
     if (d.taken_from && d.taken_from.name) {
@@ -1705,6 +1730,190 @@ function renderTrace(ol, trace) {
   });
 }
 
+/* ---------- place view ---------- */
+const place = {
+  view: null,
+  key: null,
+  collection: "world",
+  VP_ORDER: ["ground_level", "elevated", "aerial", "interior", "water_level", "unknown"],
+
+  mount(view, key) {
+    this.view = view;
+    this.key = key;
+    this.collection = "world";
+    $("#place-back", view).addEventListener("click", (e) => {
+      e.preventDefault();
+      if (window.history.length > 1) window.history.back();
+      else location.hash = "#/";
+    });
+    $("#place-retry", view).addEventListener("click", () => this.load());
+    $$("#place-wrap [data-coll]", view).forEach((b) => b.addEventListener("click", () => {
+      this.collection = b.dataset.coll;
+      this.paintColl();
+      this.load();
+    }));
+    $("#place-groups", view).addEventListener("click", (e) => {
+      const c = e.target.closest("[data-target]");
+      if (c) location.hash = "#/photo/" + c.dataset.target;
+    });
+    this.paintColl();
+    this.load();
+  },
+
+  paintColl() {
+    $$("#place-wrap [data-coll]", this.view).forEach((b) => {
+      const on = b.dataset.coll === this.collection;
+      b.className = on
+        ? "px-3 py-1.5 rounded text-xs font-semibold bg-papyrus-100 text-espresso-950 shadow-archival"
+        : "px-3 py-1.5 rounded text-xs font-semibold text-espresso-600 hover:text-espresso-950";
+    });
+  },
+
+  async load() {
+    const view = this.view;
+    $("#place-loading", view).hidden = false;
+    $("#place-wrap", view).hidden = true;
+    $("#place-error", view).hidden = true;
+    $("#place-error", view).classList.add("hidden");
+    $("#place-error", view).classList.remove("flex");
+    try {
+      const data = await api("/api/place/" + this.key + "?collection=" + this.collection);
+      if (!view.isConnected) return;
+      this.render(data);
+      $("#place-loading", view).hidden = true;
+      $("#place-wrap", view).hidden = false;
+    } catch (e) {
+      if (!view.isConnected) return;
+      $("#place-loading", view).hidden = true;
+      $("#place-error-text", view).textContent = String((e && e.message) || e);
+      const box = $("#place-error", view);
+      box.hidden = false;
+      box.classList.remove("hidden");
+      box.classList.add("flex");
+    }
+  },
+
+  render(d) {
+    const view = this.view;
+    const T = (n) => $("#" + n, view).content.firstElementChild;
+    $("#place-name", view).textContent = d.name || d.key;
+    $("#place-type", view).textContent = d.type
+      ? d.type[0].toUpperCase() + d.type.slice(1) : "Place";
+    const al = $("#place-aliases", view);
+    if (d.aliases && d.aliases.length) {
+      al.textContent = "Also known as: " + d.aliases.join(", ");
+      al.classList.remove("hidden");
+    } else al.classList.add("hidden");
+    const crumbs = $("#place-crumbs", view);
+    crumbs.innerHTML = "";
+    (d.hierarchy || []).forEach((h, i, arr) => {
+      if (i > 0) {
+        const sep = document.createElement("span");
+        sep.className = "text-outline-variant";
+        sep.textContent = "›";
+        crumbs.appendChild(sep);
+      }
+      if (i < arr.length - 1) {
+        const a = document.createElement("a");
+        a.href = "#/place/" + h.key;
+        a.className = "hover:text-ochre hover:underline";
+        a.textContent = h.name || h.key;
+        crumbs.appendChild(a);
+      } else {
+        const s = document.createElement("span");
+        s.className = "font-semibold text-espresso-800";
+        s.textContent = h.name || h.key;
+        crumbs.appendChild(s);
+      }
+    });
+    const n = d.total_photos || 0;
+    $("#place-count", view).textContent =
+      n + (n === 1 ? " photo" : " photos") +
+      (this.collection === "world" ? " · World archive" : " · World + mine");
+    $("#place-onephoto", view).classList.toggle("hidden", n !== 1);
+    const empty = n === 0;
+    $("#place-empty", view).classList.toggle("hidden", !empty);
+    $("#place-empty", view).classList.toggle("flex", empty);
+    ["#place-groups", "#place-side", "#place-rel-wrap"].forEach((sel) => {
+      $(sel, view).classList.toggle("hidden", empty);
+    });
+    if (empty) return;
+    /* Viewpoint groups. */
+    const box = $("#place-groups", view);
+    box.innerHTML = "";
+    const groups = d.by_viewpoint || {};
+    this.VP_ORDER.filter((vp) => (groups[vp] || []).length).forEach((vp) => {
+      const sec = T("tpl-pgroup").cloneNode(true);
+      $("[data-slot=title]", sec).textContent = VP_LABEL[vp] || "Unknown view";
+      const items = groups[vp];
+      $("[data-slot=count]", sec).textContent =
+        items.length + (items.length === 1 ? " photo" : " photos");
+      const cards = $("[data-slot=cards]", sec);
+      items.forEach((item) => {
+        const card = T("tpl-pcard").cloneNode(true);
+        card.dataset.target = item.photo_id;
+        const img = $("[data-slot=img]", card);
+        img.src = item.src || "";
+        img.alt = item.caption || item.photo_id;
+        img.addEventListener("error", () => img.setAttribute("data-broken", "true"));
+        $("[data-slot=caption]", card).textContent = item.caption || item.photo_id;
+        $("[data-slot=pid]", card).textContent = item.photo_id;
+        $("[data-slot=coll]", card).textContent =
+          item.collection === "personal" ? "Mine" : "World";
+        cards.appendChild(card);
+      });
+      box.appendChild(sec);
+    });
+    /* Signs. */
+    const signs = d.signs || [];
+    const sBox = $("#place-signs", view);
+    sBox.innerHTML = "";
+    signs.forEach((s) => {
+      const li = document.createElement("li");
+      li.className = "flex items-center justify-between gap-3 font-mono text-xs text-espresso-900";
+      const t = document.createElement("span");
+      t.className = "truncate";
+      t.textContent = "“" + s.text + "”";
+      const c = document.createElement("span");
+      c.className = "text-[11px] text-espresso-600 whitespace-nowrap font-sans font-semibold";
+      c.textContent = "in " + s.photos + (s.photos === 1 ? " photo" : " photos");
+      li.append(t, c);
+      sBox.appendChild(li);
+    });
+    $("#place-signs-empty", view).classList.toggle("hidden", signs.length > 0);
+    /* Credits. */
+    const credits = d.credits || [];
+    const cBox = $("#place-credits", view);
+    cBox.innerHTML = "";
+    credits.forEach((c) => {
+      const li = document.createElement("li");
+      li.className = "text-xs text-espresso-800";
+      li.appendChild(creditLine({ author: c.author, license: c.license,
+                                  source_url: c.source_url }));
+      cBox.appendChild(li);
+    });
+    $("#place-credits-empty", view).classList.toggle("hidden", credits.length > 0);
+    /* Related places. */
+    const rel = d.related || [];
+    const rBox = $("#place-related", view);
+    rBox.innerHTML = "";
+    rel.forEach((r) => {
+      const a = document.createElement("a");
+      a.href = "#/place/" + r.key;
+      a.className = "inline-flex items-center gap-1.5 h-8 px-3 rounded-lg bg-papyrus-200 border border-parchment-border text-espresso-900 font-semibold text-xs hover:bg-papyrus-300 transition-colors";
+      const nm = document.createElement("span");
+      nm.textContent = r.name || r.key;
+      const ct = document.createElement("span");
+      ct.className = "text-espresso-600 font-mono text-[11px]";
+      ct.textContent = "×" + r.photos;
+      a.append(nm, ct);
+      a.title = "Linked via " + (r.via || []).join(" + ");
+      rBox.appendChild(a);
+    });
+    $("#place-rel-empty", view).classList.toggle("hidden", rel.length > 0);
+  },
+};
+
 /* ---------- router ---------- */
 let pendingSearch = null;
 const viewCache = new Map();
@@ -1741,6 +1950,18 @@ async function route() {
   const hash = location.hash || "#/";
   clearInterval(home.loadingTimer);
   if (add.pollTimer) { clearInterval(add.pollTimer); add.pollTimer = null; }
+  if (hash.startsWith("#/place/")) {
+    const key = decodeURIComponent(hash.slice("#/place/".length));
+    setActiveTab("");
+    try {
+      const html = await loadView("place");
+      $("#view").innerHTML = html;
+      place.mount($("#view"), key);
+    } catch (e) {
+      stubView("The place view failed to load", String((e && e.message) || e));
+    }
+    return;
+  }
   if (hash.startsWith("#/photo/")) {
     const id = decodeURIComponent(hash.slice("#/photo/".length));
     setActiveTab("");
