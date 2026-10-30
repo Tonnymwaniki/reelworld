@@ -125,4 +125,27 @@ the first unfinished phase.
   short-circuits small-talk-only messages (kind `chat`, no LLM call) in
   `turn_stream`; anything substantive still searches. Frontend needed no
   change (`renderText` path, no nomatch template). Test: 26 checks.
+
+## Phase 2: photo dossier + attribution kit
+
+- P0 dossier already wired the full evidence panel (caption, things,
+  signs Clear/Partial + confidence, place Confirmed/Candidate + evidence,
+  landmarks, taken_from, uncertainties, credit, suggested questions, Ask
+  with trace, bridge groups, share gating) — audit found no gaps, so no
+  rebuild was needed there.
+- Built the attribution kit sheet from the `world_attribution_kit_plate`
+  export: plate mount, provenance ledger (photographer/license/subject/
+  source, all from `/api/photo`), credit line with Plain/HTML/BibTeX tabs
+  + copy, per-family license summary matrix (BY-SA/BY/CC0/unknown),
+  JSON record download, report-inaccuracy via `/api/flag`. Personal
+  photos get an honest private note instead of a kit.
+- Honesty removals (documented in the view header): fake cadastre URLs,
+  hashes, face-verification badge, sector pills, "signed" JSON-LD, year
+  in BibTeX. No inline onclick.
+- No backend change: kit uses existing `/api/photo` + `/api/flag`.
+- Tests: new `frontend/photo.test.js` 60/60, `home.test.js` still 38/38
+  (both run here). Browser pass pending user.
+- Out of scope, noted: the design's Outlines toggle is feasible now
+  (SAM live) but not in the P2 checklist; candidate for later.
+- Commit id: (this commit; see `git log`).
 - Commit id: (this commit; see `git log`).

@@ -179,6 +179,81 @@ function citeText(author, license, url) {
   return "Photo: " + (author || "Unknown") + " / ReelWorld Open Cadastre (" +
     (license || "Unknown") + ")" + (url ? " · " + url : "");
 }
+const LICENSE_DEEDS = {
+  "CC BY-SA 4.0": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "CC BY-SA 3.0": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "CC BY-SA 2.0": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "CC BY 4.0": "https://creativecommons.org/licenses/by/4.0/",
+  "CC BY 2.0": "https://creativecommons.org/licenses/by/2.0/",
+  "CC0": "https://creativecommons.org/publicdomain/zero/1.0/",
+};
+const LICENSE_NAMES = {
+  "CC BY-SA 4.0": "Attribution-ShareAlike 4.0 International",
+  "CC BY-SA 3.0": "Attribution-ShareAlike 3.0 Unported",
+  "CC BY-SA 2.0": "Attribution-ShareAlike 2.0 Generic",
+  "CC BY 4.0": "Attribution 4.0 International",
+  "CC BY 2.0": "Attribution 2.0 Generic",
+  "CC0": "CC0 1.0 Universal (public domain dedication)",
+  "Public domain": "Public domain (no known copyright)",
+};
+function licenseFamily(lic) {
+  const l = String(lic || "");
+  if (l === "CC0" || l.toLowerCase() === "public domain") return "zero";
+  if (/by-sa/i.test(l)) return "by-sa";
+  if (/\bby\b/i.test(l)) return "by";
+  return "unknown";
+}
+function licenseSummary(lic) {
+  const fam = licenseFamily(lic);
+  const share = { icon: "share", label: "Share", required: false,
+    text: "You can copy and redistribute the material in any medium or format." };
+  const adapt = { icon: "build", label: "Adapt", required: false,
+    text: "You can remix, transform, and build upon the material for any purpose." };
+  const attr = { icon: "attribution", label: "Attribution Required", required: true,
+    text: "You must give appropriate credit, provide a link to the license, and indicate if changes were made." };
+  const sa = { icon: "sync", label: "ShareAlike Required", required: true,
+    text: "If you remix or transform the material, you must distribute your contributions under the same license." };
+  if (fam === "by-sa") return {
+    sentence: "You may reuse this photo if you credit the photographer and share any changes under the same license.",
+    terms: [share, adapt, attr, sa],
+    disclaimer: "This summary highlights key terms of " + lic + " in plain language. It is not legal advice." };
+  if (fam === "by") return {
+    sentence: "You may reuse this photo if you credit the photographer.",
+    terms: [share, adapt, attr],
+    disclaimer: "This summary highlights key terms of " + lic + " in plain language. It is not legal advice." };
+  if (fam === "zero") return {
+    sentence: "You may reuse this photo freely, no conditions. Crediting the photographer is appreciated but not required.",
+    terms: [share, adapt],
+    disclaimer: "This photo is free of known copyright under " + lic + ". It is not legal advice." };
+  return {
+    sentence: "The license for this photo is not recorded — check the source record before reuse.",
+    terms: [],
+    disclaimer: "No license summary is available." };
+}
+function kitCitation(fmt, f) {
+  if (fmt === "html") {
+    const deed = LICENSE_DEEDS[f.license];
+    const lic = deed
+      ? '(<a href="' + deed + '">' + f.license + "</a>)"
+      : "(" + f.license + ")";
+    const alt = String(f.caption || f.photoId).replace(/"/g, "&quot;");
+    return "<figure>\n" +
+      '  <img src="' + f.imgUrl + '" alt="' + alt + '" />\n' +
+      "  <figcaption>Photo: " + f.author + " / ReelWorld Open Cadastre " + lic + "</figcaption>\n" +
+      "</figure>";
+  }
+  if (fmt === "bib") {
+    const key = (f.author + " " + f.photoId).toLowerCase()
+      .replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "") || f.photoId;
+    return "@misc{" + key + ",\n" +
+      "  author = {" + f.author + "},\n" +
+      "  title = {" + (f.caption || f.photoId) + "},\n" +
+      "  publisher = {ReelWorld Open Cadastre},\n" +
+      "  url = {" + f.pageUrl + "},\n" +
+      "  note = {" + f.license + "}\n}";
+  }
+  return citeText(f.author, f.license, f.pageUrl);
+}
 function hostOf(url) {
   try {
     return new URL(url).hostname.replace(/^www\./, "");
@@ -244,7 +319,8 @@ function sseParseChunk(buf) {
 const RWTEST = { fmtScore: fmtScore, shortReasons: shortReasons, creditText: creditText,
   citeText: citeText, hostOf: hostOf, areaOfKey: areaOfKey, specChips: specChips,
   applyChipRemove: applyChipRemove, buildSuggestions: buildSuggestions,
-  sseParseChunk: sseParseChunk };
+  sseParseChunk: sseParseChunk, licenseFamily: licenseFamily,
+  licenseSummary: licenseSummary, kitCitation: kitCitation };
 
 const home = {
   view: null, xlist: null, loadingTimer: null, abort: null,
@@ -2079,6 +2155,13 @@ const photo = {
       const m = e.target.closest("[data-target]");
       if (m) location.hash = "#/photo/" + m.dataset.target;
     });
+    $("#kit-tabs", view).addEventListener("click", (e) => {
+      const b = e.target.closest("[data-format]");
+      if (b) this.paintCitation(b.dataset.format);
+    });
+    $("#kit-copy", view).addEventListener("click", () => this.copyCitation());
+    $("#kit-json", view).addEventListener("click", () => this.downloadJson());
+    $("#kit-flag-send", view).addEventListener("click", () => this.sendKitFlag());
     $("#photo-retry", view).addEventListener("click", () => this.load());
     this.load();
   },
@@ -2088,6 +2171,7 @@ const photo = {
     $("#photo-loading", view).hidden = false;
     $("#dossier", view).hidden = true;
     $("#photo-error", view).hidden = true;
+    $("#kit-section", view).hidden = true;
     $("#photo-error", view).classList.add("hidden");
     $("#photo-error", view).classList.remove("flex");
     try {
@@ -2097,6 +2181,7 @@ const photo = {
       this.render(this.data);
       $("#photo-loading", view).hidden = true;
       $("#dossier", view).hidden = false;
+      $("#kit-section", view).hidden = false;
       try {
         if (sessionStorage.getItem("rw.askFocus") === this.id) {
           sessionStorage.removeItem("rw.askFocus");
@@ -2333,6 +2418,7 @@ const photo = {
       chips.appendChild(b);
     });
     this.paintShare(d);
+    this.paintKit(d);
   },
 
   /* Share gating. World photos are public already; personal photos stay
@@ -2368,6 +2454,182 @@ const photo = {
     hide($("#share-confirm", view));
     $("#share-note", view).textContent = "Sharing enabled for this photo.";
     $("#btn-share", view).disabled = false;
+  },
+
+  paintKit(d) {
+    const view = this.view;
+    const world = d.collection === "world";
+    $("#kit-private", view).classList.toggle("hidden", world);
+    $("#kit-grid", view).classList.toggle("hidden", !world);
+    $("#kit-status", view).classList.toggle("hidden", !world);
+    this.kitFlagSay("");
+    if (!world) return;
+    const c = d.credit || {};
+    const author = c.author || "Unknown photographer";
+    const lic = c.license || "License unknown";
+    $("#kit-photo-id", view).textContent = "SPECIMEN #" + d.photo_id;
+    $("#kit-open-full", view).href = d.src;
+    const thumb = $("#kit-thumb", view);
+    thumb.src = d.src;
+    thumb.alt = d.caption || d.photo_id;
+    $("#kit-reg", view).textContent = "REG #" + d.photo_id;
+    $("#kit-title", view).textContent = (d.place && d.place.name) || d.caption || d.photo_id;
+    $("#kit-caption", view).textContent = d.caption || d.photo_id;
+    $("#kit-photographer", view).textContent = author;
+    $("#kit-license-badge", view).textContent = lic;
+    const lname = $("#kit-license-name", view);
+    lname.innerHTML = "";
+    lname.appendChild(document.createTextNode(LICENSE_NAMES[lic] || lic));
+    if (LICENSE_DEEDS[lic]) {
+      lname.appendChild(document.createTextNode(" "));
+      const a = document.createElement("a");
+      a.href = LICENSE_DEEDS[lic];
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.className = "underline decoration-dotted hover:text-ochre";
+      a.textContent = "legal code";
+      lname.appendChild(a);
+    }
+    if (d.place && d.place.name) {
+      $("#kit-subject", view).textContent = d.place.name;
+      $("#kit-subject-sub", view).textContent = "Place status: " + (d.place.status || "unknown");
+    } else {
+      $("#kit-subject", view).textContent = "No place verdict";
+      $("#kit-subject-sub", view).textContent = "The archive has no place verdict for this photo.";
+    }
+    const srcEl = $("#kit-source", view);
+    srcEl.innerHTML = "";
+    if (c.source_url) {
+      const a = document.createElement("a");
+      a.href = c.source_url;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.className = "underline decoration-dotted hover:text-ochre break-all";
+      a.textContent = hostOf(c.source_url);
+      srcEl.appendChild(a);
+    } else srcEl.textContent = "Source not recorded";
+    const fam = licenseFamily(lic);
+    $("#kit-note", view).textContent = fam === "zero"
+      ? "This photo carries no reuse conditions under " + lic + "; crediting " + author + " is appreciated but not required."
+      : fam === "unknown"
+      ? "No license is recorded for this photo, so the archive cannot grant reuse. Check the source record first."
+      : "Reuse this photo under " + lic + ": credit " + author + " and link the license." +
+        (fam === "by-sa" ? " Share any changes under the same license." : "") +
+        " Moral rights stay with the photographer.";
+    const sum = licenseSummary(lic);
+    $("#kit-license-sentence", view).textContent = sum.sentence;
+    $("#kit-disclaimer", view).textContent = sum.disclaimer;
+    const mx = $("#kit-matrix", view);
+    mx.innerHTML = "";
+    sum.terms.forEach((t) => {
+      const row = document.createElement("div");
+      row.className = "bg-surface-container p-3 rounded flex items-start gap-3";
+      const ic = document.createElement("div");
+      ic.className = "w-7 h-7 rounded flex items-center justify-center shrink-0 " +
+        (t.required ? "bg-tertiary-fixed text-on-tertiary-fixed" : "bg-secondary-container text-on-secondary-fixed-variant");
+      const glyph = document.createElement("span");
+      glyph.className = "material-symbols-outlined text-[18px]";
+      glyph.textContent = t.icon;
+      ic.appendChild(glyph);
+      const tx = document.createElement("div");
+      tx.className = "flex flex-col";
+      const lab = document.createElement("span");
+      lab.className = "font-label-md text-label-md text-on-surface uppercase";
+      lab.textContent = t.label;
+      const sub = document.createElement("span");
+      sub.className = "font-body-sm text-body-sm text-on-surface-variant";
+      sub.textContent = t.text;
+      tx.append(lab, sub);
+      row.append(ic, tx);
+      mx.appendChild(row);
+    });
+    $("#kit-canonical", view).href = this.kitFields().pageUrl;
+    $("#kit-status-license", view).textContent = "License: " + lic;
+    this.paintCitation("plain");
+  },
+
+  kitFields() {
+    const d = this.data || {};
+    const c = d.credit || {};
+    const base = location.origin + location.pathname;
+    return {
+      author: c.author || "Unknown photographer",
+      license: c.license || "License unknown",
+      caption: d.caption || d.photo_id || "",
+      photoId: d.photo_id || "",
+      pageUrl: base + "#/photo/" + (d.photo_id || ""),
+      imgUrl: d.src && d.src.indexOf("http") === 0 ? d.src : location.origin + (d.src || ""),
+    };
+  },
+
+  paintCitation(fmt) {
+    const view = this.view;
+    this.kitFormat = fmt;
+    $$("#kit-tabs [data-format]", view).forEach((b) => {
+      const on = b.dataset.format === fmt;
+      b.className = "flex-1 min-h-[44px] py-1.5 px-2 rounded font-label-md text-label-md transition-all " +
+        (on ? "text-on-primary bg-primary-container shadow-sm" : "text-on-surface-variant hover:text-on-surface");
+    });
+    $("#kit-citation", view).textContent = kitCitation(fmt, this.kitFields());
+  },
+
+  async copyCitation() {
+    const view = this.view;
+    const label = $("#kit-copy-label", view);
+    const icon = $("#kit-copy-icon", view);
+    const btn = $("#kit-copy", view);
+    try {
+      await navigator.clipboard.writeText($("#kit-citation", view).textContent);
+    } catch (e) {
+      label.textContent = "Copy failed";
+      return;
+    }
+    if (!view.isConnected) return;
+    btn.classList.remove("bg-primary-container");
+    btn.classList.add("bg-secondary", "text-on-secondary");
+    label.textContent = "Copied to clipboard";
+    icon.textContent = "check";
+    setTimeout(() => {
+      if (!view.isConnected) return;
+      btn.classList.remove("bg-secondary", "text-on-secondary");
+      btn.classList.add("bg-primary-container");
+      label.textContent = "Copy credit";
+      icon.textContent = "copy_all";
+    }, 2200);
+  },
+
+  downloadJson() {
+    const blob = new Blob([JSON.stringify(this.data, null, 2)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "reelworld-" + this.id + ".json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+  },
+
+  kitFlagSay(text) {
+    const el = $("#kit-flag-status", this.view);
+    el.textContent = text || "";
+    el.classList.toggle("hidden", !text);
+  },
+
+  async sendKitFlag() {
+    const view = this.view;
+    const reason = $("#kit-flag-reason", view).value;
+    const note = $("#kit-flag-note", view).value.trim();
+    this.kitFlagSay("Sending…");
+    try {
+      const out = await api("/api/flag", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ target: this.id, reason: reason, note: note, route: location.hash || "#/" }),
+      });
+      this.kitFlagSay("Recorded " + (out.id || "—") + ". Thank you — a curator will review it.");
+    } catch (e) {
+      this.kitFlagSay("Flagging failed: " + String((e && e.message) || e));
+    }
   },
 
   shareSay(text) {
