@@ -326,6 +326,32 @@ function ringLayout(ringIdx, slot, total) {
 function ringLabel(ringIdx, slot) {
   return (ringIdx + 1) + "ABCDEFGH"[slot];
 }
+function storyTotals(chapters) {
+  const list = chapters || [];
+  return { scenes: list.length,
+    seconds: list.reduce((t, c) => t + (Number(c.seconds) || 0), 0) };
+}
+function chaptersWithPeople(chapters) {
+  return (chapters || []).filter((c) => (c.people || 0) > 0).map((c) => c.photo_id);
+}
+function buildStoryMarkdown(story, chapters) {
+  const t = storyTotals(chapters);
+  const out = ["# " + ((story && story.title) || "Untitled story"), "",
+    "A ReelWorld photo story — " + t.scenes + " scenes, " + t.seconds + " seconds.", ""];
+  (chapters || []).forEach((c, i) => {
+    out.push("## " + (i + 1) + ". " + (c.heading || "Scene " + (i + 1)));
+    if (c.caption) out.push("", c.caption);
+    if (c.text && c.text !== c.caption) out.push("", c.text);
+    const bits = [];
+    if (c.place) bits.push(c.place);
+    const ct = creditText(c.credit, c.collection);
+    if (ct) bits.push(ct);
+    if (c.photo_id) bits.push(c.photo_id);
+    if (bits.length) out.push("", bits.join(" · "));
+    out.push("");
+  });
+  return out.join("\n");
+}
 const KIND_LABEL = {
   same_place: "Same place", another_angle: "Another angle",
   where_stood: "Where you stood", shared_landmark: "Shared landmark",
@@ -364,7 +390,8 @@ const RWTEST = { fmtScore: fmtScore, shortReasons: shortReasons, creditText: cre
   sseParseChunk: sseParseChunk, licenseFamily: licenseFamily,
   licenseSummary: licenseSummary, kitCitation: kitCitation,
   ringLayout: ringLayout, ringLabel: ringLabel, evidenceRows: evidenceRows,
-  KIND_LABEL: KIND_LABEL };
+  KIND_LABEL: KIND_LABEL, storyTotals: storyTotals,
+  chaptersWithPeople: chaptersWithPeople, buildStoryMarkdown: buildStoryMarkdown };
 
 const home = {
   view: null, xlist: null, loadingTimer: null, abort: null,
@@ -4231,178 +4258,983 @@ function placeLinkClick(e) {
 }
 
 /* ---------- story view ---------- */
-const story = {
-  view: null,
-  collection: "world",
+/* ---------- story player (shared by studio preview and showcase) ---------- */
+const player = {
   timer: null,
-  data: null,
-  lastTheme: "",
+  st: null,
+
+  fmt(s) {
+    s = Math.max(0, Math.round(s));
+    return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
+  },
+
+  mount(root, full) {
+    this.destroy();
+    const chapters = (full && full.chapters) || [];
+    root.innerHTML = "";
+    if (!chapters.length) {
+      root.textContent = "This story has no scenes.";
+      return;
+    }
+    const reduce = !!(window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    const frame = document.createElement("div");
+    frame.className = "relative w-full aspect-[9/16] rounded-xl overflow-hidden bg-black shadow-md";
+    const img = document.createElement("img");
+    img.className = "absolute inset-0 w-full h-full object-cover";
+    img.alt = "";
+    const grad = document.createElement("div");
+    grad.className = "absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/80 to-transparent pointer-events-none";
+    const top = document.createElement("div");
+    top.className = "absolute top-0 inset-x-0 flex items-center justify-between px-3 py-2 text-white font-label-sm text-label-sm";
+    const tag = document.createElement("span");
+    tag.className = "px-2 py-0.5 rounded bg-black/50";
+    const time = document.createElement("span");
+    time.className = "px-2 py-0.5 rounded bg-black/50 font-mono";
+    top.append(tag, time);
+    const bot = document.createElement("div");
+    bot.className = "absolute bottom-0 inset-x-0 p-3 flex flex-col gap-1";
+    const head = document.createElement("div");
+    head.className = "text-white font-label-lg text-label-lg font-bold";
+    const cap = document.createElement("div");
+    cap.className = "text-white/90 font-body-sm text-body-sm";
+    const cred = document.createElement("div");
+    cred.className = "text-white/70 font-label-sm text-label-sm";
+    bot.append(head, cap, cred);
+    frame.append(img, grad, top, bot);
+    const track = document.createElement("div");
+    track.className = "h-1 rounded bg-surface-container-high overflow-hidden mt-2";
+    const bar = document.createElement("div");
+    bar.className = "h-full bg-secondary rounded";
+    bar.style.width = "0%";
+    track.appendChild(bar);
+    const ctrls = document.createElement("div");
+    ctrls.className = "flex items-center justify-center gap-2 mt-2";
+    const mk = (icon, label) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.title = label;
+      b.setAttribute("aria-label", label);
+      b.className = "w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-surface-container-low hover:bg-surface-container-high text-on-surface flex items-center justify-center";
+      const s = document.createElement("span");
+      s.className = "material-symbols-outlined text-[20px]";
+      s.textContent = icon;
+      b.appendChild(s);
+      return b;
+    };
+    const prev = mk("skip_previous", "Previous scene");
+    const play = mk("pause", "Play or pause");
+    const next = mk("skip_next", "Next scene");
+    const replay = mk("replay", "Replay");
+    replay.classList.add("hidden");
+    prev.addEventListener("click", () => this.jump(this.st.idx - 1));
+    next.addEventListener("click", () => this.jump(this.st.idx + 1));
+    play.addEventListener("click", () => this.toggle());
+    replay.addEventListener("click", () => {
+      replay.classList.add("hidden");
+      this.jump(0);
+      this.play();
+    });
+    ctrls.append(prev, play, next, replay);
+    const strip = document.createElement("div");
+    strip.className = "flex gap-2 overflow-x-auto py-1 mt-1";
+    chapters.forEach((c) => {
+      const t = document.createElement("button");
+      t.type = "button";
+      t.className = "w-12 h-16 rounded-lg overflow-hidden flex-shrink-0 border-2 border-transparent p-0";
+      const ti = document.createElement("img");
+      ti.src = c.src;
+      ti.alt = "";
+      ti.loading = "lazy";
+      ti.className = "w-full h-full object-cover";
+      t.appendChild(ti);
+      strip.appendChild(t);
+    });
+    Array.prototype.forEach.call(strip.children, (t, i) => {
+      t.addEventListener("click", () => this.jump(i));
+    });
+    root.append(frame, track, ctrls, strip);
+    this.st = { root: root, chapters: chapters, idx: 0, elapsed: 0, playing: true,
+      reduce: reduce, img: img, tag: tag, time: time, head: head, cap: cap,
+      cred: cred, bar: bar, play: play, replay: replay, strip: strip,
+      painted: -1,
+      total: chapters.reduce((t, c) => t + (Number(c.seconds) || 0), 0) };
+    this.paint(true);
+    const self = this;
+    this.timer = setInterval(() => self.tick(), 100);
+  },
+
+  destroy() {
+    if (this.timer) { clearInterval(this.timer); this.timer = null; }
+    this.st = null;
+  },
+
+  sceneStart(i) {
+    let t = 0;
+    for (let k = 0; k < i; k++) t += Number(this.st.chapters[k].seconds) || 0;
+    return t;
+  },
+
+  paint(full) {
+    const st = this.st;
+    if (!st) return;
+    const c = st.chapters[st.idx];
+    if (full || st.painted !== st.idx) {
+      st.img.src = c.src;
+      st.img.alt = c.caption || c.photo_id;
+      st.head.textContent = c.heading || ("Scene " + (st.idx + 1));
+      st.cap.textContent = c.caption || "";
+      st.cred.textContent = creditText(c.credit, c.collection) || "";
+      Array.prototype.forEach.call(st.strip.children, (t, i) => {
+        t.classList.toggle("border-secondary", i === st.idx);
+        t.classList.toggle("border-transparent", i !== st.idx);
+      });
+      st.painted = st.idx;
+    }
+    st.tag.textContent = (st.idx + 1) + "/" + st.chapters.length +
+      (c.heading ? " · " + c.heading : "");
+    const abs = this.sceneStart(st.idx) + st.elapsed;
+    st.time.textContent = this.fmt(abs) + " / " + this.fmt(st.total);
+    st.bar.style.width = (st.total ? Math.min(100, (abs / st.total) * 100) : 0) + "%";
+    st.play.firstChild.textContent = st.playing ? "pause" : "play_arrow";
+  },
+
+  tick() {
+    const st = this.st;
+    if (!st) return;
+    if (!st.root.isConnected) { this.destroy(); return; }
+    if (!st.playing) return;
+    st.elapsed += 0.1;
+    const dur = Number(st.chapters[st.idx].seconds) || 0;
+    if (st.elapsed >= dur) {
+      if (st.idx + 1 >= st.chapters.length) {
+        st.elapsed = dur;
+        st.playing = false;
+        st.replay.classList.remove("hidden");
+        this.paint(false);
+        return;
+      }
+      st.idx++;
+      st.elapsed = 0;
+    }
+    if (!st.reduce) {
+      const prog = dur ? Math.min(1, st.elapsed / dur) : 0;
+      const z = st.idx % 2 ? 1.1 - 0.1 * prog : 1 + 0.1 * prog;
+      st.img.style.transform = "scale(" + z.toFixed(3) + ")";
+    }
+    this.paint(false);
+  },
+
+  jump(i) {
+    const st = this.st;
+    if (!st) return;
+    if (i < 0) i = 0;
+    if (i >= st.chapters.length) i = st.chapters.length - 1;
+    st.idx = i;
+    st.elapsed = 0;
+    st.replay.classList.add("hidden");
+    this.paint(true);
+  },
+
+  play() {
+    if (this.st) {
+      this.st.playing = true;
+      this.paint(false);
+    }
+  },
+
+  toggle() {
+    const st = this.st;
+    if (!st) return;
+    if (!st.playing) {
+      const dur = Number(st.chapters[st.idx].seconds) || 0;
+      if (st.idx >= st.chapters.length - 1 && st.elapsed >= dur) {
+        st.idx = 0;
+        st.elapsed = 0;
+        st.replay.classList.add("hidden");
+      }
+      st.playing = true;
+    } else st.playing = false;
+    this.paint(false);
+  },
+};
+
+/* ---------- stories list + create ---------- */
+const stories = {
+  view: null,
+  tone: "postcard",
+  source: "both",
+  target: "short",
+  making: false,
+  makeTimer: null,
 
   mount(view) {
     this.view = view;
-    this.data = null;
-    $("#story-form", view).addEventListener("submit", (e) => {
-      e.preventDefault();
-      const t = $("#story-input", view).value.trim();
-      if (t) this.make(t);
+    this.tone = "postcard";
+    this.source = "both";
+    this.target = "short";
+    this.making = false;
+    this.paintPills();
+    const pick = (id, key) => {
+      $("#" + id, view).addEventListener("click", (e) => {
+        const b = e.target.closest("button[data-" + key + "]");
+        if (!b) return;
+        this[key] = b.dataset[key];
+        this.paintPills();
+      });
+    };
+    pick("story-tones", "tone");
+    pick("story-sources", "source");
+    pick("story-targets", "target");
+    $("#story-suggest", view).addEventListener("click", (e) => {
+      const b = e.target.closest("[data-prompt]");
+      if (b) $("#story-create-prompt", view).value = b.dataset.prompt;
     });
-    $$("#story-coll-wrap [data-coll]", view).forEach((b) => b.addEventListener("click", () => {
-      this.collection = b.dataset.coll;
-      this.paintColl();
-    }));
-    $("#story-retry", view).addEventListener("click", () => {
-      if (this.lastTheme) this.make(this.lastTheme);
+    $("#story-make", view).addEventListener("click", () => this.make());
+    $("#stories-grid", view).addEventListener("click", (e) => {
+      const card = e.target.closest("[data-sid]");
+      if (!card) return;
+      if (e.target.closest("[data-slot=del]")) { this.del(card); return; }
+      if (e.target.closest("[data-slot=open]")) location.hash = "#/stories/" + card.dataset.sid;
     });
-    $("#story-share", view).addEventListener("click", () => this.share());
-    this.paintColl();
+    this.load();
   },
 
-  paintColl() {
-    $$("#story-coll-wrap [data-coll]", this.view).forEach((b) => {
-      const on = b.dataset.coll === this.collection;
-      b.className = on
-        ? "px-3 py-1.5 rounded text-xs font-semibold bg-papyrus-100 text-espresso-950 shadow-archival"
-        : "px-3 py-1.5 rounded text-xs font-semibold text-espresso-600 hover:text-espresso-950";
-    });
-  },
-
-  setLoading(on) {
+  paintPills() {
     const view = this.view;
-    if (on) {
-      hide($("#story-article", view)); hide($("#story-error", view));
-      show($("#story-loading", view));
-      const t0 = Date.now();
-      const tick = () => {
-        $("#story-elapsed", view).textContent = Math.floor((Date.now() - t0) / 1000) + "s";
-      };
-      tick();
-      this.timer = setInterval(tick, 1000);
+    const groups = [["story-tones", "tone"], ["story-sources", "source"], ["story-targets", "target"]];
+    groups.forEach(([id, key]) => {
+      $$("#" + id + " button", view).forEach((b) => {
+        const on = b.dataset[key] === this[key];
+        b.className = "min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all " +
+          (on ? "bg-primary-container text-surface shadow-sm" : "bg-surface-container-high text-on-surface-variant hover:text-on-surface");
+      });
+    });
+  },
+
+  say(text, isError) {
+    const view = this.view;
+    const busy = $("#story-making", view);
+    const err = $("#story-make-error", view);
+    if (isError) {
+      busy.classList.add("hidden");
+      err.textContent = text;
+      err.classList.remove("hidden");
+    } else if (text) {
+      err.classList.add("hidden");
+      busy.textContent = text;
+      busy.classList.remove("hidden");
     } else {
-      if (this.timer) { clearInterval(this.timer); this.timer = null; }
-      hide($("#story-loading", view));
+      busy.classList.add("hidden");
+      err.classList.add("hidden");
     }
   },
 
-  async make(theme) {
-    this.lastTheme = theme;
-    this.setLoading(true);
+  async make() {
+    if (this.making) return;
+    const view = this.view;
+    const prompt = $("#story-create-prompt", view).value.trim();
+    if (!prompt) {
+      this.say("Describe the story first — a theme, a place, a walk.", true);
+      return;
+    }
+    this.making = true;
+    this.say("Planning…");
+    $("#story-make", view).disabled = true;
+    const t0 = performance.now();
+    this.makeTimer = setInterval(() => {
+      if (view.isConnected) this.say("Planning… " + Math.round((performance.now() - t0) / 1000) + "s elapsed");
+    }, 1000);
     try {
-      const data = await api("/api/story", {
+      const out = await api("/api/stories", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ theme, collection: this.collection }),
+        body: JSON.stringify({
+          title: $("#story-create-title", view).value.trim(),
+          prompt: prompt, tone: this.tone, source: this.source, target: this.target,
+        }),
       });
-      if (!this.view.isConnected) return;
-      this.setLoading(false);
-      this.data = data;
-      this.render(data);
+      try {
+        sessionStorage.setItem("rw.storyTrace." + out.story.id, JSON.stringify(out.trace || []));
+      } catch (e) { /* private mode */ }
+      location.hash = "#/stories/" + out.story.id;
     } catch (e) {
-      if (!this.view || !this.view.isConnected) return;
-      this.setLoading(false);
-      this.data = null;
-      $("#story-error-text", this.view).textContent = String((e && e.message) || e);
-      show($("#story-error", this.view));
-    }
-  },
-
-  render(d) {
-    const view = this.view;
-    $("#story-title", view).textContent = d.title || d.theme;
-    $("#story-intro", view).textContent = d.intro || "";
-    const box = $("#story-chapters", view);
-    box.innerHTML = "";
-    (d.chapters || []).forEach((ch, i) => {
-      const sec = document.createElement("section");
-      sec.className = "rounded-2xl bg-parchment-card border border-parchment-border p-5 shadow-archival flex flex-col gap-4";
-      const h = document.createElement("h3");
-      h.className = "text-lg font-bold text-espresso-950 tracking-tight";
-      h.textContent = (i + 1) + ". " + ch.heading;
-      const grid = document.createElement("div");
-      grid.className = "grid gap-4 " + ((ch.photos || []).length > 1
-        ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1");
-      (ch.photos || []).forEach((p) => {
-        const a = document.createElement("a");
-        a.href = "#/photo/" + p.photo_id;
-        a.className = "flex flex-col gap-2 group";
-        const img = document.createElement("img");
-        img.src = p.src || "";
-        img.alt = p.caption || p.photo_id;
-        img.loading = "lazy";
-        img.className = "rw-photo w-full aspect-[4/3] object-cover rounded-xl bg-papyrus-300 border border-parchment-border";
-        img.addEventListener("error", () => img.setAttribute("data-broken", "true"));
-        const cap = document.createElement("span");
-        cap.className = "text-xs text-espresso-700 leading-snug";
-        const b = document.createElement("strong");
-        b.className = "text-espresso-950 font-mono";
-        b.textContent = p.photo_id;
-        cap.append(b, document.createTextNode(" · " + (p.caption || "")));
-        a.append(img, cap);
-        grid.appendChild(a);
-      });
-      const t = document.createElement("p");
-      t.className = "text-sm text-espresso-900 leading-relaxed";
-      t.textContent = ch.text || "";
-      sec.append(h, grid, t);
-      box.appendChild(sec);
-    });
-    if (!(d.chapters || []).length) {
-      const p = document.createElement("p");
-      p.className = "text-sm text-espresso-700 px-1";
-      p.textContent = "No chapters — the trace below says what happened.";
-      box.appendChild(p);
-    }
-    const credits = d.credits || [];
-    const cBox = $("#story-credits", view);
-    cBox.innerHTML = "";
-    credits.forEach((c) => {
-      const li = document.createElement("li");
-      li.appendChild(creditLine({ author: c.author, license: c.license,
-                                  source_url: c.source_url }));
-      cBox.appendChild(li);
-    });
-    $("#story-credits-empty", view).classList.toggle("hidden", credits.length > 0);
-    renderTrace($("#story-trace-steps", view), d.trace || []);
-    $("#story-trace", view).open = false;
-    $("#story-share", view).disabled = !(d.chapters || []).length;
-    this.shareSay("");
-    show($("#story-article", view));
-  },
-
-  async share() {
-    const d = this.data;
-    if (!d || !(d.chapters || []).length) return;
-    const btn = $("#story-share", this.view);
-    setBtnLoading(btn, true, "Preparing…");
-    this.shareSay("");
-    try {
-      const blob = await buildStoryCard(d);
-      if (!blob) throw new Error("The card could not be drawn.");
-      const file = new File([blob], "reelworld-story.png", { type: "image/png" });
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        await navigator.share({ files: [file], title: d.title, text: d.intro });
-        this.shareSay("Shared.");
-      } else {
-        const a = document.createElement("a");
-        a.href = URL.createObjectURL(blob);
-        a.download = "reelworld-story.png";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        setTimeout(() => URL.revokeObjectURL(a.href), 5000);
-        this.shareSay("Card downloaded.");
-      }
-    } catch (e) {
-      if (e && e.name === "AbortError") this.shareSay("");
-      else this.shareSay("Sharing failed: " + String((e && e.message) || e));
+      if (!view.isConnected) return;
+      this.say(String((e && e.message) || e), true);
     } finally {
-      setBtnLoading(btn, false);
+      clearInterval(this.makeTimer);
+      this.makeTimer = null;
+      this.making = false;
+      if (view.isConnected) $("#story-make", view).disabled = false;
     }
   },
 
-  shareSay(text) {
-    const el = $("#story-share-status", this.view);
-    el.textContent = text || "";
-    el.classList.toggle("hidden", !text);
+  async load() {
+    const view = this.view;
+    const grid = $("#stories-grid", view);
+    grid.innerHTML = "";
+    $("#stories-empty", view).classList.add("hidden");
+    $("#stories-error", view).classList.add("hidden");
+    try {
+      const out = await api("/api/stories");
+      if (!view.isConnected) return;
+      const list = out.stories || [];
+      $("#stories-count", view).textContent = list.length + (list.length === 1 ? " story" : " stories");
+      if (!list.length) {
+        $("#stories-empty", view).classList.remove("hidden");
+        return;
+      }
+      const T = $("#tpl-story-card", view).content.firstElementChild;
+      list.forEach((s) => {
+        const node = T.cloneNode(true);
+        node.dataset.sid = s.id;
+        const img = $("[data-slot=img]", node);
+        if (s.cover_src) {
+          img.src = s.cover_src;
+          img.alt = s.title || s.id;
+        } else img.remove();
+        const st = $("[data-slot=status]", node);
+        const pub = s.status === "published";
+        st.textContent = pub ? "Published" : "Draft";
+        st.className += pub
+          ? " bg-secondary-container text-on-secondary-fixed"
+          : " bg-surface-container-high text-on-surface-variant";
+        $("[data-slot=title]", node).textContent = s.title || s.id;
+        $("[data-slot=meta]", node).textContent =
+          s.scenes + (s.scenes === 1 ? " scene" : " scenes") + " · " + s.seconds + "s · " + (s.tone || "");
+        grid.appendChild(node);
+      });
+    } catch (e) {
+      if (!view.isConnected) return;
+      const box = $("#stories-error", view);
+      box.textContent = String((e && e.message) || e);
+      box.classList.remove("hidden");
+    }
+  },
+
+  async del(card) {
+    const btn = card.querySelector("[data-slot=del]");
+    if (!btn.dataset.armed) {
+      btn.dataset.armed = "1";
+      btn.textContent = "Sure?";
+      return;
+    }
+    try {
+      await api("/api/stories/" + encodeURIComponent(card.dataset.sid), { method: "DELETE" });
+      if (this.view.isConnected) this.load();
+    } catch (e) {
+      if (this.view.isConnected) {
+        const box = $("#stories-error", this.view);
+        box.textContent = String((e && e.message) || e);
+        box.classList.remove("hidden");
+      }
+    }
+  },
+};
+
+/* ---------- story studio (one draft) ---------- */
+const builder = {
+  view: null,
+  id: null,
+  full: null,
+  stage: "review",
+  rec: null,
+  recCancel: false,
+
+  mount(view, id) {
+    this.view = view;
+    this.id = id;
+    this.full = null;
+    this.stage = "review";
+    this.rec = null;
+    this.recCancel = false;
+    $("#bld-tabs", view).addEventListener("click", (e) => {
+      const b = e.target.closest("[data-stage]");
+      if (b) this.showStage(b.dataset.stage);
+    });
+    $("#bld-title", view).addEventListener("input", () => this.markDirty());
+    $("#bld-tones", view).addEventListener("click", (e) => {
+      const b = e.target.closest("[data-tone]");
+      if (!b || !this.full) return;
+      this.full.story.tone = b.dataset.tone;
+      this.paintTones();
+      this.markDirty();
+    });
+    $("#bld-scenes", view).addEventListener("input", () => this.markDirty());
+    $("#bld-scenes", view).addEventListener("click", (e) => this.sceneClick(e));
+    $("#bld-shorter", view).addEventListener("click", () => this.makeShorter());
+    $("#bld-save", view).addEventListener("click", () => this.save());
+    $("#bld-delete", view).addEventListener("click", () => this.del());
+    $("#bld-webm-record", view).addEventListener("click", () => this.recordWebm());
+    $("#bld-webm-cancel", view).addEventListener("click", () => this.cancelExport());
+    $("#bld-md", view).addEventListener("click", () => this.downloadFile("md"));
+    $("#bld-json", view).addEventListener("click", () => this.downloadFile("json"));
+    $("#bld-link", view).addEventListener("click", () => this.copyLink());
+    $("#bld-publish", view).addEventListener("click", () => this.publish());
+    this.load();
+  },
+
+  cancelExport() {
+    this.recCancel = true;
+    if (this.rec) {
+      try { this.rec.stop(); } catch (e) { /* already stopped */ }
+    }
+  },
+
+  show(el, on) {
+    if (!el) return;
+    el.hidden = !on;
+    el.classList.toggle("flex", !!on);
+  },
+
+  showStage(stage) {
+    this.stage = stage;
+    const view = this.view;
+    $$("#bld-tabs [data-stage]", view).forEach((b) => {
+      const on = b.dataset.stage === stage;
+      b.className = "min-h-[44px] px-5 rounded-lg font-label-md text-label-md transition-all " +
+        (on ? "bg-primary-container text-surface shadow-sm" : "text-on-surface-variant hover:text-on-surface");
+    });
+    ["review", "player", "export"].forEach((t) => {
+      this.show($("#stage-" + t, view), t === stage);
+    });
+    if (stage === "player" && this.full) player.mount($("#bld-player", view), this.full);
+    else player.destroy();
+  },
+
+  async load() {
+    const view = this.view;
+    $("#bld-loading", view).hidden = false;
+    this.show($("#bld-main", view), false);
+    $("#bld-error", view).classList.add("hidden");
+    try {
+      const out = await api("/api/stories/" + encodeURIComponent(this.id));
+      if (!view.isConnected) return;
+      this.full = out;
+      $("#bld-loading", view).hidden = true;
+      this.show($("#bld-main", view), true);
+      let trace = null;
+      try {
+        trace = JSON.parse(sessionStorage.getItem("rw.storyTrace." + this.id) || "null");
+        sessionStorage.removeItem("rw.storyTrace." + this.id);
+      } catch (e) { trace = null; }
+      if (trace && trace.length) {
+        const box = $("#bld-trace", view);
+        box.innerHTML = "";
+        renderTrace(box, trace);
+        this.show(box, true);
+      }
+      this.paintAll();
+      this.showStage("review");
+    } catch (e) {
+      if (!view.isConnected) return;
+      $("#bld-loading", view).hidden = true;
+      const box = $("#bld-error", view);
+      box.textContent = String((e && e.message) || e);
+      box.classList.remove("hidden");
+    }
+  },
+
+  paintAll() {
+    const view = this.view;
+    const st = this.full.story;
+    $("#bld-title", view).value = st.title || "";
+    const chip = $("#bld-status", view);
+    const pub = st.status === "published";
+    chip.textContent = pub ? "Published" : "Draft";
+    chip.className = "px-2 py-0.5 rounded font-label-sm text-label-sm font-bold uppercase tracking-wider flex-shrink-0 " +
+      (pub ? "bg-secondary-container text-on-secondary-fixed" : "bg-surface-container-high text-on-surface-variant");
+    this.paintTones();
+    this.paintScenes();
+    this.paintPublish();
+    $("#bld-save", view).disabled = true;
+    $("#bld-save-status", view).textContent = "";
+  },
+
+  paintTones() {
+    const view = this.view;
+    $$("#bld-tones [data-tone]", view).forEach((b) => {
+      const on = b.dataset.tone === this.full.story.tone;
+      b.className = "min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all " +
+        (on ? "bg-primary-container text-surface shadow-sm" : "bg-surface-container-high text-on-surface-variant hover:text-on-surface");
+    });
+  },
+
+  paintScenes() {
+    const view = this.view;
+    const box = $("#bld-scenes", view);
+    box.innerHTML = "";
+    const T = $("#tpl-bld-scene", view).content.firstElementChild;
+    (this.full.chapters || []).forEach((c, i) => {
+      const node = T.cloneNode(true);
+      node.dataset.pid = c.photo_id;
+      const img = $("[data-slot=img]", node);
+      img.src = c.src;
+      img.alt = c.caption || c.photo_id;
+      $("[data-slot=idx]", node).textContent = "Scene " + (i + 1);
+      const pb = $("[data-slot=people]", node);
+      if ((c.people || 0) > 0) {
+        pb.textContent = c.people + (c.people === 1 ? " person — blocks publish" : " people — block publish");
+        pb.classList.remove("hidden");
+      }
+      $("[data-slot=heading]", node).value = c.heading || "";
+      $("[data-slot=caption]", node).value = c.caption || "";
+      $("[data-slot=secs]", node).textContent = c.seconds + "s";
+      const probs = (this.full.problems || {})[String(i)] || [];
+      if (probs.length) {
+        const w = $("[data-slot=problems]", node);
+        w.textContent = "Heading warning: " + probs.join("; ");
+        w.classList.remove("hidden");
+      }
+      box.appendChild(node);
+    });
+  },
+
+  paintPublish() {
+    const view = this.view;
+    const st = this.full.story;
+    const blocked = this.full.faces_blocked || [];
+    const pub = st.status === "published";
+    const fb = $("#bld-faces", view);
+    if (blocked.length) {
+      fb.textContent = "Cannot publish: people are visible in " + blocked.join(", ") +
+        ". Faces are never published — remove those scenes first.";
+      fb.classList.remove("hidden");
+    } else fb.classList.add("hidden");
+    $("#bld-publish", view).disabled = pub || blocked.length > 0;
+    const link = $("#bld-showcase-link", view);
+    link.classList.toggle("hidden", !pub);
+    link.classList.toggle("inline-flex", pub);
+    if (pub) $("#bld-pub-status", view).textContent = "Published to the Showcase.";
+  },
+
+  collectScenes() {
+    const view = this.view;
+    const out = [];
+    $$("#bld-scenes [data-pid]", view).forEach((node) => {
+      out.push({
+        photo_id: node.dataset.pid,
+        seconds: parseFloat($("[data-slot=secs]", node).textContent) || 4,
+        heading: $("[data-slot=heading]", node).value.trim(),
+        caption: $("[data-slot=caption]", node).value.trim(),
+      });
+    });
+    return out;
+  },
+
+  markDirty() {
+    $("#bld-save", this.view).disabled = false;
+    $("#bld-save-status", this.view).textContent = "Unsaved changes.";
+  },
+
+  sceneClick(e) {
+    const node = e.target.closest("[data-pid]");
+    if (!node) return;
+    const box = $("#bld-scenes", this.view);
+    const secsEl = $("[data-slot=secs]", node);
+    const secs = () => parseFloat(secsEl.textContent) || 4;
+    if (e.target.closest("[data-slot=slower]")) {
+      secsEl.textContent = Math.max(1, Math.round((secs() - 0.5) * 2) / 2) + "s";
+      this.markDirty();
+    } else if (e.target.closest("[data-slot=faster]")) {
+      secsEl.textContent = Math.min(15, Math.round((secs() + 0.5) * 2) / 2) + "s";
+      this.markDirty();
+    } else if (e.target.closest("[data-slot=up]")) {
+      if (node.previousElementSibling) {
+        box.insertBefore(node, node.previousElementSibling);
+        this.renumber();
+        this.markDirty();
+      }
+    } else if (e.target.closest("[data-slot=down]")) {
+      if (node.nextElementSibling) {
+        box.insertBefore(node.nextElementSibling, node);
+        this.renumber();
+        this.markDirty();
+      }
+    } else if (e.target.closest("[data-slot=remove]")) {
+      node.remove();
+      this.renumber();
+      this.markDirty();
+    }
+  },
+
+  renumber() {
+    $$("#bld-scenes [data-pid]", this.view).forEach((node, i) => {
+      $("[data-slot=idx]", node).textContent = "Scene " + (i + 1);
+    });
+  },
+
+  makeShorter() {
+    const nodes = $$("#bld-scenes [data-pid]", this.view);
+    const total = nodes.reduce((t, n) => t + (parseFloat($("[data-slot=secs]", n).textContent) || 0), 0);
+    if (total <= 14 || !nodes.length) return;
+    const f = 14 / total;
+    nodes.forEach((n) => {
+      const s = parseFloat($("[data-slot=secs]", n).textContent) || 4;
+      $("[data-slot=secs]", n).textContent = Math.max(2, Math.round(s * f * 2) / 2) + "s";
+    });
+    this.markDirty();
+  },
+
+  async save() {
+    const view = this.view;
+    const btn = $("#bld-save", view);
+    btn.disabled = true;
+    $("#bld-save-status", view).textContent = "Saving…";
+    try {
+      const out = await api("/api/stories/" + encodeURIComponent(this.id), {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: $("#bld-title", view).value.trim(),
+          tone: this.full.story.tone,
+          chapters: this.collectScenes(),
+        }),
+      });
+      if (!view.isConnected) return;
+      this.full = out;
+      this.paintAll();
+      $("#bld-save-status", view).textContent = "Saved.";
+      if (this.stage === "player") player.mount($("#bld-player", view), this.full);
+    } catch (e) {
+      if (!view.isConnected) return;
+      btn.disabled = false;
+      $("#bld-save-status", view).textContent = String((e && e.message) || e);
+    }
+  },
+
+  async del() {
+    const btn = $("#bld-delete", this.view);
+    if (!btn.dataset.armed) {
+      btn.dataset.armed = "1";
+      btn.textContent = "Click again to delete";
+      return;
+    }
+    try {
+      await api("/api/stories/" + encodeURIComponent(this.id), { method: "DELETE" });
+      location.hash = "#/stories";
+    } catch (e) {
+      if (this.view.isConnected) {
+        btn.dataset.armed = "";
+        btn.textContent = "Delete story";
+        $("#bld-save-status", this.view).textContent = String((e && e.message) || e);
+      }
+    }
+  },
+
+  downloadFile(kind) {
+    const full = this.full;
+    if (!full) return;
+    const isMd = kind === "md";
+    const text = isMd
+      ? buildStoryMarkdown(full.story, full.chapters)
+      : JSON.stringify(full, null, 2);
+    const blob = new Blob([text], { type: isMd ? "text/markdown" : "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "reelworld-" + this.id + (isMd ? ".md" : ".json");
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+  },
+
+  async copyLink() {
+    const url = location.origin + location.pathname + "#/stories/" + this.id;
+    const st = $("#bld-link-status", this.view);
+    try {
+      await navigator.clipboard.writeText(url);
+      st.textContent = "Copied. The link opens this studio on this device only.";
+    } catch (e) {
+      st.textContent = "Copy failed — the address bar holds the same link.";
+    }
+  },
+
+  async publish() {
+    const view = this.view;
+    const st = $("#bld-pub-status", view);
+    st.textContent = "Publishing…";
+    try {
+      const out = await api("/api/stories/" + encodeURIComponent(this.id) + "/publish", { method: "POST" });
+      if (!view.isConnected) return;
+      this.full = out;
+      this.paintAll();
+      st.textContent = "Published to the Showcase.";
+    } catch (e) {
+      if (!view.isConnected) return;
+      const msg = String((e && e.message) || e);
+      st.textContent = /demo code/i.test(msg)
+        ? "Demo mode: unlock with the demo code in the header, then retry."
+        : msg;
+    }
+  },
+
+  loadImage(src) {
+    return new Promise((res) => {
+      const im = new Image();
+      im.onload = () => res(im);
+      im.onerror = () => res(null);
+      im.src = src;
+    });
+  },
+
+  drawScene(ctx, im, ch, prog, idx, W, H) {
+    const z = idx % 2 ? 1.1 - 0.1 * prog : 1 + 0.1 * prog;
+    const iw = im.naturalWidth || W;
+    const ih = im.naturalHeight || H;
+    const cover = Math.max(W / iw, H / ih) * z;
+    const dw = iw * cover;
+    const dh = ih * cover;
+    ctx.fillStyle = "#000";
+    ctx.fillRect(0, 0, W, H);
+    ctx.drawImage(im, (W - dw) / 2, (H - dh) / 2, dw, dh);
+    const grad = ctx.createLinearGradient(0, H * 0.6, 0, H);
+    grad.addColorStop(0, "rgba(0,0,0,0)");
+    grad.addColorStop(1, "rgba(0,0,0,0.8)");
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, H * 0.6, W, H * 0.4);
+    ctx.fillStyle = "#fff";
+    ctx.font = '700 30px "Plus Jakarta Sans", sans-serif';
+    ctx.fillText(String(ch.heading || ("Scene " + (idx + 1))).slice(0, 60), 28, H - 120);
+    ctx.font = '400 22px "Plus Jakarta Sans", sans-serif';
+    ctx.fillStyle = "rgba(255,255,255,0.9)";
+    ctx.fillText(String(ch.caption || "").slice(0, 80), 28, H - 84);
+    const ct = creditText(ch.credit, ch.collection) || "";
+    if (ct) {
+      ctx.font = '400 18px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = "rgba(255,255,255,0.7)";
+      ctx.fillText(ct.slice(0, 80), 28, H - 52);
+    }
+  },
+
+  async recordWebm() {
+    const view = this.view;
+    const full = this.full;
+    const chapters = (full && full.chapters) || [];
+    const status = $("#bld-webm-status", view);
+    const bar = $("#bld-webm-bar", view);
+    const track = $("#bld-webm-track", view);
+    const dl = $("#bld-webm-dl", view);
+    const recBtn = $("#bld-webm-record", view);
+    const cancelBtn = $("#bld-webm-cancel", view);
+    const reset = () => {
+      recBtn.disabled = false;
+      cancelBtn.classList.add("hidden");
+      track.classList.add("hidden");
+    };
+    dl.classList.add("hidden");
+    dl.classList.remove("inline-flex");
+    if (!chapters.length) {
+      status.textContent = "This story has no scenes.";
+      return;
+    }
+    const probe = document.createElement("canvas");
+    if (!window.MediaRecorder || typeof probe.captureStream !== "function") {
+      status.textContent = "This browser cannot record video. Try Chrome or Edge.";
+      return;
+    }
+    const webm = ["video/webm;codecs=vp9", "video/webm;codecs=vp8", "video/webm"]
+      .find((m) => { try { return MediaRecorder.isTypeSupported(m); } catch (e) { return false; } });
+    if (!webm) {
+      status.textContent = "This browser cannot record WebM (it only offers other formats). Try Chrome or Edge.";
+      return;
+    }
+    recBtn.disabled = true;
+    cancelBtn.classList.remove("hidden");
+    track.classList.remove("hidden");
+    bar.style.width = "0%";
+    status.textContent = "Loading photos…";
+    const imgs = [];
+    for (const c of chapters) {
+      const im = await this.loadImage(c.src);
+      if (!im) {
+        status.textContent = "Could not load " + c.photo_id + "; export stopped.";
+        reset();
+        return;
+      }
+      imgs.push(im);
+      if (!view.isConnected) return;
+    }
+    const W = 540;
+    const H = 960;
+    const cv = document.createElement("canvas");
+    cv.width = W;
+    cv.height = H;
+    const ctx = cv.getContext("2d");
+    const stream = cv.captureStream(30);
+    const rec = new MediaRecorder(stream, { mimeType: webm, videoBitsPerSecond: 2500000 });
+    this.rec = rec;
+    this.recCancel = false;
+    const chunks = [];
+    rec.ondataavailable = (e) => {
+      if (e.data && e.data.size) chunks.push(e.data);
+    };
+    const stopped = new Promise((res) => { rec.onstop = res; });
+    rec.start(250);
+    const total = chapters.reduce((t, c) => t + (Number(c.seconds) || 0), 0);
+    let done = 0;
+    const t0 = performance.now();
+    for (let i = 0; i < chapters.length; i++) {
+      const secs = Number(chapters[i].seconds) || 4;
+      const frames = Math.max(1, Math.round(secs * 30));
+      for (let f = 0; f < frames; f++) {
+        if (this.recCancel || !view.isConnected) break;
+        this.drawScene(ctx, imgs[i], chapters[i], f / frames, i, W, H);
+        bar.style.width = Math.min(100, ((done + (f / frames) * secs) / total) * 100) + "%";
+        status.textContent = "Recording scene " + (i + 1) + "/" + chapters.length + "…";
+        await new Promise((r) => setTimeout(r, 1000 / 30));
+      }
+      if (this.recCancel || !view.isConnected) break;
+      done += secs;
+    }
+    const cancelled = this.recCancel || !view.isConnected;
+    try { rec.stop(); } catch (e) { /* already stopped */ }
+    await stopped;
+    stream.getTracks().forEach((t) => t.stop());
+    this.rec = null;
+    if (cancelled) {
+      if (view.isConnected) status.textContent = "Export cancelled.";
+      reset();
+      return;
+    }
+    const blob = new Blob(chunks, { type: "video/webm" });
+    dl.href = URL.createObjectURL(blob);
+    dl.download = "reelworld-" + this.id + ".webm";
+    dl.childNodes.forEach(() => {});
+    dl.innerHTML = "";
+    dl.appendChild(document.createTextNode(
+      "Download video (" + (blob.size / 1048576).toFixed(1) + " MB WebM)"));
+    dl.classList.remove("hidden");
+    dl.classList.add("inline-flex");
+    const took = Math.round((performance.now() - t0) / 1000);
+    status.textContent = "Recorded " + total + "s of story in " + took + "s.";
+    setTimeout(() => URL.revokeObjectURL(dl.href), 60000);
+    reset();
+  },
+};
+
+/* ---------- showcase ---------- */
+const showcase = {
+  view: null,
+  list: [],
+
+  mount(view) {
+    this.view = view;
+    this.list = [];
+    $("#sc-grid", view).addEventListener("click", (e) => {
+      const b = e.target.closest("[data-sid]");
+      if (b) this.open(b.dataset.sid);
+    });
+    $("#sc-featured", view).addEventListener("click", () => {
+      if (this.list.length) this.open(this.list[0].id);
+    });
+    $("#sc-close", view).addEventListener("click", () => this.close());
+    $("#sc-modal", view).addEventListener("click", (e) => {
+      if (e.target.id === "sc-modal") this.close();
+    });
+    document.addEventListener("keydown", this.esc);
+    this.load();
+  },
+
+  esc(e) {
+    if (e.key === "Escape" && showcase.view) {
+      const m = $("#sc-modal", showcase.view);
+      if (m && !m.classList.contains("hidden")) showcase.close();
+    }
+  },
+
+  close() {
+    const view = this.view;
+    if (!view) return;
+    player.destroy();
+    const m = $("#sc-modal", view);
+    m.classList.add("hidden");
+    m.classList.remove("flex");
+  },
+
+  async load() {
+    const view = this.view;
+    const err = $("#sc-error", view);
+    err.classList.add("hidden");
+    try {
+      const out = await api("/api/stories?status=published");
+      if (!view.isConnected) return;
+      this.list = out.stories || [];
+      $("#sc-count", view).textContent =
+        this.list.length + (this.list.length === 1 ? " story" : " stories") + " published";
+      const main = $("#sc-main", view);
+      main.hidden = false;
+      main.classList.add("flex");
+      if (!this.list.length) {
+        $("#sc-empty", view).classList.remove("hidden");
+        $("#sc-featured", view).classList.add("hidden");
+        return;
+      }
+      const f = this.list[0];
+      const fi = $("#sc-f-img", view);
+      if (f.cover_src) {
+        fi.src = f.cover_src;
+        fi.alt = f.title || f.id;
+      }
+      $("#sc-f-title", view).textContent = f.title || f.id;
+      $("#sc-f-meta", view).textContent = this.meta(f);
+      const grid = $("#sc-grid", view);
+      grid.innerHTML = "";
+      const T = $("#tpl-sc-card", view).content.firstElementChild;
+      this.list.forEach((s) => {
+        const node = T.cloneNode(true);
+        node.dataset.sid = s.id;
+        const img = $("[data-slot=img]", node);
+        if (s.cover_src) {
+          img.src = s.cover_src;
+          img.alt = s.title || s.id;
+        } else img.remove();
+        $("[data-slot=runtime]", node).textContent = s.seconds + "s";
+        $("[data-slot=title]", node).textContent = s.title || s.id;
+        $("[data-slot=meta]", node).textContent = this.meta(s);
+        grid.appendChild(node);
+      });
+    } catch (e) {
+      if (!view.isConnected) return;
+      err.textContent = String((e && e.message) || e);
+      err.classList.remove("hidden");
+    }
+  },
+
+  meta(s) {
+    return s.scenes + (s.scenes === 1 ? " scene" : " scenes") + " · " + s.seconds + "s" +
+      (s.tone ? " · " + s.tone : "");
+  },
+
+  async open(sid) {
+    const view = this.view;
+    const m = $("#sc-modal", view);
+    m.classList.remove("hidden");
+    m.classList.add("flex");
+    $("#sc-title", view).textContent = "Loading…";
+    try {
+      const full = await api("/api/stories/" + encodeURIComponent(sid));
+      if (!view.isConnected) return;
+      $("#sc-title", view).textContent = full.story.title || sid;
+      player.mount($("#sc-player", view), full);
+      const box = $("#sc-credits", view);
+      box.innerHTML = "";
+      const seen = [];
+      (full.chapters || []).forEach((c) => {
+        const ct = creditText(c.credit, c.collection);
+        if (ct && !seen.includes(ct)) {
+          seen.push(ct);
+          const p = document.createElement("p");
+          p.className = "font-label-sm text-label-sm text-on-surface-variant";
+          p.textContent = ct;
+          box.appendChild(p);
+        }
+      });
+      $("#sc-studio", view).href = "#/stories/" + sid;
+    } catch (e) {
+      if (!view.isConnected) return;
+      $("#sc-title", view).textContent = String((e && e.message) || e);
+    }
   },
 };
 
@@ -4478,7 +5310,8 @@ async function route() {
   const hash = location.hash || "#/";
   clearInterval(home.loadingTimer);
   if (add.pollTimer) { clearInterval(add.pollTimer); add.pollTimer = null; }
-  if (story.timer) { clearInterval(story.timer); story.timer = null; }
+  player.destroy();
+  builder.cancelExport();
   if (hash.startsWith("#/place/")) {
     const key = decodeURIComponent(hash.slice("#/place/".length));
     setActiveTab("");
@@ -4514,12 +5347,24 @@ async function route() {
     }
     return;
   }
-  if (hash === "#/stories" || hash === "#/story") {
+  if (hash.startsWith("#/stories/")) {
+    const id = decodeURIComponent(hash.slice("#/stories/".length));
     setActiveTab("stories");
     try {
-      const html = await loadView("story");
+      const html = await loadView("builder");
       $("#view").innerHTML = html;
-      story.mount($("#view"));
+      builder.mount($("#view"), id);
+    } catch (e) {
+      showErrorView(String((e && e.message) || e), () => route());
+    }
+    return;
+  }
+  if (hash === "#/stories") {
+    setActiveTab("stories");
+    try {
+      const html = await loadView("stories");
+      $("#view").innerHTML = html;
+      stories.mount($("#view"));
     } catch (e) {
       showErrorView(String((e && e.message) || e), () => route());
     }
@@ -4550,7 +5395,13 @@ async function route() {
   }
   if (hash === "#/showcase") {
     setActiveTab("stories");
-    stubView("Stories Showcase", "4", "Published stories arrive in Phase 4.");
+    try {
+      const html = await loadView("showcase");
+      $("#view").innerHTML = html;
+      showcase.mount($("#view"));
+    } catch (e) {
+      showErrorView(String((e && e.message) || e), () => route());
+    }
     return;
   }
   if (hash === "#/about") {

@@ -1,0 +1,124 @@
+<!-- Story studio: review, player preview, export & publish. Follows
+     stories_building_the_story, stories_review_and_adjust,
+     stories_the_story_player_9_16_vertical_quad_frame and
+     stories_export_and_publish. Removed: version/edge pills, session
+     refs, fake timers and ETAs (elapsed time shown is real), SHA-256,
+     coordinates, capture dates, camera telemetry, MP4 (WebM only),
+     invented archive sizes (real sizes after render), ZIP bundle
+     (Markdown + JSON instead), unlisted visibility (draft/published).
+     Publish is faces-blocking: any scene with people visible blocks it. -->
+<div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+<div class="flex items-center gap-3 min-w-0">
+<a class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-variant text-on-surface font-label-md text-label-md min-h-[44px]" href="#/stories" id="bld-back">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+<span>Stories</span>
+</a>
+<input autocomplete="off" class="font-headline-md text-headline-md text-on-surface tracking-tight bg-transparent border-b border-transparent hover:border-outline-variant focus:border-primary focus:outline-none min-w-0 flex-1" id="bld-title" maxlength="80" value="—"/>
+<span class="px-2 py-0.5 rounded font-label-sm text-label-sm font-bold uppercase tracking-wider flex-shrink-0" id="bld-status">—</span>
+</div>
+<button class="min-h-[44px] px-4 rounded-lg text-stone-500 hover:text-error hover:bg-error-container/40 font-label-md text-label-md transition-colors" id="bld-delete" type="button">Delete story</button>
+</div>
+<div class="flex-col gap-8 animate-pulse" id="bld-loading" hidden>
+<div class="h-12 rounded-xl bg-surface-container-low w-1/2"></div>
+<div class="h-64 rounded-xl bg-surface-container-low"></div>
+</div>
+<div class="hidden font-body-md text-body-md text-error" id="bld-error" role="alert"></div>
+<div class="flex-col gap-4" id="bld-main" hidden>
+<div class="flex items-center gap-1 p-1 bg-surface-container-low rounded-xl shadow-sm w-fit" id="bld-tabs" role="tablist">
+<button class="min-h-[44px] px-5 rounded-lg font-label-md text-label-md transition-all" data-stage="review" role="tab" type="button">Review scenes</button>
+<button class="min-h-[44px] px-5 rounded-lg font-label-md text-label-md transition-all" data-stage="player" role="tab" type="button">Player preview</button>
+<button class="min-h-[44px] px-5 rounded-lg font-label-md text-label-md transition-all" data-stage="export" role="tab" type="button">Export &amp; publish</button>
+</div>
+<div class="hidden items-center gap-3 bg-surface-container-low rounded-xl p-4 font-body-md text-body-md text-on-surface-variant" id="bld-building">
+<span class="material-symbols-outlined text-[20px] animate-spin">progress_activity</span>
+<span>Directing your story… <span id="bld-elapsed">0s</span> elapsed</span>
+</div>
+<div class="hidden flex-col gap-2" id="bld-trace"></div>
+<!-- REVIEW -->
+<section class="flex-col gap-4" id="stage-review">
+<div class="flex flex-wrap items-center gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Tone:</span>
+<div class="flex flex-wrap gap-2" id="bld-tones">
+<button class="min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all" data-tone="postcard" type="button">Postcard</button>
+<button class="min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all" data-tone="field-notes" type="button">Field Notes</button>
+<button class="min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all" data-tone="documentary" type="button">Documentary</button>
+</div>
+</div>
+<div class="flex flex-col gap-3" id="bld-scenes"></div>
+<div class="flex flex-wrap items-center gap-3">
+<button class="min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md transition-colors" id="bld-shorter" type="button" title="Scale scene durations to about 14 seconds total">Make shorter (~14s)</button>
+<button class="min-h-[44px] px-5 rounded-lg bg-primary-container text-surface hover:bg-primary font-label-md text-label-md transition-colors shadow-sm active:scale-95 disabled:opacity-45" id="bld-save" type="button" disabled>Save changes</button>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="bld-save-status"></span>
+</div>
+</section>
+<!-- PLAYER -->
+<section class="flex-col gap-4 items-center" id="stage-player" hidden>
+<div class="w-full max-w-[340px]" id="bld-player"></div>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-center max-w-md">Preview plays exactly what the export records: scenes, captions and timing.</p>
+</section>
+<!-- EXPORT -->
+<section class="flex-col gap-4" id="stage-export" hidden>
+<div class="bg-surface-container-low rounded-xl p-5 flex flex-col gap-3">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider font-semibold">Private video export (WebM)</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Records the player in real time on this device. Nothing is uploaded.</p>
+<div class="flex flex-wrap items-center gap-3">
+<button class="min-h-[44px] px-5 rounded-lg bg-primary-container text-surface hover:bg-primary font-label-md text-label-md transition-colors shadow-sm active:scale-95 disabled:opacity-45" id="bld-webm-record" type="button">
+<span class="material-symbols-outlined text-[18px] align-middle">movie</span>
+<span>Record WebM</span>
+</button>
+<button class="hidden min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md transition-colors" id="bld-webm-cancel" type="button">Cancel</button>
+<a class="hidden min-h-[44px] px-4 rounded-lg bg-secondary-container text-on-secondary-fixed font-label-md text-label-md items-center gap-2" id="bld-webm-dl" href="#">Download video</a>
+</div>
+<div class="hidden w-full h-2 bg-surface-container-high rounded-full overflow-hidden" id="bld-webm-track">
+<div class="h-full bg-secondary rounded-full" id="bld-webm-bar" style="width: 0%;"></div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant" id="bld-webm-status"></p>
+</div>
+<div class="bg-surface-container-low rounded-xl p-5 flex flex-col gap-3">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider font-semibold">Story files</span>
+<div class="flex flex-wrap items-center gap-3">
+<button class="min-h-[44px] px-4 rounded-lg bg-surface-container-highest hover:bg-surface-dim text-on-surface font-label-md text-label-md transition-colors" id="bld-md" type="button">Download Markdown</button>
+<button class="min-h-[44px] px-4 rounded-lg bg-surface-container-highest hover:bg-surface-dim text-on-surface font-label-md text-label-md transition-colors" id="bld-json" type="button">Download JSON</button>
+<button class="min-h-[44px] px-4 rounded-lg bg-surface-container-highest hover:bg-surface-dim text-on-surface font-label-md text-label-md transition-colors inline-flex items-center gap-2" id="bld-link" type="button">
+<span class="material-symbols-outlined text-[16px]">link</span>
+<span>Copy story link</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant" id="bld-link-status">The link opens this studio on this device only.</p>
+</div>
+<div class="bg-surface-container-low rounded-xl p-5 flex flex-col gap-3">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider font-semibold">Publish to Showcase</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant" id="bld-pub-note">Drafts are private. Publishing lists the story on the public Showcase.</p>
+<p class="hidden font-body-sm text-body-sm text-error" id="bld-faces"></p>
+<div class="flex flex-wrap items-center gap-3">
+<button class="min-h-[44px] px-5 rounded-lg bg-primary-container text-surface hover:bg-primary font-label-md text-label-md transition-colors shadow-sm active:scale-95 disabled:opacity-45" id="bld-publish" type="button">Publish story</button>
+<a class="hidden min-h-[44px] px-4 rounded-lg bg-secondary-container text-on-secondary-fixed font-label-md text-label-md items-center gap-2" id="bld-showcase-link" href="#/showcase">View in Showcase</a>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant" id="bld-pub-status"></p>
+</div>
+</section>
+</div>
+<template id="tpl-bld-scene">
+<div class="bg-surface-container-low rounded-xl p-4 shadow-sm flex flex-col sm:flex-row gap-4">
+<img alt="" class="rw-photo w-full sm:w-36 aspect-[4/3] rounded-lg object-cover flex-shrink-0 bg-surface-container-high" data-slot="img" loading="lazy"/>
+<div class="flex flex-col gap-2 flex-1 min-w-0">
+<div class="flex items-center justify-between gap-2">
+<span class="font-label-md text-label-md text-on-surface font-bold" data-slot="idx">Scene 1</span>
+<span class="hidden px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-[11px] font-semibold" data-slot="people">—</span>
+</div>
+<input autocomplete="off" class="w-full px-3 py-2 min-h-[44px] rounded-lg bg-surface-container-highest text-on-surface font-label-lg text-label-lg font-bold focus:outline-none" data-slot="heading" maxlength="80" placeholder="Scene heading (optional)" type="text"/>
+<textarea class="w-full px-3 py-2 min-h-[64px] rounded-lg bg-surface-container-highest text-on-surface font-body-sm text-body-sm focus:outline-none resize-y" data-slot="caption" maxlength="280" placeholder="Scene caption"></textarea>
+<p class="hidden font-body-sm text-body-sm text-error" data-slot="problems"></p>
+<div class="flex flex-wrap items-center gap-2">
+<div class="flex items-center gap-1">
+<button class="w-11 h-11 min-w-[44px] min-h-[44px] rounded-lg bg-surface-container-highest hover:bg-surface-dim text-on-surface font-bold" data-slot="slower" type="button" title="Shorter scene">−</button>
+<span class="font-label-md text-label-md text-on-surface min-w-[52px] text-center" data-slot="secs">4s</span>
+<button class="w-11 h-11 min-w-[44px] min-h-[44px] rounded-lg bg-surface-container-highest hover:bg-surface-dim text-on-surface font-bold" data-slot="faster" type="button" title="Longer scene">+</button>
+</div>
+<button class="min-h-[44px] px-3 rounded-lg bg-surface-container-highest hover:bg-surface-dim text-on-surface font-label-sm text-label-sm" data-slot="up" type="button">Move up</button>
+<button class="min-h-[44px] px-3 rounded-lg bg-surface-container-highest hover:bg-surface-dim text-on-surface font-label-sm text-label-sm" data-slot="down" type="button">Move down</button>
+<button class="min-h-[44px] px-3 rounded-lg text-stone-500 hover:text-error font-label-sm text-label-sm" data-slot="remove" type="button">Remove</button>
+</div>
+</div>
+</div>
+</template>

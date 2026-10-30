@@ -1,0 +1,88 @@
+<!-- Stories list + create. Follows stories_create_a_story. Removed:
+     version/edge pills, session refs, capture dates/coords, fake ETA,
+     "84 photos" totals. Tones and targets map to real player styling,
+     caption picks and scene counts (see build log). -->
+<section class="flex flex-col gap-6 mb-6">
+<div class="bg-surface-container-low p-6 rounded-xl shadow-sm flex flex-col xl:flex-row xl:items-center justify-between gap-6">
+<div class="flex flex-col gap-2 max-w-2xl">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm uppercase tracking-wider font-semibold w-fit">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+            Stories direction engine
+          </span>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Create a photo motion story</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Describe the story you want and Reel picks the photos, or start from photos you choose. Drafts stay private until you publish them.</p>
+</div>
+<a class="min-h-[44px] px-5 py-2.5 rounded bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-lg text-label-lg inline-flex items-center gap-2 shadow-sm active:scale-95 w-fit" href="#/showcase">
+<span class="material-symbols-outlined text-[18px]">play_circle</span>
+<span>Open Showcase</span>
+</a>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<div class="lg:col-span-5 flex flex-col gap-4">
+<div class="bg-surface-container-low rounded-xl p-5 shadow-sm flex flex-col gap-4">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider font-semibold">Describe the story you want</span>
+<input autocomplete="off" class="w-full px-3 py-2.5 min-h-[44px] rounded-lg bg-surface-container-highest text-on-surface placeholder:text-on-surface-variant/70 font-body-md text-body-md focus:outline-none" id="story-create-title" maxlength="80" placeholder="Title (optional — Reel suggests one)" type="text"/>
+<textarea class="w-full px-3 py-2.5 min-h-[88px] rounded-lg bg-surface-container-highest text-on-surface placeholder:text-on-surface-variant/70 font-body-md text-body-md focus:outline-none resize-y" id="story-create-prompt" maxlength="280" placeholder="My day at KICC"></textarea>
+<div class="flex flex-wrap gap-2" id="story-suggest">
+<button class="px-3 py-1.5 rounded-full bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-sm text-label-sm transition-colors min-h-[36px]" data-prompt="The view from above" type="button">The view from above</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-sm text-label-sm transition-colors min-h-[36px]" data-prompt="A walk through the market" type="button">A walk through the market</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-sm text-label-sm transition-colors min-h-[36px]" data-prompt="The place where I stood" type="button">The place where I stood</button>
+</div>
+<div class="flex flex-col gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Tone</span>
+<div class="flex flex-wrap gap-2" id="story-tones">
+<button class="min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all" data-tone="postcard" type="button" title="Short and warm">Postcard</button>
+<button class="min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all" data-tone="field-notes" type="button" title="Signs and details first">Field Notes</button>
+<button class="min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all" data-tone="documentary" type="button" title="Calm and factual">Documentary</button>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Photos from</span>
+<div class="flex flex-wrap gap-2" id="story-sources">
+<button class="min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all" data-source="mine" type="button">My photos only</button>
+<button class="min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all" data-source="world" type="button">World photos only</button>
+<button class="min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all" data-source="both" type="button">Both sources</button>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Length</span>
+<div class="flex flex-wrap gap-2" id="story-targets">
+<button class="min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all" data-target="short" type="button" title="About 5 scenes">Short (~20s)</button>
+<button class="min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all" data-target="medium" type="button" title="Up to 12 scenes">Medium (~40s)</button>
+</div>
+</div>
+<button class="min-h-[44px] px-5 py-2.5 rounded bg-primary-container text-surface hover:bg-primary font-label-lg text-label-lg transition-colors shadow-sm flex items-center justify-center gap-2 active:scale-95 disabled:opacity-45" id="story-make" type="button">
+<span class="material-symbols-outlined text-[18px]">movie_filter</span>
+<span>Make my story</span>
+</button>
+<p class="hidden font-body-sm text-body-sm text-on-surface-variant" id="story-making">Planning…</p>
+<p class="hidden font-body-sm text-body-sm text-error" id="story-make-error"></p>
+</div>
+</div>
+<div class="lg:col-span-7 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">My stories</h2>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm" id="stories-count">—</span>
+</div>
+<div class="hidden font-body-md text-body-md text-on-surface-variant" id="stories-error" role="alert"></div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="stories-grid"></div>
+<div class="hidden bg-surface-container-low rounded-xl p-6 text-center font-body-md text-body-md text-on-surface-variant" id="stories-empty">No stories yet — describe one and press “Make my story”.</div>
+</div>
+</div>
+<template id="tpl-story-card">
+<div class="bg-surface-container-low rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col">
+<div class="relative w-full aspect-[16/9] bg-surface-container-high">
+<img alt="" class="rw-photo w-full h-full object-cover" data-slot="img" loading="lazy"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded font-label-sm text-label-sm font-bold uppercase tracking-wider" data-slot="status">—</span>
+</div>
+<div class="p-4 flex flex-col gap-1.5 flex-1">
+<h3 class="font-label-lg text-label-lg text-on-surface font-bold leading-snug" data-slot="title">—</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant" data-slot="meta">—</p>
+<div class="flex items-center gap-2 pt-1 mt-auto">
+<button class="min-h-[44px] flex-1 px-4 rounded-lg bg-surface-container-highest hover:bg-surface-dim text-on-surface font-label-md text-label-md transition-colors" data-slot="open" type="button">Open studio</button>
+<button class="min-h-[44px] px-3 rounded-lg text-stone-500 hover:text-error hover:bg-error-container/40 font-label-md text-label-md transition-colors" data-slot="del" type="button" title="Delete story">Delete</button>
+</div>
+</div>
+</div>
+</template>

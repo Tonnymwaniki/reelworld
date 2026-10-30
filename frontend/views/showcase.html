@@ -1,0 +1,60 @@
+<!-- Public showcase of published stories. Follows stories_showcase.
+     Removed: version/edge pills, session refs, fake counts and dates,
+     curator names (no accounts), invented licenses (per-photo credits
+     instead), facial-clearance percentages (the publish gate is
+     people-visible in annotations, stated plainly). No likes, comments,
+     view counts or rankings anywhere. -->
+<section class="flex flex-col gap-6 mb-6">
+<div class="bg-surface-container-low p-6 rounded-xl shadow-sm flex flex-col gap-2 max-w-3xl">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm uppercase tracking-wider font-semibold w-fit">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+            Showcase
+          </span>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Published photo stories</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Only stories their authors chose to publish. Faces are never published: any story with people visible in it cannot be published.</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant" id="sc-count">—</p>
+</div>
+</section>
+<div class="hidden font-body-md text-body-md text-error" id="sc-error" role="alert"></div>
+<div class="flex-col gap-6" id="sc-main" hidden>
+<button class="w-full text-left bg-surface-container-low rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row" id="sc-featured" type="button">
+<div class="relative w-full md:w-2/5 aspect-[16/9] md:aspect-auto md:min-h-[220px] bg-surface-container-high">
+<img alt="" class="rw-photo absolute inset-0 w-full h-full object-cover" id="sc-f-img" loading="lazy"/>
+<span class="absolute top-3 left-3 w-11 h-11 rounded-full bg-primary-container/90 text-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">play_arrow</span>
+</span>
+</div>
+<div class="p-5 flex flex-col gap-1.5 flex-1">
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">Featured story</span>
+<h2 class="font-headline-md text-headline-md text-on-surface tracking-tight" id="sc-f-title">—</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant" id="sc-f-meta">—</p>
+</div>
+</button>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="sc-grid"></div>
+<div class="hidden bg-surface-container-low rounded-xl p-6 text-center font-body-md text-body-md text-on-surface-variant" id="sc-empty">No published stories yet. Drafts appear here once their authors publish them.</div>
+</div>
+<div class="hidden fixed inset-0 z-[60] items-center justify-center p-4 bg-primary/70" id="sc-modal" role="dialog" aria-modal="true">
+<div class="w-full max-w-[380px] bg-surface-container rounded-2xl p-4 flex flex-col gap-3 max-h-[92vh] overflow-y-auto">
+<div class="flex items-center justify-between gap-2">
+<h2 class="font-headline-sm text-headline-sm text-on-surface truncate" id="sc-title">—</h2>
+<button class="w-11 h-11 min-w-[44px] min-h-[44px] rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface flex items-center justify-center flex-shrink-0" id="sc-close" type="button" title="Close player">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div id="sc-player"></div>
+<div class="flex flex-col gap-1" id="sc-credits"></div>
+<a class="font-label-sm text-label-sm text-on-tertiary-container hover:underline w-fit" id="sc-studio" href="#">Open in studio</a>
+</div>
+</div>
+<template id="tpl-sc-card">
+<button class="bg-surface-container-low rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col text-left min-h-[44px]" type="button">
+<div class="relative w-full aspect-[16/9] bg-surface-container-high">
+<img alt="" class="rw-photo w-full h-full object-cover" data-slot="img" loading="lazy"/>
+<span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-primary-container/85 text-surface font-label-sm text-label-sm" data-slot="runtime">—</span>
+</div>
+<div class="p-4 flex flex-col gap-1">
+<h3 class="font-label-lg text-label-lg text-on-surface font-bold leading-snug" data-slot="title">—</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant" data-slot="meta">—</p>
+</div>
+</button>
+</template>

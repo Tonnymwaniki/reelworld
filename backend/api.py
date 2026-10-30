@@ -59,7 +59,8 @@ import chat as chat_module
 import place_pass as place_pass_mod
 from chat import (ANSWER_PROMPT, EMPTY_SPEC, PARSER_BASE_URL, PARSER_KEY, PARSER_MODEL,
                   Engine, extract_json, chat_create)
-from retrieval import is_specific, meta_for, score_against, search_text
+from retrieval import is_specific, meta_for, score_against, search_text
+from story_engine import StoryError
 
 ROOT = Path(__file__).resolve().parent.parent
 PHOTOS_DIR = ROOT / "data" / "photos"
@@ -67,8 +68,8 @@ FRONTEND_DIR = ROOT / "frontend"
 INDEX_HTML = FRONTEND_DIR / "index.html"
 # Hash views the app may fetch. Anything else under frontend/ (notably
 # frontend/design/) is never served, so exports stay out of the page bundle.
-VIEW_NAMES = ("home", "photo", "add", "connected", "place", "story", "404",
-              "about", "credits")
+VIEW_NAMES = ("home", "photo", "add", "connected", "place", "stories",
+              "builder", "showcase", "404", "about", "credits")
 
 # ----- share one embedding model across all sessions -----
 _model_lock = threading.Lock()
@@ -2005,4 +2006,173 @@ def explain(req: ExplainRequest):
             "trace": [{"step": "checked",
                        "detail": "Compared captions, signs, landmarks and place verdicts."},
                       {"step": "wrote",
-                       "detail": "Wrote the connection from the records."}]}
+                       "detail": "Wrote the connection from the records."}]}
+
+
+# ----- Phase 4: story drafts (engine) + publish -----
+
+class StoryCreateRequest(BaseModel):
+    title: Optional[str] = None
+    prompt: Optional[str] = None
+    tone: str = "postcard"
+    source: str = "both"
+    target: str = "short"
+    photo_ids: Optional[List[str]] = None
+
+
+class StoryPatchRequest(BaseModel):
+    title: Optional[str] = None
+    tone: Optional[str] = None
+    target: Optional[str] = None
+    chapters: Optional[List[Dict[str, Any]]] = None
+
+
+def _story_fetch_for(ids):
+    """fetch() closure for the engine backed by one photo query."""
+    try:
+        rows = (get_sb().table("photos").select("photo_id,record")
+                .in_("photo_id", list(ids)).execute().data or [])
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"photo lookup failed: {e}")
+    by_id = {r["photo_id"]: r for r in rows}
+
+    def fetch(pid):
+        r = by_id.get(pid)
+        if r is None:
+            return None
+        obs = ((r.get("record") or {}).get("observed") or {})
+        return {"people": (obs.get("people") or {}).get("count", 0) or 0}
+
+    return fetch
+
+
+def _story_full(story):
+    """Stored story + live photo data, heading problems and face flags."""
+    ids = [c["photo_id"] for c in story.get("chapters") or []]
+    by_id = _photos_by_ids(ids) if ids else {}
+    chapters = []
+    for c in story.get("chapters") or []:
+        r = by_id.get(c["photo_id"]) or {}
+        obs = ((r.get("record") or {}).get("observed") or {})
+        chapters.append({"photo_id": c["photo_id"], "seconds": c.get("seconds", 4),
+                         "heading": c.get("heading") or "", "text": c.get("text") or "",
+                         "caption": c.get("caption") or r.get("caption") or c["photo_id"],
+                         "src": photo_url(r.get("file")), "collection": r.get("collection"),
+                         "viewpoint": r.get("viewpoint"), "place": r.get("place_name"),
+                         "people": (obs.get("people") or {}).get("count", 0) or 0})
+    attach_credits(chapters)
+    problems = {}
+    for i, c in enumerate(story.get("chapters") or []):
+        if not (c.get("heading") or "").strip():
+            continue
+        r = by_id.get(c["photo_id"])
+        if r is None:
+            continue
+        try:
+            compact = _compact_record(r.get("record") or {})
+            facts = [_photo_fact(r, compact)]
+        except (KeyError, TypeError, AttributeError):
+            continue
+        bad = _heading_problems(c["heading"], facts)
+        if bad:
+            problems[str(i)] = bad
+    return {"story": story, "chapters": chapters,
+            "totals": {"scenes": len(chapters),
+                       "seconds": sum(c.get("seconds", 0) for c in chapters)},
+            "problems": problems,
+            "faces_blocked": [c["photo_id"] for c in chapters if c["people"] > 0]}
+
+
+def _story_err(fn, *a, **k):
+    try:
+        return fn(*a, **k)
+    except StoryError as e:
+        raise HTTPException(status_code=e.status, detail=e.detail)
+
+
+@app.post("/api/stories")
+def stories_create(req: StoryCreateRequest):
+    from story_engine import MAX_SCENES, create
+    prompt = (req.prompt or "").strip()
+    ids = [i.strip() for i in (req.photo_ids or []) if i.strip()]
+    if bool(prompt) == bool(ids):
+        raise HTTPException(status_code=400,
+                            detail="give exactly one of prompt or photo_ids.")
+    source = {"mine": "personal", "world": "world", "both": "both"}.get(req.source)
+    if source is None:
+        raise HTTPException(status_code=400, detail="source must be mine, world or both.")
+    if prompt:
+        planned = story(StoryRequest(theme=prompt, collection=source))
+        if not planned["chapters"]:
+            raise HTTPException(status_code=502,
+                                detail=f"no story photos found for {prompt!r}.")
+        per_scene = 4 if req.target == "short" else 5
+        cap = 5 if req.target == "short" else MAX_SCENES
+        chapters, trace = [], list(planned["trace"])
+        for ch in planned["chapters"]:
+            for p in ch["photos"]:
+                if len(chapters) >= cap:
+                    break
+                chapters.append({"photo_id": p["photo_id"], "seconds": per_scene,
+                                 "heading": ch["heading"], "text": ch["text"]})
+        trace.append({"step": "built",
+                      "detail": f"Built {len(chapters)} scenes from {len(planned['chapters'])} chapters."})
+        title = (req.title or "").strip() or planned["title"]
+    else:
+        per_scene = 4 if req.target == "short" else 5
+        chapters = [{"photo_id": i, "seconds": per_scene} for i in ids]
+        trace = [{"step": "built", "detail": f"Built {len(chapters)} scenes from your photos."}]
+        title = (req.title or "").strip()
+    fetch = _story_fetch_for([c["photo_id"] for c in chapters])
+    made = _story_err(create, title=title, prompt=prompt, tone=req.tone,
+                      source=req.source, target=req.target, chapters=chapters, fetch=fetch)
+    return {**_story_full(made), "trace": trace}
+
+
+@app.get("/api/stories")
+def stories_list(status: Optional[str] = None):
+    from story_engine import list_stories
+    found = _story_err(list_stories, status)
+    covers = [s["cover"] for s in found if s.get("cover")]
+    by_id = _photos_by_ids(covers) if covers else {}
+    for s in found:
+        r = by_id.get(s.get("cover") or "")
+        s["cover_src"] = photo_url(r.get("file")) if r else None
+    return {"stories": found}
+
+
+@app.get("/api/stories/{story_id}")
+def story_detail(story_id: str):
+    from story_engine import load
+    return _story_full(_story_err(load, story_id.strip()))
+
+
+@app.patch("/api/stories/{story_id}")
+def story_update(story_id: str, req: StoryPatchRequest):
+    from story_engine import load, update
+    current = _story_err(load, story_id.strip())
+    ids = [c.get("photo_id") for c in (req.chapters if req.chapters is not None
+                                       else current.get("chapters") or []) if c.get("photo_id")]
+    fetch = _story_fetch_for(ids)
+    made = _story_err(update, story_id.strip(), title=req.title, tone=req.tone,
+                      target=req.target, chapters=req.chapters, fetch=fetch)
+    return _story_full(made)
+
+
+@app.delete("/api/stories/{story_id}")
+def story_delete(story_id: str):
+    from story_engine import remove
+    _story_err(remove, story_id.strip())
+    return {"ok": True, "id": story_id.strip()}
+
+
+@app.post("/api/stories/{story_id}/publish")
+def story_publish(story_id: str, request: Request):
+    # Drafts are local and private (ungated, like flags); publishing puts
+    # the story on the public Showcase, so it needs the demo code.
+    _demo_guard(request)
+    from story_engine import load, publish
+    current = _story_err(load, story_id.strip())
+    fetch = _story_fetch_for([c["photo_id"] for c in current.get("chapters") or []])
+    made = _story_err(publish, story_id.strip(), fetch=fetch)
+    return _story_full(made)

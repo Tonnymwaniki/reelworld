@@ -167,6 +167,31 @@ the first unfinished phase.
 - Tests: `backend/test_links.py` (11 checks, user-run),
   `frontend/connected.test.js` 100/100 here; photo 60/60, home 38/38.
 - Verifier gains rings/overview/self/explain steps.
+
+## Phase 4: story engine + player + publish + Showcase (needs user run)
+
+- New `backend/story_engine.py`: file-backed drafts (`data/stories/`,
+  git-ignored), validation, faces-blocking publish (people-visible
+  scenes block with ids named). Endpoints: CRUD `/api/stories[/{id}]`
+  + `POST .../publish` (demo-gated; drafts ungated like flags).
+  Create from prompt reuses the `/api/story` planner (short ≤5 scenes,
+  medium ≤12); or from explicit photo_ids. GET/PATCH return enriched
+  chapters (src/credit/people), heading problems, face flags.
+- Frontend: `#/stories` (create + drafts), `#/stories/<id>` studio
+  (building trace, review with reorder/edit/durations/problems,
+  player preview, WebM/Markdown/JSON export, publish), `#/showcase`
+  (published grid + player modal, no likes/comments). Old `#/story`
+  view removed. Shared 9:16 player with Ken Burns (off under
+  reduced-motion); WebM via canvas + MediaRecorder with real sizes;
+  no MP4 anywhere.
+- Honesty removals: versions, latency, sessions, ETAs, hashes,
+  coords, capture dates, camera telemetry, invented sizes/counts/
+  licenses/curators, unlisted tier, ZIP bundle. Tone mapping: player
+  styling + caption pick (documented in code).
+- Tests: `backend/test_stories.py` (15 checks, user-run),
+  `frontend/stories.test.js` 118/118 here; all suites 316/316.
+- Verifier gains a stories CRUD roundtrip step.
+- Commit id: (this commit; see `git log`).
 - Commit id: (this commit; see `git log`).
 - Commit id: (this commit; see `git log`).
 - Commit id: (this commit; see `git log`).

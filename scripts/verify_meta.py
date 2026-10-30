@@ -116,6 +116,16 @@ def main():
         return {"linked": r.get("linked"), "kinds": r.get("kinds"),
                 "text": cut(r.get("text") or "")}
 
+    def do_stories():
+        c = api_mod.stories_create(api_mod.StoryCreateRequest(
+            title="Verifier story", photo_ids=["landmarks_003", "market_018"]))
+        sid = c["story"]["id"]
+        g = api_mod.story_detail(sid)
+        u = api_mod.story_update(sid, api_mod.StoryPatchRequest(title="Verifier story 2"))
+        api_mod.story_delete(sid)
+        return {"id": sid, "scenes": len(g["chapters"]),
+                "title": u["story"]["title"]}
+
     def do_outline():
         r = api_mod.api_outline(api_mod.OutlineRequest(photo_id="landmarks_003",
                                                        prompt="tower"))
@@ -139,6 +149,7 @@ def main():
     step(report, "overview", do_overview)
     step(report, "self", do_self)
     step(report, "explain", do_explain)
+    step(report, "stories", do_stories)
     if QUICK:
         report["steps"]["story"] = {"ok": True, "seconds": 0, "detail": "skipped (--quick)"}
         print("[ok] story (skipped --quick)")
