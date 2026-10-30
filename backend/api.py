@@ -67,7 +67,7 @@ FRONTEND_DIR = ROOT / "frontend"
 INDEX_HTML = FRONTEND_DIR / "index.html"
 # Hash views the app may fetch. Anything else under frontend/ (notably
 # frontend/design/) is never served, so exports stay out of the page bundle.
-VIEW_NAMES = ("home", "photo", "add", "connected", "place", "story")
+VIEW_NAMES = ("home", "photo", "add", "connected", "place", "story", "404")
 
 # ----- share one embedding model across all sessions -----
 _model_lock = threading.Lock()
@@ -222,6 +222,56 @@ def view(name: str):
 @app.get("/health")
 def health():
     return {"status": "ok"}
+
+
+DEMO_MODE = os.getenv("DEMO_MODE", "true").strip().lower() == "true"
+DEMO_CODE = os.getenv("DEMO_CODE", "")
+FEATURE_OUTLINES = os.getenv("FEATURE_OUTLINES", "false").strip().lower() == "true"
+ENABLE_SWAHILI = os.getenv("ENABLE_SWAHILI", "false").strip().lower() == "true"
+
+
+def _demo_unlocked(request: Request) -> bool:
+    if not DEMO_MODE:
+        return True
+    if not DEMO_CODE:
+        return False
+    return request.headers.get("x-demo-code", "") == DEMO_CODE
+
+
+def _demo_guard(request: Request):
+    if _demo_unlocked(request):
+        return
+    if not DEMO_CODE:
+        raise HTTPException(status_code=403, detail="Demo mode: writes are disabled and no demo code is configured.")
+    raise HTTPException(status_code=403, detail="Demo mode: this needs the demo code.")
+
+
+def _collection_counts():
+    counts = {"world": None, "personal": None}
+    try:
+        for coll in counts:
+            res = (get_sb().table("photos").select("photo_id", count="exact", head=True)
+                   .eq("collection", coll).execute())
+            counts[coll] = res.count
+    except Exception:
+        pass
+    return counts
+
+
+@app.get("/api/config")
+def api_config():
+    return {"demo_mode": DEMO_MODE,
+            "outlines_enabled": FEATURE_OUTLINES,
+            "swahili_enabled": ENABLE_SWAHILI,
+            "counts": _collection_counts()}
+
+
+@app.get("/og-image.png")
+def og_image():
+    p = FRONTEND_DIR / "og-image.png"
+    if not p.exists():
+        raise HTTPException(status_code=404, detail="share preview image not built yet")
+    return FileResponse(str(p), media_type="image/png")
 
 
 @app.post("/chat", response_model=ChatResponse)
@@ -1019,6 +1069,7 @@ def run_upload_job(job_id, photo_id, owner_note):
 async def upload(request: Request, background_tasks: BackgroundTasks,
                  owner_note: Optional[str] = None, note: Optional[str] = None):
     ctype = (request.headers.get("content-type") or "").split(";")[0].strip().lower()
+    _demo_guard(request)
     data, text = None, (note or owner_note)
     if ctype.startswith("multipart/"):
         try:

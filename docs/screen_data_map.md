@@ -3,6 +3,16 @@
 Every Stitch screen element, its endpoint, and the exact fields that feed
 it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 
+## 0. Shell (every page)
+
+| Element | Endpoint | Fields |
+|---|---|---|
+| Header label + nav | static | "Built with Muse Spark Open" pill; Reel, Browse, Connected, Stories, About |
+| API status pill | `GET /api/config` | reachable → "API: Online", else "API: unreachable" (never a fake latency) |
+| Demo banner + code field | `GET /api/config` → `demo_mode` | shown only when true; code kept in `sessionStorage`, sent as `X-Demo-Code` |
+| 404 card | `GET /api/config` → `counts.world` | requested path verbatim; "Public Cadastre (N photos)" with the real N |
+| Error card | live | real error message verbatim, retry re-runs the failed route, live API check |
+
 ## 1. Home and search
 
 | Element | Endpoint | Fields |

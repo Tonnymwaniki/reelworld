@@ -17,7 +17,16 @@ function sessionId() {
 }
 
 /* ---------- api ---------- */
+function demoCode() {
+  try { return sessionStorage.getItem("rw.demoCode") || ""; } catch (e) { return ""; }
+}
+
 async function api(path, opts) {
+  opts = opts || {};
+  const code = demoCode();
+  if (code) {
+    opts.headers = Object.assign({}, opts.headers, { "X-Demo-Code": code });
+  }
   const res = await fetch(path, opts);
   let body = null;
   try { body = await res.json(); } catch (e) { body = null; }
@@ -56,24 +65,33 @@ function hide(el) {
 }
 
 /* ---------- header/footer live bits ---------- */
+let rwConfig = { demo_mode: true, counts: {} };
+
 async function refreshShell() {
+  let online = false;
   try {
-    await api("/health");
-    $("#api-status-dot").className = "w-2 h-2 rounded-full bg-sage";
-    $("#api-status-text").textContent = "API: Online";
-  } catch (e) {
-    $("#api-status-dot").className = "w-2 h-2 rounded-full bg-ochre";
-    $("#api-status-text").textContent = "API: unreachable";
-    const t = $("#agent-status-text");
-    if (t) t.textContent = "Semantic Agent Offline";
-  }
-  try {
-    const mine = await api("/api/photos?collection=personal&limit=200");
-    $("#personal-count").textContent = String(mine.count);
-  } catch (e) { $("#personal-count").textContent = "–"; }
+    rwConfig = await api("/api/config");
+    online = true;
+  } catch (e) { rwConfig = { demo_mode: true, counts: {} }; }
+  const dot = $("#api-status-dot"), txt = $("#api-status-text");
+  if (dot) dot.className = "w-1.5 h-1.5 rounded-full " + (online ? "bg-secondary" : "bg-on-tertiary-container");
+  if (txt) txt.textContent = online ? "API: Online" : "API: unreachable";
+  paintDemo();
+}
+
+function paintDemo() {
+  const banner = $("#demo-banner");
+  if (!banner) return;
+  if (!rwConfig.demo_mode) { banner.classList.add("hidden"); return; }
+  banner.classList.remove("hidden");
+  const t = $("#demo-text", banner);
+  if (t) t.textContent = demoCode()
+    ? "Demo mode: a demo code is saved for this visit — writes are unlocked if it matches."
+    : "Demo mode: uploads, publishing and corrections need the demo code.";
 }
 
 function setActiveTab(tab) {
+  if (tab === "world" || tab === "personal") tab = "reel"; // old views, until rebuilt
   $$(".js-tab").forEach((a) => a.setAttribute("data-active", String(a.dataset.tab === tab)));
   $$(".js-mtab").forEach((a) => a.setAttribute("data-active", String(a.dataset.tab === tab)));
 }
@@ -2449,23 +2467,59 @@ async function loadView(name) {
   return viewCache.get(name);
 }
 
-function stubView(title, body) {
+function stubView(title, phase, body) {
   const mount = $("#view");
   mount.innerHTML = "";
   const sec = document.createElement("section");
-  sec.className = "w-full rounded-2xl bg-parchment-card border border-parchment-border p-8 shadow-archival flex flex-col gap-3 max-w-2xl";
+  sec.className = "w-full rounded-xl bg-surface-container-low border border-outline-variant/40 p-space-lg shadow-md flex flex-col gap-space-sm max-w-2xl";
+  const tag = document.createElement("span");
+  tag.className = "font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold";
+  tag.textContent = "Coming in Phase " + phase;
   const h = document.createElement("h2");
-  h.className = "text-xl font-bold text-espresso-950 tracking-tight";
+  h.className = "font-headline-lg text-headline-lg text-primary tracking-tight";
   h.textContent = title;
   const p = document.createElement("p");
-  p.className = "text-sm text-espresso-700 leading-relaxed";
+  p.className = "font-body-md text-body-md text-on-surface-variant leading-relaxed";
   p.textContent = body;
   const a = document.createElement("a");
-  a.className = "inline-flex items-center gap-1.5 h-10 px-4 rounded-xl bg-espresso-900 text-papyrus-100 text-sm font-semibold w-fit";
+  a.className = "min-h-[44px] px-space-lg py-space-sm bg-primary text-on-primary rounded-lg font-label-lg text-label-lg inline-flex items-center gap-space-xs w-fit";
   a.href = "#/";
-  a.textContent = "Back to search";
-  sec.append(h, p, a);
+  a.textContent = "Back to Reel";
+  sec.append(tag, h, p, a);
   mount.appendChild(sec);
+}
+
+async function showErrorView(message, retry) {
+  setActiveTab("");
+  try {
+    const html = await loadView("404");
+    $("#view").innerHTML = html;
+    hide($("#err404-card", $("#view")));
+    $("#err-message", $("#view")).textContent = message;
+    $("#err-retry", $("#view")).addEventListener("click", () => { if (retry) retry(); });
+    try {
+      await api("/health");
+      $("#err-api", $("#view")).textContent = "Online";
+    } catch (e) { $("#err-api", $("#view")).textContent = "Unreachable"; }
+  } catch (e) {
+    stubView("Something went wrong", "0", message);
+  }
+}
+
+async function show404() {
+  setActiveTab("");
+  try {
+    const html = await loadView("404");
+    $("#view").innerHTML = html;
+    hide($("#err-card", $("#view")));
+    $("#err404-path", $("#view")).textContent = location.hash || "#/";
+    const n = rwConfig.counts && rwConfig.counts.world;
+    $("#err404-count", $("#view")).textContent =
+      "Public Cadastre" + (typeof n === "number" ? " (" + n + " photos)" : "");
+  } catch (e) {
+    stubView("I could not find that page.", "0",
+      "The link you followed does not match any page.");
+  }
 }
 
 async function route() {
@@ -2481,7 +2535,7 @@ async function route() {
       $("#view").innerHTML = html;
       place.mount($("#view"), key);
     } catch (e) {
-      stubView("The place view failed to load", String((e && e.message) || e));
+      showErrorView(String((e && e.message) || e), () => route());
     }
     return;
   }
@@ -2493,29 +2547,29 @@ async function route() {
       $("#view").innerHTML = html;
       photo.mount($("#view"), id);
     } catch (e) {
-      stubView("The photo view failed to load", String((e && e.message) || e));
+      showErrorView(String((e && e.message) || e), () => route());
     }
     return;
   }
   if (hash.startsWith("#/add")) {
-    setActiveTab("add");
+    setActiveTab("");
     try {
       const html = await loadView("add");
       $("#view").innerHTML = html;
       add.mount($("#view"));
     } catch (e) {
-      stubView("The add-photo view failed to load", String((e && e.message) || e));
+      showErrorView(String((e && e.message) || e), () => route());
     }
     return;
   }
-  if (hash.startsWith("#/story")) {
-    setActiveTab("story");
+  if (hash === "#/stories" || hash === "#/story") {
+    setActiveTab("stories");
     try {
       const html = await loadView("story");
       $("#view").innerHTML = html;
       story.mount($("#view"));
     } catch (e) {
-      stubView("The story view failed to load", String((e && e.message) || e));
+      showErrorView(String((e && e.message) || e), () => route());
     }
     return;
   }
@@ -2526,17 +2580,50 @@ async function route() {
       $("#view").innerHTML = html;
       connected.mount($("#view"));
     } catch (e) {
-      stubView("The Connected view failed to load", String((e && e.message) || e));
+      showErrorView(String((e && e.message) || e), () => route());
     }
     return;
   }
-  try {
-    const html = await loadView("home");
-    $("#view").innerHTML = html;
-    home.mount($("#view"));
-  } catch (e) {
-    stubView("The home view failed to load", String((e && e.message) || e));
+  if (hash === "#/browse") {
+    setActiveTab("browse");
+    stubView("Browse the world collection", "5",
+      "Filtered browsing of the public cadastre arrives in Phase 5.");
+    return;
   }
+  if (hash === "#/library") {
+    setActiveTab("");
+    stubView("My Photos library", "5",
+      "Smart albums, the upload queue and photo management arrive in Phase 5.");
+    return;
+  }
+  if (hash === "#/showcase") {
+    setActiveTab("stories");
+    stubView("Stories Showcase", "4", "Published stories arrive in Phase 4.");
+    return;
+  }
+  if (hash === "#/about") {
+    setActiveTab("about");
+    stubView("About ReelWorld", "1", "The Reel story and measured numbers arrive in Phase 1.");
+    return;
+  }
+  if (hash === "#/credits") {
+    setActiveTab("");
+    stubView("Photo credits", "1",
+      "The photographer and license directory arrives in Phase 1.");
+    return;
+  }
+  if (hash === "#/" || hash === "") {
+    setActiveTab("reel");
+    try {
+      const html = await loadView("home");
+      $("#view").innerHTML = html;
+      home.mount($("#view"));
+    } catch (e) {
+      showErrorView(String((e && e.message) || e), () => route());
+    }
+    return;
+  }
+  show404();
 }
 
 /* ---------- boot ---------- */
@@ -2546,17 +2633,16 @@ document.addEventListener("keydown", (e) => {
     if (input) { e.preventDefault(); input.focus(); }
   }
 });
-$$(".js-tab, .js-mtab").forEach((a) => {
-  a.addEventListener("click", (e) => {
-    const tab = a.dataset.tab;
-    if (tab === "world" || tab === "personal") {
-      e.preventDefault();
-      home.collection = tab;
-      if ((location.hash || "#/") !== "#/") { location.hash = "#/"; return; }
-      if (home.view && home.view.isConnected) home.browse(tab);
-      else route();
-    }
-  });
+$("#demo-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const v = $("#demo-code").value.trim();
+  try {
+    if (v) sessionStorage.setItem("rw.demoCode", v);
+    else sessionStorage.removeItem("rw.demoCode");
+  } catch (err) { /* private mode */
+  }
+  $("#demo-code").value = "";
+  paintDemo();
 });
 window.addEventListener("hashchange", route);
 refreshShell();

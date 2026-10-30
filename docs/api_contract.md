@@ -20,6 +20,22 @@ Liveness check. Touches neither the model nor the database.
 
 - 200: `{"status": "ok"}`
 
+## `GET /api/config`
+
+Shell configuration + real collection totals. No secrets are ever returned.
+
+- 200: `{"demo_mode": true, "outlines_enabled": false,
+  "swahili_enabled": false, "counts": {"world": 132, "personal": 16}}`
+- `demo_mode` comes from `DEMO_MODE` in `.env` (default true). Counts are
+  `null` when the database is unreachable.
+
+## `GET /og-image.png`
+
+The landing share-preview image (1200×630 PNG), rebuilt honestly from
+real photos, credits and counts by `python scripts/make_og_image.py`.
+
+- 200 `image/png`; 404 when not built yet
+
 ## `POST /chat`
 
 One conversation turn. `session_id` selects the in-memory conversation
@@ -328,6 +344,7 @@ Response is immediate; the work continues in the job:
 - 202: `{ "job_id": "9f2c…", "status": "queued", "stage": "uploaded" }`
 - 400 missing/empty file, unsupported type, unreadable image
 - 413 body larger than 10 MB
+- 403 in demo mode without a matching `X-Demo-Code` header
 - 501 multipart used but `python-multipart` is not installed
   (`pip install python-multipart` enables it; raw-byte upload works without it)
 

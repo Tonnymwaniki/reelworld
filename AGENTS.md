@@ -23,32 +23,58 @@ Hackathon (Indie track). Environment: Windows, PowerShell, Python 3.14.
 
 ## The product (what the app must show)
 
-Two sections in one app:
-1. **My Photos**: the user's phone photos, searchable in plain language, private.
-2. **World**: the Kenyan photo collection.
-3. **The bridge**: on any photo, "Find in the world" and "Another angle"; on a world
-   photo, "Compare with mine". One search box works across both; results are grouped
-   "From you" and "From the world".
+The assistant is named **Reel**. English only. Navigation: Reel, Browse,
+Connected, Stories, About. "Built with Muse Spark Open" is prominent in the
+header of every page. Designs in `frontend/design/stitch_export_final/` are
+authoritative; wire them exactly, only adding behaviour and data.
 
-Every photo opens a detail view with an **evidence panel**: caption, what was seen
-(entities), signs read (exact text and how legible), place and landmark with their
-status (confirmed or candidate), and a list of uncertainties. Honest wording matters:
-when the engine says it found no other view of a place, show that message, never
-pad results.
+1. **Reel** (`#/`): landing hero, then a chat thread — user bubbles, assistant
+   replies with photo blocks, "why it matched" lines, action chips, suggested
+   follow-ups, filter chips, context pill, "How I found this" trace, honest
+   message states, compare mode, in-thread add-photo flow, live SSE progress,
+   60-second tour, Credits, About, "Flag this".
+2. **Photo detail** (`#/photo/<id>`): evidence panel (caption, things, signs
+   with Clear/Partial, place Confirmed/Candidate + evidence, uncertainties,
+   credit, suggested questions, Ask, bridge buttons, place link) plus the
+   attribution kit sheet.
+3. **Connected** (`#/connected`): places overview, SVG ring diagram, link
+   evidence, explain-a-connection, phone fallback rows.
+4. **Stories** (`#/stories`, `#/showcase`): story engine, player, review,
+   WebM export, publish flow with faces-blocking, Showcase (no likes/comments).
+5. **My Photos** (`#/library`): smart albums, upload queue, bursts, correction,
+   real deletion, data export. **World** (`#/browse` + `#/place/<key>`):
+   filtered browse, place pages, gaps, "Add the first photo".
 
-## Build plan (small steps; stop and show me after each)
+Honest wording matters: when the engine says it found no other view of a
+place, show that message, never pad results. Never invent data; unbackable
+design elements go to `docs/deferred.md`, never the UI.
 
-1. `backend/api.py`: FastAPI app wrapping `Engine`. Share the heavy parts (embedding
-   model, clients) across sessions but keep conversation state per `session_id`.
-   Endpoints: `POST /chat`, `GET /health`, `POST /sessions/{session_id}/reset`,
-   `GET /api/photos?collection=&limit=`, `GET /api/photo/{photo_id}`
-   (record summary for the evidence panel), `POST /api/ask`.
-   Serve photos from `data/photos` at `/photos/...`.
-2. `frontend/index.html`: one responsive page (vanilla JS and CSS, no build step,
-   mobile first). Tabs World / My Photos, a chat-style search bar, a photo grid, a
-   photo detail view with the evidence panel and the bridge buttons.
-3. Polish for the demo video: loading states, empty states, a clean visual style
-   inspired by Kenyan colours but restrained, keyboard and touch friendly.
+## Demo mode
+
+`DEMO_MODE=true` (default, in `.env`) shows the sample library and disables
+upload, delete, correction and publish unless the request carries header
+`X-Demo-Code` matching `DEMO_CODE` in `.env` (403 + clear message otherwise).
+The UI offers a code field and keeps the code in `sessionStorage` only.
+`DEMO_MODE=false` enables everything (the local real library). Same data
+either way; the flag gates writes, not reads.
+
+## Build plan (phases; commit after each)
+
+See `docs/build_plan.md` (screen→route→endpoint map) and `docs/build_log.md`
+(per-phase log; read both on session restart and continue at the first
+unfinished phase). After each phase: start the server, test for real (API
+calls + page load), show the output, commit. Do not ask unless truly blocked.
+
+0. Foundation: plan/deferred docs, AGENTS.md, merged tokens, shared shell
+   (header, nav, footer, routing, error/404), demo handling, og/meta tags.
+1. Reel home: thread UI, SSE progress, compare, in-thread add, tour, credits,
+   about, flag.
+2. Photo detail: evidence panel + attribution kit.
+3. Connected rings + explain.
+4. Story engine + player + publish + Showcase.
+5. Libraries: albums, queue, bursts, correction, deletion, export, world
+   browse/filters/gaps.
+6. Polish + full acceptance pass.
 
 ## Rules
 

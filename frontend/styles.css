@@ -1,8 +1,36 @@
-/* ReelWorld shared tokens + small responsive fixes.
-   Component styling comes from the Stitch export markup (Tailwind classes);
-   this file only holds tokens, active states, and phone-size adjustments. */
+/* ReelWorld merged tokens (design_system_v6 + papyrus set) and shell rules.
+   Component styling comes from the export markup (Tailwind classes); this
+   file holds tokens, nav states, focus visibility, and small fixes. */
 
 :root {
+  /* Warm archival set (authoritative). */
+  --surface: #fef8f4;
+  --surface-dim: #ded9d5;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f8f3ef;
+  --surface-container: #f2ede9;
+  --surface-container-high: #ece7e3;
+  --surface-container-highest: #e6e2de;
+  --surface-variant: #e6e2de;
+  --on-surface: #1d1b19;
+  --on-surface-variant: #45474b;
+  --outline: #76777b;
+  --outline-variant: #c6c6cb;
+  --primary: #030408;
+  --on-primary: #ffffff;
+  --primary-container: #1b1e23;
+  --secondary: #476556;
+  --on-secondary: #ffffff;
+  --secondary-container: #c9ead8;
+  --on-secondary-container: #4d6b5c;
+  --tertiary-container: #3d0d00;
+  --on-tertiary-container: #d5643b;
+  --tertiary-fixed: #ffdbcf;
+  --on-tertiary-fixed: #390c00;
+  --error: #ba1a1a;
+  --on-error: #ffffff;
+  --error-container: #ffdad6;
+  /* Papyrus set (ring screen + views in transition). */
   --papyrus-100: #F4EFEB;
   --papyrus-200: #ECE5DD;
   --papyrus-300: #E4DCD2;
@@ -16,20 +44,25 @@
   --forest: #1e4732;
 }
 
-/* Desktop tab active / inactive states (toggled by JS). */
+/* Desktop tab active / inactive states (toggled by JS, export classes). */
 .js-tab[data-active="true"] {
-  background-color: var(--papyrus-100);
-  color: var(--espresso-950);
-  font-weight: 700;
-  border: 1px solid var(--parchment-border);
-  box-shadow: 0 1px 3px rgba(30, 28, 26, 0.06), 0 1px 2px rgba(30, 28, 26, 0.04);
+  background-color: var(--primary-container);
+  color: var(--on-primary);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(27,30,35,0.06);
 }
-.js-tab[data-active="true"] .material-symbols-outlined { color: var(--ochre); }
-.js-tab[data-active="false"] { color: #4D4740; }
-.js-tab[data-active="false"]:hover { background-color: rgba(244, 239, 235, 0.7); }
+.js-tab[data-active="false"] { color: var(--on-surface-variant); }
+.js-tab[data-active="false"]:hover { color: var(--on-surface); }
 
 /* Mobile bottom-nav active state. */
-.js-mtab[data-active="true"] { color: var(--ochre); }
+.js-mtab[data-active="true"] { color: var(--secondary); }
+
+/* Visible keyboard focus everywhere. */
+a:focus-visible, button:focus-visible, input:focus-visible,
+summary:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid var(--on-tertiary-container);
+  outline-offset: 2px;
+}
 
 /* Broken-image fallback: hide the img so the mat + caption still render. */
 img.rw-photo { background-color: var(--papyrus-300); }
@@ -70,7 +103,7 @@ details[open] .how-chev { transform: rotate(180deg); }
 
 @media (max-width: 767px) {
   /* Keep the phone chrome clear of the bottom nav. */
-  #view { padding-bottom: 1rem; }
+  #view { padding-bottom: 6rem; }
   /* List density is single-column on phones anyway. */
   #results-grid[data-density="list"] article { flex-direction: column; }
   #results-grid[data-density="list"] article .rw-thumb { width: 100%; min-width: 0; }

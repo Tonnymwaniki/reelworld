@@ -1,0 +1,197 @@
+<!-- 404 + error states. Export markup; invented cluster numbers replaced with
+     live data (requested path, real photo count, real error, live API check).
+     Removed: "Nairobi Edge" node names, fake latencies, uptime %, Inspect Pipe. -->
+<div class="w-full flex flex-col gap-space-xl">
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-lg">
+<div class="flex flex-col gap-space-sm max-w-3xl">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<span>ReelWorld</span>
+<span>/</span>
+<span>System Exception Runtime</span>
+<span>/</span>
+<span class="text-secondary font-semibold">Status Codes &amp; Honest Recovery</span>
+</div>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary tracking-tight">System Exceptions &amp; Honest Recovery</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Reel handles missing pages and unexpected network interruptions with the same honesty it applies to photos: no cryptic masks, and clearly illuminated paths back.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-gutter items-stretch">
+<!-- 404 card -->
+<div class="flex flex-col bg-surface-container-low rounded-xl p-space-lg md:p-space-xl shadow-md" id="err404-card">
+<div class="flex items-center justify-between pb-space-lg">
+<div class="flex items-center gap-space-xs px-space-sm py-1 bg-surface-container rounded text-on-surface font-label-sm text-label-sm uppercase tracking-wider">
+<span class="w-2 h-2 rounded-full bg-on-surface-variant"></span>
+<span>Cadastre Code 404 · Missing Record</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant tracking-widest uppercase">PLATE-ROUTE-NULL</span>
+</div>
+<div class="relative w-full h-44 rounded-lg bg-surface-container flex items-center justify-center overflow-hidden mb-space-lg">
+<svg class="absolute inset-0 w-full h-full opacity-10" fill="none" viewbox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
+<path class="text-primary" d="M0 30H400M0 90H400M0 150H400" stroke="currentColor" stroke-dasharray="4 4" stroke-width="1"></path>
+<path class="text-primary" d="M50 0V180M150 0V180M250 0V180M350 0V180" stroke="currentColor" stroke-dasharray="4 4" stroke-width="1"></path>
+</svg>
+<div class="relative flex items-center justify-center">
+<div class="w-24 h-24 rounded-full bg-surface-variant/70 flex items-center justify-center">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center shadow-inner">
+<svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" stroke-width="1.75" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="9" stroke-dasharray="3 3"></circle>
+<circle cx="12" cy="12" r="3"></circle>
+<line x1="12" x2="12" y1="3" y2="7"></line>
+<line x1="12" x2="12" y1="17" y2="21"></line>
+<line x1="3" x2="7" y1="12" y2="12"></line>
+<line x1="17" x2="21" y1="12" y2="12"></line>
+</svg>
+</div>
+</div>
+<span class="absolute -bottom-2 px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm uppercase">Unmapped Index</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-sm mb-space-lg">
+<h2 class="font-headline-lg text-headline-lg text-primary tracking-tight">I could not find that page.</h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">The link you followed may point to a page that does not exist yet, or an address outside the archive.</p>
+</div>
+<div class="bg-surface-container rounded-lg p-space-md mb-space-lg flex flex-col gap-space-xs font-body-sm text-body-sm shadow-sm">
+<div class="font-label-sm text-label-sm text-secondary uppercase tracking-wider font-semibold">Diagnostic Ledger</div>
+<div class="flex flex-col sm:flex-row sm:justify-between py-1 gap-1">
+<span class="text-on-surface-variant">Requested Path</span>
+<span class="font-mono text-primary font-medium break-all" id="err404-path">—</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:justify-between py-1 gap-1">
+<span class="text-on-surface-variant">Privacy Assertion</span>
+<span class="text-secondary font-medium">Nothing about this visit was logged.</span>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm mb-space-lg pt-space-xs">
+<a class="min-h-[44px] px-space-lg py-space-sm bg-primary text-on-primary hover:bg-primary-container rounded-lg font-label-lg text-label-lg flex items-center justify-center gap-space-xs shadow-sm transition-all" href="#/">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Back to Reel</span>
+</a>
+<a class="min-h-[44px] px-space-lg py-space-sm bg-surface-container-high text-primary hover:bg-surface-container-highest rounded-lg font-label-lg text-label-lg flex items-center justify-center gap-space-xs shadow-sm transition-all" href="#/browse">
+<span class="material-symbols-outlined text-[18px]">photo_library</span>
+<span>Browse the Collection</span>
+</a>
+</div>
+<div class="mt-auto pt-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block mb-space-sm">Archival Waypoints &amp; Alternative Paths</span>
+<div class="flex flex-wrap gap-space-xs">
+<a class="px-space-sm py-space-xs bg-surface-container text-on-surface-variant hover:text-primary hover:bg-surface-container-high rounded text-label-sm font-label-sm transition-colors flex items-center gap-1" href="#/place/kenya/nairobi/cbd/kicc">
+<span class="material-symbols-outlined text-[14px]">search</span>
+<span>KICC Harambee Forecourt</span>
+</a>
+<a class="px-space-sm py-space-xs bg-surface-container text-on-surface-variant hover:text-primary hover:bg-surface-container-high rounded text-label-sm font-label-sm transition-colors flex items-center gap-1" href="#/browse">
+<span class="material-symbols-outlined text-[14px]">view_agenda</span>
+<span id="err404-count">Public Cadastre</span>
+</a>
+<a class="px-space-sm py-space-xs bg-surface-container text-on-surface-variant hover:text-primary hover:bg-surface-container-high rounded text-label-sm font-label-sm transition-colors flex items-center gap-1" href="#/showcase">
+<span class="material-symbols-outlined text-[14px]">auto_stories</span>
+<span>Stories Showcase</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Error card -->
+<div class="flex flex-col bg-surface-container-low rounded-xl p-space-lg md:p-space-xl shadow-md" id="err-card">
+<div class="flex items-center justify-between pb-space-lg">
+<div class="flex items-center gap-space-xs px-space-sm py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded font-label-sm text-label-sm uppercase tracking-wider">
+<span class="w-2 h-2 rounded-full bg-on-tertiary-container animate-pulse"></span>
+<span>Runtime Exception · Connection Interrupted</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant tracking-widest uppercase">LOAD-FAILURE</span>
+</div>
+<div class="relative w-full h-44 rounded-lg bg-surface-container flex items-center justify-center overflow-hidden mb-space-lg">
+<svg class="absolute inset-0 w-full h-full opacity-10" fill="none" viewbox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
+<path class="text-tertiary-container" d="M0 45Q100 20 200 45T400 45" stroke="currentColor" stroke-width="1.5"></path>
+<path class="text-tertiary-container" d="M0 90Q100 65 200 90T400 90" stroke="currentColor" stroke-width="1.5"></path>
+<path class="text-tertiary-container" d="M0 135Q100 110 200 135T400 135" stroke="currentColor" stroke-width="1.5"></path>
+</svg>
+<div class="relative flex items-center justify-center">
+<div class="w-24 h-24 rounded-full bg-tertiary-fixed/40 flex items-center justify-center">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center shadow-inner">
+<svg class="w-8 h-8 text-on-tertiary-container" fill="none" stroke="currentColor" stroke-width="1.75" viewbox="0 0 24 24">
+<path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+<line x1="8" x2="8" y1="13" y2="17"></line>
+<line x1="12" x2="12" y1="13" y2="17"></line>
+</svg>
+</div>
+</div>
+<span class="absolute -bottom-2 px-space-xs py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm uppercase">View failed to load</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-sm mb-space-lg">
+<h2 class="font-headline-lg text-headline-lg text-primary tracking-tight">Something went wrong while talking to Reel.</h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed" id="err-message">The request failed.</p>
+</div>
+<div class="bg-surface-container rounded-lg p-space-md mb-space-lg flex flex-col gap-space-xs font-body-sm text-body-sm shadow-sm">
+<div class="font-label-sm text-label-sm text-on-tertiary-container uppercase tracking-wider font-semibold">Diagnostic Ledger</div>
+<div class="flex flex-col sm:flex-row sm:justify-between py-1 gap-1">
+<span class="text-on-surface-variant">Your work</span>
+<span class="text-secondary font-medium">Nothing was lost — this page keeps its state.</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:justify-between py-1 gap-1">
+<span class="text-on-surface-variant">API status</span>
+<span class="text-primary font-medium" id="err-api">checking…</span>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm mb-space-lg pt-space-xs">
+<button class="min-h-[44px] px-space-lg py-space-sm bg-primary text-on-primary hover:bg-primary-container rounded-lg font-label-lg text-label-lg flex items-center justify-center gap-space-xs shadow-sm transition-all cursor-pointer" id="err-retry" type="button">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+<span>Retry</span>
+</button>
+<a class="min-h-[44px] px-space-lg py-space-sm bg-surface-container-high text-primary hover:bg-surface-container-highest rounded-lg font-label-lg text-label-lg flex items-center justify-center gap-space-xs shadow-sm transition-all" href="#/">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Back to Reel</span>
+</a>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-space-md pt-space-md">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-sm">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold">System Epistemology</span>
+<h3 class="font-headline-md text-headline-md text-primary tracking-tight">Our Error Handling Philosophy</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xl">Museum curation requires complete institutional transparency. We treat fault lines with candor rather than decorative obfuscation.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter items-stretch">
+<div class="flex flex-col bg-surface-container rounded-xl p-space-lg shadow-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary mb-space-md">
+<span class="material-symbols-outlined text-[20px]">handshake</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-space-xs">Principle 01</span>
+<h4 class="font-headline-sm text-headline-sm text-primary mb-space-xs">Honest Failure</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Reel tells you when it is not sure, and states precisely what could not be found. We never conceal ambiguity behind artificial cheerfulness or user blame.</p>
+</div>
+<div class="flex flex-col bg-surface-container rounded-xl p-space-lg shadow-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-secondary mb-space-md">
+<span class="material-symbols-outlined text-[20px]">shield_person</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-space-xs">Principle 02</span>
+<h4 class="font-headline-sm text-headline-sm text-primary mb-space-xs">Zero Telemetry Leaks</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">System errors generate no records about you. We never log your search strings, photos, or device fingerprints.</p>
+</div>
+<div class="flex flex-col bg-surface-container rounded-xl p-space-lg shadow-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-tertiary-container mb-space-md">
+<span class="material-symbols-outlined text-[20px]">folder_special</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-space-xs">Principle 03</span>
+<h4 class="font-headline-sm text-headline-sm text-primary mb-space-xs">Preserved Sandboxes</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">A disrupted connection never purges your workspace. Your comparisons and drafts stay in local memory, ready to continue.</p>
+</div>
+</div>
+</div>
+<div class="w-full bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">apartment</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-primary">Kenyan Architectural Cadastre Protocol v4</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Archival integrity verified through Muse Spark Open v2.4.</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Active Vault Seal</span>
+</div>
+</div>
+</div>
