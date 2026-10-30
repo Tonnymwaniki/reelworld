@@ -56,6 +56,14 @@ def main():
     import os
     key = os.environ[key_env]
 
+    def do_keyshape():
+        raw = os.environ.get(key_env, "")
+        s = raw.strip()
+        return {"length": len(s), "edge_whitespace": raw != s,
+                "quoted": len(s) >= 2 and s[0] == s[-1] and s[0] in "\"'",
+                "internal_space": any(c.isspace() for c in s),
+                "nonprint": sum(1 for c in s if ord(c) < 32 or ord(c) > 126)}
+
     def do_probe():
         resp = OpenAI(base_url=base, api_key=key).chat.completions.create(
             model=model, temperature=0, max_tokens=20,
@@ -70,6 +78,8 @@ def main():
             intent, fell = out
         else:
             intent, fell = out, None
+        if fell:
+            raise RuntimeError("parser fell back (LLM unusable)")
         return {"fell_back": fell, "intent": cut(intent, 500)}
 
     def do_answer():
@@ -94,6 +104,7 @@ def main():
         return {"title": cut(r.get("title") or ""), "chapters": len(ch),
                 "first_heading": cut((ch[0].get("heading") if ch else "") or "")}
 
+    step(report, "keyshape", do_keyshape)
     step(report, "probe", do_probe)
     step(report, "parse", do_parse)
     step(report, "answer", do_answer)
