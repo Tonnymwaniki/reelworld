@@ -118,6 +118,17 @@ async function main() {
   ok(T.shortReasons(["a", "b", "c"]) === "a; b", "reasons trimmed to two");
   ok(T.shortReasons([]) === "close match", "empty reasons fall back");
 
+  // ---- view hygiene regressions (mojibake + shell claims) ----
+  const views = ["views/home.html", "views/credits.html", "views/about.html"];
+  for (const v of views) {
+    const t = fs.readFileSync(path.join(__dirname, v), "utf8");
+    ok(/[\u00C3\u00C2\u00E2]/.test(t) === false, v + " has no mojibake markers");
+  }
+  const shell = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
+  ok(/opsz,wght,FILL,GRAD@20\.\.48,100\.\.700,0\.\.1,-50\.\.200/.test(shell), "font URL has full axis spec");
+  ok(shell.includes("v2.4") === false, "no invented model version in shell");
+  ok(shell.includes("Encrypted locally") === false, "no false encryption claim in shell");
+
   console.log("home.test.js: " + n + "/" + n + " checks passed");
 }
 

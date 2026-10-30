@@ -86,3 +86,14 @@ the first unfinished phase.
 - NOT run here (no Python in this sandbox): probe, py_compile,
   live search test. User-run commands in the chat report.
 - Commit id: (this commit; see `git log`).
+
+## Shell/hygiene fixes (from browser paste)
+
+- Icons rendered as text: the Material Symbols URL had malformed axes;
+  replaced with the documented `opsz,wght,FILL,GRAD` spec.
+- Removed invented `v2.4` from the shell header; replaced the false
+  "Encrypted locally" footer claim with the true privacy line.
+- Fixed cascaded UTF-8 mojibake across views + frags (151 runs reversed
+  to clean bullets, quotes, dashes, checks) and the false
+  "Nairobi/Mombasa/Kisumu" stat sub-label.
+- `home.test.js` gains view-hygiene regressions: 38/38 green.
