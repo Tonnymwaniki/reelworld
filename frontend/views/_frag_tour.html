@@ -1,0 +1,372 @@
+<div class="flex flex-col w-full relative min-h-[calc(100vh-4rem)]">
+<!-- BACKGROUND LAYER: ARCHIVAL HOME SCREEN (FROSTED / SOFTENED STATE) -->
+<div aria-hidden="true" class="w-full px-margin-mobile md:px-margin-tablet lg:px-margin py-space-xl opacity-35 filter blur-[1px] pointer-events-none select-none">
+<!-- Archival Head Section -->
+<div class="max-w-5xl mx-auto flex flex-col gap-space-lg">
+<div class="flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-sm py-space-xs rounded bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm tracking-widest uppercase">Cadastre Index NBO-ARC</span>
+<span class="text-outline-variant font-label-sm">â€¢</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">18,420 Visual Survey Plates</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant tracking-wider uppercase">Repository Master: Rev. 11</span>
+</div>
+<div class="space-y-space-xs">
+<h1 class="font-display-lg text-headline-lg md:text-display-lg text-primary tracking-tight font-bold">Inquire the Visual Record</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Describe structural details, stone masonry, or light angles from memory. Reel cites empirical architectural sightlines across Kenya's public visual records.</p>
+</div>
+<!-- Simulated Search Composer -->
+<div class="w-full p-space-md rounded-xl bg-surface-container-low shadow-sm flex items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[24px]">search</span>
+<span class="font-body-md text-body-md text-outline">Describe a facade, fluted tower, or colonnade...</span>
+</div>
+<div class="px-space-md py-space-xs rounded bg-primary-container text-surface font-label-md text-label-md">Examine Archive</div>
+</div>
+<!-- Passive Background Tiles -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg pt-space-lg">
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-space-sm">
+<div class="w-full h-44 rounded bg-surface-container-highest"></div>
+<div class="h-4 w-2/3 bg-surface-container-high rounded"></div>
+<div class="h-3 w-1/3 bg-surface-container-high rounded"></div>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-space-sm">
+<div class="w-full h-44 rounded bg-surface-container-highest"></div>
+<div class="h-4 w-3/4 bg-surface-container-high rounded"></div>
+<div class="h-3 w-1/2 bg-surface-container-high rounded"></div>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-space-sm">
+<div class="w-full h-44 rounded bg-surface-container-highest"></div>
+<div class="h-4 w-1/2 bg-surface-container-high rounded"></div>
+<div class="h-3 w-1/4 bg-surface-container-high rounded"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- MODAL SCRIM OVERLAY -->
+<div class="fixed inset-0 top-16 z-40 bg-primary-container/45 backdrop-blur-[3px] flex items-center justify-center p-space-sm md:p-space-lg overflow-y-auto">
+<!-- TOUR MODAL CONTAINER -->
+<div class="w-full max-w-4xl bg-surface-container-lowest rounded-xl shadow-2xl overflow-hidden my-auto flex flex-col transition-all duration-300">
+<!-- TOP PERSISTENT CALM VERIFICATION BANNER -->
+<div class="w-full bg-surface-container-high px-space-md md:px-space-lg py-2 flex items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-2 h-2 rounded-full bg-on-tertiary-container animate-pulse"></div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Saved example, not a live search</span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px]">inventory_2</span>
+<span>Archival Demonstration Stream</span>
+</div>
+</div>
+<!-- MODAL HEADER -->
+<div class="w-full px-space-md md:px-space-lg py-space-md bg-surface-container-low flex items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-surface text-[22px]">play_circle</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary tracking-tight">The 60-Second Tour: How Reel Works</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Three principles of evidence-based archival visual recovery</p>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<!-- Step Indicator Badge -->
+<div class="px-space-sm py-1 rounded bg-surface-container text-on-surface font-label-md text-label-md uppercase tracking-wider font-semibold" id="step-badge">
+            Step <span id="current-step-label">1</span> of 3
+          </div>
+<!-- Close button -->
+<button aria-label="Close Tour" class="w-11 h-11 rounded-lg bg-surface-container hover:bg-surface-container-high active:bg-surface-dim text-on-surface flex items-center justify-center transition-colors" id="close-tour-btn" type="button">
+<span class="material-symbols-outlined text-[22px]">close</span>
+</button>
+</div>
+</div>
+<!-- STEP TAB CONTROLS (DIRECT ACCESS) -->
+<div class="w-full px-space-md md:px-space-lg pt-space-sm bg-surface-container-low flex items-center gap-space-sm overflow-x-auto">
+<button class="tab-trigger flex-1 min-h-[44px] px-space-sm py-2 rounded-t-lg bg-surface-container-lowest text-primary font-label-sm text-label-sm uppercase tracking-wider font-bold transition-all flex items-center justify-center gap-space-xs shadow-sm" id="tab-btn-1" type="button">
+<span class="w-5 h-5 rounded-full bg-primary-container text-surface flex items-center justify-center text-[10px]">1</span>
+<span class="truncate">Describing Memory</span>
+</button>
+<button class="tab-trigger flex-1 min-h-[44px] px-space-sm py-2 rounded-t-lg bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider font-medium hover:bg-surface-container hover:text-on-surface transition-all flex items-center justify-center gap-space-xs" id="tab-btn-2" type="button">
+<span class="w-5 h-5 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center text-[10px]">2</span>
+<span class="truncate">Honest Uncertainty</span>
+</button>
+<button class="tab-trigger flex-1 min-h-[44px] px-space-sm py-2 rounded-t-lg bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider font-medium hover:bg-surface-container hover:text-on-surface transition-all flex items-center justify-center gap-space-xs" id="tab-btn-3" type="button">
+<span class="w-5 h-5 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center text-[10px]">3</span>
+<span class="truncate">Connecting Photos</span>
+</button>
+</div>
+<!-- TOUR BODY: INTERACTIVE VIEWPORT -->
+<div class="p-space-md md:p-space-lg flex-1 overflow-y-auto">
+<!-- ================= STEP 1 PANEL ================= -->
+<div class="step-panel flex flex-col gap-space-lg" id="step-panel-1">
+<!-- Step Subheader -->
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">1. Describing what you remember</h3>
+<span class="font-label-sm text-label-sm text-secondary font-medium uppercase tracking-wider">Method: Structural Parsing</span>
+</div>
+<!-- Conversational Inquiry Bubble -->
+<div class="flex justify-end">
+<div class="max-w-xl p-space-md rounded-xl bg-surface-container text-on-surface shadow-sm space-y-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant block font-medium">Observer Query</span>
+<p class="font-body-md text-body-md font-medium text-primary">"A modernist building with a fluted tower and amphitheatre in Nairobi"</p>
+</div>
+</div>
+<!-- Reel Response & Evidence -->
+<div class="flex flex-col gap-space-md pl-space-md md:pl-space-lg relative">
+<!-- Archival Hairline Indicator -->
+<div class="absolute left-0 top-1 bottom-1 w-1 bg-secondary rounded-full"></div>
+<div class="flex items-center gap-space-sm">
+<div class="w-7 h-7 rounded bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-surface text-[16px]">camera</span>
+</div>
+<span class="font-label-md text-label-md uppercase tracking-wider text-primary font-bold">Reel Archival Match</span>
+<span class="px-space-xs py-0.5 rounded bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm font-semibold">
+                Confirmed match â€¢ 14 correlated angle frames
+              </span>
+</div>
+<!-- Plate Card -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md p-space-md rounded-xl bg-surface-container-low shadow-sm">
+<!-- Archival Plate Photo Mount -->
+<div class="md:col-span-5 flex flex-col gap-space-xs">
+<div class="p-2 rounded bg-surface-variant flex flex-col gap-space-xs">
+<div class="aspect-[4/3] w-full rounded overflow-hidden relative bg-surface-dim">
+<img class="w-full h-full object-cover" data-alt="Clear high-resolution documentary archival photograph of the Kenyatta International Conference Centre KICC in Nairobi Kenya showing the octagonal modernist terracotta fluted tower and the adjacent amphitheater viewed across the Harambee Avenue forecourt under morning golden hour sunlight with sun-cured archival warm tones and sharp architectural lines"/>
+<div class="absolute bottom-2 left-2 px-space-xs py-0.5 rounded bg-primary-container/85 text-surface font-label-sm text-[10px] tracking-wider uppercase">
+                      Plate #NBO-0021
+                    </div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant px-1 pt-1">
+<span class="font-label-sm text-label-sm">Photo: C. Karanja</span>
+<span class="font-label-sm text-label-sm text-outline font-medium">CC BY-SA 4.0</span>
+</div>
+</div>
+</div>
+<!-- Corroborated Evidence Details -->
+<div class="md:col-span-7 flex flex-col justify-between gap-space-sm">
+<div class="space-y-space-sm">
+<div class="space-y-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Corroborated Architectural Findings</span>
+<p class="font-body-md text-body-md text-primary font-medium">
+                      KICC Harambee Forecourt &amp; Central Plinth
+                    </p>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container text-on-surface space-y-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold block">Why it matched:</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                      28-story octagonal terracotta ribbed tower with basalt plinth fluting matches Nairobi Central Cadastre plate series. Conical tiered plenary auditorium confirms spatial volume.
+                    </p>
+</div>
+</div>
+<div class="flex flex-wrap gap-space-xs pt-1">
+<span class="px-space-xs py-1 rounded bg-surface-variant text-on-surface-variant font-label-sm text-label-sm">28-Storey Octagonal</span>
+<span class="px-space-xs py-1 rounded bg-surface-variant text-on-surface-variant font-label-sm text-label-sm">Terracotta Fin Finish</span>
+<span class="px-space-xs py-1 rounded bg-surface-variant text-on-surface-variant font-label-sm text-label-sm">Central Cadastre Verified</span>
+</div>
+</div>
+</div>
+<!-- "What to Notice" Callout -->
+<div class="p-space-md rounded-xl bg-surface-container-high flex items-start gap-space-md shadow-sm">
+<span class="material-symbols-outlined text-on-tertiary-container text-[22px] shrink-0 mt-0.5">verified</span>
+<div class="space-y-0.5">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-tertiary-container font-bold block">What to notice</span>
+<p class="font-body-sm text-body-sm text-on-surface leading-normal">
+                  Notice the <span class="font-semibold text-primary">"why it matched"</span> line. Reel cites observable architectural features, not speculative keywords or hallucinated assumptions.
+                </p>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= STEP 2 PANEL ================= -->
+<div class="step-panel hidden flex flex-col gap-space-lg" id="step-panel-2">
+<!-- Step Subheader -->
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">2. When Reel is not sure (Honest uncertainty)</h3>
+<span class="font-label-sm text-label-sm text-on-tertiary-container font-medium uppercase tracking-wider">Method: Occlusion &amp; Confidence Bound</span>
+</div>
+<!-- Conversational Inquiry Bubble -->
+<div class="flex justify-end">
+<div class="max-w-xl p-space-md rounded-xl bg-surface-container text-on-surface shadow-sm space-y-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant block font-medium">Observer Query</span>
+<p class="font-body-md text-body-md font-medium text-primary">"The market with wooden carvings and baskets near city hall"</p>
+</div>
+</div>
+<!-- Reel Response & Candidate Comparison -->
+<div class="flex flex-col gap-space-md pl-space-md md:pl-space-lg relative">
+<div class="absolute left-0 top-1 bottom-1 w-1 bg-on-tertiary-container rounded-full"></div>
+<div class="flex items-center gap-space-sm">
+<div class="w-7 h-7 rounded bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-surface text-[16px]">help_center</span>
+</div>
+<span class="font-label-md text-label-md uppercase tracking-wider text-primary font-bold">Reel Candidate Flag</span>
+<span class="px-space-xs py-0.5 rounded bg-tertiary-container text-on-tertiary-container font-label-sm text-label-sm font-semibold">
+                Candidate match â€¢ 2 possible places found
+              </span>
+</div>
+<!-- Two Candidate Photo Mounts Side by Side -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Candidate A -->
+<div class="p-space-md rounded-xl bg-surface-container-low shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="px-space-xs py-0.5 rounded bg-on-tertiary-container text-surface font-label-sm text-label-sm font-semibold">Candidate 01</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Plate #MKT-1102</span>
+</div>
+<div class="p-2 rounded bg-surface-variant">
+<div class="aspect-[16/10] w-full rounded overflow-hidden relative bg-surface-dim">
+<img class="w-full h-full object-cover" data-alt="Architectural photograph of Nairobi City Market high arched interior hall showing wooden stall frameworks and woven sisal baskets with diffused overhead natural skylight and cast shadows across stone tiles"/>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant px-1 pt-1.5 font-label-sm text-label-sm">
+<span>City Market Concourse</span>
+<span class="text-outline">W. Omondi â€¢ CC BY-SA 4.0</span>
+</div>
+</div>
+<div class="p-space-xs rounded bg-surface-container text-body-sm text-body-sm text-on-surface-variant">
+                  Signage reads "City Market", but basket weaving stall angle is partly shadowed and obstructed.
+                </div>
+</div>
+<!-- Candidate B -->
+<div class="p-space-md rounded-xl bg-surface-container-low shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="px-space-xs py-0.5 rounded bg-on-tertiary-container text-surface font-label-sm text-label-sm font-semibold">Candidate 02</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Plate #KRK-0488</span>
+</div>
+<div class="p-2 rounded bg-surface-variant">
+<div class="aspect-[16/10] w-full rounded overflow-hidden relative bg-surface-dim">
+<img class="w-full h-full object-cover" data-alt="Documentary photograph of Kariokor Market open craft pavilion displaying hand carved wooden sculptures and woven kiondo baskets arranged under corrugated roof eaves in soft ambient midday daylight"/>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant px-1 pt-1.5 font-label-sm text-label-sm">
+<span>Kariokor Craft Stalls</span>
+<span class="text-outline">M. Ndege â€¢ CC BY-SA 4.0</span>
+</div>
+</div>
+<div class="p-space-xs rounded bg-surface-container text-body-sm text-body-sm text-on-surface-variant">
+                  Matches wooden carvings and basket craft forms, yet located further east than query proximity.
+                </div>
+</div>
+</div>
+<!-- "What to Notice" Callout -->
+<div class="p-space-md rounded-xl bg-surface-container-high flex items-start gap-space-md shadow-sm">
+<span class="material-symbols-outlined text-on-tertiary-container text-[22px] shrink-0 mt-0.5">rule</span>
+<div class="space-y-0.5">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-tertiary-container font-bold block">What to notice</span>
+<p class="font-body-sm text-body-sm text-on-surface leading-normal">
+                  Notice Reel's honesty. When a sightline or sign is occluded, Reel flags it as a <span class="font-semibold text-primary">candidate</span> rather than hallucinating certainty.
+                </p>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= STEP 3 PANEL ================= -->
+<div class="step-panel hidden flex flex-col gap-space-lg" id="step-panel-3">
+<!-- Step Subheader -->
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">3. Connecting your own photos to the cadastre</h3>
+<span class="font-label-sm text-label-sm text-secondary font-medium uppercase tracking-wider">Method: Shared Vantage Bridge</span>
+</div>
+<!-- Conversational Action Bubble -->
+<div class="flex justify-end">
+<div class="max-w-xl p-space-md rounded-xl bg-surface-container text-on-surface shadow-sm space-y-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant block font-medium">Observer Contribution</span>
+<p class="font-body-md text-body-md font-medium text-primary">Local snapshot brought from personal camera roll: "Corner perspective of Harambee Avenue concourse"</p>
+</div>
+</div>
+<!-- Reel Response & Vantage Dual Plate -->
+<div class="flex flex-col gap-space-md pl-space-md md:pl-space-lg relative">
+<div class="absolute left-0 top-1 bottom-1 w-1 bg-secondary rounded-full"></div>
+<div class="flex items-center gap-space-sm">
+<div class="w-7 h-7 rounded bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-surface text-[16px]">sync_alt</span>
+</div>
+<span class="font-label-md text-label-md uppercase tracking-wider text-primary font-bold">Reel Cadastral Alignment</span>
+<span class="px-space-xs py-0.5 rounded bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm font-semibold">
+                Dual-plate sightline match
+              </span>
+</div>
+<!-- Dual Plate Vantage Comparison with Bridge -->
+<div class="p-space-md rounded-xl bg-surface-container-low shadow-sm flex flex-col gap-space-md">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md relative">
+<!-- Left: User Photo -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-primary font-label-sm text-label-sm font-bold uppercase">Your Photo</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Private by default</span>
+</div>
+<div class="p-2 rounded bg-surface-variant">
+<div class="aspect-[4/3] w-full rounded overflow-hidden relative bg-surface-dim">
+<img class="w-full h-full object-cover" data-alt="A smartphone photograph of the pedestrian pavement along Harambee Avenue Nairobi showing street curb stone patterns and the corner entrance of an archival municipal building during overcast afternoon light"/>
+</div>
+<div class="px-1 pt-1.5 text-on-surface-variant font-label-sm text-label-sm">
+                      Perspective: Oblique ground-level angle
+                    </div>
+</div>
+</div>
+<!-- Right: Cadastre Public Plate -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="px-space-xs py-0.5 rounded bg-primary-container text-surface font-label-sm text-label-sm font-bold uppercase">Public Cadastre</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Plate #CBD-0018</span>
+</div>
+<div class="p-2 rounded bg-surface-variant">
+<div class="aspect-[4/3] w-full rounded overflow-hidden relative bg-surface-dim">
+<img class="w-full h-full object-cover" data-alt="Black and white archival survey photograph of Harambee Avenue Nairobi showing matching street curb stone masonry and architectural facade lines captured with medium format camera in balanced neutral light"/>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant px-1 pt-1.5 font-label-sm text-label-sm">
+<span>Public Survey Record</span>
+<span class="text-outline">J. Kimani â€¢ Public Domain</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Shared Bridge Strip -->
+<div class="w-full p-space-sm rounded-lg bg-surface-container flex items-center justify-center gap-space-sm text-center">
+<span class="material-symbols-outlined text-secondary text-[20px]">share_location</span>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest font-bold">
+                  Same vantage â€¢ Harambee Ave concourse (18m baseline correlation)
+                </span>
+</div>
+</div>
+<!-- "What to Notice" Callout -->
+<div class="p-space-md rounded-xl bg-surface-container-high flex items-start gap-space-md shadow-sm">
+<span class="material-symbols-outlined text-on-tertiary-container text-[22px] shrink-0 mt-0.5">link</span>
+<div class="space-y-0.5">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-tertiary-container font-bold block">What to notice</span>
+<p class="font-body-sm text-body-sm text-on-surface leading-normal">
+                  Notice the <span class="font-semibold text-primary">vantage bridge</span>. Your personal photos connect to open public records through shared viewpoints without relinquishing privacy.
+                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- MODAL FOOTER & WORKFLOW ACTIONS -->
+<div class="w-full px-space-md md:px-space-lg py-space-md bg-surface-container-low flex flex-wrap items-center justify-between gap-space-md">
+<!-- Left: Secondary Exit or Prev -->
+<div class="flex items-center gap-space-sm">
+<button class="min-h-[44px] px-space-md py-space-xs rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container active:bg-surface-dim font-label-md text-label-md transition-colors flex items-center gap-space-xs" id="skip-tour-btn" type="button">
+            Skip tour
+          </button>
+<button class="hidden min-h-[44px] px-space-md py-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high active:bg-surface-dim text-on-surface font-label-md text-label-md transition-colors flex items-center gap-space-xs" id="prev-step-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Previous</span>
+</button>
+</div>
+<!-- Center: Step Indicator Dots -->
+<div class="flex items-center gap-space-xs">
+<button aria-label="Go to step 1" class="w-3 h-3 rounded-full bg-primary-container transition-all" id="dot-1" type="button"></button>
+<button aria-label="Go to step 2" class="w-3 h-3 rounded-full bg-outline-variant hover:bg-outline transition-all" id="dot-2" type="button"></button>
+<button aria-label="Go to step 3" class="w-3 h-3 rounded-full bg-outline-variant hover:bg-outline transition-all" id="dot-3" type="button"></button>
+</div>
+<!-- Right: Primary Progression / Finish Button -->
+<div class="flex items-center gap-space-sm">
+<button class="min-h-[44px] px-space-lg py-space-sm rounded-lg bg-primary-container hover:bg-primary active:bg-on-tertiary-container text-surface font-label-md text-label-md font-semibold transition-all flex items-center gap-space-xs shadow-md" id="next-step-btn" type="button">
+<span id="next-btn-text">Next: Honest uncertainty</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<button class="hidden min-h-[44px] px-space-lg py-space-sm rounded-lg bg-primary-container hover:bg-primary active:bg-on-tertiary-container text-surface font-label-md text-label-md font-bold transition-all flex items-center gap-space-xs shadow-md" id="try-search-btn" type="button">
+<span>Try your own search</span>
+<span class="material-symbols-outlined text-[18px]">search</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>

@@ -2,6 +2,9 @@
 .venv/
 __pycache__/
 node_modules/
-data/photos/data/annotations/personal/
+data/photos/
+data/annotations/personal/
 data/annotations/raw/
 data/index/
+data/flags.jsonl
+data/personal_manifest.csv

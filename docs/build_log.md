@@ -31,3 +31,40 @@ the first unfinished phase.
   (right code/no code/demo off), old endpoints OK, JS + both suites green.
 - Commit id: (this commit; see `git log`).
 - Open: footer GitHub link needs the real repo URL; Phase 1 builds Reel.
+
+## Phase 1 — Reel thread, credits, about, flag, tour (done, needs server smoke)
+
+- Backend: `turn_stream` + `POST /chat/stream` (SSE step/result/error),
+  `GET /api/credits` (manifest + captions/places), `POST /api/flag`
+  (`data/flags.jsonl`, never demo-gated), `GET /tour/{step}.json`,
+  demo gate on upload. `scripts/record_tour.py` + `data/tour/*.json`.
+- Meta key (safe part): `META_API_KEY` is set; `PARSER_*` placeholders
+  no longer override the working Baseten defaults (`_env_or`);
+  `POST /api/outline` returns honest 501; `scripts/probe_meta.py`
+  probes the Meta endpoint once its docs arrive. Routing reasoning to
+  Meta needs the base URL + model name (asked, still open).
+- Also: `/api/config` counts gain `places` + `themes`;
+  `VIEW_NAMES` gains `about`, `credits`; tour `shaped()` now keeps
+  `src` (snapshots must be re-recorded: step 2 candidates lack `src`).
+- Frontend: `p1_extract.py` (landing+thread+frags+credits+about from the
+  exports), `p1_assemble.py` (12 templates into `home.html`; tour-modal
+  landmark fixed). `app.js` rewritten for the thread: SSE progress with
+  live elapsed + stop, filter chips with instant re-search, action chips,
+  suggestions, compare-select + `/api/compare`, flag dialog, in-thread
+  add-photo with job polling, 60-second tour, live stats + trust sample,
+  credits directory (metrics, donut, pills, search, sort, cite, toast),
+  about (live counts, duo, session reset).
+- Honesty pass: 53 external placeholder images stripped (all JS-filled
+  from real data); fake stats/copy/benchmarks replaced with live counts
+  or removed; inline `onclick` removed; tune button + world-publish
+  button deferred (rows in `docs/deferred.md`). Landing cards verified
+  offline: market_018 / cbd_020 / landmarks_004 / street_022; trust
+  sample landmarks_003; about duo cbd_002 + hills_006.
+- Tested: `node --check`, `home.test.js` 32/32, structural verify (every
+  wired id/template/handler resolves; old views intact). NOT run here
+  (no Python in this sandbox): py_compile, `backend/test_story.py`,
+  `record_tour.py` re-run, server smoke. User-run commands in the chat
+  report.
+- Commit id: (this commit; see `git log`).
+- Open: re-record tour; Meta endpoint docs; footer GitHub URL; Phase 2
+  rebuilds the photo detail view.
