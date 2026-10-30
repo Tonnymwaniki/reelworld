@@ -316,11 +316,55 @@ function sseParseChunk(buf) {
   }
   return { events: events, rest: rest };
 }
+const RING_RADII = [58, 95, 140, 185, 230];
+function ringLayout(ringIdx, slot, total) {
+  const r = RING_RADII[ringIdx];
+  const a = -Math.PI / 2 + (slot * 2 * Math.PI) / Math.max(1, total) + ringIdx * 0.42;
+  return { x: Math.round((250 + r * Math.cos(a)) * 10) / 10,
+    y: Math.round((250 + r * Math.sin(a)) * 10) / 10 };
+}
+function ringLabel(ringIdx, slot) {
+  return (ringIdx + 1) + "ABCDEFGH"[slot];
+}
+const KIND_LABEL = {
+  same_place: "Same place", another_angle: "Another angle",
+  where_stood: "Where you stood", shared_landmark: "Shared landmark",
+  shared_sign: "Shared sign", similar: "Looks similar",
+};
+function evidenceRows(facts, nameA, nameB) {
+  const f = facts || {};
+  const rows = [];
+  if (f.same_place) {
+    rows.push({ icon: "pin_drop", label: "Same place",
+      text: f.place_name || "Both photos share a place verdict." });
+  }
+  if (f.same_place && nameA && nameB && nameA !== nameB) {
+    rows.push({ icon: "view_in_ar", label: "Different viewpoint",
+      text: nameA + " vs " + nameB + "." });
+  }
+  if (f.taken_cross) {
+    rows.push({ icon: "tripod", label: "Where you stood",
+      text: "One photo shows the spot the other was taken from." });
+  }
+  (f.shared_landmarks || []).length && rows.push({ icon: "domain", label: "Shared landmark",
+    text: f.shared_landmarks.join("; ") });
+  (f.shared_signs || []).length && rows.push({ icon: "badge", label: "Shared sign text",
+    text: f.shared_signs.map((s) => "\u201c" + s + "\u201d").join("; ") });
+  (f.shared_entities || []).slice(0, 5).length && rows.push({ icon: "visibility",
+    label: "Same things visible", text: f.shared_entities.slice(0, 5).join(", ") });
+  if (!rows.length) {
+    rows.push({ icon: "block", label: "No shared evidence",
+      text: "Different places, signs and landmarks." });
+  }
+  return rows;
+}
 const RWTEST = { fmtScore: fmtScore, shortReasons: shortReasons, creditText: creditText,
   citeText: citeText, hostOf: hostOf, areaOfKey: areaOfKey, specChips: specChips,
   applyChipRemove: applyChipRemove, buildSuggestions: buildSuggestions,
   sseParseChunk: sseParseChunk, licenseFamily: licenseFamily,
-  licenseSummary: licenseSummary, kitCitation: kitCitation };
+  licenseSummary: licenseSummary, kitCitation: kitCitation,
+  ringLayout: ringLayout, ringLabel: ringLabel, evidenceRows: evidenceRows,
+  KIND_LABEL: KIND_LABEL };
 
 const home = {
   view: null, xlist: null, loadingTimer: null, abort: null,
@@ -3239,98 +3283,276 @@ const add = {
 /* ---------- connected view ---------- */
 const connected = {
   view: null,
-  data: null,
-  selected: null,
+  tab: "overview",
+  overview: null,
+  index: null,
+  selfPairs: [],
+  ringsCache: {},
+  anchorPid: null,
+  selLink: null,
+  explainA: null,
+  explainB: null,
+  explainBWorld: true,
+  history: [],
   filter: "",
-
-  GROUP_ORDER: ["same_place", "another_angle", "taken_from_here", "similar_look"],
-  GROUP_META: {
-    same_place: { title: "Same Place", dot: "bg-on-tertiary-container",
-      icon: "near_me", arc: "Bridge: Same Place", note: "Same subject, same viewpoint" },
-    another_angle: { title: "Another Angle", dot: "bg-secondary",
-      icon: "view_in_ar", arc: "Bridge: Another Angle", note: "Same subject, different viewpoint" },
-    taken_from_here: { title: "Where You Were Standing", dot: "bg-primary-container",
-      icon: "tripod", arc: "Bridge: Taken From Here", note: "Shows where you stood" },
-    similar_look: { title: "Similar Look", dot: "bg-outline",
-      icon: "filter_tilt_shift", arc: "Bridge: Similar Look", note: "Closest look-alikes" },
-  },
 
   mount(view) {
     this.view = view;
-    this.data = null;
-    this.selected = null;
+    this.tab = "overview";
+    this.overview = null;
+    this.index = null;
+    this.selfPairs = [];
+    this.ringsCache = {};
+    this.anchorPid = null;
+    this.selLink = null;
+    this.explainA = null;
+    this.explainB = null;
+    this.history = [];
     this.filter = "";
+    $("#conn-tabs", view).addEventListener("click", (e) => {
+      const b = e.target.closest("[data-tab]");
+      if (b) this.showTab(b.dataset.tab);
+    });
     $("#connected-refresh", view).addEventListener("click", () => this.load());
     $("#connected-retry", view).addEventListener("click", () => this.load());
-    $("#captures-filter", view).addEventListener("input", (e) => {
+    $("#ring-search", view).addEventListener("input", (e) => {
       this.filter = e.target.value.trim().toLowerCase();
-      this.renderList();
+      this.renderCaptures();
     });
-    $("#captures-list", view).addEventListener("click", (e) => {
+    $("#ring-captures", view).addEventListener("click", (e) => {
       const b = e.target.closest("[data-pid]");
-      if (b) this.select(b.dataset.pid);
+      if (b) this.selectAnchor(b.dataset.pid, true);
     });
-    $("#anchor-groups", view).addEventListener("click", (e) => {
-      if (placeLinkClick(e)) return;
-      const c = e.target.closest("article[data-target]");
-      if (c) location.hash = "#/photo/" + c.dataset.target;
+    $("#ov-places", view).addEventListener("click", (e) => {
+      if (e.target.closest("[data-slot=placelink]")) return;
+      const r = e.target.closest("[data-slot=rings]");
+      if (r && r.dataset.pid) { this.openRings(r.dataset.pid); return; }
+      const a = e.target.closest("[data-slot=addangle]");
+      if (a) this.addAngle(a.dataset.place, a.dataset.vp);
+    });
+    $("#ov-self-list", view).addEventListener("click", (e) => {
+      const b = e.target.closest("[data-a]");
+      if (b) this.explainPair(b.dataset.a, b.dataset.b);
+    });
+    $("#ring-nodes", view).addEventListener("click", (e) => {
+      const b = e.target.closest("[data-link]");
+      if (b) this.selectLink(b.dataset.ring, Number(b.dataset.idx));
+    });
+    $("#ring-rows", view).addEventListener("click", (e) => {
+      const b = e.target.closest("[data-link]");
+      if (b) this.selectLink(b.dataset.ring, Number(b.dataset.idx));
+    });
+    $("#ev-close", view).addEventListener("click", () => {
+      this.selLink = null;
+      this.show($("#ring-evidence", view), false);
+      this.paintStage();
+    });
+    $("#ev-explain", view).addEventListener("click", () => {
+      if (this.selLink) this.explainPair(this.anchorPid, this.selLink.member.photo_id);
+    });
+    $("#ev-recentre", view).addEventListener("click", () => {
+      if (this.selLink) this.selectAnchor(this.selLink.member.photo_id, true);
+    });
+    $("#ring-back", view).addEventListener("click", () => this.goBack());
+    $("#ex-a-list", view).addEventListener("click", (e) => {
+      const b = e.target.closest("[data-pid]");
+      if (b) this.pickExplainA(b.dataset.pid);
+    });
+    $("#ex-b-list", view).addEventListener("click", (e) => {
+      const b = e.target.closest("[data-pid]");
+      if (b) this.pickExplainB(b.dataset.pid, b.dataset.world !== "0");
+    });
+    $("#ex-run", view).addEventListener("click", () => this.runExplain());
+    $("#ex-open-rings", view).addEventListener("click", () => {
+      if (this.explainA) this.openRings(this.explainA);
     });
     this.load();
+  },
+
+  show(el, on) {
+    if (!el) return;
+    el.hidden = !on;
+    el.classList.toggle("flex", !!on);
+  },
+
+  showTab(tab) {
+    this.tab = tab;
+    const view = this.view;
+    $$("#conn-tabs [data-tab]", view).forEach((b) => {
+      const on = b.dataset.tab === tab;
+      b.setAttribute("aria-selected", on ? "true" : "false");
+      b.className = "min-h-[44px] px-5 rounded-lg font-label-md text-label-md transition-all " +
+        (on ? "bg-primary-container text-surface shadow-sm" : "text-on-surface-variant hover:text-on-surface");
+    });
+    ["overview", "rings", "explain"].forEach((t) => {
+      this.show($("#conn-" + t, view), t === tab);
+    });
   },
 
   async load() {
     const view = this.view;
     $("#connected-loading", view).hidden = false;
-    $("#connected-grid", view).hidden = true;
-    $("#connected-empty", view).hidden = true;
-    $("#connected-empty", view).classList.add("hidden");
-    $("#connected-empty", view).classList.remove("flex");
-    $("#connected-error", view).hidden = true;
-    $("#connected-error", view).classList.add("hidden");
-    $("#connected-error", view).classList.remove("flex");
+    this.show($("#connected-grid", view), false);
+    const empty = $("#connected-empty", view);
+    empty.hidden = true;
+    empty.classList.add("hidden");
+    empty.classList.remove("flex");
+    const err = $("#connected-error", view);
+    err.hidden = true;
+    err.classList.add("hidden");
+    err.classList.remove("flex");
     try {
-      const data = await api("/api/connected");
+      const [ov, idx, self] = await Promise.all([
+        api("/api/places/overview"),
+        api("/api/connected"),
+        api("/api/connected/self"),
+      ]);
       if (!view.isConnected) return;
       $("#connected-loading", view).hidden = true;
-      const s = data.summary || {};
+      this.overview = ov;
+      this.index = idx;
+      this.selfPairs = (self && self.pairs) || [];
+      const s = idx.summary || {};
+      const entries = idx.photos || [];
       const p = s.photos_connected || 0;
       const pl = s.places_connected || 0;
       $("#connected-title", view).textContent =
-        p + " of your " + (p === 1 ? "photo connects" : "photos connect") +
+        p + " of your " + entries.length + (entries.length === 1 ? " photo connects" : " photos connect") +
         " to " + pl + (pl === 1 ? " place" : " places") + " in the world";
-      let upd = "";
-      if (data.updated_at) {
-        const t = new Date(data.updated_at);
-        if (!isNaN(t)) upd = " • updated " + t.toLocaleString();
-      }
+      const ovs = ov.summary || {};
       $("#connected-sub", view).textContent =
-        (s.matches_total || 0) + " world matches" + upd;
-      $("#connected-count", view).textContent = p + " Connected";
-      const entries = data.photos || [];
-      if (!entries.length || entries.every((e) => !(e.match_count > 0))) {
-        const box = $("#connected-empty", view);
-        box.hidden = false;
-        box.classList.remove("hidden");
-        box.classList.add("flex");
+        (ovs.counterparts || 0) + " world counterparts • " + (ovs.gaps || 0) + " viewpoint gaps";
+      if (!entries.length) {
+        empty.hidden = false;
+        empty.classList.remove("hidden");
+        empty.classList.add("flex");
         return;
       }
-      this.data = data;
-      $("#connected-grid", view).hidden = false;
+      this.show($("#connected-grid", view), true);
+      this.showTab("overview");
+      this.paintOverview();
+      this.renderCaptures();
+      this.renderExplainA();
       const first = entries.find((e) => e.match_count > 0) || entries[0];
-      this.select(first.photo.photo_id);
+      this.selectAnchor(first.photo.photo_id, false);
     } catch (e) {
       if (!view.isConnected) return;
       $("#connected-loading", view).hidden = true;
       $("#connected-error-text", view).textContent = String((e && e.message) || e);
-      const box = $("#connected-error", view);
-      box.hidden = false;
-      box.classList.remove("hidden");
-      box.classList.add("flex");
+      err.hidden = false;
+      err.classList.remove("hidden");
+      err.classList.add("flex");
     }
   },
 
-  filtered() {
-    const entries = (this.data && this.data.photos) || [];
+  /* ---------- overview tab ---------- */
+
+  vpWords(vps) {
+    return vps.map((v) => (VP_LABEL[v] || v).toLowerCase()).join(" and ");
+  },
+
+  paintOverview() {
+    const view = this.view;
+    const ov = this.overview || {};
+    const s = ov.summary || {};
+    $("#ov-captures", view).textContent = s.captures || 0;
+    $("#ov-counterparts", view).textContent = s.counterparts || 0;
+    $("#ov-places-n", view).textContent = s.places || 0;
+    $("#ov-gaps", view).textContent = s.gaps || 0;
+    const box = $("#ov-places", view);
+    box.innerHTML = "";
+    const T = $("#tpl-ov-place", view).content.firstElementChild;
+    (ov.places || []).forEach((pl) => {
+      const node = T.cloneNode(true);
+      $("[data-slot=name]", node).textContent = pl.name || pl.key;
+      const link = $("[data-slot=placelink]", node);
+      if (pl.key && pl.key !== "unplaced") link.href = "#/place/" + pl.key;
+      else link.classList.add("hidden");
+      const w = pl.world || {};
+      const m = pl.mine || {};
+      const wb = w.by_viewpoint || {};
+      const g = wb.ground_level || 0;
+      const ev = wb.elevated || 0;
+      const other = (w.total || 0) - g - ev;
+      let counts;
+      if (!w.total) counts = "The world has no photos of this place yet.";
+      else {
+        counts = "The world has " + w.total + " photo" + (w.total === 1 ? "" : "s") +
+          " here (" + g + " ground-level, " + ev + " elevated" +
+          (other > 0 ? ", " + other + " other" : "") + ").";
+      }
+      counts += " You have " + (m.total || 0) + ".";
+      $("[data-slot=counts]", node).textContent = counts;
+      const gaps = pl.gaps || [];
+      let gap;
+      if (!w.total) gap = "Yours may be the first photos of this place.";
+      else if (gaps.length) {
+        const n = gaps.reduce((t, v) => t + (wb[v] || 0), 0);
+        gap = "Gap: no " + this.vpWords(gaps) + " view from you — the world has " + n + ".";
+      } else gap = "No gaps — you match every world viewpoint here.";
+      $("[data-slot=gap]", node).textContent = gap;
+      const rb = $("[data-slot=rings]", node);
+      rb.dataset.pid = (pl.mine_ids || [])[0] || "";
+      if (!rb.dataset.pid) rb.classList.add("hidden");
+      const ab = $("[data-slot=addangle]", node);
+      if (gaps.length) {
+        ab.dataset.place = pl.name || pl.key;
+        ab.dataset.vp = gaps[0];
+        ab.classList.remove("hidden");
+        ab.classList.add("inline-flex");
+      }
+      box.appendChild(node);
+    });
+    if (!box.children.length) {
+      const p = document.createElement("p");
+      p.className = "font-body-md text-body-md text-on-surface-variant";
+      p.textContent = "No places yet — add a photo to connect it to the world.";
+      box.appendChild(p);
+    }
+    const sl = $("#ov-self-list", view);
+    sl.innerHTML = "";
+    const T2 = $("#tpl-self-pair", view).content.firstElementChild;
+    this.selfPairs.slice(0, 12).forEach((pr) => {
+      const node = T2.cloneNode(true);
+      node.dataset.a = pr.a.photo_id;
+      node.dataset.b = pr.b.photo_id;
+      const ia = $("[data-slot=a-img]", node);
+      ia.src = pr.a.src;
+      ia.alt = pr.a.caption || pr.a.photo_id;
+      const ib = $("[data-slot=b-img]", node);
+      ib.src = pr.b.src;
+      ib.alt = pr.b.caption || pr.b.photo_id;
+      $("[data-slot=caps]", node).textContent =
+        (pr.a.caption || pr.a.photo_id) + "  +  " + (pr.b.caption || pr.b.photo_id);
+      const kc = $("[data-slot=kinds]", node);
+      (pr.kinds || []).forEach((k) => {
+        const chip = document.createElement("span");
+        chip.className = "px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed font-label-sm text-[11px] font-semibold";
+        chip.textContent = KIND_LABEL[k] || k;
+        kc.appendChild(chip);
+      });
+      sl.appendChild(node);
+    });
+    this.show($("#ov-self", view), this.selfPairs.length > 0);
+  },
+
+  openRings(pid) {
+    this.showTab("rings");
+    this.selectAnchor(pid, true);
+  },
+
+  addAngle(place, vp) {
+    try {
+      sessionStorage.setItem("rw.pendingNote",
+        "Gap: " + (VP_LABEL[vp] || vp) + " view of " + place);
+    } catch (e) { /* private mode */ }
+    location.hash = "#/add";
+  },
+
+  /* ---------- rings tab ---------- */
+
+  filteredCaptures() {
+    const entries = (this.index && this.index.photos) || [];
     if (!this.filter) return entries;
     return entries.filter((e) => {
       const hay = ((e.photo.caption || "") + " " + e.photo.photo_id).toLowerCase();
@@ -3338,16 +3560,18 @@ const connected = {
     });
   },
 
-  renderList() {
+  renderCaptures() {
     const view = this.view;
-    const box = $("#captures-list", view);
+    const box = $("#ring-captures", view);
     box.innerHTML = "";
     const T = $("#tpl-capture", view).content.firstElementChild;
-    this.filtered().forEach((entry) => {
+    const entries = this.filteredCaptures();
+    $("#ring-count", view).textContent = entries.length + " captures";
+    entries.forEach((entry) => {
       const node = T.cloneNode(true);
       const pid = entry.photo.photo_id;
       node.dataset.pid = pid;
-      const on = pid === this.selected;
+      const on = pid === this.anchorPid;
       node.className += on
         ? " bg-surface-container-high shadow-md relative"
         : " bg-surface-container-low hover:bg-surface-container shadow-sm";
@@ -3366,7 +3590,7 @@ const connected = {
       $("[data-slot=caption]", node).textContent = entry.photo.caption || pid;
       $("[data-slot=pid]", node).textContent = pid;
       box.appendChild(node);
-      this.fillPlace(node, pid);
+      this.fillCapturePlace(node, pid);
     });
     if (!box.children.length) {
       const p = document.createElement("p");
@@ -3376,103 +3600,403 @@ const connected = {
     }
   },
 
-  async fillPlace(node, pid) {
+  async fillCapturePlace(node, pid) {
     const d = await photoDetail(pid);
     if (!d || !node.isConnected) return;
     $("[data-slot=place]", node).textContent = (d.place && d.place.name) || "Place unknown";
   },
 
-  select(pid) {
-    this.selected = pid;
-    this.renderList();
-    this.renderAnchor();
+  ringsData() {
+    return this.ringsCache[this.anchorPid] || null;
   },
 
-  renderAnchor() {
+  async selectAnchor(pid, push) {
+    if (push && this.anchorPid && this.history[this.history.length - 1] !== this.anchorPid) {
+      this.history.push(this.anchorPid);
+    }
+    this.anchorPid = pid;
+    this.selLink = null;
+    this.renderCaptures();
+    this.show($("#ring-evidence", this.view), false);
+    const back = $("#ring-back", this.view);
+    this.show(back, this.history.length > 0);
+    $("#ring-history-count", this.view).textContent =
+      this.history.length ? "(" + this.history.length + ")" : "";
+    if (!this.ringsCache[pid]) {
+      $("#ring-centre-label", this.view).textContent = "Loading…";
+      try {
+        this.ringsCache[pid] = await api("/api/rings/" + encodeURIComponent(pid));
+      } catch (e) {
+        if (!this.view.isConnected || this.anchorPid !== pid) return;
+        $("#ring-centre-label", this.view).textContent = String((e && e.message) || e);
+        return;
+      }
+      if (!this.view.isConnected || this.anchorPid !== pid) return;
+    }
+    const d = this.ringsData();
+    $("#ring-centre-label", this.view).textContent =
+      (d.caption || d.photo_id) + (d.place ? " — " + d.place : "");
+    const ci = $("#ring-centre-img", this.view);
+    ci.src = d.src;
+    ci.alt = d.caption || d.photo_id;
+    const counts = $("#ring-counts", this.view);
+    counts.innerHTML = "";
+    (d.rings || []).forEach((r) => {
+      const chip = document.createElement("span");
+      chip.className = "px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm";
+      chip.textContent = r.tag + " · " + r.members.length;
+      chip.title = r.label;
+      counts.appendChild(chip);
+    });
+    this.paintStage();
+    this.paintRows();
+  },
+
+  goBack() {
+    const prev = this.history.pop();
+    if (prev) this.selectAnchor(prev, false);
+  },
+
+  paintStage() {
     const view = this.view;
-    const entry = ((this.data && this.data.photos) || [])
-      .find((e) => e.photo.photo_id === this.selected);
-    if (!entry) return;
-    const img = $("#anchor-img", view);
-    img.src = entry.photo.src;
-    img.alt = entry.photo.caption || entry.photo.photo_id;
-    img.addEventListener("error", () => img.setAttribute("data-broken", "true"));
-    $("#anchor-id", view).textContent = "ID: " + entry.photo.photo_id;
-    $("#anchor-caption", view).textContent = entry.photo.caption || entry.photo.photo_id;
-    const mc = entry.match_count || 0;
-    $("#anchor-links", view).textContent =
-      mc + (mc === 1 ? " Linked World Artifact Found" : " Linked World Artifacts Found");
-    $("#anchor-dossier", view).href = "#/photo/" + entry.photo.photo_id;
-    const groups = entry.groups || {};
-    const box = $("#anchor-groups", view);
+    const d = this.ringsData();
+    const nodes = $("#ring-nodes", view);
+    nodes.innerHTML = "";
+    const g = $("#ring-threads", view);
+    while (g.firstChild) g.removeChild(g.firstChild);
+    if (!d) return;
+    const NS = "http://www.w3.org/2000/svg";
+    (d.rings || []).forEach((ring, ri) => {
+      (ring.members || []).forEach((m, i) => {
+        const pos = ringLayout(ri, i, ring.members.length);
+        const sel = this.selLink && this.selLink.ring === ring.key &&
+          this.selLink.member.photo_id === m.photo_id;
+        const path = document.createElementNS(NS, "path");
+        const mx = (250 + pos.x) / 2;
+        const my = (250 + pos.y) / 2;
+        const dx = pos.x - 250;
+        const dy = pos.y - 250;
+        const len = Math.hypot(dx, dy) || 1;
+        const cx = (mx - (dy / len) * 14).toFixed(1);
+        const cy = (my + (dx / len) * 14).toFixed(1);
+        path.setAttribute("d", "M 250 250 Q " + cx + " " + cy + " " + pos.x + " " + pos.y);
+        path.setAttribute("fill", "none");
+        path.setAttribute("stroke", sel ? "#d5643b" : "#476556");
+        path.setAttribute("stroke-width", sel ? "2.5" : "1.5");
+        if (!sel && (ri === 0 || ri === 4)) path.setAttribute("stroke-dasharray", "2 3");
+        g.appendChild(path);
+        const b = document.createElement("button");
+        b.type = "button";
+        b.dataset.link = "1";
+        b.dataset.ring = ring.key;
+        b.dataset.idx = String(i);
+        b.title = (m.caption || m.photo_id) + " — " + ring.label;
+        b.className = "absolute w-14 h-14 rounded-full p-0.5 shadow-md bg-surface-container border-2 " +
+          (sel ? "border-on-tertiary-container" : "border-secondary/40 hover:border-secondary");
+        b.style.left = (pos.x / 5) + "%";
+        b.style.top = (pos.y / 5) + "%";
+        b.style.transform = "translate(-50%, -50%)";
+        const img = document.createElement("img");
+        img.src = m.src;
+        img.alt = m.caption || m.photo_id;
+        img.className = "rw-photo w-full h-full rounded-full object-cover";
+        img.loading = "lazy";
+        const tag = document.createElement("span");
+        tag.className = "absolute -bottom-2 left-1/2 -translate-x-1/2 px-1.5 rounded bg-primary-container text-surface font-label-sm text-[10px] font-bold";
+        tag.textContent = ringLabel(ri, i);
+        b.append(img, tag);
+        nodes.appendChild(b);
+      });
+    });
+  },
+
+  paintRows() {
+    const view = this.view;
+    const d = this.ringsData();
+    const box = $("#ring-rows", view);
     box.innerHTML = "";
-    const T = (n) => $("#" + n, view).content.firstElementChild;
-    let shown = 0;
-    this.GROUP_ORDER.forEach((k) => {
-      const items = groups[k] || [];
-      if (!items.length) return;
-      const meta = this.GROUP_META[k];
-      const sec = T("tpl-cgroup").cloneNode(true);
-      $("[data-slot=arc-icon]", sec).textContent = meta.icon;
-      $("[data-slot=arc-label]", sec).textContent = meta.arc;
-      $("[data-slot=dot]", sec).className += " " + meta.dot;
-      $("[data-slot=title]", sec).textContent = meta.title;
+    if (!d) return;
+    const T = $("#tpl-ring-row", view).content.firstElementChild;
+    let total = 0;
+    (d.rings || []).forEach((ring) => {
+      if (!ring.members.length) return;
+      total += ring.members.length;
+      const sec = T.cloneNode(true);
+      $("[data-slot=title]", sec).textContent = ring.tag + " · " + ring.label;
       $("[data-slot=count]", sec).textContent =
-        items.length + (items.length === 1 ? " archive capture" : " archive captures");
-      $("[data-slot=note]", sec).textContent = meta.note;
-      const cards = $("[data-slot=cards]", sec);
-      items.forEach((item) => cards.appendChild(this.matchCard(T, item)));
-      shown += items.length;
+        ring.members.length + (ring.members.length === 1 ? " photo" : " photos");
+      const rows = $("[data-slot=rows]", sec);
+      ring.members.forEach((m, i) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.dataset.link = "1";
+        b.dataset.ring = ring.key;
+        b.dataset.idx = String(i);
+        b.className = "w-full flex items-center gap-3 p-2 rounded-lg bg-surface-container-highest hover:bg-surface border border-parchment-border/50 text-left min-h-[44px]";
+        const img = document.createElement("img");
+        img.src = m.src;
+        img.alt = m.caption || m.photo_id;
+        img.loading = "lazy";
+        img.className = "rw-photo w-12 h-12 rounded-lg object-cover flex-shrink-0 bg-surface-container-high";
+        const tx = document.createElement("span");
+        tx.className = "flex flex-col min-w-0 flex-1";
+        const c1 = document.createElement("span");
+        c1.className = "font-body-sm text-body-sm text-on-surface truncate";
+        c1.textContent = m.caption || m.photo_id;
+        const c2 = document.createElement("span");
+        c2.className = "font-label-sm text-label-sm text-on-surface-variant truncate";
+        c2.textContent = (m.place || "Place unknown") +
+          (typeof m.score === "number" ? " · score " + m.score.toFixed(2) : "");
+        tx.append(c1, c2);
+        b.append(img, tx);
+        rows.appendChild(b);
+      });
       box.appendChild(sec);
     });
-    $("#anchor-nolinks", view).classList.toggle("hidden", shown > 0);
+    if (!total) {
+      const p = document.createElement("p");
+      p.className = "font-body-md text-body-md text-on-surface-variant";
+      p.textContent = "No links yet for this photo. Links form by place, viewpoint and look.";
+      box.appendChild(p);
+    }
   },
 
-  matchCard(T, item) {
-    const node = T("tpl-cmatch").cloneNode(true);
-    node.dataset.target = item.photo_id;
-    const img = $("[data-slot=img]", node);
-    img.src = item.src || srcOf(item);
-    img.alt = item.caption || item.photo_id;
-    img.addEventListener("error", () => img.setAttribute("data-broken", "true"));
-    $("[data-slot=match]", node).textContent = typeof item.similarity === "number"
-      ? Math.round(item.similarity * 100) + "% Match"
-      : (typeof item.score === "number" ? "score " + item.score.toFixed(2) : "");
-    const vp = $("[data-slot=vp]", node);
-    if (item.viewpoint && VP_LABEL[item.viewpoint]) vp.textContent = VP_LABEL[item.viewpoint];
-    else vp.classList.add("hidden");
-    $("[data-slot=byline]", node).textContent = item.credit && item.credit.author
-      ? "Photo by " + item.credit.author : "World archive photo";
-    $("[data-slot=pid]", node).textContent = item.photo_id;
-    $("[data-slot=title]", node).textContent =
-      item.place || (item.caption || item.photo_id).slice(0, 60);
-    fillPlaceLink(node, item);
-    const plc = $("[data-slot=place]", node);
-    if (plc && item.place_key) plc.href = "#/place/" + item.place_key;
-    $("[data-slot=reason]", node).textContent = item.reason_text || "match";
-    const credit = $("[data-slot=credit]", node);
-    if (item.credit && (item.credit.author || item.credit.license)) {
-      const b = document.createElement("span");
-      b.className = "font-semibold text-on-surface";
-      b.textContent = "Photo by " + (item.credit.author || "Unknown");
-      credit.appendChild(b);
-      if (item.credit.license) {
-        credit.appendChild(document.createTextNode(" • License: "));
-        if (item.credit.source_url) {
-          const a = document.createElement("a");
-          a.href = item.credit.source_url;
-          a.target = "_blank";
-          a.rel = "noopener";
-          a.className = "underline decoration-dotted hover:text-ochre";
-          a.textContent = item.credit.license;
-          a.addEventListener("click", (e) => e.stopPropagation());
-          credit.appendChild(a);
-        } else credit.appendChild(document.createTextNode(item.credit.license));
-      }
-    } else {
-      credit.textContent = "World archive photo";
+  selectLink(ringKey, idx) {
+    const d = this.ringsData();
+    if (!d) return;
+    const ring = (d.rings || []).find((r) => r.key === ringKey);
+    const member = ring && ring.members[idx];
+    if (!member) return;
+    this.selLink = { ring: ringKey, member: member };
+    this.paintStage();
+    const view = this.view;
+    $("#ev-title", view).textContent =
+      (d.caption || d.photo_id) + "  ↔  " + (member.caption || member.photo_id);
+    $("#ev-badge", view).textContent = ring.tag + ": " + ring.label;
+    const q = (n) => view.querySelector('[data-ev="' + n + '"]');
+    const ai = q("a-img");
+    ai.src = d.src;
+    ai.alt = d.caption || d.photo_id;
+    q("a-vp").textContent = VP_LABEL[d.viewpoint] || d.viewpoint || "";
+    q("a-cap").textContent = (d.caption || d.photo_id) + (d.place ? " — " + d.place : "");
+    q("a-link").href = "#/photo/" + d.photo_id;
+    const bi = q("b-img");
+    bi.src = member.src;
+    bi.alt = member.caption || member.photo_id;
+    q("b-vp").textContent = VP_LABEL[member.viewpoint] || member.viewpoint || "";
+    q("b-cap").textContent = (member.caption || member.photo_id) +
+      (member.place ? " — " + member.place : "");
+    q("b-credit").textContent = member.credit && member.credit.author
+      ? "Photo: " + member.credit.author +
+        (member.credit.license ? " · " + member.credit.license : "")
+      : (member.collection === "personal" ? "Your photo" : "World archive photo");
+    q("b-link").href = "#/photo/" + member.photo_id;
+    const rows = q("rows");
+    rows.innerHTML = "";
+    const T = $("#tpl-ev-row", view).content.firstElementChild;
+    evidenceRows(member.facts || {}, VP_LABEL[d.viewpoint] || d.viewpoint,
+      VP_LABEL[member.viewpoint] || member.viewpoint).forEach((r) => {
+      const node = T.cloneNode(true);
+      $("[data-slot=icon]", node).textContent = r.icon;
+      $("[data-slot=label]", node).textContent = r.label;
+      $("[data-slot=text]", node).textContent = r.text;
+      rows.appendChild(node);
+    });
+    if (member.reason_text) {
+      const node = T.cloneNode(true);
+      $("[data-slot=icon]", node).textContent = "query_stats";
+      $("[data-slot=label]", node).textContent = "Match detail";
+      $("[data-slot=text]", node).textContent = member.reason_text;
+      rows.appendChild(node);
     }
-    return node;
+    this.show($("#ring-evidence", view), true);
+    $("#ring-evidence", view).scrollIntoView({ block: "nearest", behavior: "smooth" });
+  },
+
+  /* ---------- explain tab ---------- */
+
+  renderExplainA() {
+    const view = this.view;
+    const box = $("#ex-a-list", view);
+    box.innerHTML = "";
+    const T = $("#tpl-ex-opt", view).content.firstElementChild;
+    ((this.index && this.index.photos) || []).forEach((entry) => {
+      const node = T.cloneNode(true);
+      node.dataset.pid = entry.photo.photo_id;
+      if (entry.photo.photo_id === this.explainA) {
+        node.classList.add("ring-2", "ring-on-tertiary-container");
+      }
+      const img = $("[data-slot=img]", node);
+      img.src = entry.photo.src;
+      img.alt = entry.photo.caption || entry.photo.photo_id;
+      $("[data-slot=cap]", node).textContent = entry.photo.caption || entry.photo.photo_id;
+      $("[data-slot=sub]", node).textContent =
+        (entry.match_count || 0) + " world links";
+      box.appendChild(node);
+    });
+  },
+
+  async pickExplainA(pid) {
+    this.explainA = pid;
+    this.explainB = null;
+    $("#ex-run", this.view).disabled = true;
+    this.show($("#ex-result", this.view), false);
+    this.renderExplainA();
+    const hint = $("#ex-b-hint", this.view);
+    hint.textContent = "Loading links…";
+    this.show($("#ex-b-list", this.view), false);
+    if (!this.ringsCache[pid]) {
+      try {
+        this.ringsCache[pid] = await api("/api/rings/" + encodeURIComponent(pid));
+      } catch (e) {
+        if (!this.view.isConnected || this.explainA !== pid) return;
+        hint.textContent = String((e && e.message) || e);
+        return;
+      }
+      if (!this.view.isConnected || this.explainA !== pid) return;
+    }
+    const box = $("#ex-b-list", this.view);
+    box.innerHTML = "";
+    const T = $("#tpl-ex-opt", this.view).content.firstElementChild;
+    const mk = (m, sub, world) => {
+      const node = T.cloneNode(true);
+      node.dataset.pid = m.photo_id;
+      node.dataset.world = world ? "1" : "0";
+      const img = $("[data-slot=img]", node);
+      img.src = m.src;
+      img.alt = m.caption || m.photo_id;
+      $("[data-slot=cap]", node).textContent = m.caption || m.photo_id;
+      $("[data-slot=sub]", node).textContent = sub;
+      return node;
+    };
+    let n = 0;
+    (this.ringsCache[pid].rings || []).forEach((ring) => {
+      (ring.members || []).forEach((m) => {
+        box.appendChild(mk(m, ring.tag + " · " + ring.label, true));
+        n++;
+      });
+    });
+    this.selfPairs.forEach((pr) => {
+      const other = pr.a.photo_id === pid ? pr.b : (pr.b.photo_id === pid ? pr.a : null);
+      if (other) {
+        box.appendChild(mk(other, "Your photo · " + pr.kinds.map((k) => KIND_LABEL[k] || k).join(", "), false));
+        n++;
+      }
+    });
+    if (!n) hint.textContent = "No links for this photo yet.";
+    else {
+      hint.textContent = "";
+      this.show(box, true);
+    }
+  },
+
+  pickExplainB(pid, world) {
+    this.explainB = pid;
+    this.explainBWorld = world;
+    $$("#ex-b-list [data-pid]", this.view).forEach((b) => {
+      b.classList.toggle("ring-2", b.dataset.pid === pid);
+      b.classList.toggle("ring-on-tertiary-container", b.dataset.pid === pid);
+    });
+    $("#ex-run", this.view).disabled = false;
+  },
+
+  async explainPair(a, b) {
+    this.showTab("explain");
+    await this.pickExplainA(a);
+    if (!this.view.isConnected || this.explainA !== a) return;
+    const opt = this.view.querySelector('#ex-b-list [data-pid="' + b + '"]');
+    if (!opt) return;
+    this.pickExplainB(b, opt.dataset.world !== "0");
+    this.runExplain();
+  },
+
+  async runExplain() {
+    if (!this.explainA || !this.explainB) return;
+    const view = this.view;
+    const btn = $("#ex-run", view);
+    btn.disabled = true;
+    this.show($("#ex-result", view), true);
+    $("#ex-verdict", view).textContent = "Explaining…";
+    $("#ex-text", view).textContent = "Thinking…";
+    $("#ex-icon", view).textContent = "hourglass_top";
+    try {
+      const out = await api("/api/explain", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ photo_a: this.explainA, photo_b: this.explainB }),
+      });
+      if (!view.isConnected) return;
+      this.paintExplain(out);
+    } catch (e) {
+      if (!view.isConnected) return;
+      $("#ex-verdict", view).textContent = "Explanation failed";
+      $("#ex-text", view).textContent = String((e && e.message) || e);
+      $("#ex-icon", view).textContent = "error_outline";
+    } finally {
+      btn.disabled = false;
+    }
+  },
+
+  paintExplain(out) {
+    const view = this.view;
+    const q = (n) => view.querySelector('[data-ex="' + n + '"]');
+    $("#ex-icon", view).textContent = out.linked ? "hub" : "block";
+    const kinds = (out.kinds || []).map((k) => KIND_LABEL[k] || k).join(", ");
+    $("#ex-verdict", view).textContent = out.linked
+      ? "Connection found: " + kinds
+      : "No verifiable connection";
+    $("#ex-text", view).textContent = out.text || "";
+    const pa = out.photos[0];
+    const pb = out.photos[1];
+    const ia = q("a-img");
+    ia.src = pa.src;
+    ia.alt = pa.caption || pa.photo_id;
+    q("a-cap").textContent = pa.caption || pa.photo_id;
+    const ib = q("b-img");
+    ib.src = pb.src;
+    ib.alt = pb.caption || pb.photo_id;
+    q("b-cap").textContent = pb.caption || pb.photo_id;
+    const f = out.facts || {};
+    const anchor = f.place_name && f.same_place ? f.place_name
+      : (f.shared_landmarks || [])[0] || (f.shared_signs || [])[0]
+      || (out.linked ? "Visual similarity" : "No shared anchor");
+    q("anchor").textContent = anchor;
+    q("anchor-sub").textContent = kinds || "different places and subjects";
+    const cr = q("credit");
+    if (!this.explainBWorld && pa.photo_id === this.explainA) {
+      cr.textContent = "Both photos are yours.";
+      cr.classList.remove("hidden");
+    } else {
+      cr.textContent = "";
+      cr.classList.add("hidden");
+      const worldPid = this.explainBWorld ? this.explainB : this.explainA;
+      this.fillExplainCredit(worldPid);
+    }
+    const ev = $("#ex-evidence", view);
+    ev.innerHTML = "";
+    const T = $("#tpl-ev-row", view).content.firstElementChild;
+    evidenceRows(f, VP_LABEL[pa.viewpoint] || pa.viewpoint,
+      VP_LABEL[pb.viewpoint] || pb.viewpoint).forEach((r) => {
+      const node = T.cloneNode(true);
+      $("[data-slot=icon]", node).textContent = r.icon;
+      $("[data-slot=label]", node).textContent = r.label;
+      $("[data-slot=text]", node).textContent = r.text;
+      ev.appendChild(node);
+    });
+    q("a-link").href = "#/photo/" + pa.photo_id;
+    q("b-link").href = "#/photo/" + pb.photo_id;
+    $("#ex-result", view).scrollIntoView({ block: "nearest", behavior: "smooth" });
+  },
+
+  async fillExplainCredit(pid) {
+    const d = await photoDetail(pid);
+    if (!d || !this.view.isConnected) return;
+    const cr = this.view.querySelector('[data-ex="credit"]');
+    if (d.credit && d.credit.author) {
+      cr.textContent = "Photo: " + d.credit.author +
+        (d.credit.license ? " · " + d.credit.license : "");
+      cr.classList.remove("hidden");
+    }
   },
 };
 

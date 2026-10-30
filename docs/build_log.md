@@ -147,5 +147,26 @@ the first unfinished phase.
   (both run here). Browser pass pending user.
 - Out of scope, noted: the design's Outlines toggle is feasible now
   (SAM live) but not in the P2 checklist; candidate for later.
+
+## Phase 3: connected rings + explain (needs user Python run + browser)
+
+- Backend (appended to `backend/api.py`, `retrieval.py` untouched):
+  `GET /api/rings/{id}` (5 rings, ≤8 each, R5 similarity floor 0.5,
+  per-member deterministic facts), `GET /api/places/overview`
+  (world-vs-mine viewpoint counts + gaps), `GET /api/connected/self`
+  (personal↔personal pairs), `POST /api/explain` (facts + strict
+  evidence-only LLM paragraph, honest no-link reply without a call).
+  Ring rule: each photo lands in exactly one ring, R1-R4 earned by
+  place/landmark keys, never fuzzy names.
+- Frontend: `#/connected` rebuilt with Overview / Ring diagram / Explain
+  tabs from the six connected exports — stats, place cards with gap
+  lines, self rows, SVG ring stage (design radii) + phone rows, link
+  evidence panel, explain flow with chain graphic. Honesty removals:
+  versions, latency pills, dates, elevations/rays/angles, cadastre refs,
+  hashes, fake counts; vantage geometry deferred (self rows instead).
+- Tests: `backend/test_links.py` (11 checks, user-run),
+  `frontend/connected.test.js` 100/100 here; photo 60/60, home 38/38.
+- Verifier gains rings/overview/self/explain steps.
+- Commit id: (this commit; see `git log`).
 - Commit id: (this commit; see `git log`).
 - Commit id: (this commit; see `git log`).

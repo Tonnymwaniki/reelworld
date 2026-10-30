@@ -59,7 +59,7 @@ import chat as chat_module
 import place_pass as place_pass_mod
 from chat import (ANSWER_PROMPT, EMPTY_SPEC, PARSER_BASE_URL, PARSER_KEY, PARSER_MODEL,
                   Engine, extract_json, chat_create)
-from retrieval import meta_for, score_against, search_text
+from retrieval import is_specific, meta_for, score_against, search_text
 
 ROOT = Path(__file__).resolve().parent.parent
 PHOTOS_DIR = ROOT / "data" / "photos"
@@ -1710,4 +1710,299 @@ def connected(limit: int = 2):
                               "caption": p["caption"]},
                     "groups": groups, "match_count": len(linked)})
     return {"updated_at": snap["updated_at"], "count": len(out),
-            "summary": snap["summary"], "photos": out}
+            "summary": snap["summary"], "photos": out}
+
+
+# ----- Phase 3: connected rings, overview, self links, explain -----
+
+RING_DEFS = (("same_place", "Same place", "R1"),
+             ("another_angle", "Another angle", "R2"),
+             ("where_stood", "Where you stood", "R3"),
+             ("in_background", "In the background", "R4"),
+             ("similar", "Looks similar", "R5"))
+RING_LIMIT = 8
+# Rings 1-4 are earned by place/landmark evidence; ring 5 has only the
+# similarity score behind it, so it needs a floor to mean anything.
+RING_SIMILAR_FLOOR = 0.5
+_VP_ORDER = ("ground_level", "elevated", "aerial", "interior", "water_level")
+
+
+def ring_of(src, cand):
+    """Ring key for one candidate row (pure; each photo lands in one ring).
+
+    src/cand carry place_key, taken_from_key, landmark_keys, viewpoint.
+    """
+    direct = (src.get("place_key") and src["place_key"] == cand.get("place_key")
+              and is_specific(cand["place_key"]))
+    if direct and src.get("viewpoint") != cand.get("viewpoint"):
+        return "another_angle"
+    if direct:
+        return "same_place"
+    if ((src.get("taken_from_key") and src["taken_from_key"] == cand.get("place_key"))
+            or (cand.get("taken_from_key") and cand["taken_from_key"] == src.get("place_key"))):
+        return "where_stood"
+    if ((src.get("place_key") and src["place_key"] in (cand.get("landmark_keys") or []))
+            or (cand.get("place_key") and cand["place_key"] in (src.get("landmark_keys") or []))):
+        return "in_background"
+    return "similar"
+
+
+def _norm_text(t):
+    return re.sub(r"[^a-z0-9]+", " ", str(t or "").lower()).strip()
+
+
+def _lm_index(lms):
+    by_key, by_name = {}, {}
+    for lm in lms or []:
+        disp = lm.get("name") or lm.get("key") or "landmark"
+        if lm.get("key"):
+            by_key.setdefault(lm["key"], disp)
+        nm = _norm_text(lm.get("name"))
+        if nm:
+            by_name.setdefault(nm, disp)
+    return by_key, by_name
+
+
+def link_facts(rec_a, rec_b):
+    """Deterministic shared evidence between two records (pure)."""
+    obs_a, inf_a = rec_a.get("observed") or {}, rec_a.get("inferred") or {}
+    obs_b, inf_b = rec_b.get("observed") or {}, rec_b.get("inferred") or {}
+    place_a, place_b = inf_a.get("place") or {}, inf_b.get("place") or {}
+    taken_a = (inf_a.get("taken_from") or {}).get("key")
+    taken_b = (inf_b.get("taken_from") or {}).get("key")
+    signs_a = {_norm_text(t.get("text")) for t in obs_a.get("visible_text") or []} - {""}
+    signs_b = {_norm_text(t.get("text")) for t in obs_b.get("visible_text") or []} - {""}
+    ents_a = {_norm_text(e.get("label")) for e in obs_a.get("entities") or []} - {""}
+    ents_b = {_norm_text(e.get("label")) for e in obs_b.get("entities") or []} - {""}
+    ka, na = _lm_index(inf_a.get("landmarks"))
+    kb, nb = _lm_index(inf_b.get("landmarks"))
+    shared_lm = [ka[k] for k in ka if k in kb]
+    seen = {_norm_text(s) for s in shared_lm}
+    shared_lm += [disp for nm, disp in na.items() if nm in nb and nm not in seen]
+    return {
+        "same_place": bool(place_a.get("key") and place_a["key"] == place_b.get("key")),
+        "place_name": place_a.get("name") or place_b.get("name"),
+        "taken_cross": bool((taken_a and taken_a == place_b.get("key"))
+                            or (taken_b and taken_b == place_a.get("key"))),
+        "shared_landmarks": sorted(set(shared_lm)),
+        "shared_signs": sorted(signs_a & signs_b),
+        "shared_entities": sorted(ents_a & ents_b),
+    }
+
+
+def kinds_of(facts, vp_a=None, vp_b=None):
+    """Link-kind chips from facts (pure). Empty means no verifiable link."""
+    kinds = []
+    if facts["same_place"]:
+        kinds.append("another_angle" if (vp_a and vp_b and vp_a != vp_b) else "same_place")
+    if facts["taken_cross"]:
+        kinds.append("where_stood")
+    if facts["shared_landmarks"]:
+        kinds.append("shared_landmark")
+    if facts["shared_signs"]:
+        kinds.append("shared_sign")
+    return kinds
+
+
+def _cosine(a, b):
+    dot = sum(x * y for x, y in zip(a, b))
+    na = sum(x * x for x in a) ** 0.5
+    nb = sum(y * y for y in b) ** 0.5
+    return dot / (na * nb) if na and nb else 0.0
+
+
+def _photos_by_ids(ids, cols="photo_id,collection,file,caption,viewpoint,place_key,place_name,record,embedding"):
+    try:
+        rows = (get_sb().table("photos").select(cols)
+                .in_("photo_id", list(ids)).execute().data or [])
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"photo lookup failed: {e}")
+    return {r["photo_id"]: r for r in rows}
+
+
+def _self_mini(r):
+    return {"photo_id": r["photo_id"], "src": photo_url(r.get("file")),
+            "caption": r.get("caption"), "viewpoint": r.get("viewpoint"),
+            "place": r.get("place_name")}
+
+
+@app.get("/api/rings/{photo_id}")
+def rings(photo_id: str):
+    src = _bridge_src(photo_id.strip())
+    other = "personal" if src["collection"] == "world" else "world"
+    cands = _bridge_candidates(_coerce_embedding(src["embedding"]), other, src["photo_id"])
+    scored = sorted(_score_bridge(src, cands), key=lambda s: s["score"], reverse=True)
+    buckets = {key: [] for key, _, _ in RING_DEFS}
+    for s in scored:
+        key = ring_of(src, s["row"])
+        if key == "similar" and (s["row"].get("similarity") or 0) < RING_SIMILAR_FLOOR:
+            continue
+        if len(buckets[key]) >= RING_LIMIT:
+            continue
+        buckets[key].append(s)
+    member_ids = [s["row"]["photo_id"] for bl in buckets.values() for s in bl]
+    recs = (_photos_by_ids([src["photo_id"]] + member_ids, "photo_id,record")
+            if member_ids else {})
+    src_rec = (recs.get(src["photo_id"]) or {}).get("record") or {}
+    out_rings = []
+    for key, label, tag in RING_DEFS:
+        members = []
+        for s in buckets[key]:
+            facts = link_facts(src_rec, (recs.get(s["row"]["photo_id"]) or {}).get("record") or {})
+            item = _bridge_item(s)
+            item["ring"] = key
+            item["facts"] = facts
+            members.append(item)
+        attach_credits(members)
+        out_rings.append({"key": key, "label": label, "tag": tag, "members": members})
+    kept = sum(len(r["members"]) for r in out_rings)
+    return {"photo_id": src["photo_id"], "collection": src["collection"],
+            "src": photo_url(src.get("file")), "caption": src.get("caption"),
+            "viewpoint": src.get("viewpoint"), "place": src.get("place_name"),
+            "place_key": src.get("place_key"), "other_collection": other,
+            "rings": out_rings,
+            "counts": {r["key"]: len(r["members"]) for r in out_rings},
+            "trace": [{"step": "searched",
+                       "detail": f"Compared {src['photo_id']} with {len(cands)} {other} photos."},
+                      {"step": "answered",
+                       "detail": f"Kept {kept} links in "
+                                 f"{sum(1 for r in out_rings if r['members'])} rings."}]}
+
+
+@app.get("/api/places/overview")
+def places_overview():
+    try:
+        rows = (get_sb().table("photos")
+                .select("photo_id,collection,place_key,place_name,viewpoint")
+                .execute().data or [])
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"overview failed: {e}")
+    places = {}
+    for r in rows:
+        key = r.get("place_key") or "unplaced"
+        e = places.setdefault(key, {"key": key, "name": r.get("place_name") or key,
+                                    "world": {"total": 0, "by_viewpoint": {}},
+                                    "mine": {"total": 0, "by_viewpoint": {}},
+                                    "mine_ids": []})
+        if r.get("place_name"):
+            e["name"] = r["place_name"]
+        bucket = e["mine"] if r["collection"] == "personal" else e["world"]
+        bucket["total"] += 1
+        vp = r.get("viewpoint") or "unknown"
+        bucket["by_viewpoint"][vp] = bucket["by_viewpoint"].get(vp, 0) + 1
+        if r["collection"] == "personal":
+            e["mine_ids"].append(r["photo_id"])
+    mine_places = [e for e in places.values() if e["mine"]["total"] > 0]
+    for e in mine_places:
+        e["gaps"] = [vp for vp in _VP_ORDER
+                     if e["world"]["by_viewpoint"].get(vp, 0) > 0
+                     and e["mine"]["by_viewpoint"].get(vp, 0) == 0]
+    mine_places.sort(key=lambda e: (-e["mine"]["total"], e["name"]))
+    return {"places": mine_places,
+            "summary": {
+                "captures": sum(e["mine"]["total"] for e in mine_places),
+                "counterparts": sum(e["world"]["total"] for e in mine_places),
+                "places": len(mine_places),
+                "gaps": sum(1 for e in mine_places if e["gaps"])}}
+
+
+@app.get("/api/connected/self")
+def connected_self(limit: int = 24):
+    limit = max(1, min(int(limit), 60))
+    try:
+        ids = [r["photo_id"] for r in get_sb().table("photos").select("photo_id")
+               .eq("collection", "personal").order("photo_id").execute().data or []]
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"self links failed: {e}")
+    by_id = _photos_by_ids(ids) if ids else {}
+    pairs = []
+    for i in range(len(ids)):
+        for j in range(i + 1, len(ids)):
+            a, b = by_id[ids[i]], by_id[ids[j]]
+            facts = link_facts(a.get("record") or {}, b.get("record") or {})
+            kinds = kinds_of(facts, a.get("viewpoint"), b.get("viewpoint"))
+            sim = _cosine(_coerce_embedding(a.get("embedding") or []),
+                          _coerce_embedding(b.get("embedding") or []))
+            if not kinds and sim < RING_SIMILAR_FLOOR:
+                continue
+            if not kinds:
+                kinds = ["similar"]
+            pairs.append({"a": _self_mini(a), "b": _self_mini(b), "kinds": kinds,
+                          "facts": facts, "similarity": round(sim, 3)})
+    pairs.sort(key=lambda p: (0 if p["kinds"] != ["similar"] else 1, -p["similarity"]))
+    return {"count": len(pairs), "pairs": pairs[:limit]}
+
+
+EXPLAIN_PROMPT = """You explain how two photos are connected. Answer ONLY from
+the link facts and records below; never add outside facts.
+Rules: under 120 words; name the evidence (say which photo each claim
+comes from); state uncertainty plainly; never identify a person (no
+names; people only by count, activity or clothing); never invent
+measurements, angles, distances, dates, counts or names that are not
+written below. Where a detail is absent, say the records do not state it.
+
+Link facts:
+{facts}
+
+Record A ({photo_a}):
+{record_a}
+
+Record B ({photo_b}):
+{record_b}"""
+
+
+class ExplainRequest(BaseModel):
+    photo_a: str
+    photo_b: str
+
+
+def _safe_compact(rec):
+    rec = rec or {}
+    return _compact_record(rec) if "observed" in rec and "inferred" in rec else {}
+
+
+@app.post("/api/explain")
+def explain(req: ExplainRequest):
+    a_id, b_id = req.photo_a.strip(), req.photo_b.strip()
+    by_id = _photos_by_ids([a_id, b_id])
+    if a_id not in by_id or b_id not in by_id:
+        raise HTTPException(status_code=404, detail="I could not find that photo.")
+    a, b = by_id[a_id], by_id[b_id]
+    facts = link_facts(a.get("record") or {}, b.get("record") or {})
+    kinds = kinds_of(facts, a.get("viewpoint"), b.get("viewpoint"))
+    minis = [_self_mini(a), _self_mini(b)]
+    base = {"photo_a": a_id, "photo_b": b_id, "kinds": kinds,
+            "facts": facts, "photos": minis}
+    if not kinds:
+        pa, pb = a.get("place_name"), b.get("place_name")
+        if pa and pb and pa != pb:
+            why = f"they are placed differently ({pa} vs {pb})"
+        elif not pa or not pb:
+            why = "at least one of them has no place verdict"
+        else:
+            why = "they share no signs, landmarks or entities in their records"
+        return {**base, "linked": False,
+                "text": (f"{a_id} and {b_id} share no verifiable connection: {why}. "
+                         "Try two photos of the same place."),
+                "trace": [{"step": "answered",
+                           "detail": "Compared the two records; no shared evidence found."}]}
+    prompt = EXPLAIN_PROMPT.format(
+        facts=json.dumps(facts, ensure_ascii=False),
+        photo_a=a_id, photo_b=b_id,
+        record_a=json.dumps(_safe_compact(a.get("record")), ensure_ascii=False),
+        record_b=json.dumps(_safe_compact(b.get("record")), ensure_ascii=False))
+    try:
+        resp = chat_create(get_llm(), model=PARSER_MODEL, temperature=0.1,
+                           max_tokens=800,
+                           messages=[{"role": "user", "content": prompt}])
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"explain failed: {e}")
+    text = _msg_text(resp.choices[0].message).strip()
+    if not text:
+        text = ("The records link these photos (" + ", ".join(kinds) + ") but "
+                "the model returned no wording; the facts above are the evidence.")
+    return {**base, "linked": True, "text": text,
+            "trace": [{"step": "checked",
+                       "detail": "Compared captions, signs, landmarks and place verdicts."},
+                      {"step": "wrote",
+                       "detail": "Wrote the connection from the records."}]}

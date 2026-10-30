@@ -98,6 +98,24 @@ def main():
         return {"differences": len(r.get("differences") or []),
                 "answer": cut(r.get("answer") or "")}
 
+    def do_rings():
+        r = api_mod.rings("personal_006")
+        return {"counts": r.get("counts"), "other": r.get("other_collection")}
+
+    def do_overview():
+        r = api_mod.places_overview()
+        return {"summary": r.get("summary")}
+
+    def do_self():
+        r = api_mod.connected_self()
+        return {"count": r.get("count")}
+
+    def do_explain():
+        r = api_mod.explain(api_mod.ExplainRequest(photo_a="personal_006",
+                                                   photo_b="landmarks_003"))
+        return {"linked": r.get("linked"), "kinds": r.get("kinds"),
+                "text": cut(r.get("text") or "")}
+
     def do_outline():
         r = api_mod.api_outline(api_mod.OutlineRequest(photo_id="landmarks_003",
                                                        prompt="tower"))
@@ -117,6 +135,10 @@ def main():
     step(report, "ask", do_ask)
     step(report, "compare", do_compare)
     step(report, "outline", do_outline)
+    step(report, "rings", do_rings)
+    step(report, "overview", do_overview)
+    step(report, "self", do_self)
+    step(report, "explain", do_explain)
     if QUICK:
         report["steps"]["story"] = {"ok": True, "seconds": 0, "detail": "skipped (--quick)"}
         print("[ok] story (skipped --quick)")
