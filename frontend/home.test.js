@@ -128,6 +128,12 @@ async function main() {
   ok(/opsz,wght,FILL,GRAD@20\.\.48,100\.\.700,0\.\.1,-50\.\.200/.test(shell), "font URL has full axis spec");
   ok(shell.includes("v2.4") === false, "no invented model version in shell");
   ok(shell.includes("Encrypted locally") === false, "no false encryption claim in shell");
+  const liveHome = fs.readFileSync(path.join(__dirname, "views/home.html"), "utf8")
+    .replace(/<!--[\s\S]*?-->/g, "");
+  ["v2.4", "NBO-", "Tesseract", "Public Works Gazette", "4096x2730", "242px",
+    "94.6", "C. Karanja", "TIFF source", "Batch #"].forEach((s) => {
+    ok(liveHome.indexOf(s) === -1, "home.html free of " + s);
+  });
 
   console.log("home.test.js: " + n + "/" + n + " checks passed");
 }

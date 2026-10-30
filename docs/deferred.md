@@ -14,5 +14,12 @@ missing input in hand.
 | Swahili UI | English-only product rule | no Swahili code remains; `ENABLE_SWAHILI` reserved |
 | Thread tune/lens panel | export shows the button but no panel | button hidden until designed (P1) |
 | Publish personal→world from thread | no such endpoint | button removed from the add-photo reply (P1) |
+| Vantage sightline geometry (rays, elevations, azimuths, facings) | no geometric data | self-links render as plain rows (P3) |
+| EXIF/telemetry (f-stops, acutance, focal lengths), capture dates/coords | not stored | cut from library/burst/queue views (P5) |
+| Cadastre refs, registry hashes, invented plate IDs (NBO-*) | no such identifiers | real photo/place ids only; examples use market_018 (P6) |
+| Fake counts, latency pills, model versions, batch numbers | no such telemetry | live counts or nothing (P1/P6) |
+| Unlisted story visibility | no sharing model beyond draft/published | draft/published only (P4) |
+| Theme albums for personal photos | no theme data on personal photos | albums skip themes (P5) |
+| Pass B rerun on correction | pipeline stays out of requests | owner overrides stored as-is (P5) |
 
 More rows are added per phase as screens are wired (rule 2).

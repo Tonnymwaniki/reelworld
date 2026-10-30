@@ -219,6 +219,27 @@ the first unfinished phase.
   `frontend/library.test.js` 172/172 here; all suites 488/488.
 - Verifier gains albums/world/gaps/export steps plus correct/delete
   guards (world photo must 400/403, nothing mutated).
+
+## Phase 6: polish + acceptance audit (user acceptance run pending)
+
+- Route audit: 13 views resolve, no phase stubs left, no `#/story`
+  refs, no TODO/FIXME/console.log. Demo audit: the 5 listed writes
+  (upload, correct, delete, delete-all, publish) are guarded; reads,
+  flags, drafts and local prefs are documented ungated. No secrets
+  in tracked files. og/meta + footer verified (no GitHub URL known).
+- Honesty purge: v2.4/version pills (404/add/home), fake 94.6% stat
+  and batch number (home badge), fake trace rows (OCR/Gazette/pixels
+  → live-trace shell), fake credit-table rows (8 dead rows deleted;
+  tbody hidden until live render), fake citation URL/id (real
+  market_018 example), hardcoded license counts (neutral until live).
+  Template placeholders (NBO-*/C. Karanja) neutralized in home.html.
+  Dead `_frag_*.html` build leftovers deleted (unreferenced).
+- Credits row 1 kept as a hidden structural template: every slot is
+  overwritten or removed by renderRows before display.
+- `docs/deferred.md` extended with the P2-P6 unbackable cuts.
+- Tests: `home.test.js` grows to 48/48 with template-hygiene
+  regressions; all suites 498/498 here.
+- Commit id: (this commit; see `git log`).
 - Commit id: (this commit; see `git log`).
 - Commit id: (this commit; see `git log`).
 - Commit id: (this commit; see `git log`).

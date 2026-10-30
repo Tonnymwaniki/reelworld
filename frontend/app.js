@@ -1800,6 +1800,7 @@ const credits = {
     if (!tbody._tpl && tbody.children[0]) tbody._tpl = tbody.children[0].cloneNode(true);
     const tpl = tbody._tpl;
     tbody.innerHTML = "";
+    tbody.hidden = false;
     const rows = this.filteredRows();
     const badgeCls = {
       "cc-by-sa": "bg-secondary-container text-on-secondary-container",
