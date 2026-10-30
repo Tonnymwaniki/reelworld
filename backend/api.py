@@ -69,7 +69,8 @@ INDEX_HTML = FRONTEND_DIR / "index.html"
 # Hash views the app may fetch. Anything else under frontend/ (notably
 # frontend/design/) is never served, so exports stay out of the page bundle.
 VIEW_NAMES = ("home", "photo", "add", "connected", "place", "stories",
-              "builder", "showcase", "404", "about", "credits")
+              "builder", "showcase", "library", "browse",
+              "404", "about", "credits")
 
 # ----- share one embedding model across all sessions -----
 _model_lock = threading.Lock()
@@ -2175,4 +2176,471 @@ def story_publish(story_id: str, request: Request):
     current = _story_err(load, story_id.strip())
     fetch = _story_fetch_for([c["photo_id"] for c in current.get("chapters") or []])
     made = _story_err(publish, story_id.strip(), fetch=fetch)
-    return _story_full(made)
+    return _story_full(made)
+
+
+# ----- Phase 5: library albums, world browse, gaps, correction, deletion, export -----
+
+BURST_SIMILAR = 0.85
+LIBRARY_JSON = ROOT / "data" / "library.json"
+_GAP_VPS = ("ground_level", "elevated", "aerial", "interior")
+
+
+class LibraryError(Exception):
+    def __init__(self, status, detail):
+        super().__init__(detail)
+        self.status = status
+        self.detail = detail
+
+
+def _library_err(fn, *a, **k):
+    try:
+        return fn(*a, **k)
+    except LibraryError as e:
+        raise HTTPException(status_code=e.status, detail=e.detail)
+
+
+def _library_prefs():
+    try:
+        return json.loads(LIBRARY_JSON.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def _save_library_prefs(prefs):
+    LIBRARY_JSON.write_text(json.dumps(prefs, ensure_ascii=False, indent=1), encoding="utf-8")
+
+
+def cluster_bursts(ids, sim):
+    """Transitive similarity groups (pure); singles dropped, sorted by first id.
+
+    sim maps (a, b) with a < b to a float. Filenames are synthetic
+    (personal_NNN), so bursts group near-duplicate frames by meaning.
+    """
+    parent = {i: i for i in ids}
+
+    def find(x):
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    for (a, b), s in sim.items():
+        if s >= BURST_SIMILAR and a in parent and b in parent:
+            ra, rb = find(a), find(b)
+            if ra != rb:
+                parent[max(ra, rb)] = min(ra, rb)
+    groups = {}
+    for i in ids:
+        groups.setdefault(find(i), []).append(i)
+    return sorted([sorted(g) for g in groups.values() if len(g) > 1], key=lambda g: g[0])
+
+
+def _personal_rows():
+    try:
+        return (get_sb().table("photos")
+                .select("photo_id,file,caption,viewpoint,place_key,place_name,record,embedding")
+                .eq("collection", "personal").order("photo_id").execute().data or [])
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"library lookup failed: {e}")
+
+
+def _lib_mini(r):
+    return {"photo_id": r["photo_id"], "src": photo_url(r.get("file")),
+            "caption": r.get("caption"), "viewpoint": r.get("viewpoint"),
+            "place": r.get("place_name"), "place_key": r.get("place_key")}
+
+
+@app.get("/api/albums")
+def albums():
+    rows = _personal_rows()
+    by_id = {r["photo_id"]: r for r in rows}
+    ids = [r["photo_id"] for r in rows]
+    infos = {}
+    for r in rows:
+        obs = ((r.get("record") or {}).get("observed") or {})
+        inf = ((r.get("record") or {}).get("inferred") or {})
+        vt = obs.get("visible_text") or []
+        infos[r["photo_id"]] = {
+            "signs": sum(1 for s in vt if isinstance(s, dict) and (s.get("text") or "").strip()),
+            "people": (obs.get("people") or {}).get("count", 0) or 0,
+            "uncertain": bool((r.get("record") or {}).get("uncertainties")),
+            "confirmed": ((inf.get("place") or {}).get("status") == "confirmed"),
+        }
+    vecs = {r["photo_id"]: _coerce_embedding(r.get("embedding") or []) for r in rows}
+    sim = {}
+    for i in range(len(ids)):
+        for j in range(i + 1, len(ids)):
+            sim[(ids[i], ids[j])] = _cosine(vecs[ids[i]], vecs[ids[j]])
+    covers = (_library_prefs().get("burst_covers") or {})
+    bursts = []
+    for g in cluster_bursts(ids, sim):
+        key = "b-" + g[0]
+        cover = covers.get(key) if covers.get(key) in g else g[0]
+        bursts.append({"key": key, "count": len(g), "cover": cover, "ids": g})
+    places = {}
+    for r in rows:
+        key = r.get("place_key") or "unplaced"
+        e = places.setdefault(key, {"key": key, "name": r.get("place_name") or key, "ids": []})
+        if r.get("place_name"):
+            e["name"] = r["place_name"]
+        e["ids"].append(r["photo_id"])
+    above_ids = [i for i in ids if by_id[i].get("viewpoint") in ("elevated", "aerial")]
+    signs_ids = [i for i in ids if infos[i]["signs"]]
+    people_ids = [i for i in ids if infos[i]["people"]]
+    look_ids = [i for i in ids if not by_id[i].get("place_key")
+                or not infos[i]["confirmed"] or infos[i]["uncertain"]]
+    return {
+        "count": len(rows),
+        "albums": [
+            {"key": "all", "label": "All photos", "count": len(ids), "ids": ids},
+            {"key": "places", "label": "Places", "count": len(places),
+             "groups": sorted(places.values(),
+                              key=lambda e: (-len(e["ids"]), e["name"]))},
+            {"key": "above", "label": "From above",
+             "count": len(above_ids), "ids": above_ids},
+            {"key": "signs", "label": "With signs",
+             "count": len(signs_ids), "ids": signs_ids},
+            {"key": "people", "label": "With people",
+             "count": len(people_ids), "ids": people_ids},
+            {"key": "look", "label": "Needs a look",
+             "count": len(look_ids), "ids": look_ids},
+            {"key": "bursts", "label": "Bursts", "count": len(bursts), "sets": bursts},
+        ],
+        "photos": {i: _lib_mini(by_id[i]) for i in ids},
+    }
+
+
+class CoverRequest(BaseModel):
+    cover: str = Field(min_length=1)
+
+
+@app.patch("/api/bursts/{burst_key}")
+def burst_cover(burst_key: str, req: CoverRequest):
+    # A local display preference (ungated, like story drafts).
+    rows = _personal_rows()
+    ids = [r["photo_id"] for r in rows]
+    vecs = {r["photo_id"]: _coerce_embedding(r.get("embedding") or []) for r in rows}
+    sim = {}
+    for i in range(len(ids)):
+        for j in range(i + 1, len(ids)):
+            sim[(ids[i], ids[j])] = _cosine(vecs[ids[i]], vecs[ids[j]])
+    target = [g for g in cluster_bursts(ids, sim) if "b-" + g[0] == burst_key.strip()]
+    if not target:
+        raise HTTPException(status_code=404, detail="I could not find that burst.")
+    if req.cover.strip() not in target[0]:
+        raise HTTPException(status_code=400, detail="that photo is not in this burst.")
+    prefs = _library_prefs()
+    prefs.setdefault("burst_covers", {})[burst_key.strip()] = req.cover.strip()
+    _save_library_prefs(prefs)
+    return {"ok": True, "key": burst_key.strip(), "cover": req.cover.strip()}
+
+
+def _theme_of(path):
+    parts = str(path or "").replace("\\", "/").split("/")
+    try:
+        return parts[parts.index("world") + 1]
+    except (ValueError, IndexError):
+        return ""
+
+
+@app.get("/api/world")
+def world(place_key: Optional[str] = None, theme: Optional[str] = None,
+          viewpoint: Optional[str] = None, people: Optional[str] = None,
+          q: Optional[str] = None, limit: int = 60, offset: int = 0):
+    limit = max(1, min(int(limit or 60), 60))
+    offset = max(0, int(offset or 0))
+    try:
+        rows = (get_sb().table("photos")
+                .select("photo_id,file,caption,viewpoint,place_key,place_name,record")
+                .eq("collection", "world").order("photo_id").execute().data or [])
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"world lookup failed: {e}")
+    for r in rows:
+        r["_theme"] = _theme_of(r.get("file"))
+        obs = ((r.get("record") or {}).get("observed") or {})
+        r["_people"] = (obs.get("people") or {}).get("count", 0) or 0
+    places, themes, vps = {}, {}, {}
+    for r in rows:
+        if r.get("place_key"):
+            e = places.setdefault(r["place_key"],
+                                  {"key": r["place_key"],
+                                   "name": r.get("place_name") or r["place_key"], "count": 0})
+            e["count"] += 1
+        if r["_theme"]:
+            themes[r["_theme"]] = themes.get(r["_theme"], 0) + 1
+        vp = r.get("viewpoint") or "unknown"
+        vps[vp] = vps.get(vp, 0) + 1
+    want_q = (q or "").strip().casefold()
+    out = []
+    for r in rows:
+        if place_key and r.get("place_key") != place_key:
+            continue
+        if theme and r["_theme"] != theme.strip().lower():
+            continue
+        if viewpoint and (r.get("viewpoint") or "unknown") != viewpoint:
+            continue
+        if people == "yes" and not r["_people"]:
+            continue
+        if people == "no" and r["_people"]:
+            continue
+        if want_q and want_q not in (((r.get("caption") or "") + " " +
+                                      (r.get("place_name") or "")).casefold()):
+            continue
+        prov = ((r.get("record") or {}).get("provided") or {})
+        out.append({"photo_id": r["photo_id"], "src": photo_url(r.get("file")),
+                    "caption": r.get("caption"), "viewpoint": r.get("viewpoint"),
+                    "place": r.get("place_name"), "place_key": r.get("place_key"),
+                    "theme": r["_theme"], "people": r["_people"],
+                    "credit": {"author": prov.get("author"), "license": prov.get("license"),
+                               "source_url": prov.get("source_url")}
+                    if (prov.get("author") or prov.get("license")) else None})
+    return {"total": len(out), "limit": limit, "offset": offset,
+            "photos": out[offset:offset + limit],
+            "facets": {
+                "places": sorted(places.values(), key=lambda e: (-e["count"], e["name"])),
+                "themes": sorted([{"key": k, "label": k.capitalize(), "count": v}
+                                  for k, v in themes.items()], key=lambda e: -e["count"]),
+                "viewpoints": sorted([{"key": k, "count": v} for k, v in vps.items()],
+                                     key=lambda e: -e["count"])}}
+
+
+def gap_list(world_rows, registry):
+    """Thin and empty places (pure over rows + registry map)."""
+    by_place = {}
+    for r in world_rows:
+        key = r.get("place_key")
+        if not key:
+            continue
+        e = by_place.setdefault(key, {"count": 0, "vps": set(), "sample": []})
+        e["count"] += 1
+        if r.get("viewpoint"):
+            e["vps"].add(r["viewpoint"])
+        if len(e["sample"]) < 3:
+            e["sample"].append(r["photo_id"])
+    out = []
+    for key, info in registry.items():
+        if key.startswith("unknown/"):
+            continue
+        e = by_place.get(key, {"count": 0, "vps": set(), "sample": []})
+        missing = [vp for vp in _GAP_VPS if vp not in e["vps"]] if e["count"] else ["all"]
+        kinds = []
+        if not e["count"]:
+            kinds.append("empty")
+        elif e["count"] == 1:
+            kinds.append("single")
+        if "elevated" in missing or "aerial" in missing:
+            kinds.append("high")
+        if "interior" in missing:
+            kinds.append("interior")
+        if not kinds:
+            continue
+        out.append({"key": key, "name": (info or {}).get("name") or key,
+                    "type": (info or {}).get("type") or "place",
+                    "count": e["count"], "missing": missing, "kinds": kinds,
+                    "sample": e["sample"]})
+    out.sort(key=lambda g: (g["count"], g["name"]))
+    return out
+
+
+@app.get("/api/gaps")
+def gaps():
+    try:
+        rows = (get_sb().table("photos").select("photo_id,place_key,viewpoint")
+                .eq("collection", "world").execute().data or [])
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"gaps lookup failed: {e}")
+    found = gap_list(rows, load_places())
+    return {"count": len(found), "gaps": found[:60]}
+
+
+class CorrectRequest(BaseModel):
+    caption: Optional[str] = None
+    place_key: Optional[str] = None
+    place_name: Optional[str] = None
+    note: Optional[str] = None
+
+
+def apply_correction(record, body):
+    """Owner overrides on a copy of the record (pure).
+
+    Overrides only — no model rerun. The owner's word is ground truth
+    for their own photo, so a corrected place verdict is final.
+    """
+    rec = json.loads(json.dumps(record or {}))
+    changed = []
+    if (body.get("caption") or "").strip():
+        rec.setdefault("observed", {})["caption"] = body["caption"].strip()[:500]
+        changed.append("caption")
+    if (body.get("place_key") or "").strip():
+        key = body["place_key"].strip().lower()[:160]
+        name = (body.get("place_name") or "").strip()[:160] or key
+        why = "Corrected by the photo owner"
+        if (body.get("note") or "").strip():
+            why += ": " + body["note"].strip()[:200]
+        rec.setdefault("inferred", {})["place"] = {
+            "key": key, "name": name, "status": "human_review",
+            "evidence": [why], "confidence": 1.0}
+        changed.append("place")
+    if not changed:
+        raise LibraryError(400, "nothing to correct: give a caption and/or a place.")
+    rec["corrected_by"] = "you"
+    rec["corrected_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    return rec, changed
+
+
+def _one_photo(pid, cols="photo_id,collection,file,caption,record"):
+    try:
+        rows = (get_sb().table("photos").select(cols)
+                .eq("photo_id", pid).execute().data or [])
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"photo lookup failed: {e}")
+    if not rows:
+        raise HTTPException(status_code=404, detail="I could not find that photo.")
+    return rows[0]
+
+
+@app.post("/api/photo/{photo_id}/correct")
+def correct_photo(photo_id: str, req: CorrectRequest, request: Request):
+    _demo_guard(request)
+    pid = photo_id.strip()
+    row = _one_photo(pid)
+    if row.get("collection") != "personal":
+        raise HTTPException(status_code=400, detail="Corrections apply to your photos; "
+                            "flag world photos from their dossier instead.")
+    body = {"caption": req.caption, "place_key": req.place_key,
+            "place_name": req.place_name, "note": req.note}
+    new_rec, changed = _library_err(apply_correction, row.get("record") or {}, body)
+    ann = ROOT / "data" / "annotations" / "personal" / (pid + ".json")
+    try:
+        ann.parent.mkdir(parents=True, exist_ok=True)
+        ann.write_text(json.dumps({**new_rec, "photo_id": pid},
+                                  ensure_ascii=False, indent=1), encoding="utf-8")
+    except OSError as e:
+        raise HTTPException(status_code=502, detail=f"annotation write failed: {e}")
+    inf = (new_rec.get("inferred") or {}).get("place") or {}
+    patch = {"caption": (new_rec.get("observed") or {}).get("caption") or row.get("caption"),
+             "place_key": inf.get("key"), "place_name": inf.get("name"), "record": new_rec}
+    reembedded = False
+    try:
+        text = search_text(new_rec)
+        vec = np.array(list(chat_module.get_model().embed([text]))[0], dtype="float32")
+        patch["embedding"] = (vec / np.linalg.norm(vec)).tolist()
+        reembedded = True
+    except Exception as e:
+        print(f"(re-embed failed for {pid}: {e})")
+    try:
+        get_sb().table("photos").update(patch).eq("photo_id", pid).execute()
+        try:
+            refresh_connected()
+        except Exception as e:
+            print(f"(connected refresh failed: {e})")
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"photo update failed: {e}")
+    return {"ok": True, "photo_id": pid, "corrected": changed, "reembedded": reembedded,
+            "note": "Run `python backend/retrieval.py build` to refresh the local index."}
+
+
+def _delete_personal(pid):
+    row = _one_photo(pid, "photo_id,collection,file")
+    if row.get("collection") != "personal":
+        raise HTTPException(status_code=400, detail="Only your own photos can be deleted.")
+    out = {"db": False, "file": False, "annotation": False}
+    get_sb().table("photos").delete().eq("photo_id", pid).execute()
+    out["db"] = True
+    f = str(row.get("file") or "")
+    if f.startswith("data/photos/personal/"):
+        p = ROOT / f
+        if p.exists():
+            p.unlink()
+            out["file"] = True
+    ann = ROOT / "data" / "annotations" / "personal" / (pid + ".json")
+    if ann.exists():
+        ann.unlink()
+        out["annotation"] = True
+    prefs = _library_prefs()
+    covers = prefs.get("burst_covers") or {}
+    if pid in covers.values():
+        prefs["burst_covers"] = {k: v for k, v in covers.items() if v != pid}
+        _save_library_prefs(prefs)
+    return out
+
+
+@app.delete("/api/photo/{photo_id}")
+def delete_photo(photo_id: str, request: Request):
+    _demo_guard(request)
+    pid = photo_id.strip()
+    try:
+        out = _delete_personal(pid)
+        try:
+            refresh_connected()
+        except Exception as e:
+            print(f"(connected refresh failed: {e})")
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"delete failed: {e}")
+    return {"ok": True, "photo_id": pid, "deleted": out,
+            "note": "Links update automatically; run `python backend/retrieval.py build` "
+                    "to refresh the local index."}
+
+
+@app.delete("/api/photos/mine")
+def delete_all_my_photos(request: Request):
+    _demo_guard(request)
+    try:
+        ids = [r["photo_id"] for r in get_sb().table("photos").select("photo_id")
+               .eq("collection", "personal").order("photo_id").execute().data or []]
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"photo lookup failed: {e}")
+    done, errors = {}, {}
+    for pid in ids:
+        try:
+            done[pid] = _delete_personal(pid)
+        except Exception as e:
+            errors[pid] = str(e)
+    try:
+        refresh_connected()
+    except Exception as e:
+        print(f"(connected refresh failed: {e})")
+    return {"ok": not errors, "deleted": len(done), "photos": done, "errors": errors}
+
+
+@app.get("/api/export")
+def export_mine():
+    # Your own data out (a read, like flagging): not demo-gated.
+    import io
+    import zipfile
+    try:
+        rows = (get_sb().table("photos")
+                .select("photo_id,file,caption,viewpoint,place_key,place_name,record")
+                .eq("collection", "personal").order("photo_id").execute().data or [])
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"export lookup failed: {e}")
+    buf = io.BytesIO()
+    names = []
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
+        for r in rows:
+            base = Path(str(r.get("file") or "")).name or (r["photo_id"] + ".jpg")
+            try:
+                zf.write(str(ROOT / str(r.get("file") or "")), "photos/" + base)
+            except OSError:
+                names.append({"photo_id": r["photo_id"], "file": None, "missing_file": True})
+                continue
+            zf.writestr("annotations/" + r["photo_id"] + ".json",
+                        json.dumps(r.get("record") or {}, ensure_ascii=False, indent=1))
+            names.append({"photo_id": r["photo_id"], "file": "photos/" + base,
+                          "caption": r.get("caption"), "place": r.get("place_name")})
+        zf.writestr("manifest.json", json.dumps(
+            {"exported_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+             "count": len(names), "photos": names}, ensure_ascii=False, indent=1))
+        zf.writestr("README.txt", "ReelWorld personal export.\n"
+                    f"{len(names)} photos with annotations, exported "
+                    f"{datetime.now(timezone.utc).date().isoformat()}.\n")
+    data = buf.getvalue()
+
+    def gen():
+        yield data
+
+    return StreamingResponse(gen(), media_type="application/zip", headers={
+        "Content-Disposition": "attachment; filename=reelworld-my-photos.zip"})

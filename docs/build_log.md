@@ -191,6 +191,35 @@ the first unfinished phase.
 - Tests: `backend/test_stories.py` (15 checks, user-run),
   `frontend/stories.test.js` 118/118 here; all suites 316/316.
 - Verifier gains a stories CRUD roundtrip step.
+
+## Phase 5: libraries + world browse + gaps (needs user run)
+
+- Backend: `GET /api/albums` (all/places/above/signs/people/look +
+  bursts clustered by embedding similarity >= 0.85, covers in
+  `data/library.json`), `PATCH /api/bursts/{key}` cover,
+  `GET /api/world` (place/theme/viewpoint/people/text filters +
+  facets; theme from the file path), `GET /api/gaps` (thin + empty
+  non-unknown places), `POST /api/photo/{id}/correct` (personal-only
+  owner overrides + re-embed, demo-gated), `DELETE /api/photo/{id}`
+  + `DELETE /api/photos/mine` (file+annotation+row cascade,
+  demo-gated), `GET /api/export` (ZIP of photos+annotations, ungated
+  read). Corrections and deletes refresh the connected index.
+- Frontend: `#/library` (albums, album drill, burst detail with
+  frame player + cover pick + side-by-side compare, multi-file
+  upload queue with pause/clear/cancel, correction + delete +
+  export + delete-all), `#/browse` (filters, surprise, gaps with
+  add-first links), `#/place/<key>` rebuilt (world/mine toggle,
+  viewpoint sections, signs, credits, related, empty state).
+- Deviations, all deliberate: `#/add` kept (queue is the fast path,
+  single upload keeps owner notes); correction stores overrides
+  without a Pass B rerun (pipeline stays out of requests); no theme
+  albums for personal photos (no theme data); vantage geometry and
+  EXIF/telemetry cut as unbackable.
+- Tests: `backend/test_library.py` (14 checks, user-run),
+  `frontend/library.test.js` 172/172 here; all suites 488/488.
+- Verifier gains albums/world/gaps/export steps plus correct/delete
+  guards (world photo must 400/403, nothing mutated).
+- Commit id: (this commit; see `git log`).
 - Commit id: (this commit; see `git log`).
 - Commit id: (this commit; see `git log`).
 - Commit id: (this commit; see `git log`).

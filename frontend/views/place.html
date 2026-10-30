@@ -1,118 +1,71 @@
-<!-- Place view (#/place/<key>). Home-card language with dossier touches:
-     header, viewpoint photo groups, signs, credits, related places. -->
-<div class="flex-col w-full gap-6" id="place-wrap" hidden>
-<div class="flex items-center gap-3 py-2 px-1">
-<a class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-variant text-on-surface font-label-md text-label-md transition-all group shadow-sm min-h-[44px]" href="#/" id="place-back">
-<span class="material-symbols-outlined text-tertiary-container group-hover:-translate-x-1 transition-transform text-[16px]">arrow_back</span>
-<span class="">Back</span>
+<!-- Place page. Follows world_place_page_kicc_nairobi. Removed:
+     plate refs, architect names and dates, acutance/vantage indices,
+     fake link counts, datum-stone prose. Everything shown comes from
+     /api/place: viewpoint groups, clear signs, credits, related places. -->
+<div class="flex flex-col gap-1 mb-4">
+<nav aria-label="Breadcrumb" class="flex flex-wrap items-center gap-1.5 font-label-sm text-label-sm text-on-surface-variant" id="pl-crumbs"></nav>
+<div class="flex flex-wrap items-end justify-between gap-3">
+<div class="flex flex-col gap-1">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight" id="pl-name">—</h1>
+<p class="font-body-md text-body-md text-on-surface-variant" id="pl-meta">—</p>
+</div>
+<div class="flex flex-wrap items-center gap-2">
+<div class="flex items-center gap-1 p-1 bg-surface-container-low rounded-xl" id="pl-coll">
+<button class="min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all" data-coll="world" type="button">World</button>
+<button class="min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all" data-coll="mine" type="button">Mine</button>
+</div>
+<button class="min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md transition-colors inline-flex items-center gap-1.5" id="pl-add" type="button">
+<span class="material-symbols-outlined text-[16px]">add_photo_alternate</span>
+<span>Add a photo</span>
+</button>
+<a class="min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md transition-colors inline-flex items-center gap-1.5" href="#/connected" id="pl-connected">
+<span class="material-symbols-outlined text-[16px]">hub</span>
+<span>Connected</span>
 </a>
 </div>
-<!-- Header card -->
-<section class="w-full rounded-2xl bg-parchment-card border border-parchment-border shadow-archival p-5 md:p-6 flex flex-col gap-3">
-<div class="flex items-start justify-between gap-3 flex-wrap">
-<div class="flex flex-col gap-1.5 min-w-0">
-<span class="text-[10px] font-bold uppercase tracking-wider text-ochre-clay bg-ochre-soft px-2 py-0.5 rounded border border-ochre/20 w-fit">Place</span>
-<h1 class="text-xl md:text-2xl font-bold text-espresso-950 tracking-tight break-words" id="place-name">—</h1>
-<p class="hidden text-xs text-espresso-600" id="place-aliases"></p>
-<nav class="flex items-center gap-1.5 text-xs text-espresso-600 flex-wrap" id="place-crumbs" aria-label="Breadcrumb"></nav>
-</div>
-<span class="px-2.5 py-1 rounded-full bg-papyrus-200 border border-parchment-border text-espresso-800 text-xs font-semibold whitespace-nowrap" id="place-type">—</span>
-</div>
-<div class="flex items-center justify-between gap-3 flex-wrap pt-3 border-t border-parchment-border">
-<span class="text-sm text-espresso-700" id="place-count">—</span>
-<div class="flex items-center bg-papyrus-200 p-1 rounded-lg border border-parchment-border" role="group" aria-label="Which photos">
-<button class="px-3 py-1.5 rounded text-xs font-semibold" data-coll="world" type="button">World</button>
-<button class="px-3 py-1.5 rounded text-xs font-semibold" data-coll="personal" type="button">World + mine</button>
 </div>
 </div>
-<p class="hidden text-sm text-espresso-700 leading-relaxed" id="place-onephoto">Only one photo of this place so far.</p>
-</section>
-<!-- Empty state -->
-<div class="hidden w-full rounded-2xl bg-parchment-card border border-parchment-border p-8 shadow-archival flex-col items-center text-center gap-3" id="place-empty">
-<div class="w-12 h-12 rounded-xl bg-papyrus-200 border border-parchment-border flex items-center justify-center text-espresso-600">
-<span class="material-symbols-outlined text-[26px]">location_off</span>
+<div class="flex-col gap-4 animate-pulse" id="pl-loading" hidden>
+<div class="h-48 rounded-xl bg-surface-container-low"></div>
+<div class="h-48 rounded-xl bg-surface-container-low"></div>
 </div>
-<p class="text-sm font-semibold text-espresso-950">No photos of this place yet</p>
-<p class="text-sm text-espresso-700 leading-relaxed max-w-md">Nobody has added a photo placed here. If you have one, add it from the Add tab.</p>
-<a class="inline-flex items-center gap-1.5 h-10 px-4 rounded-xl bg-espresso-900 text-papyrus-100 text-sm font-semibold mt-1" href="#/add">Add a photo</a>
+<div class="hidden font-body-md text-body-md text-error" id="pl-error" role="alert"></div>
+<div class="flex-col gap-8" id="pl-main" hidden>
+<div class="flex-col gap-6" id="pl-sections"></div>
+<div class="flex-col gap-2" id="pl-signs-wrap">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Signs read here</h2>
+<div class="flex flex-col gap-1.5" id="pl-signs"></div>
 </div>
-<!-- Viewpoint groups -->
-<div class="flex flex-col gap-6" id="place-groups"></div>
-<!-- Signs + credits -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="place-side">
-<section class="rounded-2xl bg-parchment-card border border-parchment-border shadow-archival p-5 flex flex-col gap-3">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-[18px] text-ochre">signpost</span>
-<h2 class="text-sm font-bold text-espresso-950 tracking-tight">Signs read here</h2>
+<div class="flex-col gap-2" id="pl-credits-wrap">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Credits</h2>
+<div class="flex flex-col gap-1.5" id="pl-credits"></div>
 </div>
-<ul class="flex flex-col gap-2" id="place-signs"></ul>
-<p class="hidden text-sm text-espresso-600" id="place-signs-empty">No clear signs read at this place yet.</p>
-</section>
-<section class="rounded-2xl bg-parchment-card border border-parchment-border shadow-archival p-5 flex flex-col gap-3">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-[18px] text-ochre">person_pin</span>
-<h2 class="text-sm font-bold text-espresso-950 tracking-tight">Photographers</h2>
+<div class="flex-col gap-2" id="pl-rel-wrap">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Related places</h2>
+<div class="flex flex-wrap gap-2" id="pl-related"></div>
 </div>
-<ul class="flex flex-col gap-2" id="place-credits"></ul>
-<p class="hidden text-sm text-espresso-600" id="place-credits-empty">No credits recorded.</p>
-</section>
+<div class="hidden bg-surface-container-low rounded-xl p-6 text-center flex-col gap-3 items-center" id="pl-empty">
+<p class="font-body-md text-body-md text-on-surface-variant" id="pl-empty-text">No photos of this place yet.</p>
+<button class="min-h-[44px] px-5 rounded-lg bg-primary-container text-surface hover:bg-primary font-label-md text-label-md transition-colors active:scale-95" id="pl-empty-add" type="button">Add the first photo</button>
 </div>
-<!-- Related places -->
-<section class="rounded-2xl bg-parchment-card border border-parchment-border shadow-archival p-5 flex flex-col gap-3" id="place-rel-wrap">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-[18px] text-ochre">hub</span>
-<h2 class="text-sm font-bold text-espresso-950 tracking-tight">Related places</h2>
 </div>
-<div class="flex flex-wrap gap-2" id="place-related"></div>
-<p class="hidden text-sm text-espresso-600" id="place-rel-empty">No related places recorded.</p>
-</section>
+<template id="tpl-pl-section">
+<div class="flex flex-col gap-3">
+<div class="flex items-baseline justify-between gap-2">
+<h2 class="font-headline-sm text-headline-sm text-on-surface" data-slot="title">—</h2>
+<span class="font-label-sm text-label-sm text-on-surface-variant" data-slot="count">—</span>
 </div>
-<!-- Loading skeleton -->
-<div class="flex-col w-full gap-6 animate-pulse" id="place-loading" hidden>
-<div class="h-44 rounded-2xl bg-surface-container"></div>
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-<div class="aspect-[4/3] rounded-xl bg-surface-container"></div>
-<div class="aspect-[4/3] rounded-xl bg-surface-container"></div>
-<div class="hidden md:block aspect-[4/3] rounded-xl bg-surface-container"></div>
-<div class="hidden md:block aspect-[4/3] rounded-xl bg-surface-container"></div>
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4" data-slot="grid"></div>
 </div>
-<div class="h-32 rounded-2xl bg-surface-container"></div>
-</div>
-<!-- Error state with retry -->
-<div class="w-full rounded-2xl bg-parchment-card border border-ochre/50 p-6 shadow-archival flex-col sm:flex-row items-start sm:items-center gap-4 max-w-2xl" id="place-error" hidden>
-<div class="w-10 h-10 rounded-xl bg-ochre-soft border border-ochre/30 text-ochre-clay flex items-center justify-center flex-shrink-0">
-<span class="material-symbols-outlined text-[20px]">cloud_off</span>
-</div>
-<div class="flex-1 min-w-0">
-<p class="text-sm font-bold text-espresso-950">This place failed to load</p>
-<p class="text-sm text-espresso-700 leading-relaxed" id="place-error-text">The request failed.</p>
-</div>
-<button class="min-h-[44px] inline-flex items-center gap-1.5 px-6 py-2.5 rounded bg-forest hover:bg-forest-hover active:bg-forest-active text-papyrus-100 font-label-lg text-label-lg font-bold shadow-archival transition-all flex-shrink-0" id="place-retry" type="button">
-<span class="material-symbols-outlined text-[18px]">refresh</span>
-<span>Retry connection</span>
-</button>
-</div>
-<!-- Templates -->
-<template id="tpl-pgroup">
-<section class="flex flex-col gap-3">
-<div class="flex items-center gap-3">
-<h2 class="text-sm font-bold text-espresso-950 tracking-tight" data-slot="title">Group</h2>
-<span class="text-xs font-medium text-espresso-700 bg-papyrus-200 px-2.5 py-1 rounded-full border border-parchment-border" data-slot="count"></span>
-</div>
-<div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4" data-slot="cards"></div>
-</section>
 </template>
-<template id="tpl-pcard">
-<article class="flex flex-col rounded-2xl bg-parchment-card border border-parchment-border overflow-hidden shadow-card hover:shadow-elevated transition-all group duration-300 cursor-pointer" data-slot="card">
-<div class="relative w-full aspect-[4/3] bg-papyrus-300 overflow-hidden">
-<img alt="" class="rw-photo w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" data-slot="img"/>
+<template id="tpl-pl-plate">
+<a class="bg-surface-container-low rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col" data-slot="link" href="#">
+<div class="relative w-full aspect-[4/3] bg-surface-container-high">
+<img alt="" class="rw-photo w-full h-full object-cover" data-slot="img" loading="lazy"/>
 </div>
-<div class="p-3 flex flex-col gap-1.5">
-<h3 class="font-semibold text-[13px] text-espresso-950 leading-snug group-hover:text-ochre transition-colors rw-clamp-2" data-slot="caption"></h3>
-<div class="flex items-center justify-between gap-2 text-[11px] text-espresso-600">
-<span class="font-mono" data-slot="pid"></span>
-<span class="px-1.5 py-0.5 rounded bg-papyrus-200 border border-parchment-border font-semibold" data-slot="coll"></span>
+<div class="p-3 flex flex-col gap-0.5">
+<p class="font-body-sm text-body-sm text-on-surface leading-snug" data-slot="cap">—</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant truncate" data-slot="credit">—</p>
 </div>
-</div>
-</article>
+</a>
 </template>

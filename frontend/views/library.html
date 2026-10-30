@@ -1,0 +1,207 @@
+<!-- My Photos library: albums, upload queue, bursts, manage. Follows
+     my_photos_library_smart_albums, my_photos_add_photos_ingestion_queue,
+     my_photos_burst_detail_curation, my_photos_manage_photo_correction
+     and my_photos_delete_and_export. Removed: version/edge pills,
+     fake counts, capture dates/coords, EXIF/telemetry (f-stops, acutance,
+     focal lengths), TIFF/RAW/DNG claims (JPEG/PNG only), throughput MB,
+     batch refs, hashes, encryption claims, SSO. Bursts group
+     near-duplicate frames by meaning (>= 0.85), not by filename. -->
+<section class="flex flex-col gap-4 mb-6">
+<div class="bg-surface-container-low p-6 rounded-xl shadow-sm flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+<div class="flex flex-col gap-2 max-w-2xl">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm uppercase tracking-wider font-semibold w-fit">
+<span class="material-symbols-outlined text-[16px]">photo_library</span>
+            My Photos
+          </span>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Your private library</h1>
+<p class="font-body-md text-body-md text-on-surface-variant" id="lib-sub">—</p>
+</div>
+<a class="min-h-[44px] px-5 py-2.5 rounded bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-lg text-label-lg inline-flex items-center gap-2 shadow-sm active:scale-95 w-fit" href="#/browse">
+<span class="material-symbols-outlined text-[18px]">public</span>
+<span>Browse the world</span>
+</a>
+</div>
+<div class="flex items-center gap-1 p-1 bg-surface-container-low rounded-xl shadow-sm w-fit" id="lib-tabs" role="tablist">
+<button class="min-h-[44px] px-5 rounded-lg font-label-md text-label-md transition-all" data-ltab="albums" role="tab" type="button">Albums</button>
+<button class="min-h-[44px] px-5 rounded-lg font-label-md text-label-md transition-all" data-ltab="queue" role="tab" type="button">Upload queue</button>
+<button class="min-h-[44px] px-5 rounded-lg font-label-md text-label-md transition-all" data-ltab="manage" role="tab" type="button">Manage</button>
+</div>
+</section>
+<div class="flex-col gap-8 animate-pulse" id="lib-loading" hidden>
+<div class="h-40 rounded-xl bg-surface-container-low"></div>
+<div class="h-64 rounded-xl bg-surface-container-low"></div>
+</div>
+<div class="hidden font-body-md text-body-md text-error" id="lib-error" role="alert"></div>
+<div class="flex-col gap-6" id="lib-main" hidden>
+<!-- ALBUMS -->
+<section class="flex-col gap-4" id="lib-albums">
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4" id="lib-album-cards"></div>
+<div class="flex-col gap-2" id="lib-places-wrap">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Places</h2>
+<div class="flex flex-col gap-2" id="lib-places"></div>
+</div>
+<div class="flex-col gap-2" id="lib-bursts-wrap">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Bursts</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Near-duplicate frames grouped by meaning.</p>
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4" id="lib-bursts"></div>
+</div>
+<div class="hidden bg-surface-container-low rounded-xl p-6 text-center font-body-md text-body-md text-on-surface-variant" id="lib-empty">No photos yet.
+<button class="underline hover:text-on-surface font-semibold" id="lib-empty-add" type="button">Add your first photos</button>
+</div>
+</section>
+<!-- ALBUM DETAIL -->
+<section class="flex-col gap-4" id="lib-detail" hidden>
+<div class="flex items-center gap-3">
+<button class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-variant text-on-surface font-label-md text-label-md min-h-[44px]" id="lib-back" type="button">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+<span>Albums</span>
+</button>
+<h2 class="font-headline-sm text-headline-sm text-on-surface" id="lib-detail-title">—</h2>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4" id="lib-detail-grid"></div>
+</section>
+<!-- BURST DETAIL -->
+<section class="flex-col gap-4" id="lib-burst" hidden>
+<div class="flex items-center gap-3 flex-wrap">
+<button class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-variant text-on-surface font-label-md text-label-md min-h-[44px]" id="burst-back" type="button">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+<span>Albums</span>
+</button>
+<h2 class="font-headline-sm text-headline-sm text-on-surface" id="burst-title">—</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<div class="lg:col-span-7 flex flex-col gap-3">
+<div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-surface-container-high">
+<img alt="" class="rw-photo w-full h-full object-cover" id="burst-main" loading="lazy"/>
+<span class="absolute bottom-3 left-3 px-2 py-1 rounded bg-primary-container/85 text-surface-container-lowest font-label-sm text-label-sm" id="burst-tag">—</span>
+</div>
+<div class="flex flex-wrap items-center gap-2">
+<button class="min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md transition-colors inline-flex items-center gap-2" id="burst-play" type="button">
+<span class="material-symbols-outlined text-[16px]">play_arrow</span>
+<span>Play frames</span>
+</button>
+<button class="min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md transition-colors" id="burst-cover" type="button">Set as cover</button>
+<a class="min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md transition-colors inline-flex items-center" id="burst-dossier" href="#">Open dossier</a>
+</div>
+<div class="flex gap-2 overflow-x-auto py-1" id="burst-strip"></div>
+</div>
+<div class="lg:col-span-5 bg-surface-container-low rounded-xl p-5 flex flex-col gap-3">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider font-semibold">Side-by-side compare</span>
+<div class="flex items-center gap-2">
+<select aria-label="First frame" class="min-h-[44px] px-2 rounded-lg bg-surface-container-highest text-on-surface font-body-sm text-body-sm focus:outline-none flex-1" id="burst-a"></select>
+<select aria-label="Second frame" class="min-h-[44px] px-2 rounded-lg bg-surface-container-highest text-on-surface font-body-sm text-body-sm focus:outline-none flex-1" id="burst-b"></select>
+</div>
+<button class="min-h-[44px] px-4 rounded-lg bg-primary-container text-surface hover:bg-primary font-label-md text-label-md transition-colors active:scale-95" id="burst-compare" type="button">Compare frames</button>
+<p class="font-body-sm text-body-sm text-on-surface leading-relaxed" id="burst-compare-out">Pick two frames to compare them.</p>
+</div>
+</div>
+</section>
+<!-- QUEUE -->
+<section class="flex-col gap-4" id="lib-queue" hidden>
+<div class="bg-surface-container-low rounded-xl p-6 flex flex-col gap-3 items-center text-center border-2 border-dashed border-outline-variant" id="lib-drop">
+<span class="material-symbols-outlined text-[40px] text-on-surface-variant">add_photo_alternate</span>
+<p class="font-body-md text-body-md text-on-surface">Drop photos here or choose files</p>
+<button class="min-h-[44px] px-5 rounded-lg bg-primary-container text-surface hover:bg-primary font-label-md text-label-md transition-colors active:scale-95" id="lib-choose" type="button">Choose files</button>
+<input accept="image/jpeg,image/png" class="hidden" id="lib-files" multiple type="file"/>
+<p class="font-label-sm text-label-sm text-on-surface-variant">JPEG or PNG, 10 MB max each. Two uploads run at a time.</p>
+</div>
+<div class="flex flex-wrap items-center gap-2">
+<button class="min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md transition-colors" id="lib-pause" type="button">Pause launching</button>
+<button class="min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md transition-colors" id="lib-clear" type="button">Clear finished</button>
+<button class="min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md transition-colors" id="lib-cancel" type="button">Cancel remaining</button>
+<span class="font-label-sm text-label-sm text-on-surface-variant" id="lib-queue-count"></span>
+</div>
+<div class="flex flex-col gap-2" id="lib-queue-list"></div>
+</section>
+<!-- MANAGE -->
+<section class="flex-col gap-4" id="lib-manage" hidden>
+<div class="bg-surface-container-low rounded-xl p-5 flex flex-col gap-3">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider font-semibold">Photo</span>
+<div class="flex flex-wrap items-center gap-3">
+<select aria-label="Choose one of your photos" class="min-h-[44px] px-3 rounded-lg bg-surface-container-highest text-on-surface font-body-md text-body-md focus:outline-none min-w-[220px]" id="lib-mgr-select"></select>
+<a class="font-label-sm text-label-sm text-on-tertiary-container hover:underline" id="lib-mgr-dossier" href="#">Open dossier</a>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-5 flex flex-col gap-3">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider font-semibold">Correct this photo</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Your correction overrides the machine record. Nothing is re-run; your word stands.</p>
+<input autocomplete="off" class="w-full px-3 py-2.5 min-h-[44px] rounded-lg bg-surface-container-highest text-on-surface font-body-md text-body-md focus:outline-none" id="lib-cor-cap" maxlength="500" placeholder="Caption (leave blank to keep)" type="text"/>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<input autocomplete="off" class="w-full px-3 py-2.5 min-h-[44px] rounded-lg bg-surface-container-highest text-on-surface font-body-md text-body-md focus:outline-none" id="lib-cor-key" maxlength="160" placeholder="Place key, e.g. kenya/nairobi/cbd/kicc" type="text"/>
+<input autocomplete="off" class="w-full px-3 py-2.5 min-h-[44px] rounded-lg bg-surface-container-highest text-on-surface font-body-md text-body-md focus:outline-none" id="lib-cor-name" maxlength="160" placeholder="Place name" type="text"/>
+</div>
+<input autocomplete="off" class="w-full px-3 py-2.5 min-h-[44px] rounded-lg bg-surface-container-highest text-on-surface font-body-md text-body-md focus:outline-none" id="lib-cor-note" maxlength="200" placeholder="Note (optional, stored as evidence)" type="text"/>
+<div class="flex flex-wrap items-center gap-3">
+<button class="min-h-[44px] px-5 rounded-lg bg-primary-container text-surface hover:bg-primary font-label-md text-label-md transition-colors active:scale-95" id="lib-cor-send" type="button">Save correction</button>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="lib-cor-status"></span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-5 flex flex-col gap-3">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider font-semibold">Delete this photo</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Permanently removes, in this order:</p>
+<ul class="font-body-sm text-body-sm text-on-surface-variant list-disc pl-5 flex flex-col gap-1">
+<li>The photo file</li>
+<li>Its annotation record</li>
+<li>Its search entry (links update automatically)</li>
+</ul>
+<div class="flex flex-wrap items-center gap-3">
+<button class="min-h-[44px] px-5 rounded-lg bg-error-container text-on-error-container hover:opacity-90 font-label-md text-label-md transition-colors" id="lib-del-btn" type="button">Delete photo</button>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="lib-del-status"></span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-5 flex flex-col gap-3">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider font-semibold">Export my data</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Downloads every photo with its annotation as one ZIP file.</p>
+<div>
+<a class="min-h-[44px] px-5 py-2.5 rounded-lg bg-surface-container-highest hover:bg-surface-dim text-on-surface font-label-md text-label-md inline-flex items-center gap-2" download href="/api/export" id="lib-export">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span>Export my data (ZIP)</span>
+</a>
+</div>
+</div>
+<div class="bg-error-container/30 border border-error/30 rounded-xl p-5 flex flex-col gap-3">
+<span class="font-label-md text-label-md text-on-error-container uppercase tracking-wider font-semibold">Delete all my photos</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant" id="lib-delall-note">This cannot be undone.</p>
+<div class="flex flex-wrap items-center gap-3">
+<button class="min-h-[44px] px-5 rounded-lg bg-error text-on-error hover:opacity-90 font-label-md text-label-md transition-colors" id="lib-delall-btn" type="button">Delete everything</button>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="lib-delall-status"></span>
+</div>
+</div>
+</section>
+</div>
+<template id="tpl-lib-album">
+<button class="bg-surface-container-low rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col text-left min-h-[44px]" type="button">
+<div class="relative w-full aspect-[16/10] bg-surface-container-high">
+<img alt="" class="rw-photo w-full h-full object-cover" data-slot="img" loading="lazy"/>
+</div>
+<div class="p-3 flex flex-col gap-0.5">
+<span class="font-label-lg text-label-lg text-on-surface font-bold" data-slot="label">—</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant" data-slot="count">—</span>
+</div>
+</button>
+</template>
+<template id="tpl-lib-tile">
+<div class="bg-surface-container-low rounded-xl overflow-hidden shadow-sm flex flex-col">
+<a class="relative w-full aspect-square bg-surface-container-high block" data-slot="link" href="#">
+<img alt="" class="rw-photo w-full h-full object-cover" data-slot="img" loading="lazy"/>
+</a>
+<div class="p-2.5 flex flex-col gap-1">
+<p class="font-body-sm text-body-sm text-on-surface truncate" data-slot="cap">—</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant truncate" data-slot="sub">—</p>
+<div class="flex items-center gap-1">
+<button class="flex-1 min-h-[36px] px-2 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-sm text-label-sm" data-slot="correct" type="button">Correct</button>
+<button class="flex-1 min-h-[36px] px-2 rounded-lg text-stone-500 hover:text-error font-label-sm text-label-sm" data-slot="del" type="button">Delete</button>
+</div>
+</div>
+</div>
+</template>
+<template id="tpl-queue-row">
+<div class="bg-surface-container-low rounded-xl p-3 flex items-center gap-3">
+<span class="material-symbols-outlined text-[22px] text-on-surface-variant flex-shrink-0" data-slot="icon">hourglass_top</span>
+<div class="flex flex-col min-w-0 flex-1">
+<span class="font-body-sm text-body-sm text-on-surface truncate" data-slot="name">—</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant" data-slot="sub">Queued</span>
+</div>
+<a class="hidden font-label-sm text-label-sm text-on-tertiary-container hover:underline flex-shrink-0" data-slot="link" href="#">View</a>
+</div>
+</template>

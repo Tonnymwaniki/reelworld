@@ -326,6 +326,21 @@ function ringLayout(ringIdx, slot, total) {
 function ringLabel(ringIdx, slot) {
   return (ringIdx + 1) + "ABCDEFGH"[slot];
 }
+function fmtBytes(b) {
+  if (b == null) return "—";
+  if (b < 1024) return b + " B";
+  if (b < 1048576) return Math.round(b / 1024) + " KB";
+  return (b / 1048576).toFixed(1) + " MB";
+}
+const GAP_VP_LABEL = { ground_level: "ground-level view", elevated: "elevated view",
+  aerial: "aerial view", interior: "interior view" };
+function gapText(g) {
+  if (!g.count) return "No photos yet — yours could be the first.";
+  const bits = (g.missing || []).filter((m) => m !== "all")
+    .map((m) => "No " + (GAP_VP_LABEL[m] || m));
+  if (g.count === 1) bits.push("Only one photo");
+  return bits.length ? bits.join(" · ") + "." : "Covered from every angle.";
+}
 function storyTotals(chapters) {
   const list = chapters || [];
   return { scenes: list.length,
@@ -391,7 +406,8 @@ const RWTEST = { fmtScore: fmtScore, shortReasons: shortReasons, creditText: cre
   licenseSummary: licenseSummary, kitCitation: kitCitation,
   ringLayout: ringLayout, ringLabel: ringLabel, evidenceRows: evidenceRows,
   KIND_LABEL: KIND_LABEL, storyTotals: storyTotals,
-  chaptersWithPeople: chaptersWithPeople, buildStoryMarkdown: buildStoryMarkdown };
+  chaptersWithPeople: chaptersWithPeople, buildStoryMarkdown: buildStoryMarkdown,
+  fmtBytes: fmtBytes, gapText: gapText };
 
 const home = {
   view: null, xlist: null, loadingTimer: null, abort: null,
@@ -4052,86 +4068,1039 @@ function renderTrace(ol, trace) {
 }
 
 /* ---------- place view ---------- */
+/* ---------- my photos library ---------- */
+const library = {
+  view: null,
+  tab: "albums",
+  data: null,
+  drill: null,
+  burstIdx: 0,
+  burstTimer: null,
+  queue: [],
+  qPaused: false,
+  qTimer: null,
+  qActive: 0,
+  qSeq: 0,
+  mgrPid: null,
+
+  mount(view) {
+    this.view = view;
+    this.tab = "albums";
+    this.data = null;
+    this.drill = null;
+    this.queue = [];
+    this.qPaused = false;
+    this.qActive = 0;
+    this.mgrPid = null;
+    $("#lib-tabs", view).addEventListener("click", (e) => {
+      const b = e.target.closest("[data-ltab]");
+      if (b) this.showTab(b.dataset.ltab);
+    });
+    $("#lib-album-cards", view).addEventListener("click", (e) => {
+      const b = e.target.closest("[data-album]");
+      if (b) this.openAlbum(b.dataset.album);
+    });
+    $("#lib-places", view).addEventListener("click", (e) => {
+      const b = e.target.closest("[data-place]");
+      if (b) this.openPlaceGroup(b.dataset.place);
+    });
+    $("#lib-bursts", view).addEventListener("click", (e) => {
+      const b = e.target.closest("[data-burst]");
+      if (b) this.openBurst(b.dataset.burst);
+    });
+    $("#lib-back", view).addEventListener("click", () => {
+      this.drill = null;
+      this.paintMain();
+    });
+    $("#lib-detail-grid", view).addEventListener("click", (e) => {
+      const t = e.target.closest("[data-pid]");
+      if (!t) return;
+      if (e.target.closest("[data-slot=correct]")) { this.gotoManage(t.dataset.pid); return; }
+      if (e.target.closest("[data-slot=del]")) { this.gotoManage(t.dataset.pid); return; }
+    });
+    $("#burst-back", view).addEventListener("click", () => {
+      this.stopBurst();
+      this.drill = null;
+      this.paintMain();
+    });
+    $("#burst-strip", view).addEventListener("click", (e) => {
+      const b = e.target.closest("[data-frame]");
+      if (b) this.burstFrame(Number(b.dataset.frame));
+    });
+    $("#burst-play", view).addEventListener("click", () => this.burstPlayToggle());
+    $("#burst-cover", view).addEventListener("click", () => this.burstSetCover());
+    $("#burst-compare", view).addEventListener("click", () => this.burstCompare());
+    $("#lib-choose", view).addEventListener("click", () => $("#lib-files", view).click());
+    $("#lib-files", view).addEventListener("change", (e) => {
+      this.addFiles(e.target.files);
+      e.target.value = "";
+    });
+    const dz = $("#lib-drop", view);
+    dz.addEventListener("dragover", (e) => e.preventDefault());
+    dz.addEventListener("drop", (e) => {
+      e.preventDefault();
+      if (e.dataTransfer && e.dataTransfer.files) this.addFiles(e.dataTransfer.files);
+    });
+    $("#lib-pause", view).addEventListener("click", () => {
+      this.qPaused = !this.qPaused;
+      $("#lib-pause", view).textContent = this.qPaused ? "Resume launching" : "Pause launching";
+      if (!this.qPaused) this.pump();
+    });
+    $("#lib-clear", view).addEventListener("click", () => {
+      this.queue = this.queue.filter((f) => f.status !== "done");
+      this.paintQueue();
+    });
+    $("#lib-cancel", view).addEventListener("click", () => {
+      this.queue = this.queue.filter((f) => f.status !== "queued");
+      this.paintQueue();
+    });
+    $("#lib-empty-add", view).addEventListener("click", () => this.showTab("queue"));
+    $("#lib-mgr-select", view).addEventListener("change", (e) => {
+      this.mgrPid = e.target.value || null;
+      this.paintManagePhoto();
+    });
+    $("#lib-cor-send", view).addEventListener("click", () => this.correct());
+    $("#lib-del-btn", view).addEventListener("click", () => this.del());
+    $("#lib-delall-btn", view).addEventListener("click", () => this.delAll());
+    this.load();
+  },
+
+  destroy() {
+    if (this.qTimer) { clearInterval(this.qTimer); this.qTimer = null; }
+    this.stopBurst();
+  },
+
+  show(el, on) {
+    if (!el) return;
+    el.hidden = !on;
+    el.classList.toggle("flex", !!on);
+  },
+
+  showTab(tab) {
+    this.tab = tab;
+    const view = this.view;
+    $$("#lib-tabs [data-ltab]", view).forEach((b) => {
+      const on = b.dataset.ltab === tab;
+      b.className = "min-h-[44px] px-5 rounded-lg font-label-md text-label-md transition-all " +
+        (on ? "bg-primary-container text-surface shadow-sm" : "text-on-surface-variant hover:text-on-surface");
+    });
+    this.paintMain();
+  },
+
+  paintMain() {
+    const view = this.view;
+    const inDrill = this.tab === "albums" && this.drill;
+    ["albums", "queue", "manage"].forEach((t) => {
+      const el = $("#lib-" + t, view);
+      this.show(el, t === this.tab && !inDrill);
+    });
+    this.show($("#lib-detail", view), !!(inDrill && this.drill.kind === "album"));
+    this.show($("#lib-burst", view), !!(inDrill && this.drill.kind === "burst"));
+  },
+
+  albumByKey(key) {
+    return ((this.data && this.data.albums) || []).find((a) => a.key === key);
+  },
+
+  async load(quiet) {
+    const view = this.view;
+    if (!quiet) {
+      $("#lib-loading", view).hidden = false;
+      this.show($("#lib-main", view), false);
+    }
+    $("#lib-error", view).classList.add("hidden");
+    try {
+      const out = await api("/api/albums");
+      if (!view.isConnected) return;
+      this.data = out;
+      $("#lib-loading", view).hidden = true;
+      this.show($("#lib-main", view), true);
+      $("#lib-sub", view).textContent =
+        out.count + (out.count === 1 ? " photo" : " photos") + " in your private library.";
+      this.paintAlbums();
+      this.paintManagePicker();
+      if (!quiet) {
+        this.showTab(this.tab);
+        const empty = !out.count;
+        $("#lib-empty", view).classList.toggle("hidden", !empty);
+      }
+      if (this.drill) this.repaintDrill();
+    } catch (e) {
+      if (!view.isConnected) return;
+      $("#lib-loading", view).hidden = true;
+      const box = $("#lib-error", view);
+      box.textContent = String((e && e.message) || e);
+      box.classList.remove("hidden");
+    }
+  },
+
+  coverFor(ids) {
+    const photos = (this.data && this.data.photos) || {};
+    const first = (ids || [])[0];
+    return first && photos[first] ? photos[first].src : null;
+  },
+
+  paintAlbums() {
+    const view = this.view;
+    const box = $("#lib-album-cards", view);
+    box.innerHTML = "";
+    const T = $("#tpl-lib-album", view).content.firstElementChild;
+    ["all", "above", "signs", "people", "look"].forEach((key) => {
+      const a = this.albumByKey(key);
+      if (!a) return;
+      const node = T.cloneNode(true);
+      node.dataset.album = key;
+      const img = $("[data-slot=img]", node);
+      const src = this.coverFor(a.ids);
+      if (src) {
+        img.src = src;
+        img.alt = a.label;
+      } else img.remove();
+      $("[data-slot=label]", node).textContent = a.label;
+      $("[data-slot=count]", node).textContent = a.count + (a.count === 1 ? " photo" : " photos");
+      box.appendChild(node);
+    });
+    const pl = $("#lib-places", view);
+    pl.innerHTML = "";
+    const groups = (this.albumByKey("places") || {}).groups || [];
+    groups.forEach((g) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.dataset.place = g.key;
+      b.className = "w-full flex items-center justify-between gap-2 p-3 rounded-xl bg-surface-container-low hover:bg-surface-container-high shadow-sm transition-colors text-left min-h-[44px]";
+      const nm = document.createElement("span");
+      nm.className = "font-body-md text-body-md text-on-surface truncate";
+      nm.textContent = g.name || g.key;
+      const ct = document.createElement("span");
+      ct.className = "font-label-sm text-label-sm text-on-surface-variant flex-shrink-0";
+      ct.textContent = g.ids.length + (g.ids.length === 1 ? " photo" : " photos");
+      b.append(nm, ct);
+      pl.appendChild(b);
+    });
+    this.show($("#lib-places-wrap", view), groups.length > 0);
+    const bb = $("#lib-bursts", view);
+    bb.innerHTML = "";
+    const sets = (this.albumByKey("bursts") || {}).sets || [];
+    sets.forEach((s) => {
+      const node = T.cloneNode(true);
+      node.dataset.burst = s.key;
+      const img = $("[data-slot=img]", node);
+      const photos = (this.data && this.data.photos) || {};
+      const cover = photos[s.cover] || photos[s.ids[0]];
+      if (cover) {
+        img.src = cover.src;
+        img.alt = "Burst of " + s.count;
+      } else img.remove();
+      $("[data-slot=label]", node).textContent = "Burst of " + s.count;
+      $("[data-slot=count]", node).textContent = s.cover === s.ids[0] ? "cover: first frame" : "cover: chosen";
+      bb.appendChild(node);
+    });
+    this.show($("#lib-bursts-wrap", view), sets.length > 0);
+  },
+
+  openAlbum(key) {
+    const a = this.albumByKey(key);
+    if (!a) return;
+    this.drill = { kind: "album", key: key, title: a.label, ids: a.ids || [] };
+    this.paintDetail();
+    this.paintMain();
+  },
+
+  openPlaceGroup(key) {
+    const groups = (this.albumByKey("places") || {}).groups || [];
+    const g = groups.find((x) => x.key === key);
+    if (!g) return;
+    this.drill = { kind: "album", key: "place:" + key, title: g.name || key, ids: g.ids || [] };
+    this.paintDetail();
+    this.paintMain();
+  },
+
+  repaintDrill() {
+    if (!this.drill) return;
+    if (this.drill.kind === "burst") {
+      const sets = (this.albumByKey("bursts") || {}).sets || [];
+      const s = sets.find((x) => x.key === this.drill.key);
+      if (!s) {
+        this.drill = null;
+        this.paintMain();
+        return;
+      }
+      this.drill.ids = s.ids;
+      this.paintBurst();
+    } else {
+      this.paintDetail();
+    }
+  },
+
+  paintDetail() {
+    const view = this.view;
+    $("#lib-detail-title", view).textContent =
+      this.drill.title + " (" + this.drill.ids.length + ")";
+    const grid = $("#lib-detail-grid", view);
+    grid.innerHTML = "";
+    const T = $("#tpl-lib-tile", view).content.firstElementChild;
+    const photos = (this.data && this.data.photos) || {};
+    this.drill.ids.forEach((pid) => {
+      const node = T.cloneNode(true);
+      node.dataset.pid = pid;
+      const m = photos[pid] || {};
+      const link = $("[data-slot=link]", node);
+      link.href = "#/photo/" + pid;
+      const img = $("[data-slot=img]", node);
+      img.src = m.src || "";
+      img.alt = m.caption || pid;
+      $("[data-slot=cap]", node).textContent = m.caption || pid;
+      $("[data-slot=sub]", node).textContent = m.place || "Place unknown";
+      grid.appendChild(node);
+    });
+  },
+
+  openBurst(key) {
+    const sets = (this.albumByKey("bursts") || {}).sets || [];
+    const s = sets.find((x) => x.key === key);
+    if (!s) return;
+    this.drill = { kind: "burst", key: key, title: "Burst of " + s.count, ids: s.ids };
+    this.burstIdx = 0;
+    this.paintBurst();
+    this.paintMain();
+  },
+
+  paintBurst() {
+    const view = this.view;
+    const ids = this.drill.ids;
+    $("#burst-title", view).textContent = this.drill.title;
+    const strip = $("#burst-strip", view);
+    strip.innerHTML = "";
+    const photos = (this.data && this.data.photos) || {};
+    ids.forEach((pid, i) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.dataset.frame = String(i);
+      b.className = "w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 border-2 p-0";
+      const img = document.createElement("img");
+      img.src = (photos[pid] || {}).src || "";
+      img.alt = "";
+      img.loading = "lazy";
+      img.className = "w-full h-full object-cover";
+      b.appendChild(img);
+      strip.appendChild(b);
+    });
+    const sa = $("#burst-a", view);
+    const sb = $("#burst-b", view);
+    sa.innerHTML = "";
+    sb.innerHTML = "";
+    ids.forEach((pid, i) => {
+      [sa, sb].forEach((sel) => {
+        const o = document.createElement("option");
+        o.value = pid;
+        o.textContent = "Frame " + (i + 1) + " (" + pid + ")";
+        sel.appendChild(o);
+      });
+    });
+    if (ids[1]) sb.value = ids[1];
+    $("#burst-compare-out", view).textContent = "Pick two frames to compare them.";
+    this.burstFrame(Math.min(this.burstIdx, ids.length - 1));
+  },
+
+  burstFrame(i) {
+    const view = this.view;
+    const ids = this.drill.ids;
+    this.burstIdx = (i + ids.length) % ids.length;
+    const pid = ids[this.burstIdx];
+    const m = ((this.data && this.data.photos) || {})[pid] || {};
+    const img = $("#burst-main", view);
+    img.src = m.src || "";
+    img.alt = m.caption || pid;
+    const sets = (this.albumByKey("bursts") || {}).sets || [];
+    const s = sets.find((x) => x.key === this.drill.key);
+    const isCover = s && s.cover === pid;
+    $("#burst-tag", view).textContent = "Frame " + (this.burstIdx + 1) + " of " + ids.length +
+      (isCover ? " · Cover" : "");
+    $("#burst-dossier", view).href = "#/photo/" + pid;
+    Array.prototype.forEach.call($("#burst-strip", view).children, (t, k) => {
+      t.classList.toggle("border-secondary", k === this.burstIdx);
+      t.classList.toggle("border-transparent", k !== this.burstIdx);
+    });
+  },
+
+  burstPlayToggle() {
+    const view = this.view;
+    if (this.burstTimer) {
+      this.stopBurst();
+      return;
+    }
+    const btn = $("#burst-play", view);
+    btn.querySelector("span:last-child").textContent = "Pause";
+    this.burstTimer = setInterval(() => {
+      if (!view.isConnected) { this.stopBurst(); return; }
+      this.burstFrame(this.burstIdx + 1);
+    }, 500);
+  },
+
+  stopBurst() {
+    if (this.burstTimer) { clearInterval(this.burstTimer); this.burstTimer = null; }
+    if (this.view && this.view.isConnected) {
+      const btn = $("#burst-play", this.view);
+      if (btn) btn.querySelector("span:last-child").textContent = "Play frames";
+    }
+  },
+
+  async burstSetCover() {
+    const pid = this.drill.ids[this.burstIdx];
+    try {
+      await api("/api/bursts/" + encodeURIComponent(this.drill.key), {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cover: pid }),
+      });
+      await this.load(true);
+    } catch (e) {
+      if (this.view.isConnected) {
+        $("#burst-tag", this.view).textContent = String((e && e.message) || e);
+      }
+    }
+  },
+
+  async burstCompare() {
+    const view = this.view;
+    const out = $("#burst-compare-out", view);
+    out.textContent = "Comparing…";
+    try {
+      const r = await api("/api/compare", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ photo_a: $("#burst-a", view).value,
+          photo_b: $("#burst-b", view).value }),
+      });
+      if (!view.isConnected) return;
+      const n = (r.differences || []).length;
+      out.textContent = (r.answer || "") + (n ? " (" + n + " differences listed.)" : "");
+    } catch (e) {
+      if (!view.isConnected) return;
+      out.textContent = String((e && e.message) || e);
+    }
+  },
+
+  /* ----- queue ----- */
+
+  addFiles(files) {
+    const view = this.view;
+    Array.prototype.forEach.call(files || [], (f) => {
+      const row = { seq: ++this.qSeq, file: f, name: f.name || "photo.jpg",
+        size: f.size || 0, status: "queued", jobId: null, photoId: null,
+        stage: "", elapsed: null, error: "" };
+      if (row.size > 10 * 1024 * 1024) {
+        row.status = "error";
+        row.error = "Too large (" + fmtBytes(row.size) + "); 10 MB max.";
+      }
+      this.queue.push(row);
+    });
+    this.paintQueue();
+    this.pump();
+  },
+
+  paintQueue() {
+    const view = this.view;
+    const box = $("#lib-queue-list", view);
+    box.innerHTML = "";
+    const T = $("#tpl-queue-row", view).content.firstElementChild;
+    const counts = { queued: 0, working: 0, done: 0, error: 0 };
+    this.queue.forEach((f) => {
+      counts[f.status === "uploading" || f.status === "working" ? "working"
+        : (counts[f.status] == null ? "queued" : f.status)]++;
+      const node = T.cloneNode(true);
+      $("[data-slot=name]", node).textContent = f.name + " (" + fmtBytes(f.size) + ")";
+      $("[data-slot=icon]", node).textContent = f.status === "done" ? "check_circle"
+        : f.status === "error" ? "error"
+        : f.status === "queued" ? "hourglass_top" : "sync";
+      let sub = "Queued";
+      if (f.status === "uploading") sub = "Uploading…";
+      else if (f.status === "working") sub = (f.stage || "Working…") +
+        (f.elapsed != null ? " · " + Math.round(f.elapsed) + "s" : "");
+      else if (f.status === "done") sub = "Done — " + (f.photoId || "");
+      else if (f.status === "error") sub = f.error || "Failed";
+      $("[data-slot=sub]", node).textContent = sub;
+      const link = $("[data-slot=link]", node);
+      if (f.status === "done" && f.photoId) {
+        link.href = "#/photo/" + f.photoId;
+        link.classList.remove("hidden");
+      }
+      box.appendChild(node);
+    });
+    const n = this.queue.length;
+    $("#lib-queue-count", view).textContent = n
+      ? (counts.done + " done · " + counts.working + " working · " +
+        counts.queued + " queued · " + counts.error + " failed")
+      : "The queue is empty.";
+    if (!this.qTimer && this.queue.some((f) => f.status === "working")) {
+      this.qTimer = setInterval(() => this.pollQueue(), 2000);
+    }
+  },
+
+  pump() {
+    if (!this.view || !this.view.isConnected) return;
+    while (!this.qPaused && this.qActive < 2) {
+      const next = this.queue.find((f) => f.status === "queued");
+      if (!next) break;
+      this.launch(next);
+    }
+  },
+
+  async launch(f) {
+    f.status = "uploading";
+    this.qActive++;
+    this.paintQueue();
+    try {
+      const form = new FormData();
+      form.append("photo", f.file, f.name);
+      const data = await api("/api/upload", { method: "POST", body: form });
+      f.jobId = data.job_id;
+      f.photoId = data.photo_id;
+      f.status = "working";
+    } catch (e) {
+      f.status = "error";
+      let msg = String((e && e.message) || e);
+      if (msg.indexOf("demo code") !== -1) {
+        msg += " Enter it in the header field.";
+        this.qPaused = true;
+        $("#lib-pause", this.view).textContent = "Resume launching";
+      }
+      f.error = msg;
+      this.qActive--;
+      if (this.view.isConnected) {
+        this.paintQueue();
+        this.pump();
+        this.settleCheck();
+      }
+      return;
+    }
+    this.qActive--;
+    if (this.view.isConnected) {
+      this.paintQueue();
+      this.pump();
+    }
+  },
+
+  async pollQueue() {
+    const working = this.queue.filter((f) => f.status === "working");
+    if (!working.length) {
+      if (this.qTimer) { clearInterval(this.qTimer); this.qTimer = null; }
+      return;
+    }
+    for (const f of working) {
+      try {
+        const job = await api("/api/jobs/" + encodeURIComponent(f.jobId));
+        f.stage = job.stage || job.status || "";
+        f.elapsed = job.elapsed_seconds;
+        if (job.status === "done") {
+          f.status = "done";
+          f.photoId = (job.result && job.result.photo_id) || f.photoId;
+        } else if (job.status === "error") {
+          f.status = "error";
+          f.error = (job.error || "The job failed.") +
+            (job.stage ? " (during " + job.stage + ")" : "");
+        }
+      } catch (e) {
+        f.status = "error";
+        f.error = "Lost track of the job: " + String((e && e.message) || e);
+      }
+    }
+    if (!this.view.isConnected) return;
+    this.paintQueue();
+    this.settleCheck();
+  },
+
+  settleCheck() {
+    if (this.queue.length && this.queue.every((f) => f.status === "done" || f.status === "error")) {
+      this.load(true);
+    }
+  },
+
+  /* ----- manage ----- */
+
+  gotoManage(pid) {
+    this.mgrPid = pid;
+    this.showTab("manage");
+    this.paintManagePicker();
+    this.paintManagePhoto();
+  },
+
+  paintManagePicker() {
+    const view = this.view;
+    const sel = $("#lib-mgr-select", view);
+    sel.innerHTML = "";
+    const photos = (this.data && this.data.photos) || {};
+    Object.keys(photos).forEach((pid) => {
+      const o = document.createElement("option");
+      o.value = pid;
+      o.textContent = pid + " — " + (photos[pid].caption || "untitled");
+      sel.appendChild(o);
+    });
+    if (!this.mgrPid || !photos[this.mgrPid]) {
+      this.mgrPid = Object.keys(photos)[0] || null;
+    }
+    if (this.mgrPid) sel.value = this.mgrPid;
+    const n = Object.keys(photos).length;
+    $("#lib-delall-note", view).textContent = n
+      ? "This permanently deletes all " + n + " of your photos. This cannot be undone."
+      : "There is nothing to delete.";
+    this.paintManagePhoto();
+  },
+
+  paintManagePhoto() {
+    const view = this.view;
+    if (!view) return;
+    $("#lib-mgr-dossier", view).href = this.mgrPid ? "#/photo/" + this.mgrPid : "#/library";
+  },
+
+  async correct() {
+    const view = this.view;
+    const st = $("#lib-cor-status", view);
+    if (!this.mgrPid) {
+      st.textContent = "Choose a photo first.";
+      return;
+    }
+    st.textContent = "Saving…";
+    try {
+      const out = await api("/api/photo/" + encodeURIComponent(this.mgrPid) + "/correct", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          caption: $("#lib-cor-cap", view).value.trim(),
+          place_key: $("#lib-cor-key", view).value.trim(),
+          place_name: $("#lib-cor-name", view).value.trim(),
+          note: $("#lib-cor-note", view).value.trim(),
+        }),
+      });
+      if (!view.isConnected) return;
+      st.textContent = "Corrected: " + (out.corrected || []).join(", ") + "." +
+        (out.reembedded ? "" : " (Search entry kept; re-embed failed.)");
+      $("#lib-cor-cap", view).value = "";
+      $("#lib-cor-key", view).value = "";
+      $("#lib-cor-name", view).value = "";
+      $("#lib-cor-note", view).value = "";
+      this.load(true);
+    } catch (e) {
+      if (!view.isConnected) return;
+      let msg = String((e && e.message) || e);
+      if (msg.indexOf("demo code") !== -1) msg += " Enter it in the header field.";
+      st.textContent = msg;
+    }
+  },
+
+  async del() {
+    const view = this.view;
+    const btn = $("#lib-del-btn", view);
+    const st = $("#lib-del-status", view);
+    if (!this.mgrPid) {
+      st.textContent = "Choose a photo first.";
+      return;
+    }
+    if (!btn.dataset.armed) {
+      btn.dataset.armed = "1";
+      btn.textContent = "Click again to delete " + this.mgrPid;
+      return;
+    }
+    btn.dataset.armed = "";
+    btn.textContent = "Delete photo";
+    st.textContent = "Deleting…";
+    const pid = this.mgrPid;
+    try {
+      const out = await api("/api/photo/" + encodeURIComponent(pid), { method: "DELETE" });
+      if (!view.isConnected) return;
+      const d = out.deleted || {};
+      const bits = [];
+      if (d.db) bits.push("search entry");
+      if (d.file) bits.push("photo file");
+      if (d.annotation) bits.push("annotation");
+      st.textContent = "Deleted " + pid + " (" + (bits.join(", ") || "nothing found") + ").";
+      this.mgrPid = null;
+      this.drill = null;
+      this.load(true);
+    } catch (e) {
+      if (!view.isConnected) return;
+      let msg = String((e && e.message) || e);
+      if (msg.indexOf("demo code") !== -1) msg += " Enter it in the header field.";
+      st.textContent = msg;
+    }
+  },
+
+  async delAll() {
+    const view = this.view;
+    const btn = $("#lib-delall-btn", view);
+    const st = $("#lib-delall-status", view);
+    const n = Object.keys((this.data && this.data.photos) || {}).length;
+    if (!n) {
+      st.textContent = "There is nothing to delete.";
+      return;
+    }
+    if (!btn.dataset.armed) {
+      btn.dataset.armed = "1";
+      btn.textContent = "Click again to delete all " + n + " photos";
+      return;
+    }
+    btn.dataset.armed = "";
+    btn.textContent = "Delete everything";
+    st.textContent = "Deleting…";
+    try {
+      const out = await api("/api/photos/mine", { method: "DELETE" });
+      if (!view.isConnected) return;
+      const errs = Object.keys(out.errors || {}).length;
+      st.textContent = errs
+        ? ("Deleted " + out.deleted + "; " + errs + " failed.")
+        : ("Deleted all " + out.deleted + " photos.");
+      this.mgrPid = null;
+      this.drill = null;
+      this.load(true);
+    } catch (e) {
+      if (!view.isConnected) return;
+      let msg = String((e && e.message) || e);
+      if (msg.indexOf("demo code") !== -1) msg += " Enter it in the header field.";
+      st.textContent = msg;
+    }
+  },
+};
+
+/* ---------- world browse ---------- */
+const browse = {
+  view: null,
+  facets: null,
+  filters: null,
+  offset: 0,
+  total: 0,
+  gaps: null,
+  gapsShown: false,
+  qTimer: null,
+
+  mount(view) {
+    this.view = view;
+    this.facets = null;
+    this.filters = { q: "", place: "", theme: "", vp: "", people: "" };
+    this.offset = 0;
+    this.total = 0;
+    this.gaps = null;
+    this.gapsShown = false;
+    $("#br-q", view).addEventListener("input", (e) => {
+      if (this.qTimer) clearTimeout(this.qTimer);
+      this.qTimer = setTimeout(() => {
+        this.filters.q = e.target.value.trim();
+        this.search(true);
+      }, 400);
+    });
+    $("#br-place", view).addEventListener("change", (e) => {
+      this.filters.place = e.target.value;
+      this.search(true);
+    });
+    $("#br-themes", view).addEventListener("click", (e) => {
+      const b = e.target.closest("[data-theme]");
+      if (!b) return;
+      this.filters.theme = b.dataset.theme;
+      this.paintPills();
+      this.search(true);
+    });
+    $("#br-vps", view).addEventListener("click", (e) => {
+      const b = e.target.closest("[data-vp]");
+      if (!b) return;
+      this.filters.vp = b.dataset.vp;
+      this.paintPills();
+      this.search(true);
+    });
+    $("#br-people", view).addEventListener("click", (e) => {
+      const b = e.target.closest("[data-people]");
+      if (!b) return;
+      this.filters.people = b.dataset.people;
+      this.paintPills();
+      this.search(true);
+    });
+    $("#br-reset", view).addEventListener("click", () => {
+      this.filters = { q: "", place: "", theme: "", vp: "", people: "" };
+      $("#br-q", view).value = "";
+      $("#br-place", view).value = "";
+      this.paintPills();
+      this.search(true);
+    });
+    $("#br-more", view).addEventListener("click", () => this.search(false));
+    $("#br-surprise", view).addEventListener("click", () => this.surprise());
+    $("#br-gaps-toggle", view).addEventListener("click", () => this.toggleGaps());
+    $("#br-gaps", view).addEventListener("click", (e) => {
+      const a = e.target.closest("[data-gap-add]");
+      if (a) {
+        try {
+          sessionStorage.setItem("rw.pendingNote",
+            a.dataset.gapAdd === "first"
+              ? "First photo of " + a.dataset.place
+              : "Gap: " + a.dataset.gapAdd + " of " + a.dataset.place);
+        } catch (err) { /* private mode */ }
+        location.hash = "#/add";
+      }
+    });
+    this.search(true);
+  },
+
+  qs(extra) {
+    const f = this.filters;
+    const p = new URLSearchParams();
+    if (f.q) p.set("q", f.q);
+    if (f.place) p.set("place_key", f.place);
+    if (f.theme) p.set("theme", f.theme);
+    if (f.vp) p.set("viewpoint", f.vp);
+    if (f.people) p.set("people", f.people);
+    Object.keys(extra || {}).forEach((k) => p.set(k, extra[k]));
+    return p.toString();
+  },
+
+  async search(reset) {
+    const view = this.view;
+    if (reset) this.offset = 0;
+    $("#br-error", view).classList.add("hidden");
+    try {
+      const out = await api("/api/world?" + this.qs({ limit: 24, offset: this.offset }));
+      if (!view.isConnected) return;
+      this.total = out.total;
+      if (!this.facets) {
+        this.facets = out.facets;
+        this.paintFacets();
+      }
+      this.offset += (out.photos || []).length;
+      const grid = $("#br-grid", view);
+      if (reset) grid.innerHTML = "";
+      const T = $("#tpl-br-card", view).content.firstElementChild;
+      (out.photos || []).forEach((r) => {
+        const node = T.cloneNode(true);
+        node.href = "#/photo/" + r.photo_id;
+        const img = $("[data-slot=img]", node);
+        img.src = r.src;
+        img.alt = r.caption || r.photo_id;
+        $("[data-slot=cap]", node).textContent = r.caption || r.photo_id;
+        $("[data-slot=meta]", node).textContent =
+          (r.place || "Place unknown") + " · " + (VP_LABEL[r.viewpoint] || r.viewpoint || "");
+        $("[data-slot=credit]", node).textContent = r.credit && r.credit.author
+          ? "Photo: " + r.credit.author + (r.credit.license ? " · " + r.credit.license : "")
+          : "";
+        grid.appendChild(node);
+      });
+      $("#br-count", view).textContent =
+        this.total + (this.total === 1 ? " photo" : " photos") + " in the world archive";
+      $("#br-empty", view).classList.toggle("hidden", this.total > 0);
+      $("#br-more", view).classList.toggle("hidden", this.offset >= this.total);
+      const fx = out.facets || this.facets || {};
+      $("#br-stats", view).textContent =
+        this.total + " photos · " + ((fx.places || []).length) + " places · " +
+        ((fx.themes || []).length) + " themes";
+    } catch (e) {
+      if (!view.isConnected) return;
+      const box = $("#br-error", view);
+      box.textContent = String((e && e.message) || e);
+      box.classList.remove("hidden");
+    }
+  },
+
+  pill(parent, key, label, active) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.dataset[key] = label.key;
+    b.className = "min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all " +
+      (active ? "bg-primary-container text-surface shadow-sm"
+        : "bg-surface-container-high text-on-surface-variant hover:text-on-surface");
+    b.textContent = label.text;
+    parent.appendChild(b);
+  },
+
+  paintFacets() {
+    const view = this.view;
+    const fx = this.facets || {};
+    const sel = $("#br-place", view);
+    sel.innerHTML = "";
+    const all = document.createElement("option");
+    all.value = "";
+    all.textContent = "All places";
+    sel.appendChild(all);
+    (fx.places || []).forEach((p) => {
+      const o = document.createElement("option");
+      o.value = p.key;
+      o.textContent = p.name + " (" + p.count + ")";
+      sel.appendChild(o);
+    });
+    const th = $("#br-themes", view);
+    th.innerHTML = "";
+    this.pill(th, "theme", { key: "", text: "All themes" }, !this.filters.theme);
+    (fx.themes || []).forEach((t) => {
+      this.pill(th, "theme", { key: t.key, text: t.label + " (" + t.count + ")" },
+        this.filters.theme === t.key);
+    });
+    const vp = $("#br-vps", view);
+    vp.innerHTML = "";
+    this.pill(vp, "vp", { key: "", text: "Any viewpoint" }, !this.filters.vp);
+    (fx.viewpoints || []).forEach((v) => {
+      this.pill(vp, "vp", { key: v.key, text: (VP_LABEL[v.key] || v.key) + " (" + v.count + ")" },
+        this.filters.vp === v.key);
+    });
+    this.paintPills();
+  },
+
+  paintPills() {
+    const view = this.view;
+    const on = "min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all bg-primary-container text-surface shadow-sm";
+    const off = "min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all bg-surface-container-high text-on-surface-variant hover:text-on-surface";
+    $$("#br-themes [data-theme]", view).forEach((b) => {
+      b.className = b.dataset.theme === this.filters.theme ? on : off;
+    });
+    $$("#br-vps [data-vp]", view).forEach((b) => {
+      b.className = b.dataset.vp === this.filters.vp ? on : off;
+    });
+    $$("#br-people [data-people]", view).forEach((b) => {
+      b.className = b.dataset.people === this.filters.people ? on : off;
+    });
+  },
+
+  async surprise() {
+    const view = this.view;
+    if (!this.total) return;
+    const at = Math.floor(Math.random() * this.total);
+    try {
+      const out = await api("/api/world?" + this.qs({ limit: 1, offset: at }));
+      if (!view.isConnected) return;
+      if ((out.photos || []).length) location.hash = "#/photo/" + out.photos[0].photo_id;
+    } catch (e) {
+      if (!view.isConnected) return;
+      const box = $("#br-error", view);
+      box.textContent = String((e && e.message) || e);
+      box.classList.remove("hidden");
+    }
+  },
+
+  async toggleGaps() {
+    const view = this.view;
+    this.gapsShown = !this.gapsShown;
+    const box = $("#br-gaps", view);
+    $("#br-gaps-toggle", view).textContent =
+      this.gapsShown ? "Hide gaps in the archive" : "Show gaps in the archive";
+    box.classList.toggle("hidden", !this.gapsShown);
+    box.classList.toggle("flex", this.gapsShown);
+    if (!this.gapsShown || this.gaps) return;
+    try {
+      const out = await api("/api/gaps");
+      if (!view.isConnected) return;
+      this.gaps = out.gaps || [];
+      box.innerHTML = "";
+      if (!this.gaps.length) {
+        box.textContent = "No gaps found — every registered place is covered.";
+        return;
+      }
+      this.gaps.slice(0, 24).forEach((g) => {
+        const card = document.createElement("div");
+        card.className = "bg-surface-container-highest rounded-xl p-4 flex flex-col gap-2";
+        const nm = document.createElement("span");
+        nm.className = "font-label-lg text-label-lg text-on-surface font-bold";
+        nm.textContent = g.name;
+        const meta = document.createElement("span");
+        meta.className = "font-label-sm text-label-sm text-on-surface-variant";
+        meta.textContent = (g.type || "place") + " · " + g.count +
+          (g.count === 1 ? " photo" : " photos");
+        const miss = document.createElement("span");
+        miss.className = "font-body-sm text-body-sm text-on-surface";
+        miss.textContent = gapText(g);
+        const row = document.createElement("div");
+        row.className = "flex flex-wrap gap-2";
+        if (g.count) {
+          const pl = document.createElement("a");
+          pl.href = "#/place/" + g.key;
+          pl.className = "min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md inline-flex items-center";
+          pl.textContent = "Open place";
+          row.appendChild(pl);
+        }
+        const add = document.createElement("button");
+        add.type = "button";
+        add.dataset.gapAdd = g.count ? (g.missing || []).join(", ") : "first";
+        add.dataset.place = g.name;
+        add.className = "min-h-[44px] px-4 rounded-lg bg-primary-container text-surface hover:bg-primary font-label-md text-label-md transition-colors";
+        add.textContent = g.count ? "Add a photo to fill the gap" : "Add the first photo";
+        row.append(add, miss);
+        card.append(nm, meta, row);
+        box.appendChild(card);
+      });
+    } catch (e) {
+      if (!view.isConnected) return;
+      box.textContent = String((e && e.message) || e);
+    }
+  },
+};
+
+/* ---------- place page ---------- */
 const place = {
   view: null,
   key: null,
-  collection: "world",
-  VP_ORDER: ["ground_level", "elevated", "aerial", "interior", "water_level", "unknown"],
+  data: null,
+  coll: "world",
 
   mount(view, key) {
     this.view = view;
     this.key = key;
-    this.collection = "world";
-    $("#place-back", view).addEventListener("click", (e) => {
-      e.preventDefault();
-      if (window.history.length > 1) window.history.back();
-      else location.hash = "#/";
+    this.data = null;
+    this.coll = "world";
+    $("#pl-coll", view).addEventListener("click", (e) => {
+      const b = e.target.closest("[data-coll]");
+      if (!b || !this.data) return;
+      this.coll = b.dataset.coll;
+      this.render();
     });
-    $("#place-retry", view).addEventListener("click", () => this.load());
-    $$("#place-wrap [data-coll]", view).forEach((b) => b.addEventListener("click", () => {
-      this.collection = b.dataset.coll;
-      this.paintColl();
-      this.load();
-    }));
-    $("#place-groups", view).addEventListener("click", (e) => {
-      const c = e.target.closest("[data-target]");
-      if (c) location.hash = "#/photo/" + c.dataset.target;
+    const addNote = () => {
+      try {
+        sessionStorage.setItem("rw.pendingNote", "Photo of " + (this.data.name || this.key));
+      } catch (err) { /* private mode */ }
+      location.hash = "#/add";
+    };
+    $("#pl-add", view).addEventListener("click", addNote);
+    $("#pl-empty-add", view).addEventListener("click", () => {
+      try {
+        sessionStorage.setItem("rw.pendingNote", "First photo of " + (this.data.name || this.key));
+      } catch (err) { /* private mode */ }
+      location.hash = "#/add";
     });
-    this.paintColl();
     this.load();
-  },
-
-  paintColl() {
-    $$("#place-wrap [data-coll]", this.view).forEach((b) => {
-      const on = b.dataset.coll === this.collection;
-      b.className = on
-        ? "px-3 py-1.5 rounded text-xs font-semibold bg-papyrus-100 text-espresso-950 shadow-archival"
-        : "px-3 py-1.5 rounded text-xs font-semibold text-espresso-600 hover:text-espresso-950";
-    });
   },
 
   async load() {
     const view = this.view;
-    $("#place-loading", view).hidden = false;
-    $("#place-wrap", view).hidden = true;
-    $("#place-error", view).hidden = true;
-    $("#place-error", view).classList.add("hidden");
-    $("#place-error", view).classList.remove("flex");
+    $("#pl-loading", view).hidden = false;
+    $("#pl-main", view).hidden = true;
+    $("#pl-error", view).classList.add("hidden");
     try {
-      const data = await api("/api/place/" + this.key + "?collection=" + this.collection);
+      const data = await api("/api/place/" + this.key + "?collection=both");
       if (!view.isConnected) return;
-      this.render(data);
-      $("#place-loading", view).hidden = true;
-      $("#place-wrap", view).hidden = false;
+      this.data = data;
+      $("#pl-loading", view).hidden = true;
+      $("#pl-main", view).hidden = false;
+      this.render();
     } catch (e) {
       if (!view.isConnected) return;
-      $("#place-loading", view).hidden = true;
-      $("#place-error-text", view).textContent = String((e && e.message) || e);
-      const box = $("#place-error", view);
-      box.hidden = false;
+      $("#pl-loading", view).hidden = true;
+      const box = $("#pl-error", view);
+      box.textContent = String((e && e.message) || e);
       box.classList.remove("hidden");
-      box.classList.add("flex");
     }
   },
 
-  render(d) {
+  items() {
+    const d = this.data;
+    const out = [];
+    Object.keys(d.by_viewpoint || {}).forEach((vp) => {
+      (d.by_viewpoint[vp] || []).forEach((r) => {
+        if (r.collection === this.coll) out.push({ vp: vp, row: r });
+      });
+    });
+    return out;
+  },
+
+  render() {
     const view = this.view;
-    const T = (n) => $("#" + n, view).content.firstElementChild;
-    $("#place-name", view).textContent = d.name || d.key;
-    $("#place-type", view).textContent = d.type
-      ? d.type[0].toUpperCase() + d.type.slice(1) : "Place";
-    const al = $("#place-aliases", view);
-    if (d.aliases && d.aliases.length) {
-      al.textContent = "Also known as: " + d.aliases.join(", ");
-      al.classList.remove("hidden");
-    } else al.classList.add("hidden");
-    const crumbs = $("#place-crumbs", view);
+    const d = this.data;
+    const crumbs = $("#pl-crumbs", view);
     crumbs.innerHTML = "";
     (d.hierarchy || []).forEach((h, i, arr) => {
-      if (i > 0) {
+      if (i) {
         const sep = document.createElement("span");
-        sep.className = "text-outline-variant";
-        sep.textContent = "›";
+        sep.textContent = "/";
         crumbs.appendChild(sep);
       }
       if (i < arr.length - 1) {
@@ -4142,96 +5111,97 @@ const place = {
         crumbs.appendChild(a);
       } else {
         const s = document.createElement("span");
-        s.className = "font-semibold text-espresso-800";
+        s.className = "text-on-surface font-semibold";
         s.textContent = h.name || h.key;
         crumbs.appendChild(s);
       }
     });
-    const n = d.total_photos || 0;
-    $("#place-count", view).textContent =
-      n + (n === 1 ? " photo" : " photos") +
-      (this.collection === "world" ? " · World archive" : " · World + mine");
-    $("#place-onephoto", view).classList.toggle("hidden", n !== 1);
-    const empty = n === 0;
-    $("#place-empty", view).classList.toggle("hidden", !empty);
-    $("#place-empty", view).classList.toggle("flex", empty);
-    ["#place-groups", "#place-side", "#place-rel-wrap"].forEach((sel) => {
-      $(sel, view).classList.toggle("hidden", empty);
+    $("#pl-name", view).textContent = d.name || d.key;
+    const mine = Object.keys(d.by_viewpoint || {}).reduce((t, vp) =>
+      t + (d.by_viewpoint[vp] || []).filter((r) => r.collection === "personal").length, 0);
+    const world = Object.keys(d.by_viewpoint || {}).reduce((t, vp) =>
+      t + (d.by_viewpoint[vp] || []).filter((r) => r.collection === "world").length, 0);
+    $$("#pl-coll [data-coll]", view).forEach((b) => {
+      const on = b.dataset.coll === this.coll;
+      b.className = "min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all " +
+        (on ? "bg-primary-container text-surface shadow-sm"
+          : "text-on-surface-variant hover:text-on-surface");
+      b.textContent = b.dataset.coll === "world" ? "World (" + world + ")" : "Mine (" + mine + ")";
     });
-    if (empty) return;
-    /* Viewpoint groups. */
-    const box = $("#place-groups", view);
-    box.innerHTML = "";
-    const groups = d.by_viewpoint || {};
-    this.VP_ORDER.filter((vp) => (groups[vp] || []).length).forEach((vp) => {
-      const sec = T("tpl-pgroup").cloneNode(true);
-      $("[data-slot=title]", sec).textContent = VP_LABEL[vp] || "Unknown view";
-      const items = groups[vp];
-      $("[data-slot=count]", sec).textContent =
-        items.length + (items.length === 1 ? " photo" : " photos");
-      const cards = $("[data-slot=cards]", sec);
-      items.forEach((item) => {
-        const card = T("tpl-pcard").cloneNode(true);
-        card.dataset.target = item.photo_id;
-        const img = $("[data-slot=img]", card);
-        img.src = item.src || "";
-        img.alt = item.caption || item.photo_id;
-        img.addEventListener("error", () => img.setAttribute("data-broken", "true"));
-        $("[data-slot=caption]", card).textContent = item.caption || item.photo_id;
-        $("[data-slot=pid]", card).textContent = item.photo_id;
-        $("[data-slot=coll]", card).textContent =
-          item.collection === "personal" ? "Mine" : "World";
-        cards.appendChild(card);
+    const shown = this.items();
+    const vps = {};
+    shown.forEach((it) => {
+      vps[it.vp] = vps[it.vp] || [];
+      vps[it.vp].push(it.row);
+    });
+    const order = ["ground_level", "elevated", "aerial", "interior", "water_level", "unknown"];
+    const vpsHere = order.filter((v) => vps[v]);
+    $("#pl-meta", view).textContent = shown.length +
+      (shown.length === 1 ? " photo" : " photos") + " · " + vpsHere.length +
+      (vpsHere.length === 1 ? " viewpoint" : " viewpoints") +
+      (d.type ? " · " + d.type : "");
+    const secs = $("#pl-sections", view);
+    secs.innerHTML = "";
+    const T = $("#tpl-pl-section", view).content.firstElementChild;
+    const TP = $("#tpl-pl-plate", view).content.firstElementChild;
+    vpsHere.forEach((vp) => {
+      const sec = T.cloneNode(true);
+      $("[data-slot=title]", sec).textContent = VP_LABEL[vp] || vp;
+      $("[data-slot=count]", sec).textContent = vps[vp].length +
+        (vps[vp].length === 1 ? " photo" : " photos");
+      const grid = $("[data-slot=grid]", sec);
+      vps[vp].forEach((r) => {
+        const node = TP.cloneNode(true);
+        node.href = "#/photo/" + r.photo_id;
+        const img = $("[data-slot=img]", node);
+        img.src = r.src;
+        img.alt = r.caption || r.photo_id;
+        $("[data-slot=cap]", node).textContent = r.caption || r.photo_id;
+        const mineTag = $("[data-slot=credit]", node);
+        if (r.collection === "personal") mineTag.textContent = "Your photo";
+        else mineTag.classList.add("hidden");
+        grid.appendChild(node);
       });
-      box.appendChild(sec);
+      secs.appendChild(sec);
     });
-    /* Signs. */
-    const signs = d.signs || [];
-    const sBox = $("#place-signs", view);
-    sBox.innerHTML = "";
-    signs.forEach((s) => {
-      const li = document.createElement("li");
-      li.className = "flex items-center justify-between gap-3 font-mono text-xs text-espresso-900";
-      const t = document.createElement("span");
-      t.className = "truncate";
-      t.textContent = "“" + s.text + "”";
-      const c = document.createElement("span");
-      c.className = "text-[11px] text-espresso-600 whitespace-nowrap font-sans font-semibold";
-      c.textContent = "in " + s.photos + (s.photos === 1 ? " photo" : " photos");
-      li.append(t, c);
-      sBox.appendChild(li);
+    const sg = $("#pl-signs", view);
+    sg.innerHTML = "";
+    (d.signs || []).forEach((s) => {
+      const p = document.createElement("p");
+      p.className = "font-body-sm text-body-sm text-on-surface";
+      p.textContent = "\u201c" + s.text + "\u201d — read in " + s.photos +
+        (s.photos === 1 ? " photo" : " photos");
+      sg.appendChild(p);
     });
-    $("#place-signs-empty", view).classList.toggle("hidden", signs.length > 0);
-    /* Credits. */
-    const credits = d.credits || [];
-    const cBox = $("#place-credits", view);
-    cBox.innerHTML = "";
-    credits.forEach((c) => {
-      const li = document.createElement("li");
-      li.className = "text-xs text-espresso-800";
-      li.appendChild(creditLine({ author: c.author, license: c.license,
-                                  source_url: c.source_url }));
-      cBox.appendChild(li);
+    $("#pl-signs-wrap", view).classList.toggle("hidden", !(d.signs || []).length);
+    const cr = $("#pl-credits", view);
+    cr.innerHTML = "";
+    (d.credits || []).forEach((c) => {
+      const p = document.createElement("p");
+      p.className = "font-body-sm text-body-sm text-on-surface-variant";
+      p.textContent = "Photo: " + (c.author || "Unknown") +
+        (c.license ? " · " + c.license : "");
+      cr.appendChild(p);
     });
-    $("#place-credits-empty", view).classList.toggle("hidden", credits.length > 0);
-    /* Related places. */
-    const rel = d.related || [];
-    const rBox = $("#place-related", view);
-    rBox.innerHTML = "";
-    rel.forEach((r) => {
+    $("#pl-credits-wrap", view).classList.toggle("hidden", !(d.credits || []).length);
+    const rel = $("#pl-related", view);
+    rel.innerHTML = "";
+    (d.related || []).slice(0, 24).forEach((r) => {
       const a = document.createElement("a");
       a.href = "#/place/" + r.key;
-      a.className = "inline-flex items-center gap-1.5 h-8 px-3 rounded-lg bg-papyrus-200 border border-parchment-border text-espresso-900 font-semibold text-xs hover:bg-papyrus-300 transition-colors";
-      const nm = document.createElement("span");
-      nm.textContent = r.name || r.key;
-      const ct = document.createElement("span");
-      ct.className = "text-espresso-600 font-mono text-[11px]";
-      ct.textContent = "×" + r.photos;
-      a.append(nm, ct);
-      a.title = "Linked via " + (r.via || []).join(" + ");
-      rBox.appendChild(a);
+      a.className = "inline-flex items-center gap-1.5 min-h-[44px] px-3 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm";
+      a.textContent = (r.name || r.key) + " ×" + r.photos;
+      rel.appendChild(a);
     });
-    $("#place-rel-empty", view).classList.toggle("hidden", rel.length > 0);
+    $("#pl-rel-wrap", view).classList.toggle("hidden", !(d.related || []).length);
+    const empty = !shown.length;
+    $("#pl-empty", view).classList.toggle("hidden", !empty);
+    $("#pl-empty", view).classList.toggle("flex", empty);
+    if (empty) {
+      $("#pl-empty-text", view).textContent = this.coll === "mine"
+        ? "You have no photos of this place yet."
+        : "No photos of this place yet.";
+    }
   },
 };
 
@@ -5312,6 +6282,7 @@ async function route() {
   if (add.pollTimer) { clearInterval(add.pollTimer); add.pollTimer = null; }
   player.destroy();
   builder.cancelExport();
+  library.destroy();
   if (hash.startsWith("#/place/")) {
     const key = decodeURIComponent(hash.slice("#/place/".length));
     setActiveTab("");
@@ -5383,14 +6354,24 @@ async function route() {
   }
   if (hash === "#/browse") {
     setActiveTab("browse");
-    stubView("Browse the world collection", "5",
-      "Filtered browsing of the public cadastre arrives in Phase 5.");
+    try {
+      const html = await loadView("browse");
+      $("#view").innerHTML = html;
+      browse.mount($("#view"));
+    } catch (e) {
+      showErrorView(String((e && e.message) || e), () => route());
+    }
     return;
   }
   if (hash === "#/library") {
     setActiveTab("");
-    stubView("My Photos library", "5",
-      "Smart albums, the upload queue and photo management arrive in Phase 5.");
+    try {
+      const html = await loadView("library");
+      $("#view").innerHTML = html;
+      library.mount($("#view"));
+    } catch (e) {
+      showErrorView(String((e && e.message) || e), () => route());
+    }
     return;
   }
   if (hash === "#/showcase") {

@@ -1,0 +1,80 @@
+<!-- World collection browse + gaps. Follows
+     world_public_photographic_cadastre and world_gaps_in_the_cadastre.
+     Removed: section refs, edge pills, fake counts, cadastre refs,
+     elevations/permissions/ledger prose, urgency scores, typology
+     sort, survey dates. Counts, facets and gaps all come from the
+     live collection. -->
+<section class="flex flex-col gap-4 mb-6">
+<div class="bg-surface-container-low p-6 rounded-xl shadow-sm flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+<div class="flex flex-col gap-2 max-w-2xl">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Archival Ledger · Field Station</span>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">The world photographic archive</h1>
+<p class="font-body-md text-body-md text-on-surface-variant" id="br-stats">—</p>
+</div>
+<div class="flex flex-wrap items-center gap-2">
+<a class="min-h-[44px] px-5 py-2.5 rounded bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-lg text-label-lg inline-flex items-center gap-2 shadow-sm active:scale-95" href="#/library">
+<span class="material-symbols-outlined text-[18px]">photo_library</span>
+<span>My Photos</span>
+</a>
+<button class="min-h-[44px] px-5 py-2.5 rounded bg-primary-container text-surface hover:bg-primary font-label-lg text-label-lg inline-flex items-center gap-2 shadow-sm active:scale-95" id="br-surprise" type="button">
+<span class="material-symbols-outlined text-[18px]">casino</span>
+<span>Surprise me</span>
+</button>
+</div>
+</div>
+</section>
+<div class="flex-col gap-6" id="br-main">
+<div class="bg-surface-container-low rounded-xl p-5 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider font-semibold">Filters</span>
+<button class="font-label-sm text-label-sm text-on-tertiary-container hover:underline min-h-[44px] px-2" id="br-reset" type="button">Reset all</button>
+</div>
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-outline">search</span>
+<input autocomplete="off" class="w-full pl-9 pr-3 py-2.5 min-h-[44px] rounded-lg bg-surface-container-highest text-on-surface placeholder:text-on-surface-variant/70 font-body-md text-body-md focus:outline-none" id="br-q" placeholder="Search captions and places…" type="text"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Place</span>
+<select aria-label="Filter by place" class="min-h-[44px] px-3 rounded-lg bg-surface-container-highest text-on-surface font-body-md text-body-md focus:outline-none w-full sm:w-auto sm:min-w-[280px]" id="br-place"></select>
+</div>
+<div class="flex flex-col gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Theme</span>
+<div class="flex flex-wrap gap-2" id="br-themes"></div>
+</div>
+<div class="flex flex-col gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Viewpoint</span>
+<div class="flex flex-wrap gap-2" id="br-vps"></div>
+</div>
+<div class="flex flex-col gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">People</span>
+<div class="flex flex-wrap gap-2" id="br-people">
+<button class="min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all" data-people="" type="button">Any</button>
+<button class="min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all" data-people="yes" type="button">With people</button>
+<button class="min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all" data-people="no" type="button">No people</button>
+</div>
+</div>
+<button class="font-label-md text-label-md text-on-tertiary-container hover:underline w-fit min-h-[44px]" id="br-gaps-toggle" type="button">Show gaps in the archive</button>
+<div class="hidden flex-col gap-3" id="br-gaps"></div>
+</div>
+<div class="hidden font-body-md text-body-md text-error" id="br-error" role="alert"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant" id="br-count">—</span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4" id="br-grid"></div>
+<div class="hidden bg-surface-container-low rounded-xl p-6 text-center font-body-md text-body-md text-on-surface-variant" id="br-empty">No world photos match these filters.</div>
+<div class="flex justify-center">
+<button class="hidden min-h-[44px] px-6 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md transition-colors" id="br-more" type="button">Show more</button>
+</div>
+</div>
+<template id="tpl-br-card">
+<a class="bg-surface-container-low rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col" data-slot="link" href="#">
+<div class="relative w-full aspect-[4/3] bg-surface-container-high">
+<img alt="" class="rw-photo w-full h-full object-cover" data-slot="img" loading="lazy"/>
+</div>
+<div class="p-3 flex flex-col gap-0.5">
+<p class="font-body-sm text-body-sm text-on-surface leading-snug" data-slot="cap">—</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant truncate" data-slot="meta">—</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant truncate" data-slot="credit">—</p>
+</div>
+</a>
+</template>

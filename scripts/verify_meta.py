@@ -116,6 +116,67 @@ def main():
         return {"linked": r.get("linked"), "kinds": r.get("kinds"),
                 "text": cut(r.get("text") or "")}
 
+    def demo_request():
+        from fastapi import Request
+        import os as _os
+        code = _os.getenv("DEMO_CODE", "")
+        headers = [(b"x-demo-code", code.encode())] if code else []
+        return Request({"type": "http", "method": "POST", "path": "/",
+                        "headers": headers, "query_string": b""})
+
+    def do_albums():
+        r = api_mod.albums()
+        return {"count": r.get("count"),
+                "albums": [a["key"] for a in r.get("albums") or []]}
+
+    def do_world():
+        r = api_mod.world(limit=5)
+        fx = r.get("facets") or {}
+        return {"total": r.get("total"),
+                "themes": len(fx.get("themes") or []),
+                "places": len(fx.get("places") or [])}
+
+    def do_gaps():
+        r = api_mod.gaps()
+        return {"count": r.get("count")}
+
+    def do_correct_guard():
+        from fastapi import HTTPException
+        try:
+            api_mod.correct_photo("landmarks_003",
+                                  api_mod.CorrectRequest(caption="x"),
+                                  demo_request())
+        except HTTPException as e:
+            if e.status_code in (400, 403):
+                return {"blocked": e.status_code}
+            raise
+        raise RuntimeError("world correction was NOT blocked")
+
+    def do_delete_guard():
+        from fastapi import HTTPException
+        try:
+            api_mod.delete_photo("landmarks_003", demo_request())
+        except HTTPException as e:
+            if e.status_code in (400, 403):
+                return {"blocked": e.status_code}
+            raise
+        raise RuntimeError("world delete was NOT blocked")
+
+    def do_export():
+        import asyncio
+        r = api_mod.export_mine()
+        chunks = []
+
+        async def drain():
+            async for c in r.body_iterator:
+                chunks.append(c if isinstance(c, (bytes, bytearray)) else str(c).encode())
+
+        asyncio.run(drain())
+        blob = b"".join(chunks)
+        if blob[:2] != b"PK":
+            raise RuntimeError("export is not a zip")
+        return {"bytes": len(blob)}
+
     def do_stories():
         c = api_mod.stories_create(api_mod.StoryCreateRequest(
             title="Verifier story", photo_ids=["landmarks_003", "market_018"]))
@@ -150,6 +211,12 @@ def main():
     step(report, "self", do_self)
     step(report, "explain", do_explain)
     step(report, "stories", do_stories)
+    step(report, "albums", do_albums)
+    step(report, "world", do_world)
+    step(report, "gaps", do_gaps)
+    step(report, "correct_guard", do_correct_guard)
+    step(report, "delete_guard", do_delete_guard)
+    step(report, "export", do_export)
     if QUICK:
         report["steps"]["story"] = {"ok": True, "seconds": 0, "detail": "skipped (--quick)"}
         print("[ok] story (skipped --quick)")
