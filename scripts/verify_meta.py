@@ -98,6 +98,12 @@ def main():
         return {"differences": len(r.get("differences") or []),
                 "answer": cut(r.get("answer") or "")}
 
+    def do_outline():
+        r = api_mod.api_outline(api_mod.OutlineRequest(photo_id="landmarks_003",
+                                                       prompt="tower"))
+        return {"count": r.get("count"), "model": r.get("model"),
+                "first": cut((r.get("matches") or [{}])[0])}
+
     def do_story():
         r = api_mod.story(api_mod.StoryRequest(theme="markets", collection="world"))
         ch = r.get("chapters") or []
@@ -110,6 +116,7 @@ def main():
     step(report, "answer", do_answer)
     step(report, "ask", do_ask)
     step(report, "compare", do_compare)
+    step(report, "outline", do_outline)
     if QUICK:
         report["steps"]["story"] = {"ok": True, "seconds": 0, "detail": "skipped (--quick)"}
         print("[ok] story (skipped --quick)")

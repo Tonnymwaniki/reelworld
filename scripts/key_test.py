@@ -1,8 +1,10 @@
 """Probe the Meta Model API (dev.meta.ai key) at api.meta.ai.
 
-1. GET /v1/models  -> proves auth, lists real model ids.
-2. Tiny chat completion on the Muse Spark model (auto-picked from the
+1. GET /v1/models  -> informational only (this API answers 404: no list endpoint).
+2. Chat completion proving key + base + model (auto-picked from the
    list when the configured id is absent).
+Muse reasons before answering, against the same token budget: minimal
+effort + 1024 tokens keep small probes visible (length + null = starved).
 Reads META_API_KEY from .env. Never prints the key. Stdlib only.
 
 Run from the project root:
@@ -67,7 +69,8 @@ if ids and model not in ids:
 st, body = call("POST", "/chat/completions",
                 {"model": pick,
                  "messages": [{"role": "user", "content": "say ok"}],
-                 "max_tokens": 10})
+                 "max_tokens": 1024,
+                 "reasoning_effort": "minimal"})
 print("chat: HTTP", st)
 if st == 200:
     try:
@@ -80,6 +83,7 @@ if st == 200:
         if content:
             print("reply:", str(content).strip()[:200])
         else:
+            print("finish:", (out.get("choices") or [{}])[0].get("finish_reason"))
             print("message keys:", sorted(msg.keys()))
             print("raw:", body[:600])
     except ValueError:

@@ -58,7 +58,7 @@ import annotate as annotate_mod
 import chat as chat_module
 import place_pass as place_pass_mod
 from chat import (ANSWER_PROMPT, EMPTY_SPEC, PARSER_BASE_URL, PARSER_KEY, PARSER_MODEL,
-                  Engine, extract_json)
+                  Engine, extract_json, chat_create)
 from retrieval import meta_for, score_against, search_text
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -139,6 +139,11 @@ _llm = None
 _clients_lock = threading.Lock()
 
 
+def _msg_text(msg):
+    """Chat message text, tolerating reasoning-style null content."""
+    return msg.content or getattr(msg, "reasoning_content", None) or ""
+
+
 def get_sb():
     """Shared Supabase client for the /api/* read endpoints."""
     global _sb
@@ -227,7 +232,7 @@ def health():
 
 DEMO_MODE = os.getenv("DEMO_MODE", "true").strip().lower() == "true"
 DEMO_CODE = os.getenv("DEMO_CODE", "")
-FEATURE_OUTLINES = os.getenv("FEATURE_OUTLINES", "false").strip().lower() == "true"
+FEATURE_OUTLINES = os.getenv("FEATURE_OUTLINES", "true").strip().lower() == "true"
 ENABLE_SWAHILI = os.getenv("ENABLE_SWAHILI", "false").strip().lower() == "true"
 
 
@@ -482,16 +487,48 @@ class OutlineRequest(BaseModel):
     prompt: Optional[str] = None
 
 
-@app.post("/api/outline", status_code=501)
+@app.post("/api/outline")
 def api_outline(req: OutlineRequest):
-    """Subject outlines (SAM): deferred until Meta's endpoint docs arrive.
+    """Subject outlines via SAM 3.1 (Meta Model API)."""
 
-    The Meta API key is configured, but without verified endpoint docs the
-    backend cannot call it yet. See docs/deferred.md."""
+
+
     if not FEATURE_OUTLINES:
         raise HTTPException(status_code=501, detail="Outlines are not enabled (FEATURE_OUTLINES=false).")
-    raise HTTPException(status_code=501,
-                        detail="Outlines are enabled but the segmentation endpoint is not configured yet.")
+    from sam import SAM_MODEL, meta_key, outline_request
+    if not meta_key():
+        raise HTTPException(status_code=501, detail="Outlines need META_API_KEY in .env.")
+    pid = req.photo_id.strip()
+    try:
+        rows = (get_sb().table("photos").select("record,file")
+                .eq("photo_id", pid).execute().data or [])
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"photo lookup failed: {e}")
+    if not rows:
+        raise HTTPException(status_code=404, detail="I could not find that photo.")
+    prompt = (req.prompt or "").strip()
+    if not prompt:
+        try:
+            ents = (rows[0]["record"].get("observed") or {}).get("entities") or []
+            prompt = (ents[0].get("label") or "") if ents else ""
+        except (AttributeError, IndexError, KeyError):
+            prompt = ""
+    if not prompt:
+        raise HTTPException(status_code=400, detail="prompt is required (no entity label to default to).")
+    f = rows[0].get("file") or ""
+    p = Path(f) if os.path.isabs(f) else ROOT / f
+    try:
+        photo_bytes = p.read_bytes()
+    except OSError:
+        raise HTTPException(status_code=502, detail="photo file is missing on disk.")
+    mime = "image/png" if str(p).lower().endswith(".png") else "image/jpeg"
+    try:
+        matches, _raw = outline_request(photo_bytes, mime, prompt)
+    except RuntimeError as e:
+        raise HTTPException(status_code=502, detail=str(e))
+    return {"photo_id": pid, "prompt": prompt, "model": SAM_MODEL,
+            "count": len(matches), "matches": matches}
+
 
 
 TOUR_STEPS = ("step1", "step2", "step3")
@@ -749,13 +786,13 @@ def ask(req: AskRequest):
     rec = rows[0]["record"]
     compact = _compact_record(rec)
     try:
-        resp = get_llm().chat.completions.create(
+        resp = chat_create(get_llm(), 
             model=PARSER_MODEL, temperature=0.1, max_tokens=3000,
             messages=[{"role": "user", "content": ANSWER_PROMPT.format(
                 record=json.dumps(compact, ensure_ascii=False), question=req.question)}])
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"answer failed: {e}")
-    answer = (resp.choices[0].message.content or "").strip()
+    answer = _msg_text(resp.choices[0].message).strip()
     if not any(p in answer.lower() for p in ANNOTATION_MISS):
         return {"photo_id": pid, "question": req.question, "answer": answer,
                 "source": "annotation", "note": None,
@@ -779,8 +816,7 @@ def ask(req: AskRequest):
                 {"type": "image_url", "image_url": {"url": f"data:{mime};base64,{b64}"}},
             ]}])
     except Exception as e:
-        raise HTTPException(status_code=502, detail=f"image look failed: {e}")
-    img_answer = " ".join((resp.choices[0].message.content or "").strip().split()[:120])
+        raise HTTPException(status_code=502, detail=f"image look failed: {e}")    img_answer = " ".join(_msg_text(resp.choices[0].message).strip().split()[:120])
     return {"photo_id": pid, "question": req.question, "answer": img_answer,
             "source": "image", "note": "This answer came from looking at the photo again.",
             "trace": [{"step": "reinspected",
@@ -807,7 +843,7 @@ def compare(req: CompareRequest):
     rec_a = _record_or_404(req.photo_a)
     rec_b = _record_or_404(req.photo_b)
     try:
-        resp = get_llm().chat.completions.create(
+        resp = chat_create(get_llm(), 
             model=PARSER_MODEL, temperature=0.1, max_tokens=8000,
             messages=[{"role": "user", "content": COMPARE_PROMPT.format(
                 photo_a=req.photo_a,
@@ -818,7 +854,7 @@ def compare(req: CompareRequest):
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"compare failed: {e}")
     try:
-        data = extract_json(resp.choices[0].message.content or "")
+        data = extract_json(_msg_text(resp.choices[0].message))
     except Exception:
         raise HTTPException(status_code=502, detail="compare failed: bad model reply.")
     diffs = []
@@ -985,10 +1021,10 @@ def _llm_json(prompt, temperature, max_tokens, tries=3):
     last = None
     for attempt in range(tries):
         try:
-            resp = get_llm().chat.completions.create(
+            resp = chat_create(get_llm(), 
                 model=PARSER_MODEL, temperature=temperature, max_tokens=max_tokens,
                 messages=[{"role": "user", "content": prompt}])
-            return extract_json(resp.choices[0].message.content or "")
+            return extract_json(_msg_text(resp.choices[0].message))
         except Exception as e:
             last = e
             time.sleep(2 * (attempt + 1))

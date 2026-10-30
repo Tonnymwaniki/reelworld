@@ -27,8 +27,8 @@ Run from the project root:
 
 Optional: use another model for understanding messages (for example Meta's own
 API) by setting PARSER_BASE_URL, PARSER_KEY_ENV and PARSER_MODEL in .env.
-With none set, the Meta Llama API is used when META_API_BASE_URL (or
-LLAMA_API_BASE), LLAMA_WONDER_MODEL and META_API_KEY are all configured;
+With none set, the Meta Model API is used when META_API_BASE_URL (or
+LLAMA_API_BASE), META_API_MODEL (or LLAMA_WONDER_MODEL) and META_API_KEY are all set;
 otherwise Baseten Muse Spark. A key pointer to a placeholder is ignored.
 See resolve_parser() for the exact precedence.
 
@@ -58,6 +58,11 @@ def _env_or(name, default):
     return v
 
 
+def _msg_text(msg):
+    """Chat message text, tolerating reasoning-style null content."""
+    return msg.content or getattr(msg, "reasoning_content", None) or ""
+
+
 def _key_ok(name):
     """True when the named env var holds a real key (not empty/placeholder)."""
     v = (os.getenv(name) or "").strip()
@@ -68,7 +73,7 @@ def resolve_parser():
     """Pick (base_url, key_env_name, model) for all LLM reasoning.
 
     Explicit PARSER_* wins (set all three to pin a backend). Otherwise the
-    Meta Llama API is used when fully configured, else Baseten Muse Spark.
+    Meta Model API is used when fully configured, else Baseten Muse Spark.
     A key pointer to a placeholder value is ignored, never used.
     """
     base = _env_or("PARSER_BASE_URL", None)
@@ -79,10 +84,10 @@ def resolve_parser():
     if base or key_env or model:
         base = base or "https://inference.baseten.co/v1"
         if not key_env:
-            key_env = "META_API_KEY" if "llama.com" in base else "BASETEN_API_KEY"
+            key_env = ("META_API_KEY" if ("llama.com" in base or "meta.ai" in base) else "BASETEN_API_KEY")
         return (base, key_env, model or "meta-models/muse-spark-open-1026")
     meta_base = _env_or("META_API_BASE_URL", _env_or("LLAMA_API_BASE", None))
-    meta_model = _env_or("LLAMA_WONDER_MODEL", None)
+    meta_model = _env_or("META_API_MODEL", _env_or("LLAMA_WONDER_MODEL", None))
     if meta_base and meta_model and _key_ok("META_API_KEY"):
         return (meta_base, "META_API_KEY", meta_model)
     return ("https://inference.baseten.co/v1", "BASETEN_API_KEY",
@@ -90,7 +95,27 @@ def resolve_parser():
 
 
 PARSER_BASE_URL, _PARSER_KEY_ENV, PARSER_MODEL = resolve_parser()
-PARSER_KEY = os.environ[_PARSER_KEY_ENV]
+PARSER_KEY = os.environ[_PARSER_KEY_ENV]
+
+
+def chat_kwargs():
+    """Extra create() kwargs for the configured parser backend.
+
+    api.meta.ai models reason before answering and count that against
+    the token budget; minimal effort keeps small budgets usable.
+    Other backends get no extra kwargs.
+    """
+    if "meta.ai" in resolve_parser()[0]:
+        return {"extra_body": {"reasoning_effort": "minimal"}}
+    return {}
+
+
+def chat_create(client, **kw):
+    """client.chat.completions.create plus chat_kwargs()."""
+    extra = chat_kwargs().get("extra_body")
+    if extra:
+        kw["extra_body"] = {**extra, **kw.get("extra_body", {})}
+    return client.chat.completions.create(**kw)
 
 
 
@@ -105,6 +130,42 @@ COLL_FROM = {"world": "the world archive", "personal": "your photos",
              "both": "your photos and the world archive"}
 
 
+SOCIAL_CORE = {
+    "thanks": {"thanks", "thank"},
+    "greeting": {"hello", "hi", "hey", "morning", "afternoon", "evening"},
+    "bye": {"bye", "goodbye", "night"},
+    "ack": {"ok", "okay", "wow", "oh", "nice", "great", "awesome", "cool",
+            "perfect", "lovely", "wonderful", "amazing", "excellent", "good",
+            "yay", "haha", "ha", "lol"},
+}
+SOCIAL_FILLER = {"you", "so", "much", "many", "very", "reel", "there", "a",
+                 "lot", "indeed", "well", "just", "really"}
+_SOCIAL_VOCAB = SOCIAL_FILLER | {w for core in SOCIAL_CORE.values() for w in core}
+SOCIAL_REPLY = {
+    "thanks": "You're welcome \u2014 tell me what to look for next.",
+    "greeting": "Hello \u2014 describe a photo and I'll search the archive for it.",
+    "bye": "Goodbye for now \u2014 your photos stay private here.",
+    "ack": "Noted \u2014 tell me what to change, or describe a new photo.",
+}
+
+
+def social_reply(message):
+    """Reply text for social-only messages, else None (pure function).
+
+    Only matches when EVERY word is small talk; anything substantive
+    ("thanks, now from above") returns None so the turn searches.
+    """
+    words = re.sub(r"[^a-z ]", " ", (message or "").lower()).split()
+    if not words:
+        return None
+    if any(w not in _SOCIAL_VOCAB for w in words):
+        return None
+    for intent, core in SOCIAL_CORE.items():
+        if any(w in core for w in words):
+            return SOCIAL_REPLY[intent]
+    return None
+
+
 def spec_words(spec):
     """The parsed spec in plain words, for the understood trace step."""
     bits = []
@@ -237,10 +298,10 @@ class Engine:
 
     def ask(self, prompt, max_tokens=6000):
         print("(thinking ...)", flush=True)
-        resp = self.llm.chat.completions.create(
+        resp = chat_create(self.llm,
             model=PARSER_MODEL, temperature=0.1, max_tokens=max_tokens,
             messages=[{"role": "user", "content": prompt}])
-        return resp.choices[0].message.content or ""
+        return _msg_text(resp.choices[0].message)
 
     def embed(self, text):
         v = np.array(next(iter(self.embedder.query_embed(text))), dtype="float32")
@@ -409,6 +470,15 @@ class Engine:
             yield ("result", {"text": f"Focused on {st['focus']['photo_id']}: {st['focus']['caption']}", "results": [], "kind": "ok", "trace": trace})
             return
 
+        soc = social_reply(message)
+        if soc is not None:
+            detail = "That message was small talk, not a search, so I just replied."
+            trace.append({"step": "answered", "detail": detail})
+            yield ("step", "understood", detail)
+            yield ("step", "wrote", "Reply ready.")
+            yield ("result", {"text": soc, "results": [], "kind": "chat", "trace": trace})
+            return
+
         intent, fell_back = self.parse(message)
         idx = intent.get("focus_index")
         if isinstance(idx, int) and st["last"] and 1 <= idx <= len(st["last"]):

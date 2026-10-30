@@ -97,3 +97,32 @@ the first unfinished phase.
   to clean bullets, quotes, dashes, checks) and the false
   "Nairobi/Mombasa/Kisumu" stat sub-label.
 - `home.test.js` gains view-hygiene regressions: 38/38 green.
+
+## SAM outlines implemented (needs live verification)
+
+- `dev.meta.ai` key belongs to the Meta Model API (`api.meta.ai`), not
+  `api.llama.com` — docs + live 401s proved the pasted "same system"
+  claim wrong. `key_test.py` now probes Model API (chat 200 confirmed).
+- New `backend/sam.py`: Responses call (`sam-3.1`, base64 data URL,
+  `include_confidence`, `one_bit`), grammar parser per the SAM docs
+  (boxes + normalized + opaque masks; malformed records skipped).
+- `POST /api/outline` is real: 501 without flag/key, 404 unknown photo,
+  400 promptless without entities, 502 on Meta errors. Prompt defaults
+  to the top entity label. `FEATURE_OUTLINES` defaults true.
+- `_msg_text()` in chat/api tolerates reasoning-style null content.
+- Verifier gains an `outline` step (landmarks_003 + "tower").
+- NOT run here (no Python in this sandbox): user runs verifier.
+- Probe/app env unified (`META_API_MODEL` alias, `meta.ai` key routing); probe
+  `max_tokens` 200 so reasoning models return visible content.
+- Reasoning root-caused (docs + live captures): Spark reasons first and
+  the budget counts reasoning, so probes starved (`length` + null even
+  at 200 tokens). Probe + app now send `reasoning_effort: minimal`
+  (extra_body, meta.ai only) via `chat_kwargs()`/`chat_create()`;
+  `META_API_MODEL` wins over stale `LLAMA_WONDER_MODEL`. SAM 404 was a
+  `/compat/v1` SAM_BASE_URL in `.env` (fix: delete that line).
+- New `backend/test_parser_env.py`: 5 checks, plain-script style.
+- Browser pass caught "wow thank you" re-searching: new `social_reply()`
+  short-circuits small-talk-only messages (kind `chat`, no LLM call) in
+  `turn_stream`; anything substantive still searches. Frontend needed no
+  change (`renderText` path, no nomatch template). Test: 26 checks.
+- Commit id: (this commit; see `git log`).
