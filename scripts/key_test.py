@@ -1,7 +1,9 @@
-"""Direct key test: POST to the Llama compat endpoint without app code.
+"""Probe the Meta Model API (dev.meta.ai key) at api.meta.ai.
 
-Reads META_API_KEY + LLAMA_WONDER_MODEL from .env, prints one HTTP
-status and the reply or error body. Never prints the key. Stdlib only.
+1. GET /v1/models  -> proves auth, lists real model ids.
+2. Tiny chat completion on the Muse Spark model (auto-picked from the
+   list when the configured id is absent).
+Reads META_API_KEY from .env. Never prints the key. Stdlib only.
 
 Run from the project root:
     python scripts\\key_test.py
@@ -11,6 +13,9 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
+BASE = "https://api.meta.ai/v1"
+WANT_MODEL = "muse-spark-1.3"
+
 env = (Path(__file__).resolve().parent.parent / ".env").read_text(encoding="utf-8")
 vals = {}
 for line in env.splitlines():
@@ -18,29 +23,57 @@ for line in env.splitlines():
         k, v = line.split("=", 1)
         vals[k.strip()] = v.strip()
 key = vals.get("META_API_KEY", "")
-model = vals.get("LLAMA_WONDER_MODEL", "Llama-4-Maverick-17B-128E-Instruct")
+model = vals.get("META_API_MODEL", "") or WANT_MODEL
 if not key:
     raise SystemExit("META_API_KEY is empty in .env")
 
-body = json.dumps({"model": model,
-                   "messages": [{"role": "user", "content": "say ok"}],
-                   "max_tokens": 10}).encode()
-schemes = [
-    ("bearer", {"Authorization": "Bearer " + key}),
-    ("x-api-key", {"X-API-Key": key}),
-    ("raw", {"Authorization": key}),
-]
-for name, auth in schemes:
-    headers = {"Content-Type": "application/json"}
-    headers.update(auth)
+
+def call(method, path, payload=None):
+    data = json.dumps(payload).encode() if payload is not None else None
     req = urllib.request.Request(
-        "https://api.llama.com/compat/v1/chat/completions", data=body,
-        headers=headers)
+        BASE + path, data=data, method=method,
+        headers={"Content-Type": "application/json",
+                 "Authorization": "Bearer " + key})
     try:
         with urllib.request.urlopen(req, timeout=30) as r:
-            out = json.loads(r.read().decode("utf-8", "replace"))
-        print(f"[{name}] HTTP", r.status,
-              "reply:", out["choices"][0]["message"]["content"].strip()[:120])
+            return r.status, r.read().decode("utf-8", "replace")
     except urllib.error.HTTPError as e:
-        print(f"[{name}] HTTP", e.code,
-              e.read().decode("utf-8", "replace")[:160].replace("\n", " "))
+        return e.code, e.read().decode("utf-8", "replace")[:400]
+
+
+st, body = call("GET", "/v1/models")
+print("models: HTTP", st)
+ids = []
+if st == 200:
+    try:
+        ids = [m.get("id", "?") for m in json.loads(body).get("data", [])]
+    except ValueError:
+        pass
+    print("models:", ", ".join(ids[:12]) or "(unparseable)")
+else:
+    print(body[:300])
+
+pick = model
+low = [i.lower() for i in ids]
+if ids and model not in ids:
+    for i in ids:
+        if "spark" in i.lower():
+            pick = i
+            break
+    else:
+        pick = ids[0]
+    print(f"note: {model} not listed, trying {pick}")
+
+st, body = call("POST", "/chat/completions",
+                {"model": pick,
+                 "messages": [{"role": "user", "content": "say ok"}],
+                 "max_tokens": 10})
+print("chat: HTTP", st)
+if st == 200:
+    try:
+        out = json.loads(body)
+        print("reply:", out["choices"][0]["message"]["content"].strip()[:200])
+    except (ValueError, KeyError, IndexError):
+        print(body[:300])
+else:
+    print(body[:300])
