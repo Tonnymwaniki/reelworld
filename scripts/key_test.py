@@ -72,8 +72,17 @@ print("chat: HTTP", st)
 if st == 200:
     try:
         out = json.loads(body)
-        print("reply:", out["choices"][0]["message"]["content"].strip()[:200])
-    except (ValueError, KeyError, IndexError):
+        msg = (out.get("choices") or [{}])[0].get("message") or {}
+        content = msg.get("content")
+        if isinstance(content, list):  # block-style content
+            content = " ".join(
+                b.get("text", "") for b in content if isinstance(b, dict))
+        if content:
+            print("reply:", str(content).strip()[:200])
+        else:
+            print("message keys:", sorted(msg.keys()))
+            print("raw:", body[:600])
+    except ValueError:
         print(body[:300])
 else:
     print(body[:300])
