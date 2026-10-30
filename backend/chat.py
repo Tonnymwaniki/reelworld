@@ -27,8 +27,11 @@ Run from the project root:
 
 Optional: use another model for understanding messages (for example Meta's own
 API) by setting PARSER_BASE_URL, PARSER_KEY_ENV and PARSER_MODEL in .env.
-Empty or paste_* values fall back to the Baseten defaults below; point
-PARSER_KEY_ENV at META_API_KEY to use the Meta key once its endpoint is known.
+With none set, the Meta Llama API is used when META_API_BASE_URL (or
+LLAMA_API_BASE), LLAMA_WONDER_MODEL and META_API_KEY are all configured;
+otherwise Baseten Muse Spark. A key pointer to a placeholder is ignored.
+See resolve_parser() for the exact precedence.
+
 
 Commands: "open 3" focuses result 3, "quit" exits.
 """
@@ -55,9 +58,41 @@ def _env_or(name, default):
     return v
 
 
-PARSER_BASE_URL = _env_or("PARSER_BASE_URL", "https://inference.baseten.co/v1")
-PARSER_KEY = os.environ[_env_or("PARSER_KEY_ENV", "BASETEN_API_KEY")]
-PARSER_MODEL = _env_or("PARSER_MODEL", "meta-models/muse-spark-open-1026")
+def _key_ok(name):
+    """True when the named env var holds a real key (not empty/placeholder)."""
+    v = (os.getenv(name) or "").strip()
+    return bool(v) and not v.lower().startswith("paste_") and not v.startswith("<")
+
+
+def resolve_parser():
+    """Pick (base_url, key_env_name, model) for all LLM reasoning.
+
+    Explicit PARSER_* wins (set all three to pin a backend). Otherwise the
+    Meta Llama API is used when fully configured, else Baseten Muse Spark.
+    A key pointer to a placeholder value is ignored, never used.
+    """
+    base = _env_or("PARSER_BASE_URL", None)
+    key_env = _env_or("PARSER_KEY_ENV", None)
+    model = _env_or("PARSER_MODEL", None)
+    if key_env and not _key_ok(key_env):
+        key_env = None
+    if base or key_env or model:
+        base = base or "https://inference.baseten.co/v1"
+        if not key_env:
+            key_env = "META_API_KEY" if "llama.com" in base else "BASETEN_API_KEY"
+        return (base, key_env, model or "meta-models/muse-spark-open-1026")
+    meta_base = _env_or("META_API_BASE_URL", _env_or("LLAMA_API_BASE", None))
+    meta_model = _env_or("LLAMA_WONDER_MODEL", None)
+    if meta_base and meta_model and _key_ok("META_API_KEY"):
+        return (meta_base, "META_API_KEY", meta_model)
+    return ("https://inference.baseten.co/v1", "BASETEN_API_KEY",
+            "meta-models/muse-spark-open-1026")
+
+
+PARSER_BASE_URL, _PARSER_KEY_ENV, PARSER_MODEL = resolve_parser()
+PARSER_KEY = os.environ[_PARSER_KEY_ENV]
+
+
 
 VIEWPOINTS = ["ground_level", "elevated", "aerial", "interior", "water_level"]
 COLLECTIONS = {"world": "world", "personal": "personal", "both": None}

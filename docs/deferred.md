@@ -6,7 +6,7 @@ missing input in hand.
 
 | Item | Why deferred | UI treatment |
 |---|---|---|
-| SAM 3.1 outlines | key is in `.env` (`META_API_KEY`); endpoint docs still needed | `POST /api/outline` returns 501 until docs arrive; stays behind `FEATURE_OUTLINES=false` |
+| SAM 3.1 outlines | key + base + model in `.env` (`META_API_KEY`, `SAM_BASE_URL`, `SAM_MODEL`); SAM request/response docs still needed | `POST /api/outline` returns 501 until docs arrive; stays behind `FEATURE_OUTLINES=false` |
 | Voice input (mic in chat bar) | no speech backend; rule 9 | behind the same off flag; no fake waveform |
 | Likes, comments, ranking, share counts | no social backend; brief forbids them on Showcase | removed wherever the exports show them |
 | Maps, GPS pins, user profiles, notifications, settings | no such features | removed wherever the exports show them |

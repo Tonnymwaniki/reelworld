@@ -68,3 +68,21 @@ the first unfinished phase.
 - Commit id: (this commit; see `git log`).
 - Open: re-record tour; Meta endpoint docs; footer GitHub URL; Phase 2
   rebuilds the photo detail view.
+
+## Meta Llama routing (post-P1; needs probe + search test)
+
+- `.env` gained the Llama set (`META_API_BASE_URL`/`LLAMA_API_BASE`,
+  `LLAMA_WONDER_MODEL`, `LLAMA_SPARK_MODEL`, `SAM_BASE_URL`,
+  `SAM_MODEL`); removed a pasted junk line and retired the stale
+  `PARSER_KEY_ENV=MODAL_API_KEY` pointer (Modal was never real).
+- `chat.resolve_parser()`: explicit `PARSER_*` wins; else Meta Llama
+  (compat base + Wonder + `META_API_KEY`) when fully configured; else
+  Baseten. Key pointers to placeholders are ignored; the key follows
+  the base. Covers parse, answers, ask, compare and story.
+- `scripts/probe_meta.py` now probes the resolved backend and prints
+  base/model/key-name (never the key).
+- SAM 3.1 is segmentation, not chat: outlines stay 501 until Meta's SAM
+  request/response docs arrive (one curl example is enough).
+- NOT run here (no Python in this sandbox): probe, py_compile,
+  live search test. User-run commands in the chat report.
+- Commit id: (this commit; see `git log`).
