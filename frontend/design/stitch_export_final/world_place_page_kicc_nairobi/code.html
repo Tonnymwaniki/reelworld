@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-error-container":"#93000a","on-secondary":"#ffffff","on-surface":"#1d1b19","tertiary":"#0e0100","secondary-fixed":"#c9ead8","secondary":"#476556","surface":"#fef8f4","on-primary-fixed":"#191c21","inverse-primary":"#c4c6cd","tertiary-container":"#3d0d00","secondary-fixed-dim":"#aecebc","on-surface-variant":"#45474b","tertiary-fixed-dim":"#ffb59c","surface-tint":"#5c5e64","on-primary-container":"#83868c","surface-container-lowest":"#ffffff","error":"#ba1a1a","surface-variant":"#e6e2de","on-error":"#ffffff","surface-container-highest":"#e6e2de","surface-dim":"#ded9d5","surface-container-low":"#f8f3ef","on-secondary-fixed-variant":"#304d3f","secondary-container":"#c9ead8","on-tertiary-fixed-variant":"#822801","surface-container-high":"#ece7e3","error-container":"#ffdad6","primary-container":"#1b1e23","on-background":"#1d1b19","primary-fixed":"#e1e2e9","inverse-surface":"#32302e","outline":"#76777b","on-tertiary-container":"#d5643b","on-tertiary":"#ffffff","surface-container":"#f2ede9","on-secondary-container":"#4d6b5c","surface-bright":"#fef8f4","primary":"#030408","background":"#fef8f4","outline-variant":"#c6c6cb","on-primary-fixed-variant":"#44474c","tertiary-fixed":"#ffdbcf","on-primary":"#ffffff","on-secondary-fixed":"#032015","primary-fixed-dim":"#c4c6cd","inverse-on-surface":"#f5f0ec","on-tertiary-fixed":"#390c00"},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},spacing:{"margin-tablet":"2rem","space-sm":"0.5rem","space-xs":"0.25rem","gutter":"1.5rem","margin":"3rem","space-md":"1rem","margin-mobile":"1.25rem","space-xl":"2.5rem","gutter-mobile":"1rem","space-lg":"1.5rem"},fontFamily:{"label-md":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"display-lg-mobile":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"]},fontSize:{"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.04em",fontWeight:"600"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-lg-mobile":["26px",{lineHeight:"34px",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-sm":["20px",{lineHeight:"28px",fontWeight:"600"}],"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.005em",fontWeight:"600"}],"body-sm":["13px",{lineHeight:"20px",fontWeight:"400"}],"display-lg-mobile":["36px",{lineHeight:"44px",letterSpacing:"-0.015em",fontWeight:"700"}],"label-lg":["14px",{lineHeight:"20px",letterSpacing:"0.02em",fontWeight:"600"}],"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.06em",fontWeight:"500"}],"display-lg":["56px",{lineHeight:"64px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-lg":["18px",{lineHeight:"28px",fontWeight:"400"}],"body-md":["15px",{lineHeight:"24px",fontWeight:"400"}]}}};</script></head><body class="bg-background font-body-md text-on-surface min-h-screen selection:bg-tertiary-fixed selection:text-on-tertiary-fixed"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(27,30,35,0.04)]"><div class="h-20 w-full px-margin-mobile md:px-margin-tablet lg:px-margin flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-md"><span class="font-headline-sm text-headline-sm tracking-tight text-primary-container uppercase">ReelWorld Visual Archive</span><div class="hidden sm:inline-flex items-center gap-space-xs px-space-sm py-space-xs rounded bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Built with Muse Spark Open v2.4</div></div><nav class="hidden lg:flex items-center gap-space-lg" data-active-classes="bg-primary-container text-on-primary font-label-md text-label-md rounded px-space-sm py-space-xs shadow-[0_2px_8px_rgba(27,30,35,0.08)]"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="world" href="#">World</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="my-photos" href="#">My Photos (84)</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="connected" href="#">Connected</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="stories" href="#">Stories</a></nav><div class="flex items-center gap-space-md"><div class="inline-flex items-center gap-space-xs px-space-sm py-space-xs rounded bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>Nairobi Edge Cluster: Online (32ms)</div></div></div></header><main class="w-full pt-20 bg-background min-h-[calc(100vh-140px)]"><div class="flex flex-col w-full">
+<!-- Top Archival Mat Canvas -->
+<div class="w-full px-margin-mobile md:px-margin-tablet lg:px-margin pb-space-xl">
+<!-- Cadastral Breadcrumb & System Verification -->
+<div class="pt-space-md pb-space-sm flex flex-wrap items-center justify-between gap-space-sm">
+<nav aria-label="Cadastral hierarchy" class="flex items-center gap-space-xs font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
+<span class="hover:text-on-surface transition-colors cursor-pointer">World</span>
+<span class="text-outline-variant">/</span>
+<span class="hover:text-on-surface transition-colors cursor-pointer">Kenya</span>
+<span class="text-outline-variant">/</span>
+<span class="hover:text-on-surface transition-colors cursor-pointer">Nairobi</span>
+<span class="text-outline-variant">/</span>
+<span class="hover:text-on-surface transition-colors cursor-pointer">CBD</span>
+<span class="text-outline-variant">/</span>
+<span class="text-primary font-semibold">KICC</span>
+</nav>
+<div class="inline-flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>Verified Public Cadastre Plate: REF-NBO-KICC-8422</span>
+</div>
+</div>
+<!-- Main Place Monograph Header Banner -->
+<section class="mt-space-sm bg-surface-container-low p-space-md md:p-space-lg rounded-xl shadow-sm">
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs max-w-3xl">
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="px-space-sm py-0.5 rounded bg-surface-container-highest text-secondary font-label-sm text-label-sm tracking-widest uppercase">
+              Kenya, Nairobi, CBD
+            </span>
+<span class="inline-flex items-center gap-1 px-space-sm py-0.5 rounded bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+              Confirmed Architectural Monograph
+            </span>
+<span class="text-outline-variant font-label-sm text-label-sm">•</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Karl Henrik Nøstvik (1973)</span>
+</div>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg tracking-tight text-primary leading-none mt-space-xs">
+            Kenyatta International Convention Centre (KICC)
+          </h1>
+<div class="flex flex-wrap items-center gap-space-sm mt-space-xs font-label-md text-label-md text-on-surface-variant">
+<span class="font-medium text-primary">28 photos in public cadastre</span>
+<span class="text-outline-variant">•</span>
+<span>4 catalogued vantage strata</span>
+<span class="text-outline-variant">•</span>
+<span>Acutance index: 94.2/100</span>
+</div>
+</div>
+<!-- Action Matrix -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<button class="inline-flex items-center gap-space-xs px-space-md py-space-sm rounded bg-surface-container-highest hover:bg-surface-variant text-primary font-label-md text-label-md shadow-sm transition-colors" id="find-mine-btn">
+<span class="material-symbols-outlined text-[18px] text-tertiary-container">hub</span>
+<span>Find mine</span>
+<span class="ml-1 px-1.5 py-0.5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-bold">3</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-md py-space-sm rounded bg-on-tertiary-container hover:opacity-90 text-surface font-label-md text-label-md shadow-sm transition-all">
+<span class="material-symbols-outlined text-[18px]">add_photo_alternate</span>
+<span>Add a photo</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-sm py-space-sm rounded bg-surface-container-high hover:bg-surface-variant text-on-surface-variant font-label-md text-label-md transition-colors" title="Download cadastral descriptor">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+<span class="hidden sm:inline">Reference Plate</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Interactive "Find Mine" Private Enclave Connection Drawer -->
+<section class="mt-space-md p-space-md rounded-xl bg-surface-container border-l-4 border-secondary shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-sm">
+<div class="p-space-xs rounded bg-secondary-container text-on-secondary-fixed-variant mt-0.5">
+<span class="material-symbols-outlined text-[20px]">join_inner</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<div class="font-label-md text-label-md uppercase tracking-wider text-secondary font-bold">
+              Connected to your private enclave
+            </div>
+<p class="font-body-md text-body-md text-on-surface">
+<span class="font-semibold text-primary">3 photos in My Photos</span> match KICC (<span class="font-mono text-body-sm text-on-surface-variant">Harambee Forecourt #001</span>, <span class="font-mono text-body-sm text-on-surface-variant">Plinth Steps #004</span>, <span class="font-mono text-body-sm text-on-surface-variant">Conical Saucer #012</span>) — <span class="font-medium text-secondary">14 shared vantage links verified</span>.
+            </p>
+</div>
+</div>
+<a class="inline-flex items-center gap-space-xs font-label-md text-label-md text-on-tertiary-container hover:underline whitespace-nowrap self-start md:self-center" href="#">
+<span>Open in Connected ring diagram</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</section>
+<!-- Main Archival Photo Stratification by Viewpoint -->
+<div class="mt-space-xl flex flex-col gap-space-xl">
+<!-- Viewpoint 1: Ground Level -->
+<section class="flex flex-col gap-space-md">
+<div class="flex items-baseline justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<h2 class="font-headline-md text-headline-md text-primary">Ground level</h2>
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-semibold">14 photos</span>
+</div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant hidden sm:inline">Plaza Pedestal &amp; Basalt Steps</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Plate 1 -->
+<article class="bg-surface-container-low p-space-sm rounded-lg shadow-sm hover:shadow-md transition-shadow flex flex-col gap-space-xs">
+<div class="w-full aspect-[4/3] rounded overflow-hidden bg-surface-container-high relative">
+<img class="w-full h-full object-cover" data-alt="Monochrome fine-art documentary photograph of KICC ground plaza looking up toward the terracotta tower cylinder. Early morning diffused sunlight grazing brutalist fluted concrete ribs. Sun-cured warm archival paper tones, zero people, pure architectural form." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaLeT-g6CWD0hxHPCFFjfV610JNiztpditatSh254KPniLB7w-6nJtK9fumMCUOQRY8DVcg_Kw3qcpcvA6NM3lF9frb9QprREBEYk_L_cE9_qVmjCUYywFKywLBZ83eZd5zc7xT0nAcIYMLqEaiklV0Ck1adHRnxuaTwXsvgvLu3UkGTX89EqEyw95-tds_BO7ec6KKPw8VV-X_N9nkAZ_mdUkLOUhMeSDocBS6wk"/>
+<span class="absolute top-2 left-2 px-1.5 py-0.5 rounded bg-primary-container text-surface-container-lowest font-label-sm text-label-sm font-mono text-[10px]">
+                PLATE #NBO-0021
+              </span>
+</div>
+<div class="flex flex-col gap-0.5 pt-1">
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">Forecourt Harambee View</span>
+<p class="font-body-sm text-body-sm text-on-surface line-clamp-1">Fluted column bases and basalt pedestal paving</p>
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm mt-1">
+<span class="truncate">Photo: C. Karanja</span>
+<span class="font-mono text-[10px] bg-surface-container-highest px-1 rounded">CC BY-SA 4.0</span>
+</div>
+</div>
+</article>
+<!-- Plate 2 -->
+<article class="bg-surface-container-low p-space-sm rounded-lg shadow-sm hover:shadow-md transition-shadow flex flex-col gap-space-xs">
+<div class="w-full aspect-[4/3] rounded overflow-hidden bg-surface-container-high relative">
+<img class="w-full h-full object-cover" data-alt="Architectural photograph of the amphitheater conical terracotta saucer viewed from the southern reflecting pool. Diffuse overcast equatorial daylight, warm sand and earthen clay pigments, mineral brutalist concrete detail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqlG9GfPO6gWut65hnIVTPdIIass9zBpz9HofdZ6Tgzws00QYh8wE4rxZoyqjAOanAPPz8JliUGtSSwk5ylq6_zHd4vNnRd0wZDTKRzQQjK0F_oBe55N_4uhYEwhXiVLOdGTjMGh98ryd9G1vqkqiuAfKHab4HMdSHtGrtXHmfW4IxIVsVHnooaPJ4n_Jv3quqYSVFC3wqdzbsmxCUo69ePESaj54wdGXTwtXrENI"/>
+<span class="absolute top-2 left-2 px-1.5 py-0.5 rounded bg-primary-container text-surface-container-lowest font-label-sm text-label-sm font-mono text-[10px]">
+                PLATE #NBO-0024
+              </span>
+</div>
+<div class="flex flex-col gap-0.5 pt-1">
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">Amphitheatre Cone Base</span>
+<p class="font-body-sm text-body-sm text-on-surface line-clamp-1">Reflecting basin perimeter and structural cantilever</p>
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm mt-1">
+<span class="truncate">Photo: C. Karanja</span>
+<span class="font-mono text-[10px] bg-surface-container-highest px-1 rounded">CC BY-SA 4.0</span>
+</div>
+</div>
+</article>
+<!-- Plate 3 -->
+<article class="bg-surface-container-low p-space-sm rounded-lg shadow-sm hover:shadow-md transition-shadow flex flex-col gap-space-xs">
+<div class="w-full aspect-[4/3] rounded overflow-hidden bg-surface-container-high relative">
+<img class="w-full h-full object-cover" data-alt="Close architectural framing of the bronze foundation plaque embedded in porous volcanic tuff stone at the primary entrance colonnade of KICC. Warm ochre and mineral clay tones, macro texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPBoysAiIO6c5f500ZTaAinH1cDR9eQd7ywfZ9nO8bMIJXFWywg_mcG7HRwIDberMzsZPLDeSYQCv1DpEAKuo3-qZceNmnuOUCtEhvp-Yoi4Cy89mIg0tVkuKhMtXKdWirSbV_hn7PlHkKBodrlYiOvMrX-Mq9N3RMf7pHYMNwGTJPv8TR5xOzHiT9TcHuHPwh1FEpmsxp0w-1t9hC6qFhgOK4mB40b4heIxvvrfU"/>
+<span class="absolute top-2 left-2 px-1.5 py-0.5 rounded bg-primary-container text-surface-container-lowest font-label-sm text-label-sm font-mono text-[10px]">
+                PLATE #NBO-0027
+              </span>
+</div>
+<div class="flex flex-col gap-0.5 pt-1">
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">Colonnade Pier North</span>
+<p class="font-body-sm text-body-sm text-on-surface line-clamp-1">Corner datum stone with cadastral mark LR-209</p>
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm mt-1">
+<span class="truncate">Nairobi Archival Trust</span>
+<span class="font-mono text-[10px] bg-surface-container-highest px-1 rounded">Public Domain</span>
+</div>
+</div>
+</article>
+<!-- Plate 4 -->
+<article class="bg-surface-container-low p-space-sm rounded-lg shadow-sm hover:shadow-md transition-shadow flex flex-col gap-space-xs">
+<div class="w-full aspect-[4/3] rounded overflow-hidden bg-surface-container-high relative">
+<img class="w-full h-full object-cover" data-alt="Documentary view looking up from City Hall Way pedestrian concourse toward the towering 28-storey cylindrical tower of KICC. Ochre aggregate render, soft linen sky, high architectural fidelity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQ4NVlHLQzvcTPKKkhWxhIJZ-C0KUNg9w3Dd7lMxeM3Kvr0Of3oLfNovfomk4inGdUZbdBYRFr8fr69LQWvODH3RoMVBPON6zEs1sC-ZS2WjKG2zth6FNPOCzCRmBeUyLBz_uVuAGYceGKOAucvbOQwyDVKBY4CM_1AVZTIqV9jFgvUH3qDdQbfCB9ZoRxs5A8vGFahbuQWhLIVfOL7v5N__vpOW8WNjeeB0FbTMg"/>
+<span class="absolute top-2 left-2 px-1.5 py-0.5 rounded bg-primary-container text-surface-container-lowest font-label-sm text-label-sm font-mono text-[10px]">
+                PLATE #NBO-0033
+              </span>
+</div>
+<div class="flex flex-col gap-0.5 pt-1">
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">City Hall Way Approach</span>
+<p class="font-body-sm text-body-sm text-on-surface line-clamp-1">Vertical fin shadows across 28 storeys</p>
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm mt-1">
+<span class="truncate">Photo: D. Mumo</span>
+<span class="font-mono text-[10px] bg-surface-container-highest px-1 rounded">CC BY 4.0</span>
+</div>
+</div>
+</article>
+</div>
+<div class="flex justify-end">
+<button class="font-label-sm text-label-sm uppercase tracking-wider text-on-tertiary-container hover:underline inline-flex items-center gap-1">
+<span>Inspect all 14 Ground Level plates</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</button>
+</div>
+</section>
+<!-- Viewpoint 2: Elevated -->
+<section class="flex flex-col gap-space-md">
+<div class="flex items-baseline justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<h2 class="font-headline-md text-headline-md text-primary">Elevated</h2>
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-semibold">8 photos</span>
+</div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant hidden sm:inline">Vantages from CBK, Teleposta &amp; Parliament towers</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-space-md">
+<!-- Plate 1 -->
+<article class="bg-surface-container-low p-space-sm rounded-lg shadow-sm hover:shadow-md transition-shadow flex flex-col gap-space-xs">
+<div class="w-full aspect-[16/10] rounded overflow-hidden bg-surface-container-high relative">
+<img class="w-full h-full object-cover" data-alt="High angle shot looking down from Teleposta Towers across to the amphitheater cone and public plaza of KICC. Warm editorial documentary aesthetic, sandstone surfaces, clear geometry." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZna5nDyStGjCyLrmYKDJeNww04NZdHfvQEyIkCVdMtNetywJ9wxdfJKNqOsU_Yay9fLVtQ3cBSX3O0EqVfJjaCob2DC-LGuEkrb7uAJ0-ARQarKTHEXKhWO-WVVVneRjK1Q3AF3hnBTze4AT9gNaI5W4r1YGVENjhUDNY0FGKTLtXyj8r06W5XNd6SO2fDJ7GK2_25uJU74lWTIRCmQDKamZyp5PBlkA8EScdizw"/>
+<span class="absolute top-2 left-2 px-1.5 py-0.5 rounded bg-primary-container text-surface-container-lowest font-label-sm text-label-sm font-mono text-[10px]">
+                PLATE #NBO-0082
+              </span>
+</div>
+<div class="flex flex-col gap-0.5 pt-1">
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">Teleposta High Terrace Vantage</span>
+<p class="font-body-sm text-body-sm text-on-surface line-clamp-1">Amphitheatre roof geometry and civic square diagonal</p>
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm mt-1">
+<span class="truncate">Photo: F. Omar</span>
+<span class="font-mono text-[10px] bg-surface-container-highest px-1 rounded">CC BY-SA 4.0</span>
+</div>
+</div>
+</article>
+<!-- Plate 2 -->
+<article class="bg-surface-container-low p-space-sm rounded-lg shadow-sm hover:shadow-md transition-shadow flex flex-col gap-space-xs">
+<div class="w-full aspect-[16/10] rounded overflow-hidden bg-surface-container-high relative">
+<img class="w-full h-full object-cover" data-alt="Middle-distance view from Central Bank of Kenya upper balcony showing KICC tower set against Uhuru Park green canopy in the background. Balanced archival contrast, tactile paper tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkQC-UENdocPNF3Eg9f-MxkcjBBJc6YqyDnrwgoqrX-YiLICzZN7gJpdeaNW-U_1id9gNsga4TmLX2a9DW0UxwkyyWYpXM-Fs2r9LBcGXTA125xJhKeTNAwFxvABYhBA5dQtiLqSBJT8h73Gmjj0Mj5X90uuWMzwZ6zi50XOPKdL22jKJl_jVBALj6Yf2cQrg95N-O62JJYQ_g9TSnRJ7rc3l8n2_Wcia06p-RjCM"/>
+<span class="absolute top-2 left-2 px-1.5 py-0.5 rounded bg-primary-container text-surface-container-lowest font-label-sm text-label-sm font-mono text-[10px]">
+                PLATE #NBO-0089
+              </span>
+</div>
+<div class="flex flex-col gap-0.5 pt-1">
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">CBK Pension Perch</span>
+<p class="font-body-sm text-body-sm text-on-surface line-clamp-1">South facade vertical fins in late afternoon raking shadow</p>
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm mt-1">
+<span class="truncate">Nairobi Archival Trust</span>
+<span class="font-mono text-[10px] bg-surface-container-highest px-1 rounded">Public Domain</span>
+</div>
+</div>
+</article>
+<!-- Plate 3 -->
+<article class="bg-surface-container-low p-space-sm rounded-lg shadow-sm hover:shadow-md transition-shadow flex flex-col gap-space-xs">
+<div class="w-full aspect-[16/10] rounded overflow-hidden bg-surface-container-high relative">
+<img class="w-full h-full object-cover" data-alt="View from Parliament Clock Tower observing the lower conference terrace and entrance portico of KICC. Ochre render and brutalist geometric patterns, museum archival standard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHCe6AcRZGmW9RmfmgeVuZn5G1xAFCJrpc1Kapb0lC4ocEC26svkjAESRVvZR57QEDh15zZpS5AEAcM4DFV15sml9nHaCH2W47156VbvTs2_XjinOi-XvwQBiQo1F4CB-EAYJ9EuyHOhopPDhbcRbJOF09p0LVewJoEV9nlGk6Axv3LuugLg-IU7kOlvSORRP2bFMzRFzrrecqsX-nwvhT21j9DYc5GAA7lL6PCJk"/>
+<span class="absolute top-2 left-2 px-1.5 py-0.5 rounded bg-primary-container text-surface-container-lowest font-label-sm text-label-sm font-mono text-[10px]">
+                PLATE #NBO-0094
+              </span>
+</div>
+<div class="flex flex-col gap-0.5 pt-1">
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">Parliamentary Axis East</span>
+<p class="font-body-sm text-body-sm text-on-surface line-clamp-1">Junction between Harambee Avenue and civic courtyard</p>
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm mt-1">
+<span class="truncate">Photo: C. Karanja</span>
+<span class="font-mono text-[10px] bg-surface-container-highest px-1 rounded">CC BY-SA 4.0</span>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- Split Layout: Aerial & Interior -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-lg">
+<!-- Viewpoint 3: Aerial -->
+<section class="flex flex-col gap-space-md">
+<div class="flex items-baseline justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<h2 class="font-headline-md text-headline-md text-primary">Aerial</h2>
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-semibold">4 photos</span>
+</div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Helipad roof &amp; radial grid</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<article class="bg-surface-container-low p-space-sm rounded-lg shadow-sm flex flex-col gap-space-xs">
+<div class="w-full aspect-[4/3] rounded overflow-hidden bg-surface-container-high relative">
+<img class="w-full h-full object-cover" data-alt="Strictly orthogonal overhead aerial survey photograph capturing the circular helipad crowning the KICC tower. Clean radial geometry, warm sand and pale concrete tones, zero distortion." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3bgdlurA4p4uY2B7xwJTH_EovIUcYgyDIOLAWr0tt_-3BL1EXR0VygHFOPXXodVh52HN6__Qr7zzfYA79dQaZKPXkZ5UmAhLoBlGYpPmdgFb8Pd5RnqCF_H4XmjGInCBv4KAeJkybuwY7Hal6IGdU2ycJQO9o4nKdShh2VmlTNxv3tZNGzPeNvSk9fxFLEqxzg6Q_yO_ITPOsF9QybnUcsWKh4PBZY58ff1ZmKIo"/>
+<span class="absolute top-2 left-2 px-1.5 py-0.5 rounded bg-primary-container text-surface-container-lowest font-label-sm text-label-sm font-mono text-[10px]">
+                  PLATE #NBO-0140
+                </span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">Nadir Crown Plate</span>
+<p class="font-body-sm text-body-sm text-on-surface line-clamp-1">Helipad circular pad with revolving saucer rim</p>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Photo: D. Mumo • CC BY 4.0</span>
+</article>
+<article class="bg-surface-container-low p-space-sm rounded-lg shadow-sm flex flex-col gap-space-xs">
+<div class="w-full aspect-[4/3] rounded overflow-hidden bg-surface-container-high relative">
+<img class="w-full h-full object-cover" data-alt="Oblique high aerial photograph showing the CBD street grid centering around KICC and City Hall. Earthen terracotta roofs and modernist building tops, warm archival tint." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXKhC3JFsnSMyx_qGb_2b_TxJLVyuTH3WkOTdDxyNgu446xkjuf0TJ9caRGCp37g0_P4Hoi5GH0NY-B6gWSBvX8uqjHFOxJdmNATL7IYz0WnqbOEdLATyalu-qYz_oLewlSTRdxQ2vXsjkpybQEbfEadQAvBnuXrzp9e4yjnviUBdz0Gfe7ncpqW3LK9qDXkWDSkCxVcGSOm_4L6i2KeF03Vy4L8yXKR8OjUQdTow"/>
+<span class="absolute top-2 left-2 px-1.5 py-0.5 rounded bg-primary-container text-surface-container-lowest font-label-sm text-label-sm font-mono text-[10px]">
+                  PLATE #NBO-0144
+                </span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">Radial Urban Cadastre</span>
+<p class="font-body-sm text-body-sm text-on-surface line-clamp-1">Concentric relationship to Harambee Ave and Parliament</p>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Nairobi Archival Trust • Public Domain</span>
+</article>
+</div>
+</section>
+<!-- Viewpoint 4: Interior -->
+<section class="flex flex-col gap-space-md">
+<div class="flex items-baseline justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<h2 class="font-headline-md text-headline-md text-primary">Interior</h2>
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-semibold">2 photos</span>
+</div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Plenary hall &amp; timber ribs</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<article class="bg-surface-container-low p-space-sm rounded-lg shadow-sm flex flex-col gap-space-xs">
+<div class="w-full aspect-[4/3] rounded overflow-hidden bg-surface-container-high relative">
+<img class="w-full h-full object-cover" data-alt="Empty monumental interior of KICC plenary amphitheatre showing exposed timber ceiling ribs converging toward the acoustic apex. Deep walnut and mahogany tones, warm linen seats, zero people." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjb0ZU1ZpaJItMcX2lhH1RCWSretmWdsVdoQUQvK552YMhBW1EicypQfFStBii2LWqB-Fj0VMxCmMbuyFv751ehya-iqU3k5fvEmbxBB9wWUk4yy-77um54T9MJCTwAEJ-DN8GljDMUcIb6xcP6aYd6_ZVRGk8l1_-kH3eoqkbn9klZmK4LFH-sEu_Vbxfd0GZUM2Ld9Z6zHcZwebtiEzI4gcZzNyFPfkvLZmAyi8"/>
+<span class="absolute top-2 left-2 px-1.5 py-0.5 rounded bg-primary-container text-surface-container-lowest font-label-sm text-label-sm font-mono text-[10px]">
+                  PLATE #NBO-0201
+                </span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">Plenary Amphitheatre Ceilings</span>
+<p class="font-body-sm text-body-sm text-on-surface line-clamp-1">Acoustic timber fins and concentric delegate tiers</p>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Photo: C. Karanja • CC BY-SA 4.0</span>
+</article>
+<article class="bg-surface-container-low p-space-sm rounded-lg shadow-sm flex flex-col gap-space-xs">
+<div class="w-full aspect-[4/3] rounded overflow-hidden bg-surface-container-high relative">
+<img class="w-full h-full object-cover" data-alt="Architectural photograph of delegate foyer with terrazzo flooring and brutalist bush-hammered concrete columns. Warm ambient light spilling through clerestory windows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvSsNQfiqdJABIcUQ7RUJ0E5GtWqLYxHd5kIRX2p2OiU0j_S2uiYw1d1CvuGPgfYcinWKotYiv85DslasIYPmV47PSlKxDk7kiCeqZJIUf87a3JpUlyXa4GMqpJDq6l_Bh01fiBoajgJpZlFn8Yc04XWZ6XgQ1lMdFA-amrOPJcFK3REHehj3tdhFxxb0PysCRspctRxMszMYVeQZ1BsFmW02wxYi7kmIi6W3v_5g"/>
+<span class="absolute top-2 left-2 px-1.5 py-0.5 rounded bg-primary-container text-surface-container-lowest font-label-sm text-label-sm font-mono text-[10px]">
+                  PLATE #NBO-0205
+                </span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">Lower Delegate Foyer</span>
+<p class="font-body-sm text-body-sm text-on-surface line-clamp-1">Terrazzo plinth and bush-hammered concrete piers</p>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Architectural Society of Kenya • CC BY-NC 4.0</span>
+</article>
+</div>
+</section>
+</div>
+<!-- Section 4: Honest Sparse-Coverage Callout -->
+<section class="p-space-lg rounded-xl bg-surface-container-high border-l-4 border-on-tertiary-container shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-space-lg">
+<div class="flex items-start gap-space-md max-w-2xl">
+<div class="p-space-sm rounded bg-surface-container-highest text-on-tertiary-container">
+<span class="material-symbols-outlined text-[28px]">search_off</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<div class="inline-flex items-center gap-space-xs">
+<span class="px-space-sm py-0.5 rounded bg-surface-container text-on-tertiary-container font-label-sm text-label-sm uppercase font-bold tracking-wider">
+                Variant Sub-Quadrant
+              </span>
+<span class="font-label-md text-label-md font-bold text-primary">
+                KICC Western Drainage Apron &amp; Subterranean Cisterns
+              </span>
+</div>
+<p class="font-headline-sm text-headline-sm text-primary">
+              Only one photo of this place so far
+            </p>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              The drainage apron connecting to the Parliament culvert remains largely undocumented in the public cadastre. Structural details of the basalt catchment channels are critical to completing the full 360° hydro-architectural model of the civic island.
+            </p>
+</div>
+</div>
+<button class="inline-flex items-center gap-space-xs px-space-md py-space-sm rounded bg-on-tertiary-container hover:opacity-95 text-surface font-label-md text-label-md shadow transition-all whitespace-nowrap self-stretch md:self-center justify-center">
+<span class="material-symbols-outlined text-[18px]">add_photo_alternate</span>
+<span>Add a photo</span>
+</button>
+</section>
+<!-- Section 5: Signs Read Here (OCR & Neural Transcription) -->
+<section class="flex flex-col gap-space-md">
+<div class="flex items-baseline justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[22px]">spellcheck</span>
+<h2 class="font-headline-md text-headline-md text-primary">Signs read here</h2>
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-semibold">5 corroborated inscriptions</span>
+</div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant hidden sm:inline">OCR &amp; Visual Transcriptions</span>
+</div>
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm overflow-hidden">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-sm">
+<div class="p-space-sm rounded bg-surface-container flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-mono text-body-md text-primary font-bold tracking-tight">"HARAMBEE HOUSE"</span>
+<span class="px-space-sm py-0.5 rounded bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm font-semibold">9 photos</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Clear inscription • Harambee Ave facade datum</span>
+</div>
+<div class="p-space-sm rounded bg-surface-container flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-mono text-body-md text-primary font-bold tracking-tight">"KENYATTA INTERNATIONAL CONVENTION CENTRE"</span>
+<span class="px-space-sm py-0.5 rounded bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm font-semibold">16 photos</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Clear inscription • Main concourse pediment stone</span>
+</div>
+<div class="p-space-sm rounded bg-surface-container flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-mono text-body-md text-primary font-bold tracking-tight">"LR-209/8422"</span>
+<span class="px-space-sm py-0.5 rounded bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm font-semibold">4 photos</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Cadastral boundary marker • Survey concrete pier</span>
+</div>
+<div class="p-space-sm rounded bg-surface-container flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-mono text-body-md text-primary font-bold tracking-tight">"FOUNDATION STONE 1973"</span>
+<span class="px-space-sm py-0.5 rounded bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm font-semibold">2 photos</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Bronze plaque • Ceremonial plenary cornerstone</span>
+</div>
+<div class="p-space-sm rounded bg-surface-container flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-mono text-body-md text-primary font-bold tracking-tight">"NO PARKING CIVIC SQUARE"</span>
+<span class="px-space-sm py-0.5 rounded bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm font-semibold">6 photos</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Municipal signage • North pedestrian apron bollards</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 6: Curatorial Credits & Public Licensing -->
+<section class="flex flex-col gap-space-md">
+<div class="flex items-baseline justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[22px]">verified</span>
+<h2 class="font-headline-md text-headline-md text-primary">Curatorial Credits &amp; Public Licensing</h2>
+</div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant hidden sm:inline">Provenance Integrity</span>
+</div>
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm flex flex-col gap-space-md">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-sm">
+<div class="p-space-sm rounded bg-surface-container flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg font-semibold text-primary">C. Karanja</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">CC BY-SA 4.0</span>
+</div>
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-primary font-mono text-label-sm text-label-sm font-bold">11 photos</span>
+</div>
+<div class="p-space-sm rounded bg-surface-container flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg font-semibold text-primary">Nairobi Archival Trust</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Public Domain / Open Cadastre</span>
+</div>
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-primary font-mono text-label-sm text-label-sm font-bold">8 photos</span>
+</div>
+<div class="p-space-sm rounded bg-surface-container flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg font-semibold text-primary">D. Mumo</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">CC BY 4.0</span>
+</div>
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-primary font-mono text-label-sm text-label-sm font-bold">5 photos</span>
+</div>
+<div class="p-space-sm rounded bg-surface-container flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg font-semibold text-primary">F. Omar</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">CC BY-SA 4.0</span>
+</div>
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-primary font-mono text-label-sm text-label-sm font-bold">3 photos</span>
+</div>
+<div class="p-space-sm rounded bg-surface-container flex items-center justify-between md:col-span-2 lg:col-span-1">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg font-semibold text-primary">Architectural Society of Kenya</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">CC BY-NC 4.0</span>
+</div>
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-primary font-mono text-label-sm text-label-sm font-bold">1 photo</span>
+</div>
+</div>
+<!-- Face Cadastre Protocol Callout -->
+<div class="flex items-center gap-space-sm p-space-sm rounded bg-secondary-container text-on-secondary-fixed-variant">
+<span class="material-symbols-outlined text-[20px] text-secondary">shield</span>
+<p class="font-body-sm text-body-sm">
+<span class="font-semibold">Curatorial Ethics:</span> All plates pass Zero-Face Cadastre screening. Facial anonymity verified across 28 plates in compliance with ReelWorld Architectural Observation Ethics.
+            </p>
+</div>
+</div>
+</section>
+<!-- Section 7: Related places -->
+<section class="flex flex-col gap-space-md">
+<div class="flex items-baseline justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[22px]">share_location</span>
+<h2 class="font-headline-md text-headline-md text-primary">Related places</h2>
+</div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">CBD Architectural Continuum</span>
+</div>
+<div class="flex flex-wrap gap-space-sm">
+<a class="px-space-md py-space-sm rounded bg-surface-container-high hover:bg-surface-variant text-on-surface flex items-center gap-space-xs font-label-md text-label-md transition-colors shadow-sm" href="#">
+<span class="font-semibold text-primary">Harambee Avenue Government Precinct</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">18 photos</span>
+</a>
+<a class="px-space-md py-space-sm rounded bg-surface-container-high hover:bg-surface-variant text-on-surface flex items-center gap-space-xs font-label-md text-label-md transition-colors shadow-sm" href="#">
+<span class="font-semibold text-primary">Supreme Court East Portico</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">12 photos</span>
+</a>
+<a class="px-space-md py-space-sm rounded bg-surface-container-high hover:bg-surface-variant text-on-surface flex items-center gap-space-xs font-label-md text-label-md transition-colors shadow-sm" href="#">
+<span class="font-semibold text-primary">City Market Nave</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">24 photos</span>
+</a>
+<a class="px-space-md py-space-sm rounded bg-surface-container-high hover:bg-surface-variant text-on-surface flex items-center gap-space-xs font-label-md text-label-md transition-colors shadow-sm" href="#">
+<span class="font-semibold text-primary">Parliament Buildings Clock Tower</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">16 photos</span>
+</a>
+<a class="px-space-md py-space-sm rounded bg-surface-container-high hover:bg-surface-variant text-on-surface flex items-center gap-space-xs font-label-md text-label-md transition-colors shadow-sm" href="#">
+<span class="font-semibold text-primary">CBK Pension Towers</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">15 photos</span>
+</a>
+<a class="px-space-md py-space-sm rounded bg-surface-container-high hover:bg-surface-variant text-on-surface flex items-center gap-space-xs font-label-md text-label-md transition-colors shadow-sm" href="#">
+<span class="font-semibold text-primary">Jamia Mosque Courtyard</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">19 photos</span>
+</a>
+</div>
+</section>
+</div>
+</div>
+</div>
+<script>
+  (function initKiccPlaceInteractions() {
+    const findMineBtn = document.getElementById('find-mine-btn');
+    if (findMineBtn) {
+      findMineBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 120, behavior: 'smooth' });
+      });
+    }
+  })();
+</script></main><footer class="w-full bg-surface-container-low mt-space-xl py-space-xl"><div class="w-full px-margin-mobile md:px-margin-tablet lg:px-margin flex flex-col md:flex-row items-start md:items-center justify-between gap-space-lg"><div class="flex flex-col gap-space-xs"><span class="font-label-lg text-label-lg text-primary">ReelWorld Archival Visual Knowledge Base</span><p class="font-body-sm text-body-sm text-on-surface-variant max-w-xl">Preserving East African cultural and documentary photographic histories through mineral-grade digitization, archival taxonomy, and open conversational intelligence.</p></div><div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-md md:gap-space-lg font-label-sm text-label-sm text-on-surface-variant"><span class="hover:text-on-surface cursor-pointer transition-colors">Provenance &amp; Ingestion Protocols</span><span class="hover:text-on-surface cursor-pointer transition-colors">Curatorial Attribution Ethics</span><span class="hover:text-on-surface cursor-pointer transition-colors">East Africa Regional Mirror (NBO-01)</span></div></div></footer></body></html>

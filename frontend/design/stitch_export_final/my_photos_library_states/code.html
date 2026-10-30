@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-error-container":"#93000a","on-secondary":"#ffffff","on-surface":"#1d1b19","tertiary":"#0e0100","secondary-fixed":"#c9ead8","secondary":"#476556","surface":"#fef8f4","on-primary-fixed":"#191c21","inverse-primary":"#c4c6cd","tertiary-container":"#3d0d00","secondary-fixed-dim":"#aecebc","on-surface-variant":"#45474b","tertiary-fixed-dim":"#ffb59c","surface-tint":"#5c5e64","on-primary-container":"#83868c","surface-container-lowest":"#ffffff","error":"#ba1a1a","surface-variant":"#e6e2de","on-error":"#ffffff","surface-container-highest":"#e6e2de","surface-dim":"#ded9d5","surface-container-low":"#f8f3ef","on-secondary-fixed-variant":"#304d3f","secondary-container":"#c9ead8","on-tertiary-fixed-variant":"#822801","surface-container-high":"#ece7e3","error-container":"#ffdad6","primary-container":"#1b1e23","on-background":"#1d1b19","primary-fixed":"#e1e2e9","inverse-surface":"#32302e","outline":"#76777b","on-tertiary-container":"#d5643b","on-tertiary":"#ffffff","surface-container":"#f2ede9","on-secondary-container":"#4d6b5c","surface-bright":"#fef8f4","primary":"#030408","background":"#fef8f4","outline-variant":"#c6c6cb","on-primary-fixed-variant":"#44474c","tertiary-fixed":"#ffdbcf","on-primary":"#ffffff","on-secondary-fixed":"#032015","primary-fixed-dim":"#c4c6cd","inverse-on-surface":"#f5f0ec","on-tertiary-fixed":"#390c00"},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},spacing:{"margin-tablet":"2rem","space-sm":"0.5rem","space-xs":"0.25rem","gutter":"1.5rem","margin":"3rem","space-md":"1rem","margin-mobile":"1.25rem","space-xl":"2.5rem","gutter-mobile":"1rem","space-lg":"1.5rem"},fontFamily:{"label-md":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"display-lg-mobile":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"]},fontSize:{"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.04em",fontWeight:"600"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-lg-mobile":["26px",{lineHeight:"34px",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-sm":["20px",{lineHeight:"28px",fontWeight:"600"}],"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.005em",fontWeight:"600"}],"body-sm":["13px",{lineHeight:"20px",fontWeight:"400"}],"display-lg-mobile":["36px",{lineHeight:"44px",letterSpacing:"-0.015em",fontWeight:"700"}],"label-lg":["14px",{lineHeight:"20px",letterSpacing:"0.02em",fontWeight:"600"}],"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.06em",fontWeight:"500"}],"display-lg":["56px",{lineHeight:"64px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-lg":["18px",{lineHeight:"28px",fontWeight:"400"}],"body-md":["15px",{lineHeight:"24px",fontWeight:"400"}]}}};</script></head><body class="bg-background font-body-md text-on-surface min-h-screen selection:bg-tertiary-fixed selection:text-on-tertiary-fixed"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(27,30,35,0.04)]"><div class="h-20 w-full px-margin-mobile md:px-margin-tablet lg:px-margin flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-md"><span class="font-headline-sm text-headline-sm tracking-tight text-primary-container uppercase">ReelWorld Visual Archive</span><div class="hidden sm:inline-flex items-center gap-space-xs px-space-sm py-space-xs rounded bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Built with Muse Spark Open v2.4</div></div><nav class="hidden lg:flex items-center gap-space-lg" data-active-classes="bg-primary-container text-on-primary font-label-md text-label-md rounded px-space-sm py-space-xs shadow-[0_2px_8px_rgba(27,30,35,0.08)]"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="world" href="#">World</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="my-photos" href="#">My Photos (84)</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="connected" href="#">Connected</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="stories" href="#">Stories</a></nav><div class="flex items-center gap-space-md"><div class="inline-flex items-center gap-space-xs px-space-sm py-space-xs rounded bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>Nairobi Edge Cluster: Online (32ms)</div></div></div></header><main class="w-full pt-20 bg-background min-h-[calc(100vh-140px)]"><div class="flex flex-col w-full">
+<!-- Interactive View State Controller Header -->
+<section class="w-full px-margin-mobile md:px-margin-tablet lg:px-margin py-space-md bg-surface-container-low shadow-sm">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary">Repository Partition</span>
+<span class="text-outline">/</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface font-semibold">My Photos</span>
+</div>
+<h1 class="font-headline-md text-headline-md text-primary tracking-tight">Library Lifecycle States</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-2xl">
+          Visual inventory and protocol validation matrix for isolated local photographic enclaves within the Nairobi CBD architectural registry.
+        </p>
+</div>
+<!-- State Tab Selectors -->
+<div class="flex flex-wrap items-center gap-1.5 p-1.5 rounded-lg bg-surface-container-high" id="state-tabs-container">
+<button class="state-tab-btn active px-3.5 py-2.5 min-h-[44px] rounded font-label-md text-label-md transition-all flex items-center gap-1.5 bg-primary-container text-on-primary shadow-sm" data-state-tab="all" type="button">
+<span class="material-symbols-outlined text-[18px]">view_quilt</span>
+<span>Matrix Overview</span>
+</button>
+<button class="state-tab-btn px-3.5 py-2.5 min-h-[44px] rounded font-label-md text-label-md transition-all flex items-center gap-1.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container" data-state-tab="state-1" type="button">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span>1. Demo Enclave</span>
+</button>
+<button class="state-tab-btn px-3.5 py-2.5 min-h-[44px] rounded font-label-md text-label-md transition-all flex items-center gap-1.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container" data-state-tab="state-2" type="button">
+<span class="material-symbols-outlined text-[18px]">photo_library</span>
+<span>2. Empty Mount</span>
+</button>
+<button class="state-tab-btn px-3.5 py-2.5 min-h-[44px] rounded font-label-md text-label-md transition-all flex items-center gap-1.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container" data-state-tab="state-3" type="button">
+<span class="material-symbols-outlined text-[18px]">hourglass_top</span>
+<span>3. Live Ingestion</span>
+</button>
+<button class="state-tab-btn px-3.5 py-2.5 min-h-[44px] rounded font-label-md text-label-md transition-all flex items-center gap-1.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container" data-state-tab="state-4" type="button">
+<span class="material-symbols-outlined text-[18px]">sync_problem</span>
+<span>4. Error Recovery</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Main Multi-State Showcase Layout -->
+<div class="w-full px-margin-mobile md:px-margin-tablet lg:px-margin py-space-xl flex flex-col gap-space-xl" id="states-root">
+<!-- ========================================================================= -->
+<!-- STATE 1: PUBLIC DEMO STATE -->
+<!-- ========================================================================= -->
+<section class="state-section flex flex-col gap-space-lg transition-all duration-300" id="state-1">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="w-7 h-7 rounded flex items-center justify-center bg-primary-container text-on-primary font-label-sm text-label-sm">01</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary">Public Demo State</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Sandboxed research viewer with write-protected ingestion pipelines.</p>
+</div>
+</div>
+<span class="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+          Enclave Lock Active
+        </span>
+</div>
+<!-- Demo Enclave Notice Banner -->
+<div class="bg-surface-container rounded-lg p-space-lg md:p-space-xl shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-tertiary-fixed/15 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
+<div class="relative z-10 flex flex-col xl:flex-row xl:items-center justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs max-w-3xl">
+<div class="inline-flex items-center gap-space-xs px-2.5 py-1 rounded bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm uppercase tracking-wider self-start">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+              Demo Mode • Read-Only Enclave
+            </div>
+<h3 class="font-headline-sm text-headline-sm text-primary">
+              This is a demo library of sample photos. Uploads are turned off in the public demo.
+            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Browse 84 pre-indexed Nairobi architectural captures. To upload and test real-time cadastre extraction in an isolated enclave, provide your researcher access code.
+            </p>
+</div>
+<!-- Inline Researcher Unlock Form -->
+<div class="flex flex-col gap-space-xs bg-surface-container-high p-space-md rounded-lg shadow-sm min-w-[320px] md:min-w-[360px]">
+<label class="font-label-md text-label-md text-primary flex items-center justify-between" for="demo-passcode">
+<span>Have a demo code?</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Institution SSO / Grant</span>
+</label>
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+<div class="relative flex-1">
+<input class="w-full h-11 px-3 py-2 bg-surface-container-lowest rounded font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-on-tertiary-container shadow-inner" id="demo-passcode" placeholder="e.g., RESEARCH-NBO-2024" type="text"/>
+</div>
+<button class="min-h-[44px] px-4 py-2.5 rounded bg-primary-container text-on-primary hover:bg-tertiary-container font-label-md text-label-md tracking-wide uppercase transition-colors flex items-center justify-center gap-2 active:scale-95" id="unlock-demo-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">key</span>
+<span>Unlock Uploads</span>
+</button>
+</div>
+<span class="font-label-sm text-label-sm text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">shield</span>
+              Tokens are verified locally via WebAssembly Ed25519 signatures
+            </span>
+</div>
+</div>
+</div>
+<!-- Demo State Action Bar & Gallery Preview -->
+<div class="bg-surface-container-low rounded-lg p-space-md md:p-space-lg flex flex-col gap-space-md">
+<div class="flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-lg text-label-lg text-primary">Curated Registry Samples</span>
+<span class="px-2 py-0.5 rounded bg-surface-variant text-on-surface-variant font-label-sm text-label-sm">84 items mounted</span>
+</div>
+<!-- Disabled Upload Button -->
+<div class="flex items-center gap-space-sm">
+<button aria-disabled="true" class="min-h-[44px] px-4 py-2.5 rounded bg-surface-dim text-on-surface-variant cursor-not-allowed font-label-md text-label-md flex items-center gap-2 opacity-80" disabled="" title="Uploads disabled in demo mode" type="button">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+<span>Add photos (Disabled in Demo)</span>
+</button>
+<button class="min-h-[44px] px-3.5 py-2.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+<span>Taxonomy Filter</span>
+</button>
+</div>
+</div>
+<!-- 3 Archetypal Sample Photo Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Sample Card 1 -->
+<article class="bg-surface-container rounded-lg p-3 flex flex-col gap-2.5 shadow-sm hover:shadow-md transition-shadow">
+<div class="p-2.5 bg-surface-container-high rounded flex flex-col gap-2">
+<div class="relative overflow-hidden rounded aspect-[4/3] bg-surface-variant">
+<img class="w-full h-full object-cover grayscale contrast-125" data-alt="Monochrome archival photograph of the Kenyatta International Conference Centre tower in Nairobi showing concrete fluted columns and textured brise-soleil under soft diffused equatorial morning light, mineral warm paper tone, documentary architectural framing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYkgU3yu7BcIu_HOwnt9_tHzHuDX1hVbY8Wo0gaszYPdJvcVGFZV_GYK04HRohPR3qNEAe6w6FXpXT8Z_Vf8NgU4aisk5XnCMVs9_2_B_tl_18HJg1DkZhFq5ZTmUQAU16-BuftojJ0eJvKceX6_3gy7ObjKcDQ3F3vugvpPcqZSkX_LEfNwliXS0xWNLJc7_P2_GGTfi7vm32onJuvJvWKZl7XaE8CQBYDF-WbMo"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded bg-primary-container/85 text-on-primary font-label-sm text-label-sm tracking-wider uppercase backdrop-blur-sm">
+                  Sample Capture #DEMO-01
+                </span>
+</div>
+</div>
+<div class="flex flex-col gap-1 px-1">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-secondary font-semibold uppercase">Nairobi Central Cadastre</span>
+<span class="font-label-sm text-label-sm text-outline">Brutalist / Modernist</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-primary">KICC Cylindrical Plinth &amp; Podium</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+                Structural feature vectors identify hyperbolic paraboloid amphitheater and fluted concrete skin.
+              </p>
+</div>
+</article>
+<!-- Sample Card 2 -->
+<article class="bg-surface-container rounded-lg p-3 flex flex-col gap-2.5 shadow-sm hover:shadow-md transition-shadow">
+<div class="p-2.5 bg-surface-container-high rounded flex flex-col gap-2">
+<div class="relative overflow-hidden rounded aspect-[4/3] bg-surface-variant">
+<img class="w-full h-full object-cover grayscale contrast-125" data-alt="Architectural documentary photo of Nairobi City Market vaulted market hall roof ribs and stone masonry entryway arches, sun-cured archival warm tones, deep earth shadows, textured papyrus patina." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDijGfbGqGuqAienzWGVNmve2H9k5ynpRYzCBIvCaNUaawNbBNb7zN763-_lJsO7nSSO2kBYbrFF0gVftTMp2-XACK_jHGgSIS8DXDs-HCuzhcEpy4qZqeq7YmpIzyWp18dJSreOpPBdMzpSy3iVztz7LjB7bCKLpPub_CdhergLz72lPJp-HZHk6b4R9n9edACc1v6brYFDFADs0oOuXP6BG6CCB9WqRGURQ60isM"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded bg-primary-container/85 text-on-primary font-label-sm text-label-sm tracking-wider uppercase backdrop-blur-sm">
+                  Sample Capture #DEMO-02
+                </span>
+</div>
+</div>
+<div class="flex flex-col gap-1 px-1">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-secondary font-semibold uppercase">Muindi Mbingu Precinct</span>
+<span class="font-label-sm text-label-sm text-outline">Pre-War Steel Truss</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-primary">City Market Hall Barrel Ribbing</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+                Parapet profile matches colonial municipal archives with vaulted concrete lattice work.
+              </p>
+</div>
+</article>
+<!-- Sample Card 3 -->
+<article class="bg-surface-container rounded-lg p-3 flex flex-col gap-2.5 shadow-sm hover:shadow-md transition-shadow">
+<div class="p-2.5 bg-surface-container-high rounded flex flex-col gap-2">
+<div class="relative overflow-hidden rounded aspect-[4/3] bg-surface-variant">
+<img class="w-full h-full object-cover grayscale contrast-125" data-alt="Medium format architectural capture of the Central Bank of Kenya modern towers and Haile Selassie Avenue civic frontage, mineral grain, ochre reflections on solar glass, museum stock aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2zuCNAN3vtRvebZYJa83xDBvJEqtx-_zUPwz-Z-ypZ8WtQ6j22gus93Ww_odR0Q56eTjlWChrhrMTYcigM1XwSO0hvNsxoxJz7DTkzsRPmBfPNYSwnWoQ6gResJNvdE4U6fV9JVrNJxP1CadbbUivW8C_0GvSR-zuDqwx-cjlwACxmkRmqOcYqR-N5r8B7r8cL4bSnmz1Krk1tM1z7Gj2L17pEZTkVfLoE5idfUE"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded bg-primary-container/85 text-on-primary font-label-sm text-label-sm tracking-wider uppercase backdrop-blur-sm">
+                  Sample Capture #DEMO-03
+                </span>
+</div>
+</div>
+<div class="flex flex-col gap-1 px-1">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-secondary font-semibold uppercase">Haile Selassie Corridor</span>
+<span class="font-label-sm text-label-sm text-outline">Late Modern Granite</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-primary">CBK High-Rise Granite Finning</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+                Angle triangulated from southern vantage elevation; inscribed lintel matched to civic bank registry.
+              </p>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- STATE 2: EMPTY LIBRARY (FIRST-TIME USER) -->
+<!-- ========================================================================= -->
+<section class="state-section flex flex-col gap-space-lg transition-all duration-300" id="state-2">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="w-7 h-7 rounded flex items-center justify-center bg-primary-container text-on-primary font-label-sm text-label-sm">02</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary">Empty Library State</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Initial zero-mount canvas for researchers establishing a clean enclave.</p>
+</div>
+</div>
+<span class="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm uppercase tracking-wider">
+<span class="material-symbols-outlined text-[16px]">fingerprint</span>
+          Isolated Enclave Ready
+        </span>
+</div>
+<!-- Large Archival Illustration Empty Mount Box -->
+<div class="relative bg-surface-container rounded-lg p-space-lg md:p-space-xl text-center flex flex-col items-center justify-center shadow-sm overflow-hidden">
+<!-- Archival corner framing bracket accents -->
+<div class="absolute top-4 left-4 w-5 h-5 flex flex-col justify-between pointer-events-none">
+<div class="w-5 h-0.5 bg-outline"></div>
+<div class="w-0.5 h-4 bg-outline"></div>
+</div>
+<div class="absolute top-4 right-4 w-5 h-5 flex flex-col items-end justify-between pointer-events-none">
+<div class="w-5 h-0.5 bg-outline"></div>
+<div class="w-0.5 h-4 bg-outline self-end"></div>
+</div>
+<div class="absolute bottom-4 left-4 w-5 h-5 flex flex-col justify-between pointer-events-none">
+<div class="w-0.5 h-4 bg-outline"></div>
+<div class="w-5 h-0.5 bg-outline"></div>
+</div>
+<div class="absolute bottom-4 right-4 w-5 h-5 flex flex-col items-end justify-between pointer-events-none">
+<div class="w-0.5 h-4 bg-outline self-end"></div>
+<div class="w-5 h-0.5 bg-outline"></div>
+</div>
+<div class="max-w-2xl flex flex-col items-center gap-space-md my-space-md">
+<!-- Mineral Emblem Icon -->
+<div class="w-20 h-20 rounded-full bg-surface-container-highest flex items-center justify-center text-primary-container shadow-inner">
+<span class="material-symbols-outlined text-[40px] text-tertiary-container">add_a_photo</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-headline-lg text-headline-lg text-primary tracking-tight">
+              Add your first photo and I will work out where it was taken
+            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl mx-auto">
+              ReelWorld examines architectural features, inscriptions, parapets, and vantage angles directly on your device. Nothing leaves your private enclave.
+            </p>
+</div>
+<!-- Primary Actions -->
+<div class="flex flex-col sm:flex-row items-center gap-space-md mt-space-sm">
+<button class="min-h-[48px] px-6 py-3 rounded bg-tertiary-container text-tertiary-fixed hover:bg-tertiary transition-colors font-label-lg text-label-lg tracking-wider uppercase flex items-center gap-2 shadow-sm active:scale-95" type="button">
+<span class="material-symbols-outlined text-[20px]">upload</span>
+<span>Add your first photo</span>
+</button>
+<span class="font-label-md text-label-md text-on-surface-variant">or drag and drop here</span>
+</div>
+<!-- Micro specs badge -->
+<div class="flex flex-wrap items-center justify-center gap-space-md pt-space-xs text-outline font-label-sm text-label-sm uppercase tracking-wider">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">shield_person</span>Zero Cloud Storage</span>
+<span>•</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">memory</span>Local Neural Hash</span>
+<span>•</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">domain</span>Nairobi CBD Triangulation</span>
+</div>
+</div>
+</div>
+<!-- "What happens next?" Archival Guidance Cards -->
+<div class="flex flex-col gap-space-sm">
+<span class="font-label-md text-label-md uppercase tracking-wider text-secondary font-semibold">Onboarding Architecture • What happens next?</span>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<div class="bg-surface-container rounded-lg p-space-md flex flex-col gap-space-xs shadow-sm">
+<div class="flex items-center justify-between">
+<span class="w-6 h-6 rounded bg-surface-container-high text-primary font-label-sm text-label-sm flex items-center justify-center">1</span>
+<span class="material-symbols-outlined text-[20px] text-secondary">architecture</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-primary">Feature Extraction</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Detects masonry, signs, and building profiles using an offline 14MB model compiled for WebAssembly.
+            </p>
+</div>
+<div class="bg-surface-container rounded-lg p-space-md flex flex-col gap-space-xs shadow-sm">
+<div class="flex items-center justify-between">
+<span class="w-6 h-6 rounded bg-surface-container-high text-primary font-label-sm text-label-sm flex items-center justify-center">2</span>
+<span class="material-symbols-outlined text-[20px] text-secondary">explore</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-primary">Place Identification</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Matches against the open Nairobi cadastre ledger, identifying architectural elevations without needing GPS metadata.
+            </p>
+</div>
+<div class="bg-surface-container rounded-lg p-space-md flex flex-col gap-space-xs shadow-sm">
+<div class="flex items-center justify-between">
+<span class="w-6 h-6 rounded bg-surface-container-high text-primary font-label-sm text-label-sm flex items-center justify-center">3</span>
+<span class="material-symbols-outlined text-[20px] text-secondary">collections_bookmark</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-primary">Private Smart Albums</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Automatically groups by place, viewpoint, and bursts while indexing archival relationships inside browser storage.
+            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- STATE 3: UPLOADING (ACTIVE INGESTION STATE) -->
+<!-- ========================================================================= -->
+<section class="state-section flex flex-col gap-space-lg transition-all duration-300" id="state-3">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="w-7 h-7 rounded flex items-center justify-center bg-primary-container text-on-primary font-label-sm text-label-sm">03</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary">Ingestion &amp; Uploading State</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Real-time local batch extraction, hashing, and cadastre lookups.</p>
+</div>
+</div>
+<span class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm uppercase tracking-wider">
+<span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+          Ingestion Queue Running
+        </span>
+</div>
+<!-- Ingestion Status Bar -->
+<div class="bg-surface-container rounded-lg p-space-md flex flex-col sm:flex-row sm:items-center justify-between gap-space-md shadow-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">cloud_sync</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-primary">Ingesting 3 photos • Local Enclave Active</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">2 threads processing local tensor geometry • Edge mirror roundtrip: 32ms</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="min-h-[44px] px-4 py-2 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1.5 active:scale-95" type="button">
+<span class="material-symbols-outlined text-[18px]">pause</span>
+<span>Pause Batch</span>
+</button>
+<button class="min-h-[44px] px-4 py-2 rounded bg-surface-container-high hover:bg-error-container hover:text-on-error-container text-on-surface-variant font-label-md text-label-md transition-colors flex items-center gap-1.5 active:scale-95" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+<span>Cancel remaining</span>
+</button>
+</div>
+</div>
+<!-- Ingestion Progress Grid (Cards A, B, & Completed) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Card A: Hashing Progress (82%) -->
+<article class="bg-surface-container rounded-lg p-4 flex flex-col gap-3 shadow-sm relative overflow-hidden">
+<div class="p-2.5 bg-surface-container-high rounded flex flex-col gap-2">
+<div class="relative overflow-hidden rounded aspect-[4/3] bg-surface-variant">
+<img class="w-full h-full object-cover grayscale opacity-90" data-alt="Crisp black and white high-contrast telephoto framing of the Parliament Buildings clock tower spire in Nairobi CBD, stone clock face, clear structural edges under midday tropical sun." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6fGfFQATc6jV0bdaR6GdfddjKIEZI_956x9O0k_Xfe4GXoiZ2xwD1GaM0HKiZV8cjMLGR_Q3Xccseywf3Jdvmj4lRXANLdSY-iylonBDNCgwMWf1J6qVui_N2tXtxUnhGDpKjjdJmuj_z4b7C9G005ZeoDLJCERppXuMxB6_ReJPuExjMUzJr_Sv1wN2SsJk2D0A-KxDKGnjuPzsocMkawSuu6NO2DGj6-8EFwqg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent flex items-end p-2.5">
+<span class="font-label-sm text-label-sm text-on-primary uppercase font-mono">PARL_EAST_ELEV_009.CR3</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wide text-secondary font-semibold">Stage 1 of 4: SHA-512</span>
+<span class="font-label-md text-label-md font-mono text-primary font-bold">82%</span>
+</div>
+<!-- Progress bar -->
+<div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden">
+<div class="h-full bg-tertiary-container rounded-full transition-all duration-300" style="width: 82%;"></div>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-primary">Uploading &amp; calculating hashes... (82%)</h4>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm pt-1">
+<span>File size: 28.4 MB</span>
+<span class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-[16px] animate-spin">sync</span>
+                Hashing local blocks
+              </span>
+</div>
+</div>
+</article>
+<!-- Card B: Reading Signs & Masonry Features (Stage 2 of 4) -->
+<article class="bg-surface-container rounded-lg p-4 flex flex-col gap-3 shadow-sm relative overflow-hidden">
+<!-- Subtle warm pulsing shimmer glow -->
+<div class="absolute -inset-1 bg-gradient-to-r from-transparent via-tertiary-fixed/20 to-transparent opacity-50 animate-pulse pointer-events-none"></div>
+<div class="p-2.5 bg-surface-container-high rounded flex flex-col gap-2 relative">
+<div class="relative overflow-hidden rounded aspect-[4/3] bg-surface-variant">
+<img class="w-full h-full object-cover grayscale opacity-90" data-alt="Close up architectural detail of historic carved coral rag masonry and weathered wooden shutter lintels on a historic government lane in central Nairobi, architectural archival lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0zLzZBoK8DpR641COGiVM6Q8fmaGehbRVY_wgR_Mx3XdKFQ5_kew_Jo5W9DcXal1UMUH0AeSnx5zi0npp8wbfPlqtqVQYtLbk--HpJhocPfS0WDyrOfGoWKJqB5_M14lZo1ESGoEZBvNhrsICpQa5SD4MGuGa7UZae-POsGP4ZPeI0MaKF38bHpr7-NE_Qf4sA0D0RIexpDwrfzwQXHprPUgcoHIHb6vUxOdUaPw"/>
+<div class="absolute inset-0 bg-primary/30 flex items-center justify-center">
+<!-- Animated spinning ring badge -->
+<div class="px-3 py-1.5 rounded-full bg-surface-container/90 backdrop-blur-md flex items-center gap-2 shadow-md">
+<svg class="w-4 h-4 text-tertiary-container animate-spin" fill="none" viewbox="0 0 24 24">
+<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+<path class="opacity-75" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" fill="currentColor"></path>
+</svg>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider font-semibold">Analyzing Tessera</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-2 relative">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wide text-secondary font-semibold">Stage 2 of 4: CADASTRE RESOLVE</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">14 / 28 features</span>
+</div>
+<!-- Stage 2 Progress Bar -->
+<div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden">
+<div class="h-full bg-secondary rounded-full transition-all duration-300" style="width: 50%;"></div>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-primary">Reading signs &amp; masonry features...</h4>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm pt-1">
+<span>File size: 19.8 MB</span>
+<span class="text-tertiary-container font-semibold">Tensor Match 89%</span>
+</div>
+</div>
+</article>
+<!-- Card C: Enclave Complete (Queue Position 3) -->
+<article class="bg-surface-container rounded-lg p-4 flex flex-col gap-3 shadow-sm">
+<div class="p-2.5 bg-surface-container-high rounded flex flex-col gap-2">
+<div class="relative overflow-hidden rounded aspect-[4/3] bg-surface-variant">
+<img class="w-full h-full object-cover grayscale opacity-90" data-alt="Archival study of the National Theatre colonnade facade in Nairobi, architectural pediment, classic warm sunlight casting sharp geometrical shadows across pale plaster surfaces." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6zNeInupGmjpJmaf9fkD3JUX7A1xhj564bv0HxjKaQSso22CLFfXm7PNZsQDLGXiZo9o37OuLAUS0ALwP8qJhJvuSFYsl6guQH7VhTo0pQ-PfEJRTTfQ0SQHBHNeEo-C0cgetCJ0z8mFyn3G5e0zVbTWXy0wXCkAbvTlh4y8scSln0_fXPB0eTFqVD8lD7gF63McYPF6CYX3KSOkOrdYmSZyt-D1xdoDordt9K4k"/>
+<span class="absolute top-2 right-2 px-2 py-0.5 rounded bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm uppercase tracking-wider">
+                Queued • Awaiting Slot
+              </span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wide text-outline font-semibold">Stage 0 of 4: PENDING</span>
+<span class="font-label-sm text-label-sm text-outline">Buffer #3</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-highest">
+<div class="h-full bg-outline rounded-full" style="width: 5%;"></div>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-primary">Nairobi National Theatre Portico</h4>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm pt-1">
+<span>File size: 31.2 MB</span>
+<span class="text-outline">Waiting for Worker 01</span>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- STATE 4: ERROR WITH RETRY (CALM ERROR RECOVERY) -->
+<!-- ========================================================================= -->
+<section class="state-section flex flex-col gap-space-lg transition-all duration-300" id="state-4">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="w-7 h-7 rounded flex items-center justify-center bg-primary-container text-on-primary font-label-sm text-label-sm">04</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary">Error Recovery State</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Non-destructive network fault handling with zero browser data loss.</p>
+</div>
+</div>
+<span class="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded bg-error-container text-on-error-container font-label-sm text-label-sm uppercase tracking-wider">
+<span class="material-symbols-outlined text-[16px]">sync_problem</span>
+          Edge Resolution Stalled
+        </span>
+</div>
+<!-- Archival Error Recovery Banner Container -->
+<div class="bg-surface-container rounded-lg p-space-lg md:p-space-xl shadow-sm flex flex-col gap-space-lg">
+<div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest text-on-surface flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[28px] text-tertiary-container">cloud_off</span>
+</div>
+<div class="flex flex-col gap-1 max-w-2xl">
+<h3 class="font-headline-md text-headline-md text-primary">
+                Could not connect 1 photo to the world
+              </h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                Network connection to the Nairobi Edge Cluster timed out while resolving cadastre links. Your original photo and local feature vectors are safely stored in your browser enclave.
+              </p>
+</div>
+</div>
+<!-- Honest Diagnosis Box -->
+<div class="bg-surface-container-high rounded p-space-sm px-space-md flex flex-col gap-1 self-stretch lg:self-auto min-w-[280px]">
+<div class="flex items-center justify-between text-outline font-label-sm text-label-sm uppercase tracking-wider">
+<span>Diagnostic Receipt</span>
+<span class="text-secondary font-semibold">Integrity Verified</span>
+</div>
+<span class="font-mono text-label-md text-label-md text-primary font-semibold">
+              Error code: CLUSTER_EDGE_TIMEOUT_408
+            </span>
+<span class="font-label-sm text-label-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+              0 data lost • Hash 9f8a3c… cached locally
+            </span>
+</div>
+</div>
+<!-- Problem Artifact Card & Action Options -->
+<div class="p-space-md bg-surface-container-low rounded-lg flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md w-full md:w-auto">
+<div class="w-20 h-20 rounded bg-surface-container-high overflow-hidden shrink-0 relative">
+<img class="w-full h-full object-cover grayscale opacity-80" data-alt="Archival study of the masonry frieze on the Supreme Court building in Nairobi, neoclassical stonework columns, warm paper tones, museum archive lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoVFbQPAYuLla2Yl_sqJL6Da0qbus9TXjV6Y19Rprqk-fV0RR08WrAXFx43NU1qD-bEqn3A-IDmNp4NtqvVzRKbcmwn5sDlBmYU-jN_Js5ANfTZxeFo4xsG2gGCF_2WBKUn1KEi-OTiOV7AjE62IN4jL3ToNjVn7SNSE2TDjqlmzWv5fBVGP7Tfly93SwlvYZBH8GJYJDlkjOqo4buN2n9Syc4za9egaZZ3NSPDSQ"/>
+<span class="absolute bottom-1 right-1 px-1 py-0.5 rounded bg-error-container text-on-error-container font-label-sm text-[10px] leading-tight font-semibold">
+                Unlinked
+              </span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-primary">Supreme Court East Masonry Lintel</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">34.1 MB RAW • 42 local keypoints extracted • Missing cadastre peer confirmation</span>
+</div>
+</div>
+<!-- Action Buttons (Touch targets >= 44px) -->
+<div class="flex flex-wrap items-center gap-2.5 w-full md:w-auto justify-end">
+<button class="min-h-[44px] px-5 py-2.5 rounded bg-tertiary-container text-tertiary-fixed hover:bg-tertiary transition-colors font-label-md text-label-md uppercase tracking-wider flex items-center gap-2 shadow-sm active:scale-95" id="retry-connection-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">replay</span>
+<span>Retry connection</span>
+</button>
+<button class="min-h-[44px] px-4 py-2.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1.5 active:scale-95" type="button">
+<span class="material-symbols-outlined text-[18px]">folder_off</span>
+<span>Keep as offline unlinked photo</span>
+</button>
+<button class="min-h-[44px] px-3.5 py-2.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1" id="view-log-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+<span>View technical log</span>
+</button>
+</div>
+</div>
+<!-- Technical Telemetry Collapsible Log Drawer (Hidden by default, toggleable) -->
+<div class="hidden bg-primary-container text-on-primary rounded p-space-md font-mono text-label-sm text-label-sm flex flex-col gap-1.5" id="technical-log-panel">
+<div class="flex items-center justify-between text-on-primary-container border-b border-on-primary-container/20 pb-1">
+<span>Edge Gateway Log Trace — Nairobi-01 (KIXP Interface)</span>
+<span>Handshake TTL expired at 30000ms</span>
+</div>
+<p class="text-secondary-fixed">[08:14:22.102] Local Tensor Worker #02 completed feature map [42 vectors in 184ms]</p>
+<p class="text-on-primary-container">[08:14:22.288] Attempting mirror sync with https://nbo-edge-01.reelworld.archive/v1/cadastre</p>
+<p class="text-error-container">[08:14:52.290] HTTP 408 REQUEST_TIMEOUT: Gateway worker pool saturated. Connection aborted safely.</p>
+<p class="text-secondary-fixed">[08:14:52.292] ENCLAVE GUARANTEE: In-memory artifact persisted to IndexedDB blob store. No bits discarded.</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Inline Script for Tab Switching and Micro-Interactions -->
+<script>
+    (function() {
+      // Tab selector behavior for Lifecycle States Showcase
+      const tabButtons = document.querySelectorAll('.state-tab-btn');
+      const sections = {
+        'state-1': document.getElementById('state-1'),
+        'state-2': document.getElementById('state-2'),
+        'state-3': document.getElementById('state-3'),
+        'state-4': document.getElementById('state-4')
+      };
+
+      tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const target = btn.getAttribute('data-state-tab');
+
+          // Style tabs
+          tabButtons.forEach(b => {
+            b.classList.remove('bg-primary-container', 'text-on-primary', 'shadow-sm');
+            b.classList.add('text-on-surface-variant');
+          });
+          btn.classList.remove('text-on-surface-variant');
+          btn.classList.add('bg-primary-container', 'text-on-primary', 'shadow-sm');
+
+          // Filter sections
+          if (target === 'all') {
+            Object.values(sections).forEach(sec => {
+              if (sec) sec.classList.remove('hidden');
+            });
+          } else {
+            Object.entries(sections).forEach(([key, sec]) => {
+              if (sec) {
+                if (key === target) {
+                  sec.classList.remove('hidden');
+                  sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else {
+                  sec.classList.add('hidden');
+                }
+              }
+            });
+          }
+        });
+      });
+
+      // Technical Log Toggle
+      const logBtn = document.getElementById('view-log-btn');
+      const logPanel = document.getElementById('technical-log-panel');
+      if (logBtn && logPanel) {
+        logBtn.addEventListener('click', () => {
+          logPanel.classList.toggle('hidden');
+          const isExpanded = !logPanel.classList.contains('hidden');
+          logBtn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+        });
+      }
+
+      // Retry Connection Micro-interaction feedback
+      const retryBtn = document.getElementById('retry-connection-btn');
+      if (retryBtn) {
+        retryBtn.addEventListener('click', () => {
+          const originalText = retryBtn.innerHTML;
+          retryBtn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">sync</span><span>Reconnecting to Nairobi-01...</span>';
+          retryBtn.disabled = true;
+          setTimeout(() => {
+            retryBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">done</span><span>Queued for Retry (32ms)</span>';
+            setTimeout(() => {
+              retryBtn.innerHTML = originalText;
+              retryBtn.disabled = false;
+            }, 2500);
+          }, 1200);
+        });
+      }
+
+      // Unlock Demo Code Feedback
+      const unlockBtn = document.getElementById('unlock-demo-btn');
+      const unlockInput = document.getElementById('demo-passcode');
+      if (unlockBtn && unlockInput) {
+        unlockBtn.addEventListener('click', () => {
+          if (!unlockInput.value.trim()) {
+            unlockInput.placeholder = 'Please enter a researcher token...';
+            unlockInput.focus();
+            return;
+          }
+          unlockBtn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">key</span><span>Verifying...</span>';
+          setTimeout(() => {
+            unlockBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">verified</span><span>Code Applied</span>';
+            unlockBtn.classList.remove('bg-primary-container');
+            unlockBtn.classList.add('bg-secondary', 'text-on-secondary');
+          }, 900);
+        });
+      }
+    })();
+  </script>
+</div></main><footer class="w-full bg-surface-container-low mt-space-xl py-space-xl"><div class="w-full px-margin-mobile md:px-margin-tablet lg:px-margin flex flex-col md:flex-row items-start md:items-center justify-between gap-space-lg"><div class="flex flex-col gap-space-xs"><span class="font-label-lg text-label-lg text-primary">ReelWorld Archival Visual Knowledge Base</span><p class="font-body-sm text-body-sm text-on-surface-variant max-w-xl">Preserving East African cultural and documentary photographic histories through mineral-grade digitization, archival taxonomy, and open conversational intelligence.</p></div><div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-md md:gap-space-lg font-label-sm text-label-sm text-on-surface-variant"><span class="hover:text-on-surface cursor-pointer transition-colors">Provenance &amp; Ingestion Protocols</span><span class="hover:text-on-surface cursor-pointer transition-colors">Curatorial Attribution Ethics</span><span class="hover:text-on-surface cursor-pointer transition-colors">East Africa Regional Mirror (NBO-01)</span></div></div></footer></body></html>

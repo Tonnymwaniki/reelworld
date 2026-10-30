@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-secondary":"#ffffff","surface-container-highest":"#e6e2de","error-container":"#ffdad6","on-background":"#1d1b19","secondary-fixed-dim":"#aecebc","inverse-surface":"#32302e","secondary-container":"#c9ead8","tertiary-fixed-dim":"#ffb59c","surface-variant":"#e6e2de","primary-fixed":"#e1e2e9","on-error":"#ffffff","secondary":"#476556","surface":"#fef8f4","primary-fixed-dim":"#c4c6cd","on-tertiary-fixed":"#390c00","on-secondary-fixed":"#032015","primary-container":"#1b1e23","error":"#ba1a1a","primary":"#030408","surface-container":"#f2ede9","on-primary-fixed-variant":"#44474c","tertiary-container":"#3d0d00","surface-bright":"#fef8f4","outline-variant":"#c6c6cb","surface-container-lowest":"#ffffff","on-primary":"#ffffff","surface-dim":"#ded9d5","inverse-primary":"#c4c6cd","on-tertiary":"#ffffff","inverse-on-surface":"#f5f0ec","on-error-container":"#93000a","on-surface-variant":"#45474b","on-surface":"#1d1b19","surface-container-low":"#f8f3ef","tertiary":"#0e0100","tertiary-fixed":"#ffdbcf","on-secondary-container":"#4d6b5c","on-secondary-fixed-variant":"#304d3f","outline":"#76777b","on-primary-fixed":"#191c21","surface-tint":"#5c5e64","secondary-fixed":"#c9ead8","on-primary-container":"#83868c","background":"#fef8f4","surface-container-high":"#ece7e3","on-tertiary-container":"#d5643b","on-tertiary-fixed-variant":"#822801"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-xl":"2.5rem","space-sm":"0.5rem","margin":"3rem","gutter":"1.5rem","space-xs":"0.25rem","gutter-mobile":"1rem","margin-mobile":"1.25rem","margin-tablet":"2rem","space-lg":"1.5rem","space-md":"1rem"},"fontFamily":{"display-lg":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"display-lg-mobile":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"]},"fontSize":{"display-lg":["56px",{"lineHeight":"64px","letterSpacing":"-0.02em","fontWeight":"700"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"600"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.02em","fontWeight":"600"}],"display-lg-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.015em","fontWeight":"700"}],"headline-lg-mobile":["26px",{"lineHeight":"34px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-sm":["13px",{"lineHeight":"20px","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.005em","fontWeight":"600"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],"body-md":["15px",{"lineHeight":"24px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.06em","fontWeight":"500"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased selection:bg-secondary-container selection:text-on-secondary-fixed"><header class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-28 w-full px-margin-mobile md:px-margin-tablet lg:px-margin flex flex-col justify-between pt-3 pb-0"><div class="flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-secondary text-[24px]">lens_blur</span><div class="flex items-baseline gap-1.5"><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">ReelWorld</span><span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase font-semibold">VISUAL ARCHIVE</span></div></div><div class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-lg bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm"><span class="text-secondary mr-1.5 font-bold">●</span>Built with Muse Spark Open v2.4</div></div><div class="flex items-center gap-2 px-2.5 py-1 rounded-lg bg-surface-container text-on-surface-variant font-label-sm text-label-sm"><span class="inline-block w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-medium tracking-wide uppercase">NAIROBI EDGE CLUSTER: ONLINE (32ms)</span></div></div><div class="flex items-center justify-between border-t border-surface-container-highest/60 pt-1.5 pb-2"><nav class="flex items-center gap-space-lg" data-active-classes="text-primary font-semibold border-b-2 border-primary"><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors pb-1" data-path="chat" href="#">Chat</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors pb-1" data-path="browse" href="#">Browse</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors pb-1" data-path="connected" href="#">Connected</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors pb-1" data-path="stories" href="#">Stories</a></nav><nav class="flex items-center gap-1.5 bg-surface-container-low p-0.5 rounded-lg" data-active-classes="bg-primary-container text-on-primary font-medium rounded-lg"><a class="font-label-md text-label-md px-3 py-1 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="create-story" href="#">Create</a><a class="font-label-md text-label-md px-3 py-1 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="my-stories" href="#">My stories</a><a class="font-label-md text-label-md px-3 py-1 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="showcase" href="#">Showcase</a></nav></div></div></header><main class="w-full pt-28 bg-surface min-h-[calc(100vh-140px)] px-margin-mobile md:px-margin-tablet lg:px-margin py-space-xl"><div class="flex flex-col w-full">
+<!-- Session Metadata Banner -->
+<div class="w-full bg-surface-container-high rounded-xl p-space-md mb-space-lg shadow-sm">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex flex-wrap items-center gap-space-sm">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-surface-container-highest text-on-surface font-label-sm text-label-sm uppercase tracking-wider">
+<span class="material-symbols-outlined text-[15px] text-secondary">tune</span>
+          REVIEW &amp; CURATORIAL ADJUSTMENT
+        </span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Session #RW-ST-2025-08B</span>
+<span class="text-outline-variant">•</span>
+<span class="font-headline-sm text-headline-sm text-primary">“My day at KICC”</span>
+</div>
+<div class="flex items-center gap-space-sm font-label-md text-label-md text-on-surface-variant">
+<span class="inline-flex items-center gap-1 bg-surface-container px-2.5 py-1 rounded-lg">
+<span class="material-symbols-outlined text-[16px] text-secondary">view_carousel</span>
+          4 Scenes
+        </span>
+<span class="inline-flex items-center gap-1 bg-surface-container px-2.5 py-1 rounded-lg">
+<span class="material-symbols-outlined text-[16px] text-secondary">schedule</span>
+          20.0s Total
+        </span>
+<span class="inline-flex items-center gap-1 bg-secondary-container text-on-secondary-container px-2.5 py-1 rounded-lg font-semibold">
+<span class="material-symbols-outlined text-[16px]">mail</span>
+          Postcard Style
+        </span>
+</div>
+</div>
+</div>
+<!-- Main Workstation Layout: Left Story Player, Right Curatorial Scenes -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- LEFT COLUMN: 9:16 Story Preview & Primary Directing Actions -->
+<div class="lg:col-span-5 xl:col-span-4 lg:sticky lg:top-36 flex flex-col gap-space-md">
+<!-- Player Status Callout -->
+<div class="flex items-center justify-between px-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<div class="flex items-center gap-1.5">
+<span class="inline-block w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+<span>Playing preview • Active: Scene 1</span>
+</div>
+<span class="text-secondary font-medium">Tap any scene to jump</span>
+</div>
+<!-- 9:16 Vertical Device Mat / Framed Player -->
+<div class="relative w-full aspect-[9/16] max-h-[640px] rounded-xl overflow-hidden bg-primary-container shadow-xl flex flex-col justify-between p-space-md text-on-primary">
+<!-- Background Archival Media for Active Scene -->
+<div class="absolute inset-0 bg-cover bg-center transition-all duration-500 transform scale-100" data-alt="Photographic medium format shot looking up Harambee Avenue toward the circular fluted terracotta tower of KICC in Nairobi, Kenya. Warm midday equatorial sunlight casts crisp architectural shadows across dusty concrete pavements and acacia tree fringes. Archival, analog grain, earthy warm tones." id="player-bg" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDHpSxYYRxhQLuFsZ5YOlKVxSdL4W0YbrB7j7aBYVOtsn44w-MXUt3X78i4NyT-CI5qkrsDpDl1QDwFhVeAXTo1RIErjuzlRwtV-UNTsr7ujpfOD5vRGBYfDucxBw77rIR61ATMke3OjjxM--TUX04dm3FEO-lV3RY9MFGcC0_TGEqCsx_2cfXgIaH0AQqVvV-g20MCP5EvJ1fIY-VXbPiwPJNY5VcS9wIsCDDYWH8')">
+</div>
+<!-- Cinematic Gradient Scrims -->
+<div class="absolute inset-0 bg-gradient-to-b from-primary/70 via-transparent to-primary/90 pointer-events-none"></div>
+<!-- Top Progress Indicators (4 scenes) -->
+<div class="relative z-10 w-full flex items-center gap-1.5 pt-space-xs">
+<div class="h-1 flex-1 bg-surface rounded-full overflow-hidden">
+<div class="h-full bg-surface-container-lowest w-2/3 rounded-full"></div>
+</div>
+<div class="h-1 flex-1 bg-surface/30 rounded-full"></div>
+<div class="h-1 flex-1 bg-surface/30 rounded-full"></div>
+<div class="h-1 flex-1 bg-surface/30 rounded-full"></div>
+</div>
+<!-- Top Player Meta Overlay -->
+<div class="relative z-10 flex items-center justify-between pt-space-xs">
+<span class="px-2 py-0.5 rounded-lg bg-primary-container/80 backdrop-blur-md text-on-primary font-label-sm text-label-sm tracking-wide">
+            1/4 • ESTABLISHING WIDE
+          </span>
+<span class="px-2 py-0.5 rounded-lg bg-primary-container/80 backdrop-blur-md text-on-primary font-label-sm text-label-sm">
+            0:03 / 0:20
+          </span>
+</div>
+<!-- Center Play Overlay Indicator (Touch Area) -->
+<div class="relative z-10 flex-1 flex items-center justify-center">
+<button aria-label="Play or Pause" class="w-14 h-14 rounded-full bg-primary-container/70 backdrop-blur-md text-on-primary flex items-center justify-center hover:bg-primary-container transition-transform active:scale-95 shadow-md" type="button">
+<span class="material-symbols-outlined text-[32px]">play_arrow</span>
+</button>
+</div>
+<!-- Lower Third Editorial Caption in Postcard Mat Style -->
+<div class="relative z-10 flex flex-col gap-space-sm bg-surface/90 backdrop-blur-md rounded-xl p-space-md text-on-surface shadow-md">
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span class="flex items-center gap-1 text-secondary font-semibold">
+<span class="material-symbols-outlined text-[14px]">videocam</span>
+              Slow push-in (0.2x)
+            </span>
+<span>IMG_8841.CR3</span>
+</div>
+<p class="font-body-md text-body-md text-primary font-medium leading-snug" id="player-active-caption">
+            Approaching City Square on Harambee Avenue under warm equatorial midday light.
+          </p>
+<div class="flex items-center justify-between pt-space-xs border-t border-surface-container-highest/60 font-label-sm text-label-sm text-on-surface-variant">
+<span>KICC Nairobi Collection</span>
+<span class="uppercase tracking-widest text-[10px] text-secondary">Postcard #01</span>
+</div>
+</div>
+</div>
+<!-- Quick Action Controls & Export Bar -->
+<div class="flex flex-col gap-space-xs bg-surface-container-low p-space-md rounded-xl shadow-sm">
+<div class="grid grid-cols-2 gap-space-xs">
+<button class="h-11 px-3 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md flex items-center justify-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">style</span>
+<span>Try another style</span>
+</button>
+<button class="h-11 px-3 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md flex items-center justify-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">content_cut</span>
+<span>Make shorter (~14s)</span>
+</button>
+</div>
+<!-- Primary Final CTA -->
+<button class="h-11 w-full rounded-lg bg-secondary hover:bg-on-secondary-container text-on-secondary font-label-lg text-label-lg font-semibold flex items-center justify-center gap-2 shadow-sm transition-all active:scale-[0.99] mt-space-xs" type="button">
+<span>Export &amp; Save Story</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- RIGHT COLUMN: Curatorial Review List & Scene Modification Cards -->
+<div class="lg:col-span-7 xl:col-span-8 flex flex-col gap-space-lg">
+<!-- Section Header -->
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary font-semibold">DIRECTED NARRATIVE SEQUENCE</span>
+<h2 class="font-headline-lg text-headline-lg text-primary">Review and adjust your story scenes</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Review each directed moment. Tap any caption to edit the wording directly. Reorder or prune scenes to calibrate pacing.
+        </p>
+</div>
+<!-- Helpful Notice Banner -->
+<div class="flex items-start gap-space-md p-space-md rounded-xl bg-surface-container text-on-surface shadow-sm">
+<div class="w-8 h-8 rounded-lg bg-secondary-container text-on-secondary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">edit_note</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="font-label-md text-label-md text-primary font-semibold">Direct Tap Editing</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Captions are derived from verified visual records. Tap any text below to edit or refine in your own words. No complex timeline or video editors required.
+          </p>
+</div>
+</div>
+<!-- SCENE LIST -->
+<div class="flex flex-col gap-space-md" id="scene-stack">
+<!-- SCENE 1 CARD -->
+<article class="bg-surface-container-low rounded-xl p-space-md shadow-sm transition-all hover:shadow-md flex flex-col gap-space-md">
+<!-- Card Header Row -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-sm border-b border-surface-container-highest/60">
+<div class="flex items-center gap-space-xs">
+<span class="w-6 h-6 rounded-md bg-secondary text-on-secondary flex items-center justify-center font-label-sm text-label-sm font-bold">1</span>
+<span class="font-headline-sm text-headline-sm text-primary">Scene 1 • Establishing Wide</span>
+<span class="px-2 py-0.5 rounded-lg bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">Harambee Approach</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="px-2.5 py-1 rounded-lg bg-surface-container text-primary font-label-md text-label-md font-semibold">4.5s</span>
+<span class="px-2 py-0.5 rounded-lg bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">Master Establishing</span>
+</div>
+</div>
+<!-- Body Content: Image Mat + Motion + Provenance -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md items-start">
+<!-- Archival Photo Mat -->
+<div class="md:col-span-4 flex flex-col gap-1.5">
+<div class="p-2 bg-surface-container rounded-lg">
+<div class="w-full aspect-[4/3] rounded-md overflow-hidden bg-surface-dim">
+<img alt="Scene 1 Harambee Ave approach" class="w-full h-full object-cover" data-alt="Wide perspective shot of the Harambee Avenue walkway leading to the Kenyatta International Convention Centre tower in Nairobi. Architectural lines, Kenyan sunlight, deep clay-tinted shadows, high detail architectural documentary style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKoCmR8fnQmitmsdMZI4gxzOfMXLJMgOF2D2yv4cBFOnsBP9ytLXuEjWl9Wv_ie8KMQDL-2WcplWBagynEIAdWZut8WeXuzmXx484lb_HElkHhkqGJ3desobEZV3X-uUgqaxJhDLwx_c7IdsEsYsrbb2wD4wEeAojLos1TAdnral6-aqJOn52r7cwZPUCmNTxu3XT-0u0LpIWV0Ga9DGCENIi7yQA70Vs8_4GQFMM"/>
+</div>
+</div>
+<div class="flex items-center justify-between px-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-[14px]">pan_tool_alt</span>
+                  Slow push-in (0.2x)
+                </span>
+<span class="text-on-surface-variant">Wide 24mm</span>
+</div>
+</div>
+<!-- Editable Caption & Provenance Block -->
+<div class="md:col-span-8 flex flex-col gap-space-sm">
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant flex items-center justify-between">
+<span>Scene Caption</span>
+<span class="text-secondary font-medium">✎ Tap text to refine</span>
+</label>
+<!-- Tactile Tappable Editable Field -->
+<div class="p-space-sm bg-surface-container rounded-lg hover:bg-surface-container-highest transition-colors cursor-text group">
+<p aria-label="Scene 1 Caption" class="font-body-md text-body-md text-primary outline-none focus:ring-0 leading-relaxed font-medium" contenteditable="true">
+                    Approaching City Square on Harambee Avenue under warm equatorial midday light.
+                  </p>
+<div class="flex items-center justify-between pt-2 mt-2 border-t border-surface-container-highest/60 text-on-surface-variant font-label-sm text-label-sm">
+<span class="group-hover:text-primary transition-colors">✎ Tap to edit caption</span>
+<span>82 chars • 3.2s reading time</span>
+</div>
+</div>
+</div>
+<!-- Source Provenance Stamp -->
+<div class="flex flex-wrap items-center gap-2 pt-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="inline-flex items-center gap-1 bg-surface-container px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[14px] text-secondary">verified</span>
+                  Private photo
+                </span>
+<span class="bg-surface-container px-2 py-0.5 rounded">IMG_8841.CR3</span>
+<span class="bg-surface-container px-2 py-0.5 rounded">Harambee Ave • 13:14 EAT</span>
+</div>
+</div>
+</div>
+<!-- Bottom Scene Actions Row (44px tactile ergonomics) -->
+<div class="flex flex-wrap items-center justify-between gap-space-xs pt-space-xs border-t border-surface-container-highest/60">
+<div class="flex items-center gap-space-xs">
+<button class="h-11 px-3 rounded-lg bg-surface-container/50 text-outline cursor-not-allowed font-label-md text-label-md flex items-center gap-1" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">arrow_upward</span>
+<span>Move up ↑</span>
+</button>
+<button class="h-11 px-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+<span>Move down ↓</span>
+</button>
+<div class="h-6 w-px bg-surface-container-highest mx-1"></div>
+<button class="h-11 px-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">motion_photos_on</span>
+<span>Camera move: Slow push-in</span>
+<span class="material-symbols-outlined text-[16px] text-outline">expand_more</span>
+</button>
+</div>
+<div>
+<button class="h-11 px-3 rounded-lg hover:bg-error-container text-on-surface-variant hover:text-on-error-container font-label-md text-label-md flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+<span>Remove scene ✕</span>
+</button>
+</div>
+</div>
+</article>
+<!-- SCENE 2 CARD -->
+<article class="bg-surface-container-low rounded-xl p-space-md shadow-sm transition-all hover:shadow-md flex flex-col gap-space-md">
+<!-- Card Header Row -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-sm border-b border-surface-container-highest/60">
+<div class="flex items-center gap-space-xs">
+<span class="w-6 h-6 rounded-md bg-secondary text-on-secondary flex items-center justify-center font-label-sm text-label-sm font-bold">2</span>
+<span class="font-headline-sm text-headline-sm text-primary">Scene 2 • Focused Subject</span>
+<span class="px-2 py-0.5 rounded-lg bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">burst_mode</span>
+                Burst of 5 selected
+              </span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="px-2.5 py-1 rounded-lg bg-surface-container text-primary font-label-md text-label-md font-semibold">5.0s</span>
+<span class="px-2 py-0.5 rounded-lg bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">Architectural Core</span>
+</div>
+</div>
+<!-- Body Content -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md items-start">
+<!-- Archival Photo Mat -->
+<div class="md:col-span-4 flex flex-col gap-1.5">
+<div class="p-2 bg-surface-container rounded-lg">
+<div class="w-full aspect-[4/3] rounded-md overflow-hidden bg-surface-dim relative">
+<img alt="Scene 2 Fluted Tower Details" class="w-full h-full object-cover" data-alt="Vertical perspective closeup of the fluted terracotta 32-story cylinder tower and conical amphitheatre of the KICC building in Nairobi. Warm textured concrete facets, clear blue high-altitude African sky, geometric modernist architecture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkfA40JROyOf0fqo4FoeGnwiOGDLIKZSK22CDyauBy4XFuzBFbPUljMezfcZTsuragWacP9_OfAI23mjZbdhttQc5WoZL42fnpx-vJRbbXD2_JV97vGTD0TGxqWstu3QgsAOOYYEHCDzXM6MlY3QMdqhxDKXsTTS4uv3AhHtt9Q57M7WLt2ZEwnT4Wg9J4BG53PxdlZjsoRQ-OPizd54kPueWcQhpfZucs8RzFz20"/>
+<!-- Stack indicator -->
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-primary-container/80 text-on-primary font-label-sm text-label-sm">
+                    +4 frames
+                  </div>
+</div>
+</div>
+<div class="flex items-center justify-between px-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-[14px]">vibration</span>
+                  Hold &amp; micro-shift
+                </span>
+<span class="text-on-surface-variant">50mm Prime</span>
+</div>
+</div>
+<!-- Editable Caption & Provenance Block -->
+<div class="md:col-span-8 flex flex-col gap-space-sm">
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant flex items-center justify-between">
+<span>Scene Caption</span>
+<span class="text-secondary font-medium">✎ Tap text to refine</span>
+</label>
+<div class="p-space-sm bg-surface-container rounded-lg hover:bg-surface-container-highest transition-colors cursor-text group">
+<p aria-label="Scene 2 Caption" class="font-body-md text-body-md text-primary outline-none focus:ring-0 leading-relaxed font-medium" contenteditable="true">
+                    32-story terracotta tower fluting and amphitheatre facade under midday sun.
+                  </p>
+<div class="flex items-center justify-between pt-2 mt-2 border-t border-surface-container-highest/60 text-on-surface-variant font-label-sm text-label-sm">
+<span class="group-hover:text-primary transition-colors">✎ Tap to edit caption</span>
+<span>78 chars • 3.0s reading time</span>
+</div>
+</div>
+</div>
+<!-- Source Provenance Stamp -->
+<div class="flex flex-wrap items-center gap-2 pt-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="inline-flex items-center gap-1 bg-surface-container px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[14px] text-secondary">burst_mode</span>
+                  Private burst sequence
+                </span>
+<span class="bg-surface-container px-2 py-0.5 rounded">IMG_8842–8846</span>
+<span class="bg-surface-container px-2 py-0.5 rounded">Best exposure: #8844</span>
+</div>
+</div>
+</div>
+<!-- Bottom Scene Actions Row -->
+<div class="flex flex-wrap items-center justify-between gap-space-xs pt-space-xs border-t border-surface-container-highest/60">
+<div class="flex items-center gap-space-xs">
+<button class="h-11 px-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">arrow_upward</span>
+<span>Move up ↑</span>
+</button>
+<button class="h-11 px-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+<span>Move down ↓</span>
+</button>
+<div class="h-6 w-px bg-surface-container-highest mx-1"></div>
+<button class="h-11 px-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">motion_photos_on</span>
+<span>Camera move: Micro-shift</span>
+<span class="material-symbols-outlined text-[16px] text-outline">expand_more</span>
+</button>
+</div>
+<div>
+<button class="h-11 px-3 rounded-lg hover:bg-error-container text-on-surface-variant hover:text-on-error-container font-label-md text-label-md flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+<span>Remove scene ✕</span>
+</button>
+</div>
+</div>
+</article>
+<!-- SCENE 3 CARD (Evidence Scene with OCR Snippet) -->
+<article class="bg-surface-container-low rounded-xl p-space-md shadow-sm transition-all hover:shadow-md flex flex-col gap-space-md">
+<!-- Card Header Row -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-sm border-b border-surface-container-highest/60">
+<div class="flex items-center gap-space-xs">
+<span class="w-6 h-6 rounded-md bg-secondary text-on-secondary flex items-center justify-center font-label-sm text-label-sm font-bold">3</span>
+<span class="font-headline-sm text-headline-sm text-primary">Scene 3 • Legible Detail</span>
+<span class="px-2 py-0.5 rounded-lg bg-surface-container-highest text-secondary font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">document_scanner</span>
+                OCR Confirmed • 99%
+              </span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="px-2.5 py-1 rounded-lg bg-surface-container text-primary font-label-md text-label-md font-semibold">3.5s</span>
+<span class="px-2 py-0.5 rounded-lg bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">Historical Marker</span>
+</div>
+</div>
+<!-- Body Content -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md items-start">
+<!-- Archival Photo Mat -->
+<div class="md:col-span-4 flex flex-col gap-1.5">
+<div class="p-2 bg-surface-container rounded-lg">
+<div class="w-full aspect-[4/3] rounded-md overflow-hidden bg-surface-dim">
+<img alt="Scene 3 Foundation Plaque Detail" class="w-full h-full object-cover" data-alt="Macro archival photo of the commemorative bronze foundation plaque embedded into the base of the KICC amphitheatre podium. Weathered verdigris patina on cast bronze letters with ceremonial dedication text legible in natural light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsHpU5hBOyViQ_NgYul1-bcO16HCUyvuXosoqbpUM7NsEIlzba9POkcZtU-k_l_QZtlaG8p2feu61fhJp6J39sn_G9ATMbFSoU3DyDk_knCCq_Vp8TLs5dG6MwLBz-03X7gurhLlcdT6YnutTjhdLDjzFNobJEbfrx8g2khLSa0RHX1R-0AgBDahvEih84EVsE-4WvOh-oudVHA1USyKb-FieDnxSxVJnOqWqwwfk"/>
+</div>
+</div>
+<div class="flex items-center justify-between px-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-[14px]">filter_center_focus</span>
+                  Hold (Focal lock)
+                </span>
+<span class="text-on-surface-variant">Macro 85mm</span>
+</div>
+</div>
+<!-- Editable Caption & Transcription Block -->
+<div class="md:col-span-8 flex flex-col gap-space-sm">
+<!-- OCR Verified Transcription Snippet -->
+<div class="p-2.5 rounded-lg bg-surface-container text-on-surface flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">text_snippet</span>
+                  Archival Transcription (Optical Extract)
+                </span>
+<p class="font-mono text-[12px] leading-relaxed text-on-surface bg-surface-container-high/60 p-1.5 rounded">
+                  “THIS PLAQUE COMMEMORATES THE OFFICIAL OPENING BY HIS EXCELLENCY MZEE JOMO KENYATTA... SEPTEMBER 1973”
+                </p>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant flex items-center justify-between">
+<span>Scene Caption</span>
+<span class="text-secondary font-medium">✎ Tap text to refine</span>
+</label>
+<div class="p-space-sm bg-surface-container rounded-lg hover:bg-surface-container-highest transition-colors cursor-text group">
+<p aria-label="Scene 3 Caption" class="font-body-md text-body-md text-primary outline-none focus:ring-0 leading-relaxed font-medium" contenteditable="true">
+                    Dedication bronze plaque installed at the ceremonial podium during inaugural opening.
+                  </p>
+<div class="flex items-center justify-between pt-2 mt-2 border-t border-surface-container-highest/60 text-on-surface-variant font-label-sm text-label-sm">
+<span class="group-hover:text-primary transition-colors">✎ Tap to edit caption</span>
+<span>88 chars • 3.5s reading time</span>
+</div>
+</div>
+</div>
+<!-- Source Provenance Stamp -->
+<div class="flex flex-wrap items-center gap-2 pt-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="inline-flex items-center gap-1 bg-surface-container px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[14px] text-secondary">verified</span>
+                  Private photo
+                </span>
+<span class="bg-surface-container px-2 py-0.5 rounded">IMG_8847.CR3</span>
+<span class="bg-surface-container px-2 py-0.5 rounded">Amphitheatre Courtyard</span>
+</div>
+</div>
+</div>
+<!-- Bottom Scene Actions Row -->
+<div class="flex flex-wrap items-center justify-between gap-space-xs pt-space-xs border-t border-surface-container-highest/60">
+<div class="flex items-center gap-space-xs">
+<button class="h-11 px-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">arrow_upward</span>
+<span>Move up ↑</span>
+</button>
+<button class="h-11 px-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+<span>Move down ↓</span>
+</button>
+<div class="h-6 w-px bg-surface-container-highest mx-1"></div>
+<button class="h-11 px-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">motion_photos_on</span>
+<span>Camera move: Focal lock</span>
+<span class="material-symbols-outlined text-[16px] text-outline">expand_more</span>
+</button>
+</div>
+<div>
+<button class="h-11 px-3 rounded-lg hover:bg-error-container text-on-surface-variant hover:text-on-error-container font-label-md text-label-md flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+<span>Remove scene ✕</span>
+</button>
+</div>
+</div>
+</article>
+<!-- SCENE 4 CARD (World Cutaway Archival Scene) -->
+<article class="bg-surface-container-low rounded-xl p-space-md shadow-sm transition-all hover:shadow-md flex flex-col gap-space-md">
+<!-- Card Header Row -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-sm border-b border-surface-container-highest/60">
+<div class="flex items-center gap-space-xs">
+<span class="w-6 h-6 rounded-md bg-secondary text-on-secondary flex items-center justify-center font-label-sm text-label-sm font-bold">4</span>
+<span class="font-headline-sm text-headline-sm text-primary">Scene 4 • World Cutaway</span>
+<span class="px-2 py-0.5 rounded-lg bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+                ✦ From the world
+              </span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="px-2.5 py-1 rounded-lg bg-surface-container text-primary font-label-md text-label-md font-semibold">7.0s</span>
+<span class="px-2 py-0.5 rounded-lg bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">Historical Context</span>
+</div>
+</div>
+<!-- Body Content -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md items-start">
+<!-- Archival Photo Mat -->
+<div class="md:col-span-4 flex flex-col gap-1.5">
+<div class="p-2 bg-surface-container rounded-lg">
+<div class="w-full aspect-[4/3] rounded-md overflow-hidden bg-surface-dim">
+<img alt="Scene 4 Historical 1974 Amphitheatre View" class="w-full h-full object-cover" data-alt="Vintage 1974 elevated archival photograph of central Nairobi showcasing the newly completed Kenyatta International Conference Centre tower and saucer-shaped amphitheatre. Sepia-toned gelatin silver print quality, open green lawns of City Square, retro vehicles on Harambee Avenue." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAr6_Slg5tGaS5Cg7Zmda5qla0e-u8662DTOOBkqJmI8V6g6gO_Ghp0ou8513JocQhJhhmGlAkL_a9GuGpUIa_xAi2EdCoznHoj1YBb1ibT2KM_hqonhuYTrZlUxKzcKmal5m86PCDOSnz5auW5mAykVSNg6-g4hRlyzms4c3qzfwvxEnA_IiEJd3lTF9ZPTpM3NcJnRl-TRUitCuRzRGiZFstEugcnKfBxsE8Mws"/>
+</div>
+</div>
+<div class="flex items-center justify-between px-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-[14px]">swap_horiz</span>
+                  Slow lateral drift
+                </span>
+<span class="text-on-surface-variant">Archival Medium Format</span>
+</div>
+</div>
+<!-- Editable Caption & Mandatory Provenance Credit Block -->
+<div class="md:col-span-8 flex flex-col gap-space-sm">
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant flex items-center justify-between">
+<span>Scene Caption</span>
+<span class="text-secondary font-medium">✎ Tap text to refine</span>
+</label>
+<div class="p-space-sm bg-surface-container rounded-lg hover:bg-surface-container-highest transition-colors cursor-text group">
+<p aria-label="Scene 4 Caption" class="font-body-md text-body-md text-primary outline-none focus:ring-0 leading-relaxed font-medium" contenteditable="true">
+                    Elevated vantage point showing the fluted saucer amphitheatre prior to modern skyline additions.
+                  </p>
+<div class="flex items-center justify-between pt-2 mt-2 border-t border-surface-container-highest/60 text-on-surface-variant font-label-sm text-label-sm">
+<span class="group-hover:text-primary transition-colors">✎ Tap to edit caption</span>
+<span>101 chars • 4.1s reading time</span>
+</div>
+</div>
+</div>
+<!-- Mandatory Public Provenance Credit Line -->
+<div class="p-2.5 rounded-lg bg-surface-container text-on-surface flex flex-col gap-1">
+<div class="flex items-center gap-1.5 font-label-sm text-label-sm text-secondary font-semibold">
+<span class="material-symbols-outlined text-[15px]">public</span>
+                  Archive Credit &amp; Attribution
+                </div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Photo: K. Odhiambo • Nairobi Municipal Archive • CC BY-SA 4.0 (#1974-NBO)
+                </p>
+<span class="font-label-sm text-label-sm text-outline">Archival cutaway shot added to bridge pacing and anchor historical depth.</span>
+</div>
+</div>
+</div>
+<!-- Bottom Scene Actions Row -->
+<div class="flex flex-wrap items-center justify-between gap-space-xs pt-space-xs border-t border-surface-container-highest/60">
+<div class="flex items-center gap-space-xs">
+<button class="h-11 px-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">arrow_upward</span>
+<span>Move up ↑</span>
+</button>
+<button class="h-11 px-3 rounded-lg bg-surface-container/50 text-outline cursor-not-allowed font-label-md text-label-md flex items-center gap-1" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+<span>Move down ↓</span>
+</button>
+<div class="h-6 w-px bg-surface-container-highest mx-1"></div>
+<button class="h-11 px-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">motion_photos_on</span>
+<span>Camera move: Lateral drift</span>
+<span class="material-symbols-outlined text-[16px] text-outline">expand_more</span>
+</button>
+</div>
+<div>
+<button class="h-11 px-3 rounded-lg hover:bg-error-container text-on-surface-variant hover:text-on-error-container font-label-md text-label-md flex items-center gap-1 transition-colors" title="Remove will drop total duration to 13.0s" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+<span>Remove scene ✕ <span class="text-outline text-label-sm font-normal">(Will reduce to 13s)</span></span>
+</button>
+</div>
+</div>
+</article>
+</div>
+<!-- Quick Cadence & Story Addition Bar -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm p-space-md rounded-xl bg-surface-container shadow-sm">
+<div class="flex flex-wrap items-center gap-space-xs">
+<button class="h-11 px-4 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md flex items-center gap-2 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">auto_stories</span>
+<span>Try another style</span>
+</button>
+<button class="h-11 px-4 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md flex items-center gap-2 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">shutter_speed</span>
+<span>Make it shorter (~14s)</span>
+</button>
+</div>
+<div>
+<button class="h-11 px-4 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md flex items-center gap-2 transition-colors active:scale-95 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">add_photo_alternate</span>
+<span>+ Add another photo scene</span>
+</button>
+</div>
+</div>
+<!-- Curatorial & Algorithmic Integrity Guarantee -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-secondary-container text-on-secondary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">verified_user</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary font-semibold">Facial Privacy &amp; Real-World Fidelity</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Facial privacy clearance: 100% (Zero private faces). Photos directed with authentic optical physics—no synthetic AI hallucination.
+            </p>
+</div>
+</div>
+<div class="shrink-0 flex items-center gap-2">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-secondary bg-surface-container px-2.5 py-1 rounded-md font-semibold">
+<span class="material-symbols-outlined text-[14px]">format_image_left</span>
+            PROVENANCE PASS
+          </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Inline Script for Scene Switch and Caption Reflection Micro-Interactions -->
+<script>
+    (function() {
+      // Direct caption reflection into story preview player
+      const scenes = [
+        {
+          id: 1,
+          tag: '1/4 • ESTABLISHING WIDE',
+          caption: 'Approaching City Square on Harambee Avenue under warm equatorial midday light.',
+          move: 'Slow push-in (0.2x)',
+          source: 'IMG_8841.CR3'
+        },
+        {
+          id: 2,
+          tag: '2/4 • FOCUSED SUBJECT',
+          caption: '32-story terracotta tower fluting and amphitheatre facade under midday sun.',
+          move: 'Hold & micro-shift',
+          source: 'IMG_8842–8846'
+        },
+        {
+          id: 3,
+          tag: '3/4 • LEGIBLE DETAIL',
+          caption: 'Dedication bronze plaque installed at the ceremonial podium during inaugural opening.',
+          move: 'Hold (Focal lock)',
+          source: 'IMG_8847.CR3'
+        },
+        {
+          id: 4,
+          tag: '4/4 • WORLD CUTAWAY',
+          caption: 'Elevated vantage point showing the fluted saucer amphitheatre prior to modern skyline additions.',
+          move: 'Slow lateral drift',
+          source: 'Nairobi Archive #1974'
+        }
+      ];
+
+      const playerCaption = document.getElementById('player-active-caption');
+      const editableParas = document.querySelectorAll('[contenteditable="true"]');
+
+      editableParas.forEach(function(el, index) {
+        el.addEventListener('input', function() {
+          if (index === 0 && playerCaption) {
+            playerCaption.textContent = this.textContent.trim();
+          }
+        });
+        el.addEventListener('focus', function() {
+          this.parentElement.classList.add('bg-surface-container-highest');
+        });
+        el.addEventListener('blur', function() {
+          this.parentElement.classList.remove('bg-surface-container-highest');
+        });
+      });
+    })();
+  </script>
+</div></main><footer class="w-full bg-surface-container-low py-space-lg mt-space-xl"><div class="w-full px-margin-mobile md:px-margin-tablet lg:px-margin flex flex-col md:flex-row items-center justify-between gap-space-md"><div class="font-body-sm text-body-sm text-on-surface-variant text-center md:text-left"><p>ReelWorld Kenya Semantic Visual Pipeline • Powered by Muse Spark Open Framework • Nairobi Edge Cluster</p></div><nav class="flex items-center gap-space-md" data-active-classes="text-primary font-medium underline"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="documentation" href="#">Documentation</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="archive-provenance" href="#">Archive Provenance</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="curatorial-guidelines" href="#">Curatorial Guidelines</a></nav></div></footer></body></html>

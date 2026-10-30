@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+
+<html lang="en" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ReelWorld - Conversational Visual Archive</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            papyrus: {
+              50: '#FAF6F1',
+              100: '#F4EFEB',
+              200: '#ECE5DD',
+              300: '#E4DCD2',
+              400: '#D5CDC2',
+              500: '#CBC2B5',
+            },
+            parchment: {
+              card: '#ECE5DD',
+              input: '#F4EFEB',
+              border: '#D8CFC3',
+              hover: '#E2D8CC',
+              muted: '#DFD5C7',
+            },
+            espresso: {
+              950: '#151311',
+              900: '#1E1C1A',
+              850: '#282522',
+              800: '#35312C',
+              700: '#4D4740',
+              600: '#686057',
+              500: '#8A8074',
+            },
+            ochre: {
+              DEFAULT: '#C85A32',
+              dark: '#AF4A24',
+              clay: '#D35400',
+              glow: '#E0693E',
+              warm: '#D9822B',
+              soft: '#F4DFD2',
+              subtle: '#FAEEE7',
+            },
+            sage: {
+              900: '#1D2E24',
+              800: '#284133',
+              700: '#345241',
+              600: '#3D604E',
+              DEFAULT: '#476E5B',
+              light: '#E2ECE6',
+              border: '#B3C8BD',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          boxShadow: {
+            archival: '0 1px 3px rgba(30,28,26,0.06), 0 1px 2px rgba(30,28,26,0.04)',
+            elevated: '0 10px 28px -4px rgba(30,28,26,0.09), 0 4px 10px -2px rgba(30,28,26,0.05)',
+            card: '0 4px 18px -2px rgba(30,28,26,0.07), 0 2px 6px -1px rgba(30,28,26,0.04)',
+            ochreGlow: '0 0 22px -3px rgba(200,90,50,0.32)',
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #F4EFEB;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #1E1C1A;
+      overflow-x: hidden;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 4px;
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: #D5CDC2;
+      border-radius: 9999px;
+    }
+  </style>
+<meta content="web_standard" name="shell-type"/></head>
+<body class="min-h-screen bg-papyrus-100 text-espresso-900 flex flex-col antialiased selection:bg-ochre selection:text-white">
+<!-- Desktop Sticky Header (1440px target) -->
+<header class="sticky top-0 z-50 w-full bg-parchment-card/90 backdrop-blur-xl border-b border-parchment-border transition-all">
+<div class="max-w-[1440px] mx-auto h-20 px-8 flex items-center justify-between gap-6">
+<!-- Brand & Muse Spark Emblem -->
+<div class="flex items-center gap-4 flex-shrink-0">
+<div class="flex items-center gap-3 group cursor-pointer">
+<!-- Geometric Lens Emblem -->
+<div class="relative w-10 h-10 rounded-xl bg-espresso-900 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform overflow-hidden border border-espresso-800">
+<div class="absolute inset-0 bg-gradient-to-tr from-espresso-950 via-espresso-900 to-espresso-850"></div>
+<div class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-ochre blur-sm opacity-80 animate-pulse"></div>
+<span class="material-symbols-outlined text-[22px] text-ochre-warm relative z-10 font-bold">flare</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xl font-bold tracking-tight text-espresso-950 leading-none">ReelWorld</span>
+<span class="text-[11px] font-semibold tracking-wider text-espresso-600 uppercase">Visual Archive</span>
+</div>
+</div>
+<!-- Muse Spark Open Badge Pill -->
+<div class="h-6 w-px bg-parchment-border mx-1"></div>
+<div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-papyrus-200 border-2 border-ochre/40 shadow-sm transition-all"><span class="relative flex h-2.5 w-2.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-ochre opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-ochre"></span></span><span class="text-xs font-bold text-espresso-950 tracking-tight uppercase">Built with Muse Spark Open</span><span class="px-2 py-0.5 rounded text-[11px] font-extrabold bg-ochre text-white tracking-wide shadow-sm">v2.4</span></div>
+</div>
+<!-- Center Desktop Navigation Tabs -->
+<nav class="flex items-center gap-1 bg-papyrus-200/90 p-1.5 rounded-full border border-parchment-border shadow-inner">
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px] text-ochre">public</span>
+<span class="">World</span>
+</a>
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px]">photo_library</span>
+<span class="">My Photos</span>
+<span class="ml-0.5 px-1.5 py-0.2 rounded-full bg-papyrus-300 text-[11px] font-semibold text-espresso-700">84</span>
+</a>
+<a class="px-5 py-2 rounded-full bg-papyrus-100 text-espresso-950 font-bold text-sm shadow-archival border border-parchment-border transition-all flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[18px]">sensors</span>
+<span class="">Connected</span>
+<span class="w-1.5 h-1.5 rounded-full bg-sage-600"></span>
+</a>
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px]">auto_stories</span>
+<span class="">Curated Journals</span>
+</a>
+</nav>
+<!-- Right Utility Bar -->
+<div class="flex items-center gap-3">
+<!-- Assistant Status Indicator -->
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-papyrus-200 hover:bg-parchment-hover text-espresso-700 text-xs font-semibold transition-colors border border-parchment-border">
+<span class="material-symbols-outlined text-[16px] text-ochre">auto_awesome</span>
+<span class="">Semantic Agent Active</span>
+</button>
+<!-- Lens / Camera Fast Tool -->
+<button class="w-10 h-10 rounded-full bg-papyrus-200 hover:bg-ochre-soft hover:text-ochre text-espresso-700 flex items-center justify-center transition-colors border border-parchment-border" title="Fast Capture Lens">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+</button>
+<!-- Primary Upload Action -->
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-espresso-900 text-papyrus-100 hover:bg-espresso-800 text-sm font-semibold shadow-archival transition-all active:scale-95 group border border-espresso-800">
+<span class="material-symbols-outlined text-[18px] text-ochre-warm group-hover:rotate-90 transition-transform">add</span>
+<span class="">Upload Artifact</span>
+</button>
+<!-- User Profile Avatar with Connected Pill -->
+</div>
+</div>
+</header>
+<!-- Main Content Space (Max 1440px Container) -->
+<main class="w-full max-w-[1440px] mx-auto px-8 py-8 flex flex-col gap-8 flex-1"><div class="flex flex-col w-full">
+<!-- Sub-Navigation Bar: Connected Section Facets -->
+<div class="flex items-center justify-between gap-4 pb-6 overflow-x-auto custom-scrollbar border-b border-surface-container-highest">
+<nav class="flex items-center gap-1.5 p-1 rounded-xl bg-surface-container-high/60 backdrop-blur-md">
+<a class="flex items-center gap-2 px-4 py-2.5 rounded-lg text-body-sm font-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined text-base">explore</span>
+<span>Where you've been</span>
+</a>
+<a class="flex items-center gap-2 px-4 py-2.5 rounded-lg text-body-sm font-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined text-base">filter_tilt_shift</span>
+<span>Ring Diagram</span>
+</a>
+<a class="flex items-center gap-2 px-4 py-2.5 rounded-lg text-body-sm font-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined text-base">conversion_path</span>
+<span>Link Evidence</span>
+</a>
+<a class="flex items-center gap-2 px-4 py-2.5 rounded-lg text-body-sm font-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined text-base">psychology_alt</span>
+<span>How are these connected?</span>
+</a>
+<a class="flex items-center gap-2 px-4 py-2.5 rounded-lg text-body-sm font-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined text-base">visibility</span>
+<span>From here, I saw this</span>
+</a>
+<a class="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-surface shadow-archival text-body-sm font-label-lg text-on-surface" href="#">
+<span class="material-symbols-outlined text-base text-on-tertiary-container">tune</span>
+<span>States &amp; Edge Cases</span>
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+</a>
+</nav>
+<!-- State Quick Switcher Control -->
+<div class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container border border-surface-container-highest">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Archival Pipeline Spec:</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-label-sm font-label-sm text-on-surface">v2.4 Cadastral Matrices</span>
+</div>
+</div>
+<!-- State Indicator Banner -->
+<div class="mt-6 p-4 rounded-xl bg-surface-container-low border border-surface-container-highest flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-start md:items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container-highest flex items-center justify-center flex-shrink-0 text-on-surface">
+<span class="material-symbols-outlined text-xl">grain</span>
+</div>
+<div>
+<p class="text-body-md font-label-lg text-on-surface">Optical Connection Matrix • Exemplar States</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Concentric architectural vantage verification across Kenya CBD cadastral registers.</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-label-sm font-label-sm text-secondary uppercase tracking-wider">4 Reference Viewports</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Zero Spatial Coordinates</span>
+</div>
+</div>
+<!-- GRID: 4 Bespoke Architectural States -->
+<div class="mt-8 flex flex-col gap-16">
+<!-- ========================================================================= -->
+<!-- STATE 1: LOADING ("Tuning in...")                                         -->
+<!-- ========================================================================= -->
+<section class="flex flex-col gap-4">
+<div class="flex items-baseline justify-between border-b border-surface-container-highest pb-2">
+<div class="flex items-center gap-2.5">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">State 01</span>
+<h2 class="text-headline-sm font-headline-sm text-on-surface">Loading • Lens Barrel Optical Alignment</h2>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Status: Tuning Corridor Active</span>
+</div>
+<div class="relative w-full rounded-2xl bg-surface-container-low p-6 md:p-12 overflow-hidden shadow-card border border-surface-container-highest">
+<!-- Archival Paper Texture Underlay -->
+<div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#1d1b19_1px,transparent_1px)] [background-size:16px_16px]"></div>
+<div class="relative z-10 flex flex-col lg:flex-row items-center justify-center gap-12 min-h-[480px]">
+<!-- Concentric Optical Tuning Engine (SVG Graphic with Tick Marks) -->
+<div class="relative w-[340px] h-[340px] md:w-[420px] md:h-[420px] flex items-center justify-center flex-shrink-0">
+<!-- Calibrated Outer Barrel Rim SVG -->
+<svg class="absolute inset-0 w-full h-full text-surface-container-highest" fill="none" viewbox="0 0 420 420">
+<!-- Ring 5: Looks Similar -->
+<circle class="opacity-40 animate-[spin_60s_linear_infinite]" cx="210" cy="210" r="198" stroke="currentColor" stroke-dasharray="4 6" stroke-width="1.5"></circle>
+<!-- Ring 4: In the Background -->
+<circle class="opacity-50" cx="210" cy="210" r="162" stroke="currentColor" stroke-dasharray="3 3" stroke-width="1"></circle>
+<!-- Ring 3: Where You Stood -->
+<circle class="opacity-60 animate-[spin_40s_linear_infinite_reverse]" cx="210" cy="210" r="126" stroke="currentColor" stroke-dasharray="8 6" stroke-width="1.5"></circle>
+<!-- Ring 2: Another Angle -->
+<circle class="opacity-75" cx="210" cy="210" r="90" stroke="currentColor" stroke-dasharray="2 4" stroke-width="1.5"></circle>
+<!-- Ring 1: Same Place -->
+<circle class="opacity-90 animate-[pulse_3s_ease-in-out_infinite]" cx="210" cy="210" r="58" stroke="currentColor" stroke-dasharray="6 3" stroke-width="2"></circle>
+<!-- Radial Alignment Crosshairs (Delicate Tick Lines) -->
+<line class="opacity-80" stroke="currentColor" stroke-width="1.5" x1="210" x2="210" y1="6" y2="24"></line>
+<line class="opacity-80" stroke="currentColor" stroke-width="1.5" x1="210" x2="210" y1="396" y2="414"></line>
+<line class="opacity-80" stroke="currentColor" stroke-width="1.5" x1="6" x2="24" y1="210" y2="210"></line>
+<line class="opacity-80" stroke="currentColor" stroke-width="1.5" x1="396" x2="414" y1="210" y2="210"></line>
+<!-- 45-degree micro calibrations -->
+<line class="opacity-50" stroke="currentColor" stroke-width="1" x1="66" x2="78" y1="66" y2="78"></line>
+<line class="opacity-50" stroke="currentColor" stroke-width="1" x1="354" x2="342" y1="66" y2="78"></line>
+<line class="opacity-50" stroke="currentColor" stroke-width="1" x1="66" x2="78" y1="354" y2="342"></line>
+<line class="opacity-50" stroke="currentColor" stroke-width="1" x1="354" x2="342" y1="354" y2="342"></line>
+</svg>
+<!-- Ghost Pulsing Nodes on Tuning Rings -->
+<div class="absolute top-12 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-surface-container border border-surface-container-highest animate-ping opacity-30"></div>
+<div class="absolute bottom-20 left-16 w-3 h-3 rounded-full bg-on-tertiary-container/30 border border-on-tertiary-container animate-pulse"></div>
+<div class="absolute top-28 right-16 w-3.5 h-3.5 rounded-full bg-secondary/30 border border-secondary animate-pulse"></div>
+<!-- Centre Photo Node Skeleton Pulse -->
+<div class="relative w-20 h-20 md:w-24 md:h-24 rounded-full bg-surface-container-high border-2 border-on-tertiary-container flex items-center justify-center shadow-lg group">
+<div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-surface-container flex items-center justify-center animate-pulse">
+<span class="material-symbols-outlined text-2xl md:text-3xl text-on-tertiary-container">cc_attribution</span>
+</div>
+<div class="absolute -bottom-6 px-2 py-0.5 rounded bg-surface-container-highest border border-surface-container text-label-sm font-label-sm text-on-surface whitespace-nowrap shadow-sm">
+                Origin Frame #01
+              </div>
+</div>
+<!-- Optical Ring Labels -->
+<span class="absolute top-2 text-[10px] font-label-sm uppercase tracking-widest text-on-surface-variant/70">Ring 5 • Similar Facade</span>
+<span class="absolute bottom-7 text-[10px] font-label-sm uppercase tracking-widest text-on-surface-variant/70">Ring 3 • Where You Stood</span>
+</div>
+<!-- Loading Copy & Subtle Action -->
+<div class="flex flex-col items-center lg:items-start text-center lg:text-left max-w-md">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high border border-surface-container-highest mb-4">
+<span class="w-2 h-2 rounded-full bg-on-tertiary-container animate-ping"></span>
+<span class="text-label-sm font-label-sm text-on-surface uppercase tracking-wider">Cadastral Aperture Active</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-on-surface mb-2">Tuning in...</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6">
+              Resolving optical vantage corridors across 38 world archival counterparts along Kenyatta Avenue and City Square.
+            </p>
+<!-- Verification Progress Matrix -->
+<div class="w-full flex flex-col gap-2 p-3.5 rounded-xl bg-surface-container border border-surface-container-highest mb-6">
+<div class="flex items-center justify-between text-label-sm font-label-sm">
+<span class="text-on-surface-variant">Archival Corridors Checked:</span>
+<span class="font-semibold text-on-surface">24 / 38 verified</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container-highest overflow-hidden">
+<div class="h-full bg-on-tertiary-container rounded-full transition-all duration-500 w-[63%]"></div>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Scanning: Jamia Minaret colonnade masonry alignment</p>
+</div>
+<button class="min-h-[44px] px-6 py-2.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-body-sm font-label-lg text-on-surface-variant hover:text-on-surface transition-all border border-surface-container-highest" type="button">
+              Cancel alignment
+            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- STATE 2: PLACE WITH NO CONNECTIONS YET (Empty Place Ring)                 -->
+<!-- ========================================================================= -->
+<section class="flex flex-col gap-4">
+<div class="flex items-baseline justify-between border-b border-surface-container-highest pb-2">
+<div class="flex items-center gap-2.5">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">State 02</span>
+<h2 class="text-headline-sm font-headline-sm text-on-surface">Isolated Place • No Optical Connections Found</h2>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Status: Cadastre Standalone</span>
+</div>
+<div class="relative w-full rounded-2xl bg-surface-container-low p-6 md:p-12 overflow-hidden shadow-card border border-surface-container-highest">
+<!-- Lens Diagram Background Grid Overlay -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<!-- Concentric Diagram Frame (Empty Rings) -->
+<div class="lg:col-span-7 flex items-center justify-center relative min-h-[380px] md:min-h-[440px]">
+<!-- Clean SVG Arc Canvas with Engraved Labels -->
+<svg class="absolute inset-0 w-full h-full text-surface-container-highest" fill="none" viewbox="0 0 500 500">
+<!-- Ring 5: LOOKS SIMILAR -->
+<circle cx="250" cy="250" r="230" stroke="currentColor" stroke-dasharray="3 4" stroke-width="1"></circle>
+<text fill="#76777b" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="600" letter-spacing="0.1em" text-anchor="middle" x="250" y="32">RING 5: LOOKS SIMILAR</text>
+<!-- Ring 4: IN THE BACKGROUND -->
+<circle cx="250" cy="250" r="185" stroke="currentColor" stroke-dasharray="3 4" stroke-width="1"></circle>
+<text fill="#76777b" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="600" letter-spacing="0.1em" text-anchor="middle" x="250" y="78">RING 4: IN THE BACKGROUND</text>
+<!-- Ring 3: WHERE YOU STOOD -->
+<circle cx="250" cy="250" r="140" stroke="currentColor" stroke-dasharray="3 4" stroke-width="1"></circle>
+<text fill="#76777b" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="600" letter-spacing="0.1em" text-anchor="middle" x="250" y="122">RING 3: WHERE YOU STOOD</text>
+<!-- Ring 2: ANOTHER ANGLE -->
+<circle cx="250" cy="250" r="95" stroke="currentColor" stroke-dasharray="3 4" stroke-width="1"></circle>
+<text fill="#76777b" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="600" letter-spacing="0.1em" text-anchor="middle" x="250" y="167">RING 2: ANOTHER ANGLE</text>
+<!-- Ring 1: SAME PLACE -->
+<circle cx="250" cy="250" r="55" stroke="currentColor" stroke-dasharray="2 3" stroke-width="1.2"></circle>
+<text fill="#76777b" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="600" letter-spacing="0.1em" text-anchor="middle" x="250" y="206">RING 1: SAME PLACE</text>
+</svg>
+<!-- Center Origin Artifact: User Negative #07 -->
+<div class="relative z-10 flex flex-col items-center">
+<div class="relative w-28 h-28 md:w-32 md:h-32 rounded-2xl bg-surface-container p-2 shadow-card border-2 border-on-tertiary-container group">
+<div class="w-full h-full rounded-xl overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="Close architectural study of the carved stone plinth and patterned marble paving at Jamia Mosque courtyard in Nairobi, captured in soft warm early morning equatorial light, muted terracotta and stone tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjB84cR2QzhZWf1W4G95n5Oab1caA30FPUKY7kDIPIhh4xD-VcA4vsA53YGPooI1RRRLMkK7pWmAfVgyASDdrppwgjTpJbjhKMHIAG3dighUHt5lHtCp6sEl34s5Dopn6fr9giJ59rwgs7fscjF2w4GjSlJcZ4x6VpD-JQrBY4fAU7cc9ZYL3OhOEcCHlfpSUn0Fry68O7v_sz-yUKjgu4-PNiPYcFjxNVIX2jHq4"/>
+<div class="absolute inset-0 bg-primary/10"></div>
+</div>
+<div class="absolute -top-2.5 -right-2.5 w-6 h-6 rounded-full bg-on-tertiary-container text-surface flex items-center justify-center text-xs shadow-sm">
+<span class="material-symbols-outlined text-sm">lock_open</span>
+</div>
+</div>
+<!-- Negative Micro Tag -->
+<div class="mt-3 px-3 py-1 rounded-md bg-surface border border-surface-container-highest shadow-sm text-center">
+<p class="text-label-sm font-label-lg text-on-surface">Jamia Mosque Courtyard Plinth</p>
+<p class="text-[10px] font-label-sm text-on-surface-variant uppercase tracking-wider">User Negative #07 • Solo Stance</p>
+</div>
+</div>
+<!-- Empty Ring Arc Notations -->
+<div class="absolute bottom-4 left-6 flex items-center gap-1.5 text-label-sm font-label-sm text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-surface-container-highest"></span>
+<span>0 Registered Intersections</span>
+</div>
+</div>
+<!-- Empty State Narrative & Call to Action -->
+<div class="lg:col-span-5 flex flex-col gap-5 p-6 rounded-xl bg-surface border border-surface-container-highest">
+<div class="flex items-center gap-2 text-on-tertiary-container">
+<span class="material-symbols-outlined text-xl">travel_explore</span>
+<span class="text-label-sm font-label-lg uppercase tracking-wider">First Cadastral Anchor</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">No connections found for this place yet</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed">
+                We've scanned visible architectural registers and facade inscriptions across the world collection. No matching angles or physical cadastres were verified for this courtyard plinth.
+              </p>
+</div>
+<!-- Archival Metadata Ledger -->
+<div class="p-3.5 rounded-lg bg-surface-container-low border border-surface-container-highest flex flex-col gap-2 text-body-sm font-body-sm">
+<div class="flex justify-between items-center text-label-sm font-label-sm">
+<span class="text-on-surface-variant">Masonry Register:</span>
+<span class="text-on-surface font-semibold">Coral rag ashlar block #08</span>
+</div>
+<div class="flex justify-between items-center text-label-sm font-label-sm">
+<span class="text-on-surface-variant">Neighboring Nodes:</span>
+<span class="text-on-surface">City Market (480m) • Unlinked</span>
+</div>
+<div class="flex justify-between items-center text-label-sm font-label-sm">
+<span class="text-on-surface-variant">Curatorial Recommendation:</span>
+<span class="text-secondary font-semibold">Photograph arcade exterior</span>
+</div>
+</div>
+<!-- Direct Actions (>= 44px) -->
+<div class="flex flex-col sm:flex-row gap-3 pt-2">
+<button class="min-h-[44px] flex-1 px-5 py-3 rounded-lg bg-primary-container text-surface hover:bg-primary transition-all text-body-sm font-label-lg flex items-center justify-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-base text-on-tertiary-container">add_a_photo</span>
+<span>+ Add photo to expand place</span>
+</button>
+<button class="min-h-[44px] px-4 py-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-all text-body-sm font-label-lg flex items-center justify-center gap-2 border border-surface-container-highest" type="button">
+<span class="material-symbols-outlined text-base">upload_file</span>
+<span>Upload archival candidate</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- STATE 3: COVERAGE GAP STATE (Missing Elevated Parapet Angle)             -->
+<!-- ========================================================================= -->
+<section class="flex flex-col gap-4">
+<div class="flex items-baseline justify-between border-b border-surface-container-highest pb-2">
+<div class="flex items-center gap-2.5">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">State 03</span>
+<h2 class="text-headline-sm font-headline-sm text-on-surface">Coverage Gap • Missing Vantage Invitation</h2>
+</div>
+<div class="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-tertiary-fixed text-on-tertiary-fixed text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-sm text-on-tertiary-container">info</span>
+<span>Cadastral Loop Open</span>
+</div>
+</div>
+<div class="relative w-full rounded-2xl bg-surface-container-low p-6 md:p-8 overflow-hidden shadow-card border border-surface-container-highest">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<!-- Concentric Ring Diagram with Interactive Gap Highlight -->
+<div class="lg:col-span-7 relative flex items-center justify-center min-h-[420px] md:min-h-[480px]">
+<!-- Graphic Background Ring Matrix -->
+<svg class="absolute inset-0 w-full h-full text-surface-container-highest" fill="none" viewbox="0 0 520 520">
+<!-- Ring 5: Similar -->
+<circle cx="260" cy="260" r="240" stroke="currentColor" stroke-dasharray="3 3" stroke-width="1"></circle>
+<!-- Ring 4: In the Background (1 Node present) -->
+<circle cx="260" cy="260" r="190" stroke="currentColor" stroke-width="1.2"></circle>
+<!-- Ring 3: GAP HIGHLIGHTED RING (WHERE YOU STOOD) -->
+<circle class="opacity-80" cx="260" cy="260" r="145" stroke="#d5643b" stroke-dasharray="6 4" stroke-width="2"></circle>
+<!-- Ring 2: Another Angle (2 Nodes) -->
+<circle cx="260" cy="260" r="100" stroke="currentColor" stroke-width="1.2"></circle>
+<!-- Ring 1: Same Place (3 Nodes) -->
+<circle cx="260" cy="260" r="60" stroke="currentColor" stroke-width="1.5"></circle>
+<!-- Radial Guide toward missing parapet zone -->
+<line class="opacity-70" stroke="#d5643b" stroke-dasharray="4 2" stroke-width="1.5" x1="260" x2="380" y1="260" y2="175"></line>
+</svg>
+<!-- Center Origin Node: KICC Harambee Forecourt -->
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-24 h-24 rounded-full bg-surface-container p-1.5 shadow-md border-2 border-on-surface">
+<img class="w-full h-full object-cover rounded-full" data-alt="Kenyatta International Conference Centre cylindrical tower and terracotta podium forecourt in Nairobi, bright equatorial midday sky with sharp architectural shadow geometry." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWsRgkpEF3bCYykG5xvLbNjXnl-Hs-W2L-oJZstmN1e76wPRPhrfZPx7K-7izYiWN0MfKhW99uc-AEK8R1n1mYAIkf2_aXqPidxHGEZiNug5qEayVw_MQoVSjWwY0OnHk8U1IrC1ShehEy0kpYablV9DaxOPjJeDjqv_-Jnmg6y_Q6gGiWZPDmkUlHrsPduZneecEm0jYugul3NsQOhdYIaHWT_ZAmxxGCHm5OGi0"/>
+</div>
+<span class="mt-1.5 px-2 py-0.5 rounded bg-surface border border-surface-container-highest text-label-sm font-label-sm text-on-surface shadow-sm">
+                KICC Harambee Forecourt
+              </span>
+</div>
+<!-- OCCUPIED NODES (Surrounding concentric rings) -->
+<!-- Ring 1 Node 1: Same Place -->
+<div class="absolute top-[210px] left-[225px] w-9 h-9 rounded-full bg-surface-container border border-surface-container-highest shadow-sm overflow-hidden" title="Ground plinth close detail">
+<img class="w-full h-full object-cover" data-alt="Detailed ground perspective of the fluted concrete plinth at KICC forecourt with warm ochre sand texture, Nairobi CBD." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOigGIxH3lo7_qEe6J_psPFzygQfvGSxnHSD9uW9-lz1JOqo0ooDhDlFMWYV_vr59Jh--TAj3NMDwL2tYzQM7c3c0o35P8UzMwYBXeeuRiE3WzkSNMGLreV55ug5GNmiI41JuJWj33bo3JBMNO2jENC3yhEi24CphU_mfl2LMbZmVn2BBOhNn6YYu6VARwPgrrswtjDeBSb8Y3W3JsXjsm3f7lO5Pas7ykkzBQKqI"/>
+</div>
+<!-- Ring 1 Node 2 -->
+<div class="absolute bottom-[210px] right-[225px] w-9 h-9 rounded-full bg-surface-container border border-surface-container-highest shadow-sm overflow-hidden" title="Water fountain curb view">
+<img class="w-full h-full object-cover" data-alt="The low fountain pool curbing surrounding the KICC amphitheatre base, warm concrete finish, bright sun." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCjBgJkos1X1avJdoKNSJnRLWzsyZkZnG4wjZj3vLwTshXc-7yn96a7Zx_8GQ6u57mxxn2OYTOKZ1ugPzop9xYPXnSfLTJ-GgH3YKikdyM5titk3TG-msd2H5MarL90hRS1SYohPxODHza8J_AE2g45Kd_-G-ctyqfWCXvTPL6pNvJESqA-BNDF1m0cEq8A8Es90NPzv9badfswmLSaSyon8WlleLDTJBiN4a73AQ"/>
+</div>
+<!-- Ring 2 Node 1: Another Angle -->
+<div class="absolute top-[170px] right-[180px] w-10 h-10 rounded-full bg-surface-container border border-surface-container-highest shadow-sm overflow-hidden" title="View from Parliament Road entrance">
+<img class="w-full h-full object-cover" data-alt="Pedestrian angle looking northwest toward KICC saucer roof from Parliament Road sidewalk, green acacia trees framing concrete tower." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxQ0cF1WhIMUiDSI-vwNQVw88XmR-qA_Ef1fD_p1fAKSHj-s5pQmIDnbTCbx9CebJBVtGb3uguyH8a5nMeLOsKkSw9vAC2iv9UzIMw0SeFGCkbjgWk1ffCeA-88zeJXiqhAgSju9vqywirDtk9RL1X2aD7AFhFJ8OjlBT622mhu_q3E_P6jgzN38PcVXv2NVkAkeyAScmoZjtA5Pxsj8DvFy6sZqZOjAQLRo4SCS0"/>
+</div>
+<!-- Ring 4 Node: In Background -->
+<div class="absolute top-[80px] left-[150px] w-11 h-11 rounded-full bg-surface-container border border-secondary shadow-sm overflow-hidden" title="World Archive counterpart">
+<img class="w-full h-full object-cover" data-alt="Historic documentary photograph showing the KICC tower silhouetted against Nairobi skyline with City Hall clock tower in the foreground." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD70gA9aKvF22MJ8sJFkJmXISEbbcndkQjJfhoK3KDPAo-13j00cE_SpSFkt-i2xJVL3RF9hKvWpMsFS-6WeN0wIkM4AM4yOej2HilUPeK9ZBX6oN9CLaMSNXmW802CmmjMPU1u0FTVRWIkiiruKYCSVux9252-tCFrqzAJMhqBMDstLJs6qLxKEvXpRP7ETRzJ_TzYqR5ucJI8qT8i_0GGB5I9BpN1Upa5Qaxsm-Q"/>
+</div>
+<!-- GAP INVITATION BUTTON (Positioned directly on Ring 3 Arc) -->
+<div class="absolute top-[130px] right-[70px] z-20 flex flex-col items-center">
+<div class="px-3 py-1 rounded-full bg-tertiary-fixed border border-on-tertiary-container shadow-md flex items-center gap-1.5 mb-2 animate-bounce">
+<span class="w-2 h-2 rounded-full bg-on-tertiary-container"></span>
+<span class="text-label-sm font-label-lg text-on-tertiary-fixed">Elevated Vantage Missing</span>
+</div>
+<button class="min-h-[44px] px-4 py-2.5 rounded-full bg-on-tertiary-container text-surface hover:bg-tertiary transition-all shadow-card flex items-center gap-2 group active:scale-95" type="button">
+<span class="material-symbols-outlined text-base group-hover:rotate-90 transition-transform">add_a_photo</span>
+<span class="text-label-sm font-label-lg whitespace-nowrap">+ Add photo from this angle</span>
+</button>
+<span class="mt-1 text-[10px] font-label-sm text-on-surface-variant uppercase tracking-wider">Ring 3 • Amphitheatre Parapet</span>
+</div>
+</div>
+<!-- Gap Detail Analysis & Cadastral Loop Breakdown -->
+<div class="lg:col-span-5 flex flex-col gap-5 p-6 rounded-xl bg-surface border border-surface-container-highest">
+<div>
+<span class="px-2.5 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed text-label-sm font-label-sm uppercase tracking-wider font-semibold">
+                Coverage Gap Identified
+              </span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mt-2">
+                Elevated vantage missing
+              </h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1.5 leading-relaxed">
+                Ring 3 (Where You Stood) has no user or world photos looking downward from the amphitheatre parapet into the central lotus court.
+              </p>
+</div>
+<!-- Existing Perspectives vs Missing Geometry -->
+<div class="flex flex-col gap-3 p-4 rounded-xl bg-surface-container-low border border-surface-container-highest">
+<div class="flex items-center justify-between pb-2 border-b border-surface-container-highest">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase">Current Vantage Audit</span>
+<span class="text-label-sm font-label-sm text-on-surface font-semibold">KICC Harambee Forecourt</span>
+</div>
+<!-- Existing Angles -->
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-base">check_circle</span>
+<span>Ground-level plaza perspectives</span>
+</div>
+<span class="font-label-lg text-on-surface">4 Verified</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-base">check_circle</span>
+<span>Parliament Road approach facade</span>
+</div>
+<span class="font-label-lg text-on-surface">2 Verified</span>
+</div>
+<!-- Missing Angle (High impact) -->
+<div class="flex items-center justify-between text-body-sm font-body-sm pt-1 border-t border-surface-container-highest">
+<div class="flex items-center gap-2 text-on-tertiary-container font-medium">
+<span class="material-symbols-outlined text-base">radio_button_unchecked</span>
+<span>Upper tier amphitheatre downward parapet</span>
+</div>
+<span class="font-label-lg text-on-tertiary-container">0 Verified</span>
+</div>
+</div>
+<p class="text-label-sm font-body-sm text-on-surface-variant italic">
+              "The world archive has 4 ground perspectives and 0 elevated parapet captures from this stance. Your capture would close this cadastral loop."
+            </p>
+<!-- Curatorial Attribution Credit Line -->
+<div class="pt-3 border-t border-surface-container-highest flex items-center justify-between text-[11px] font-label-sm text-on-surface-variant">
+<span>World photo counterpart credit:</span>
+<span class="text-on-surface">M. Mwangi • CC-BY-NC 4.0</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- STATE 4: ERROR STATE WITH RETRY                                           -->
+<!-- ========================================================================= -->
+<section class="flex flex-col gap-4">
+<div class="flex items-baseline justify-between border-b border-surface-container-highest pb-2">
+<div class="flex items-center gap-2.5">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">State 04</span>
+<h2 class="text-headline-sm font-headline-sm text-on-surface">Cadastral Pipeline Disruption • Dignified Error</h2>
+</div>
+<div class="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-surface-container text-on-surface-variant text-label-sm font-label-sm">
+<span class="w-2 h-2 rounded-full bg-on-tertiary-container"></span>
+<span>Interrupted Optical Corridor</span>
+</div>
+</div>
+<div class="relative w-full rounded-2xl bg-surface-container-low p-6 md:p-12 overflow-hidden shadow-card border border-surface-container-highest">
+<div class="max-w-2xl mx-auto flex flex-col items-center text-center">
+<!-- Stylized Broken / Interrupted Lens Graphic -->
+<div class="relative w-36 h-36 md:w-44 md:h-44 flex items-center justify-center mb-6">
+<!-- Interrupted Concentric Arc SVG -->
+<svg class="w-full h-full text-surface-container-highest" fill="none" viewbox="0 0 180 180">
+<!-- Broken Ring 3 -->
+<path d="M 20 90 A 70 70 0 0 1 120 25" stroke="currentColor" stroke-dasharray="4 4" stroke-width="1.5"></path>
+<path d="M 155 60 A 70 70 0 0 1 140 140" stroke="currentColor" stroke-width="1.5"></path>
+<path d="M 110 155 A 70 70 0 0 1 35 125" stroke="currentColor" stroke-dasharray="2 3" stroke-width="1.5"></path>
+<!-- Broken Inner Barrel -->
+<path d="M 45 90 A 45 45 0 0 1 130 70" stroke="#d5643b" stroke-dasharray="8 4" stroke-width="2"></path>
+<path d="M 125 115 A 45 45 0 0 1 65 130" stroke="#d5643b" stroke-width="2"></path>
+<!-- Ray Disruption Gap Lines -->
+<line stroke="#76777b" stroke-width="1.5" x1="85" x2="95" y1="20" y2="40"></line>
+<line stroke="#76777b" stroke-width="1.5" x1="140" x2="160" y1="85" y2="95"></line>
+</svg>
+<!-- Center Interrupted Focal Point -->
+<div class="absolute w-16 h-16 rounded-full bg-surface-container border border-surface-container-highest flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-2xl text-on-tertiary-container">sync_problem</span>
+</div>
+</div>
+<!-- Archival Error Narrative (Dignified, Not Alarming) -->
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container border border-surface-container-highest mb-3">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Edge Transmission Lag</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-on-surface mb-3">
+            Unable to resolve optical cadastre
+          </h3>
+<p class="text-body-md font-body-md text-on-surface-variant max-w-lg mb-8 leading-relaxed">
+            The optical alignment pipeline could not verify parapet coordinates due to temporary connection timeout with Nairobi Edge Cluster (Node NBO-04).
+          </p>
+<!-- Dual Tactile Action Buttons (>=44px touch targets) -->
+<div class="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto mb-8">
+<button class="w-full sm:w-auto min-h-[44px] px-6 py-3 rounded-lg bg-primary-container hover:bg-primary text-surface transition-all text-body-sm font-label-lg flex items-center justify-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-base text-on-tertiary-container">refresh</span>
+<span>Retry alignment</span>
+</button>
+<button class="w-full sm:w-auto min-h-[44px] px-6 py-3 rounded-lg bg-surface hover:bg-surface-container text-on-surface transition-all text-body-sm font-label-lg flex items-center justify-center gap-2 border border-surface-container-highest" type="button">
+<span class="material-symbols-outlined text-base">cloud_off</span>
+<span>Work offline in sandbox</span>
+</button>
+</div>
+<!-- Field Telemetry & Cache Safety Note -->
+<div class="w-full p-4 rounded-xl bg-surface border border-surface-container-highest flex flex-col sm:flex-row items-center justify-between gap-3 text-left">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-base text-secondary">verified_user</span>
+<span class="text-label-sm font-label-sm text-on-surface font-mono">
+                Error code: OPTIC_CORRIDOR_TIMEOUT • Frame #07 preserved in local cache
+              </span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Cluster latency: 4,120ms</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Bottom Archival Context Footer -->
+<div class="mt-16 pt-6 border-t border-surface-container-highest flex flex-col md:flex-row items-center justify-between gap-4 text-label-sm font-label-sm text-on-surface-variant">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-lg text-secondary">domain_verification</span>
+<span>Nairobi Archival Pipeline: CBK Pension Towers, City Market, Jamia Mosque, KICC Registered.</span>
+</div>
+<div class="flex items-center gap-4">
+<span>Zero automated coordinates</span>
+<span>•</span>
+<span>Pure optical alignment verification</span>
+</div>
+</div>
+</div></main>
+<!-- Desktop Persistent Footer / System Status Bar -->
+<footer class="w-full bg-espresso-950 border-t border-espresso-850 text-papyrus-300 mt-12">
+<div class="max-w-[1440px] mx-auto px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+<div class="flex items-center gap-3">
+<div class="w-7 h-7 rounded-lg bg-espresso-900 border border-espresso-800 flex items-center justify-center text-ochre-warm">
+<span class="material-symbols-outlined text-[16px]">flare</span>
+</div>
+<div>
+<span class="text-papyrus-100 font-bold">ReelWorld Kenya Semantic Visual Pipeline</span>
+<span class="mx-2 text-espresso-700">•</span>
+<span class="">Powered by Muse Spark Open Framework</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-sage-DEFAULT"></span>
+<span class="text-papyrus-200">Nairobi Edge Cluster: Online (32ms)</span>
+</div>
+<a class="hover:text-ochre-warm transition-colors" href="#">Documentation</a>
+<a class="hover:text-ochre-warm transition-colors" href="#">Archive Telemetry</a>
+<a class="hover:text-ochre-warm transition-colors" href="#">Privacy &amp; Provenance</a>
+</div>
+</div>
+</footer>
+<script>
+    function setQuery(text) {
+      const input = document.getElementById('conversational-input');
+      if (input) {
+        input.value = text;
+        input.focus();
+        input.parentElement.parentElement.classList.add('ring-2', 'ring-ochre');
+        setTimeout(() => {
+          input.parentElement.parentElement.classList.remove('ring-2', 'ring-ochre');
+        }, 800);
+      }
+    }
+  </script>
+</body></html>

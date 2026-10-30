@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ReelWorld - Conversational Visual Archive</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            papyrus: {
+              50: '#FAF6F1',
+              100: '#F4EFEB',
+              200: '#ECE5DD',
+              300: '#E4DCD2',
+              400: '#D5CDC2',
+              500: '#CBC2B5',
+            },
+            parchment: {
+              card: '#ECE5DD',
+              input: '#F4EFEB',
+              border: '#D8CFC3',
+              hover: '#E2D8CC',
+              muted: '#DFD5C7',
+            },
+            espresso: {
+              950: '#151311',
+              900: '#1E1C1A',
+              850: '#282522',
+              800: '#35312C',
+              700: '#4D4740',
+              600: '#686057',
+              500: '#8A8074',
+            },
+            ochre: {
+              DEFAULT: '#C85A32',
+              dark: '#AF4A24',
+              clay: '#D35400',
+              glow: '#E0693E',
+              warm: '#D9822B',
+              soft: '#F4DFD2',
+              subtle: '#FAEEE7',
+            },
+            sage: {
+              900: '#1D2E24',
+              800: '#284133',
+              700: '#345241',
+              600: '#3D604E',
+              DEFAULT: '#476E5B',
+              light: '#E2ECE6',
+              border: '#B3C8BD',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          boxShadow: {
+            archival: '0 1px 3px rgba(30,28,26,0.06), 0 1px 2px rgba(30,28,26,0.04)',
+            elevated: '0 10px 28px -4px rgba(30,28,26,0.09), 0 4px 10px -2px rgba(30,28,26,0.05)',
+            card: '0 4px 18px -2px rgba(30,28,26,0.07), 0 2px 6px -1px rgba(30,28,26,0.04)',
+            ochreGlow: '0 0 22px -3px rgba(200,90,50,0.32)',
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #F4EFEB;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #1E1C1A;
+      overflow-x: hidden;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 4px;
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: #D5CDC2;
+      border-radius: 9999px;
+    }
+  </style>
+<meta content="web_standard" name="shell-type"/></head>
+<body class="min-h-screen bg-papyrus-100 text-espresso-900 flex flex-col antialiased selection:bg-ochre selection:text-white">
+<!-- Desktop Sticky Header (1440px target) -->
+<header class="sticky top-0 z-50 w-full bg-parchment-card/90 backdrop-blur-xl border-b border-parchment-border transition-all">
+<div class="max-w-[1440px] mx-auto h-20 px-8 flex items-center justify-between gap-6">
+<!-- Brand & Muse Spark Emblem -->
+<div class="flex items-center gap-4 flex-shrink-0">
+<div class="flex items-center gap-3 group cursor-pointer">
+<!-- Geometric Lens Emblem -->
+<div class="relative w-10 h-10 rounded-xl bg-espresso-900 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform overflow-hidden border border-espresso-800">
+<div class="absolute inset-0 bg-gradient-to-tr from-espresso-950 via-espresso-900 to-espresso-850"></div>
+<div class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-ochre blur-sm opacity-80 animate-pulse"></div>
+<span class="material-symbols-outlined text-[22px] text-ochre-warm relative z-10 font-bold">flare</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xl font-bold tracking-tight text-espresso-950 leading-none">ReelWorld</span>
+<span class="text-[11px] font-semibold tracking-wider text-espresso-600 uppercase">Visual Archive</span>
+</div>
+</div>
+<!-- Muse Spark Open Badge Pill -->
+<div class="h-6 w-px bg-parchment-border mx-1"></div>
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-papyrus-200 border border-parchment-border hover:border-ochre/50 transition-colors">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-ochre opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-ochre"></span>
+</span>
+<span class="text-xs font-semibold text-espresso-800 tracking-tight">Built with Muse Spark Open</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-ochre-soft text-ochre-clay tracking-wide">v2.4</span>
+</div>
+</div>
+<!-- Center Desktop Navigation Tabs -->
+<nav class="flex items-center gap-1 bg-papyrus-200/90 p-1.5 rounded-full border border-parchment-border shadow-inner">
+<a class="px-5 py-2 rounded-full bg-papyrus-100 text-espresso-950 font-bold text-sm shadow-archival border border-parchment-border transition-all flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[18px] text-ochre">public</span>
+<span>World</span>
+</a>
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px]">photo_library</span>
+<span>My Photos</span>
+<span class="ml-0.5 px-1.5 py-0.2 rounded-full bg-papyrus-300 text-[11px] font-semibold text-espresso-700">84</span>
+</a>
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px]">sensors</span>
+<span>Connected</span>
+<span class="w-1.5 h-1.5 rounded-full bg-sage-600"></span>
+</a>
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px]">auto_stories</span>
+<span>Curated Journals</span>
+</a>
+</nav>
+<!-- Right Utility Bar -->
+<div class="flex items-center gap-3">
+<!-- Assistant Status Indicator -->
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-papyrus-200 hover:bg-parchment-hover text-espresso-700 text-xs font-semibold transition-colors border border-parchment-border">
+<span class="material-symbols-outlined text-[16px] text-ochre">auto_awesome</span>
+<span>Semantic Agent Active</span>
+</button>
+<!-- Lens / Camera Fast Tool -->
+<button class="w-10 h-10 rounded-full bg-papyrus-200 hover:bg-ochre-soft hover:text-ochre text-espresso-700 flex items-center justify-center transition-colors border border-parchment-border" title="Fast Capture Lens">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+</button>
+<!-- Primary Upload Action -->
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-espresso-900 text-papyrus-100 hover:bg-espresso-800 text-sm font-semibold shadow-archival transition-all active:scale-95 group border border-espresso-800">
+<span class="material-symbols-outlined text-[18px] text-ochre-warm group-hover:rotate-90 transition-transform">add</span>
+<span>Upload Artifact</span>
+</button>
+<div class="h-6 w-px bg-parchment-border"></div>
+<!-- User Profile Avatar with Connected Pill -->
+<div class="flex items-center gap-2.5 pl-1 cursor-pointer group">
+<div class="relative">
+<div class="w-10 h-10 rounded-full bg-gradient-to-tr from-espresso-850 to-espresso-700 flex items-center justify-center text-papyrus-100 ring-2 ring-parchment-border shadow-archival">
+<span class="material-symbols-outlined text-[20px]">person</span>
+</div>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-sage-600 rounded-full ring-2 ring-papyrus-100"></span>
+</div>
+<div class="hidden xl:flex flex-col text-left">
+<span class="text-xs font-bold text-espresso-950 group-hover:text-ochre transition-colors">Dr. A. Ochieng</span>
+<span class="text-[11px] text-espresso-600">Archivist Lead</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Space (Max 1440px Container) -->
+<main class="w-full max-w-[1440px] mx-auto px-8 py-8 flex flex-col gap-8 flex-1"><div class="flex flex-col w-full">
+<!-- System Verification Header & Banner -->
+<section class="flex flex-col gap-6 mb-12">
+<div class="flex flex-wrap items-center justify-between gap-4 p-6 rounded-xl bg-surface-container shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-primary-container text-on-tertiary-container flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">hub</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">Spec Sheet • Spec ID #SYS-CADASTRE-v4.2</span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed text-label-sm font-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+              Live Cluster: Nairobi-04
+            </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mt-0.5">Design System v4: Connected Radial Cadastre</h1>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-on-tertiary-container">verified</span>
+<span>Zero Synthetic Interpolation Principle</span>
+</div>
+<div class="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim">flare</span>
+<span>Muse Spark Open v2.4 Certified</span>
+</div>
+</div>
+</div>
+<!-- Archival Color & Spatial Token Ribbon -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+<div class="p-3.5 rounded-lg bg-surface shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-sm text-label-sm text-outline">Canvas</span>
+<span class="w-4 h-4 rounded-full bg-surface shadow-sm"></span>
+</div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Sun-Cured Sand</p>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">#fef8f4</span>
+</div>
+<div class="p-3.5 rounded-lg bg-surface shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-sm text-label-sm text-outline">User Captures</span>
+<span class="w-4 h-4 rounded-full bg-on-tertiary-container shadow-sm"></span>
+</div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Terracotta Clay</p>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">#c85a32</span>
+</div>
+<div class="p-3.5 rounded-lg bg-surface shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-sm text-label-sm text-outline">World Archives</span>
+<span class="w-4 h-4 rounded-full bg-secondary shadow-sm"></span>
+</div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Acacia / Forest Green</p>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">#1b4332 / #2d5a3f</span>
+</div>
+<div class="p-3.5 rounded-lg bg-surface shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-sm text-label-sm text-outline">Structural Seam</span>
+<span class="w-4 h-4 rounded-full bg-surface-dim shadow-sm"></span>
+</div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Parchment Muted</p>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">#ded9d5</span>
+</div>
+<div class="p-3.5 rounded-lg bg-surface shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-sm text-label-sm text-outline">Typographic Ink</span>
+<span class="w-4 h-4 rounded-full bg-primary-container shadow-sm"></span>
+</div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Roasted Espresso</p>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">#1b1e23</span>
+</div>
+<div class="p-3.5 rounded-lg bg-surface shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-sm text-label-sm text-outline">Unverified Tick</span>
+<span class="w-4 h-4 rounded-full bg-outline shadow-sm"></span>
+</div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Earthy Slate</p>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">#8c827a</span>
+</div>
+</div>
+</section>
+<!-- SECTION A: Ring Node Matrix -->
+<section class="flex flex-col gap-6 mb-16">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-on-tertiary-container"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-outline">Sub-System 01</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Radial Cadastre: Ring Node States</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        Planar visual artifacts represented as coordinate nodes within concentric camera ranges. Zero generative infill; every node anchors strictly to physical ground truth.
+      </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- 1. Yours Root Node -->
+<div class="flex flex-col p-5 rounded-xl bg-surface-container shadow-sm gap-4">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-tertiary-container font-semibold">State: Root (Yours)</span>
+<span class="px-2 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed text-label-sm font-label-sm">Datum 0.0m</span>
+</div>
+<div class="flex items-center justify-center p-8 bg-surface-container-low rounded-lg relative overflow-hidden">
+<!-- Background radial hint -->
+<div class="absolute w-36 h-36 rounded-full bg-on-tertiary-container/10"></div>
+<!-- Node Container -->
+<div class="relative flex flex-col items-center group cursor-pointer">
+<div class="w-20 h-20 rounded-full bg-on-tertiary-container p-1 shadow-md">
+<div class="w-full h-full rounded-full overflow-hidden bg-surface-container-highest relative">
+<img class="w-full h-full object-cover" data-alt="Close up archival view of Nairobi City Hall colonnade pillars in warm afternoon sunlight, crisp architectural detail on sandstone, Kodachrome archival tone" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVNJxS9X9tg1g7rzKO79muAQ2B0EyfgQ4Yq-H8E9ruQLQz2p55WoAwT2YRB_MmFsaEZU8BElXZ3N_vFZ76JrXpOZCvx0w1tI1_x4UAflVY-KxzJvsUPpzY4VLnrhqpsJFxBFYoq4u66VwyCEnfA-gq30yAjR925Ivp7V89gGdrepYjYw8GYPxkMgxI7nPo-SgQhvu4A88sY1XvwDn8CUPMotLfZq2GTI6lQdAJrAY"/>
+<div class="absolute inset-0 bg-primary/20"></div>
+</div>
+</div>
+<span class="absolute -bottom-2.5 px-2 py-0.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-bold shadow-sm">Yours</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex justify-between"><span class="text-outline">Border Weight:</span> <span class="text-on-surface font-mono">4px Terracotta (#c85a32)</span></div>
+<div class="flex justify-between"><span class="text-outline">Position:</span> <span class="text-on-surface font-mono">Radial Center (Origin)</span></div>
+<div class="flex justify-between"><span class="text-outline">Elevation:</span> <span class="text-on-surface font-mono">Ground (0.0m)</span></div>
+</div>
+</div>
+<!-- 2. World Archival Node -->
+<div class="flex flex-col p-5 rounded-xl bg-surface-container shadow-sm gap-4">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold">State: World (Confirmed)</span>
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-fixed text-label-sm font-label-sm">+28m Vantage</span>
+</div>
+<div class="flex items-center justify-center p-8 bg-surface-container-low rounded-lg relative overflow-hidden">
+<div class="relative flex flex-col items-center group cursor-pointer">
+<div class="w-20 h-20 rounded-full bg-secondary p-1 shadow-md">
+<div class="w-full h-full rounded-full overflow-hidden bg-surface-container-highest relative">
+<img class="w-full h-full object-cover" data-alt="Historical 1974 vintage photograph of Nairobi city skyline and Kenyatta International Convention Centre tower with saucer under bright tropical sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjIxFNG1OxGYYazUlVotF9HHtpqJlYdbr235dAdqRGJhgFcgCxPoRbewOWc-EALulROPFVeU-Nk34N09lvN_axlDJ-UFDQXo0YxCHrgWnHIVmGv-tHsIj5ubEynHEEsGQSCxhIpcWmBkoZPeiYBeIfrHAQNYD8XEfSpdhUu5leyG9HrChIrBCBoIRM1k0ep3rsyMAB0nVfuBaHez7KfF6_fZySCS2nz3kwoMjentI"/>
+</div>
+</div>
+<span class="absolute -bottom-2.5 px-2 py-0.5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-bold shadow-sm">1974 Archival</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex justify-between"><span class="text-outline">Border Tone:</span> <span class="text-on-surface font-mono">Forest Green (#1b4332)</span></div>
+<div class="flex justify-between"><span class="text-outline">Credit Line:</span> <span class="text-on-surface font-mono">Photo: Kenya National Archives • CC BY-SA 4.0</span></div>
+<div class="flex justify-between"><span class="text-outline">Confirmed Vector:</span> <span class="text-on-surface font-mono">Plinth Colonnade 4-Point Match</span></div>
+</div>
+</div>
+<!-- 3. Similar Ring 5 Node (Unconfirmed) -->
+<div class="flex flex-col p-5 rounded-xl bg-surface-container shadow-sm gap-4">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">State: Similar (Ring 5)</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant text-label-sm font-label-sm">Unconfirmed</span>
+</div>
+<div class="flex items-center justify-center p-8 bg-surface-container-low rounded-lg relative overflow-hidden">
+<div class="relative flex flex-col items-center opacity-80 group cursor-pointer">
+<div class="w-20 h-20 rounded-full bg-surface-dim p-1 shadow-sm">
+<div class="w-full h-full rounded-full overflow-hidden bg-surface-container-highest relative grayscale-[40%]">
+<img class="w-full h-full object-cover" data-alt="Monochrome photograph of modernist concrete facade with geometric sun louvers in Nairobi CBD during overcast monsoon morning" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRLC-wQqYWEkBsd1ISlbZfjgHzvbP0yNrNqo7a3wODFS03Ucm_ysOvQqRvbtJhsTOFg0qRK-T4Balloyi5dMbuwND5rX_J8blrv5gZfHg0KsCEIWCfSIKV8Cx99h3av1sCLX_NaNy4WYgnFjV7jbi_CEFF-OxiBZVIR9ijQUwM7TG_MaMkgwTLROwJ1qhgsD8adTkMzKRftLEtQtgeJbXdOjMMcjZTDFju16ygtlw"/>
+</div>
+</div>
+<span class="absolute -bottom-2.5 px-2 py-0.5 rounded-full bg-surface-dim text-on-surface-variant font-label-sm text-label-sm font-bold shadow-sm">Probable Facade</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex justify-between"><span class="text-outline">Perimeter:</span> <span class="text-on-surface font-mono">Segmented Muted (#8c827a)</span></div>
+<div class="flex justify-between"><span class="text-outline">Warning Stamp:</span> <span class="text-on-surface font-mono">Ambiguous Horizon Line (Δ 2.4°)</span></div>
+<div class="flex justify-between"><span class="text-outline">Credit Line:</span> <span class="text-on-surface font-mono">Photo: S. Mwangi • CC BY 2.0</span></div>
+</div>
+</div>
+<!-- 4. Hovered Node with Reticle & Tooltip -->
+<div class="flex flex-col p-5 rounded-xl bg-surface-container shadow-sm gap-4">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-tertiary-container font-semibold">State: Hovered (Optical Focus)</span>
+<span class="px-2 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed text-label-sm font-label-sm">Active Reticle</span>
+</div>
+<div class="flex items-center justify-center p-8 bg-surface-container-low rounded-lg relative">
+<!-- Coordinates Tooltip Callout -->
+<div class="absolute top-2 left-3 px-2 py-1 rounded bg-primary text-on-primary text-[10px] font-mono shadow-md z-10 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[12px] text-tertiary-fixed-dim">my_location</span>
+<span>1°17'19.2"S 36°49'24.8"E • +18m</span>
+</div>
+<!-- Target Sight Reticle -->
+<div class="relative flex flex-col items-center">
+<div class="w-24 h-24 rounded-full bg-on-tertiary-container/30 p-1.5 flex items-center justify-center shadow-lg">
+<div class="w-20 h-20 rounded-full bg-on-tertiary-container p-1 relative">
+<img class="w-full h-full rounded-full object-cover" data-alt="High angle view of Harambee Avenue traffic and pedestrians with modernist limestone post office facade in background, warm film scan aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABKSwCOtc2AIR2q6lpcdhEUFIsxk_FkcEti94mGaLzNQdZctde1fjfmVUSrFghFXfqA_SaoRw-D3VipscukTFqt67grr7WdfT28xhFX3ERsa1VC0pp_dGToUw_nLTWHDbdyTDbG7gbsOsH2pcRTb45kjLnNGIyydnVd6qf8QdJopmtIu0N9llhQ6JW3t9GawJDdneNx0yf_kVetV2NGUy1FQwKxFo1vFx_RkRDm2k"/>
+<!-- Reticle cross lines -->
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-0.5 h-3 bg-tertiary-fixed-dim"></div>
+<div class="absolute -bottom-3 left-1/2 -translate-x-1/2 w-0.5 h-3 bg-tertiary-fixed-dim"></div>
+<div class="absolute top-1/2 -left-3 -translate-y-1/2 w-3 h-0.5 bg-tertiary-fixed-dim"></div>
+<div class="absolute top-1/2 -right-3 -translate-y-1/2 w-3 h-0.5 bg-tertiary-fixed-dim"></div>
+</div>
+</div>
+<span class="absolute -bottom-2 px-2 py-0.5 rounded-full bg-primary-container text-on-primary font-label-sm text-label-sm font-bold shadow-sm">Focal Lock</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex justify-between"><span class="text-outline">Scale Shift:</span> <span class="text-on-surface font-mono">1.12x Reticle Expansion</span></div>
+<div class="flex justify-between"><span class="text-outline">Crosshairs:</span> <span class="text-on-surface font-mono">Orthogonal Datum Markers</span></div>
+<div class="flex justify-between"><span class="text-outline">Credit Line:</span> <span class="text-on-surface font-mono">Photo: G. Waweru • CC BY-SA 3.0</span></div>
+</div>
+</div>
+<!-- 5. Selected Active Inspection Node -->
+<div class="flex flex-col p-5 rounded-xl bg-surface-container shadow-sm gap-4">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold">State: Selected (Pinned)</span>
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-fixed text-label-sm font-label-sm">Dual Collar</span>
+</div>
+<div class="flex items-center justify-center p-8 bg-surface-container-low rounded-lg relative">
+<!-- Active Inspection Node -->
+<div class="relative flex flex-col items-center">
+<div class="w-24 h-24 rounded-full bg-secondary-fixed flex items-center justify-center shadow-lg">
+<div class="w-20 h-20 rounded-full bg-secondary p-1">
+<img class="w-full h-full rounded-full object-cover" data-alt="Architectural detail of concrete waffle ceiling and spiral ramp of Kenyan conference amphitheatre, high-contrast natural shadow play" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBku4QLsxLkZpaOJ7gD3MkyU_vTCa3YuNIjI9yfiYTkLa_fNmpJZ747s2_1anqDIr1FTvh1DbGJc0jwhIMQM06xeJ87xjXBZacGNvGq9b7Offdg4yRMs7uZSCKPcXvtsgFhMQZW1I-cx0XZM6KFw-2NoiaX0tXVY6DKZ0-CqJqg-YiDmOq0u8mHVPzNzziAOeuvRgDonfSZtWs9HfbJ6RSr1CgC6V0Dpti7k9CyvKc"/>
+</div>
+</div>
+<span class="absolute -bottom-2.5 px-2.5 py-0.5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-bold shadow-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">check_circle</span>
+<span>Active Subject</span>
+</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex justify-between"><span class="text-outline">Ring Style:</span> <span class="text-on-surface font-mono">Double Solid Concentric Band</span></div>
+<div class="flex justify-between"><span class="text-outline">Tectonic Match:</span> <span class="text-on-surface font-mono">99.4% Keypoint Alignment</span></div>
+<div class="flex justify-between"><span class="text-outline">Credit Line:</span> <span class="text-on-surface font-mono">Photo: M. Otieno • CC BY 4.0</span></div>
+</div>
+</div>
+<!-- 6. Stacked Cluster Overflow Node (+3 more) -->
+<div class="flex flex-col p-5 rounded-xl bg-surface-container shadow-sm gap-4">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">State: Clustered Overflow</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface text-label-sm font-label-sm">Colocated [4]</span>
+</div>
+<div class="flex items-center justify-center p-8 bg-surface-container-low rounded-lg relative">
+<div class="relative flex flex-col items-center cursor-pointer group">
+<!-- Background Stack Disc 2 -->
+<div class="absolute -top-2 left-3 w-16 h-16 rounded-full bg-surface-dim shadow-sm opacity-60"></div>
+<!-- Background Stack Disc 1 -->
+<div class="absolute -top-1 left-1.5 w-18 h-18 rounded-full bg-surface-variant shadow-sm opacity-80"></div>
+<!-- Top Disc Node with Count Badge -->
+<div class="relative w-20 h-20 rounded-full bg-surface-container-high p-1 shadow-md flex items-center justify-center">
+<img class="w-full h-full rounded-full object-cover brightness-75" data-alt="Square view of Nairobi parliament square fountain and basalt stonework in midday sunlight with palm fronds casting crisp shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-sZUoejGeZuwFMAmdtaUPTtl5jYUTHR9rquvoN1O023XT92mIUM-d7oO05WeqaNGHUc5EB72JgvypZcnKhf95eD9r8PDryL1lHSwtmvJVpk8k5fZdrekc_r7-kg3J0C4rjk-KxrCAHDKFUqoHfJ1sQc5ilaRRAr9IXOW1RPp_cJllDnb8-c1z_Eanbw3QK7AnUaOFzzZX4T3wfylG3ZzYsOKDbtwBpnCl5Y6coJg"/>
+<div class="absolute inset-0 rounded-full bg-primary/40 flex items-center justify-center">
+<span class="font-headline-sm text-headline-sm text-on-primary font-bold">+3</span>
+</div>
+</div>
+<span class="absolute -bottom-2.5 px-2 py-0.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-bold shadow-sm">View Cluster</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex justify-between"><span class="text-outline">Stack Depth:</span> <span class="text-on-surface font-mono">3 Discs Layered Offset</span></div>
+<div class="flex justify-between"><span class="text-outline">Resolution:</span> <span class="text-on-surface font-mono">Radial Drawer on Click</span></div>
+<div class="flex justify-between"><span class="text-outline">Credit Line:</span> <span class="text-on-surface font-mono">Various Authors • CC BY-SA</span></div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION B: Threads & Sightline Vectors -->
+<section class="flex flex-col gap-6 mb-16">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-outline">Sub-System 02</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Relational Sightline Vectors &amp; Tectonic Rays</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        Strict geometric lines establishing confirmed spatial correlation between your camera sensor and peer historical vantage points.
+      </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- 1. Verified Tectonic Thread -->
+<div class="flex flex-col p-6 rounded-xl bg-surface-container shadow-sm gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-on-tertiary-container"></span>
+<span class="font-label-lg text-label-lg font-semibold text-on-surface">Verified Tectonic Ray</span>
+</div>
+<span class="font-mono text-label-sm text-label-sm text-on-tertiary-container font-semibold">Confidence: 99.8%</span>
+</div>
+<!-- Vector Visual Stage -->
+<div class="h-28 bg-surface-container-low rounded-lg p-4 flex items-center justify-between relative overflow-hidden">
+<div class="w-10 h-10 rounded-full bg-on-tertiary-container text-on-tertiary flex items-center justify-center font-bold text-xs shadow-sm z-10">YOU</div>
+<!-- Solid Ray with Directional Pulses -->
+<div class="flex-1 mx-4 relative flex items-center justify-center">
+<div class="w-full h-1 bg-on-tertiary-container rounded-full"></div>
+<div class="absolute inset-0 flex items-center justify-around px-4">
+<span class="material-symbols-outlined text-[16px] text-on-primary">chevron_right</span>
+<span class="material-symbols-outlined text-[16px] text-on-primary">chevron_right</span>
+<span class="material-symbols-outlined text-[16px] text-on-primary">chevron_right</span>
+</div>
+<span class="absolute -top-5 px-2 py-0.5 rounded bg-surface text-on-tertiary-container font-mono text-[10px] shadow-sm font-semibold">Tectonic Co-Planar</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-bold text-xs shadow-sm z-10">ARCH</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Solid Terracotta ray with directional amber chevron pulses. Indicates dual vantage points observing identical architectural masonry planes from measured baseline deltas.
+        </p>
+</div>
+<!-- 2. Optical Sightline Vector -->
+<div class="flex flex-col p-6 rounded-xl bg-surface-container shadow-sm gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="font-label-lg text-label-lg font-semibold text-on-surface">Optical Sightline Vector</span>
+</div>
+<span class="font-mono text-label-sm text-label-sm text-secondary font-semibold">312° Vector / +18° Pitch</span>
+</div>
+<!-- Vector Visual Stage -->
+<div class="h-28 bg-surface-container-low rounded-lg p-4 flex items-center justify-between relative overflow-hidden">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center font-bold text-xs shadow-sm z-10">0.0m</div>
+<!-- Fine Dashed Ray with Angular Annotation -->
+<div class="flex-1 mx-4 relative flex flex-col items-center justify-center">
+<svg class="w-full h-4 text-secondary" preserveaspectratio="none">
+<line stroke="currentColor" stroke-dasharray="6,4" stroke-width="2" x1="0" x2="100%" y1="8" y2="8"></line>
+</svg>
+<div class="absolute -bottom-1 px-2.5 py-0.5 rounded bg-secondary-container text-on-secondary-fixed font-mono text-[10px] font-semibold">
+              Δ Azimuth 128.4° • F/5.6 35mm
+            </div>
+</div>
+<div class="w-10 h-10 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-bold text-xs shadow-sm z-10">+28m</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Fine dashed ray carrying compass bearing, tilt angles, and focal length parity calculations. Connects ground level perspective to elevated archival balconies.
+        </p>
+</div>
+<!-- 3. Unconfirmed Morphological Thread -->
+<div class="flex flex-col p-6 rounded-xl bg-surface-container shadow-sm gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-outline"></span>
+<span class="font-label-lg text-label-lg font-semibold text-on-surface">Unconfirmed Morphological Thread</span>
+</div>
+<span class="font-mono text-label-sm text-label-sm text-outline font-semibold">Confidence: 61.2%</span>
+</div>
+<!-- Vector Visual Stage -->
+<div class="h-28 bg-surface-container-low rounded-lg p-4 flex items-center justify-between relative overflow-hidden">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center font-bold text-xs shadow-sm z-10">A</div>
+<!-- Dotted Muted Thread with Question Glyph -->
+<div class="flex-1 mx-4 relative flex items-center justify-center">
+<svg class="w-full h-4 text-outline" preserveaspectratio="none">
+<line stroke="currentColor" stroke-dasharray="2,5" stroke-width="2" x1="0" x2="100%" y1="8" y2="8"></line>
+</svg>
+<div class="absolute px-2 py-0.5 rounded-full bg-surface-dim text-on-surface-variant font-mono text-[10px] flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[12px]">help</span>
+<span>Potential Facade Ambiguity</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-dim text-on-surface-variant flex items-center justify-center font-bold text-xs shadow-sm z-10">?</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Muted dotted thread indicating semantic shape similarity (e.g., modular brutalist brise-soleil) without certified cadastre ground alignment.
+        </p>
+</div>
+<!-- 4. Coverage Gap Line -->
+<div class="flex flex-col p-6 rounded-xl bg-surface-container shadow-sm gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-error"></span>
+<span class="font-label-lg text-label-lg font-semibold text-on-surface">Cadastral Coverage Gap Arc</span>
+</div>
+<span class="font-mono text-label-sm text-label-sm text-error font-semibold">Missing Sector: 42°–88°</span>
+</div>
+<!-- Vector Visual Stage -->
+<div class="h-28 bg-surface-container-low rounded-lg p-4 flex items-center justify-between relative overflow-hidden">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center font-bold text-xs shadow-sm z-10">210°</div>
+<!-- Interrupted Arc with Invitation Pulse -->
+<div class="flex-1 mx-4 relative flex items-center justify-center">
+<div class="w-1/3 h-0.5 bg-outline opacity-40"></div>
+<button class="mx-2 px-3 py-1 rounded-full bg-surface text-on-surface text-label-sm font-label-sm flex items-center gap-1.5 shadow-sm hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[14px] text-on-tertiary-container">add_a_photo</span>
+<span class="font-semibold text-xs">Fill Gap</span>
+</button>
+<div class="w-1/3 h-0.5 bg-outline opacity-40"></div>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center font-bold text-xs shadow-sm z-10">340°</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Broken arc indicating unphotographed blind spots in the urban block. Prompts community archivists to upload photos from the absent azimuth.
+        </p>
+</div>
+</div>
+</section>
+<!-- SECTION C: Concentric Ring Labels & Calibration Barrel Marks -->
+<section class="flex flex-col gap-6 mb-16">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-outline">Sub-System 03</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Concentric Cadastre Ring Calibration System</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        Camera barrel typography and tactile measurement ticks calibrated to physical camera separation distances.
+      </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+<!-- Ring 1 -->
+<div class="flex flex-col p-4 rounded-xl bg-surface-container shadow-sm justify-between">
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-mono text-[11px] font-bold">RING 01</span>
+<span class="w-2 h-2 rounded-full bg-on-tertiary-container"></span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-1">SAME PLACE</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Under 15 meters radius. Dual lenses shared the same pavement stones.</p>
+</div>
+<div class="mt-4 pt-3 flex flex-col gap-2 bg-surface-container-low p-2.5 rounded-lg">
+<div class="flex justify-between items-center font-mono text-label-sm text-label-sm">
+<span class="text-outline">Calibration:</span>
+<span class="text-on-surface font-semibold">0m – 15m</span>
+</div>
+<div class="flex justify-between items-center font-mono text-label-sm text-label-sm">
+<span class="text-outline">Verified Count:</span>
+<span class="px-1.5 py-0.2 rounded bg-secondary-container text-on-secondary-fixed font-bold">3 verified</span>
+</div>
+</div>
+</div>
+<!-- Ring 2 -->
+<div class="flex flex-col p-4 rounded-xl bg-surface-container shadow-sm justify-between">
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-mono text-[11px] font-bold">RING 02</span>
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-1">ANOTHER ANGLE</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Opposite perspective or lateral shift. Identical subject matter.</p>
+</div>
+<div class="mt-4 pt-3 flex flex-col gap-2 bg-surface-container-low p-2.5 rounded-lg">
+<div class="flex justify-between items-center font-mono text-label-sm text-label-sm">
+<span class="text-outline">Angular Shift:</span>
+<span class="text-on-surface font-semibold">90° – 180°</span>
+</div>
+<div class="flex justify-between items-center font-mono text-label-sm text-label-sm">
+<span class="text-outline">Verified Count:</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-on-surface font-bold">7 verified</span>
+</div>
+</div>
+</div>
+<!-- Ring 3 -->
+<div class="flex flex-col p-4 rounded-xl bg-surface-container shadow-sm justify-between">
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-mono text-[11px] font-bold">RING 03</span>
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-1">WHERE YOU STOOD</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Identical position across time deltas (decades or epochs apart).</p>
+</div>
+<div class="mt-4 pt-3 flex flex-col gap-2 bg-surface-container-low p-2.5 rounded-lg">
+<div class="flex justify-between items-center font-mono text-label-sm text-label-sm">
+<span class="text-outline">Chronology:</span>
+<span class="text-on-surface font-semibold">1974 Datum</span>
+</div>
+<div class="flex justify-between items-center font-mono text-label-sm text-label-sm">
+<span class="text-outline">Archive Source:</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-on-surface font-bold">Nat. Archives</span>
+</div>
+</div>
+</div>
+<!-- Ring 4 -->
+<div class="flex flex-col p-4 rounded-xl bg-surface-container shadow-sm justify-between">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-mono text-[11px] font-bold">RING 04</span>
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-1">IN BACKGROUND</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">The monument appears as background secondary sightline.</p>
+</div>
+<div class="mt-4 pt-3 flex flex-col gap-2 bg-surface-container-low p-2.5 rounded-lg">
+<div class="flex justify-between items-center font-mono text-label-sm text-label-sm">
+<span class="text-outline">Distance Badge:</span>
+<span class="text-on-surface font-semibold">1.2km offset</span>
+</div>
+<div class="flex justify-between items-center font-mono text-label-sm text-label-sm">
+<span class="text-outline">Verified Count:</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-on-surface font-bold">12 indexed</span>
+</div>
+</div>
+</div>
+<!-- Ring 5 -->
+<div class="flex flex-col p-4 rounded-xl bg-surface-container shadow-sm justify-between">
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-surface-dim text-on-surface-variant font-mono text-[11px] font-bold">RING 05</span>
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-1">LOOKS SIMILAR</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Visual similarity detected, but geolocation remains unverified.</p>
+</div>
+<div class="mt-4 pt-3 flex flex-col gap-2 bg-surface-container-low p-2.5 rounded-lg">
+<div class="flex justify-between items-center font-mono text-label-sm text-label-sm">
+<span class="text-outline">Confidence:</span>
+<span class="text-error font-semibold">&lt; 70% match</span>
+</div>
+<div class="flex justify-between items-center font-mono text-label-sm text-label-sm">
+<span class="text-outline">Status:</span>
+<span class="px-1.5 py-0.2 rounded bg-error-container text-on-error-container font-bold">Unconfirmed</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION D: Legend Filter Chips & Tactile Toggle Switch -->
+<section class="flex flex-col gap-6 mb-16">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-outline">Sub-System 04</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Archival Cadastre Legend &amp; Tactile Filters</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        Minimalist tactile filter chips designed for field archival research with high-contrast active states.
+      </p>
+</div>
+<div class="p-6 rounded-xl bg-surface-container shadow-sm flex flex-col gap-6">
+<div class="flex flex-wrap items-center justify-between gap-4">
+<!-- Filter Chips Group -->
+<div class="flex flex-wrap items-center gap-2">
+<!-- Active Chip: Show All -->
+<button class="px-4 py-2 rounded-full bg-primary text-on-primary font-label-md text-label-md flex items-center gap-2 shadow-sm transition-all hover:bg-primary-container">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span>Show All Rings (31)</span>
+</button>
+<!-- Active Filter Chip: Ring 1 -->
+<button class="px-4 py-2 rounded-full bg-on-tertiary-container text-on-primary font-label-md text-label-md flex items-center gap-2 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-on-primary"></span>
+<span>Ring 1: Same Place</span>
+<span class="px-1.5 py-0.2 rounded-full bg-primary/20 text-[11px] font-bold">3</span>
+</button>
+<!-- Inactive Filter Chip: Ring 2 -->
+<button class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-2 hover:bg-surface-variant transition-colors">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Ring 2: Another Angle</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container text-on-surface text-[11px]">7</span>
+</button>
+<!-- Toggled Off Chip: Ring 5 -->
+<button class="px-4 py-2 rounded-full bg-surface-dim text-on-surface-variant font-label-md text-label-md flex items-center gap-2 opacity-70">
+<span class="material-symbols-outlined text-[16px] text-outline">visibility_off</span>
+<span class="line-through">Ring 5: Looks Similar</span>
+</button>
+<!-- Historical Only -->
+<button class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-2 hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[16px] text-secondary">history_edu</span>
+<span>Historical Only (&lt;1980)</span>
+</button>
+</div>
+<!-- Archival Tactile Toggle Switch -->
+<div class="flex items-center gap-3 p-2 rounded-lg bg-surface-container-low shadow-sm">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Strict Cadastre Mode</span>
+<!-- Tactile Switch Control -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-dim peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-on-primary after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-primary after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION E: Evidence Cards (Verified vs Honest Variant) -->
+<section class="flex flex-col gap-6 mb-16">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-on-tertiary-container"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-outline">Sub-System 05</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Cadastral Evidence &amp; Audit Cards</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        Side-by-side inspection components. ReelWorld enforces strict provenance transparency with mandatory public domain / Creative Commons attribution lines.
+      </p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- 1. Verified Evidence Card -->
+<div class="flex flex-col p-6 rounded-xl bg-surface-container shadow-sm gap-5">
+<div class="flex items-center justify-between pb-3">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="font-label-lg text-label-lg font-semibold text-on-surface">Verified Alignment Card</span>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed text-label-sm font-label-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+<span>Ring 01: Identical Coordinates</span>
+</span>
+</div>
+<!-- Side-by-side Photo Pair -->
+<div class="grid grid-cols-2 gap-4">
+<!-- Your Photo -->
+<div class="flex flex-col gap-2">
+<div class="h-44 rounded-lg bg-surface-container-highest overflow-hidden relative shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Street level view of Kenyatta International Convention Centre tower podium with concrete fins and red soil planters in Nairobi" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD04eqLp5yvXc5L6zye_l2p-revOpbOkfx59GL2XW8zt6ZkXwm4pvw9sbyVfO6iY1IQgCb9xNhx0FEXigA5fqq8W8Js8RYfuL2nce9nHoQCNB6N6UJlarBbp4Qg_O91q6cI8wNkzKOU2c8lgY_2hCpzsFQ_rn9fKD9CWzuvm1Hp2yWTfhgOLcNjHTkpJUsS1Lbxch4JDt5WXfLcyF27wLFNWdCpTSmtw3fVszPuA_o"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded bg-primary text-on-primary font-label-sm text-label-sm font-bold shadow-sm">Your Capture</span>
+<span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-surface/90 text-on-surface font-mono text-[10px]">2024 • 24mm F/4</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Harambee Plaza Forecourt (Ground)</span>
+</div>
+<!-- World Photo -->
+<div class="flex flex-col gap-2">
+<div class="h-44 rounded-lg bg-surface-container-highest overflow-hidden relative shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Historical 1974 documentary photo of Kenyatta International Convention Centre plinth during its grand opening ceremony with crowds in period dress" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJzL04jxMLQzzExcks5kjui0FbRZ_m0zKEFB2wH4-qmM2n3Zn6HzNNqt7NtYbMraCUrKE2i9u_zY3D9_H5JsTjZ3KwdKyfvrE6ksUGlnfditERUunLUPjp8SrLzZ3zDX1GnQQbzqCQHaopDyWUtxe4B1k8ghyK9kbajUg02po8V_Az6wHOELiL__8noTP8EbYc_6M-VSOsA5EW2t0tgUhAfhjg_syFNZ3mMVMEwjM"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded bg-secondary text-on-secondary font-label-sm text-label-sm font-bold shadow-sm">Archival World Match</span>
+<span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-surface/90 text-on-surface font-mono text-[10px]">1974 • 35mm Scan</span>
+</div>
+<!-- Mandatory Credit Line -->
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">
+              Photo: K. Odhiambo • CC BY-SA 4.0 (#1974-NBO)
+            </span>
+</div>
+</div>
+<!-- Granular Cadastre Bullets -->
+<div class="flex flex-col gap-2.5 p-4 rounded-lg bg-surface-container-low">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-secondary mt-0.5">check_circle</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Shared Sign Inscription</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">"HARAMBEE HOUSE" bronze plinth bas-relief matching line height 14.2cm.</span>
+</div>
+</div>
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-secondary mt-0.5">check_circle</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Confirmed Landmark</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">KICC Amphitheatre Saucer concrete cantilever rim rib 18 through 24.</span>
+</div>
+</div>
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-secondary mt-0.5">check_circle</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Viewpoint Delta</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Offset 3.8m South-East. Compass alignment within 1.2° tolerance.</span>
+</div>
+</div>
+</div>
+<!-- Primary Action Button Group -->
+<div class="flex flex-wrap items-center gap-3 pt-2">
+<button class="flex-1 py-2.5 px-4 rounded bg-primary text-on-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-2 shadow-sm hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">compare</span>
+<span>Compare Split-Screen</span>
+</button>
+<button class="py-2.5 px-4 rounded bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold flex items-center gap-2 hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">screen_rotation</span>
+<span>Another Angle</span>
+</button>
+<button class="py-2.5 px-4 rounded bg-on-tertiary-container text-on-primary font-label-md text-label-md font-semibold flex items-center gap-2 hover:bg-on-tertiary-container/90 transition-colors">
+<span class="material-symbols-outlined text-[18px]">bookmark_add</span>
+<span>Add to Story</span>
+</button>
+</div>
+</div>
+<!-- 2. Honest Variant Evidence Card -->
+<div class="flex flex-col p-6 rounded-xl bg-surface-container shadow-sm gap-5">
+<div class="flex items-center justify-between pb-3">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-outline"></span>
+<span class="font-label-lg text-label-lg font-semibold text-on-surface">Honest Uncertainty Variant</span>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-dim text-on-surface-variant text-label-sm font-label-sm font-semibold">
+            Ring 05: Unconfirmed
+          </span>
+</div>
+<!-- Honest Alert Banner -->
+<div class="p-4 rounded-lg bg-surface-container-highest flex items-start gap-3">
+<span class="material-symbols-outlined text-[22px] text-on-surface-variant mt-0.5">warning</span>
+<div class="flex flex-col gap-0.5">
+<span class="font-label-md text-label-md font-bold text-on-surface">
+              "Looks alike, but I cannot confirm it is the same place"
+            </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+              ReelWorld refuses synthetic hallucination. Visual patterns correlate, but key geographic cadastre anchors are missing or obscured.
+            </span>
+</div>
+</div>
+<!-- Shared Patterns vs Missing Anchors Table -->
+<div class="flex flex-col rounded-lg bg-surface-container-low overflow-hidden">
+<div class="grid grid-cols-2 p-3 bg-surface-container-high font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">
+<span>Detected Shared Patterns</span>
+<span>Missing Physical Anchors</span>
+</div>
+<div class="grid grid-cols-2 p-3 gap-3 font-body-sm text-body-sm text-on-surface">
+<ul class="flex flex-col gap-2">
+<li class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[14px]">check</span>
+<span>Hexagonal sun-shade concrete grid</span>
+</li>
+<li class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[14px]">check</span>
+<span>Mid-century East African brutalism</span>
+</li>
+<li class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[14px]">check</span>
+<span>Red laterite earth at building base</span>
+</li>
+</ul>
+<ul class="flex flex-col gap-2">
+<li class="flex items-center gap-1.5 text-error">
+<span class="material-symbols-outlined text-[14px]">close</span>
+<span>No cadastral survey pin in frame</span>
+</li>
+<li class="flex items-center gap-1.5 text-error">
+<span class="material-symbols-outlined text-[14px]">close</span>
+<span>Street signage obscured by tree canopy</span>
+</li>
+<li class="flex items-center gap-1.5 text-error">
+<span class="material-symbols-outlined text-[14px]">close</span>
+<span>Exif metadata absent / stripped</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Mandatory Credit Line for Proposed Candidate -->
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-outline">photo_camera</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Candidate: S. Kamau Archives • CC BY-NC 4.0 (#MBI-1982)</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-dim text-outline font-mono text-[10px]">Candidate #44</span>
+</div>
+<!-- Dismiss / Confirm Actions -->
+<div class="flex items-center gap-3 pt-2">
+<button class="flex-1 py-2.5 px-4 rounded bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold flex items-center justify-center gap-2 hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">close</span>
+<span>Dismiss Match</span>
+</button>
+<button class="flex-1 py-2.5 px-4 rounded bg-primary text-on-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-2 hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">rate_review</span>
+<span>Provide Ground Truth Evidence</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION F: Cadastral Provenance Breadcrumb & Interactive Chain -->
+<section class="flex flex-col gap-6 mb-16">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-outline">Sub-System 06</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Relational Chain Architecture &amp; Provenance Breadcrumb</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        The dual-artifact cadastral chain binding two visual moments through an immutable physical anchor.
+      </p>
+</div>
+<!-- Provenance Track Breadcrumb -->
+<div class="p-4 rounded-xl bg-surface-container shadow-sm flex flex-wrap items-center justify-between gap-4">
+<div class="flex flex-wrap items-center gap-2 font-label-md text-label-md">
+<span class="text-outline uppercase text-label-sm font-label-sm tracking-wider">Provenance Track /</span>
+<a class="px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-semibold hover:bg-surface-variant transition-colors" href="#">
+          Harambee Plaza Forecourt [Centred Root]
+        </a>
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_forward</span>
+<div class="px-2.5 py-1 rounded bg-secondary-container text-on-secondary-fixed font-semibold flex items-center gap-1.5 shadow-sm">
+<span>Node 1B: KICC Amphitheatre Saucer Roof</span>
+<span class="px-1.5 py-0.2 rounded bg-secondary text-on-secondary text-[10px] font-mono">+64m Datum</span>
+</div>
+</div>
+<div class="flex items-center gap-2 font-mono text-label-sm text-label-sm text-outline">
+<span class="material-symbols-outlined text-[14px]">link</span>
+<span>Cadastre Chain Validated (Block LR-209-8422)</span>
+</div>
+</div>
+<!-- The Chain Graphic: Verified Chain vs Broken Chain -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- 1. Verified Relational Chain -->
+<div class="flex flex-col p-6 rounded-xl bg-surface-container shadow-sm gap-4">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold">Chain State: Verified Anchor</span>
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-fixed text-label-sm font-label-sm font-semibold">Locked Chain</span>
+</div>
+<!-- Graphic Container -->
+<div class="p-6 bg-surface-container-low rounded-lg flex flex-col md:flex-row items-center justify-between gap-4 relative">
+<!-- User Node -->
+<div class="flex flex-col items-center gap-2 text-center">
+<div class="w-14 h-14 rounded-full bg-on-tertiary-container p-1 shadow-md">
+<div class="w-full h-full rounded-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Square crop of modern tourist photo of downtown Nairobi streetscape with modern high rises in crisp natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSMXfvczjsoB_klYTKbcXv6sspg4anb-fxIlsO0Hs8ZROYqN7nCyfUpg3AwuaojWHinu0YnTRnwor1KdxzZOTzc-3x9_6pEbiQYCvfPVfvj0MT6RsE0DATrDewChomTrEwMHb-0HCOSFxBbIVdCgC94LrHKw69phJgSwjWdFUfIrLUtPr5UTdtfekV_wco7DZAUhO8N2B9J80rEC5nvJII8Pqv69_zu9Uu-cuwDyk"/>
+</div>
+</div>
+<span class="font-label-sm text-label-sm font-bold text-on-surface">You (2024)</span>
+<span class="font-mono text-[10px] text-outline">Ground 0.0m</span>
+</div>
+<!-- Solid Connecting Ray -->
+<div class="hidden md:flex flex-1 h-0.5 bg-on-tertiary-container relative items-center justify-center">
+<span class="w-2 h-2 rounded-full bg-on-tertiary-container"></span>
+</div>
+<!-- Shared Anchor Node -->
+<div class="flex flex-col items-center gap-2 p-3 rounded-lg bg-surface shadow-sm text-center max-w-[200px]">
+<span class="material-symbols-outlined text-[20px] text-primary">foundation</span>
+<span class="font-label-sm text-label-sm font-bold text-on-surface">KICC Saucer Plinth</span>
+<span class="font-mono text-[10px] text-outline">Cadastre #LR-209-8422</span>
+</div>
+<!-- Solid Connecting Ray -->
+<div class="hidden md:flex flex-1 h-0.5 bg-secondary relative items-center justify-center">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+</div>
+<!-- World Node -->
+<div class="flex flex-col items-center gap-2 text-center">
+<div class="w-14 h-14 rounded-full bg-secondary p-1 shadow-md">
+<div class="w-full h-full rounded-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Square crop of vintage black and white archival photo of Nairobi city centre construction with timber scaffolding and crane" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOzcAK25wj5V53xblg2Y2S0K9zzV2LLh15ddCpCbOBCBXUG5pXkegACzDikjkYtybF4XvNJ1TQRsTrYi-8Gxz2Xa1NEgnkC__sjZrrBD0ertzaNqRYcX8Cd-12twwNREhwV12csOdvyb8_e3GOiBw7OBsKucLAzMHk5pJnwEsvvFjdPAtIpYzigtpcYo1pJJIvjzg53r95O7h6gbLygjKENApSI3j_MwOOZTVg32o"/>
+</div>
+</div>
+<span class="font-label-sm text-label-sm font-bold text-on-surface">World (1974)</span>
+<span class="font-mono text-[10px] text-outline">Above +28m</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Mandatory Credit Line: <span class="text-on-surface font-semibold">Photo: Ministry of Information &amp; Broadcasting • CC BY-SA 4.0</span>
+</p>
+</div>
+<!-- 2. Broken Chain / Unconnected Variant -->
+<div class="flex flex-col p-6 rounded-xl bg-surface-container shadow-sm gap-4">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Chain State: Disjointed Cadastre</span>
+<span class="px-2 py-0.5 rounded bg-surface-dim text-on-surface-variant text-label-sm font-label-sm font-semibold">Broken Chain</span>
+</div>
+<!-- Graphic Container -->
+<div class="p-6 bg-surface-container-low rounded-lg flex flex-col md:flex-row items-center justify-between gap-4 relative">
+<!-- User Node -->
+<div class="flex flex-col items-center gap-2 text-center">
+<div class="w-14 h-14 rounded-full bg-on-tertiary-container p-1 shadow-md">
+<div class="w-full h-full rounded-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Modern smartphone capture of a street vendor cart under shade trees in Nairobi CBD, vibrant colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWe8nI2fXls4F5dJd0__-LVXcaZaDiIxWoEHBq57irFtAnR5qpxoifXGbB-yHwZ-wAer8BdkQiGii0tSyC3MKzG5a1YEZYPf56c_oKAT1qcqLy1jDp3ZFa9CHhfnpDQCOVNrjPcAFV5qHgNQFNbIjbG8ZW1L8bF9euDgIUTrPnO932q1wqt5jQC7rrROFCzXT5Oo60RlpDUB5uuXjvNDSEl51arBPj8Krl95JybxM"/>
+</div>
+</div>
+<span class="font-label-sm text-label-sm font-bold text-on-surface">You (2024)</span>
+<span class="font-mono text-[10px] text-outline">Ground 0.0m</span>
+</div>
+<!-- Broken Dotted Line -->
+<div class="hidden md:flex flex-1 items-center justify-center">
+<svg class="w-full h-2 text-outline" preserveaspectratio="none">
+<line stroke="currentColor" stroke-dasharray="3,4" stroke-width="2" x1="0" x2="100%" y1="4" y2="4"></line>
+</svg>
+</div>
+<!-- Unshared Center -->
+<div class="flex flex-col items-center gap-1 p-3 rounded-lg bg-surface-dim text-center max-w-[200px] opacity-80">
+<span class="material-symbols-outlined text-[20px] text-error">link_off</span>
+<span class="font-label-sm text-label-sm font-bold text-on-surface">No Physical Cadastre</span>
+<span class="font-mono text-[10px] text-error">Δ 840m Spatial Drift</span>
+</div>
+<!-- Broken Dotted Line -->
+<div class="hidden md:flex flex-1 items-center justify-center">
+<svg class="w-full h-2 text-outline" preserveaspectratio="none">
+<line stroke="currentColor" stroke-dasharray="3,4" stroke-width="2" x1="0" x2="100%" y1="4" y2="4"></line>
+</svg>
+</div>
+<!-- World Candidate Node -->
+<div class="flex flex-col items-center gap-2 text-center opacity-70">
+<div class="w-14 h-14 rounded-full bg-surface-dim p-1 shadow-sm">
+<div class="w-full h-full rounded-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Archival black and white shot of standard street lamps and colonial administrative buildings in Nairobi, 1960s" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTs-5YkCZPDw9d7deGShXkFmIAn0FSr64WVSNyEuJkAEJ6qPtTMePFZypPTybMElOmqOGxPCl5DBRHaCkF8b9iO1NPDmJlvMv2PvbLRpIcFRnvvxdK63WmmAzDUinZuD-QMd0PB4tUPW8mzNPANG1OFQsx4-8Cq9JV_ZnpIVGb6jsJhDsPl8DoM2Uz4hC83gP6y0u5dNqvP-sINDjbIno6gVRNn8Iz89GFW0y3rZU"/>
+</div>
+</div>
+<span class="font-label-sm text-label-sm font-bold text-on-surface">Candidate (1968)</span>
+<span class="font-mono text-[10px] text-outline">Unknown Vantage</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Mandatory Credit Line: <span class="text-on-surface font-semibold">Photo: Public Domain Collection • Municipal Record #NBO-URB-68</span>
+</p>
+</div>
+</div>
+</section>
+<!-- SECTION G & H: Mini Ring Glyphs, Vantage Badges & Empty Ring Invitation Arc -->
+<section class="flex flex-col gap-6 mb-16">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-outline">Sub-System 07 &amp; 08</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Micro-Tokens: Aperture Glyphs, Elevation Badges &amp; Coverage Invitations</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        Atomic components utilized across spatial tables, mobile drawers, and camera calibration overlays.
+      </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- 1. Mini Ring Aperture Glyphs (16px, 24px, 32px) -->
+<div class="flex flex-col p-6 rounded-xl bg-surface-container shadow-sm gap-4">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Scale Token: Aperture Glyphs</span>
+<div class="p-6 bg-surface-container-low rounded-lg flex items-center justify-around">
+<!-- 16px Glyph -->
+<div class="flex flex-col items-center gap-2">
+<svg class="w-4 h-4 text-on-tertiary-container" fill="none" viewbox="0 0 16 16">
+<circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"></circle>
+<circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"></circle>
+<circle cx="8" cy="8" fill="currentColor" r="1"></circle>
+</svg>
+<span class="font-mono text-label-sm text-label-sm text-outline">16px Table</span>
+</div>
+<!-- 24px Glyph -->
+<div class="flex flex-col items-center gap-2">
+<svg class="w-6 h-6 text-secondary" fill="none" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"></circle>
+<circle cx="12" cy="12" r="6" stroke="currentColor" stroke-width="1.5"></circle>
+<circle cx="12" cy="12" fill="currentColor" r="2"></circle>
+</svg>
+<span class="font-mono text-label-sm text-label-sm text-outline">24px Standard</span>
+</div>
+<!-- 32px Glyph -->
+<div class="flex flex-col items-center gap-2">
+<svg class="w-8 h-8 text-primary" fill="none" viewbox="0 0 32 32">
+<circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2"></circle>
+<circle cx="16" cy="16" r="9" stroke="currentColor" stroke-dasharray="3 3" stroke-width="1.5"></circle>
+<circle cx="16" cy="16" r="4" stroke="currentColor" stroke-width="1.5"></circle>
+<circle cx="16" cy="16" fill="currentColor" r="1.5"></circle>
+</svg>
+<span class="font-mono text-label-sm text-label-sm text-outline">32px Hero</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Concentric target aperture glyph indicating spatial depth in table rows, breadcrumbs, and archival cards.
+        </p>
+</div>
+<!-- 2. Above / Ground Vantage Elevation Badges -->
+<div class="flex flex-col p-6 rounded-xl bg-surface-container shadow-sm gap-4">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Tokens: Elevation Vantage Chips</span>
+<div class="p-6 bg-surface-container-low rounded-lg flex flex-col gap-3 justify-center">
+<div class="flex items-center justify-between p-2 rounded bg-surface shadow-sm">
+<span class="font-label-sm text-label-sm text-outline">Ground Baseline</span>
+<span class="px-2.5 py-1 rounded bg-surface-container text-on-surface font-mono text-label-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">horizontal_rule</span>
+<span>Ground (0.0m)</span>
+</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface shadow-sm">
+<span class="font-label-sm text-label-sm text-outline">Low Balcony</span>
+<span class="px-2.5 py-1 rounded bg-secondary-container text-on-secondary-fixed font-mono text-label-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+<span>Above (+28m)</span>
+</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface shadow-sm">
+<span class="font-label-sm text-label-sm text-outline">Rooftop Plinth</span>
+<span class="px-2.5 py-1 rounded bg-tertiary-fixed text-on-tertiary-fixed font-mono text-label-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">flight_takeoff</span>
+<span>Above (+64m)</span>
+</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Elevation tokens derived from LiDAR and barometer EXIF datum tags to explain vertical parallax shifts.
+        </p>
+</div>
+<!-- 3. Empty Ring Invitation & Scanning Line Arc -->
+<div class="flex flex-col p-6 rounded-xl bg-surface-container shadow-sm gap-4">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">State: Empty Ring Arc</span>
+<div class="p-6 bg-surface-container-low rounded-lg flex flex-col items-center justify-center text-center gap-3 relative overflow-hidden">
+<div class="w-16 h-16 rounded-full bg-surface shadow-sm flex items-center justify-center text-on-tertiary-container">
+<span class="material-symbols-outlined text-[28px] animate-spin" style="animation-duration: 12s;">autorenew</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">Unphotographed Sector</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Ring 03 (North-Northwest) has zero registered captures</span>
+</div>
+<button class="px-3.5 py-1.5 rounded bg-primary text-on-primary font-label-sm text-label-sm font-semibold flex items-center gap-1.5 shadow-sm hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-[14px]">add</span>
+<span>Add photo from this angle</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Scanning pulse encouraging archival contributors to close coverage gaps in historical monuments.
+        </p>
+</div>
+</div>
+</section>
+<!-- Interactive Sandbox Live Tester -->
+<section class="flex flex-col gap-6 p-8 rounded-xl bg-surface-container shadow-sm mb-8">
+<div class="flex flex-wrap items-center justify-between gap-4">
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary font-semibold">Live Sandbox Tester</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Interactive Cadastral State Toggle</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Simulate live node inspection shifts to inspect token reactivity in real time.</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3.5 py-2 rounded bg-on-tertiary-container text-on-primary font-label-sm text-label-sm font-semibold shadow-sm" id="btn-demo-root">
+          Focus: Your Capture (Root)
+        </button>
+<button class="px-3.5 py-2 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-variant transition-colors" id="btn-demo-world">
+          Focus: 1974 World Archive
+        </button>
+<button class="px-3.5 py-2 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-variant transition-colors" id="btn-demo-similar">
+          Focus: Ring 5 Similar
+        </button>
+</div>
+</div>
+<!-- Live Stage Box -->
+<div class="p-8 rounded-lg bg-surface flex flex-col md:flex-row items-center justify-between gap-6 transition-all duration-300" id="demo-stage">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-full bg-on-tertiary-container p-1 shadow-md transition-all" id="demo-indicator">
+<div class="w-full h-full rounded-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Nairobi city center street scene with jacaranda trees in purple bloom against stone government buildings" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlMNBFWQ1O6-zEhzh29WkRWASuym5usTrn0e6B56d0kq2dZdXXzwGNLV_aPhQRD1dR3dXzYgyh47gza6FoG_MJEfQvw8W80qL7YOS65bXgJlPE_0vZuIzAi14kzlJJHSZpACeOgmAzJLLHXAXhrQnalENql6LWNt6FnHSGsxzrbuLNmdquY6V8-sszyCSJ_itDPZsJ_vfgjudUXXKu_Yv_31cU9atHQYgM6g19uic"/>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface" id="demo-title">Root Node (You)</span>
+<span class="font-mono text-label-sm text-label-sm text-on-tertiary-container font-semibold" id="demo-subtitle">Coordinates: 1°17'19.2"S 36°49'24.8"E (0.0m)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1" id="demo-attribution">Author: Dr. A. Ochieng • Archival Lead Collection (Private)</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1 font-mono text-label-sm text-label-sm">
+<div class="flex items-center gap-2">
+<span class="text-outline">Engine:</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-bold">Muse Spark Open 2.4</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-outline">Physical Cadastre Match:</span>
+<span class="text-secondary font-bold" id="demo-match">100% Deterministic</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive JavaScript Controller -->
+<script>
+    const btnRoot = document.getElementById('btn-demo-root');
+    const btnWorld = document.getElementById('btn-demo-world');
+    const btnSimilar = document.getElementById('btn-demo-similar');
+    const indicator = document.getElementById('demo-indicator');
+    const title = document.getElementById('demo-title');
+    const subtitle = document.getElementById('demo-subtitle');
+    const attribution = document.getElementById('demo-attribution');
+    const match = document.getElementById('demo-match');
+
+    function resetButtons() {
+      [btnRoot, btnWorld, btnSimilar].forEach(btn => {
+        btn.className = 'px-3.5 py-2 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-variant transition-colors';
+      });
+    }
+
+    if (btnRoot && btnWorld && btnSimilar) {
+      btnRoot.addEventListener('click', () => {
+        resetButtons();
+        btnRoot.className = 'px-3.5 py-2 rounded bg-on-tertiary-container text-on-primary font-label-sm text-label-sm font-semibold shadow-sm';
+        indicator.className = 'w-16 h-16 rounded-full bg-on-tertiary-container p-1 shadow-md transition-all scale-105';
+        title.innerText = 'Root Node (Your Capture)';
+        subtitle.innerText = 'Coordinates: 1°17\'19.2"S 36°49\'24.8"E (Datum 0.0m)';
+        subtitle.className = 'font-mono text-label-sm text-label-sm text-on-tertiary-container font-semibold';
+        attribution.innerText = 'Author: Dr. A. Ochieng • Archival Lead Collection (Private)';
+        match.innerText = '100% Deterministic (Root Origin)';
+        match.className = 'text-secondary font-bold';
+      });
+
+      btnWorld.addEventListener('click', () => {
+        resetButtons();
+        btnWorld.className = 'px-3.5 py-2 rounded bg-secondary text-on-secondary font-label-sm text-label-sm font-semibold shadow-sm';
+        indicator.className = 'w-16 h-16 rounded-full bg-secondary p-1 shadow-md transition-all scale-105';
+        title.innerText = 'World Archival Node (1974)';
+        subtitle.innerText = 'Coordinates: 1°17\'18.9"S 36°49\'24.2"E (Above +28m)';
+        subtitle.className = 'font-mono text-label-sm text-label-sm text-secondary font-semibold';
+        attribution.innerText = 'Photo: K. Odhiambo • CC BY-SA 4.0 (#1974-NBO-ARCHIVE)';
+        match.innerText = '99.4% Keypoint Alignment';
+        match.className = 'text-secondary font-bold';
+      });
+
+      btnSimilar.addEventListener('click', () => {
+        resetButtons();
+        btnSimilar.className = 'px-3.5 py-2 rounded bg-surface-dim text-on-surface font-label-sm text-label-sm font-semibold shadow-sm';
+        indicator.className = 'w-16 h-16 rounded-full bg-surface-dim p-1 shadow-sm transition-all scale-100 opacity-80';
+        title.innerText = 'Ring 5 Candidate (Morphological Match)';
+        subtitle.innerText = 'Coordinates: Unverified Cadastre (Δ 2.4° Horizon Shift)';
+        subtitle.className = 'font-mono text-label-sm text-label-sm text-error font-semibold';
+        attribution.innerText = 'Photo: S. Mwangi • CC BY 2.0 (Municipal Repository)';
+        match.innerText = '61.2% Probable (Unconfirmed)';
+        match.className = 'text-error font-bold';
+      });
+    }
+  </script>
+</div></main>
+<!-- Desktop Persistent Footer / System Status Bar -->
+<footer class="w-full bg-espresso-950 border-t border-espresso-850 text-papyrus-300 mt-12">
+<div class="max-w-[1440px] mx-auto px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+<div class="flex items-center gap-3">
+<div class="w-7 h-7 rounded-lg bg-espresso-900 border border-espresso-800 flex items-center justify-center text-ochre-warm">
+<span class="material-symbols-outlined text-[16px]">flare</span>
+</div>
+<div>
+<span class="text-papyrus-100 font-bold">ReelWorld Kenya Semantic Visual Pipeline</span>
+<span class="mx-2 text-espresso-700">•</span>
+<span>Powered by Muse Spark Open Framework</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-sage-DEFAULT"></span>
+<span class="text-papyrus-200">Nairobi Edge Cluster: Online (32ms)</span>
+</div>
+<a class="hover:text-ochre-warm transition-colors" href="#">Documentation</a>
+<a class="hover:text-ochre-warm transition-colors" href="#">Archive Telemetry</a>
+<a class="hover:text-ochre-warm transition-colors" href="#">Privacy &amp; Provenance</a>
+</div>
+</div>
+</footer>
+<script>
+    function setQuery(text) {
+      const input = document.getElementById('conversational-input');
+      if (input) {
+        input.value = text;
+        input.focus();
+        input.parentElement.parentElement.classList.add('ring-2', 'ring-ochre');
+        setTimeout(() => {
+          input.parentElement.parentElement.classList.remove('ring-2', 'ring-ochre');
+        }, 800);
+      }
+    }
+  </script>
+</body></html>

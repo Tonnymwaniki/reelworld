@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ReelWorld - Conversational Visual Archive</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            papyrus: {
+              50: '#FAF6F1',
+              100: '#F4EFEB',
+              200: '#ECE5DD',
+              300: '#E4DCD2',
+              400: '#D5CDC2',
+              500: '#CBC2B5',
+            },
+            parchment: {
+              card: '#ECE5DD',
+              input: '#F4EFEB',
+              border: '#D8CFC3',
+              hover: '#E2D8CC',
+              muted: '#DFD5C7',
+            },
+            espresso: {
+              950: '#151311',
+              900: '#1E1C1A',
+              850: '#282522',
+              800: '#35312C',
+              700: '#4D4740',
+              600: '#686057',
+              500: '#8A8074',
+            },
+            ochre: {
+              DEFAULT: '#C85A32',
+              dark: '#AF4A24',
+              clay: '#D35400',
+              glow: '#E0693E',
+              warm: '#D9822B',
+              soft: '#F4DFD2',
+              subtle: '#FAEEE7',
+            },
+            sage: {
+              900: '#1D2E24',
+              800: '#284133',
+              700: '#345241',
+              600: '#3D604E',
+              DEFAULT: '#476E5B',
+              light: '#E2ECE6',
+              border: '#B3C8BD',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          boxShadow: {
+            archival: '0 1px 3px rgba(30,28,26,0.06), 0 1px 2px rgba(30,28,26,0.04)',
+            elevated: '0 10px 28px -4px rgba(30,28,26,0.09), 0 4px 10px -2px rgba(30,28,26,0.05)',
+            card: '0 4px 18px -2px rgba(30,28,26,0.07), 0 2px 6px -1px rgba(30,28,26,0.04)',
+            ochreGlow: '0 0 22px -3px rgba(200,90,50,0.32)',
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #F4EFEB;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #1E1C1A;
+      overflow-x: hidden;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 4px;
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: #D5CDC2;
+      border-radius: 9999px;
+    }
+  </style>
+<meta content="web_standard" name="shell-type"/></head>
+<body class="min-h-screen bg-papyrus-100 text-espresso-900 flex flex-col antialiased selection:bg-ochre selection:text-white">
+<!-- Desktop Sticky Header (1440px target) -->
+<header class="sticky top-0 z-50 w-full bg-parchment-card/90 backdrop-blur-xl border-b border-parchment-border transition-all">
+<div class="max-w-[1440px] mx-auto h-20 px-8 flex items-center justify-between gap-6">
+<!-- Brand & Muse Spark Emblem -->
+<div class="flex items-center gap-4 flex-shrink-0">
+<div class="flex items-center gap-3 group cursor-pointer">
+<!-- Geometric Lens Emblem -->
+<div class="relative w-10 h-10 rounded-xl bg-espresso-900 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform overflow-hidden border border-espresso-800">
+<div class="absolute inset-0 bg-gradient-to-tr from-espresso-950 via-espresso-900 to-espresso-850"></div>
+<div class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-ochre blur-sm opacity-80 animate-pulse"></div>
+<span class="material-symbols-outlined text-[22px] text-ochre-warm relative z-10 font-bold">flare</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xl font-bold tracking-tight text-espresso-950 leading-none">ReelWorld</span>
+<span class="text-[11px] font-semibold tracking-wider text-espresso-600 uppercase">Visual Archive</span>
+</div>
+</div>
+<!-- Muse Spark Open Badge Pill -->
+<div class="h-6 w-px bg-parchment-border mx-1"></div>
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-papyrus-200 border border-parchment-border hover:border-ochre/50 transition-colors">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-ochre opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-ochre"></span>
+</span>
+<span class="text-xs font-semibold text-espresso-800 tracking-tight">Built with Muse Spark Open</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-ochre-soft text-ochre-clay tracking-wide">v2.4</span>
+</div>
+</div>
+<!-- Center Desktop Navigation Tabs -->
+<nav class="flex items-center gap-1 bg-papyrus-200/90 p-1.5 rounded-full border border-parchment-border shadow-inner">
+<a class="px-5 py-2 rounded-full bg-papyrus-100 text-espresso-950 font-bold text-sm shadow-archival border border-parchment-border transition-all flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[18px] text-ochre">public</span>
+<span>World</span>
+</a>
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px]">photo_library</span>
+<span>My Photos</span>
+<span class="ml-0.5 px-1.5 py-0.2 rounded-full bg-papyrus-300 text-[11px] font-semibold text-espresso-700">84</span>
+</a>
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px]">sensors</span>
+<span>Connected</span>
+<span class="w-1.5 h-1.5 rounded-full bg-sage-600"></span>
+</a>
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px]">auto_stories</span>
+<span>Curated Journals</span>
+</a>
+</nav>
+<!-- Right Utility Bar -->
+<div class="flex items-center gap-3">
+<!-- Assistant Status Indicator -->
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-papyrus-200 hover:bg-parchment-hover text-espresso-700 text-xs font-semibold transition-colors border border-parchment-border">
+<span class="material-symbols-outlined text-[16px] text-ochre">auto_awesome</span>
+<span>Semantic Agent Active</span>
+</button>
+<!-- Lens / Camera Fast Tool -->
+<button class="w-10 h-10 rounded-full bg-papyrus-200 hover:bg-ochre-soft hover:text-ochre text-espresso-700 flex items-center justify-center transition-colors border border-parchment-border" title="Fast Capture Lens">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+</button>
+<!-- Primary Upload Action -->
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-espresso-900 text-papyrus-100 hover:bg-espresso-800 text-sm font-semibold shadow-archival transition-all active:scale-95 group border border-espresso-800">
+<span class="material-symbols-outlined text-[18px] text-ochre-warm group-hover:rotate-90 transition-transform">add</span>
+<span>Upload Artifact</span>
+</button>
+<div class="h-6 w-px bg-parchment-border"></div>
+<!-- User Profile Avatar with Connected Pill -->
+<div class="flex items-center gap-2.5 pl-1 cursor-pointer group">
+<div class="relative">
+<div class="w-10 h-10 rounded-full bg-gradient-to-tr from-espresso-850 to-espresso-700 flex items-center justify-center text-papyrus-100 ring-2 ring-parchment-border shadow-archival">
+<span class="material-symbols-outlined text-[20px]">person</span>
+</div>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-sage-600 rounded-full ring-2 ring-papyrus-100"></span>
+</div>
+<div class="hidden xl:flex flex-col text-left">
+<span class="text-xs font-bold text-espresso-950 group-hover:text-ochre transition-colors">Dr. A. Ochieng</span>
+<span class="text-[11px] text-espresso-600">Archivist Lead</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Space (Max 1440px Container) -->
+<main class="w-full max-w-[1440px] mx-auto px-8 py-8 flex flex-col gap-8 flex-1"><div class="flex flex-col w-full">
+<!-- System Showcase Sub-Header & Live Archival Telemetry -->
+<section class="flex flex-col gap-6 pb-8 border-b border-parchment-border">
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+<div class="flex flex-col gap-2 max-w-3xl">
+<div class="flex items-center gap-3">
+<span class="px-2.5 py-1 rounded bg-secondary-container text-on-secondary-fixed text-label-sm font-label-sm tracking-wider uppercase">
+            SPECIFICATION SPEC-v2.4.8
+          </span>
+<span class="text-label-sm font-label-sm text-espresso-600">
+            MUSEUM CADASTRE REPOSITORY • EAST AFRICA REGION
+          </span>
+</div>
+<h1 class="text-headline-lg font-headline-lg text-espresso-950 tracking-tight">
+          Design System v2: ReelWorld Photobot
+        </h1>
+<p class="text-body-md font-body-md text-espresso-700">
+          The conversational UI canon for East African photographic archaeology. Built with Muse Spark Open v2.4, this system enforces archival tactility, strict model honesty, and 44px spatial ergonomic compliance across visual retrieval surfaces.
+        </p>
+</div>
+<!-- Edge Telemetry & Badge Array -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+<div class="px-4 py-2.5 rounded-lg bg-surface-container-high flex items-center justify-between gap-4">
+<div class="flex items-center gap-2">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span>
+</span>
+<span class="text-label-sm font-label-sm text-espresso-900 font-semibold">NBO-EDGE-01 (ACTIVE)</span>
+</div>
+<span class="text-label-sm font-label-sm text-espresso-600">32ms • Zero External Pins</span>
+</div>
+<div class="px-4 py-2.5 rounded-lg bg-primary-container text-surface flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-ochre-warm">flare</span>
+<span class="text-label-sm font-label-sm font-semibold tracking-wide">Muse Spark Open v2.4</span>
+</div>
+</div>
+</div>
+<!-- Quick Archival Token Legend -->
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 pt-4">
+<div class="p-3 rounded bg-surface-container flex flex-col gap-1">
+<span class="text-label-sm font-label-sm text-espresso-600">CANVAS GROUND</span>
+<span class="text-body-sm font-body-sm text-espresso-950 font-semibold">Sand / Papyrus (#fef8f4)</span>
+</div>
+<div class="p-3 rounded bg-surface-container flex flex-col gap-1">
+<span class="text-label-sm font-label-sm text-espresso-600">PRIMARY ACCENT</span>
+<span class="text-body-sm font-body-sm text-espresso-950 font-semibold">Acacia Forest (#1e4732)</span>
+</div>
+<div class="p-3 rounded bg-surface-container flex flex-col gap-1">
+<span class="text-label-sm font-label-sm text-espresso-600">WARM TERRACOTTA</span>
+<span class="text-body-sm font-body-sm text-espresso-950 font-semibold">Rift Ochre (#c05e3b)</span>
+</div>
+<div class="p-3 rounded bg-surface-container flex flex-col gap-1">
+<span class="text-label-sm font-label-sm text-espresso-600">INK TONALITY</span>
+<span class="text-body-sm font-body-sm text-espresso-950 font-semibold">Roasted Espresso (#1b1e23)</span>
+</div>
+<div class="p-3 rounded bg-surface-container flex flex-col gap-1">
+<span class="text-label-sm font-label-sm text-espresso-600">TARGET COMPLIANCE</span>
+<span class="text-body-sm font-body-sm text-espresso-950 font-semibold">Min 44px Ergonomics</span>
+</div>
+<div class="p-3 rounded bg-surface-container flex flex-col gap-1">
+<span class="text-label-sm font-label-sm text-espresso-600">SPEECH RIGOR</span>
+<span class="text-body-sm font-body-sm text-espresso-950 font-semibold">Honest Negatives Only</span>
+</div>
+</div>
+</section>
+<!-- Specimen Catalog Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-8 py-8">
+<!-- LEFT COLUMN: Conversation Threads & Dialogue Primitives (7 cols) -->
+<div class="xl:col-span-7 flex flex-col gap-10">
+<!-- SECTION 1: USER BUBBLE STATES -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between pb-2 border-b border-parchment-border">
+<div class="flex items-center gap-2">
+<span class="text-label-sm font-label-sm font-semibold text-ochre">01</span>
+<h2 class="text-headline-sm font-headline-sm text-espresso-950">User Query States</h2>
+</div>
+<span class="text-label-sm font-label-sm text-espresso-600">Flush Right • Inverted Espresso Tint</span>
+</div>
+<div class="p-6 rounded-xl bg-surface-container flex flex-col gap-6">
+<!-- State 1A: Plain Text Query Bubble -->
+<div class="flex flex-col items-end gap-1.5 w-full">
+<div class="flex items-center gap-2 text-label-sm font-label-sm text-espresso-600">
+<span>Provenance: Session Query #482</span>
+<span>•</span>
+<span>14:02:11 EAT</span>
+</div>
+<div class="max-w-[85%] bg-primary-container text-surface px-5 py-3.5 rounded-2xl rounded-tr-sm shadow-md">
+<p class="text-body-md font-body-md leading-relaxed">
+                Show me the front plaza of the National Theatre in Nairobi before the 1978 perimeter stone wall was erected.
+              </p>
+</div>
+</div>
+<!-- State 1B: Ingested Private Photo Upload Query -->
+<div class="flex flex-col items-end gap-1.5 w-full">
+<div class="flex items-center gap-2 text-label-sm font-label-sm text-espresso-600">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-espresso-800 font-semibold">Sandboxed Ingestion</span>
+<span>•</span>
+<span>EXIF: 1982-11-04 (Inferred)</span>
+</div>
+<div class="max-w-[90%] bg-primary-container text-surface p-4 rounded-2xl rounded-tr-sm shadow-md flex flex-col gap-3">
+<div class="flex items-center justify-between gap-4 pb-2 border-b border-espresso-800">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-ochre-warm">lock</span>
+<span class="text-label-sm font-label-sm font-bold tracking-wider text-ochre-soft uppercase">Private to you</span>
+</div>
+<span class="text-label-sm font-label-sm text-espresso-500 font-mono">IMG_SCAN_ARCHIVE_0921.TIF</span>
+</div>
+<div class="flex items-center gap-4 bg-espresso-900/80 p-2.5 rounded-lg">
+<div class="w-16 h-16 rounded overflow-hidden flex-shrink-0 bg-espresso-800">
+<img class="w-full h-full object-cover" data-alt="Monochrome archival scan from 1980 of an old architectural colonnade in downtown Nairobi, dust scratches, matte print paper texture, East African historical preservation documentation" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF1vU0C107SGG1siFkvoixD7mh_wcCyGf3xmjsfTgQXP8Lj8fetDs1oUHln92D8OyMgF6yuhavdC0yBqbFEwJLUiDoBjOH_C24cZkJTqH4SBTg3-OR_YIIxalkS6cD7Fk5rVuFHsPRsivia6McJq-s3WU_VGXKW9z6d68OoAHTd9q4yX6Hfeeuh44J0ieJ0UmHTKG2JmkxhVYf1bKdKHzd69hgJRMcje6MoajlAmk"/>
+</div>
+<div class="flex flex-col gap-1 min-w-0">
+<span class="text-body-sm font-body-sm font-semibold text-surface truncate">Scan_Mount_NBO_78_Plate4.tiff</span>
+<div class="flex flex-wrap gap-2 text-label-sm font-label-sm text-espresso-400">
+<span>3240 × 2160 px</span>
+<span>•</span>
+<span>Fuji Neopan 400 Scan</span>
+</div>
+</div>
+</div>
+<p class="text-body-md font-body-md text-papyrus-100">
+                Can you match this scan with the municipal public cadastres to confirm the architect and construction year?
+              </p>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: ASSISTANT REPLY STATES -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between pb-2 border-b border-parchment-border">
+<div class="flex items-center gap-2">
+<span class="text-label-sm font-label-sm font-semibold text-ochre">02</span>
+<h2 class="text-headline-sm font-headline-sm text-espresso-950">Assistant Reply States</h2>
+</div>
+<span class="text-label-sm font-label-sm text-espresso-600">Left-Aligned • Acacia Rule • Aperture Mark</span>
+</div>
+<div class="p-6 rounded-xl bg-surface-container flex flex-col gap-8">
+<!-- State 2A: Default Text Reply -->
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-lg bg-secondary text-surface flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">cc_attribution</span>
+</div>
+<div class="flex flex-col gap-2 border-l-2 border-secondary pl-4">
+<div class="flex items-center gap-2">
+<span class="text-label-sm font-label-sm font-semibold text-secondary">ReelWorld Photobot</span>
+<span class="text-label-sm font-label-sm text-espresso-500">• Inferred from 28 archival survey cards</span>
+</div>
+<p class="text-body-md font-body-md text-espresso-900 leading-relaxed">
+                Found the unencumbered northern forecourt. In 1974, the Kenya National Theatre open lawns connected directly to Harry Thuku Road without perimeter fencing. Here is the verified municipal record:
+              </p>
+</div>
+</div>
+<!-- State 2B: Reply with Lead Featured Photo + Companion Thumbnail Grid -->
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-lg bg-secondary text-surface flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">cc_attribution</span>
+</div>
+<div class="flex flex-col gap-4 border-l-2 border-secondary pl-4 w-full">
+<div class="flex items-center gap-2">
+<span class="text-label-sm font-label-sm font-semibold text-secondary">ReelWorld Photobot</span>
+<span class="text-label-sm font-label-sm text-espresso-500">• Visual Concordance Output</span>
+</div>
+<p class="text-body-md font-body-md text-espresso-900">
+                I located the primary 1976 vantage point recorded by photographer J. Kimani, alongside three adjacent lateral perspectives:
+              </p>
+<!-- Lead Card (16:9) -->
+<div class="rounded-xl overflow-hidden bg-surface-container-high p-3 flex flex-col gap-3 shadow-sm">
+<div class="relative w-full aspect-[16/9] rounded-lg overflow-hidden bg-espresso-900">
+<img class="w-full h-full object-cover" data-alt="Expansive historical photograph of Nairobi National Theatre forecourt with jacaranda trees in afternoon sunlight, warm terracotta tones, 1970s architectural photography with Kodachrome palette and soft grain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYOOniY6l4rJWnyoyeKDecW5vzoeWZkk-DnNCQ2g5Wmb-Wd1yPT4StmsHiTZ65RNGu8ev422hjSdj3u9utD18KdX1AvnK0O9M4BQWq_lrqe1jbusBRSU5ISvMf--K4SR201fKfbLNq98sQ0HNTBlNXoNmOkd4f19mtLNmkJXXpEOiJaGRN-gQhJJPQwYsh_UWHW9XrENOhzTTkQdFUNWmEi6lAIkM3yR6rt7xONBs"/>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="px-2.5 py-1 rounded bg-espresso-950/80 text-surface text-label-sm font-label-sm backdrop-blur-sm">
+                      CADASTRE #NRB-TH-76
+                    </span>
+<span class="px-2.5 py-1 rounded bg-secondary text-surface text-label-sm font-label-sm font-semibold">
+                      Primary Match
+                    </span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-body-md font-body-md font-semibold text-espresso-950">Northern Lawn Approach &amp; Main Entrance (1976)</span>
+<span class="text-body-sm font-body-sm text-espresso-600">Why it matched: Matches the front portico pillars and unpaved grass perimeter prior to 1978 masonry modifications.</span>
+<span class="text-label-sm font-label-sm text-espresso-500 pt-1">Photo: J. Kimani • CC BY-SA 4.0 Archival Licence</span>
+</div>
+</div>
+<!-- 3 Companion Mini Thumbnails -->
+<div class="grid grid-cols-3 gap-3">
+<div class="p-2 rounded-lg bg-surface-container-high flex flex-col gap-1.5">
+<div class="aspect-square rounded bg-espresso-900 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Archival black and white shot of stone steps leading to an open colonial-modernist cultural hall in Nairobi with shadows from overhead eucalyptus trees" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQbhryxmEUC0IEr8o5QZE_0wKV8JBH5WepJvLawcBqFkjHegW4VNcvJgATC_cQ8sEBWEE_M3cRpCrUlEMudEaT4Fht9zSdA2DgIbU-i28PKMmWDjbwp5hOSHm8NiS31dr3byGtHMQ9zu-3ljmiDNcF3ACT978CdtJZS2hsqiI9z-4hpqbe1EyLQvzHtzPaV7IT9DLe7jdPriUBGzNCcMTFjHobFHZniHiIcIrYza4"/>
+</div>
+<span class="text-label-sm font-label-sm font-semibold text-espresso-900 truncate">East Colonnade</span>
+<span class="text-[10px] text-espresso-500 font-mono">1975 • Angle B</span>
+</div>
+<div class="p-2 rounded-lg bg-surface-container-high flex flex-col gap-1.5">
+<div class="aspect-square rounded bg-espresso-900 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Vintage photograph looking out towards Harry Thuku Road from the Nairobi National Theatre patio, showing retro vehicles parked along grass curb" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ5OWs9ChsAq1kz6gMDSEFDDv9RtHAlmAKCbNIlki4DnO45GNeB2jlP7WwO3BJfWg-k1L3Bx5iUKP_gmm2BlNazwlMVN8S48iZy5ShqOcGqRkRwI7nQHGCLOyw0P3msI6AMg5xB_7CxeiGTEH2VHR_Mv2hlUV2FN3xO-lC5QtACXaSs5icxA3MeGVw-y8XNSQT0-j8i1aAlYCAeswjX7ESixWCgtRZQ3xQ1w896no"/>
+</div>
+<span class="text-label-sm font-label-sm font-semibold text-espresso-900 truncate">Perimeter Verge</span>
+<span class="text-[10px] text-espresso-500 font-mono">1977 • Angle C</span>
+</div>
+<div class="p-2 rounded-lg bg-surface-container-high flex flex-col gap-1.5">
+<div class="aspect-square rounded bg-espresso-900 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="High angle shot from nearby University of Nairobi tower overlooking the National Theatre gardens, late afternoon amber cast, retro film grain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOqsbOn6umYvi32ZYvIbjikbGGXVqMnTKhqWz3CZi-9lxAcAMxW1AtCOkCeWq-DqtOC2pYcTvMKmdtyQBMsxVyMT7sol4UrZyIsme5qIuNbMHT9Mmxov05MkR1KCAylneOUcPegHzmtqBf0SQA48FC6352mj3Te7M8eGwfx9JAMJCWVU36C7q2qnouZvikL3vAeXWKfbh2H8nhxVoyGYtfhh3ig4mL97ocfWJOXWs"/>
+</div>
+<span class="text-label-sm font-label-sm font-semibold text-espresso-900 truncate">Aerial Perspective</span>
+<span class="text-[10px] text-espresso-500 font-mono">1976 • Angle D</span>
+</div>
+</div>
+</div>
+</div>
+<!-- State 2C: Deep Inspection Answer with Quoted Verbatim Specimen -->
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-lg bg-secondary text-surface flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">cc_attribution</span>
+</div>
+<div class="flex flex-col gap-3 border-l-2 border-secondary pl-4 w-full">
+<div class="flex items-center gap-2">
+<span class="text-label-sm font-label-sm font-semibold text-secondary">ReelWorld Photobot</span>
+<span class="text-label-sm font-label-sm text-espresso-500">• Deep Curatorial Inspection</span>
+</div>
+<p class="text-body-md font-body-md text-espresso-900">
+                Examining the inscription stamped on the reverse side of mount #842 confirms the boundary construction date:
+              </p>
+<!-- Verbatim Inscription Mount -->
+<div class="p-4 rounded-lg bg-surface-container-highest flex gap-4 items-start">
+<div class="w-14 h-14 rounded overflow-hidden flex-shrink-0 bg-espresso-900">
+<img class="w-full h-full object-cover" data-alt="Macro close up of vintage hand-stamped archival card with purple ink lettering on aged sand paper, Nairobi Ministry of Works 1978" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnZrAXW6ilOp83ps5GyYkdKRFVqApL32Vo_yoWXolQ0Wq-zoRvWXlhob4CdJPYi3BiU4-HQPsP_EHqNF0CDA8JjTPfX2q9XBcxfgEbwlm6ICt-dfKcqAu5aRbMz6m6pvJrz-TC_LD2V3oJYVYrh7c4jsCGPSCP7jEAOQvRRJg-dlbinTnHXnrO3ZxZyVVDfh8HoHKdeytFugFIOrq1UjEfwS7dtSkja8UV6pECqPU"/>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-label-sm font-label-sm text-espresso-500 font-mono uppercase">Cadastral Field Log Inscription</span>
+<blockquote class="text-body-sm font-body-sm italic text-espresso-900 font-medium">
+                    "Works approved for boundary masonry barrier along Harry Thuku frontage commencing 14 Aug 1978. Lawns enclosed by Oct 1978."
+                  </blockquote>
+<span class="text-label-sm font-label-sm text-espresso-600">— Chief Surveyor's Office, Municipal Record Box 14B</span>
+</div>
+</div>
+</div>
+</div>
+<!-- State 2D: Comparative Synthesis Reply (Side-by-Side Comparison) -->
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-lg bg-secondary text-surface flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">cc_attribution</span>
+</div>
+<div class="flex flex-col gap-4 border-l-2 border-secondary pl-4 w-full">
+<div class="flex items-center gap-2">
+<span class="text-label-sm font-label-sm font-semibold text-secondary">ReelWorld Photobot</span>
+<span class="text-label-sm font-label-sm text-espresso-500">• Comparative Synthesis</span>
+</div>
+<p class="text-body-md font-body-md text-espresso-900">
+                Direct morphological comparison of the boundary fence line between 1976 (open) and 1982 (post-enclosure):
+              </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Plate 1 -->
+<div class="p-3 rounded-lg bg-surface-container-high flex flex-col gap-2">
+<div class="aspect-[4/3] rounded bg-espresso-900 overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="Sepia toned vintage photo from 1976 showing an open lawn garden before a theater building with clear view of the roadway and passersby strolling openly" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9LCK39x8mxT4CdjcMluOaehfwtojxsvutHIu-M9NigaKZm4Zhe78Vg-enRBrMqp251A0c8ADeYwqEMD6amLXO2Y38-SPrzu7wc-bHvajNeUhVRgEZQM8dxXwYCe-ag16WFhpnDvRQRv3OlP98koiw2pmFxHkowzy7WDJkY3OXMnjgV5hPhxyDbqJR0_XE4GrgoTpUKU_lioA3HjCQIT7DFVK1ePiDj0TBBSLkoZE"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded bg-espresso-950/80 text-surface text-label-sm font-label-sm">
+                      1976 • Open Forecourt
+                    </span>
+</div>
+<div class="flex flex-col">
+<span class="text-body-sm font-body-sm font-semibold text-espresso-950">Unrestricted Civic Lawn</span>
+<span class="text-label-sm font-label-sm text-espresso-600">Continuity between sidewalk and theatre foyer.</span>
+</div>
+</div>
+<!-- Plate 2 -->
+<div class="p-3 rounded-lg bg-surface-container-high flex flex-col gap-2">
+<div class="aspect-[4/3] rounded bg-espresso-900 overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="Historical 1982 photo from same angle showing newly erected stone barrier wall and security checkpoint gate in front of Nairobi theatre" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8367hHz9W-pM5q_7lT8B_yOubgbFzMeLjzY0E3D2eYAGTd4L6kgm14reziWqT-l5_DaT0Ra_x1SbYeaxZNC0_fp2je8GuAH-pCvfTXiY_2aFWO74gzPPDxl9uKwzAFnPFu-ELINaDjTq9XwLTwFaAn21zcAttLvwFL0CURLF66GLHl5xumNRSHwVfu75DIrlpkLDI1I02D_nbLcDoMG1GqvkttYSCkEICy9xq-gY"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded bg-tertiary-container text-surface text-label-sm font-label-sm">
+                      1982 • Masonry Enclosure
+                    </span>
+</div>
+<div class="flex flex-col">
+<span class="text-body-sm font-body-sm font-semibold text-espresso-950">Constructed Perimeter</span>
+<span class="text-label-sm font-label-sm text-espresso-600">Continuous 1.8m dressed volcanic tuff wall visible.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 8: STEP LIST (PIPELINE REAL-TIME PROGRESS) -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between pb-2 border-b border-parchment-border">
+<div class="flex items-center gap-2">
+<span class="text-label-sm font-label-sm font-semibold text-ochre">08</span>
+<h2 class="text-headline-sm font-headline-sm text-espresso-950">Pipeline Real-Time Execution</h2>
+</div>
+<span class="text-label-sm font-label-sm text-espresso-600">Muse Spark Open Engine Telemetry</span>
+</div>
+<div class="p-6 rounded-xl bg-surface-container flex flex-col gap-4">
+<!-- Step 1: Done State -->
+<div class="flex items-start gap-4">
+<div class="w-7 h-7 rounded-full bg-secondary-container text-on-secondary-fixed flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px] font-bold">check</span>
+</div>
+<div class="flex flex-col flex-1">
+<div class="flex items-center justify-between">
+<span class="text-body-sm font-body-sm font-semibold text-espresso-950">Visual Embeddings Synthesized</span>
+<span class="text-label-sm font-label-sm font-mono text-secondary font-semibold">0.8s • Vector space aligned</span>
+</div>
+<p class="text-label-sm font-label-sm text-espresso-600">Cross-referenced against 14,209 geocoded Kenyan municipal plate archives.</p>
+</div>
+</div>
+<!-- Step 2: Active State -->
+<div class="flex items-start gap-4">
+<div class="w-7 h-7 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-ochre opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-ochre"></span>
+</span>
+</div>
+<div class="flex flex-col flex-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="text-body-sm font-body-sm font-semibold text-espresso-950">Filtering Top Spatial Candidates</span>
+<span class="px-2 py-0.2 rounded bg-tertiary-fixed text-on-tertiary-fixed-variant text-[10px] font-bold tracking-wider uppercase">ACTIVE</span>
+</div>
+<span class="text-label-sm font-label-sm font-mono text-ochre font-semibold">14 candidates</span>
+</div>
+<p class="text-label-sm font-label-sm text-espresso-600">Eliminating misdated plates &amp; unconfirmed architectural alterations.</p>
+</div>
+</div>
+<!-- Step 3: Upcoming State -->
+<div class="flex items-start gap-4 opacity-50">
+<div class="w-7 h-7 rounded-full bg-surface-container-high text-espresso-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">hourglass_empty</span>
+</div>
+<div class="flex flex-col flex-1">
+<div class="flex items-center justify-between">
+<span class="text-body-sm font-body-sm font-medium text-espresso-700">Writing Curatorial Synthesis</span>
+<span class="text-label-sm font-label-sm text-espresso-500">Queued</span>
+</div>
+<p class="text-label-sm font-label-sm text-espresso-600">Awaiting corroboration from Municipal Ledger Vol. IV.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 11: HONEST NOTICE CARDS -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between pb-2 border-b border-parchment-border">
+<div class="flex items-center gap-2">
+<span class="text-label-sm font-label-sm font-semibold text-ochre">11</span>
+<h2 class="text-headline-sm font-headline-sm text-espresso-950">Honest Archival Notices</h2>
+</div>
+<span class="text-label-sm font-label-sm text-espresso-600">Anti-Hallucination &amp; Epistemic Humility</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Card 11A: No Strong Match Notice -->
+<div class="p-5 rounded-xl bg-surface-container flex flex-col justify-between gap-4">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2 text-ochre font-semibold text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[18px]">sentiment_dissatisfied</span>
+<span>NO DIRECT SPECIMEN FOUND</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-espresso-950">No Strong Photo Match</h3>
+<p class="text-body-sm font-body-sm text-espresso-700">
+                I could not find an archival photo that clearly shows that angle. Here are the closest spatial approximations in the catalogue:
+              </p>
+</div>
+<!-- Archival Contribution Callout -->
+<div class="p-3.5 rounded-lg bg-surface-container-high flex items-center justify-between gap-3">
+<div class="flex flex-col">
+<span class="text-body-sm font-body-sm font-semibold text-espresso-950">Empty Cadastre Slot</span>
+<span class="text-label-sm font-label-sm text-espresso-600">Nobody has added a photo of this yet. Add the first one.</span>
+</div>
+<button class="h-[44px] px-4 rounded bg-primary-container text-surface hover:bg-espresso-800 text-label-sm font-label-sm font-semibold flex items-center gap-2 flex-shrink-0 transition-colors">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span>Add a photo</span>
+</button>
+</div>
+</div>
+<!-- Card 11B: No Other Angle Notice -->
+<div class="p-5 rounded-xl bg-surface-container flex flex-col justify-between gap-4">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2 text-secondary font-semibold text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[18px]">view_in_ar</span>
+<span>SINGLE PERSPECTIVE RECORDED</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-espresso-950">No Alternate Angle Available</h3>
+<p class="text-body-sm font-body-sm text-espresso-700">
+                I could not find another vantage point of the same structure from this decade. Here are the closest architectural siblings instead:
+              </p>
+</div>
+<div class="p-3 rounded-lg bg-secondary-container text-on-secondary-fixed flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px]">filter_vintage</span>
+<span class="text-body-sm font-body-sm font-semibold">Matched 2 structural siblings in Old Town Mombasa</span>
+</div>
+</div>
+<!-- Card 11C: "Not Sure About" Field Notes Card -->
+<div class="p-5 rounded-xl bg-surface-container flex flex-col gap-3">
+<div class="flex items-center gap-2 text-espresso-600 font-semibold text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+<span>UNCERTAIN PROVENANCE LOG</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-espresso-950">Field Note: Ambiguous Attribution</h3>
+<p class="text-body-sm font-body-sm text-espresso-700 leading-relaxed">
+              Caution regarding plate date: The stamp on the card mount indicates 1969, but the presence of a Peugeot 504 sedan in the foreground strongly suggests this photograph cannot predate late 1971. Awaiting microfiche verification.
+            </p>
+<div class="flex items-center gap-2 text-label-sm font-label-sm text-espresso-500 font-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-ochre"></span>
+<span>Epistemic Confidence Score: 0.61</span>
+</div>
+</div>
+<!-- Card 11D: Reassurance Note -->
+<div class="p-5 rounded-xl bg-surface-container flex flex-col gap-3">
+<div class="flex items-center gap-2 text-secondary font-semibold text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>RE-EXAMINATION PASS</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-espresso-950">Double-Inspected Specimen</h3>
+<p class="text-body-sm font-body-sm text-espresso-700 leading-relaxed">
+              I looked at the original high-resolution silver gelatin plate a second time to answer your question about the inscription behind the podium: the lettering is hand-carved mvule timber, not cast bronze.
+            </p>
+<span class="text-label-sm font-label-sm text-espresso-500 font-mono">
+              Loupe Scan Resolution: 1200 DPI Optical
+            </span>
+</div>
+</div>
+</section>
+</div>
+<!-- RIGHT COLUMN: Interactive Primitives & Control Specimens (5 cols) -->
+<div class="xl:col-span-5 flex flex-col gap-10">
+<!-- SECTION 3: PHOTO BLOCK SPECIMENS -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between pb-2 border-b border-parchment-border">
+<div class="flex items-center gap-2">
+<span class="text-label-sm font-label-sm font-semibold text-ochre">03</span>
+<h2 class="text-headline-sm font-headline-sm text-espresso-950">Photo Block System</h2>
+</div>
+<span class="text-label-sm font-label-sm text-espresso-600">Matte Inset Framing</span>
+</div>
+<div class="p-6 rounded-xl bg-surface-container flex flex-col gap-6">
+<!-- 3A: Full Photo Card with Verified Cadastre Tag & Reason Tag -->
+<div class="p-3 rounded-lg bg-surface-container-high flex flex-col gap-3">
+<div class="relative w-full aspect-[16/9] rounded overflow-hidden bg-espresso-900">
+<img class="w-full h-full object-cover" data-alt="Archival black and white shot of historic 1970s Nairobi City Market glass roof arches, natural light pouring into fruit vendor aisles, vintage documentary style with deep tonal range" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmi9K0nYJNFLb6q9gmuLznU8LwE7z-Qeo3ukj5aYgLz5XtNdoXRdG5D_lh1CjGrnXqnkSLMt2samb0SUBQu9o3SXZUTcY8uviB3m5n1aW5_2cEZguoPrJ6JajJ07Gqeb4NGV-j-heCJZkVKSdlSt5uxHtATrWn4_QyplYhgA54PnZzv7yr5l4jff85JDu7cBuz1L4IyTecoNOm6FGKvElY8Q4z4wpq3wafH6GwXvU"/>
+<div class="absolute top-2.5 left-2.5 flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded bg-espresso-950/80 text-surface text-label-sm font-label-sm backdrop-blur-sm">
+                  CADASTRE #MKT-NAI-72
+                </span>
+<span class="px-2 py-0.5 rounded bg-secondary text-surface text-label-sm font-label-sm font-semibold">
+                  Same Place
+                </span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-body-md font-body-md font-semibold text-espresso-950">Interior Stalls, Nairobi City Market</span>
+<p class="text-body-sm font-body-sm text-espresso-700">
+                Why it matched: Distinct reinforced concrete paraboloid arches match the municipal drawings from the 1932 design.
+              </p>
+<span class="text-label-sm font-label-sm text-espresso-500 pt-1 font-mono">
+                Photo: M. Kariuki Archive • CC BY-SA 4.0
+              </span>
+</div>
+</div>
+<!-- 3B: 4-Specimen Compact Grid with License Attribution -->
+<div class="flex flex-col gap-2">
+<span class="text-label-sm font-label-sm font-semibold text-espresso-900 uppercase">Compact 4-Specimen Matrix</span>
+<div class="grid grid-cols-2 gap-2">
+<div class="p-2 rounded bg-surface-container-high flex flex-col gap-1 hover:bg-surface-container-highest cursor-pointer transition-colors">
+<div class="aspect-[4/3] rounded bg-espresso-900 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Historical photo of vintage street bus in 1970s Nairobi downtown with passengers entering, warm afternoon light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAfQ32gO_wd4JXN3LJp08ILN1Dv7apt0lAInMpPwAhPfnfmLuVlTjOuE9xly_MbDrt4LQP1SLStrr1qmyr8KTdKx0DmH7PRU7-b5EA3Q7SV_02ph604Tu-WOJvRDjR10_6WykTVBxHIpS1aKFCeEVTwgTiXRgsVKoLTDmJWvtePdTanCAexOtUI_FiyaqOBeGmv1TD5KETlR2Nzaq_wxLdJfqJCFmfA25cUzd-MFA"/>
+</div>
+<span class="text-body-sm font-body-sm font-semibold text-espresso-950 truncate">Moi Ave Bus Terminus</span>
+<span class="text-[10px] text-espresso-500 font-mono">CC BY-NC 2.0</span>
+</div>
+<div class="p-2 rounded bg-surface-container-high flex flex-col gap-1 hover:bg-surface-container-highest cursor-pointer transition-colors">
+<div class="aspect-[4/3] rounded bg-espresso-900 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Old photograph of the facade of McMillan Memorial Library Nairobi, marble pillars and entrance lions, sepia tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpkRwiNJxwPs9KIMYYgd1c5t8stY4mjZJ0rIHoSZ_x58rjtHM572qAsfTmuy4Rt2dyHShRfI2LMKoc8bmyKFLhWus2iZzFi5kd8aLRS3FuCLc-pfWjeAYSdl3fKvsLsBS55E87JLzdeFkDNgW_LubkUJK_KOE4lXV4DdOGjM88kYA_0xNlMh4oyjxQ3-Ud-GQTkV8gGlBXp3J4JaDERNEskuoDa7CbugUZGDPE8i4"/>
+</div>
+<span class="text-body-sm font-body-sm font-semibold text-espresso-950 truncate">McMillan Library</span>
+<span class="text-[10px] text-espresso-500 font-mono">Public Domain</span>
+</div>
+<div class="p-2 rounded bg-surface-container-high flex flex-col gap-1 hover:bg-surface-container-highest cursor-pointer transition-colors">
+<div class="aspect-[4/3] rounded bg-espresso-900 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Historic shot of Jeevanjee Gardens in Nairobi in the 1960s with public stone benches and mature jacaranda blooms" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7GlQA9D2g19zlavgNRcRuj1gdbYRWd267FC3Lbl8k70gQ5rxXSiFagR8Ik3MFAe3qXI3N_YuFH3oPRkrVnwfpJyQAWHbLTuSQPaOLDV4d48Xs-uKFR-H1AbQKptWnUKVa94ZnZV9FbhK2oa4cdvtj6f-6E_IfwDi1gd4mzNJpM_uwvcpqODr7XtBr1S8Fahy1DxnqjJN3ZPGh-ikHXYQpIENVkgQMV2TVpIJ5YjM"/>
+</div>
+<span class="text-body-sm font-body-sm font-semibold text-espresso-950 truncate">Jeevanjee Gardens</span>
+<span class="text-[10px] text-espresso-500 font-mono">CC BY 4.0</span>
+</div>
+<div class="p-2 rounded bg-surface-container-high flex flex-col gap-1 hover:bg-surface-container-highest cursor-pointer transition-colors">
+<div class="aspect-[4/3] rounded bg-espresso-900 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Vintage picture of Kenya Railways headquarters brick facade with colonial clocktower in early morning mist" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1zt77shHRzloaBwq-QI938H0V2HQAQAIRuzc8sq7R8n4ItaIW6_ZJQMkIJr0iy1gY52Tqj6BbZYsOg3YvMs5yy0oqY9SIQGtXiYGh4XP0c3mZFzrUAbBHIXV1K1OdMPcJ4_uDPHkIHH_4dInxdvWrHtTaBfBj_bBA2_YoixMejSQYViOtJQNd0Cjs2OlUVzjBF3nmYa_54Si5xEMmvkszJ7b1yX80RAm-_73iLcQ"/>
+</div>
+<span class="text-body-sm font-body-sm font-semibold text-espresso-950 truncate">Railways HQ Clocktower</span>
+<span class="text-[10px] text-espresso-500 font-mono">CC BY-SA 4.0</span>
+</div>
+</div>
+</div>
+<!-- 3C: Photo Skeleton Block with Scanning Shimmer Lines -->
+<div class="flex flex-col gap-2">
+<span class="text-label-sm font-label-sm font-semibold text-espresso-900 uppercase">Ingestion Scanner Shimmer</span>
+<div class="relative w-full aspect-[16/9] rounded-lg bg-surface-container-highest overflow-hidden p-4 flex flex-col justify-between">
+<!-- Shimmer Bar -->
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-surface/40 to-transparent -translate-x-full animate-[shimmer_2s_infinite]"></div>
+<div class="flex justify-between items-center z-10">
+<div class="h-4 w-28 rounded bg-espresso-700/20 animate-pulse"></div>
+<div class="h-4 w-16 rounded bg-espresso-700/20 animate-pulse"></div>
+</div>
+<div class="flex flex-col gap-2 z-10">
+<div class="h-5 w-3/4 rounded bg-espresso-700/20 animate-pulse"></div>
+<div class="h-3 w-1/2 rounded bg-espresso-700/20 animate-pulse"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 4, 5, 6: CHIP SYSTEM TAXONOMY -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between pb-2 border-b border-parchment-border">
+<div class="flex items-center gap-2">
+<span class="text-label-sm font-label-sm font-semibold text-ochre">04-06</span>
+<h2 class="text-headline-sm font-headline-sm text-espresso-950">Chip Architecture</h2>
+</div>
+<span class="text-label-sm font-label-sm text-espresso-600">44px Touch Compliance</span>
+</div>
+<div class="p-6 rounded-xl bg-surface-container flex flex-col gap-6">
+<!-- 4. Action Chips -->
+<div class="flex flex-col gap-2.5">
+<span class="text-label-sm font-label-sm font-semibold text-espresso-900 uppercase">
+              Action Chips (Standard / Active / Disabled)
+            </span>
+<div class="flex flex-wrap gap-2.5">
+<!-- Default -->
+<button class="h-[44px] px-4 rounded bg-surface-container-high hover:bg-surface-container-highest text-espresso-950 text-label-lg font-label-lg flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[18px] text-ochre">rotate_right</span>
+<span>Another angle</span>
+</button>
+<!-- Active / Selected -->
+<button class="h-[44px] px-4 rounded bg-secondary-container text-on-secondary-fixed text-label-lg font-label-lg flex items-center gap-2 font-semibold">
+<span class="material-symbols-outlined text-[18px]">grain</span>
+<span>More like this</span>
+</button>
+<!-- Active Alternative (Terracotta) -->
+<button class="h-[44px] px-4 rounded bg-tertiary-fixed text-on-tertiary-fixed-variant text-label-lg font-label-lg flex items-center gap-2 font-semibold">
+<span class="material-symbols-outlined text-[18px]">compare_arrows</span>
+<span>Compare side-by-side</span>
+</button>
+<!-- Disabled -->
+<button class="h-[44px] px-4 rounded bg-surface-container-high text-espresso-500 opacity-40 cursor-not-allowed text-label-lg font-label-lg flex items-center gap-2" disabled="">
+<span class="material-symbols-outlined text-[18px]">block</span>
+<span>Not this one</span>
+</button>
+</div>
+</div>
+<!-- 5. Suggestion Chips -->
+<div class="flex flex-col gap-2.5">
+<span class="text-label-sm font-label-sm font-semibold text-espresso-900 uppercase">
+              Prompt Suggestion Pills
+            </span>
+<div class="flex flex-wrap gap-2">
+<button class="h-[44px] px-5 rounded-full bg-surface-container-high hover:bg-secondary-container text-espresso-900 hover:text-on-secondary-fixed text-label-sm font-label-sm flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[16px] text-secondary">flight</span>
+<span>From above</span>
+</button>
+<button class="h-[44px] px-5 rounded-full bg-surface-container-high hover:bg-secondary-container text-espresso-900 hover:text-on-secondary-fixed text-label-sm font-label-sm flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[16px] text-secondary">person_off</span>
+<span>No people</span>
+</button>
+<button class="h-[44px] px-5 rounded-full bg-surface-container-high hover:bg-secondary-container text-espresso-900 hover:text-on-secondary-fixed text-label-sm font-label-sm flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[16px] text-secondary">storefront</span>
+<span>Show only the City Market</span>
+</button>
+</div>
+</div>
+<!-- 6. Removable Filter Chips -->
+<div class="flex flex-col gap-2.5">
+<span class="text-label-sm font-label-sm font-semibold text-espresso-900 uppercase">
+              Active Dismissible Filters
+            </span>
+<div class="flex flex-wrap gap-2">
+<!-- Filter Tag Sage -->
+<div class="h-[44px] pl-3.5 pr-2 rounded bg-secondary-container text-on-secondary-fixed text-label-sm font-label-sm flex items-center gap-2">
+<span class="font-semibold">From above</span>
+<button class="w-8 h-8 rounded hover:bg-secondary/20 flex items-center justify-center transition-colors" title="Remove filter">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<!-- Filter Tag Terracotta -->
+<div class="h-[44px] pl-3.5 pr-2 rounded bg-tertiary-fixed text-on-tertiary-fixed-variant text-label-sm font-label-sm flex items-center gap-2">
+<span class="font-semibold">No people</span>
+<button class="w-8 h-8 rounded hover:bg-tertiary-fixed-dim/30 flex items-center justify-center transition-colors" title="Remove filter">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<!-- Filter Tag Date Span -->
+<div class="h-[44px] pl-3.5 pr-2 rounded bg-surface-container-highest text-espresso-900 text-label-sm font-label-sm flex items-center gap-2">
+<span class="font-semibold">Circa 1970–1985</span>
+<button class="w-8 h-8 rounded hover:bg-espresso-800/10 flex items-center justify-center transition-colors" title="Remove filter">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 7 & 9: CONTEXT PILL & COMPOSER STATES -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between pb-2 border-b border-parchment-border">
+<div class="flex items-center gap-2">
+<span class="text-label-sm font-label-sm font-semibold text-ochre">07 &amp; 09</span>
+<h2 class="text-headline-sm font-headline-sm text-espresso-950">Composer &amp; Docked Context</h2>
+</div>
+<span class="text-label-sm font-label-sm text-espresso-600">Bilingual Kiswahili/English</span>
+</div>
+<div class="p-6 rounded-xl bg-surface-container flex flex-col gap-6">
+<!-- 7. Context Pills on their own -->
+<div class="flex flex-col gap-2">
+<span class="text-label-sm font-label-sm font-semibold text-espresso-900 uppercase">Context Pill Primitives</span>
+<div class="flex flex-wrap gap-2.5">
+<!-- Context Pill A -->
+<div class="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-surface-container-high text-espresso-950 text-label-sm font-label-sm">
+<div class="w-5 h-5 rounded overflow-hidden bg-espresso-900">
+<img class="w-full h-full object-cover" data-alt="Micro thumbnail of street photograph in Nairobi with retro Peugeot car" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqyNtlqJBDG75HoZ93T6NsMxtWZtYxztc0jEbRvvwpITLv_7Lwcu_roY_8vvdkka432ksrJVWecjblCfXvCSp0i2l2FQZ46VhHH9nLhyBS2UUy7LwAlVa-kWnVCDRdYAz3E5PT29sOAaPkgSxVexQAGrLq6ui2I7ZBFG_ENzcR1vG8b6Oh0UBpD0uog0DPMg9-4ycgzzJECEj1TlZdnxic54u0wReELai6Knve-zE"/>
+</div>
+<span class="font-medium">Asking about: street_025</span>
+<button class="w-5 h-5 rounded-full hover:bg-espresso-700/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</div>
+<!-- Context Pill B: Location Context -->
+<div class="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-secondary-container text-on-secondary-fixed text-label-sm font-label-sm font-semibold">
+<span class="material-symbols-outlined text-[16px] text-secondary">apartment</span>
+<span>Context: KICC (Private) • Identified</span>
+<button class="w-5 h-5 rounded-full hover:bg-secondary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 9A: Empty Composer State -->
+<div class="flex flex-col gap-2">
+<span class="text-label-sm font-label-sm font-semibold text-espresso-900 uppercase">State 9A: Clean Empty Composer</span>
+<div class="p-2 rounded-xl bg-surface-container-high flex items-center gap-2">
+<button class="w-[44px] h-[44px] rounded-lg bg-surface-container hover:bg-surface-container-highest text-espresso-800 flex items-center justify-center transition-colors" title="Attach Archival Scan">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+<input class="flex-1 bg-transparent px-2 text-body-md font-body-md text-espresso-950 placeholder:text-espresso-500 border-none focus:outline-none" disabled="" placeholder="Describe a photo, in English or Kiswahili..." type="text"/>
+<button class="w-[44px] h-[44px] rounded-lg bg-surface-container text-espresso-400 flex items-center justify-center cursor-not-allowed" disabled="">
+<span class="material-symbols-outlined text-[20px]">arrow_upward</span>
+</button>
+</div>
+</div>
+<!-- 9B: Active Typing State -->
+<div class="flex flex-col gap-2">
+<span class="text-label-sm font-label-sm font-semibold text-espresso-900 uppercase">State 9B: Active Typing State</span>
+<div class="p-2 rounded-xl bg-surface-container-high flex items-center gap-2">
+<button class="w-[44px] h-[44px] rounded-lg bg-surface-container hover:bg-surface-container-highest text-espresso-800 flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+<input class="flex-1 bg-transparent px-2 text-body-md font-body-md text-espresso-950 font-medium border-none focus:outline-none" readonly="" type="text" value="Picha ya soko la jiji miaka ya sabini..."/>
+<button class="w-[44px] h-[44px] rounded-lg bg-secondary text-surface hover:bg-secondary/90 flex items-center justify-center shadow transition-colors" title="Submit Search">
+<span class="material-symbols-outlined text-[20px] font-bold">arrow_upward</span>
+</button>
+</div>
+</div>
+<!-- 9C: Composer with Docked Context Pill -->
+<div class="flex flex-col gap-2">
+<span class="text-label-sm font-label-sm font-semibold text-espresso-900 uppercase">State 9C: Docked Ingestion Context</span>
+<div class="p-2.5 rounded-xl bg-surface-container-high flex flex-col gap-2">
+<div class="flex items-center justify-between bg-surface-container p-2 rounded-lg">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded overflow-hidden bg-espresso-900">
+<img class="w-full h-full object-cover" data-alt="Micro preview of aerial photograph of Uhuru Highway in early 1970s" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAR8ots8TYCP9MWxJQzZcVXM03Vi4_4yyY47RK7iRelOZnDNW-_vTGI9G2pB1DGiMQql-gaisqlce3bZN6C3fv5chLBwEE74vpRYFbMI6okX4PVCoFWVPR8Py34PlfG22oo-NQtmtei3RFEHzsh4NBzc9oU4WOkc13fw0foxESTq95jX3TKc-se2RU3dlWcKKc-jnRaGFUsx-O4d-ikBHDQOjmr92bBkETEWQprfK0"/>
+</div>
+<span class="text-label-sm font-label-sm text-espresso-900 font-semibold">Target Specimen: Plate_Uhuru_Hwy_1974.png</span>
+</div>
+<button class="w-6 h-6 rounded hover:bg-espresso-800/10 flex items-center justify-center text-espresso-600">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-[44px] h-[44px] rounded-lg bg-surface-container hover:bg-surface-container-highest text-espresso-800 flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+<input class="flex-1 bg-transparent px-2 text-body-md font-body-md text-espresso-950 font-medium border-none focus:outline-none" readonly="" type="text" value="Who designed the roundabout memorial in this shot?"/>
+<button class="w-[44px] h-[44px] rounded-lg bg-secondary text-surface hover:bg-secondary/90 flex items-center justify-center shadow transition-colors">
+<span class="material-symbols-outlined text-[20px] font-bold">arrow_upward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 10: BOTTOM SHEET (MOBILE PREVIEW DESKTOP HARNESS) -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between pb-2 border-b border-parchment-border">
+<div class="flex items-center gap-2">
+<span class="text-label-sm font-label-sm font-semibold text-ochre">10</span>
+<h2 class="text-headline-sm font-headline-sm text-espresso-950">Mobile Sheet Pattern</h2>
+</div>
+<span class="text-label-sm font-label-sm text-espresso-600">Curatorial Loupe Inspector</span>
+</div>
+<div class="p-6 rounded-xl bg-surface-container flex justify-center">
+<!-- Mobile Frame Wrapper Preview -->
+<div class="w-full max-w-sm rounded-2xl bg-espresso-950 p-3 shadow-xl">
+<div class="w-full bg-surface-container rounded-xl overflow-hidden flex flex-col">
+<!-- Drag Handle & Markers -->
+<div class="pt-3 pb-2 flex flex-col items-center gap-1.5 cursor-grab">
+<div class="w-12 h-1.5 rounded-full bg-espresso-400"></div>
+<div class="flex items-center gap-3 text-[10px] text-espresso-500 font-mono">
+<span>SNAP: 50%</span>
+<span>•</span>
+<span>DRAG TO FULL</span>
+</div>
+</div>
+<!-- Specimen Header -->
+<div class="p-4 flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-fixed text-label-sm font-label-sm font-semibold">
+                      VERIFIED
+                    </span>
+<span class="text-label-sm font-label-sm text-espresso-500 font-mono">#KICC-73-ARCH</span>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-espresso-700">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="aspect-[16/9] rounded-lg overflow-hidden bg-espresso-900 relative">
+<img class="w-full h-full object-cover" data-alt="Mobile inspection specimen preview showing the distinct cylindrical plenary hall of KICC Nairobi under construction with scaffolding in 1972" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9vKp40JguvvcOkGiiT59dEVD-4GwsTfqK0tK4qdyaCay_OYdHfsHhRTBfjQDq36RbttTej8sc19Jpg9VrB21W86m5NqmtrdycKJzuAXKT09zW_ptt_kGmHZXoMQf269SBvxj5gnJz0DEPcXPAUN6fgIkWqgfWa1zxcJIJ-h6GBkDuIM2BntWnYlPUbN3iD3IwIFeeS1g27i9qzg-l2mQL-Thd5P_0ESlYbhlYavc"/>
+<span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-espresso-950/80 text-surface text-[10px] font-mono">
+                    1200 DPI
+                  </span>
+</div>
+<div class="flex flex-col gap-1">
+<h4 class="text-body-md font-body-md font-semibold text-espresso-950 leading-snug">
+                    Plenary Tower Installation
+                  </h4>
+<p class="text-body-sm font-body-sm text-espresso-700">
+                    Architects Karl Henrik Nøstvik &amp; David Mutiso inspecting reinforced concrete terracing.
+                  </p>
+</div>
+<!-- Entity Badges -->
+<div class="flex flex-wrap gap-1.5 pt-1">
+<span class="px-2 py-1 rounded bg-surface-container-high text-espresso-900 text-label-sm font-label-sm">
+                    K.H. Nøstvik
+                  </span>
+<span class="px-2 py-1 rounded bg-surface-container-high text-espresso-900 text-label-sm font-label-sm">
+                    David Mutiso
+                  </span>
+<span class="px-2 py-1 rounded bg-surface-container-high text-espresso-900 text-label-sm font-label-sm">
+                    1973
+                  </span>
+</div>
+<!-- Touch Targets Action Buttons -->
+<div class="grid grid-cols-2 gap-2 pt-2">
+<button class="h-[44px] rounded bg-primary-container text-surface hover:bg-espresso-800 text-label-sm font-label-sm font-semibold flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[16px]">zoom_in</span>
+<span>Optical Loupe</span>
+</button>
+<button class="h-[44px] rounded bg-surface-container-high hover:bg-surface-container-highest text-espresso-950 text-label-sm font-label-sm font-semibold flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[16px]">description</span>
+<span>Full Ledger</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- Component Specifications & Verification Footer Ribbon -->
+<section class="p-6 rounded-xl bg-surface-container-high mt-4 flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-secondary text-surface flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+</div>
+<div class="flex flex-col">
+<span class="text-body-sm font-body-sm font-semibold text-espresso-950">Design System Compliance Complete</span>
+<span class="text-label-sm font-label-sm text-espresso-600">All 11 conversational states strictly satisfy 44px ergonomics &amp; Muse Spark Open v2.4 protocols.</span>
+</div>
+</div>
+<div class="flex items-center gap-4 text-label-sm font-label-sm font-mono text-espresso-700">
+<span>NO VOX/AUDIO</span>
+<span>•</span>
+<span>NO SOCIAL/LIKES</span>
+<span>•</span>
+<span>NO AVATAR DEPENDENCY</span>
+</div>
+</section>
+</div></main>
+<!-- Desktop Persistent Footer / System Status Bar -->
+<footer class="w-full bg-espresso-950 border-t border-espresso-850 text-papyrus-300 mt-12">
+<div class="max-w-[1440px] mx-auto px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+<div class="flex items-center gap-3">
+<div class="w-7 h-7 rounded-lg bg-espresso-900 border border-espresso-800 flex items-center justify-center text-ochre-warm">
+<span class="material-symbols-outlined text-[16px]">flare</span>
+</div>
+<div>
+<span class="text-papyrus-100 font-bold">ReelWorld Kenya Semantic Visual Pipeline</span>
+<span class="mx-2 text-espresso-700">•</span>
+<span>Powered by Muse Spark Open Framework</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-sage-DEFAULT"></span>
+<span class="text-papyrus-200">Nairobi Edge Cluster: Online (32ms)</span>
+</div>
+<a class="hover:text-ochre-warm transition-colors" href="#">Documentation</a>
+<a class="hover:text-ochre-warm transition-colors" href="#">Archive Telemetry</a>
+<a class="hover:text-ochre-warm transition-colors" href="#">Privacy &amp; Provenance</a>
+</div>
+</div>
+</footer>
+<script>
+    function setQuery(text) {
+      const input = document.getElementById('conversational-input');
+      if (input) {
+        input.value = text;
+        input.focus();
+        input.parentElement.parentElement.classList.add('ring-2', 'ring-ochre');
+        setTimeout(() => {
+          input.parentElement.parentElement.classList.remove('ring-2', 'ring-ochre');
+        }, 800);
+      }
+    }
+  </script>
+</body></html>

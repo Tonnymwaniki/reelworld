@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ReelWorld - Conversational Visual Archive</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            papyrus: {
+              50: '#FAF6F1',
+              100: '#F4EFEB',
+              200: '#ECE5DD',
+              300: '#E4DCD2',
+              400: '#D5CDC2',
+              500: '#CBC2B5',
+            },
+            parchment: {
+              card: '#ECE5DD',
+              input: '#F4EFEB',
+              border: '#D8CFC3',
+              hover: '#E2D8CC',
+              muted: '#DFD5C7',
+            },
+            espresso: {
+              950: '#151311',
+              900: '#1E1C1A',
+              850: '#282522',
+              800: '#35312C',
+              700: '#4D4740',
+              600: '#686057',
+              500: '#8A8074',
+            },
+            ochre: {
+              DEFAULT: '#C85A32',
+              dark: '#AF4A24',
+              clay: '#D35400',
+              glow: '#E0693E',
+              warm: '#D9822B',
+              soft: '#F4DFD2',
+              subtle: '#FAEEE7',
+            },
+            sage: {
+              900: '#1D2E24',
+              800: '#284133',
+              700: '#345241',
+              600: '#3D604E',
+              DEFAULT: '#476E5B',
+              light: '#E2ECE6',
+              border: '#B3C8BD',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          boxShadow: {
+            archival: '0 1px 3px rgba(30,28,26,0.06), 0 1px 2px rgba(30,28,26,0.04)',
+            elevated: '0 10px 28px -4px rgba(30,28,26,0.09), 0 4px 10px -2px rgba(30,28,26,0.05)',
+            card: '0 4px 18px -2px rgba(30,28,26,0.07), 0 2px 6px -1px rgba(30,28,26,0.04)',
+            ochreGlow: '0 0 22px -3px rgba(200,90,50,0.32)',
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #F4EFEB;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #1E1C1A;
+      overflow-x: hidden;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 4px;
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: #D5CDC2;
+      border-radius: 9999px;
+    }
+  </style>
+<meta content="web_standard" name="shell-type"/></head>
+<body class="min-h-screen bg-papyrus-100 text-espresso-900 flex flex-col antialiased selection:bg-ochre selection:text-white">
+<!-- Desktop Sticky Header (1440px target) -->
+<header class="sticky top-0 z-50 w-full bg-parchment-card/90 backdrop-blur-xl border-b border-parchment-border transition-all">
+<div class="max-w-[1440px] mx-auto h-20 px-8 flex items-center justify-between gap-6">
+<!-- Brand & Muse Spark Emblem -->
+<div class="flex items-center gap-4 flex-shrink-0">
+<div class="flex items-center gap-3 group cursor-pointer">
+<!-- Geometric Lens Emblem -->
+<div class="relative w-10 h-10 rounded-xl bg-espresso-900 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform overflow-hidden border border-espresso-800">
+<div class="absolute inset-0 bg-gradient-to-tr from-espresso-950 via-espresso-900 to-espresso-850"></div>
+<div class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-ochre blur-sm opacity-80 animate-pulse"></div>
+<span class="material-symbols-outlined text-[22px] text-ochre-warm relative z-10 font-bold">flare</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xl font-bold tracking-tight text-espresso-950 leading-none">ReelWorld</span>
+<span class="text-[11px] font-semibold tracking-wider text-espresso-600 uppercase">Visual Archive</span>
+</div>
+</div>
+<!-- Muse Spark Open Badge Pill -->
+<div class="h-6 w-px bg-parchment-border mx-1"></div>
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-papyrus-200 border border-parchment-border hover:border-ochre/50 transition-colors">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-ochre opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-ochre"></span>
+</span>
+<span class="text-xs font-semibold text-espresso-800 tracking-tight">Built with Muse Spark Open</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-ochre-soft text-ochre-clay tracking-wide">v2.4</span>
+</div>
+</div>
+<!-- Center Desktop Navigation Tabs -->
+<nav class="flex items-center gap-1 bg-papyrus-200/90 p-1.5 rounded-full border border-parchment-border shadow-inner">
+<a class="px-5 py-2 rounded-full bg-papyrus-100 text-espresso-950 font-bold text-sm shadow-archival border border-parchment-border transition-all flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[18px] text-ochre">public</span>
+<span>World</span>
+</a>
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px]">photo_library</span>
+<span>My Photos</span>
+<span class="ml-0.5 px-1.5 py-0.2 rounded-full bg-papyrus-300 text-[11px] font-semibold text-espresso-700">84</span>
+</a>
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px]">sensors</span>
+<span>Connected</span>
+<span class="w-1.5 h-1.5 rounded-full bg-sage-600"></span>
+</a>
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px]">auto_stories</span>
+<span>Curated Journals</span>
+</a>
+</nav>
+<!-- Right Utility Bar -->
+<div class="flex items-center gap-3">
+<!-- Assistant Status Indicator -->
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-papyrus-200 hover:bg-parchment-hover text-espresso-700 text-xs font-semibold transition-colors border border-parchment-border">
+<span class="material-symbols-outlined text-[16px] text-ochre">auto_awesome</span>
+<span>Semantic Agent Active</span>
+</button>
+<!-- Lens / Camera Fast Tool -->
+<button class="w-10 h-10 rounded-full bg-papyrus-200 hover:bg-ochre-soft hover:text-ochre text-espresso-700 flex items-center justify-center transition-colors border border-parchment-border" title="Fast Capture Lens">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+</button>
+<!-- Primary Upload Action -->
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-espresso-900 text-papyrus-100 hover:bg-espresso-800 text-sm font-semibold shadow-archival transition-all active:scale-95 group border border-espresso-800">
+<span class="material-symbols-outlined text-[18px] text-ochre-warm group-hover:rotate-90 transition-transform">add</span>
+<span>Upload Artifact</span>
+</button>
+<div class="h-6 w-px bg-parchment-border"></div>
+<!-- User Profile Avatar with Connected Pill -->
+<div class="flex items-center gap-2.5 pl-1 cursor-pointer group">
+<div class="relative">
+<div class="w-10 h-10 rounded-full bg-gradient-to-tr from-espresso-850 to-espresso-700 flex items-center justify-center text-papyrus-100 ring-2 ring-parchment-border shadow-archival">
+<span class="material-symbols-outlined text-[20px]">person</span>
+</div>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-sage-600 rounded-full ring-2 ring-papyrus-100"></span>
+</div>
+<div class="hidden xl:flex flex-col text-left">
+<span class="text-xs font-bold text-espresso-950 group-hover:text-ochre transition-colors">Dr. A. Ochieng</span>
+<span class="text-[11px] text-espresso-600">Archivist Lead</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Space (Max 1440px Container) -->
+<main class="w-full max-w-[1440px] mx-auto px-8 py-8 flex flex-col gap-8 flex-1"><div class="flex flex-col w-full text-on-surface">
+<!-- Document Header / Curatorial Title Block -->
+<div class="relative bg-surface-container-low p-space-lg md:p-space-xl mb-space-lg rounded-xl shadow-archival">
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md">
+<div class="max-w-3xl">
+<div class="flex items-center gap-space-sm mb-space-xs">
+<span class="px-2.5 py-1 rounded bg-secondary-container text-on-secondary-container font-label-sm text-label-sm uppercase tracking-wider font-semibold">
+            ReelWorld Design System v3
+          </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Stories Pipeline Architecture</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">•</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">SPEC-REF: #2024-STORY-SPEC</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight mb-space-xs">
+          Component Specification: Visual Stories Architecture
+        </h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Complete taxonomy, responsive states, interactive chrome, and editorial governance tokens for ReelWorld's 9:16 multimodal documentary engine. Optimized for tactile materiality, museum-grade attribution, and strict privacy invariants.
+        </p>
+</div>
+<!-- System Verification Badge Bar -->
+<div class="flex flex-wrap lg:flex-nowrap items-center gap-space-sm bg-surface-container-highest p-space-sm rounded-lg">
+<div class="flex items-center gap-2 px-3 py-1.5 bg-surface rounded">
+<span class="material-symbols-outlined text-[16px] text-secondary">verified_user</span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Facial Privacy Enforced</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 bg-surface rounded">
+<span class="material-symbols-outlined text-[16px] text-on-tertiary-container">touch_app</span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Target ≥44px</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 bg-surface rounded">
+<span class="material-symbols-outlined text-[16px] text-outline">history_edu</span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">CC BY-NC 4.0</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Nav Anchor Tray -->
+<div class="sticky top-20 z-40 bg-surface-container-high/95 backdrop-blur-md p-space-sm rounded-lg shadow-sm mb-space-xl flex items-center justify-between overflow-x-auto custom-scrollbar">
+<div class="flex items-center gap-2 text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px] text-secondary">bookmark</span>
+<span class="uppercase tracking-wider font-bold text-on-surface mr-2">Components Index:</span>
+<a class="px-3 py-1.5 rounded hover:bg-surface text-on-surface hover:text-secondary font-medium transition-colors" href="#section-shot-cards">1. Shot &amp; Scene Cards</a>
+<a class="px-3 py-1.5 rounded hover:bg-surface text-on-surface hover:text-secondary font-medium transition-colors" href="#section-evidence">2. Evidence &amp; Cutaways</a>
+<a class="px-3 py-1.5 rounded hover:bg-surface text-on-surface hover:text-secondary font-medium transition-colors" href="#section-player">3. 9:16 Player Chrome</a>
+<a class="px-3 py-1.5 rounded hover:bg-surface text-on-surface hover:text-secondary font-medium transition-colors" href="#section-export">4. Export &amp; Privacy</a>
+<a class="px-3 py-1.5 rounded hover:bg-surface text-on-surface hover:text-secondary font-medium transition-colors" href="#section-showcase">5. Showcase Cards</a>
+</div>
+<div class="hidden md:flex items-center gap-2 font-mono text-[11px] text-on-surface-variant pr-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+      Tokens: Earth / Papyrus / Acacia / Clay
+    </div>
+</div>
+<!-- ========================================================================= -->
+<!-- SECTION 1: Directed Shot & Scene Cards -->
+<!-- ========================================================================= -->
+<section class="flex flex-col gap-space-lg mb-space-xl" id="section-shot-cards">
+<div class="flex items-center justify-between pb-space-xs bg-surface-container-highest/40 p-space-md rounded-t-lg">
+<div class="flex items-center gap-space-sm">
+<span class="w-7 h-7 rounded bg-secondary text-on-secondary flex items-center justify-center font-bold text-sm">01</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary tracking-tight">Directed Shot &amp; Scene Cards</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Narrative construction blocks, timeline manipulation primitives, and directional semantic camera hooks.</p>
+</div>
+</div>
+<span class="font-mono text-label-sm text-on-surface-variant bg-surface-container px-2 py-1 rounded">Module: scene-curator-v3</span>
+</div>
+<!-- 1.1 Taxonomy: Shot Roles & Camera Moves (Pill Variants) -->
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+<h3 class="font-label-lg text-label-lg font-bold text-on-surface uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-secondary">label</span>
+          Semantic Metadata Token Bank
+        </h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Exhaustive pill tokens for spatial classification</span>
+</div>
+<!-- Shot Roles -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">SHOT_ROLE_TOKENS (100% SPECIFIED VARIANTS):</span>
+<div class="flex flex-wrap gap-2.5">
+<!-- Establishing -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[15px]">landscape</span>
+<span>Establishing</span>
+<span class="text-[10px] opacity-75 font-mono">ROLE:WIDE</span>
+</div>
+<!-- Subject -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[15px]">person</span>
+<span>Subject</span>
+<span class="text-[10px] opacity-75 font-mono">ROLE:HERO</span>
+</div>
+<!-- Detail -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[15px]">center_focus_strong</span>
+<span>Detail</span>
+<span class="text-[10px] opacity-75 font-mono">ROLE:MACRO</span>
+</div>
+<!-- Reveal -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-dim text-on-surface font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[15px]">visibility</span>
+<span>Reveal</span>
+<span class="text-[10px] opacity-75 font-mono">ROLE:DISCOVERY</span>
+</div>
+<!-- Cutaway -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[15px]">streetview</span>
+<span>Cutaway</span>
+<span class="text-[10px] opacity-75 font-mono">ROLE:EXT_CONTEXT</span>
+</div>
+</div>
+</div>
+<!-- Camera Move Tags -->
+<div class="flex flex-col gap-2 pt-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">CAMERA_MOVE_TOKENS (PARAMETRIC INTERPOLATION):</span>
+<div class="flex flex-wrap gap-2.5">
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-surface-container text-on-surface font-label-sm text-label-sm shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">zoom_in</span>
+<span class="font-medium">Slow push-in</span>
+<span class="font-mono text-[10px] text-on-surface-variant">0.2x</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-surface-container text-on-surface font-label-sm text-label-sm shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">vibration</span>
+<span class="font-medium">Hold &amp; micro-shift</span>
+<span class="font-mono text-[10px] text-on-surface-variant">±2px</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-surface-container text-on-surface font-label-sm text-label-sm shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">filter_center_focus</span>
+<span class="font-medium">Hold (Focal focus)</span>
+<span class="font-mono text-[10px] text-on-surface-variant">LOCK</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-surface-container text-on-surface font-label-sm text-label-sm shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">east</span>
+<span class="font-medium">Slow lateral drift</span>
+<span class="font-mono text-[10px] text-on-surface-variant">0.15x</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-surface-container text-on-surface font-label-sm text-label-sm shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">vertical_align_top</span>
+<span class="font-medium">Pedestal tilt</span>
+<span class="font-mono text-[10px] text-on-surface-variant">0.3x Y</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-surface-container text-on-surface font-label-sm text-label-sm shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">pan_tool_alt</span>
+<span class="font-medium">Static pan</span>
+<span class="font-mono text-[10px] text-on-surface-variant">0.25x X</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 1.2 Interactive Showcase: Scene Card States (Default vs Active vs Compact vs Burst Stack) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Scene Card 01: DEFAULT STATE (6 Cols) -->
+<div class="lg:col-span-6 flex flex-col gap-space-xs">
+<div class="flex items-center justify-between px-1">
+<span class="font-label-sm text-label-sm font-mono text-on-surface-variant">STATE: DEFAULT (IDLE CURATOR VIEW)</span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">Drag handle active</span>
+</div>
+<div class="bg-surface-container p-space-md rounded-xl shadow-archival transition-all hover:shadow-card flex flex-col gap-space-md">
+<!-- Card Header Bar -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-7 h-7 rounded-full bg-surface-container-highest text-on-surface font-bold text-xs flex items-center justify-center font-mono">#01</span>
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">Establishing Wide</span>
+<span class="px-2.5 py-0.5 rounded bg-surface text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">zoom_in</span>
+                  Slow push-in (0.2x)
+                </span>
+</div>
+</div>
+<!-- Duration Badge -->
+<div class="flex items-center gap-1 px-2.5 py-1 rounded bg-surface text-on-surface font-mono font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-outline">schedule</span>
+<span>4.5s</span>
+</div>
+</div>
+<!-- Mat-Board Image Frame -->
+<div class="relative bg-surface-container-highest p-3 rounded-lg overflow-hidden flex gap-4">
+<div class="w-32 h-44 rounded overflow-hidden flex-shrink-0 relative shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Sun-drenched architectural documentary photograph of Kenyatta International Convention Centre in Nairobi, warm ochre dust in afternoon golden hour, museum archival quality, medium format photographic print style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoAI28U6DYpVHNY3ObNOBLb_Vh1nPERLT2vSOFmY8DJN_ToQTzq8uIrL3v6QkC2hQcE17KdFxY8ount0yVlc64ien8BzsxRj3xejBe6U44lKWV8EyS1C1b-FK-R9-SEKR54YH-4D6qcU3sbSjoKk8GWiJ-iPpoyJEeP2LfffEP8qQxWfb-uhI6br3RedCWliWPWww4MOy623xjXon35BjXEA5DKbDAm8zvqqqPFGM"/>
+<span class="absolute bottom-1 right-1 px-1.5 py-0.5 bg-primary-container/80 text-surface text-[10px] font-mono rounded">16:9 ➔ 9:16</span>
+</div>
+<!-- Inset Metadata & Caption Form -->
+<div class="flex flex-col justify-between flex-1 py-1">
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">LOC: -1.2884, 36.8233</span>
+<span class="px-2 py-0.5 bg-surface rounded text-[11px] font-mono text-secondary">GPS Confirmed</span>
+</div>
+<!-- Editable Caption Field with Tap Affordance -->
+<div class="group relative cursor-pointer bg-surface p-2.5 rounded transition-all hover:bg-surface-bright">
+<div class="flex items-center justify-between text-[11px] font-label-sm text-on-surface-variant mb-1">
+<span class="uppercase tracking-wider">Caption Inscription</span>
+<span class="material-symbols-outlined text-[14px] group-hover:text-on-tertiary-container transition-colors">edit</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface italic line-clamp-2">
+                    "KICC amphitheater terracotta tiles rising into early Nairobi fog along Harambee Avenue."
+                  </p>
+<span class="text-[10px] text-on-surface-variant font-mono mt-1 block">Tap to revise editorial phrasing</span>
+</div>
+</div>
+<!-- Curatorial Provenance Line -->
+<div class="flex items-center gap-2 pt-2">
+<span class="material-symbols-outlined text-[16px] text-secondary">verified</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Source: Camera Roll • DCIM_0894.RAW</span>
+</div>
+</div>
+</div>
+<!-- Bottom Action Controls: Reordering & Removal (≥44px Touch Targets) -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-2">
+<button class="min-h-[44px] px-3.5 rounded bg-surface hover:bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-semibold flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[18px]">arrow_upward</span>
+<span>Move up ↑</span>
+</button>
+<button class="min-h-[44px] px-3.5 rounded bg-surface hover:bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-semibold flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+<span>Move down ↓</span>
+</button>
+</div>
+<!-- Remove Button -->
+<button class="min-h-[44px] px-3.5 rounded bg-surface hover:bg-tertiary-fixed text-on-surface hover:text-on-tertiary-fixed font-label-sm text-label-sm font-semibold flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[18px] text-error">delete_outline</span>
+<span>Remove scene ✕</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Scene Card 02: ACTIVE / PLAYING STATE (6 Cols) -->
+<div class="lg:col-span-6 flex flex-col gap-space-xs">
+<div class="flex items-center justify-between px-1">
+<span class="font-label-sm text-label-sm font-mono text-secondary font-bold">STATE: ACTIVE / CADENCE PLAYING</span>
+<span class="font-label-sm text-label-sm text-on-tertiary-container font-mono">TIMECODE: 00:02.1 / 00:05.0</span>
+</div>
+<div class="bg-surface-container p-space-md rounded-xl shadow-elevated relative overflow-hidden flex flex-col gap-space-md">
+<!-- Subtle Forest Green Highlight Rim -->
+<div class="absolute inset-0 pointer-events-none rounded-xl bg-secondary/5"></div>
+<!-- Card Header with Active Pulse Indicator -->
+<div class="flex items-center justify-between relative z-10">
+<div class="flex items-center gap-space-sm">
+<span class="w-7 h-7 rounded-full bg-secondary text-on-secondary font-bold text-xs flex items-center justify-center font-mono">#02</span>
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold">Subject Hero</span>
+<!-- Active Playing Badge -->
+<span class="px-2.5 py-0.5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm flex items-center gap-1.5 font-bold animate-pulse">
+<span class="material-symbols-outlined text-[14px]">graphic_eq</span>
+                  PLAYING (1.0x)
+                </span>
+</div>
+</div>
+<div class="flex items-center gap-1 px-2.5 py-1 rounded bg-secondary-container text-on-secondary-container font-mono font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">timer</span>
+<span>5.0s</span>
+</div>
+</div>
+<!-- Mat-Board Image Frame with Active Zoom Simulation -->
+<div class="relative bg-surface-container-highest p-3 rounded-lg overflow-hidden flex gap-4 z-10">
+<div class="w-32 h-44 rounded overflow-hidden flex-shrink-0 relative shadow-sm">
+<img class="w-full h-full object-cover scale-105 transition-transform duration-1000" data-alt="Documentary close portrait of a Kenyan elder watchmaker working under a wooden awning on Moi Avenue, Nairobi, intricate mechanical gears, golden natural sidelight, warm muted film tones, archival texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPissPq35u_HqbnqH9HHPa3rK0cJzjdK4XnVkdjjjlh9u37rfFitMxvkfrkzB1JeBR2wv-yqbV9IuKbgUYZFOJGtCxnU7_t8QbtOsi-1VLeqPlSJgZCLh2GZu7RXR1IoEsddyviUh9cHlrV4vjRh2y4qSPXnA7APdl1-NW65vVdowvjGVx-Otl3l35NmoK-gjZM61MZDGmnLXSi43HhMwJNdcyXzMjAmNBKZ6jHBE"/>
+<!-- Playing Audio Waveform Overlay -->
+<div class="absolute bottom-0 inset-x-0 bg-primary-container/85 px-2 py-1 flex items-center justify-between text-surface font-mono text-[10px]">
+<span>NARRATION</span>
+<span class="flex items-center gap-0.5">
+<span class="w-1 h-3 bg-secondary-fixed rounded-full animate-pulse"></span>
+<span class="w-1 h-4 bg-secondary-fixed rounded-full animate-bounce"></span>
+<span class="w-1 h-2 bg-secondary-fixed rounded-full animate-pulse"></span>
+</span>
+</div>
+</div>
+<div class="flex flex-col justify-between flex-1 py-1">
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">MOI_AVE_OCT24_03.DNG</span>
+<span class="px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed-variant rounded text-[11px] font-mono">Hold &amp; micro-shift</span>
+</div>
+<!-- Caption Inscription -->
+<div class="bg-surface-bright p-2.5 rounded shadow-sm">
+<div class="flex items-center justify-between text-[11px] font-label-sm text-secondary font-bold mb-1">
+<span class="uppercase tracking-wider">Active Audio Track Synchronization</span>
+<span class="material-symbols-outlined text-[14px]">volume_up</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface italic line-clamp-2">
+                    "Forty years tuning Swiss escapements while the matatus roar outside his cedar frame shop."
+                  </p>
+</div>
+</div>
+<!-- Cadence Progress Strip -->
+<div class="pt-2 flex flex-col gap-1">
+<div class="flex justify-between text-[11px] font-mono text-on-surface-variant">
+<span>Scene Playback Progress</span>
+<span class="text-secondary font-bold">42%</span>
+</div>
+<div class="w-full h-1.5 bg-surface rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 42%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Action Controls -->
+<div class="flex items-center justify-between pt-1 z-10">
+<div class="flex items-center gap-2">
+<button class="min-h-[44px] px-3.5 rounded bg-surface hover:bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">pause</span>
+<span>Pause scene</span>
+</button>
+<button class="min-h-[44px] px-3.5 rounded bg-surface hover:bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">replay</span>
+<span>Re-cue (0s)</span>
+</button>
+</div>
+<span class="font-mono text-label-sm text-on-surface-variant">CADENCE: NATURAL (1.0x)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 1.3 Scene Card Compact / Strip State + Burst Stack Deck Component -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center bg-surface-container-low p-space-lg rounded-xl shadow-sm">
+<!-- Compact / Strip State (6 Cols) -->
+<div class="lg:col-span-6 flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-mono text-on-surface-variant">STATE: COMPACT PROGRESS STRIP ('Building the Story' View)</span>
+<span class="font-label-sm text-label-sm text-secondary font-mono">Step 3 of 6</span>
+</div>
+<div class="bg-surface-container p-3 rounded-lg shadow-sm flex items-center gap-4">
+<div class="w-16 h-16 rounded overflow-hidden flex-shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="Sunlit architectural colonnade in Nairobi Central Business District, stone pillars, deep amber dust reflections, archival visual document." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAl7JsyO9GiNh5sPfkFgZlpAkGV929Y4bbJvON6_zsFbrr_C4xi82Iz9xji2Uo-idntZQ9XiGWEg7VaOoaE9GQJcRsR85J3lGIlt6GR7dwW6pj7yz_2iec7QyLa_F5ZAEYsB24Ajj1hWw0DyaM5M2GTYd6tLme4UXB9DQbM2ZcsdXg4P0zxvxO4O8sESaSBnq4-Z6UVKnoxT330_FI_O_SfEWqmgskXpnhDxet6jm8"/>
+<span class="absolute top-1 left-1 w-4 h-4 rounded bg-primary text-surface font-mono text-[9px] flex items-center justify-center font-bold">03</span>
+</div>
+<div class="flex flex-col justify-center flex-1 min-w-0">
+<div class="flex items-center gap-2 mb-0.5">
+<span class="font-label-sm text-label-sm font-bold text-on-surface truncate">Colonnade Stone Shading</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-[10px] font-bold">Detail</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">
+              Slow lateral drift • 3.8s • Audio synchronized with city resonance
+            </p>
+</div>
+<div class="flex items-center gap-1 flex-shrink-0">
+<span class="material-symbols-outlined text-[20px] text-secondary">check_circle</span>
+<span class="font-mono text-label-sm text-on-surface-variant">READY</span>
+</div>
+</div>
+</div>
+<!-- Burst Stack Component (6 Cols) -->
+<div class="lg:col-span-6 flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-mono text-on-surface-variant">COMPONENT: BURST STACK COMPONENT (Tactile Photo Deck)</span>
+<span class="font-label-sm text-label-sm text-on-tertiary-container font-bold">Multi-frame Selection</span>
+</div>
+<div class="bg-surface-container p-4 rounded-lg shadow-sm flex items-center justify-between gap-6">
+<div class="flex items-center gap-5">
+<!-- Physical Stack Representation -->
+<div class="relative w-20 h-24 flex-shrink-0 my-2">
+<!-- Back Deck Card 2 -->
+<div class="absolute inset-0 bg-surface-dim rounded transform rotate-6 translate-x-2 -translate-y-1 shadow-sm opacity-60"></div>
+<!-- Back Deck Card 1 -->
+<div class="absolute inset-0 bg-surface-container-highest rounded transform -rotate-3 -translate-x-1.5 -translate-y-0.5 shadow-sm opacity-85"></div>
+<!-- Front Deck Hero -->
+<div class="absolute inset-0 rounded overflow-hidden shadow-archival">
+<img class="w-full h-full object-cover" data-alt="Quick photographic action burst of birds taking flight over City Square fountain in Nairobi, dusk shadows, warm earthen sky, high shutter speed archival photograph." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYsTXze0vUXuOvI5X7ale_2o80nXrg0XgLax7Z_gOIJkmKOm0RXSFVGFdddk1e58nC5hO02lj5OlJKord36SHBRd_mPgum1XiH3snx_v4erYbEEZilfJBGeh0MYHd8QU68fhGGHaRMOk3d8bxpeMA0kuK35LhlEjLE1zb7fJhUoIGKXMJPN6ab8ZxLJ7PYQFjpHq1M1rIowYZEid9Qpk4UZGGvIdnvaS6YBLU9Q2Y"/>
+<div class="absolute inset-0 bg-primary-container/20"></div>
+<!-- Frame Count Callout -->
+<span class="absolute top-1 right-1 px-1.5 py-0.5 bg-primary text-surface font-mono text-[10px] font-bold rounded">
+                  +4 frames
+                </span>
+</div>
+</div>
+<div class="flex flex-col">
+<!-- Prominent Emerald Badge -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-bold w-fit mb-1 shadow-sm">
+<span class="material-symbols-outlined text-[15px]">burst_mode</span>
+<span>Burst of 5</span>
+</div>
+<span class="font-headline-sm text-[16px] text-on-surface font-bold">Continuous Sequence #08</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Camera AI isolated 1 hero candidate</span>
+</div>
+</div>
+<!-- Micro Action Pill -->
+<button class="min-h-[44px] px-4 rounded bg-surface hover:bg-surface-bright text-on-surface font-label-sm text-label-sm font-semibold flex items-center gap-1.5 shadow-sm transition-colors flex-shrink-0">
+<span class="material-symbols-outlined text-[18px] text-secondary">layers</span>
+<span>Expand Deck</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 2: Evidence Moments & World Cutaway Tags -->
+<!-- ========================================================================= -->
+<section class="flex flex-col gap-space-lg mb-space-xl" id="section-evidence">
+<div class="flex items-center justify-between pb-space-xs bg-surface-container-highest/40 p-space-md rounded-t-lg">
+<div class="flex items-center gap-space-sm">
+<span class="w-7 h-7 rounded bg-secondary text-on-secondary flex items-center justify-center font-bold text-sm">02</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary tracking-tight">Evidence Moments &amp; World Cutaway Tags</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Verification provenance cards, OCR sign transcription tokens, and cross-archive attribution modules.</p>
+</div>
+</div>
+<span class="font-mono text-label-sm text-on-surface-variant bg-surface-container px-2 py-1 rounded">Module: provenance-engine-v3</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg items-start">
+<!-- 2.1 Evidence Card: Normal / Slide-up Confirmed State -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm font-mono text-secondary font-bold">STATE: EVIDENCE CONFIRMED (99% OCR)</span>
+<div class="bg-surface-container p-space-md rounded-xl shadow-card flex flex-col gap-space-sm relative">
+<!-- Slide Up Header Banner -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-secondary">policy</span>
+<span class="font-label-sm text-label-sm font-bold text-on-surface uppercase tracking-wider">Spatial Evidence Moment</span>
+</div>
+<!-- OCR Confirmed Badge -->
+<span class="px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-mono text-[11px] font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+              Confirmed • 99%
+            </span>
+</div>
+<!-- Mat Image Inset with Highlight Box -->
+<div class="relative bg-surface-container-highest p-2 rounded-lg">
+<div class="w-full h-36 rounded overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="Close up architectural detail of cast-bronze commemorative plaque on Nairobi municipal building facade, legible weathered serif lettering, sunlit patina." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqgbq6vpC2Ef2Us_e1FwoDy-gTDzK-KOa_GfsdaNJL1h8Gq2psK7w2dEH0NH6IJ3EabsSikNLO1Ev67p5zCzT_WjfsjnzK7U9KcOWOaXRulkRtbluKcx83-rUcht30n248sKfcUdbojW8kK-VPtEX61THr3noSHj_mYu-QAX6q_9Fb1JCEuTHJEy0-LbbX0cbgQNAsIPiTHKHCnaS2w94moS6F5zBYqLMJ8Qf25uk"/>
+<!-- OCR Bounding Box Overlay -->
+<div class="absolute inset-x-8 inset-y-6 rounded bg-secondary/15 flex items-center justify-center">
+<span class="px-2 py-0.5 bg-primary text-surface font-mono text-[9px] uppercase tracking-widest rounded-sm">OCR_TARGET_RECOG</span>
+</div>
+</div>
+</div>
+<!-- Monospace Verbatim Inscription -->
+<div class="bg-surface p-3 rounded font-mono text-[12px] leading-relaxed text-on-surface">
+<div class="text-[10px] text-on-surface-variant uppercase font-sans font-bold mb-1">Verbatim Transcription</div>
+<p class="select-all">"CITY HALL WAY — ERECTED ANNO DOMINI 1957 — MUNICIPAL WORKS DEPARTMENT"</p>
+</div>
+<!-- Cadastre Reference Tag -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1.5 font-mono text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[15px] text-secondary">pin_drop</span>
+<span>CADASTRE: #NBO-LR-209-8422</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-[10px] font-mono text-on-surface">Geo-anchored</span>
+</div>
+</div>
+</div>
+<!-- 2.2 Evidence Card: Candidate / Unconfirmed State -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm font-mono text-on-tertiary-container font-bold">STATE: CANDIDATE / TENTATIVE (74% CONFIDENCE)</span>
+<div class="bg-surface-container p-space-md rounded-xl shadow-card flex flex-col gap-space-sm relative">
+<!-- Header Banner with Warm Amber Badge -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-on-tertiary-container">help_outline</span>
+<span class="font-label-sm text-label-sm font-bold text-on-surface uppercase tracking-wider">Candidate Signage</span>
+</div>
+<!-- Candidate 74% Badge in Warm Amber -->
+<span class="px-2.5 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-mono text-[11px] font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+              Candidate • 74%
+            </span>
+</div>
+<!-- Mat Image Inset -->
+<div class="relative bg-surface-container-highest p-2 rounded-lg">
+<div class="w-full h-36 rounded overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="Distorted weathered painted hand-lettered sign in background of Nairobi back alleyway, partial sun flare, dusty atmosphere, documentary photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDg0Pf-uUTokKCXdE5bqqjrt5SZlKnUusPBeHi6QZS3WOUe5lnlTDUMWJTfPDFKorbu_wlo-piC3EXyQGUWKyxBUoQSyg_RhQ4dWNWqHc-hFCJu7pQX9FY-jHmKh2VuIyD7_YA8Di9MAV5U588kooXr8ZqgpMV-U18ucRwXcX2AAQmqoXUpZ3Hyh21yMqCnPzS4J1pvCvt2Q-2eqvnxx-CDtvrWsgkaAXQEOqYwzs"/>
+<div class="absolute inset-x-12 inset-y-10 rounded bg-on-tertiary-container/15 flex items-center justify-center">
+<span class="px-1.5 py-0.5 bg-tertiary-container text-surface font-mono text-[9px]">PARTIAL_MATCH</span>
+</div>
+</div>
+</div>
+<!-- Tentative Inscription Field -->
+<div class="bg-surface p-3 rounded font-mono text-[12px] leading-relaxed text-on-surface">
+<div class="text-[10px] text-on-tertiary-container uppercase font-sans font-bold mb-1">Tentative Match Notes</div>
+<p class="text-on-surface-variant italic">"[Keny]atta Market Section 4B — Cloth Dyers Guild (?)"</p>
+</div>
+<!-- Curatorial Confirmation Prompt -->
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">Requires archivist verify</span>
+<button class="min-h-[44px] px-3 rounded bg-surface hover:bg-surface-bright text-on-tertiary-container font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">check</span>
+<span>Confirm ➔</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 2.3 Cutaway Tag & Attribution Line Specification -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm font-mono text-on-surface-variant font-bold">STATE: EXTERNAL WORLD CUTAWAY &amp; ATTRIBUTION</span>
+<div class="bg-surface-container p-space-md rounded-xl shadow-card flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-bold text-on-surface uppercase tracking-wider">Provenance Integration</span>
+<span class="font-mono text-label-sm text-on-surface-variant">MODULE: CC-BY-SA-4.0</span>
+</div>
+<!-- Tag Variant: "✦ From the world" Pill -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">TAG VARIANT:</span>
+<div>
+<span class="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-bold shadow-sm">
+<span class="text-secondary text-[14px]">✦</span>
+<span>From the world</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="text-[11px] font-mono text-on-secondary-fixed-variant">PUBLIC ARCHIVE LINK</span>
+</span>
+</div>
+</div>
+<!-- Micro Image Sample -->
+<div class="w-full h-24 rounded overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="Archival black and white street photograph of 1974 Nairobi bus terminal, crowds board vintage double-decker bus, historical documentary artifact." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPUrnd4g92Aar3RVMFN97TWMvQytlMvlp1PfYrUaJ_tlgrN7EhkQgiqoiq1P28nNzt9xhMESgWLlVe5eobbiT_fXg7q7ATY8TFjCPDwxEKNa2OYHjzaZIxCfYldt4CqP5xf6pI7clvZO7YaiJliiNL-uaY3fxigiYTQ4fvQ9cuAJ2j8CUUEEvWwsayaglzv7HBUk-LW2qL6mCidzBv2Uw9JOAEcE5KRQVvAAfGwfs"/>
+<div class="absolute top-2 left-2">
+<span class="px-2 py-0.5 rounded-full bg-primary/85 text-surface text-[10px] font-mono">ARCHIVAL 1974</span>
+</div>
+</div>
+<!-- Verbatim Credit Line Component -->
+<div class="bg-surface-container-highest p-3 rounded-lg flex flex-col gap-1.5">
+<span class="text-[10px] font-label-sm uppercase font-mono text-on-surface-variant">Strict Credit Line Architecture</span>
+<div class="flex items-start gap-2 text-on-surface">
+<span class="material-symbols-outlined text-[18px] text-secondary flex-shrink-0 mt-0.5">copyright</span>
+<p class="font-body-sm text-body-sm leading-tight">
+<span class="font-semibold">Photo: K. Odhiambo</span> • Nairobi Municipal Archive • <span class="font-mono text-xs">CC BY-SA 4.0 (#1974-NBO)</span>
+</p>
+</div>
+<div class="flex items-center gap-3 pt-1 text-[11px] text-on-surface-variant font-mono">
+<span>CANONICAL: Yes</span>
+<span>INDEX: Public</span>
+<span>COMMERCIAL: Excluded</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 3: 9:16 Story Player Controls & Cadence Chrome -->
+<!-- ========================================================================= -->
+<section class="flex flex-col gap-space-lg mb-space-xl" id="section-player">
+<div class="flex items-center justify-between pb-space-xs bg-surface-container-highest/40 p-space-md rounded-t-lg">
+<div class="flex items-center gap-space-sm">
+<span class="w-7 h-7 rounded bg-secondary text-on-secondary flex items-center justify-center font-bold text-sm">03</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary tracking-tight">9:16 Story Player Controls &amp; Cadence Chrome</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Full-bleed vertical documentary preview viewport, gesture zones, multi-segment cadence meters, and lower-third typography.</p>
+</div>
+</div>
+<span class="font-mono text-label-sm text-on-surface-variant bg-surface-container px-2 py-1 rounded">Module: player-chrome-9-16</span>
+</div>
+<!-- Multi-Column Layout: Progress Segments Bank + Interactive Full 9:16 Frame -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- Left Column: Segment Variations & Token Anatomy (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<!-- Progress Segments Breakdown Card -->
+<div class="bg-surface-container-low p-space-md rounded-xl shadow-sm flex flex-col gap-space-md">
+<h3 class="font-label-lg text-label-lg font-bold text-on-surface uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-secondary">linear_scale</span>
+            Thin Progress Segments (State Bank)
+          </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Micro-height progress bars engineered for zero distraction. High contrast over dynamic photographic scrims.
+          </p>
+<!-- 4-Segment Demonstration -->
+<div class="flex flex-col gap-2 pt-1">
+<div class="flex justify-between font-mono text-label-sm text-on-surface-variant">
+<span>PATTERN A: 4-SCENE VARIATION</span>
+<span>SCENE 2 ACTIVE (58%)</span>
+</div>
+<!-- 4 Bar Container -->
+<div class="grid grid-cols-4 gap-1.5 p-3 bg-primary-container rounded-lg">
+<!-- Bar 1: Completed -->
+<div class="h-1 rounded-full bg-surface"></div>
+<!-- Bar 2: Active / Advancing -->
+<div class="h-1 rounded-full bg-surface/30 overflow-hidden relative">
+<div class="h-full bg-surface rounded-full shadow-[0_0_8px_#ffffff]" style="width: 58%;"></div>
+</div>
+<!-- Bar 3: Unwatched -->
+<div class="h-1 rounded-full bg-surface/20"></div>
+<!-- Bar 4: Unwatched -->
+<div class="h-1 rounded-full bg-surface/20"></div>
+</div>
+<div class="flex justify-between text-[11px] font-mono text-on-surface-variant px-1">
+<span>01: 100% Solid</span>
+<span>02: Glowing 58%</span>
+<span>03: 20% Alpha</span>
+<span>04: 20% Alpha</span>
+</div>
+</div>
+<!-- 6-Segment Demonstration -->
+<div class="flex flex-col gap-2 pt-2">
+<div class="flex justify-between font-mono text-label-sm text-on-surface-variant">
+<span>PATTERN B: 6-SCENE EXTENDED DOCUMENTARY</span>
+<span>SCENE 4 ACTIVE (82%)</span>
+</div>
+<!-- 6 Bar Container -->
+<div class="grid grid-cols-6 gap-1 p-3 bg-primary-container rounded-lg">
+<div class="h-1 rounded-full bg-surface"></div>
+<div class="h-1 rounded-full bg-surface"></div>
+<div class="h-1 rounded-full bg-surface"></div>
+<!-- Active with animated pulse -->
+<div class="h-1 rounded-full bg-surface/30 overflow-hidden relative">
+<div class="h-full bg-surface rounded-full" style="width: 82%;"></div>
+</div>
+<div class="h-1 rounded-full bg-surface/20"></div>
+<div class="h-1 rounded-full bg-surface/20"></div>
+</div>
+</div>
+<!-- Micro Legend of States -->
+<div class="grid grid-cols-3 gap-2 pt-2 text-center font-mono text-[10px]">
+<div class="p-2 rounded bg-surface">
+<div class="font-bold text-on-surface">COMPLETED</div>
+<div class="text-on-surface-variant">100% Surface</div>
+</div>
+<div class="p-2 rounded bg-surface">
+<div class="font-bold text-secondary">ADVANCING</div>
+<div class="text-on-surface-variant">Pulse / Fill</div>
+</div>
+<div class="p-2 rounded bg-surface">
+<div class="font-bold text-on-surface-variant">UNWATCHED</div>
+<div class="text-on-surface-variant">20% Scrim Opacity</div>
+</div>
+</div>
+</div>
+<!-- Touch Target Specification Table -->
+<div class="bg-surface-container-low p-space-md rounded-xl shadow-sm flex flex-col gap-2">
+<span class="font-label-sm text-label-sm font-bold text-on-surface uppercase tracking-wider">Ergonomic Spatial Constraints</span>
+<div class="flex flex-col gap-2 text-[12px] font-mono">
+<div class="flex justify-between py-1 bg-surface px-2 rounded">
+<span>TOP_CHROME_HEIGHT:</span>
+<span class="text-secondary font-bold">56px (Safe Area: 44px)</span>
+</div>
+<div class="flex justify-between py-1 bg-surface px-2 rounded">
+<span>SCRIM_GRADIENT_MASK:</span>
+<span class="text-secondary font-bold">to-t from-primary/95 to-transparent (180px)</span>
+</div>
+<div class="flex justify-between py-1 bg-surface px-2 rounded">
+<span>MIN_TOUCH_AREA:</span>
+<span class="text-secondary font-bold">≥ 44px × 44px (W3C AAA)</span>
+</div>
+<div class="flex justify-between py-1 bg-surface px-2 rounded">
+<span>GESTURE_SWIPE_TOL:</span>
+<span class="text-secondary font-bold">40px Delta / Velocity 0.3</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Interactive 9:16 Mobile Viewport (7 Cols) -->
+<div class="lg:col-span-7 flex flex-col items-center">
+<span class="font-label-sm text-label-sm font-mono text-on-surface-variant mb-2">FULL-BLEED 9:16 PLAYER VIEWPORT WITH INTEGRATED CONTROLS</span>
+<!-- 9:16 Mock Device Shell -->
+<div class="relative w-full max-w-[360px] aspect-[9/16] rounded-2xl overflow-hidden shadow-elevated bg-primary flex flex-col justify-between">
+<!-- Background Archival Media Frame -->
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover" data-alt="Atmospheric vertical documentary photograph of a weaver stall in Nairobi Jamia Mosque market area, vibrant terracotta and indigo textile yarns hanging from rafters, cinematic soft light filtering through wooden slats." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbkbb-tbzFa9p213OZ-dWIScq-w7JqrfM9zLViUjDuj_coc-Tcyh8TBBdodWTh7B1OCQkQpONya22Q_bd_RixuYZ2r_eRadtP0yXaDwXjpViGwg8-IrVuy1E-g5fycu_v9Mg-dCxQZkgL9UZH0YP0V_989uJMuMKYgvTccmbmX7OSCnvSbJcITcN9-eFIwTk_mJdeIHdf-sdzNs3cdPYcyYxVe3jcSJRiq3pUVDf4"/>
+<!-- Subtle Darkening Scrim for Header and Footer Legibility -->
+<div class="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-primary/80 via-primary/40 to-transparent"></div>
+<div class="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-primary/95 via-primary/60 to-transparent"></div>
+</div>
+<!-- TOP CHROME CONTROLS (Z-20) -->
+<div class="relative z-20 p-3 pt-4 flex flex-col gap-2.5">
+<!-- 5-Segment Progress Bar -->
+<div class="grid grid-cols-5 gap-1.5 w-full">
+<div class="h-1 rounded-full bg-surface"></div>
+<div class="h-1 rounded-full bg-surface"></div>
+<!-- Active 3rd Bar -->
+<div class="h-1 rounded-full bg-surface/30 overflow-hidden relative">
+<div class="h-full bg-surface rounded-full shadow-[0_0_6px_#fff]" style="width: 65%;"></div>
+</div>
+<div class="h-1 rounded-full bg-surface/20"></div>
+<div class="h-1 rounded-full bg-surface/20"></div>
+</div>
+<!-- Header Utility Bar -->
+<div class="flex items-center justify-between mt-1">
+<!-- Location / Timecode Pill -->
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/60 backdrop-blur-md text-surface font-mono text-[11px]">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>NAIROBI CBD • 00:08</span>
+</div>
+<!-- Language & Close Buttons (≥44px Touch Envelope) -->
+<div class="flex items-center gap-2">
+<!-- Captions Language Indicator Chip ('EN' / 'SW' pill) -->
+<button class="min-h-[44px] min-w-[44px] px-2.5 py-1 rounded-full bg-primary/60 hover:bg-primary/90 backdrop-blur-md text-surface flex items-center justify-center gap-1 font-mono text-[11px] font-bold transition-colors">
+<span class="text-on-tertiary-container">CC</span>
+<span>EN</span>
+<span class="text-surface/40">/</span>
+<span class="text-surface/60">SW</span>
+</button>
+<!-- Close '✕' Button -->
+<button class="min-h-[44px] min-w-[44px] rounded-full bg-primary/60 hover:bg-primary/90 backdrop-blur-md text-surface flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- CENTER GESTURE ZONES (Visual Indicator for Devs) -->
+<div class="relative z-10 flex-1 flex items-center justify-between px-2 pointer-events-none opacity-0 hover:opacity-100 transition-opacity">
+<span class="px-2 py-1 bg-primary/70 text-surface text-[10px] font-mono rounded">◀ TAP: PREV</span>
+<span class="px-2 py-1 bg-primary/70 text-surface text-[10px] font-mono rounded">HOLD: PAUSE</span>
+<span class="px-2 py-1 bg-primary/70 text-surface text-[10px] font-mono rounded">TAP: NEXT ▶</span>
+</div>
+<!-- LOWER-THIRD & FOOTER TRANSPORT CONTROLS (Z-20) -->
+<div class="relative z-20 p-4 pb-5 flex flex-col gap-3">
+<!-- Evidence Lock Floating Pill -->
+<div class="flex items-center gap-2">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container/90 backdrop-blur-md text-on-secondary-container font-label-sm text-label-sm font-semibold shadow-sm">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+<span>Evidence Locked • Inscription Verified</span>
+</div>
+</div>
+<!-- Lower-Third Caption Typography with Reading Time -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2 font-mono text-[11px] text-surface/80">
+<span class="uppercase tracking-widest text-on-tertiary-container font-bold">Scene 03 of 05</span>
+<span>•</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">auto_stories</span>
+                  2.4s read time
+                </span>
+</div>
+<p class="font-body-md text-body-md text-surface leading-snug drop-shadow-sm font-medium">
+                "Warp threads dyed with organic acacia bark, dried in the dry rift breeze behind Jamia Mosque."
+              </p>
+</div>
+<!-- Transport Control Bar (Full Touch Compliance) -->
+<div class="flex items-center justify-between pt-2 border-t border-surface/10">
+<div class="flex items-center gap-1">
+<!-- Prev Scene -->
+<button class="min-h-[44px] min-w-[44px] rounded-full bg-surface/15 hover:bg-surface/30 text-surface flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[20px]">skip_previous</span>
+</button>
+<!-- Play/Pause -->
+<button class="min-h-[44px] min-w-[44px] rounded-full bg-surface text-primary flex items-center justify-center transition-transform active:scale-95 shadow-sm">
+<span class="material-symbols-outlined text-[22px]">play_arrow</span>
+</button>
+<!-- Next Scene -->
+<button class="min-h-[44px] min-w-[44px] rounded-full bg-surface/15 hover:bg-surface/30 text-surface flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[20px]">skip_next</span>
+</button>
+</div>
+<!-- Cadence Speed Toggle '1.0x Cadence' Pill -->
+<button class="min-h-[44px] px-3.5 rounded-full bg-surface/15 hover:bg-surface/30 text-surface font-mono text-[12px] font-semibold flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[15px] text-secondary-fixed">speed</span>
+<span>1.0x Cadence</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 4: Export & Publishing Configuration Components -->
+<!-- ========================================================================= -->
+<section class="flex flex-col gap-space-lg mb-space-xl" id="section-export">
+<div class="flex items-center justify-between pb-space-xs bg-surface-container-highest/40 p-space-md rounded-t-lg">
+<div class="flex items-center gap-space-sm">
+<span class="w-7 h-7 rounded bg-secondary text-on-secondary flex items-center justify-center font-bold text-sm">04</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary tracking-tight">Export &amp; Publishing Configuration Components</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Distribution radios, facial privacy enforcement states, curatorial preview vouchers, and rendering telemetry.</p>
+</div>
+</div>
+<span class="font-mono text-label-sm text-on-surface-variant bg-surface-container px-2 py-1 rounded">Module: export-pipeline-v3</span>
+</div>
+<!-- 4.1 Visibility Radio Cards (All 3 Canonical States) -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-mono text-on-surface-variant uppercase tracking-wider">VISIBILITY_SELECTION_RADIO_GROUP (ALL STATES):</span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">Single Select Archetype</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Card 1: Private (Only me) — Unselected State -->
+<div class="bg-surface-container p-space-md rounded-xl shadow-sm hover:shadow-card cursor-pointer transition-all flex flex-col justify-between gap-3">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">lock</span>
+<span class="font-headline-sm text-[16px] text-on-surface font-bold">Private (Only me)</span>
+</div>
+<!-- Unselected Radio Circle -->
+<div class="w-5 h-5 rounded-full bg-surface-dim flex items-center justify-center"></div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Stored encrypted strictly in your local device vault. Never indexed, shared, or processed by public semantic embeddings.
+          </p>
+<div class="flex items-center gap-2 pt-1 font-mono text-[11px] text-on-surface-variant">
+<span>INDEX: EXCLUDED</span>
+<span>•</span>
+<span>TOKEN: LOCAL_VAULT</span>
+</div>
+</div>
+<!-- Card 2: Unlisted (Direct URL only) — Unselected State -->
+<div class="bg-surface-container p-space-md rounded-xl shadow-sm hover:shadow-card cursor-pointer transition-all flex flex-col justify-between gap-3">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">link</span>
+<span class="font-headline-sm text-[16px] text-on-surface font-bold">Unlisted (Direct URL)</span>
+</div>
+<div class="w-5 h-5 rounded-full bg-surface-dim flex items-center justify-center"></div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Accessible only to collaborators possessing the cryptographic token URL. Excluded from Kenyan regional discovery catalogues.
+          </p>
+<div class="flex items-center gap-2 pt-1 font-mono text-[11px] text-on-surface-variant">
+<span>INDEX: UNLISTED</span>
+<span>•</span>
+<span>KEY: ED25519</span>
+</div>
+</div>
+<!-- Card 3: Showcase (Public Kenyan index) — SELECTED STATE -->
+<div class="bg-surface-container-high p-space-md rounded-xl shadow-card relative overflow-hidden flex flex-col justify-between gap-3">
+<!-- Active Green Focus Accent -->
+<div class="absolute inset-0 pointer-events-none rounded-xl bg-secondary/10"></div>
+<div class="flex items-start justify-between relative z-10">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[20px] text-secondary">public</span>
+<span class="font-headline-sm text-[16px] text-secondary font-bold">Showcase (Public Index)</span>
+</div>
+<!-- Selected Radio Circle with Forest Fill -->
+<div class="w-5 h-5 rounded-full bg-secondary flex items-center justify-center text-on-secondary shadow-sm">
+<div class="w-2 h-2 rounded-full bg-surface"></div>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface relative z-10 font-medium">
+            Published into the curated ReelWorld Kenya cultural visual repository. Linked with Nairobi Cadastre historical metadata.
+          </p>
+<div class="flex items-center justify-between pt-1 font-mono text-[11px] text-secondary relative z-10 font-semibold">
+<span>INDEX: REELWORLD_KENYA</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+              ACTIVE SELECTION
+            </span>
+</div>
+</div>
+</div>
+</div>
+<!-- 4.2 Facial Privacy Blocked-Scene State & Curatorial Preview Voucher -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Blocked-Scene State (Facial Privacy Violations) (6 Cols) -->
+<div class="lg:col-span-6 flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm font-mono text-error font-bold">COMPONENT: BLOCKED-SCENE STATE (FACIAL PRIVACY INVARIANT)</span>
+<div class="bg-surface-container p-space-md rounded-xl shadow-card flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-error">gpp_bad</span>
+<span class="font-label-sm text-label-sm font-bold text-on-surface uppercase tracking-wider">Privacy Engine Gatekeeper</span>
+</div>
+<!-- Warning Badge -->
+<span class="px-2.5 py-1 rounded-full bg-error-container text-on-error-container font-mono text-[11px] font-bold flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-ping"></span>
+              Flagged: 2 visible pedestrian faces
+            </span>
+</div>
+<!-- Dimmed Thumbnail with Scrim & Lock Icon -->
+<div class="relative bg-surface-container-highest p-2 rounded-lg">
+<div class="w-full h-44 rounded overflow-hidden relative">
+<!-- Dimmed Image -->
+<img class="w-full h-full object-cover filter blur-[2px] brightness-50" data-alt="Nairobi city center street scene with pedestrians walking past bank entrance, bright sunlight, candid street view." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW-lDRTVu59jFHGIuJVR-PIhWTb7Xxqbn-3Du0uUYCw1fppgZoEXoNL5pLl_17LQvZQhFYozLBwsSy7qfY-scIJM6NxMNm1roAzoSnkRYCnYr_JMsZDa0VR3aLSUjjZt-T_gBrPWB_cJpYlOhC-K3gfWlCz2DL9BF8qKxJH8DwRdEKJNZqSXsgk1WPVFHqS5PfXKAItO30f0IxYvqq9MuLRHr2lgfqlFqDh1BQL4k"/>
+<!-- Scrim Overlay with Lock Icon -->
+<div class="absolute inset-0 bg-primary/60 flex flex-col items-center justify-center gap-2 p-4 text-center">
+<div class="w-12 h-12 rounded-full bg-error-container text-on-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">lock</span>
+</div>
+<span class="text-surface font-headline-sm text-[16px] font-bold">Publishing Blocked</span>
+<p class="text-surface/80 font-body-sm text-[12px] max-w-xs">
+                  ReelWorld zero-biometric policy prohibits public distribution of unconsented recognizable human faces.
+                </p>
+</div>
+</div>
+</div>
+<!-- Explicit Resolution Action Bar -->
+<div class="flex items-center justify-between pt-1">
+<span class="font-mono text-label-sm text-on-surface-variant">SCENE ID: #04_CANDIDATE</span>
+<button class="min-h-[44px] px-4 rounded bg-error text-on-error font-label-sm text-label-sm font-bold flex items-center gap-2 shadow-sm transition-all active:scale-95">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+<span>Remove these scenes</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 'What will be public' Curatorial Preview Card (6 Cols) -->
+<div class="lg:col-span-6 flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm font-mono text-secondary font-bold">COMPONENT: 'WHAT WILL BE PUBLIC' CURATORIAL PREVIEW CARD</span>
+<div class="bg-surface-container p-space-md rounded-xl shadow-card flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-bold text-on-surface uppercase tracking-wider">Curatorial Inspection Voucher</span>
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container font-mono text-[11px] font-bold">READY TO PUBLISH</span>
+</div>
+<div class="flex items-start gap-4 bg-surface p-3 rounded-lg">
+<!-- Cover Thumbnail -->
+<div class="w-24 h-24 rounded overflow-hidden flex-shrink-0 relative shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Iconic viewpoint of Kenyatta International Convention Centre with dramatic architectural spiral tower under late afternoon Kenyan sun." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT7N0PvvobggUmzf9xT5K_FegYn6kkxuSvLEagcFxHTwa2GWj4IKPNl2ySBVePB9NQMNYPuSGg9Nln3eS9BwuhSP44G1lzsVtIyg9AqgivfHz8eWAff2-skKYmCcSRTODPfwywG0-XUTMi1pofmlYPNHOAyHf0__o9Rd2iP0K5v56PBoRnGFc4oiesfAZpoFGFbbeEFlHyzU3ZV37TQWntC2jQGX2VC9IP_5r2yH0"/>
+<span class="absolute bottom-1 left-1 px-1 bg-primary text-surface text-[9px] font-mono rounded">COVER</span>
+</div>
+<div class="flex flex-col gap-1 min-w-0 flex-1">
+<h4 class="font-headline-sm text-[18px] text-on-surface font-bold truncate">My day at KICC</h4>
+<div class="flex items-center gap-1.5 font-mono text-[11px] text-secondary">
+<span class="material-symbols-outlined text-[14px]">pin_drop</span>
+<span>Nairobi Central • Harambee Ave</span>
+</div>
+<div class="flex items-center gap-2 pt-1 font-mono text-[11px] text-on-surface-variant">
+<span>LICENSE: CC BY-NC 4.0</span>
+<span>•</span>
+<span>SCENES: 6 APPROVED</span>
+</div>
+</div>
+</div>
+<!-- Approved Scene List Breakdown -->
+<div class="flex flex-col gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">APPROVED SCENES MANIFEST (NO FACIAL LEAKS):</span>
+<div class="grid grid-cols-6 gap-1 bg-surface-container-highest p-2 rounded">
+<div class="text-center font-mono text-[10px] bg-surface p-1 rounded">#1 OK</div>
+<div class="text-center font-mono text-[10px] bg-surface p-1 rounded">#2 OK</div>
+<div class="text-center font-mono text-[10px] bg-surface p-1 rounded">#3 OK</div>
+<div class="text-center font-mono text-[10px] bg-surface p-1 rounded">#4 OK</div>
+<div class="text-center font-mono text-[10px] bg-surface p-1 rounded">#5 OK</div>
+<div class="text-center font-mono text-[10px] bg-surface p-1 rounded">#6 OK</div>
+</div>
+</div>
+<!-- Final Affirmation Button -->
+<button class="min-h-[44px] w-full rounded bg-primary text-on-primary font-label-md text-label-md font-bold flex items-center justify-center gap-2 shadow-archival hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-[18px] text-secondary-fixed">publish</span>
+<span>Publish to Nairobi Open Archive</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 4.3 Export Progress Bar (3 Canonical States) -->
+<div class="bg-surface-container-low p-space-md rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<h3 class="font-label-lg text-label-lg font-bold text-on-surface uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-secondary">hourglass_top</span>
+          Rendering &amp; Packaging Telemetry Bars (All 3 States)
+        </h3>
+<span class="font-mono text-label-sm text-on-surface-variant">PIPELINE: FFMPEG_WASM_CLUSTER</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- State 1: Active Rendering -->
+<div class="bg-surface-container p-3.5 rounded-lg flex flex-col gap-2">
+<div class="flex items-center justify-between font-mono text-label-sm">
+<span class="text-secondary font-bold">STATE: RENDERING</span>
+<span class="text-on-surface">40% (~4s remain)</span>
+</div>
+<div class="w-full h-2 bg-surface rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 40%;"></div>
+</div>
+<span class="text-[11px] text-on-surface-variant font-mono">
+            Making your video... (Stitching Ken Burns transforms)
+          </span>
+</div>
+<!-- State 2: Complete -->
+<div class="bg-surface-container p-3.5 rounded-lg flex flex-col gap-2">
+<div class="flex items-center justify-between font-mono text-label-sm">
+<span class="text-secondary font-bold">STATE: COMPLETE</span>
+<span class="text-secondary font-bold">100%</span>
+</div>
+<div class="w-full h-2 bg-secondary rounded-full"></div>
+<div class="flex items-center justify-between text-[11px] font-mono text-on-surface">
+<span>ZIP archive ready (18.4 MB)</span>
+<span class="text-secondary font-bold underline cursor-pointer">Download</span>
+</div>
+</div>
+<!-- State 3: Indeterminate / Queued State -->
+<div class="bg-surface-container p-3.5 rounded-lg flex flex-col gap-2">
+<div class="flex items-center justify-between font-mono text-label-sm">
+<span class="text-on-tertiary-container font-bold">STATE: QUEUED</span>
+<span class="text-on-surface-variant">Slot #2 in Nairobi Edge</span>
+</div>
+<!-- Animated Indeterminate Bar -->
+<div class="w-full h-2 bg-surface rounded-full overflow-hidden relative">
+<div class="h-full bg-on-tertiary-container/60 rounded-full w-1/3 animate-[pulse_1.5s_infinite]"></div>
+</div>
+<span class="text-[11px] text-on-surface-variant font-mono">
+            Awaiting GPU thread allotment (Est. wait: 1.2s)
+          </span>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 5: Showcase Story Card System -->
+<!-- ========================================================================= -->
+<section class="flex flex-col gap-space-lg mb-space-xl" id="section-showcase">
+<div class="flex items-center justify-between pb-space-xs bg-surface-container-highest/40 p-space-md rounded-t-lg">
+<div class="flex items-center gap-space-sm">
+<span class="w-7 h-7 rounded bg-secondary text-on-secondary flex items-center justify-center font-bold text-sm">05</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary tracking-tight">Showcase Story Card System</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Curatorial gallery tiles, hover states, zero-social minimalist tokens, and privacy boundary empty states.</p>
+</div>
+</div>
+<span class="font-mono text-label-sm text-on-surface-variant bg-surface-container px-2 py-1 rounded">Module: showcase-index-v3</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg items-start">
+<!-- 5.1 Published Story Card: STANDARD STATE -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm font-mono text-on-surface-variant">STATE: PUBLISHED SHOWCASE (STANDARD IDLE)</span>
+<div class="bg-surface-container p-space-md rounded-xl shadow-archival flex flex-col gap-3 group">
+<!-- Inset Photo Mount Frame -->
+<div class="relative bg-surface-container-highest p-2.5 rounded-lg overflow-hidden">
+<div class="w-full h-64 rounded overflow-hidden relative shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Curated architectural documentary photograph of modernist concrete spiral facade of Jamia Mosque library in Nairobi, clear desert sky, deep terracotta reflections." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1mKJJ8acZoDwi4c9MPxgr0Q2RP5YRK3z_6fcV4VJaQi_zIdccjLcLeyfbEj5Lq-HYskD2OkJ1SEb6-GUMw-HmBo40wewwUwCGHnQdDAbwBq-HjDPIVy1YDYUWCQmPRcDeQSKNM98vNfyAeRtdpLgv9OHrKouOGKBTScakb6EIRr6lN-Aonm6cJTek7fJs-y294HVebyhru1Ct3QrANuuEBSB-hUULmUAYUFK9XOU"/>
+<!-- Top Left: Curatorial Style Tag -->
+<span class="absolute top-2 left-2 px-2.5 py-1 rounded bg-primary-container/90 backdrop-blur-sm text-surface font-mono text-[10px] font-bold tracking-wider">
+                POSTCARD
+              </span>
+<!-- Top Right: Duration Badge -->
+<span class="absolute top-2 right-2 px-2 py-0.5 rounded bg-primary/75 text-surface font-mono text-[11px]">
+                0:20
+              </span>
+<!-- Bottom Left: Camera Move Indicator -->
+<div class="absolute bottom-2 left-2 flex items-center gap-1 px-2 py-0.5 rounded bg-surface/90 text-primary font-mono text-[10px]">
+<span class="material-symbols-outlined text-[13px] text-secondary">pan_tool_alt</span>
+<span>Static pan</span>
+</div>
+</div>
+</div>
+<!-- Story Details -->
+<div class="flex flex-col gap-1 px-1">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-secondary font-mono font-bold">Made from 8 photos</span>
+<span class="font-mono text-[11px] text-on-surface-variant">CC BY-NC 4.0</span>
+</div>
+<h3 class="font-headline-sm text-[18px] text-on-surface font-bold">Jamia Geometric Forms</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Banda Street cadastre record #209-1102. Sun-dried brick motifs &amp; bronze door hinges.
+            </p>
+</div>
+<!-- Bottom Provenance Footnote (Strictly NO social likes/followers) -->
+<div class="flex items-center justify-between pt-2 border-t border-surface-container-highest px-1">
+<span class="font-mono text-[11px] text-on-surface-variant">CURATOR: Nairobi Public Index</span>
+<button class="min-h-[44px] px-3 rounded bg-surface hover:bg-surface-bright text-on-surface font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span>View Story</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 5.2 Published Story Card: HOVER / FOCUS STATE -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm font-mono text-secondary font-bold">STATE: PUBLISHED SHOWCASE (HOVER / FOCUS ELEVATED)</span>
+<div class="bg-surface-container p-space-md rounded-xl shadow-elevated flex flex-col gap-3 relative transition-all">
+<!-- Active Highlight Rim -->
+<div class="absolute inset-0 pointer-events-none rounded-xl bg-secondary/10"></div>
+<!-- Inset Photo Mount Frame with Play Glyph Reveal -->
+<div class="relative bg-surface-container-highest p-2.5 rounded-lg overflow-hidden">
+<div class="w-full h-64 rounded overflow-hidden relative shadow-md">
+<img class="w-full h-full object-cover scale-105 transition-transform duration-700" data-alt="Archival color photograph of vibrant spice and fruit market stalls on River Road in Nairobi, deep earthen textures, soft dust motes, museum exhibition aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIC9Xy-NpEWKPJtIFrlv81hrjWeue4mmKuhjARfnnKf75N6Lk098n9R6YTHrIkV0y1RvfI-B7dAed_pgrX9zDmH1fbE1vq2hd3j0IhdQ4MJzIvgHrxjrRbVuMLu6PNqIIX04nQ-311uWuBJGMxtVjEF7SGSwkByLe-eIhRqx9o4T096aRb2mytrjB48pkB3Qdv8P6zZYJS5zsRaHmQJSNe0c4FA4yJD1l3Cuzngls"/>
+<!-- Hover Darkening Scrim -->
+<div class="absolute inset-0 bg-primary/40 flex items-center justify-center">
+<!-- Large Play Glyph Reveal -->
+<div class="w-14 h-14 rounded-full bg-surface text-primary flex items-center justify-center shadow-lg transition-transform hover:scale-110">
+<span class="material-symbols-outlined text-[28px] text-secondary">play_arrow</span>
+</div>
+</div>
+<span class="absolute top-2 left-2 px-2.5 py-1 rounded bg-secondary text-on-secondary font-mono text-[10px] font-bold">
+                PANORAMA
+              </span>
+<span class="absolute top-2 right-2 px-2 py-0.5 rounded bg-primary text-surface font-mono text-[11px]">
+                0:32
+              </span>
+</div>
+</div>
+<!-- Story Details -->
+<div class="flex flex-col gap-1 px-1">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-secondary font-mono font-bold">Made from 12 photos</span>
+<span class="font-mono text-[11px] text-secondary font-bold">ACTIVE HOVER FOCUS</span>
+</div>
+<h3 class="font-headline-sm text-[18px] text-secondary font-bold">River Road Botanical Inscriptions</h3>
+<p class="font-body-sm text-body-sm text-on-surface">
+              Herbalist apothecary signage documented across four colonial alleyways.
+            </p>
+</div>
+<!-- Bottom Action -->
+<div class="flex items-center justify-between pt-2 border-t border-surface-container-highest px-1">
+<span class="font-mono text-[11px] text-on-surface">Nairobi East District</span>
+<button class="min-h-[44px] px-3 rounded bg-secondary text-on-secondary font-label-sm text-label-sm font-bold flex items-center gap-1 shadow-sm">
+<span>Play Now ➔</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 5.3 Zero Results / Empty State Banner -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm font-mono text-on-surface-variant font-bold">COMPONENT: ZERO RESULTS / PRIVACY-FIRST EMPTY STATE</span>
+<div class="bg-surface-container p-space-md rounded-xl shadow-card flex flex-col justify-between gap-4 h-full">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-bold text-on-surface uppercase tracking-wider">Index Governance</span>
+<span class="material-symbols-outlined text-[20px] text-secondary">shield</span>
+</div>
+<!-- Curatorial Zero State Notice -->
+<div class="flex flex-col items-center text-center p-4 bg-surface rounded-lg gap-2">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant mb-1">
+<span class="material-symbols-outlined text-[24px]">filter_vintage</span>
+</div>
+<h4 class="font-headline-sm text-[16px] text-on-surface font-bold">Zero Facial Exceptions Permitted</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xs">
+              Every photograph in this visual archive undergoes edge neural filtering. Stories containing unredacted bystanders remain in the photographer's private vault until cropped.
+            </p>
+</div>
+<div class="bg-surface-container-highest p-3 rounded font-mono text-[11px] text-on-surface-variant flex flex-col gap-1">
+<div class="flex justify-between">
+<span>FACIAL_PRIVACY_MODEL:</span>
+<span class="text-secondary font-bold">Muse-Vision-Edge v2.4</span>
+</div>
+<div class="flex justify-between">
+<span>INDEXED_STORIES:</span>
+<span>1,248 Verifiable Records</span>
+</div>
+</div>
+<button class="min-h-[44px] w-full rounded bg-surface hover:bg-surface-bright text-on-surface font-label-sm text-label-sm font-semibold flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[16px]">menu_book</span>
+<span>Read Archival Policy Manual</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- TECHNICAL TOKENS & SYSTEM FOOTNOTE -->
+<!-- ========================================================================= -->
+<div class="bg-surface-container p-space-lg rounded-xl shadow-archival mb-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md text-on-surface-variant text-[12px] font-mono">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="text-on-surface font-bold font-sans">ReelWorld Story Component Engine — Architectural Spec 3.0</span>
+</div>
+<span>All interactive elements implement min-height/min-width 44px touch envelopes. Zero social tokens used.</span>
+</div>
+<div class="flex flex-wrap items-center gap-4">
+<span>EDGE_NODE: Nairobi-01 (Online)</span>
+<span>LATENCY: 32ms</span>
+<span class="px-2.5 py-1 rounded bg-secondary text-on-secondary font-sans font-bold text-[11px]">BUILD PASSED</span>
+</div>
+</div>
+</div></main>
+<!-- Desktop Persistent Footer / System Status Bar -->
+<footer class="w-full bg-espresso-950 border-t border-espresso-850 text-papyrus-300 mt-12">
+<div class="max-w-[1440px] mx-auto px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+<div class="flex items-center gap-3">
+<div class="w-7 h-7 rounded-lg bg-espresso-900 border border-espresso-800 flex items-center justify-center text-ochre-warm">
+<span class="material-symbols-outlined text-[16px]">flare</span>
+</div>
+<div>
+<span class="text-papyrus-100 font-bold">ReelWorld Kenya Semantic Visual Pipeline</span>
+<span class="mx-2 text-espresso-700">•</span>
+<span>Powered by Muse Spark Open Framework</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-sage-DEFAULT"></span>
+<span class="text-papyrus-200">Nairobi Edge Cluster: Online (32ms)</span>
+</div>
+<a class="hover:text-ochre-warm transition-colors" href="#">Documentation</a>
+<a class="hover:text-ochre-warm transition-colors" href="#">Archive Telemetry</a>
+<a class="hover:text-ochre-warm transition-colors" href="#">Privacy &amp; Provenance</a>
+</div>
+</div>
+</footer>
+<script>
+    function setQuery(text) {
+      const input = document.getElementById('conversational-input');
+      if (input) {
+        input.value = text;
+        input.focus();
+        input.parentElement.parentElement.classList.add('ring-2', 'ring-ochre');
+        setTimeout(() => {
+          input.parentElement.parentElement.classList.remove('ring-2', 'ring-ochre');
+        }, 800);
+      }
+    }
+  </script>
+</body></html>

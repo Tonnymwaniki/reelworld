@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-secondary":"#ffffff","surface-container-highest":"#e6e2de","error-container":"#ffdad6","on-background":"#1d1b19","secondary-fixed-dim":"#aecebc","inverse-surface":"#32302e","secondary-container":"#c9ead8","tertiary-fixed-dim":"#ffb59c","surface-variant":"#e6e2de","primary-fixed":"#e1e2e9","on-error":"#ffffff","secondary":"#476556","surface":"#fef8f4","primary-fixed-dim":"#c4c6cd","on-tertiary-fixed":"#390c00","on-secondary-fixed":"#032015","primary-container":"#1b1e23","error":"#ba1a1a","primary":"#030408","surface-container":"#f2ede9","on-primary-fixed-variant":"#44474c","tertiary-container":"#3d0d00","surface-bright":"#fef8f4","outline-variant":"#c6c6cb","surface-container-lowest":"#ffffff","on-primary":"#ffffff","surface-dim":"#ded9d5","inverse-primary":"#c4c6cd","on-tertiary":"#ffffff","inverse-on-surface":"#f5f0ec","on-error-container":"#93000a","on-surface-variant":"#45474b","on-surface":"#1d1b19","surface-container-low":"#f8f3ef","tertiary":"#0e0100","tertiary-fixed":"#ffdbcf","on-secondary-container":"#4d6b5c","on-secondary-fixed-variant":"#304d3f","outline":"#76777b","on-primary-fixed":"#191c21","surface-tint":"#5c5e64","secondary-fixed":"#c9ead8","on-primary-container":"#83868c","background":"#fef8f4","surface-container-high":"#ece7e3","on-tertiary-container":"#d5643b","on-tertiary-fixed-variant":"#822801"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-xl":"2.5rem","space-sm":"0.5rem","margin":"3rem","gutter":"1.5rem","space-xs":"0.25rem","gutter-mobile":"1rem","margin-mobile":"1.25rem","margin-tablet":"2rem","space-lg":"1.5rem","space-md":"1rem"},"fontFamily":{"display-lg":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"display-lg-mobile":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"]},"fontSize":{"display-lg":["56px",{"lineHeight":"64px","letterSpacing":"-0.02em","fontWeight":"700"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"600"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.02em","fontWeight":"600"}],"display-lg-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.015em","fontWeight":"700"}],"headline-lg-mobile":["26px",{"lineHeight":"34px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-sm":["13px",{"lineHeight":"20px","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.005em","fontWeight":"600"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],"body-md":["15px",{"lineHeight":"24px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.06em","fontWeight":"500"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased selection:bg-secondary-container selection:text-on-secondary-fixed"><header class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-28 w-full px-margin-mobile md:px-margin-tablet lg:px-margin flex flex-col justify-between pt-3 pb-0"><div class="flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-secondary text-[24px]">lens_blur</span><div class="flex items-baseline gap-1.5"><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">ReelWorld</span><span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase font-semibold">VISUAL ARCHIVE</span></div></div><div class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-lg bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm"><span class="text-secondary mr-1.5 font-bold">●</span>Built with Muse Spark Open v2.4</div></div><div class="flex items-center gap-2 px-2.5 py-1 rounded-lg bg-surface-container text-on-surface-variant font-label-sm text-label-sm"><span class="inline-block w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-medium tracking-wide uppercase">NAIROBI EDGE CLUSTER: ONLINE (32ms)</span></div></div><div class="flex items-center justify-between border-t border-surface-container-highest/60 pt-1.5 pb-2"><nav class="flex items-center gap-space-lg" data-active-classes="text-primary font-semibold border-b-2 border-primary"><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors pb-1" data-path="chat" href="#">Chat</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors pb-1" data-path="browse" href="#">Browse</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors pb-1" data-path="connected" href="#">Connected</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors pb-1" data-path="stories" href="#">Stories</a></nav><nav class="flex items-center gap-1.5 bg-surface-container-low p-0.5 rounded-lg" data-active-classes="bg-primary-container text-on-primary font-medium rounded-lg"><a class="font-label-md text-label-md px-3 py-1 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="create-story" href="#">Create</a><a class="font-label-md text-label-md px-3 py-1 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="my-stories" href="#">My stories</a><a class="font-label-md text-label-md px-3 py-1 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="showcase" href="#">Showcase</a></nav></div></div></header><main class="w-full pt-28 bg-surface min-h-[calc(100vh-140px)] px-margin-mobile md:px-margin-tablet lg:px-margin py-space-xl"><div class="flex flex-col w-full">
+<!-- Privacy & Ethos Header Reassurance Strip -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md p-space-md rounded-lg bg-surface-container mb-space-lg">
+<div class="flex items-start md:items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-secondary text-[22px] mt-0.5 md:mt-0 flex-shrink-0">verified_user</span>
+<div class="flex flex-col sm:flex-row sm:items-center gap-x-space-sm gap-y-0.5">
+<span class="font-headline-sm text-headline-sm text-primary">Archival Showcase Repository</span>
+<span class="hidden sm:inline text-outline-variant">•</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant font-medium">Only stories their authors chose to publish. Faces are never published.</p>
+</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container-high self-start md:self-auto flex-shrink-0">
+<span class="material-symbols-outlined text-secondary text-[16px]">security_update_good</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Automated Edge Vision Clearance • Zero private facial vectors retained</span>
+</div>
+</div>
+<!-- Featured Curatorial Study (Prominent Banner Card) -->
+<section class="flex flex-col lg:flex-row bg-surface-container-low rounded-lg p-space-md lg:p-space-lg mb-space-xl gap-space-lg shadow-sm">
+<!-- Visual Preview & Frame -->
+<div class="lg:w-7/12 flex flex-col justify-between">
+<div class="relative w-full aspect-[16/10] bg-surface-container-highest rounded-lg overflow-hidden group cursor-pointer" onclick="openStoryModal('My day at KICC: Monolithic Terracotta &amp; City Square', '20s', 'Postcard', 'Curated by J. Mwangi • Ingested Sept 2024')">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-[1.02]" data-alt="Editorial archival wide-angle photograph of Kenyatta International Convention Centre (KICC) brutalist terracotta tower in Nairobi under golden midday sun, framed across Harambee Avenue with geometric concrete pylons and acacia foliage, museum quality documentary still." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA9kAb0G8c_R-UQhcsikRBL6Cj6z6p0jL6T3KyVtSUq4HhlhRv7in0Z9VhCVh_BGv5bElMHxHdEtlqF1LS7iUP5kqfkdhq68o6xcjacO3jvWCrZGcXqcKs3933SSjuKQsQe-gJGoZF1zlqYXrBxj2275PzDpNlgPqEld_WWGyfp7lIIXKSZA8qA016Fe2FSDDECSubGy3vZL832NMyA8aKDHQ0lBN_o63839O-IcCg')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent"></div>
+<div class="absolute top-space-md left-space-md flex items-center gap-space-xs">
+<span class="bg-primary-container text-on-primary px-2.5 py-1 rounded-lg font-label-sm text-label-sm uppercase tracking-wider">Featured Curatorial Study</span>
+<span class="bg-surface-container/90 text-on-surface backdrop-blur-sm px-2 py-1 rounded-lg font-label-sm text-label-sm">Postcard Motion</span>
+</div>
+<div class="absolute top-space-md right-space-md">
+<span class="bg-secondary text-on-secondary px-2.5 py-1 rounded-lg font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">done_all</span>
+            100% Facially Cleared
+          </span>
+</div>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-14 h-14 rounded-full bg-surface/90 text-primary flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[32px] ml-0.5">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-space-md left-space-md right-space-md flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary-fixed-dim uppercase tracking-wider mb-1">Keyframe Excerpt #02</span>
+<p class="font-body-md text-body-md text-on-secondary italic font-light drop-shadow-sm">
+            “Approaching City Square on Harambee Avenue under warm equatorial midday light.”
+          </p>
+</div>
+</div>
+</div>
+<!-- Curatorial Dossier Meta & Details -->
+<div class="lg:w-5/12 flex flex-col justify-between py-1">
+<div class="flex flex-col">
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm uppercase mb-2">
+<span>NAIROBI EDGE ARCHIVE</span>
+<span>/</span>
+<span>STUDY #24-KICC</span>
+<span>/</span>
+<span class="text-secondary font-semibold">VERIFIED PUBLIC</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary mb-space-xs tracking-tight">
+          My day at KICC: Monolithic Terracotta &amp; City Square
+        </h1>
+<p class="font-label-md text-label-md text-on-surface-variant mb-space-md">
+          Curated by J. Mwangi • Ingested Sept 2024 • Nairobi Edge Index
+        </p>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-lg leading-relaxed">
+          A 4-scene kinetic motion study capturing Karl Henrik Nøstvik’s 1973 brutalist landmark, verified dedication plaques, and elevated amphitheatre perspectives without retaining ambient pedestrian likenesses.
+        </p>
+<!-- Technical Specification Mat -->
+<div class="grid grid-cols-2 gap-space-sm p-space-md rounded-lg bg-surface-container mb-space-lg">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Runtime</span>
+<span class="font-headline-sm text-headline-sm text-primary">20 Seconds</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Camera Track</span>
+<span class="font-headline-sm text-headline-sm text-primary">Slow Push &amp; Tilt</span>
+</div>
+<div class="flex flex-col pt-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Composition</span>
+<span class="font-body-sm text-body-sm text-primary font-medium">8 Photos (6 personal + 2 cutaways)</span>
+</div>
+<div class="flex flex-col pt-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Licensing</span>
+<span class="font-body-sm text-body-sm text-primary font-medium">CC BY-NC 4.0 Archival Stills</span>
+</div>
+</div>
+</div>
+<!-- Action Cluster -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-sm pt-2">
+<button class="flex items-center justify-center gap-2 px-space-md py-3 rounded-lg bg-primary-container text-on-primary hover:bg-tertiary-container hover:text-on-tertiary-container transition-colors shadow-sm font-label-lg text-label-lg" onclick="openStoryModal('My day at KICC: Monolithic Terracotta &amp; City Square', '20s', 'Postcard', 'Curated by J. Mwangi • Ingested Sept 2024')">
+<span class="material-symbols-outlined text-[20px]">play_circle</span>
+<span>Open Story Player (9:16)</span>
+</button>
+<button class="flex items-center justify-center gap-2 px-space-md py-3 rounded-lg bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-colors font-label-lg text-label-lg" onclick="toggleDossierInfo()">
+<span class="material-symbols-outlined text-[20px]">history_edu</span>
+<span>Inspect Provenance Dossier</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Museum Search & Curatorial Filter Strip -->
+<section class="flex flex-col gap-space-md mb-space-xl">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<!-- Search Input -->
+<div class="relative flex-1 max-w-2xl">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full pl-11 pr-4 py-2.5 bg-surface-container rounded-lg text-on-surface placeholder:text-on-surface-variant/70 font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-highest transition-all" id="showcaseSearch" oninput="handleSearchFilter()" placeholder="Search public stories by location or theme (e.g. KICC, City Market, Nairobi CBD, Railway Museum)..." type="text"/>
+</div>
+<!-- Metrics counter -->
+<div class="flex items-center gap-2 text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px] text-secondary">database</span>
+<span class="font-semibold text-primary" id="storyCountBadge">24 verified archival stories published</span>
+</div>
+</div>
+<!-- Filter Taxonomy Chips -->
+<div class="flex flex-wrap items-center gap-2 pt-1" id="filterChipContainer">
+<button class="filter-chip px-3 py-1.5 rounded-lg bg-primary-container text-on-primary font-label-sm text-label-sm uppercase transition-colors" onclick="setFilter('all', this)">
+        All Stories (24)
+      </button>
+<button class="filter-chip px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm uppercase transition-colors" onclick="setFilter('postcard', this)">
+        Postcard Style
+      </button>
+<button class="filter-chip px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm uppercase transition-colors" onclick="setFilter('field-notes', this)">
+        Field Notes
+      </button>
+<button class="filter-chip px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm uppercase transition-colors" onclick="setFilter('documentary', this)">
+        Documentary
+      </button>
+<button class="filter-chip px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm uppercase transition-colors" onclick="setFilter('nairobi-central', this)">
+        Nairobi Central
+      </button>
+<button class="filter-chip px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm uppercase transition-colors" onclick="setFilter('architectural', this)">
+        Architectural Cadastre
+      </button>
+</div>
+</section>
+<!-- Published Story Cards Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg mb-space-xl" id="storiesGrid">
+<!-- Story Card 1 -->
+<article class="story-item group flex flex-col bg-surface-container-low rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow" data-category="postcard nairobi-central" data-title="dawn at city market muindi mbingu st">
+<div class="relative w-full aspect-[16/10] bg-surface-container cursor-pointer overflow-hidden" onclick="openStoryModal('Dawn at City Market', '18s', 'Postcard', 'Curated by O. Wanjiku • Edge Verified')">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Sunlight pouring through the high vaulted concrete roof louvers of Nairobi City Market with wooden fruit stalls, sisal baskets, and cast iron truss structures in soft morning glow, warm earthy tones." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB8F1uhYGtFFhq8GaW7IrpcZuwcnierO03c180IWm-bYzlv0RF-ijEECpmrI94BuGFUZcF6OWqTDG03tLuUIYjcgJj5RR3VS_hkXIu0QvD0nP2sg7Ie0ZHl5HnNKDTgYMmtq1bgDtLkRQLL33xoDOg76cH7-aRNggL8zvqi9Do2y_z3eYNWIpuQhGcvA4pVh0dt9PucknY9BSfj7tQMLlZaGZct2oE1RXE-dTjYilw')">
+</div>
+<div class="absolute top-2.5 left-2.5 bg-primary/70 backdrop-blur-sm text-on-primary px-2 py-0.5 rounded-lg font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">timer</span> 0:18
+        </div>
+<div class="absolute top-2.5 right-2.5 bg-surface-container-high/90 text-on-surface px-2 py-0.5 rounded-lg font-label-sm text-label-sm">
+          Slow push-in
+        </div>
+<div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-surface text-[40px] drop-shadow-md">play_circle</span>
+</div>
+</div>
+<div class="p-space-md flex flex-col flex-1 justify-between">
+<div>
+<div class="flex items-center justify-between gap-2 mb-1.5">
+<span class="px-2 py-0.5 rounded-lg bg-surface-container text-secondary font-label-sm text-label-sm uppercase font-semibold">Postcard</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Made from 8 photos</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-primary mb-1 group-hover:text-secondary transition-colors">
+            Dawn at City Market
+          </h2>
+<div class="flex items-center gap-1 text-on-surface-variant font-body-sm text-body-sm mb-3">
+<span class="material-symbols-outlined text-[16px] text-secondary">location_on</span>
+<span>City Market, Muindi Mbingu St</span>
+</div>
+</div>
+<div class="pt-2 bg-surface-container-low flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>CC BY-NC 4.0 Public Stills</span>
+<span class="text-secondary font-medium">9:16 Ready</span>
+</div>
+<p class="font-label-sm text-label-sm text-outline transition-colors group-hover:text-primary">
+            Tap to launch Story Player • Credits shown at end
+          </p>
+</div>
+</div>
+</article>
+<!-- Story Card 2 -->
+<article class="story-item group flex flex-col bg-surface-container-low rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow" data-category="documentary architectural" data-title="nairobi railway heritage haile selassie ave">
+<div class="relative w-full aspect-[16/10] bg-surface-container cursor-pointer overflow-hidden" onclick="openStoryModal('Nairobi Railway Heritage', '24s', 'Documentary', 'Curated by K. Cherono • Railway Cadastre Project')">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Steam locomotives and weathered steel tracks at Nairobi Railway Museum depot, historic colonial workshop sheds, red terracotta dust, warm African golden hour light, museum archival register style." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBMFxcLvKIN5Dh8fuG_rcNsKTutkCtEhlE3kTUxfx7PueCdr9klFGGIdan5L9zA_PYiKboNYET4YMMsSVOJrKIUelP_tsE_E-lqhaseTKyNb0GQRQS78wZGBugp2gbad16dnOvEuIm1csWWMs0Zp-EjUwCRNe4vRt1A3HZRTzw8W9gDTlc8lJJbCeOllhCV_gKTPobeoKF42cN2eI1abCNN3f9uGybqb2wzVg3YvSE')">
+</div>
+<div class="absolute top-2.5 left-2.5 bg-primary/70 backdrop-blur-sm text-on-primary px-2 py-0.5 rounded-lg font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">timer</span> 0:24
+        </div>
+<div class="absolute top-2.5 right-2.5 bg-surface-container-high/90 text-on-surface px-2 py-0.5 rounded-lg font-label-sm text-label-sm">
+          Lateral tracking
+        </div>
+<div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-surface text-[40px] drop-shadow-md">play_circle</span>
+</div>
+</div>
+<div class="p-space-md flex flex-col flex-1 justify-between">
+<div>
+<div class="flex items-center justify-between gap-2 mb-1.5">
+<span class="px-2 py-0.5 rounded-lg bg-surface-container text-secondary font-label-sm text-label-sm uppercase font-semibold">Documentary</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Made from 11 photos</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-primary mb-1 group-hover:text-secondary transition-colors">
+            Nairobi Railway Heritage
+          </h2>
+<div class="flex items-center gap-1 text-on-surface-variant font-body-sm text-body-sm mb-3">
+<span class="material-symbols-outlined text-[16px] text-secondary">location_on</span>
+<span>Haile Selassie Ave, Yard 3</span>
+</div>
+</div>
+<div class="pt-2 bg-surface-container-low flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>CC BY-SA Cutaways</span>
+<span class="text-secondary font-medium">9:16 Ready</span>
+</div>
+<p class="font-label-sm text-label-sm text-outline transition-colors group-hover:text-primary">
+            Tap to launch Story Player • Credits shown at end
+          </p>
+</div>
+</div>
+</article>
+<!-- Story Card 3 -->
+<article class="story-item group flex flex-col bg-surface-container-low rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow" data-category="field-notes architectural nairobi-central" data-title="kenyatta avenue colonnades kimathi st">
+<div class="relative w-full aspect-[16/10] bg-surface-container cursor-pointer overflow-hidden" onclick="openStoryModal('Kenyatta Avenue Colonnades', '15s', 'Field Notes', 'Curated by A. Hassan • Colonial-Modernist Survey')">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Deep perspective view down the shaded limestone colonnades of Kenyatta Avenue in Nairobi with classical masonry arches, dappled sun shadows, and jacaranda blossoms along the curb, fine art architectural photography." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDxnAaWN2lgzqdBFLZDfbb-dfRkgyChiww68TcbUmcxDr3fx4x2XSf4uWMTr3g4yOphMg3UHKoIaH1oUWhXSyotqImXGbWt0_pVH5V6YAhqLRC_nsyvYdNDnGsH8x8ruFOrliKbrZyapAWWcAaXQGRn3NeeAKaqeYOddRgLaj7Xr-HJkmZVCkPMpy0gnilPXcUnRJAB_V9Zc747le7wNtjBg15oGWacgHLYo2ei9h4')">
+</div>
+<div class="absolute top-2.5 left-2.5 bg-primary/70 backdrop-blur-sm text-on-primary px-2 py-0.5 rounded-lg font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">timer</span> 0:15
+        </div>
+<div class="absolute top-2.5 right-2.5 bg-surface-container-high/90 text-on-surface px-2 py-0.5 rounded-lg font-label-sm text-label-sm">
+          Static pan
+        </div>
+<div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-surface text-[40px] drop-shadow-md">play_circle</span>
+</div>
+</div>
+<div class="p-space-md flex flex-col flex-1 justify-between">
+<div>
+<div class="flex items-center justify-between gap-2 mb-1.5">
+<span class="px-2 py-0.5 rounded-lg bg-surface-container text-secondary font-label-sm text-label-sm uppercase font-semibold">Field Notes</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Made from 6 photos</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-primary mb-1 group-hover:text-secondary transition-colors">
+            Kenyatta Avenue Colonnades
+          </h2>
+<div class="flex items-center gap-1 text-on-surface-variant font-body-sm text-body-sm mb-3">
+<span class="material-symbols-outlined text-[16px] text-secondary">location_on</span>
+<span>Kenyatta Ave &amp; Kimathi St</span>
+</div>
+</div>
+<div class="pt-2 bg-surface-container-low flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>CC BY-NC 4.0 Public Stills</span>
+<span class="text-secondary font-medium">9:16 Ready</span>
+</div>
+<p class="font-label-sm text-label-sm text-outline transition-colors group-hover:text-primary">
+            Tap to launch Story Player • Credits shown at end
+          </p>
+</div>
+</div>
+</article>
+<!-- Story Card 4 -->
+<article class="story-item group flex flex-col bg-surface-container-low rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow" data-category="field-notes nairobi-central" data-title="river road morning rhythm nairobi cbd">
+<div class="relative w-full aspect-[16/10] bg-surface-container cursor-pointer overflow-hidden" onclick="openStoryModal('River Road Morning Rhythm', '32s', 'Field Notes', 'Curated by P. Otieno • Urban Texture Archive')">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Atmospheric early morning on River Road Nairobi with tea vendor steam, painted matatus passing in soft blurred motion, vintage hand-painted shop typography, warm ambient daylight." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAz8UXYwqfAb_SbDfTFbZ8phj2FhcGWmeSNROM4T_mbEzfI_4wNnyfiRlA4jZotu2e7kDYSwOnQJ4AuP8NToLJrM7QX-bM3WJnVY-Y-edwd1dPh6tUdIhOH-TRV-9V42N11-Cn9Th_xmX3DuOwHt9IYqrLdEoFuXj5Ui8_fYKKA2d1u3hCphMYr1V-A1W1kBmrsTNRAE-868eznwn088sDDZDWYThZipiWUzHzTGtY')">
+</div>
+<div class="absolute top-2.5 left-2.5 bg-primary/70 backdrop-blur-sm text-on-primary px-2 py-0.5 rounded-lg font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">timer</span> 0:32
+        </div>
+<div class="absolute top-2.5 right-2.5 bg-surface-container-high/90 text-on-surface px-2 py-0.5 rounded-lg font-label-sm text-label-sm">
+          Handheld kinetic
+        </div>
+<div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-surface text-[40px] drop-shadow-md">play_circle</span>
+</div>
+</div>
+<div class="p-space-md flex flex-col flex-1 justify-between">
+<div>
+<div class="flex items-center justify-between gap-2 mb-1.5">
+<span class="px-2 py-0.5 rounded-lg bg-surface-container text-secondary font-label-sm text-label-sm uppercase font-semibold">Field Notes</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Made from 9 photos</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-primary mb-1 group-hover:text-secondary transition-colors">
+            River Road Morning Rhythm
+          </h2>
+<div class="flex items-center gap-1 text-on-surface-variant font-body-sm text-body-sm mb-3">
+<span class="material-symbols-outlined text-[16px] text-secondary">location_on</span>
+<span>Nairobi CBD, Lower Sector</span>
+</div>
+</div>
+<div class="pt-2 bg-surface-container-low flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>CC BY-NC 4.0 Public Stills</span>
+<span class="text-secondary font-medium">9:16 Ready</span>
+</div>
+<p class="font-label-sm text-label-sm text-outline transition-colors group-hover:text-primary">
+            Tap to launch Story Player • Credits shown at end
+          </p>
+</div>
+</div>
+</article>
+<!-- Story Card 5 -->
+<article class="story-item group flex flex-col bg-surface-container-low rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow" data-category="postcard" data-title="uhuru park basin reflecting upper hill skyline">
+<div class="relative w-full aspect-[16/10] bg-surface-container cursor-pointer overflow-hidden" onclick="openStoryModal('Uhuru Park Basin Reflecting', '22s', 'Postcard', 'Curated by N. Kiprop • Nairobi Green Space Index')">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Calm water surface of Uhuru Park artificial lake reflecting the modern Nairobi CBD skyscrapers, water lilies on edge, serene afternoon sky with cumulus clouds, high aesthetic landscape photography." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA4tOMAdPjtFKahj73ZHumaU6yyPTNptMCCiB0MlrnMTYe8D9yzBUCcMv1lT6d8oHSS412RkLYZFDcJ54KYff2UG6Js2xQ7sijEQLVIWb6Jpy0Cv0MFbPh5bjqBBqNHkQ4tVB2qLKTVASe-sBwROA4pggl3FvCMgFJSqJjsryiDZNaxPsB3fS1eIVk1uQcf5Bhrjb6xOB9NKx1zEm0VUu8oJrVcxQZJ3FduI6i27yI')">
+</div>
+<div class="absolute top-2.5 left-2.5 bg-primary/70 backdrop-blur-sm text-on-primary px-2 py-0.5 rounded-lg font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">timer</span> 0:22
+        </div>
+<div class="absolute top-2.5 right-2.5 bg-surface-container-high/90 text-on-surface px-2 py-0.5 rounded-lg font-label-sm text-label-sm">
+          Slow zoom-out
+        </div>
+<div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-surface text-[40px] drop-shadow-md">play_circle</span>
+</div>
+</div>
+<div class="p-space-md flex flex-col flex-1 justify-between">
+<div>
+<div class="flex items-center justify-between gap-2 mb-1.5">
+<span class="px-2 py-0.5 rounded-lg bg-surface-container text-secondary font-label-sm text-label-sm uppercase font-semibold">Postcard</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Made from 7 photos</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-primary mb-1 group-hover:text-secondary transition-colors">
+            Uhuru Park Basin Reflecting
+          </h2>
+<div class="flex items-center gap-1 text-on-surface-variant font-body-sm text-body-sm mb-3">
+<span class="material-symbols-outlined text-[16px] text-secondary">location_on</span>
+<span>Uhuru Highway &amp; Processional Way</span>
+</div>
+</div>
+<div class="pt-2 bg-surface-container-low flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>CC BY-NC 4.0 Public Stills</span>
+<span class="text-secondary font-medium">9:16 Ready</span>
+</div>
+<p class="font-label-sm text-label-sm text-outline transition-colors group-hover:text-primary">
+            Tap to launch Story Player • Credits shown at end
+          </p>
+</div>
+</div>
+</article>
+<!-- Story Card 6 -->
+<article class="story-item group flex flex-col bg-surface-container-low rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow" data-category="documentary architectural" data-title="old provincial commissioner house kenyatta avenue">
+<div class="relative w-full aspect-[16/10] bg-surface-container cursor-pointer overflow-hidden" onclick="openStoryModal('Old Provincial Commissioner’s House', '28s', 'Documentary', 'Curated by E. Muthoni • National Monuments Registry')">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Early 20th century dressed stone facade of the Old Provincial Commissioner's building in Nairobi, historical clock tower and carved timber eave details under clear blue sky, architectural heritage study." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCFh1YQuo1Luhd9C1tXSnlpsMYhajG5pPmYhim7MwGeDd9KpuiTCvv2T13e1pQ3Ae1T0yJHkVuO189ODScvOdUxqOsrB4T5jHvrihaGOjxHgke3FBJk6OSo-mBbDaIb0PG1GlOgbTP6FJIf0rjZa1Wz8QWLO2vObHJtvL-YcWrcDYQzl764QuqMOVH49JuHU_1qqzoyERg-2ulRJ1GmQ4gOVbYQNhOQrI4X6v2rlgs')">
+</div>
+<div class="absolute top-2.5 left-2.5 bg-primary/70 backdrop-blur-sm text-on-primary px-2 py-0.5 rounded-lg font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">timer</span> 0:28
+        </div>
+<div class="absolute top-2.5 right-2.5 bg-surface-container-high/90 text-on-surface px-2 py-0.5 rounded-lg font-label-sm text-label-sm">
+          Archival pedestal tilt
+        </div>
+<div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-surface text-[40px] drop-shadow-md">play_circle</span>
+</div>
+</div>
+<div class="p-space-md flex flex-col flex-1 justify-between">
+<div>
+<div class="flex items-center justify-between gap-2 mb-1.5">
+<span class="px-2 py-0.5 rounded-lg bg-surface-container text-secondary font-label-sm text-label-sm uppercase font-semibold">Documentary</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Made from 5 photos</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-primary mb-1 group-hover:text-secondary transition-colors">
+            Old Provincial Commissioner's House
+          </h2>
+<div class="flex items-center gap-1 text-on-surface-variant font-body-sm text-body-sm mb-3">
+<span class="material-symbols-outlined text-[16px] text-secondary">location_on</span>
+<span>Kenyatta Ave / Uhuru Highway Roundabout</span>
+</div>
+</div>
+<div class="pt-2 bg-surface-container-low flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>CC BY-SA Cutaways</span>
+<span class="text-secondary font-medium">9:16 Ready</span>
+</div>
+<p class="font-label-sm text-label-sm text-outline transition-colors group-hover:text-primary">
+            Tap to launch Story Player • Credits shown at end
+          </p>
+</div>
+</div>
+</article>
+</section>
+<!-- Empty State Architecture Section -->
+<section class="hidden flex-col items-center justify-center p-space-xl bg-surface-container rounded-lg text-center mb-space-xl" id="emptyStateSection">
+<div class="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center text-secondary mb-space-md">
+<span class="material-symbols-outlined text-[32px]">folder_off</span>
+</div>
+<div class="flex items-center gap-2 px-2.5 py-1 rounded-lg bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm mb-space-sm uppercase">
+      Empty State Architecture — Filter Match Result
+    </div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">No Published Stories Found in This Selection</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl mb-space-lg">
+      No stories found in this selection yet. Stories only appear here when an author explicitly selects Showcase during export, and passes facial privacy verification.
+    </p>
+<div class="flex flex-col sm:flex-row items-center gap-space-sm mb-space-md">
+<a class="px-space-md py-2.5 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:bg-tertiary-container transition-colors" href="#">
+        Create the first story for this location
+      </a>
+<button class="px-space-md py-2.5 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-container-highest transition-colors" onclick="resetFilters()">
+        Clear filter tags
+      </button>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-secondary text-[16px]">lock_reset</span>
+<span>ReelWorld preserves private drafts locally until explicit publication.</span>
+</div>
+</section>
+<!-- Toggleable Architectural Demonstration Panel: Empty State Reference Spec -->
+<div class="flex flex-col rounded-lg bg-surface-container-high p-space-md mb-space-xl">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">architecture</span>
+<span class="font-label-lg text-label-lg text-primary">Curatorial Sandbox: Preview Empty Showcase State</span>
+</div>
+<button class="self-start sm:self-auto px-3 py-1.5 rounded-lg bg-surface text-on-surface hover:bg-surface-container font-label-sm text-label-sm uppercase transition-colors shadow-sm" id="toggleEmptyDemoBtn" onclick="toggleEmptyStateSimulation()">
+        Simulate 0 Results View
+      </button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5">
+      Demonstration of the zero-state view rendered when query filters yield zero cleared public stories.
+    </p>
+</div>
+<!-- Story Player Preview Modal (Simulated Vertical 9:16 Frame) -->
+<div class="fixed inset-0 z-50 bg-primary/80 backdrop-blur-sm flex items-center justify-center p-space-md hidden opacity-0 transition-opacity duration-300" id="playerModal">
+<div class="relative w-full max-w-sm aspect-[9/16] bg-primary-container rounded-xl overflow-hidden shadow-2xl flex flex-col justify-between text-on-primary">
+<!-- Player Header / Progress -->
+<div class="p-space-md flex flex-col gap-2 z-10 bg-gradient-to-b from-primary/80 to-transparent">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]">motion_photos_on</span>
+<span class="font-label-sm text-label-sm text-secondary-fixed uppercase font-semibold" id="modalStyleBadge">Postcard Mode</span>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface/20 flex items-center justify-center hover:bg-surface/30 text-surface" onclick="closeStoryModal()">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Scene Progress Segments -->
+<div class="grid grid-cols-4 gap-1.5 w-full pt-1">
+<div class="h-1 bg-secondary rounded-full"></div>
+<div class="h-1 bg-secondary/80 rounded-full animate-pulse"></div>
+<div class="h-1 bg-surface-container/30 rounded-full"></div>
+<div class="h-1 bg-surface-container/30 rounded-full"></div>
+</div>
+</div>
+<!-- Video Center Canvas (Placeholder background) -->
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center" data-alt="Vertical 9:16 cinematography still of Nairobi brutalist tower ascending into warm cobalt sky with textured sun rays hitting concrete facade, atmospheric depth." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDBJM7MzryTs1vTl6J9f8K-DX9nc0LCHfLvYSOAfO1EBIhmRGLbxsosDq6j0her36LDWYL15QFBQa11cJVjj4QR2vMH7SYcPJftL06H24A5wcHsoovuvjdWs4Yp8m9BIUtV8Vjpu5hjW6yffXqUU8QCiCYWChUIKoHy7i2o3AKKJiA1OLQWp27XaJvAFUBE5bg9fV-t17YgW06Xz8qvLOLYKj5GxjtUO-gxUB9IJgg')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/95 via-transparent to-primary/40"></div>
+</div>
+<!-- Player Lower Dossier / Verified End-card Credits -->
+<div class="p-space-md z-10 flex flex-col gap-space-sm bg-gradient-to-t from-primary via-primary/90 to-transparent">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary-fixed-dim uppercase tracking-wider">Now Playing (9:16 Export)</span>
+<h4 class="font-headline-md text-headline-md text-on-primary font-bold" id="modalTitle">My day at KICC: Monolithic Terracotta</h4>
+<p class="font-body-sm text-body-sm text-primary-fixed-dim mt-0.5" id="modalCredits">Curated by J. Mwangi • Ingested Sept 2024</p>
+</div>
+<!-- Verified End Card Micro-Dossier -->
+<div class="p-space-sm rounded-lg bg-surface/10 backdrop-blur-md flex flex-col gap-1 font-label-sm text-label-sm">
+<div class="flex items-center justify-between text-secondary-fixed">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">verified</span> Privacy Clearance</span>
+<span>Passed (Zero Faces)</span>
+</div>
+<div class="flex items-center justify-between text-outline-variant">
+<span>Semantic Cutaways</span>
+<span>Nairobi Edge Index v2.4</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-space-sm">
+<button class="w-10 h-10 rounded-full bg-secondary text-on-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">pause</span>
+</button>
+<span class="font-label-sm text-label-sm text-outline-variant">Scene 2 of 4</span>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded bg-surface/20 text-on-primary">Full Dossier</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Provenance Dossier Modal / Drawer -->
+<div class="fixed inset-0 z-50 bg-primary/70 backdrop-blur-sm flex items-center justify-center p-space-md hidden opacity-0 transition-opacity duration-200" id="dossierModal">
+<div class="relative w-full max-w-2xl bg-surface-container rounded-lg p-space-lg shadow-2xl flex flex-col max-h-[870px] overflow-y-auto">
+<div class="flex items-center justify-between pb-space-md border-b border-surface-container-highest">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[24px]">policy</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">Provenance &amp; Clearance Dossier</h3>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface hover:bg-surface-container-highest" onclick="toggleDossierInfo()">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="py-space-md flex flex-col gap-space-md">
+<div>
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">Story Artifact ID</span>
+<p class="font-headline-sm text-headline-sm text-primary">RW-NBO-2024-KICC-0082</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md bg-surface-container-low p-space-md rounded-lg">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Input Imagery Provenance</span>
+<p class="font-body-md text-body-md text-primary font-medium mt-1">6 User Stills (Exif Cleared) + 2 Archival Cutaways</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Device: iPhone 14 Pro, Sensor Raw</p>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Privacy Filter Status</span>
+<p class="font-body-md text-body-md text-secondary font-medium mt-1">100% Cleared (Nairobi Edge Cluster)</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">3 incidental faces purged during segmentation</p>
+</div>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Licensed Archival Stills Credit</span>
+<p class="font-body-sm text-body-sm text-on-surface mt-1">
+            Karl Henrik Nøstvik brutalist cadastre reference #410 from Kenya National Archives (Public Domain via ReelWorld Muse Open Catalog).
+          </p>
+</div>
+</div>
+<div class="pt-space-md border-t border-surface-container-highest flex justify-end">
+<button class="px-space-md py-2 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md" onclick="toggleDossierInfo()">
+          Close Dossier
+        </button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  let simulatedEmptyState = false;
+
+  function setFilter(filterType, element) {
+    const chips = document.querySelectorAll('.filter-chip');
+    chips.forEach(chip => {
+      chip.classList.remove('bg-primary-container', 'text-on-primary');
+      chip.classList.add('bg-surface-container', 'text-on-surface');
+    });
+
+    if (element) {
+      element.classList.remove('bg-surface-container', 'text-on-surface');
+      element.classList.add('bg-primary-container', 'text-on-primary');
+    }
+
+    const items = document.querySelectorAll('.story-item');
+    let visibleCount = 0;
+
+    items.forEach(item => {
+      const category = item.getAttribute('data-category') || '';
+      if (filterType === 'all' || category.includes(filterType)) {
+        item.classList.remove('hidden');
+        visibleCount++;
+      } else {
+        item.classList.add('hidden');
+      }
+    });
+
+    updateEmptyState(visibleCount);
+  }
+
+  function handleSearchFilter() {
+    const query = (document.getElementById('showcaseSearch').value || '').toLowerCase().trim();
+    const items = document.querySelectorAll('.story-item');
+    let visibleCount = 0;
+
+    items.forEach(item => {
+      const title = (item.getAttribute('data-title') || '').toLowerCase();
+      const category = (item.getAttribute('data-category') || '').toLowerCase();
+      if (!query || title.includes(query) || category.includes(query)) {
+        item.classList.remove('hidden');
+        visibleCount++;
+      } else {
+        item.classList.add('hidden');
+      }
+    });
+
+    updateEmptyState(visibleCount);
+  }
+
+  function resetFilters() {
+    const searchInput = document.getElementById('showcaseSearch');
+    if (searchInput) searchInput.value = '';
+
+    const firstChip = document.querySelector('.filter-chip');
+    if (firstChip) setFilter('all', firstChip);
+
+    const items = document.querySelectorAll('.story-item');
+    items.forEach(item => item.classList.remove('hidden'));
+    updateEmptyState(items.length);
+  }
+
+  function updateEmptyState(count) {
+    const emptyState = document.getElementById('emptyStateSection');
+    const badge = document.getElementById('storyCountBadge');
+
+    if (count === 0) {
+      emptyState.classList.remove('hidden');
+      emptyState.classList.add('flex');
+      if (badge) badge.innerText = "0 stories matching current criteria";
+    } else {
+      emptyState.classList.add('hidden');
+      emptyState.classList.remove('flex');
+      if (badge) badge.innerText = `${count} verified archival stories published`;
+    }
+  }
+
+  function toggleEmptyStateSimulation() {
+    simulatedEmptyState = !simulatedEmptyState;
+    const btn = document.getElementById('toggleEmptyDemoBtn');
+    const items = document.querySelectorAll('.story-item');
+
+    if (simulatedEmptyState) {
+      items.forEach(item => item.classList.add('hidden'));
+      updateEmptyState(0);
+      btn.innerText = "Restore All 24 Stories";
+      btn.classList.add('bg-secondary', 'text-on-secondary');
+    } else {
+      resetFilters();
+      btn.innerText = "Simulate 0 Results View";
+      btn.classList.remove('bg-secondary', 'text-on-secondary');
+    }
+  }
+
+  function openStoryModal(title, duration, style, credits) {
+    const modal = document.getElementById('playerModal');
+    document.getElementById('modalTitle').innerText = title;
+    document.getElementById('modalCredits').innerText = credits;
+    document.getElementById('modalStyleBadge').innerText = style + ' Motion';
+
+    modal.classList.remove('hidden');
+    requestAnimationFrame(() => {
+      modal.classList.remove('opacity-0');
+      modal.classList.add('opacity-100');
+    });
+  }
+
+  function closeStoryModal() {
+    const modal = document.getElementById('playerModal');
+    modal.classList.add('opacity-0');
+    modal.classList.remove('opacity-100');
+    setTimeout(() => {
+      modal.classList.add('hidden');
+    }, 300);
+  }
+
+  function toggleDossierInfo() {
+    const dossier = document.getElementById('dossierModal');
+    if (dossier.classList.contains('hidden')) {
+      dossier.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        dossier.classList.remove('opacity-0');
+        dossier.classList.add('opacity-100');
+      });
+    } else {
+      dossier.classList.add('opacity-0');
+      dossier.classList.remove('opacity-100');
+      setTimeout(() => {
+        dossier.classList.add('hidden');
+      }, 200);
+    }
+  }
+</script></main><footer class="w-full bg-surface-container-low py-space-lg mt-space-xl"><div class="w-full px-margin-mobile md:px-margin-tablet lg:px-margin flex flex-col md:flex-row items-center justify-between gap-space-md"><div class="font-body-sm text-body-sm text-on-surface-variant text-center md:text-left"><p>ReelWorld Kenya Semantic Visual Pipeline • Powered by Muse Spark Open Framework • Nairobi Edge Cluster</p></div><nav class="flex items-center gap-space-md" data-active-classes="text-primary font-medium underline"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="documentation" href="#">Documentation</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="archive-provenance" href="#">Archive Provenance</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="curatorial-guidelines" href="#">Curatorial Guidelines</a></nav></div></footer></body></html>

@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-variant":"#e6e2de","tertiary":"#0e0100","inverse-surface":"#32302e","surface-container-lowest":"#ffffff","primary-fixed-dim":"#c4c6cd","on-tertiary":"#ffffff","on-secondary-container":"#4d6b5c","on-primary-fixed":"#191c21","secondary":"#476556","primary-container":"#1b1e23","on-tertiary-fixed":"#390c00","on-surface-variant":"#45474b","on-primary-container":"#83868c","tertiary-fixed":"#ffdbcf","secondary-fixed":"#c9ead8","on-tertiary-fixed-variant":"#822801","on-primary-fixed-variant":"#44474c","surface-bright":"#fef8f4","inverse-primary":"#c4c6cd","on-error":"#ffffff","error-container":"#ffdad6","on-secondary-fixed-variant":"#304d3f","surface-container-highest":"#e6e2de","tertiary-fixed-dim":"#ffb59c","secondary-container":"#c9ead8","primary":"#030408","tertiary-container":"#3d0d00","on-background":"#1d1b19","outline":"#76777b","on-secondary":"#ffffff","on-secondary-fixed":"#032015","surface-container-high":"#ece7e3","surface":"#fef8f4","surface-container-low":"#f8f3ef","surface-dim":"#ded9d5","on-primary":"#ffffff","background":"#fef8f4","inverse-on-surface":"#f5f0ec","on-tertiary-container":"#d5643b","outline-variant":"#c6c6cb","secondary-fixed-dim":"#aecebc","on-error-container":"#93000a","error":"#ba1a1a","surface-tint":"#5c5e64","surface-container":"#f2ede9","on-surface":"#1d1b19","primary-fixed":"#e1e2e9"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-md":"1rem","gutter-mobile":"1rem","space-xs":"0.25rem","margin":"3rem","space-xl":"2.5rem","margin-mobile":"1.25rem","space-sm":"0.5rem","margin-tablet":"2rem","space-lg":"1.5rem","gutter":"1.5rem"},"fontFamily":{"body-lg":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"display-lg-mobile":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"]},"fontSize":{"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"display-lg":["56px",{"lineHeight":"64px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-sm":["13px",{"lineHeight":"20px","fontWeight":"400"}],"body-md":["15px",{"lineHeight":"24px","fontWeight":"400"}],"display-lg-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.015em","fontWeight":"700"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"600"}],"headline-lg-mobile":["26px",{"lineHeight":"34px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.005em","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.06em","fontWeight":"500"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.02em","fontWeight":"600"}]}}}}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(27,30,35,0.04)]"><div class="h-16 w-full px-margin-mobile md:px-margin-tablet lg:px-margin flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md shrink-0"><a class="flex items-center gap-space-sm group" data-path="reel" href="#"><span class="font-headline-sm text-headline-sm uppercase tracking-wider text-primary group-hover:text-on-surface-variant transition-colors">REELWORLD</span></a><span class="hidden xl:inline-flex items-center px-space-sm py-0.5 rounded-lg bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider border border-outline-variant/40">Built with Muse Spark Open v2.4</span></div><nav class="hidden md:flex items-center gap-space-xs p-1 bg-surface-container-low rounded-lg border border-outline-variant/30" data-active-classes="bg-primary-container text-on-primary-container font-label-md rounded-lg"><a class="px-space-md py-1.5 text-on-surface-variant font-label-md text-label-md rounded-lg hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="reel" href="#">Reel</a><a class="px-space-md py-1.5 text-on-surface-variant font-label-md text-label-md rounded-lg hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="browse" href="#">Browse</a><a class="px-space-md py-1.5 text-on-surface-variant font-label-md text-label-md rounded-lg hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="connected" href="#">Connected</a><a class="px-space-md py-1.5 text-on-surface-variant font-label-md text-label-md rounded-lg hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="stories" href="#">Stories</a><a class="px-space-md py-1.5 text-on-surface-variant font-label-md text-label-md rounded-lg hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="about" href="#">About</a></nav><div class="flex items-center gap-space-md shrink-0"><div class="hidden sm:flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-surface-container-low border border-outline-variant/30"><span class="w-2 h-2 rounded-full bg-secondary"></span><span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">Nairobi Edge Cluster</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface min-h-[calc(100vh-4rem)]"><div class="flex flex-col w-full">
+<!-- Subtle Atmospheric Mineral Backdrop Elements -->
+<div class="relative w-full overflow-hidden px-margin-mobile md:px-margin-tablet lg:px-margin pb-space-xl">
+<!-- Top Breadcrumb & Metadata Stamp -->
+<div class="pt-space-lg pb-space-sm flex flex-wrap items-center justify-between gap-space-sm border-b-0">
+<nav aria-label="Breadcrumb" class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<a class="hover:text-primary transition-colors" href="#">REELWORLD</a>
+<span>/</span>
+<span class="text-on-surface-variant/80">PUBLIC ARCHIVE REPOSITORY</span>
+<span>/</span>
+<span class="text-primary font-semibold">Photo Credits &amp; License Registry</span>
+</nav>
+<div class="inline-flex items-center gap-space-xs px-space-sm py-1 bg-surface-container rounded-lg">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">Registry Cadastre ID: #RW-C-2024</span>
+</div>
+</div>
+<!-- Header Section (Warm Archival Earth Tone) -->
+<header class="pt-space-md pb-space-lg max-w-5xl">
+<div class="inline-flex items-center gap-space-xs px-space-sm py-1 rounded bg-secondary/10 text-secondary mb-space-sm">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Verified Public Domain &amp; Creative Commons Repository</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight mb-space-sm">
+        Photo Credits &amp; License Directory
+      </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed max-w-4xl">
+        Every visual plate preserved within ReelWorld’s architectural cadastre is rigorously accredited, openly licensed, and maintained as public knowledge. Attribution rights under CC BY-SA 4.0, CC BY 4.0, and Public Domain designations are strictly protected without algorithmic privatization, biometric scanning, or commercial paywalls.
+      </p>
+<!-- Key License Badges Legend -->
+<div class="flex flex-wrap items-center gap-space-sm pt-space-md">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant/70 mr-1">Active Designations:</span>
+<div class="inline-flex items-center gap-1.5 px-space-sm py-1 rounded bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px]">copyright</span>
+<span>CC BY-SA 4.0</span>
+<span class="text-[10px] opacity-75">(ShareAlike Open)</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-space-sm py-1 rounded bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px]">attribution</span>
+<span>CC BY 4.0</span>
+<span class="text-[10px] opacity-75">(Attribution Free)</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-space-sm py-1 rounded bg-primary-container text-surface-bright font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px]">public</span>
+<span>Public Domain / CC0</span>
+<span class="text-[10px] opacity-75">(No Rights Reserved)</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-space-sm py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px]">apartment</span>
+<span>Open Cadastre Archive</span>
+</div>
+</div>
+</header>
+<!-- Metrics Bar / Archival Ledger Tally -->
+<div class="w-full bg-surface-container rounded-xl p-space-md md:p-space-lg mb-space-lg shadow-sm">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md items-center">
+<!-- Visual Stat Counter -->
+<div class="md:col-span-5 flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined text-[28px]">photo_library</span>
+</div>
+<div>
+<div class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Archival Inventory Total</div>
+<div class="font-headline-md text-headline-md text-primary flex items-baseline gap-1.5">
+<span>132</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-normal">photos cataloged across</span>
+<span>41</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-normal">photographers</span>
+</div>
+<div class="font-body-sm text-body-sm text-secondary font-medium">
+              14 municipal cadastral surveys fully indexed
+            </div>
+</div>
+</div>
+<!-- Archival Donut Representation -->
+<div class="md:col-span-3 flex items-center gap-space-sm px-space-sm py-1 bg-surface rounded-lg">
+<svg class="w-10 h-10 shrink-0 transform -rotate-90" viewbox="0 0 36 36">
+<circle cx="18" cy="18" fill="none" r="14" stroke="#e6e2de" stroke-width="3.5"></circle>
+<!-- CC BY-SA: 63.6% (stroke-dasharray 55.9 88) -->
+<circle cx="18" cy="18" fill="none" r="14" stroke="#476556" stroke-dasharray="56 88" stroke-dashoffset="0" stroke-width="3.5"></circle>
+<!-- CC BY: 27.2% (stroke-dasharray 23.9 88) -->
+<circle cx="18" cy="18" fill="none" r="14" stroke="#d5643b" stroke-dasharray="24 88" stroke-dashoffset="-56" stroke-width="3.5"></circle>
+<!-- CC0: 9.2% (stroke-dasharray 8.1 88) -->
+<circle cx="18" cy="18" fill="none" r="14" stroke="#1b1e23" stroke-dasharray="8 88" stroke-dashoffset="-80" stroke-width="3.5"></circle>
+</svg>
+<div class="flex flex-col text-[11px] leading-tight text-on-surface-variant">
+<div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-secondary"></span> 84 CC BY-SA (64%)</div>
+<div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-on-tertiary-container"></span> 36 CC BY (27%)</div>
+<div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-primary-container"></span> 12 Public Domain (9%)</div>
+</div>
+</div>
+<!-- Search Bar -->
+<div class="md:col-span-4 relative">
+<label class="sr-only" for="creditsSearch">Search credits repository</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant/70 text-[20px] pointer-events-none">search</span>
+<input class="w-full h-11 pl-10 pr-4 bg-surface rounded-lg font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:ring-1 focus:ring-on-tertiary-container transition-all" id="creditsSearch" placeholder="Filter by photographer, plate, or landmark..." type="text"/>
+</div>
+</div>
+</div>
+<!-- Filter Controls & Sort Pill Group -->
+<div class="mt-space-md pt-space-sm flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex flex-wrap items-center gap-space-xs" id="licenseFilterGroup">
+<button class="filter-pill active min-h-[44px] px-4 py-2 rounded-lg font-label-sm text-label-sm uppercase tracking-wider bg-primary text-on-primary shadow-sm hover:opacity-95 transition-all" data-filter="all" type="button">
+            All Licenses (132)
+          </button>
+<button class="filter-pill min-h-[44px] px-4 py-2 rounded-lg font-label-sm text-label-sm uppercase tracking-wider bg-surface text-on-surface-variant hover:bg-surface-container-high transition-all" data-filter="cc-by-sa" type="button">
+            CC BY-SA 4.0 (84)
+          </button>
+<button class="filter-pill min-h-[44px] px-4 py-2 rounded-lg font-label-sm text-label-sm uppercase tracking-wider bg-surface text-on-surface-variant hover:bg-surface-container-high transition-all" data-filter="cc-by" type="button">
+            CC BY 4.0 (36)
+          </button>
+<button class="filter-pill min-h-[44px] px-4 py-2 rounded-lg font-label-sm text-label-sm uppercase tracking-wider bg-surface text-on-surface-variant hover:bg-surface-container-high transition-all" data-filter="cc0" type="button">
+            Public Domain / CC0 (12)
+          </button>
+</div>
+<div class="flex items-center gap-space-xs">
+<label class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant/80" for="sortDropdown">Sort:</label>
+<div class="relative">
+<select class="min-h-[44px] appearance-none bg-surface pl-3 pr-8 py-2 rounded-lg font-label-sm text-label-sm text-on-surface focus:outline-none focus:ring-1 focus:ring-secondary cursor-pointer" id="sortDropdown">
+<option value="recent">Most recent addition</option>
+<option value="plate-asc">Plate number (A-Z)</option>
+<option value="photographer-asc">Photographer (A-Z)</option>
+<option value="landmark-asc">Landmark name (A-Z)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px] pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Archival Table Ledger -->
+<div class="w-full bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden mb-space-xl">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse" id="creditsTable">
+<thead>
+<tr class="bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<th class="py-3.5 px-space-md w-28" scope="col">Plate &amp; Img</th>
+<th class="py-3.5 px-space-md" scope="col">Subject &amp; Civic Sector</th>
+<th class="py-3.5 px-space-md" scope="col">Photographer / Custodian</th>
+<th class="py-3.5 px-space-md" scope="col">License</th>
+<th class="py-3.5 px-space-md" scope="col">Provenance Source</th>
+<th class="py-3.5 px-space-md text-right" scope="col">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-high font-body-sm text-body-sm text-on-surface">
+<!-- Row 1: KICC Harambee Forecourt -->
+<tr class="credit-row hover:bg-surface-container-low transition-colors" data-landmark="KICC Harambee Forecourt" data-license="cc-by-sa" data-photographer="C. Karanja" data-plate="NBO-0021">
+<td class="py-4 px-space-md align-middle">
+<div class="relative w-[72px] h-[72px] rounded-lg overflow-hidden bg-surface-container group shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="Brutalist fluted terracotta tower and saucer plenum of Kenyatta International Convention Centre photographed at midday in Nairobi, Kenya. Warm earth tones, archival crisp geometry, ochre sandstone courtyard pavement." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnl5VmghMUUVw8aZStipNBkNhqjRAZok0CxaAyjMBBXONg3hbi0PsX9X-exfYCEgt78WhpaZJR7s0J58EsR3SjXuRtTuhko1-ja0bXZtO1TN6EN8-3Y-Gn5NhcVGPWM8rzCPC2AEfwcUJdXtQUk6N4JOgmYMdR_3lBZjb322t9Z03u8xUGT__6nyCOc1mGtw8yrk34ZkacbI2vYLh1we-B61EMX_fqrHA_G7iCAAE"/>
+<span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-primary/85 text-surface-bright font-label-sm text-[10px] tracking-wider uppercase font-mono">
+                    #NBO-0021
+                  </span>
+</div>
+</td>
+<td class="py-4 px-space-md align-middle">
+<div class="font-headline-sm text-[16px] text-primary font-semibold">KICC Harambee Forecourt</div>
+<div class="text-on-surface-variant text-body-sm flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-secondary">location_city</span>
+<span>Central Business District • Sector 01-NBO</span>
+</div>
+<span class="inline-block mt-1 font-label-sm text-[11px] text-on-surface-variant/70 uppercase">Brutalist / Modernist Civic</span>
+</td>
+<td class="py-4 px-space-md align-middle">
+<div class="font-medium text-primary">C. Karanja</div>
+<div class="text-on-surface-variant text-[12px] font-mono">@ckaranja_arch</div>
+<span class="inline-block px-1.5 py-0.5 mt-0.5 rounded bg-surface-container text-on-surface-variant text-[10px] font-label-sm uppercase">Independent Fellow</span>
+</td>
+<td class="py-4 px-space-md align-middle">
+<a class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-secondary-container text-on-secondary-container font-label-sm text-label-sm hover:opacity-85 transition-opacity" href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[13px]">copyright</span>
+<span>CC BY-SA 4.0</span>
+</a>
+</td>
+<td class="py-4 px-space-md align-middle">
+<a class="inline-flex items-center gap-1 text-on-tertiary-container hover:underline font-label-sm text-label-sm font-medium" href="#">
+<span>Kenya Cadastre Open Ledger</span>
+<span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+</a>
+<div class="text-on-surface-variant/70 text-[11px]">Dossier Ref: ARC-772-91</div>
+</td>
+<td class="py-4 px-space-md align-middle text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="citation-btn min-h-[44px] min-w-[44px] px-3 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm flex items-center gap-1 transition-all" onclick="copyCitation('C. Karanja', 'KICC Harambee Forecourt', '#NBO-0021', 'CC BY-SA 4.0')" title="Copy standard citation" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span class="hidden sm:inline">Cite</span>
+</button>
+<a class="min-h-[44px] min-w-[44px] px-3 py-2 rounded-lg bg-primary-container text-surface-bright hover:bg-primary font-label-sm text-label-sm flex items-center justify-center gap-1 transition-all" href="#">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span class="hidden sm:inline">View</span>
+</a>
+</div>
+</td>
+</tr>
+<!-- Row 2: City Market (Marikiti) Clerestory -->
+<tr class="credit-row hover:bg-surface-container-low transition-colors" data-landmark="City Market (Marikiti) Clerestory" data-license="cc-by" data-photographer="D. Mumo" data-plate="NBO-0045">
+<td class="py-4 px-space-md align-middle">
+<div class="relative w-[72px] h-[72px] rounded-lg overflow-hidden bg-surface-container group shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="Curved concrete reinforced vaulted roof and art-deco clerestory windows of Nairobi City Market with warm morning daylight filtering through louvers onto market stalls. Editorial warm film grain aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJxvO1WKRACVSyvvCEkFq0glQqJqj0TUJrZVIZl00xkZpF1KDB7eS9DHiefWNe8kmtPqg0szRSElNMB3VPbCH4-VlvXeJrrUhgqI-WI4M9599fKA4oxsvDJOin8Hkb8euHW_1ktjyO-HNkLVPMaMg2vIlXlVI7vSEkk-2Rc_NNc9VNwiPurRHL9GFB622UJNQLmVpDMLZNnPbcDQbLvKFzgcyfJ6KLEX2rKM_f8Ug"/>
+<span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-primary/85 text-surface-bright font-label-sm text-[10px] tracking-wider uppercase font-mono">
+                    #NBO-0045
+                  </span>
+</div>
+</td>
+<td class="py-4 px-space-md align-middle">
+<div class="font-headline-sm text-[16px] text-primary font-semibold">City Market (Marikiti) Clerestory</div>
+<div class="text-on-surface-variant text-body-sm flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-secondary">storefront</span>
+<span>Muindi Mbingu Street • Market Ward</span>
+</div>
+<span class="inline-block mt-1 font-label-sm text-[11px] text-on-surface-variant/70 uppercase">Reinforced Vault Architecture</span>
+</td>
+<td class="py-4 px-space-md align-middle">
+<div class="font-medium text-primary">D. Mumo</div>
+<div class="text-on-surface-variant text-[12px] font-mono">@mumo_light</div>
+<span class="inline-block px-1.5 py-0.5 mt-0.5 rounded bg-surface-container text-on-surface-variant text-[10px] font-label-sm uppercase">Field Contributor</span>
+</td>
+<td class="py-4 px-space-md align-middle">
+<a class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm hover:opacity-85 transition-opacity" href="https://creativecommons.org/licenses/by/4.0/" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[13px]">attribution</span>
+<span>CC BY 4.0</span>
+</a>
+</td>
+<td class="py-4 px-space-md align-middle">
+<a class="inline-flex items-center gap-1 text-on-tertiary-container hover:underline font-label-sm text-label-sm font-medium" href="#">
+<span>Wikimedia Commons #4102</span>
+<span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+</a>
+<div class="text-on-surface-variant/70 text-[11px]">Open Commons Attribution</div>
+</td>
+<td class="py-4 px-space-md align-middle text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="citation-btn min-h-[44px] min-w-[44px] px-3 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm flex items-center gap-1 transition-all" onclick="copyCitation('D. Mumo', 'City Market Clerestory', '#NBO-0045', 'CC BY 4.0')" title="Copy standard citation" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span class="hidden sm:inline">Cite</span>
+</button>
+<a class="min-h-[44px] min-w-[44px] px-3 py-2 rounded-lg bg-primary-container text-surface-bright hover:bg-primary font-label-sm text-label-sm flex items-center justify-center gap-1 transition-all" href="#">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span class="hidden sm:inline">View</span>
+</a>
+</div>
+</td>
+</tr>
+<!-- Row 3: Moi Avenue Concourse & Matatu Terminus -->
+<tr class="credit-row hover:bg-surface-container-low transition-colors" data-landmark="Moi Avenue Concourse &amp; Matatu Terminus" data-license="cc-by-sa" data-photographer="W. Njoroge" data-plate="NBO-0104">
+<td class="py-4 px-space-md align-middle">
+<div class="relative w-[72px] h-[72px] rounded-lg overflow-hidden bg-surface-container group shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="High-angle documentary photograph of Nairobi Moi Avenue pedestrian concourse and transit terminal. Linear colonnaded commercial shopfronts, jacaranda shadows on warm pavement, organic human activity without identifying faces." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA45qMbM2lTz196SNPiWKgVjiq19s_CNqqnlYWNJ1IRV7TsTp8ZYP7vo4w4COe8WQf8anDqQzbsGtaBoUjCom1DSn5i0-4u3pjxFdqm6l_gFpghyBmh0wO2dFaxec8er-kQB8uHMJ0W3Wp2HRFoCh2beedL0DlMUs1leKqnrI1mkDfjcBUJ8olHWgVDWOZcjdexMDpS8CzLf8Wnf4FrzWdOmrtlEbA-Mx75X5qciQU"/>
+<span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-primary/85 text-surface-bright font-label-sm text-[10px] tracking-wider uppercase font-mono">
+                    #NBO-0104
+                  </span>
+</div>
+</td>
+<td class="py-4 px-space-md align-middle">
+<div class="font-headline-sm text-[16px] text-primary font-semibold">Moi Avenue Concourse &amp; Matatu Terminus</div>
+<div class="text-on-surface-variant text-body-sm flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-secondary">commute</span>
+<span>Moi Avenue • Commercial Corridor</span>
+</div>
+<span class="inline-block mt-1 font-label-sm text-[11px] text-on-surface-variant/70 uppercase">Urban Transit Concourse</span>
+</td>
+<td class="py-4 px-space-md align-middle">
+<div class="font-medium text-primary">W. Njoroge</div>
+<div class="text-on-surface-variant text-[12px] font-mono">@wnjoroge_lens</div>
+<span class="inline-block px-1.5 py-0.5 mt-0.5 rounded bg-surface-container text-on-surface-variant text-[10px] font-label-sm uppercase">Curatorial Fellow</span>
+</td>
+<td class="py-4 px-space-md align-middle">
+<a class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-secondary-container text-on-secondary-container font-label-sm text-label-sm hover:opacity-85 transition-opacity" href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[13px]">copyright</span>
+<span>CC BY-SA 4.0</span>
+</a>
+</td>
+<td class="py-4 px-space-md align-middle">
+<a class="inline-flex items-center gap-1 text-on-tertiary-container hover:underline font-label-sm text-label-sm font-medium" href="#">
+<span>Open Cadastre Plate #104</span>
+<span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+</a>
+<div class="text-on-surface-variant/70 text-[11px]">Transit Typology Survey</div>
+</td>
+<td class="py-4 px-space-md align-middle text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="citation-btn min-h-[44px] min-w-[44px] px-3 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm flex items-center gap-1 transition-all" onclick="copyCitation('W. Njoroge', 'Moi Avenue Concourse', '#NBO-0104', 'CC BY-SA 4.0')" title="Copy standard citation" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span class="hidden sm:inline">Cite</span>
+</button>
+<a class="min-h-[44px] min-w-[44px] px-3 py-2 rounded-lg bg-primary-container text-surface-bright hover:bg-primary font-label-sm text-label-sm flex items-center justify-center gap-1 transition-all" href="#">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span class="hidden sm:inline">View</span>
+</a>
+</div>
+</td>
+</tr>
+<!-- Row 4: Old Mombasa Customs House -->
+<tr class="credit-row hover:bg-surface-container-low transition-colors" data-landmark="Old Mombasa Customs House" data-license="cc0" data-photographer="National Museums of Kenya Open Survey" data-plate="MBA-0012">
+<td class="py-4 px-space-md align-middle">
+<div class="relative w-[72px] h-[72px] rounded-lg overflow-hidden bg-surface-container group shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="Weathered coral rag stone masonry and carved teak timber balustrades of the historic Old Mombasa Customs House overlooking the Indian Ocean inlet. Archival sepia and warm sand palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCj7ebhcqrdfcZ7odPIW8CDDGgTcqLe95RwObWlKlAPJk60IlWzxtNiKhfEiA9QWtJFukSJy65saWLaajK_rywT2On2ngnynlJux2E1Ls8mrrvZrQ5d94jtULPVLj9RpmbHIpnw_geJ8qXiDBIV_85bwWRjfcRo27ku4ZrRowIuRFuFR0bv7ydvDAcqMdhFrg0kWNLKWFZ4uj3XXTmUwoZ_SIIKDbrCMTh-BaeBaQE"/>
+<span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-primary/85 text-surface-bright font-label-sm text-[10px] tracking-wider uppercase font-mono">
+                    #MBA-0012
+                  </span>
+</div>
+</td>
+<td class="py-4 px-space-md align-middle">
+<div class="font-headline-sm text-[16px] text-primary font-semibold">Old Mombasa Customs House</div>
+<div class="text-on-surface-variant text-body-sm flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-secondary">anchor</span>
+<span>Old Port Quarter • Mombasa Island</span>
+</div>
+<span class="inline-block mt-1 font-label-sm text-[11px] text-on-surface-variant/70 uppercase">Swahili-Colonial Coral Rag</span>
+</td>
+<td class="py-4 px-space-md align-middle">
+<div class="font-medium text-primary">Nat. Museums of Kenya Survey</div>
+<div class="text-on-surface-variant text-[12px] font-mono">Archive Registry #1898</div>
+<span class="inline-block px-1.5 py-0.5 mt-0.5 rounded bg-surface-container text-on-surface-variant text-[10px] font-label-sm uppercase">Institutional Custodian</span>
+</td>
+<td class="py-4 px-space-md align-middle">
+<a class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-primary-container text-surface-bright font-label-sm text-label-sm hover:opacity-85 transition-opacity" href="https://creativecommons.org/publicdomain/zero/1.0/" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[13px]">public</span>
+<span>Public Domain / CC0</span>
+</a>
+</td>
+<td class="py-4 px-space-md align-middle">
+<a class="inline-flex items-center gap-1 text-on-tertiary-container hover:underline font-label-sm text-label-sm font-medium" href="#">
+<span>Gov Public Domain Record</span>
+<span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+</a>
+<div class="text-on-surface-variant/70 text-[11px]">NMK Archival Ledger #62</div>
+</td>
+<td class="py-4 px-space-md align-middle text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="citation-btn min-h-[44px] min-w-[44px] px-3 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm flex items-center gap-1 transition-all" onclick="copyCitation('National Museums of Kenya', 'Old Mombasa Customs House', '#MBA-0012', 'Public Domain')" title="Copy standard citation" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span class="hidden sm:inline">Cite</span>
+</button>
+<a class="min-h-[44px] min-w-[44px] px-3 py-2 rounded-lg bg-primary-container text-surface-bright hover:bg-primary font-label-sm text-label-sm flex items-center justify-center gap-1 transition-all" href="#">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span class="hidden sm:inline">View</span>
+</a>
+</div>
+</td>
+</tr>
+<!-- Row 5: Kisumu Municipal Fish Pier -->
+<tr class="credit-row hover:bg-surface-container-low transition-colors" data-landmark="Kisumu Municipal Fish Pier" data-license="cc-by" data-photographer="M. Otieno" data-plate="KSU-0008">
+<td class="py-4 px-space-md align-middle">
+<div class="relative w-[72px] h-[72px] rounded-lg overflow-hidden bg-surface-container group shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="Lake Victoria shoreline and corrugated open-air timber fish pier pavilion in Kisumu, Kenya. Early dawn soft golden light shimmering on tranquil lake waters, geometric wooden pylons." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCeyQgP_XzxtTfPYiCOWo8rO13tysejpUi0iVz85VQfCz3yEyAckoqL-RygBdJLFwqWNGdVyPBKlzA2nIMbb05kCGIil97BeQVyEYWa01xSLX2ncyjItSc1NJvxb7KtIFHp7CkeL9083K53S-_oHnbF8izFsy_sPg45T99dwGZ0NFgUkIc7g7toN8cqV8ogR96QruV60Ki2XMVE8CNbvpihplofmXG3MBcy_fzAjs"/>
+<span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-primary/85 text-surface-bright font-label-sm text-[10px] tracking-wider uppercase font-mono">
+                    #KSU-0008
+                  </span>
+</div>
+</td>
+<td class="py-4 px-space-md align-middle">
+<div class="font-headline-sm text-[16px] text-primary font-semibold">Kisumu Municipal Fish Pier</div>
+<div class="text-on-surface-variant text-body-sm flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-secondary">water</span>
+<span>Winam Gulf Littoral • Sector KSU-West</span>
+</div>
+<span class="inline-block mt-1 font-label-sm text-[11px] text-on-surface-variant/70 uppercase">Lakeside Civic Timber Structure</span>
+</td>
+<td class="py-4 px-space-md align-middle">
+<div class="font-medium text-primary">M. Otieno</div>
+<div class="text-on-surface-variant text-[12px] font-mono">@otieno_visuals</div>
+<span class="inline-block px-1.5 py-0.5 mt-0.5 rounded bg-surface-container text-on-surface-variant text-[10px] font-label-sm uppercase">Regional Documentarian</span>
+</td>
+<td class="py-4 px-space-md align-middle">
+<a class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm hover:opacity-85 transition-opacity" href="https://creativecommons.org/licenses/by/4.0/" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[13px]">attribution</span>
+<span>CC BY 4.0</span>
+</a>
+</td>
+<td class="py-4 px-space-md align-middle">
+<a class="inline-flex items-center gap-1 text-on-tertiary-container hover:underline font-label-sm text-label-sm font-medium" href="#">
+<span>Western Kenya Open Archive</span>
+<span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+</a>
+<div class="text-on-surface-variant/70 text-[11px]">Plate Dossier #KSU-881</div>
+</td>
+<td class="py-4 px-space-md align-middle text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="citation-btn min-h-[44px] min-w-[44px] px-3 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm flex items-center gap-1 transition-all" onclick="copyCitation('M. Otieno', 'Kisumu Municipal Fish Pier', '#KSU-0008', 'CC BY 4.0')" title="Copy standard citation" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span class="hidden sm:inline">Cite</span>
+</button>
+<a class="min-h-[44px] min-w-[44px] px-3 py-2 rounded-lg bg-primary-container text-surface-bright hover:bg-primary font-label-sm text-label-sm flex items-center justify-center gap-1 transition-all" href="#">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span class="hidden sm:inline">View</span>
+</a>
+</div>
+</td>
+</tr>
+<!-- Row 6: Nairobi Railway Station Clock Tower -->
+<tr class="credit-row hover:bg-surface-container-low transition-colors" data-landmark="Nairobi Railway Station Clock Tower" data-license="cc0" data-photographer="Nairobi Municipal Cadastre 1974" data-plate="NBO-0219">
+<td class="py-4 px-space-md align-middle">
+<div class="relative w-[72px] h-[72px] rounded-lg overflow-hidden bg-surface-container group shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="Red brick and rustic stone masonry of the early 20th century Nairobi Railway Station Clock Tower against a soft pale sky. Archival high-contrast architectural survey composition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0bXBPxkUU73t-Xqv-uH6HY-2SxFGrYEyLxC7Ndcz6oUgo1HMm5w-mDKEYt0VXnDs9bov4FW7zRDONAzNHNS8SveGe-Vufv3MX8CauGngL4RyGufKZmjyQiETi1-VHbvtrauDbz76YPv1ZSmsIRt2gMlVF1RNLL1PTLVbtAO17QR_sR38I7aser_LyRvXwf_AR8pRYGHWg61JrfAOWVWq-dmMQamArh88ZBqQDkDI"/>
+<span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-primary/85 text-surface-bright font-label-sm text-[10px] tracking-wider uppercase font-mono">
+                    #NBO-0219
+                  </span>
+</div>
+</td>
+<td class="py-4 px-space-md align-middle">
+<div class="font-headline-sm text-[16px] text-primary font-semibold">Nairobi Railway Station Clock Tower</div>
+<div class="text-on-surface-variant text-body-sm flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-secondary">train</span>
+<span>Station Road • Industrial Transition</span>
+</div>
+<span class="inline-block mt-1 font-label-sm text-[11px] text-on-surface-variant/70 uppercase">Industrial Heritage Stone</span>
+</td>
+<td class="py-4 px-space-md align-middle">
+<div class="font-medium text-primary">Nairobi Municipal Cadastre 1974</div>
+<div class="text-on-surface-variant text-[12px] font-mono">Civic Records Depository</div>
+<span class="inline-block px-1.5 py-0.5 mt-0.5 rounded bg-surface-container text-on-surface-variant text-[10px] font-label-sm uppercase">Municipal Deed</span>
+</td>
+<td class="py-4 px-space-md align-middle">
+<a class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-primary-container text-surface-bright font-label-sm text-label-sm hover:opacity-85 transition-opacity" href="https://creativecommons.org/publicdomain/zero/1.0/" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[13px]">public</span>
+<span>Public Domain / CC0</span>
+</a>
+</td>
+<td class="py-4 px-space-md align-middle">
+<a class="inline-flex items-center gap-1 text-on-tertiary-container hover:underline font-label-sm text-label-sm font-medium" href="#">
+<span>Kenya National Archives</span>
+<span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+</a>
+<div class="text-on-surface-variant/70 text-[11px]">Deed Folio #ARC-19-B</div>
+</td>
+<td class="py-4 px-space-md align-middle text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="citation-btn min-h-[44px] min-w-[44px] px-3 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm flex items-center gap-1 transition-all" onclick="copyCitation('Nairobi Municipal Cadastre (1974)', 'Nairobi Railway Clock Tower', '#NBO-0219', 'Public Domain')" title="Copy standard citation" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span class="hidden sm:inline">Cite</span>
+</button>
+<a class="min-h-[44px] min-w-[44px] px-3 py-2 rounded-lg bg-primary-container text-surface-bright hover:bg-primary font-label-sm text-label-sm flex items-center justify-center gap-1 transition-all" href="#">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span class="hidden sm:inline">View</span>
+</a>
+</div>
+</td>
+</tr>
+<!-- Row 7: CBK Towers Fluted Colonnade -->
+<tr class="credit-row hover:bg-surface-container-low transition-colors" data-landmark="CBK Towers Fluted Colonnade" data-license="cc-by-sa" data-photographer="F. Omar" data-plate="NBO-0312">
+<td class="py-4 px-space-md align-middle">
+<div class="relative w-[72px] h-[72px] rounded-lg overflow-hidden bg-surface-container group shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="Vertical fluted concrete fins and rhythmic solar brise-soleil facade of Central Bank of Kenya complex. Crisp architectural study highlighting repetitive geometric shadows on sand-toned exterior." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAni5mG5MCMpnI69iHJVZNQSXnzABmvdXnqLBkA9XdBQzB6KRwVpg22Wtdf9o6-7TTK2jX6obzddWU5doRbW4H4owvdxpdkxp83Qf5ZyajzMEpaGSBnOPqUb-xL45EabbbonqHkBfnibqFb0JVHnVBe5VYTyOFEi6d_8bDRIFnLWv7Vcifz2eTmC4BZ6eQVJClXD0V5Ytq3NrPhcncL_w9NhYkm6ApyvBoK5N8tC9Q"/>
+<span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-primary/85 text-surface-bright font-label-sm text-[10px] tracking-wider uppercase font-mono">
+                    #NBO-0312
+                  </span>
+</div>
+</td>
+<td class="py-4 px-space-md align-middle">
+<div class="font-headline-sm text-[16px] text-primary font-semibold">CBK Towers Fluted Colonnade</div>
+<div class="text-on-surface-variant text-body-sm flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-secondary">account_balance</span>
+<span>Haile Selassie Avenue • Finance District</span>
+</div>
+<span class="inline-block mt-1 font-label-sm text-[11px] text-on-surface-variant/70 uppercase">Brise-Soleil Concrete Façade</span>
+</td>
+<td class="py-4 px-space-md align-middle">
+<div class="font-medium text-primary">F. Omar</div>
+<div class="text-on-surface-variant text-[12px] font-mono">@f_omar_survey</div>
+<span class="inline-block px-1.5 py-0.5 mt-0.5 rounded bg-surface-container text-on-surface-variant text-[10px] font-label-sm uppercase">Civic Documentarian</span>
+</td>
+<td class="py-4 px-space-md align-middle">
+<a class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-secondary-container text-on-secondary-container font-label-sm text-label-sm hover:opacity-85 transition-opacity" href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[13px]">copyright</span>
+<span>CC BY-SA 4.0</span>
+</a>
+</td>
+<td class="py-4 px-space-md align-middle">
+<a class="inline-flex items-center gap-1 text-on-tertiary-container hover:underline font-label-sm text-label-sm font-medium" href="#">
+<span>Wikimedia Commons #9921</span>
+<span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+</a>
+<div class="text-on-surface-variant/70 text-[11px]">Open Urban Registry</div>
+</td>
+<td class="py-4 px-space-md align-middle text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="citation-btn min-h-[44px] min-w-[44px] px-3 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm flex items-center gap-1 transition-all" onclick="copyCitation('F. Omar', 'CBK Towers Colonnade', '#NBO-0312', 'CC BY-SA 4.0')" title="Copy standard citation" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span class="hidden sm:inline">Cite</span>
+</button>
+<a class="min-h-[44px] min-w-[44px] px-3 py-2 rounded-lg bg-primary-container text-surface-bright hover:bg-primary font-label-sm text-label-sm flex items-center justify-center gap-1 transition-all" href="#">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span class="hidden sm:inline">View</span>
+</a>
+</div>
+</td>
+</tr>
+<!-- Row 8: Supreme Court Classical Portico -->
+<tr class="credit-row hover:bg-surface-container-low transition-colors" data-landmark="Supreme Court Classical Portico" data-license="cc-by" data-photographer="L. Mwangi" data-plate="NBO-0441">
+<td class="py-4 px-space-md align-middle">
+<div class="relative w-[72px] h-[72px] rounded-lg overflow-hidden bg-surface-container group shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="Classical stone columns, arched entryways and carved pediment of the Supreme Court of Kenya building under clear morning light. Ochre stone texture and symmetrical civic authority." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEM_NSnz6GmW9OdJcg47BmWAbiURfECXWIL0_12O5810C8fWotWNS1NBKNc0UggeBDHDFBNw8ICpu-Hx6hqBzU9mR6lGQ-tVi52TJ9ff6KMvsdXSZRBj5Q0JkE8yG66j1SImRl9MwMU_lwsMvgMTbb2xj82FFXRODmTR8yIUIdb-y-3WK3juz8u_o12fDCyyHpb6HnyUjSjDtuLQvMjMVMcwCkKdWjrILMzARcQAA"/>
+<span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-primary/85 text-surface-bright font-label-sm text-[10px] tracking-wider uppercase font-mono">
+                    #NBO-0441
+                  </span>
+</div>
+</td>
+<td class="py-4 px-space-md align-middle">
+<div class="font-headline-sm text-[16px] text-primary font-semibold">Supreme Court Classical Portico</div>
+<div class="text-on-surface-variant text-body-sm flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-secondary">gavel</span>
+<span>Taifa Road • Judicial Enclave</span>
+</div>
+<span class="inline-block mt-1 font-label-sm text-[11px] text-on-surface-variant/70 uppercase">Neoclassical Dressed Stone</span>
+</td>
+<td class="py-4 px-space-md align-middle">
+<div class="font-medium text-primary">L. Mwangi</div>
+<div class="text-on-surface-variant text-[12px] font-mono">@mwangi_archdoc</div>
+<span class="inline-block px-1.5 py-0.5 mt-0.5 rounded bg-surface-container text-on-surface-variant text-[10px] font-label-sm uppercase">Open Fellow</span>
+</td>
+<td class="py-4 px-space-md align-middle">
+<a class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm hover:opacity-85 transition-opacity" href="https://creativecommons.org/licenses/by/4.0/" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[13px]">attribution</span>
+<span>CC BY 4.0</span>
+</a>
+</td>
+<td class="py-4 px-space-md align-middle">
+<a class="inline-flex items-center gap-1 text-on-tertiary-container hover:underline font-label-sm text-label-sm font-medium" href="#">
+<span>Kenya Cadastre Open Ledger</span>
+<span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+</a>
+<div class="text-on-surface-variant/70 text-[11px]">Civic Ledger Plate #441</div>
+</td>
+<td class="py-4 px-space-md align-middle text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="citation-btn min-h-[44px] min-w-[44px] px-3 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm flex items-center gap-1 transition-all" onclick="copyCitation('L. Mwangi', 'Supreme Court Portico', '#NBO-0441', 'CC BY 4.0')" title="Copy standard citation" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span class="hidden sm:inline">Cite</span>
+</button>
+<a class="min-h-[44px] min-w-[44px] px-3 py-2 rounded-lg bg-primary-container text-surface-bright hover:bg-primary font-label-sm text-label-sm flex items-center justify-center gap-1 transition-all" href="#">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span class="hidden sm:inline">View</span>
+</a>
+</div>
+</td>
+</tr>
+<!-- Row 9: Old Port Dhow Basin (Mombasa) -->
+<tr class="credit-row hover:bg-surface-container-low transition-colors" data-landmark="Old Port Dhow Basin" data-license="cc-by-sa" data-photographer="A. Kiprop" data-plate="MBA-0027">
+<td class="py-4 px-space-md align-middle">
+<div class="relative w-[72px] h-[72px] rounded-lg overflow-hidden bg-surface-container group shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="Traditional Swahili wooden jahazi and dhow boat prows anchored alongside weathered coral stone quay walls in Old Port Mombasa. Warm nautical textures, ropes, calm salt water reflection." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8MGAC58ZSmt97Y285hznORx44B2cPdHBPqjyKloQZSuaho4r_j_I-lUKVvk4D4qJYyk_gsG35i6kHdei2_5cj6qlN86bbVc77uPCe8NiNH6-0CMg8JfQMaRecmdDKAYrA5E7fvFcYgOj_FjCxpttCHi9HBhIfmmD1V9MkVEUW_3NoUhVobJnz66PWcn5cgpyLYVBgaWvXYMSNCurH9hh9fwryO5nIGwPiafSqf5U"/>
+<span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-primary/85 text-surface-bright font-label-sm text-[10px] tracking-wider uppercase font-mono">
+                    #MBA-0027
+                  </span>
+</div>
+</td>
+<td class="py-4 px-space-md align-middle">
+<div class="font-headline-sm text-[16px] text-primary font-semibold">Old Port Dhow Basin</div>
+<div class="text-on-surface-variant text-body-sm flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-secondary">sailing</span>
+<span>Old Town Littoral • Mombasa Harbor</span>
+</div>
+<span class="inline-block mt-1 font-label-sm text-[11px] text-on-surface-variant/70 uppercase">Maritime Vernacular Quay</span>
+</td>
+<td class="py-4 px-space-md align-middle">
+<div class="font-medium text-primary">A. Kiprop</div>
+<div class="text-on-surface-variant text-[12px] font-mono">@kiprop_survey</div>
+<span class="inline-block px-1.5 py-0.5 mt-0.5 rounded bg-surface-container text-on-surface-variant text-[10px] font-label-sm uppercase">Coast Documentarian</span>
+</td>
+<td class="py-4 px-space-md align-middle">
+<a class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-secondary-container text-on-secondary-container font-label-sm text-label-sm hover:opacity-85 transition-opacity" href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[13px]">copyright</span>
+<span>CC BY-SA 4.0</span>
+</a>
+</td>
+<td class="py-4 px-space-md align-middle">
+<a class="inline-flex items-center gap-1 text-on-tertiary-container hover:underline font-label-sm text-label-sm font-medium" href="#">
+<span>Wikimedia Commons #1104</span>
+<span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+</a>
+<div class="text-on-surface-variant/70 text-[11px]">Coast Heritage Repository</div>
+</td>
+<td class="py-4 px-space-md align-middle text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="citation-btn min-h-[44px] min-w-[44px] px-3 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm flex items-center gap-1 transition-all" onclick="copyCitation('A. Kiprop', 'Old Port Dhow Basin', '#MBA-0027', 'CC BY-SA 4.0')" title="Copy standard citation" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span class="hidden sm:inline">Cite</span>
+</button>
+<a class="min-h-[44px] min-w-[44px] px-3 py-2 rounded-lg bg-primary-container text-surface-bright hover:bg-primary font-label-sm text-label-sm flex items-center justify-center gap-1 transition-all" href="#">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span class="hidden sm:inline">View</span>
+</a>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="hidden p-space-xl text-center" id="noResultsState">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant/40">find_in_page</span>
+<p class="font-headline-sm text-headline-sm text-primary mt-2">No cadastre records match your filter</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Try modifying your search keywords or clearing license category constraints.</p>
+</div>
+</div>
+<!-- Bottom Curatorial Notes Section (Bento Split) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Box 1: How to Cite ReelWorld Plates -->
+<div class="lg:col-span-7 bg-surface-container rounded-xl p-space-lg relative flex flex-col justify-between shadow-sm">
+<div>
+<div class="flex items-center gap-space-sm mb-space-sm">
+<span class="w-8 h-8 rounded bg-secondary/15 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">format_quote</span>
+</span>
+<h2 class="font-headline-sm text-headline-sm text-primary">How to Cite ReelWorld Plates</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-md">
+            When referencing visual records in research papers, exhibition monographs, or municipal publications, adhere to the standard open cadastre citation format to honor creator lineage and preserve provenance:
+          </p>
+<!-- Citation Code Block Display -->
+<div class="p-space-md bg-surface rounded-lg font-mono text-[12px] sm:text-[13px] leading-relaxed text-primary select-all">
+<span class="text-secondary font-semibold">Photo:</span> [Photographer Name] / ReelWorld Open Cadastre (<span class="text-on-tertiary-container font-semibold">[License Code]</span>) • https://cadastre.reelworld.org/plate/<span class="text-primary font-semibold">[PLATE-ID]</span>
+</div>
+<div class="mt-space-sm text-on-surface-variant/75 text-[12px]">
+            Example: <span class="font-mono text-primary">Photo: C. Karanja / ReelWorld Open Cadastre (CC BY-SA 4.0) • https://cadastre.reelworld.org/plate/NBO-0021</span>
+</div>
+</div>
+<div class="pt-space-md mt-space-md border-t-0 flex flex-wrap items-center justify-between gap-space-sm">
+<div class="text-on-surface-variant text-[12px] flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-secondary">check_circle</span>
+<span>Machine-readable attribution compliant with RDFa &amp; Dublin Core</span>
+</div>
+<button class="min-h-[44px] px-4 py-2 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider flex items-center gap-2 hover:bg-on-surface-variant transition-all" id="copyTemplateBtn" type="button">
+<span class="material-symbols-outlined text-[16px]">file_copy</span>
+<span>Copy Citation Template</span>
+</button>
+</div>
+</div>
+<!-- Box 2: Contributing Your Photography to the Cadastre -->
+<div class="lg:col-span-5 bg-surface-container rounded-xl p-space-lg flex flex-col justify-between shadow-sm">
+<div>
+<div class="flex items-center gap-space-sm mb-space-sm">
+<span class="w-8 h-8 rounded bg-on-tertiary-container/15 flex items-center justify-center text-on-tertiary-container">
+<span class="material-symbols-outlined text-[18px]">add_a_photo</span>
+</span>
+<h2 class="font-headline-sm text-headline-sm text-primary">Contributing Photography</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-sm">
+            Are you documenting under-represented civic architecture across Kenya? We welcome open contributions from field documentarians and urban photographers.
+          </p>
+<div class="space-y-space-xs mb-space-md">
+<div class="flex items-start gap-2 text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-secondary mt-0.5 shrink-0">shield</span>
+<span><strong>Zero Facial Privacy Risks:</strong> ReelWorld accepts strictly architectural, structural, and volumetric studies. No facial biometric indexing is conducted.</span>
+</div>
+<div class="flex items-start gap-2 text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-secondary mt-0.5 shrink-0">lock_open</span>
+<span><strong>Non-Exclusive Open Licenses:</strong> Maintain your master copyright while donating open licenses (CC BY or CC BY-SA) to the permanent public record.</span>
+</div>
+</div>
+</div>
+<div class="pt-space-sm">
+<a class="min-h-[44px] w-full px-4 py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-primary font-label-sm text-label-sm uppercase tracking-wider flex items-center justify-center gap-2 transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">menu_book</span>
+<span>Read Field Archival Guidelines</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Notification Toast (Fixed Bottom Right for Feedback) -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-16 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-2 px-4 py-3 rounded-lg bg-primary text-surface-bright shadow-lg font-body-sm text-body-sm" id="toastNotification">
+<span class="material-symbols-outlined text-secondary-fixed text-[20px]">check_circle</span>
+<span id="toastMessage">Citation copied to clipboard.</span>
+</div>
+</div>
+</div>
+<script>
+  // Simple, accessible interaction scripting for Search, Filter, Sort, and Citation copying
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('creditsSearch');
+    const filterButtons = document.querySelectorAll('.filter-pill');
+    const sortDropdown = document.getElementById('sortDropdown');
+    const tableBody = document.querySelector('#creditsTable tbody');
+    const rows = Array.from(document.querySelectorAll('.credit-row'));
+    const noResults = document.getElementById('noResultsState');
+    const toast = document.getElementById('toastNotification');
+    const toastMessage = document.getElementById('toastMessage');
+    const copyTemplateBtn = document.getElementById('copyTemplateBtn');
+
+    let currentFilter = 'all';
+
+    // Show toast helper
+    function showToast(msg) {
+      if (!toast) return;
+      toastMessage.textContent = msg;
+      toast.classList.remove('translate-y-16', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-16', 'opacity-0');
+      }, 2500);
+    }
+
+    // Expose copyCitation to global scope for row buttons
+    window.copyCitation = function(author, subject, plateId, license) {
+      const citationText = `Photo: ${author} ("${subject}") / ReelWorld Open Cadastre (${license}) • https://cadastre.reelworld.org/plate/${plateId.replace('#', '')}`;
+      navigator.clipboard.writeText(citationText).then(() => {
+        showToast(`Copied citation for ${plateId}`);
+      }).catch(() => {
+        showToast('Unable to copy citation automatically.');
+      });
+    };
+
+    if (copyTemplateBtn) {
+      copyTemplateBtn.addEventListener('click', () => {
+        const template = `Photo: [Photographer] / ReelWorld Open Cadastre (CC BY-SA 4.0) • https://cadastre.reelworld.org/plate/[PLATE-ID]`;
+        navigator.clipboard.writeText(template).then(() => {
+          showToast('Citation template copied to clipboard');
+        });
+      });
+    }
+
+    // Filter and Search engine
+    function applyFiltering() {
+      const query = (searchInput?.value || '').toLowerCase().trim();
+      let visibleCount = 0;
+
+      rows.forEach(row => {
+        const licenseType = row.getAttribute('data-license');
+        const plate = (row.getAttribute('data-plate') || '').toLowerCase();
+        const photographer = (row.getAttribute('data-photographer') || '').toLowerCase();
+        const landmark = (row.getAttribute('data-landmark') || '').toLowerCase();
+
+        const matchesLicense = (currentFilter === 'all') || (licenseType === currentFilter);
+        const matchesQuery = !query || plate.includes(query) || photographer.includes(query) || landmark.includes(query);
+
+        if (matchesLicense && matchesQuery) {
+          row.style.display = '';
+          visibleCount++;
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+      if (noResults) {
+        if (visibleCount === 0) {
+          noResults.classList.remove('hidden');
+        } else {
+          noResults.classList.add('hidden');
+        }
+      }
+    }
+
+    // Filter pill events
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => {
+          b.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
+          b.classList.add('bg-surface', 'text-on-surface-variant');
+        });
+        btn.classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
+        btn.classList.remove('bg-surface', 'text-on-surface-variant');
+
+        currentFilter = btn.getAttribute('data-filter') || 'all';
+        applyFiltering();
+      });
+    });
+
+    if (searchInput) {
+      searchInput.addEventListener('input', applyFiltering);
+    }
+
+    // Sorting implementation
+    if (sortDropdown && tableBody) {
+      sortDropdown.addEventListener('change', () => {
+        const val = sortDropdown.value;
+        const sortedRows = [...rows];
+
+        if (val === 'plate-asc') {
+          sortedRows.sort((a, b) => {
+            const pA = a.getAttribute('data-plate') || '';
+            const pB = b.getAttribute('data-plate') || '';
+            return pA.localeCompare(pB);
+          });
+        } else if (val === 'photographer-asc') {
+          sortedRows.sort((a, b) => {
+            const authA = a.getAttribute('data-photographer') || '';
+            const authB = b.getAttribute('data-photographer') || '';
+            return authA.localeCompare(authB);
+          });
+        } else if (val === 'landmark-asc') {
+          sortedRows.sort((a, b) => {
+            const lA = a.getAttribute('data-landmark') || '';
+            const lB = b.getAttribute('data-landmark') || '';
+            return lA.localeCompare(lB);
+          });
+        }
+
+        // Re-append sorted rows
+        sortedRows.forEach(r => tableBody.appendChild(r));
+      });
+    }
+  });
+</script></main><footer class="w-full bg-surface-container-low shadow-[0_-1px_6px_rgba(27,30,35,0.03)]"><div class="w-full px-margin-mobile md:px-margin-tablet lg:px-margin py-space-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-space-lg"><div class="flex flex-col gap-space-xs"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm uppercase tracking-wider text-primary">REELWORLD</span><span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">Archival Visual Network</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Your photos are private by default. Curated East African visual preservation.</p></div><div class="flex flex-wrap items-center gap-space-lg"><span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Built with Muse Spark Open</span><a class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors" data-path="about" href="#">About</a><a class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors" data-path="credits" href="#">Credits</a><a class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors" data-path="github" href="#">GitHub</a></div></div></footer></body></html>

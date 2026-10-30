@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-error-container":"#93000a","on-secondary":"#ffffff","on-surface":"#1d1b19","tertiary":"#0e0100","secondary-fixed":"#c9ead8","secondary":"#476556","surface":"#fef8f4","on-primary-fixed":"#191c21","inverse-primary":"#c4c6cd","tertiary-container":"#3d0d00","secondary-fixed-dim":"#aecebc","on-surface-variant":"#45474b","tertiary-fixed-dim":"#ffb59c","surface-tint":"#5c5e64","on-primary-container":"#83868c","surface-container-lowest":"#ffffff","error":"#ba1a1a","surface-variant":"#e6e2de","on-error":"#ffffff","surface-container-highest":"#e6e2de","surface-dim":"#ded9d5","surface-container-low":"#f8f3ef","on-secondary-fixed-variant":"#304d3f","secondary-container":"#c9ead8","on-tertiary-fixed-variant":"#822801","surface-container-high":"#ece7e3","error-container":"#ffdad6","primary-container":"#1b1e23","on-background":"#1d1b19","primary-fixed":"#e1e2e9","inverse-surface":"#32302e","outline":"#76777b","on-tertiary-container":"#d5643b","on-tertiary":"#ffffff","surface-container":"#f2ede9","on-secondary-container":"#4d6b5c","surface-bright":"#fef8f4","primary":"#030408","background":"#fef8f4","outline-variant":"#c6c6cb","on-primary-fixed-variant":"#44474c","tertiary-fixed":"#ffdbcf","on-primary":"#ffffff","on-secondary-fixed":"#032015","primary-fixed-dim":"#c4c6cd","inverse-on-surface":"#f5f0ec","on-tertiary-fixed":"#390c00"},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},spacing:{"margin-tablet":"2rem","space-sm":"0.5rem","space-xs":"0.25rem","gutter":"1.5rem","margin":"3rem","space-md":"1rem","margin-mobile":"1.25rem","space-xl":"2.5rem","gutter-mobile":"1rem","space-lg":"1.5rem"},fontFamily:{"label-md":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"display-lg-mobile":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"]},fontSize:{"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.04em",fontWeight:"600"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-lg-mobile":["26px",{lineHeight:"34px",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-sm":["20px",{lineHeight:"28px",fontWeight:"600"}],"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.005em",fontWeight:"600"}],"body-sm":["13px",{lineHeight:"20px",fontWeight:"400"}],"display-lg-mobile":["36px",{lineHeight:"44px",letterSpacing:"-0.015em",fontWeight:"700"}],"label-lg":["14px",{lineHeight:"20px",letterSpacing:"0.02em",fontWeight:"600"}],"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.06em",fontWeight:"500"}],"display-lg":["56px",{lineHeight:"64px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-lg":["18px",{lineHeight:"28px",fontWeight:"400"}],"body-md":["15px",{lineHeight:"24px",fontWeight:"400"}]}}};</script></head><body class="bg-background font-body-md text-on-surface min-h-screen selection:bg-tertiary-fixed selection:text-on-tertiary-fixed"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(27,30,35,0.04)]"><div class="h-20 w-full px-margin-mobile md:px-margin-tablet lg:px-margin flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-md"><span class="font-headline-sm text-headline-sm tracking-tight text-primary-container uppercase">ReelWorld Visual Archive</span><div class="hidden sm:inline-flex items-center gap-space-xs px-space-sm py-space-xs rounded bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Built with Muse Spark Open v2.4</div></div><nav class="hidden lg:flex items-center gap-space-lg" data-active-classes="bg-primary-container text-on-primary font-label-md text-label-md rounded px-space-sm py-space-xs shadow-[0_2px_8px_rgba(27,30,35,0.08)]"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="world" href="#">World</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="my-photos" href="#">My Photos (84)</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="connected" href="#">Connected</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="stories" href="#">Stories</a></nav><div class="flex items-center gap-space-md"><div class="inline-flex items-center gap-space-xs px-space-sm py-space-xs rounded bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>Nairobi Edge Cluster: Online (32ms)</div></div></div></header><main class="w-full pt-20 bg-background min-h-[calc(100vh-140px)]"><div class="flex flex-col w-full">
+<!-- Archival Linen Utility Bar: Breadcrumb, Plate Identifier, and Security Enclave Status -->
+<section class="w-full px-margin-mobile md:px-margin-tablet lg:px-margin py-space-sm bg-surface-container-low">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<!-- Breadcrumb Hierarchy -->
+<nav aria-label="Archival Breadcrumb" class="flex items-center flex-wrap gap-space-xs text-body-sm font-body-sm text-on-surface-variant">
+<a class="hover:text-primary transition-colors text-body-sm font-body-sm" href="#">My Photos</a>
+<span class="text-outline-variant font-label-sm">/</span>
+<a class="hover:text-primary transition-colors text-body-sm font-body-sm" href="#">Smart Albums</a>
+<span class="text-outline-variant font-label-sm">/</span>
+<a class="hover:text-primary transition-colors text-body-sm font-body-sm" href="#">Bursts</a>
+<span class="text-outline-variant font-label-sm">/</span>
+<span class="text-primary font-semibold text-body-sm font-body-sm">City Market Concrete Parabolic Vaults (Burst of 5)</span>
+</nav>
+<!-- Plate ID & Cryptographic Enclave Guard -->
+<div class="flex items-center gap-space-sm flex-wrap">
+<a class="inline-flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors font-label-sm text-label-sm min-h-[44px]" href="#">
+<span class="material-symbols-outlined text-base">arrow_back</span>
+<span>Back to Bursts (4 sets)</span>
+</a>
+<div class="inline-flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">
+<span class="font-semibold text-primary">Plate ID:</span>
+<span>#NRB-BST-04</span>
+</div>
+<div class="inline-flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-base">lock</span>
+<span>Private (Enclave encrypted)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Workstation Layout: 12-Column Responsive Exhibition Framing -->
+<div class="w-full px-margin-mobile md:px-margin-tablet lg:px-margin py-space-lg flex flex-col gap-space-lg">
+<!-- Burst Summary & Archival Telemetry Overview -->
+<header class="flex flex-col gap-space-xs bg-surface-container rounded-xl p-space-md shadow-sm">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-sm">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold">Optical Set Analysis</span>
+<h1 class="font-headline-md text-headline-md text-primary mt-0.5">City Market Parabolic Vaults — Burst Inspection</h1>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="inline-flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+            5 Consecutive Frames
+          </span>
+<span class="inline-flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">
+            24mm • f/5.6 • 1/500s bracket
+          </span>
+<span class="inline-flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">
+            Muindi Mbingu St, Nairobi CBD
+          </span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs max-w-4xl">
+        The local model identified 5 high-speed consecutive exposures of the mid-century parabolic reinforced concrete vaults. One has been selected as the prime anchor for cadastre linkage.
+      </p>
+</header>
+<!-- Asymmetric Workbench: 7 Columns Main Player / 5 Columns Inspection Deck -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Central Viewport & Interactive Player (Col 1-7) -->
+<div class="lg:col-span-7 flex flex-col gap-space-md">
+<!-- Large Preview Mount with Inset Mat Board -->
+<div class="relative bg-surface-container rounded-xl p-space-sm shadow-md flex flex-col gap-space-sm">
+<!-- Active Frame Mat Board -->
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-surface-container-highest flex items-center justify-center">
+<img alt="Nairobi City Market Concrete Vaults Frame 03" class="w-full h-full object-cover transition-opacity duration-150" data-alt="A grand interior architectural view of Nairobi City Market with sweeping reinforced concrete parabolic roof arches, soft dusty morning clerestory light beaming through high clerestory windows, sun-cured archival warm tones, earthen papyrus hues, crisp raw concrete ribs, and distant vegetable stall silhouettes." id="main-burst-display" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCy6M_VobjaahkIJzECJCUa4WBCVjx8d7asJzaF-0EsaXw1X8PRtV6NE3Rt1l-phmYoOtj6MYgdEQWmEFX-50CwEsAZY1UfqfyeSXEDuW-qiUPnlH6tXLvGU4okF-1mjYyg7B-c6MNWvHFj0bFRWCHyEe380eEpzkjV5_G3fMuM5Yor-ZKiMPuPfvPI8a8t77mWObFoeQ6rCvx59pgRjvD99cUY1ZxCasj0Q_k3yf8"/>
+<!-- Corner Plate Overlay -->
+<div class="absolute top-space-sm left-space-sm flex items-center gap-space-xs">
+<span class="px-space-sm py-1 rounded bg-tertiary text-on-tertiary font-label-sm text-label-sm shadow-sm flex items-center gap-1" id="active-frame-chip">
+<span class="material-symbols-outlined text-sm">stars</span>
+<span>Frame 03 of 05 • Selected Cover</span>
+</span>
+</div>
+<!-- Optical Focus Peaking Highlight Tag -->
+<div class="absolute bottom-space-sm left-space-sm px-space-sm py-1 rounded bg-surface-container-high/90 backdrop-blur-md text-on-surface font-label-sm text-label-sm flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Acutance: 99.2% • Zenith Arch Apex in Pin-Sharp Focus</span>
+</div>
+<!-- Live FPS Indicator when playing -->
+<div class="hidden absolute top-space-sm right-space-sm px-space-sm py-1 rounded bg-secondary text-on-secondary font-label-sm text-label-sm flex items-center gap-space-xs" id="playback-indicator">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed animate-ping"></span>
+<span>Burst Loop: 12 FPS</span>
+</div>
+</div>
+<!-- Player Control Deck -->
+<div class="flex flex-col gap-space-sm p-space-xs bg-surface-container-low rounded-lg">
+<!-- Scrubbing Timeline with 5 Tactile Tick Marks -->
+<div class="flex flex-col gap-1 w-full">
+<div class="flex justify-between items-center text-label-sm font-label-sm text-on-surface-variant px-1">
+<span>14:02:11.1 (F01)</span>
+<span>14:02:11.3 (F02)</span>
+<span class="text-primary font-bold">14:02:11.5 (F03 ★)</span>
+<span>14:02:11.7 (F04)</span>
+<span>14:02:11.9 (F05)</span>
+</div>
+<div class="relative w-full h-6 flex items-center cursor-pointer" id="scrubber-container">
+<div class="w-full h-2 bg-surface-container-highest rounded-full relative">
+<div class="h-full bg-secondary rounded-full w-[60%] transition-all duration-100" id="scrub-progress"></div>
+</div>
+<!-- 5 Discrete Frame Knots -->
+<div class="absolute inset-0 flex justify-between items-center pointer-events-none px-1">
+<span class="w-3.5 h-3.5 rounded-full bg-surface-container-highest border-2 border-surface cursor-pointer pointer-events-auto" onclick="selectFrame(0)"></span>
+<span class="w-3.5 h-3.5 rounded-full bg-surface-container-highest border-2 border-surface cursor-pointer pointer-events-auto" onclick="selectFrame(1)"></span>
+<span class="w-4 h-4 rounded-full bg-primary ring-2 ring-secondary cursor-pointer pointer-events-auto shadow-sm" onclick="selectFrame(2)"></span>
+<span class="w-3.5 h-3.5 rounded-full bg-surface-container-highest border-2 border-surface cursor-pointer pointer-events-auto" onclick="selectFrame(3)"></span>
+<span class="w-3.5 h-3.5 rounded-full bg-surface-container-highest border-2 border-surface cursor-pointer pointer-events-auto" onclick="selectFrame(4)"></span>
+</div>
+</div>
+</div>
+<!-- Primary Trigger Bar: Play, Rate, Optical Loupe -->
+<div class="flex items-center justify-between flex-wrap gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-sm">
+<!-- Play/Pause Toggle -->
+<button class="h-11 px-space-md rounded-lg bg-primary-container text-on-primary font-label-md text-label-md flex items-center gap-space-xs hover:bg-primary transition-all active:scale-[0.98] shadow-sm" id="burst-play-btn" onclick="toggleBurstPlay()">
+<span class="material-symbols-outlined text-lg" id="play-icon">play_arrow</span>
+<div class="flex flex-col text-left">
+<span class="leading-none" id="play-btn-text">Play as burst</span>
+<span class="text-[10px] text-on-primary-container font-normal leading-tight">cycles 5 frames @ 12 fps</span>
+</div>
+</button>
+<!-- Speed Multiplier Switch -->
+<div class="inline-flex rounded-lg bg-surface-container p-0.5" role="group">
+<button class="px-2.5 py-1 text-label-sm font-label-sm rounded text-on-surface-variant hover:text-on-surface h-11 flex items-center" onclick="setSpeed(0.5, this)">0.5x</button>
+<button class="px-2.5 py-1 text-label-sm font-label-sm rounded bg-surface-container-highest text-primary font-bold shadow-sm h-11 flex items-center" onclick="setSpeed(1.0, this)">1x</button>
+<button class="px-2.5 py-1 text-label-sm font-label-sm rounded text-on-surface-variant hover:text-on-surface h-11 flex items-center" onclick="setSpeed(2.0, this)">2x</button>
+</div>
+</div>
+<!-- Optical Inspection Utilities -->
+<div class="flex items-center gap-space-xs">
+<button class="h-11 px-space-sm rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors font-label-sm text-label-sm flex items-center gap-1.5" title="Inspect grain at 100% scale">
+<span class="material-symbols-outlined text-base">zoom_in</span>
+<span class="hidden sm:inline">1:1 Optical loupe</span>
+</button>
+<button class="h-11 px-space-sm rounded-lg bg-surface-container text-secondary hover:bg-surface-container-high transition-colors font-label-sm text-label-sm flex items-center gap-1.5" title="Focus Peaking Active">
+<span class="material-symbols-outlined text-base">auto_fix_high</span>
+<span class="hidden sm:inline">Focus peaking</span>
+</button>
+<button class="h-11 px-space-sm rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors font-label-sm text-label-sm flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base">view_column</span>
+<span class="hidden sm:inline">Side-by-side</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Telemetry Variance Card -->
+<div class="flex items-center justify-between p-space-sm bg-surface-container rounded-lg">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-xl">analytics</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-primary font-semibold">Frame Difference Telemetry</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">&lt; 0.8% geometric variance • Frame 03 features maximum edge acutance (99.2% contrast score)</span>
+</div>
+</div>
+<span class="hidden sm:inline-block px-space-xs py-0.5 rounded bg-secondary-container text-on-secondary-fixed text-label-sm font-label-sm">Bracket Match</span>
+</div>
+</div>
+<!-- Filmstrip Sequence Deck & Per-Frame Curation (Col 8-12) -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<!-- Filmstrip Section Header -->
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-primary">Frame Sequence</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Tap any frame or click "Set as Cover" to reassign the library anchor.</p>
+</div>
+<span class="font-label-sm text-label-sm text-secondary bg-surface-container px-space-sm py-1 rounded">5 Frames Registered</span>
+</div>
+<!-- Vertical Stack of Archival Frame Cards -->
+<div class="flex flex-col gap-space-sm" id="frames-deck">
+<!-- Frame 01 -->
+<div class="frame-card cursor-pointer flex items-center gap-space-sm p-space-sm rounded-xl bg-surface-container hover:bg-surface-container-high transition-all" data-frame-index="0" onclick="selectFrame(0)">
+<div class="w-24 h-20 rounded-lg overflow-hidden bg-surface-container-highest shrink-0 relative">
+<img alt="Frame 01" class="w-full h-full object-cover" data-alt="Nairobi City Market parabolic arch ribs showing a subtle camera shudder and faint atmospheric blur in the concrete apex, sun-bleached tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkmNfpjfbZypGIaB9Y4pUsQi-QxbGdLsN2BRWrjRu0K_C85wkDdBsx_DeTu4ZaU977kdPCHpmtALzn1n6Tw9I9jb0gx433MnR0mjz-wkxiqBXmkrgEr1G9yJPs7mVZ2GFYvvdf-irkM-KNBowVqhmUzwKWOoTQ8vOy6e1YXa9c4QRxg5-knO2EDl_8qqoYzLusbcsvPz37hW_S9gP2U_26OPIhMnFe833t6NGaG1g"/>
+<span class="absolute bottom-1 left-1 px-1 rounded bg-primary/80 text-on-primary text-[10px] font-mono">01/05</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-primary truncate">Frame 01</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">14:02:11.1</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Slight lens motion blur at north vault edge</p>
+<div class="mt-2">
+<button class="h-9 px-space-sm rounded-lg bg-surface-container-highest hover:bg-primary hover:text-on-primary text-on-surface transition-colors font-label-sm text-label-sm min-h-[36px] flex items-center" onclick="event.stopPropagation(); setCover(0)">
+                  Set as Cover
+                </button>
+</div>
+</div>
+</div>
+<!-- Frame 02 -->
+<div class="frame-card cursor-pointer flex items-center gap-space-sm p-space-sm rounded-xl bg-surface-container hover:bg-surface-container-high transition-all" data-frame-index="1" onclick="selectFrame(1)">
+<div class="w-24 h-20 rounded-lg overflow-hidden bg-surface-container-highest shrink-0 relative">
+<img alt="Frame 02" class="w-full h-full object-cover" data-alt="Nairobi City Market central market floor looking up at parabolic vault with a blurred pedestrian silhouette occluding the lower left pillar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBE2xeI1mTaMuRTDAkiIjkKQzRRduexW_ONMBjf4WZyP-LLDhz1j5YzjIDoZR5u8dbzbjQi-uWc1X1D8SwWmjAs9pR9tRuT49sejQEzevDfj2F5EXjeKbkWADK80-OUuerc3jhjilR0O5r_gmLQOtebU73agZF2dLQx-o84enhUVpSDQJXx8bH41wAuA4R0UYI7uTGGq2Qws6VixgY_71uF5fMy83viU0ZfDsR7kHc"/>
+<span class="absolute bottom-1 left-1 px-1 rounded bg-primary/80 text-on-primary text-[10px] font-mono">02/05</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-primary truncate">Frame 02</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">14:02:11.3</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Occluded lower pillar (pedestrian motion)</p>
+<div class="mt-2">
+<button class="h-9 px-space-sm rounded-lg bg-surface-container-highest hover:bg-primary hover:text-on-primary text-on-surface transition-colors font-label-sm text-label-sm min-h-[36px] flex items-center" onclick="event.stopPropagation(); setCover(1)">
+                  Set as Cover
+                </button>
+</div>
+</div>
+</div>
+<!-- Frame 03 (THE PRIME COVER ANCHOR) -->
+<div class="frame-card cursor-pointer flex items-center gap-space-sm p-space-sm rounded-xl bg-surface-container-high shadow-md transition-all ring-2 ring-tertiary-container" data-frame-index="2" onclick="selectFrame(2)">
+<div class="w-24 h-20 rounded-lg overflow-hidden bg-surface-container-highest shrink-0 relative ring-2 ring-tertiary">
+<img alt="Frame 03 Prime" class="w-full h-full object-cover" data-alt="The sharpest exposure of Nairobi City Market parabolic concrete arches with exceptional edge definition on the rib joints and pure clerestory radiance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFLHfh4w2sEjY2AwRHaZYp_SBpCk2gzeoX_3dExBCuUBLC6Sl0qz0M49aR87hYvZdWy3Z3IOabemwz0AKglttsQYO9oJteSHBtjQ8Xh8eei7xxep99_dp3hEtdmWJaJX3SB6co6bWIukTzPi_LXInogitavJdK4a5YURB_TmtbWljiXQGocc6OWmAtRheI47Dm6_7Dkcsckh4QKFl-oSdIsWa6xFYrNefFCCGKeSg"/>
+<span class="absolute bottom-1 left-1 px-1 rounded bg-tertiary text-on-tertiary text-[10px] font-mono">03/05</span>
+<span class="absolute top-1 right-1 text-tertiary material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-primary font-bold flex items-center gap-1">
+<span>Frame 03</span>
+<span class="px-1.5 py-0.5 rounded bg-tertiary text-on-tertiary text-[10px] uppercase tracking-wide">Prime Cover</span>
+</span>
+<span class="font-label-sm text-label-sm text-primary font-mono font-bold">14:02:11.5</span>
+</div>
+<p class="font-body-sm text-body-sm text-primary font-medium truncate">Sharpest plinth detail • Optimal bracket balance</p>
+<div class="mt-2 flex items-center gap-space-xs">
+<span class="inline-flex items-center gap-1 px-space-sm py-1 rounded bg-secondary-container text-on-secondary-fixed text-label-sm font-label-sm min-h-[36px]">
+<span class="material-symbols-outlined text-base">check_circle</span>
+<span>Active Primary in Library</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Frame 04 -->
+<div class="frame-card cursor-pointer flex items-center gap-space-sm p-space-sm rounded-xl bg-surface-container hover:bg-surface-container-high transition-all" data-frame-index="3" onclick="selectFrame(3)">
+<div class="w-24 h-20 rounded-lg overflow-hidden bg-surface-container-highest shrink-0 relative">
+<img alt="Frame 04" class="w-full h-full object-cover" data-alt="Nairobi City Market parabolic concrete arches frame 4 showing mild overexposure in the top glass clerestory ribbon." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjypgXXKjhO7VbDPI9wU606il_wvjbWiMBvWuADjDrxCLo0lNCUuAnKTvBklUwKj9-B3-aYxK7rymt82YN2gWUw53UQpWMLYVxXHwHAv6lsax9RQM_DYcVIROeoXqHTR8OSkpmy_NOdXWwbEnknj6AJgSByou0KhcqpITuMPVRNHM0P-nesx4aQVjNVgubAI07gKNOGMPhbvoPuKdFlYqkM80sCOzdYT95rr0RHGU"/>
+<span class="absolute bottom-1 left-1 px-1 rounded bg-primary/80 text-on-primary text-[10px] font-mono">04/05</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-primary truncate">Frame 04</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">14:02:11.7</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Slight exposure overage in clerestory fenestration</p>
+<div class="mt-2">
+<button class="h-9 px-space-sm rounded-lg bg-surface-container-highest hover:bg-primary hover:text-on-primary text-on-surface transition-colors font-label-sm text-label-sm min-h-[36px] flex items-center" onclick="event.stopPropagation(); setCover(3)">
+                  Set as Cover
+                </button>
+</div>
+</div>
+</div>
+<!-- Frame 05 -->
+<div class="frame-card cursor-pointer flex items-center gap-space-sm p-space-sm rounded-xl bg-surface-container hover:bg-surface-container-high transition-all" data-frame-index="4" onclick="selectFrame(4)">
+<div class="w-24 h-20 rounded-lg overflow-hidden bg-surface-container-highest shrink-0 relative">
+<img alt="Frame 05" class="w-full h-full object-cover" data-alt="Nairobi City Market interior view tilted slightly off-axis with divergent arch angle and peripheral lens falloff." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtDJQqqOjDqpAoAbq47sYR-VLoFGqaVON1UIkae1jzSyrfIe-Aj2GTlKjoQlJ0751yZiwsMYWqR3K5Yl-2x-5ixWmDIhgV7i6lzygVFvDibr53VV0JiM-t7UhTuCOUnl6ZbkGRoA9lytoAK2G8-4VgHLslwpjA4BmY0MTfbCn9HCWXAff3nUkIcv2o2pn78yDKLgbhaNxSA5aPGwqG4eAaLf5CbalP764zfRmS0K0"/>
+<span class="absolute bottom-1 left-1 px-1 rounded bg-primary/80 text-on-primary text-[10px] font-mono">05/05</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-primary truncate">Frame 05</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">14:02:11.9</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Divergent hand-held angle (+1.4° off zenith)</p>
+<div class="mt-2">
+<button class="h-9 px-space-sm rounded-lg bg-surface-container-highest hover:bg-primary hover:text-on-primary text-on-surface transition-colors font-label-sm text-label-sm min-h-[36px] flex items-center" onclick="event.stopPropagation(); setCover(4)">
+                  Set as Cover
+                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Archival Curation Action Suite: Permanent Commit & Storage Reclaim -->
+<section class="w-full bg-surface-container rounded-xl p-space-lg shadow-md mt-space-sm">
+<div class="flex flex-col gap-space-md">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold">Curation Decision</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">Archival Storage Management</h3>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-base text-secondary">verified</span>
+<span>Local Enclave Non-Destructive Stage</span>
+</div>
+</div>
+<!-- 3 Core Action Cards (Grid) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Option 1: Keep All 5 Photos -->
+<div class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-all flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary mb-1">
+<span class="material-symbols-outlined">collections</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-primary">Keep all (5 photos)</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Retain all 5 plates in your private enclave. Frame 03 remains the cover preview in Smart Albums, timeline, and spatial index searches.
+              </p>
+</div>
+<button class="w-full h-11 px-space-md rounded-lg bg-surface-container-highest hover:bg-surface-dim text-primary font-label-md text-label-md transition-colors flex items-center justify-center gap-space-xs" onclick="confirmCuration('keep-all')">
+<span class="material-symbols-outlined text-base">check</span>
+<span>Retain Entire Bracket (5)</span>
+</button>
+</div>
+<!-- Option 2: Keep Cover Only (Purge Duplicates) -->
+<div class="p-space-md rounded-xl bg-surface-container-high ring-1 ring-tertiary-container shadow-sm flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="w-10 h-10 rounded-lg bg-tertiary text-on-tertiary flex items-center justify-center mb-1">
+<span class="material-symbols-outlined">delete_sweep</span>
+</div>
+<div class="flex items-center justify-between">
+<h4 class="font-headline-sm text-headline-sm text-primary">Keep the cover only</h4>
+<span class="px-space-xs py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm">Reclaims 38.6 MB</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Retains Frame 03 as an autonomous archival plate and permanently purges the 4 redundant near-identical duplicates from local disk.
+              </p>
+</div>
+<button class="w-full h-11 px-space-md rounded-lg bg-tertiary text-on-tertiary hover:opacity-90 font-label-md text-label-md transition-all flex items-center justify-center gap-space-xs shadow-sm" onclick="confirmCuration('purge-duplicates')">
+<span class="material-symbols-outlined text-base">cleaning_services</span>
+<span>Purge Duplicates &amp; Keep Cover</span>
+</button>
+</div>
+<!-- Option 3: Add to Story -->
+<div class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-all flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="w-10 h-10 rounded-lg bg-secondary-container text-on-secondary-fixed flex items-center justify-center mb-1">
+<span class="material-symbols-outlined">auto_stories</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-primary">Add to a story</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Dispatch this sequence directly to the Story Builder as an interactive archival burst reel or high-contrast side-by-side comparative card.
+              </p>
+</div>
+<button class="w-full h-11 px-space-md rounded-lg bg-secondary text-on-secondary hover:bg-secondary/90 font-label-md text-label-md transition-colors flex items-center justify-center gap-space-xs" onclick="confirmCuration('add-to-story')">
+<span class="material-symbols-outlined text-base">forward</span>
+<span>Open in Story Builder</span>
+</button>
+</div>
+</div>
+<!-- Archival Sub-Utility Actions & Export -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-sm pt-space-sm border-t border-outline-variant/30">
+<div class="flex items-center gap-space-sm text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-base">archive</span>
+<span>Lossless Preservation Pipeline: Ingestion profile DNG/RAW 14-bit linear.</span>
+</div>
+<button class="h-11 px-space-md rounded-lg bg-surface-container-highest hover:bg-primary hover:text-on-primary text-on-surface font-label-md text-label-md transition-colors flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-base">download</span>
+<span>Export all 5 frames (DNG/RAW archive)</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Privacy Enclave & Curatorial Ethics Audit Notice -->
+<footer class="w-full grid grid-cols-1 md:grid-cols-2 gap-space-md pt-space-xs pb-space-lg">
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-xl shrink-0 mt-0.5">shield</span>
+<div class="flex flex-col gap-1">
+<span class="font-label-md text-label-md text-primary font-semibold">Local Enclave Guarantee</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            All burst segmentation, edge sharpness scoring, and acutance ranking occurred strictly on your local device. No raw optical data has traversed external networks.
+          </p>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-xl shrink-0 mt-0.5">visibility_off</span>
+<div class="flex flex-col gap-1">
+<span class="font-label-md text-label-md text-primary font-semibold">Curatorial Face Ethics Compliance</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Scanned 5 frames: 0 identifiable frontal faces detected in vaulted ceiling aperture. Safe for private archival curation and architectural typology registration.
+          </p>
+</div>
+</div>
+</footer>
+</div>
+<!-- Interactive Client-side Script for Live Frame Simulation & Playback -->
+<script>
+    (function() {
+      const frames = [
+        { index: 1, stamp: "14:02:11.1", label: "Frame 01 of 05 • Slight lens motion", acutance: "84.3%", isCover: false },
+        { index: 2, stamp: "14:02:11.3", label: "Frame 02 of 05 • Occluded lower pillar", acutance: "88.6%", isCover: false },
+        { index: 3, stamp: "14:02:11.5", label: "Frame 03 of 05 • Selected Cover", acutance: "99.2%", isCover: true },
+        { index: 4, stamp: "14:02:11.7", label: "Frame 04 of 05 • Slight exposure overage", acutance: "91.0%", isCover: false },
+        { index: 5, stamp: "14:02:11.9", label: "Frame 05 of 05 • Divergent angle (+1.4°)", acutance: "86.1%", isCover: false }
+      ];
+
+      let currentFrameIdx = 2; // Frame 03 default
+      let isPlaying = false;
+      let playInterval = null;
+      let playSpeedMultiplier = 1.0;
+
+      window.selectFrame = function(idx) {
+        currentFrameIdx = idx;
+        updateUI();
+      };
+
+      window.setCover = function(idx) {
+        frames.forEach((f, i) => f.isCover = (i === idx));
+        currentFrameIdx = idx;
+        updateUI();
+      };
+
+      window.toggleBurstPlay = function() {
+        isPlaying = !isPlaying;
+        const playBtn = document.getElementById('burst-play-btn');
+        const playIcon = document.getElementById('play-icon');
+        const playText = document.getElementById('play-btn-text');
+        const indicator = document.getElementById('playback-indicator');
+
+        if (isPlaying) {
+          playIcon.textContent = 'pause';
+          playText.textContent = 'Pause burst';
+          indicator.classList.remove('hidden');
+          const delay = (1000 / 12) / playSpeedMultiplier;
+          playInterval = setInterval(() => {
+            currentFrameIdx = (currentFrameIdx + 1) % frames.length;
+            updateUI();
+          }, delay);
+        } else {
+          clearInterval(playInterval);
+          playIcon.textContent = 'play_arrow';
+          playText.textContent = 'Play as burst';
+          indicator.classList.add('hidden');
+        }
+      };
+
+      window.setSpeed = function(multiplier, btnElem) {
+        playSpeedMultiplier = multiplier;
+        const buttons = btnElem.parentElement.querySelectorAll('button');
+        buttons.forEach(b => {
+          b.className = 'px-2.5 py-1 text-label-sm font-label-sm rounded text-on-surface-variant hover:text-on-surface h-11 flex items-center';
+        });
+        btnElem.className = 'px-2.5 py-1 text-label-sm font-label-sm rounded bg-surface-container-highest text-primary font-bold shadow-sm h-11 flex items-center';
+
+        if (isPlaying) {
+          clearInterval(playInterval);
+          const delay = (1000 / 12) / playSpeedMultiplier;
+          playInterval = setInterval(() => {
+            currentFrameIdx = (currentFrameIdx + 1) % frames.length;
+            updateUI();
+          }, delay);
+        }
+      };
+
+      window.confirmCuration = function(actionType) {
+        if (actionType === 'purge-duplicates') {
+          if (confirm('Permanently purge 4 redundant duplicate frames and free 38.6 MB? Frame 03 will be preserved as the standalone archival plate.')) {
+            alert('Purge complete. 38.6 MB reclaimed. Frame 03 saved to Vaulted Typologies.');
+          }
+        } else if (actionType === 'keep-all') {
+          alert('Entire 5-frame sequence retained in private enclave.');
+        } else if (actionType === 'add-to-story') {
+          alert('Burst sequence exported to Story Builder timeline.');
+        }
+      };
+
+      function updateUI() {
+        const frame = frames[currentFrameIdx];
+        const chip = document.getElementById('active-frame-chip');
+        const progressBar = document.getElementById('scrub-progress');
+        
+        // Update Scrubber bar
+        progressBar.style.width = ((currentFrameIdx + 1) / frames.length * 100) + '%';
+
+        // Update Chip Tag
+        if (frame.isCover) {
+          chip.className = 'px-space-sm py-1 rounded bg-tertiary text-on-tertiary font-label-sm text-label-sm shadow-sm flex items-center gap-1';
+          chip.innerHTML = '<span class="material-symbols-outlined text-sm">stars</span><span>Frame 0' + frame.index + ' of 05 • Selected Cover</span>';
+        } else {
+          chip.className = 'px-space-sm py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm shadow-sm flex items-center gap-1';
+          chip.innerHTML = '<span class="material-symbols-outlined text-sm">filter_none</span><span>Frame 0' + frame.index + ' of 05 (' + frame.stamp + ')</span>';
+        }
+
+        // Highlight selected frame card in deck
+        const cards = document.querySelectorAll('.frame-card');
+        cards.forEach((card, index) => {
+          if (index === currentFrameIdx) {
+            card.classList.add('ring-2', 'ring-secondary');
+          } else {
+            card.classList.remove('ring-2', 'ring-secondary');
+          }
+        });
+      }
+
+      // Initial Call
+      updateUI();
+    })();
+  </script>
+</div></main><footer class="w-full bg-surface-container-low mt-space-xl py-space-xl"><div class="w-full px-margin-mobile md:px-margin-tablet lg:px-margin flex flex-col md:flex-row items-start md:items-center justify-between gap-space-lg"><div class="flex flex-col gap-space-xs"><span class="font-label-lg text-label-lg text-primary">ReelWorld Archival Visual Knowledge Base</span><p class="font-body-sm text-body-sm text-on-surface-variant max-w-xl">Preserving East African cultural and documentary photographic histories through mineral-grade digitization, archival taxonomy, and open conversational intelligence.</p></div><div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-md md:gap-space-lg font-label-sm text-label-sm text-on-surface-variant"><span class="hover:text-on-surface cursor-pointer transition-colors">Provenance &amp; Ingestion Protocols</span><span class="hover:text-on-surface cursor-pointer transition-colors">Curatorial Attribution Ethics</span><span class="hover:text-on-surface cursor-pointer transition-colors">East Africa Regional Mirror (NBO-01)</span></div></div></footer></body></html>

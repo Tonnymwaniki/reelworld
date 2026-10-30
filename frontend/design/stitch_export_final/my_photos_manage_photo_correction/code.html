@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface":"#fef8f4","on-primary-fixed-variant":"#44474c","on-tertiary":"#ffffff","on-error-container":"#93000a","surface-container-high":"#ece7e3","tertiary":"#0e0100","surface-container-highest":"#e6e2de","background":"#fef8f4","on-secondary":"#ffffff","surface-tint":"#5c5e64","on-background":"#1d1b19","error-container":"#ffdad6","on-tertiary-container":"#d5643b","surface-dim":"#ded9d5","surface-bright":"#fef8f4","primary-fixed-dim":"#c4c6cd","surface-container-low":"#f8f3ef","on-primary-container":"#83868c","on-primary":"#ffffff","on-secondary-container":"#4d6b5c","outline-variant":"#c6c6cb","secondary-fixed":"#c9ead8","on-secondary-fixed":"#032015","error":"#ba1a1a","surface-container":"#f2ede9","surface-container-lowest":"#ffffff","on-error":"#ffffff","primary-fixed":"#e1e2e9","primary-container":"#1b1e23","on-secondary-fixed-variant":"#304d3f","primary":"#030408","on-tertiary-fixed":"#390c00","secondary-container":"#c9ead8","on-tertiary-fixed-variant":"#822801","on-surface":"#1d1b19","tertiary-container":"#3d0d00","inverse-primary":"#c4c6cd","outline":"#76777b","on-primary-fixed":"#191c21","secondary-fixed-dim":"#aecebc","on-surface-variant":"#45474b","inverse-surface":"#32302e","inverse-on-surface":"#f5f0ec","tertiary-fixed":"#ffdbcf","secondary":"#476556","surface-variant":"#e6e2de","tertiary-fixed-dim":"#ffb59c"},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},spacing:{"gutter-mobile":"1rem","margin-tablet":"2rem","space-md":"1rem","space-lg":"1.5rem","margin-mobile":"1.25rem","gutter":"1.5rem","margin":"3rem","space-sm":"0.5rem","space-xl":"2.5rem","space-xs":"0.25rem"},fontFamily:{"headline-lg-mobile":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"display-lg-mobile":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"]},fontSize:{"headline-lg-mobile":["26px",{lineHeight:"34px",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-sm":["20px",{lineHeight:"28px",fontWeight:"600"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.04em",fontWeight:"600"}],"body-md":["15px",{lineHeight:"24px",fontWeight:"400"}],"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.005em",fontWeight:"600"}],"label-lg":["14px",{lineHeight:"20px",letterSpacing:"0.02em",fontWeight:"600"}],"body-lg":["18px",{lineHeight:"28px",fontWeight:"400"}],"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.06em",fontWeight:"500"}],"body-sm":["13px",{lineHeight:"20px",fontWeight:"400"}],"display-lg-mobile":["36px",{lineHeight:"44px",letterSpacing:"-0.015em",fontWeight:"700"}],"display-lg":["56px",{lineHeight:"64px",letterSpacing:"-0.02em",fontWeight:"700"}]}}};</script></head><body class="bg-background font-body-md text-on-surface min-h-screen selection:bg-tertiary-fixed selection:text-on-tertiary-fixed"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(27,30,35,0.04)]"><div class="h-20 w-full px-margin-mobile md:px-margin-tablet lg:px-margin flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-md"><span class="font-headline-sm text-headline-sm tracking-tight text-primary-container uppercase">ReelWorld Visual Archive</span><div class="hidden sm:inline-flex items-center gap-space-xs px-space-sm py-space-xs rounded bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Built with Muse Spark Open v2.4</div></div><nav class="hidden lg:flex items-center gap-space-lg" data-active-classes="bg-primary-container text-on-primary font-label-md text-label-md rounded px-space-sm py-space-xs shadow-[0_2px_8px_rgba(27,30,35,0.08)]"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="world" href="#">World</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="my-photos" href="#">My Photos</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="connected" href="#">Connected</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="stories" href="#">Stories</a></nav><div class="flex items-center gap-space-md"><div class="inline-flex items-center gap-space-xs px-space-sm py-space-xs rounded bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>Nairobi Edge Cluster: Online (32ms)</div></div></div></header><main class="w-full pt-20 bg-background min-h-[calc(100vh-140px)]"><div class="flex flex-col w-full">
+<!-- Top Archival Navigation & Utility Bar -->
+<section class="w-full px-margin-mobile md:px-margin-tablet lg:px-margin pt-space-md pb-space-lg flex flex-col md:flex-row md:items-center justify-between gap-space-md bg-surface border-b border-surface-dim">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="#">My Photos</a>
+<span class="text-outline">/</span>
+<span class="hover:text-primary transition-colors">KICC Harambee Forecourt</span>
+<span class="text-outline">/</span>
+<span class="text-primary font-semibold">Manage &amp; Correct</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm pt-space-xs">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px] text-secondary">shield_lock</span>
+<span>Private (Enclave encrypted)</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>Status: In Library</span>
+</div>
+<div class="inline-flex items-center px-2 py-1 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm tracking-wider font-mono">
+          PLATE #NRB-2024-001
+        </div>
+</div>
+</div>
+<!-- Navigation Utility Controls -->
+<div class="flex items-center gap-space-sm self-start md:self-auto">
+<button class="inline-flex items-center justify-center gap-1.5 px-3 py-2 min-h-[44px] rounded bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Back to Library</span>
+</button>
+<button class="inline-flex items-center justify-center gap-1.5 px-3 py-2 min-h-[44px] rounded bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md transition-colors" type="button">
+<span>Next photo</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<button class="inline-flex items-center justify-center gap-1.5 px-3 py-2 min-h-[44px] rounded bg-primary-container text-on-primary hover:bg-primary transition-colors font-label-md text-label-md" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span class="hidden sm:inline">Download plate (DNG/RAW)</span>
+<span class="sm:hidden">RAW</span>
+</button>
+</div>
+</section>
+<!-- Main Editorial Inspection & Correction Grid -->
+<div class="w-full px-margin-mobile md:px-margin-tablet lg:px-margin py-space-xl grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- LEFT COLUMN: High-Fidelity Visual Inspection Mount -->
+<section class="lg:col-span-7 flex flex-col gap-space-lg">
+<!-- Archival Mat Board & Photo Canvas -->
+<div class="w-full bg-surface-container-high p-3 md:p-5 rounded-lg shadow-sm">
+<div class="relative w-full aspect-[4/3] bg-surface-dim rounded overflow-hidden group select-none">
+<img alt="KICC Harambee Forecourt Plinth Archival Plate" class="w-full h-full object-cover transition-transform duration-300 ease-out origin-center" data-alt="A sunlit, museum-grade medium format archival photograph of Nairobi's Kenyatta International Convention Centre (KICC) Harambee plaza. Terraced volcanic basalt stone pavers dominate the sun-drenched foreground with sharp linear shadows. In the midground stands the iconic fluted terracotta-tinted concrete tower and the circular conical amphitheater saucer against a clear high-altitude East African sky. Earthy ochre and warm basalt minerals with crisp architectural clarity." id="photoCanvas" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOaJUiOO84QJzgptS9T69ruN6ioBPpO2RnzK7HV7pf9fLFr42iVpdixb5WCxmxtKVarIaeQMw7bNG4i9eb1I0M5fadnKXk1Kml45JyNqMnbyor6ZehB0VHyLD0ss4vJhEBI9Ae9m2roVfaHsRfsEjnw3_nrwOyTRoGhnhTlky3qEssb4n-vRFGsmZ3Fgkx8sYdLl0bHzi7X2RgqpuBXOiNc_V_63Cq_6MtffjHu8Y"/>
+<!-- Optical Reticle Overlay on Hover -->
+<div class="absolute inset-0 pointer-events-none opacity-40 mix-blend-difference flex flex-col justify-between p-4" id="reticleFrame">
+<div class="flex justify-between items-start font-mono text-[10px] text-surface">
+<span>FOV: 74.3° • 28mm RECT</span>
+<span>GRID: ARCHIVAL 1/3 CALIB</span>
+</div>
+<!-- Center Crosshair Marker -->
+<div class="absolute inset-0 flex items-center justify-center">
+<svg class="text-surface stroke-current opacity-80" fill="none" height="48" viewbox="0 0 48 48" width="48">
+<circle cx="24" cy="24" r="14" stroke-dasharray="2 3" stroke-width="0.75"></circle>
+<line stroke-width="0.75" x1="24" x2="24" y1="4" y2="44"></line>
+<line stroke-width="0.75" x1="4" x2="44" y1="24" y2="24"></line>
+</svg>
+</div>
+<div class="flex justify-between items-end font-mono text-[10px] text-surface">
+<span>ENC-HASH: c409b-8924</span>
+<span>PLINTH HARAMBEE • ZONE 01</span>
+</div>
+</div>
+<!-- Bottom Viewport Floating Loupe Controls -->
+<div class="absolute bottom-3 left-3 right-3 flex items-center justify-between p-2 rounded bg-primary-container/85 backdrop-blur-md text-on-primary">
+<div class="flex items-center gap-1.5 font-label-sm text-label-sm">
+<button class="px-2.5 py-1 min-h-[32px] rounded bg-surface/15 hover:bg-surface/25 transition-colors font-mono uppercase tracking-wider text-[11px]" id="zoom100Btn" type="button">
+                1:1 (100%)
+              </button>
+<button class="px-2.5 py-1 min-h-[32px] rounded bg-surface/10 hover:bg-surface/20 transition-colors font-mono uppercase tracking-wider text-[11px] opacity-80" id="fitBtn" type="button">
+                Fit Frame
+              </button>
+<span class="text-on-primary-container mx-1">|</span>
+<span class="material-symbols-outlined text-[17px] text-on-secondary-container">search</span>
+<span class="font-mono text-[11px] text-on-primary-container" id="zoomLevel">1.00× MAG</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded flex items-center justify-center hover:bg-surface/20 transition-colors" id="zoomOutBtn" title="Zoom Out" type="button">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<button class="w-8 h-8 rounded flex items-center justify-center hover:bg-surface/20 transition-colors" id="zoomInBtn" title="Zoom In" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+<button class="px-2.5 py-1 min-h-[32px] rounded flex items-center gap-1 hover:bg-surface/20 transition-colors font-label-sm text-label-sm" id="cropToggleBtn" type="button">
+<span class="material-symbols-outlined text-[16px]">crop_free</span>
+<span class="hidden sm:inline">Frame bounds</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Archival Plate Technical Provenance Bar -->
+<div class="mt-4 pt-3 border-t border-surface-dim flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm text-on-surface-variant font-label-sm text-label-sm">
+<div class="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[11px]">
+<span class="text-primary font-semibold">48 MP</span>
+<span>(8256 × 5504 px)</span>
+<span class="text-outline">•</span>
+<span>Full Frame 3:2</span>
+<span class="text-outline">•</span>
+<span>f/8.0</span>
+<span class="text-outline">•</span>
+<span>28mm Rectilinear</span>
+<span class="text-outline">•</span>
+<span>ISO 100</span>
+</div>
+<div class="flex items-center gap-1.5 text-secondary font-mono text-[11px]">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+<span>Edge Enclave (Batch #NRB-8924) • Zero Cloud</span>
+</div>
+</div>
+</div>
+<!-- Historical Architectural Overview / Notes Drawer -->
+<div class="bg-surface-container p-5 rounded-lg flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">Spatial Field Specimen</span>
+<span class="font-mono text-label-sm text-on-surface-variant">TAXON: PLAZA_MONUMENTAL</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface">
+          The plinth is engineered from hand-dressed Rift Valley basalt aggregate. Designed to disperse monsoon rainfall into recessed subterranean cisterns along the northern colonnade while framing the amphitheater’s suspended saucer profile.
+        </p>
+</div>
+</section>
+<!-- RIGHT COLUMN: Archival Evidence Dossier & Local Model Correction Suite -->
+<section class="lg:col-span-5 flex flex-col gap-space-lg">
+<!-- CARD A: Automated Evidence Dossier -->
+<div class="bg-surface-container-low p-6 rounded-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between border-b border-surface-dim pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">document_scanner</span>
+<h2 class="font-headline-sm text-headline-sm text-primary">Evidence Dossier</h2>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">AUTOMATED PARSER</span>
+</div>
+<!-- Place Determination -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider">Place Determination</span>
+<div class="flex flex-wrap items-center gap-2">
+<div class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-secondary text-on-secondary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[15px]">verified</span>
+              Confirmed
+            </div>
+<div class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-on-tertiary-container text-surface-bright font-label-sm text-label-sm font-medium" id="humanBadge">
+<span class="material-symbols-outlined text-[15px]">person_check</span>
+              Reviewed by you
+            </div>
+</div>
+<p class="font-body-lg text-body-lg font-semibold text-primary pt-1">
+            KICC (Kenyatta International Convention Centre), Harambee Plaza
+          </p>
+</div>
+<!-- System Generated Caption -->
+<div class="flex flex-col gap-space-xs bg-surface-container p-3.5 rounded">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider flex items-center justify-between">
+<span>Machine Narrative Caption</span>
+<span class="font-mono text-[10px]">CONFIDENCE: 98.4%</span>
+</span>
+<p class="font-body-md text-body-md text-on-surface italic">
+            "Basalt stone flagstones in the foreground looking north-west toward the 28-storey fluted terracotta tower and conical auditorium saucer."
+          </p>
+</div>
+<!-- Detected Visual Elements -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider">Visual Features Detected</span>
+<div class="flex flex-wrap gap-1.5 pt-1">
+<span class="px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm">Basalt flagstones (terraced)</span>
+<span class="px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm">Fluted concrete facade</span>
+<span class="px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm">Conical amphitheatre saucer</span>
+<span class="px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm">Civic square colonnade</span>
+<span class="px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm">Jacaranda canopy edge</span>
+</div>
+</div>
+<!-- Signs Read (Text OCR & Inscription Gazetteer) -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider">Signs Read (Inscriptions &amp; Boundary Text)</span>
+<div class="flex flex-col gap-2 pt-1 font-mono text-[12px]">
+<div class="flex items-center justify-between p-2.5 rounded bg-surface-container">
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-secondary">match_case</span>
+<span class="font-semibold">"HARAMBEE HOUSE"</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm uppercase font-bold">
+                Clear
+              </span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded bg-surface-container">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">visibility_off</span>
+<span>"...CONVENTION CEN..."</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm uppercase">
+                Partial
+              </span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded bg-surface-container">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">tag</span>
+<span>"LR-209/8422"</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm uppercase">
+                Partial (Cadastral)
+              </span>
+</div>
+</div>
+</div>
+<!-- System Uncertainty Notice -->
+<div class="bg-surface-container-high p-3.5 rounded flex items-start gap-3">
+<span class="material-symbols-outlined text-on-tertiary-container text-[20px] mt-0.5">help_outline</span>
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm font-semibold text-primary">Uncertainty Flag</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Sun angle and long shadows obscure the western drainage apron; unable to distinguish whether basalt pavers were restored in 1996 or 2012 municipal project without surveyor notes.
+            </p>
+</div>
+</div>
+</div>
+<!-- CARD B: Interactive System Correction (Teach Local Model) -->
+<div class="bg-surface-container-low p-6 rounded-lg shadow-sm flex flex-col gap-space-md">
+<div class="border-b border-surface-dim pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-tertiary-container text-[22px]">tune</span>
+<h2 class="font-headline-sm text-headline-sm text-primary">Is this wrong?</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant pt-1">
+            Teach the local model. Your corrections stay on your device and refine future cadastre matching.
+          </p>
+</div>
+<!-- Place Field Input with Suggestions -->
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider" for="placeInput">
+            Identified Place Name
+          </label>
+<div class="relative">
+<input class="w-full px-3.5 py-2.5 rounded bg-surface-container text-primary font-body-md text-body-md focus:bg-surface-bright focus:outline-none transition-colors" id="placeInput" type="text" value="KICC"/>
+<button class="absolute right-2.5 top-2.5 text-on-surface-variant hover:text-primary" id="toggleSuggestionsBtn" type="button">
+<span class="material-symbols-outlined text-[20px]">arrow_drop_down</span>
+</button>
+</div>
+<!-- Quick 1-Click Suggestion Pills -->
+<div class="flex flex-wrap items-center gap-1.5 pt-1">
+<button class="place-pill px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors" data-value="City Market" type="button">
+              City Market
+            </button>
+<button class="place-pill px-2.5 py-1 rounded bg-primary-container text-on-primary font-label-sm text-label-sm transition-colors" data-value="KICC" type="button">
+              KICC (Selected)
+            </button>
+<button class="place-pill px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors" data-value="CBK Pension Towers" type="button">
+              CBK Pension Towers
+            </button>
+<button class="place-pill px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors" data-value="Parliament Buildings" type="button">
+              Parliament Buildings
+            </button>
+</div>
+</div>
+<!-- Short Note Field -->
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider" for="curatorNote">
+            Describe this photo in a few words
+          </label>
+<textarea class="w-full px-3.5 py-2.5 rounded bg-surface-container text-primary font-body-md text-body-md focus:bg-surface-bright focus:outline-none transition-colors resize-none" id="curatorNote" placeholder="Provide architectural or spatial context..." rows="3">Taken from the east basalt steps facing the amphitheatre during midday archival survey.</textarea>
+</div>
+<!-- Action Buttons & Micro Feedback -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-sm pt-2">
+<button class="min-h-[44px] px-5 py-2.5 rounded bg-on-tertiary-container hover:opacity-90 active:scale-[0.99] text-surface-bright font-label-lg text-label-lg flex items-center justify-center gap-2 transition-all shadow-sm" id="recheckBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+<span>Re-check this photo</span>
+</button>
+<button class="min-h-[44px] px-4 py-2.5 rounded bg-surface-container hover:bg-surface-container-high text-primary font-label-lg text-label-lg flex items-center justify-center gap-2 transition-colors" id="saveBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">check</span>
+<span>Save corrections</span>
+</button>
+</div>
+<!-- System Correction Confirmation Feedback Banner -->
+<div class="flex items-center gap-2 p-2.5 rounded bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm" id="correctionAlert">
+<span class="material-symbols-outlined text-[18px] text-secondary">task_alt</span>
+<span>1 correction applied • 'Reviewed by you' badge added to cadastre.</span>
+</div>
+</div>
+<!-- CARD C: Privacy & Enclave Control -->
+<div class="bg-surface-container-low p-6 rounded-lg shadow-sm flex flex-col gap-space-md">
+<div class="border-b border-surface-dim pb-3 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[22px]">verified_user</span>
+<h2 class="font-headline-sm text-headline-sm text-primary">Privacy &amp; Enclave Control</h2>
+</div>
+<span class="font-mono text-label-sm text-secondary">ENCLAVE SECURE</span>
+</div>
+<!-- Privacy Status Note -->
+<div class="flex items-start gap-3 bg-surface-container p-3.5 rounded">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">lock</span>
+<div class="flex flex-col gap-0.5">
+<span class="font-label-md text-label-md text-primary font-semibold">Private &amp; Local</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Stored exclusively in your browser's private edge sandbox. No public world indexing.
+            </p>
+</div>
+</div>
+<!-- Faces-Visible Flag Banner (Curatorial Ethics) -->
+<div class="bg-surface-container-high p-4 rounded flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase font-semibold text-primary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">face_retouching_off</span>
+              Curatorial Face Ethics Policy
+            </span>
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-fixed-variant font-mono text-[11px]">
+              COUNT: 0 DETECTED
+            </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Photos with visible faces cannot be published or shared. Facial detection scan completed: 0 visible faces detected in frame (Clear to curate, but remains Private by default).
+          </p>
+</div>
+<!-- Destructive Control (Delete from Enclave) -->
+<div class="pt-3 border-t border-surface-dim flex flex-col gap-2">
+<button class="min-h-[44px] w-full px-4 py-2.5 rounded bg-error-container hover:opacity-90 active:scale-[0.99] text-on-error-container font-label-md text-label-md flex items-center justify-center gap-2 transition-all" id="deletePhotoBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">delete_forever</span>
+<span>Delete this photo</span>
+</button>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-center">
+            Permanently purges the image file, extracted cadastre vectors, sign transcripts, and embedding weights from your device. Cannot be undone.
+          </p>
+</div>
+</div>
+</section>
+</div>
+<!-- Inline Script for Micro-Interactions: Magnification, Suggestions, and Feedback -->
+<script>
+    (function initPhotoInspector() {
+      const img = document.getElementById('photoCanvas');
+      const zoomText = document.getElementById('zoomLevel');
+      const zoom100Btn = document.getElementById('zoom100Btn');
+      const fitBtn = document.getElementById('fitBtn');
+      const zoomInBtn = document.getElementById('zoomInBtn');
+      const zoomOutBtn = document.getElementById('zoomOutBtn');
+      const cropToggleBtn = document.getElementById('cropToggleBtn');
+      const reticleFrame = document.getElementById('reticleFrame');
+      
+      let scale = 1.0;
+
+      function updateZoom(newScale) {
+        scale = Math.min(Math.max(newScale, 1.0), 3.0);
+        img.style.transform = `scale(${scale})`;
+        zoomText.textContent = `${scale.toFixed(2)}× MAG`;
+        if (scale > 1.0) {
+          img.classList.add('cursor-grab');
+        } else {
+          img.classList.remove('cursor-grab');
+        }
+      }
+
+      zoom100Btn?.addEventListener('click', () => updateZoom(1.0));
+      fitBtn?.addEventListener('click', () => updateZoom(1.0));
+      zoomInBtn?.addEventListener('click', () => updateZoom(scale + 0.25));
+      zoomOutBtn?.addEventListener('click', () => updateZoom(scale - 0.25));
+
+      cropToggleBtn?.addEventListener('click', () => {
+        if (reticleFrame) {
+          reticleFrame.classList.toggle('opacity-0');
+        }
+      });
+
+      // Quick Suggestion Pill clicks
+      const placeInput = document.getElementById('placeInput');
+      const pills = document.querySelectorAll('.place-pill');
+      pills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          const val = pill.getAttribute('data-value');
+          if (placeInput && val) {
+            placeInput.value = val;
+            pills.forEach(p => {
+              p.classList.remove('bg-primary-container', 'text-on-primary');
+              p.classList.add('bg-surface-container', 'text-on-surface');
+            });
+            pill.classList.add('bg-primary-container', 'text-on-primary');
+            pill.classList.remove('bg-surface-container', 'text-on-surface');
+          }
+        });
+      });
+
+      // Re-check and Save Buttons
+      const recheckBtn = document.getElementById('recheckBtn');
+      const saveBtn = document.getElementById('saveBtn');
+      const alertBox = document.getElementById('correctionAlert');
+
+      function triggerSaveFeedback() {
+        if (alertBox) {
+          alertBox.classList.remove('hidden');
+          alertBox.style.opacity = '0';
+          setTimeout(() => {
+            alertBox.style.transition = 'opacity 0.2s ease-in';
+            alertBox.style.opacity = '1';
+          }, 10);
+        }
+      }
+
+      recheckBtn?.addEventListener('click', triggerSaveFeedback);
+      saveBtn?.addEventListener('click', triggerSaveFeedback);
+
+      // Safe Delete Confirmation
+      const deleteBtn = document.getElementById('deletePhotoBtn');
+      deleteBtn?.addEventListener('click', () => {
+        if (window.confirm('Purge plate #NRB-2024-001 and all local vector weights from your browser enclave?')) {
+          deleteBtn.textContent = 'Purged from Enclave';
+          deleteBtn.disabled = true;
+          deleteBtn.classList.add('opacity-50', 'pointer-events-none');
+        }
+      });
+    })();
+  </script>
+</div></main><footer class="w-full bg-surface-container-low mt-space-xl py-space-xl"><div class="w-full px-margin-mobile md:px-margin-tablet lg:px-margin flex flex-col md:flex-row items-start md:items-center justify-between gap-space-lg"><div class="flex flex-col gap-space-xs"><span class="font-label-lg text-label-lg text-primary">ReelWorld Archival Visual Knowledge Base</span><p class="font-body-sm text-body-sm text-on-surface-variant max-w-xl">Preserving East African cultural and documentary photographic histories through mineral-grade digitization, archival taxonomy, and open conversational intelligence.</p></div><div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-md md:gap-space-lg font-label-sm text-label-sm text-on-surface-variant"><span class="hover:text-on-surface cursor-pointer transition-colors">Provenance &amp; Ingestion Protocols</span><span class="hover:text-on-surface cursor-pointer transition-colors">Curatorial Attribution Ethics</span><span class="hover:text-on-surface cursor-pointer transition-colors">East Africa Regional Mirror (NBO-01)</span></div></div></footer></body></html>

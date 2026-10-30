@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-surface-variant": "#45474b", "tertiary-fixed-dim": "#ffb59c", "surface-variant": "#e6e2de", "surface-container-low": "#f8f3ef", "tertiary-container": "#3d0d00", "secondary-container": "#c9ead8", "on-tertiary-fixed-variant": "#822801", "background": "#fef8f4", "inverse-primary": "#c4c6cd", "on-primary-container": "#83868c", "surface": "#fef8f4", "on-primary": "#ffffff", "secondary-fixed": "#c9ead8", "surface-container-lowest": "#ffffff", "on-error-container": "#93000a", "on-tertiary-container": "#d5643b", "error": "#ba1a1a", "surface-dim": "#ded9d5", "on-secondary": "#ffffff", "on-tertiary-fixed": "#390c00", "primary-fixed-dim": "#c4c6cd", "outline-variant": "#c6c6cb", "primary": "#030408", "on-secondary-fixed": "#032015", "surface-container": "#f2ede9", "inverse-on-surface": "#f5f0ec", "on-error": "#ffffff", "surface-container-high": "#ece7e3", "on-tertiary": "#ffffff", "on-primary-fixed": "#191c21", "outline": "#76777b", "secondary": "#476556", "inverse-surface": "#32302e", "primary-fixed": "#e1e2e9", "on-secondary-fixed-variant": "#304d3f", "on-primary-fixed-variant": "#44474c", "surface-container-highest": "#e6e2de", "tertiary-fixed": "#ffdbcf", "on-surface": "#1d1b19", "surface-tint": "#5c5e64", "error-container": "#ffdad6", "primary-container": "#1b1e23", "surface-bright": "#fef8f4", "on-background": "#1d1b19", "tertiary": "#0e0100", "secondary-fixed-dim": "#aecebc", "on-secondary-container": "#4d6b5c" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-xs": "0.25rem", "space-sm": "0.5rem", "space-md": "1rem", "margin": "3rem", "gutter": "1.5rem", "margin-tablet": "2rem", "space-xl": "2.5rem", "gutter-mobile": "1rem", "space-lg": "1.5rem", "margin-mobile": "1.25rem" }, "fontFamily": { "label-sm": [ "Plus Jakarta Sans" ], "headline-lg": [ "Plus Jakarta Sans" ], "headline-sm": [ "Plus Jakarta Sans" ], "body-sm": [ "Plus Jakarta Sans" ], "headline-md": [ "Plus Jakarta Sans" ], "body-lg": [ "Plus Jakarta Sans" ], "body-md": [ "Plus Jakarta Sans" ], "display-lg-mobile": [ "Plus Jakarta Sans" ], "display-lg": [ "Plus Jakarta Sans" ], "label-md": [ "Plus Jakarta Sans" ], "headline-lg-mobile": [ "Plus Jakarta Sans" ], "label-lg": [ "Plus Jakarta Sans" ] }, "fontSize": { "label-sm": [ "11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "500" } ], "headline-lg": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "headline-sm": [ "20px", { "lineHeight": "28px", "fontWeight": "600" } ], "body-sm": [ "13px", { "lineHeight": "20px", "fontWeight": "400" } ], "headline-md": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.005em", "fontWeight": "600" } ], "body-lg": [ "18px", { "lineHeight": "28px", "fontWeight": "400" } ], "body-md": [ "15px", { "lineHeight": "24px", "fontWeight": "400" } ], "display-lg-mobile": [ "36px", { "lineHeight": "44px", "letterSpacing": "-0.015em", "fontWeight": "700" } ], "display-lg": [ "56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "label-md": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" } ], "headline-lg-mobile": [ "26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "label-lg": [ "14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" } ] } } } };</script></head><body class="bg-background font-body-md text-on-surface"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(27,30,35,0.04)]"><div class="h-16 w-full px-margin-mobile md:px-margin-tablet lg:px-margin flex items-center justify-between"><div class="flex items-center gap-space-lg"><a class="flex items-center gap-space-sm group" data-path="reel" href="#"><div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center"><span class="material-symbols-outlined text-surface text-[20px]">filter_vintage</span></div><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface uppercase">REELWORLD</span></a><div class="hidden xl:flex items-center gap-space-sm"><div class="flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm"><span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span><span>Built with Muse Spark Open v2.4</span></div><div class="flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm"><span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span><span>Nairobi Edge Cluster: Online (32ms)</span></div></div></div><div class="flex items-center gap-space-lg"><nav class="flex items-center gap-space-xs p-space-xs rounded-lg bg-surface-container-low" data-active-classes="bg-primary-container text-surface rounded-lg"><a aria-current="page" class="px-space-md py-space-xs font-label-md transition-colors bg-primary-container text-surface rounded-lg" data-path="reel" href="#">Reel</a><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="browse" href="#">Browse</a><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="connected" href="#">Connected</a><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="stories" href="#">Stories</a><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="about" href="#">About</a></nav><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Top Atmospheric Header Clearance & Archival Masthead -->
+<section class="relative w-full pt-10 pb-16 px-margin-mobile md:px-margin-tablet lg:px-margin overflow-hidden">
+<!-- Subtle warm earth ambient glow -->
+<div class="absolute -top-32 right-1/4 w-[480px] h-[480px] rounded-full bg-tertiary-fixed-dim/20 blur-[100px] pointer-events-none -z-10"></div>
+<div class="absolute top-48 -left-20 w-[420px] h-[420px] rounded-full bg-secondary-fixed/30 blur-[90px] pointer-events-none -z-10"></div>
+<div class="max-w-6xl mx-auto flex flex-col items-center text-center">
+<!-- Archival Micro Metadata Ribbon -->
+<div class="flex items-center gap-space-sm mb-space-md">
+<span class="px-space-sm py-space-xs rounded bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm tracking-wider uppercase">ARCHIVE REPOSITORY / KENYA VISUAL CORPUS</span>
+<span class="text-outline-variant font-label-sm text-label-sm">•</span>
+<span class="font-label-sm text-label-sm text-secondary flex items-center gap-1 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary inline-block"></span>
+          OPEN CADASTRE
+        </span>
+</div>
+<!-- Main Exhibition Headline -->
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary tracking-tight max-w-4xl text-balance">
+        Describe a photo. Reel will find it, and show its evidence.
+      </h1>
+<!-- Supporting Statement -->
+<p class="mt-space-md max-w-2xl font-body-lg text-body-lg text-on-surface-variant leading-relaxed text-balance">
+        Search real photographs of Kenya in plain language, ask what is in them, and connect your own photos to the world.
+      </p>
+<!-- Primary Conversational Composer -->
+<div class="w-full max-w-3xl mt-space-xl">
+<div class="bg-surface-container rounded-xl p-2 shadow-sm transition-all duration-200">
+<div class="flex items-center gap-2 bg-surface-container-lowest rounded-lg p-1.5 shadow-sm">
+<!-- Add / Upload Photo Button (>=44px) -->
+<button aria-label="Upload photo to identify" class="w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-md bg-surface-container text-on-surface hover:bg-surface-container-high active:bg-surface-container-highest transition-colors flex-shrink-0 cursor-pointer" id="upload-evidence-btn" title="Add or upload an image to identify" type="button">
+<span class="material-symbols-outlined text-[22px]">add_a_photo</span>
+</button>
+<!-- Calm Architectural Prompt Bar -->
+<input class="flex-1 min-w-0 bg-transparent py-2.5 px-3 font-body-md text-body-md text-primary placeholder-outline focus:outline-none" id="archival-prompt-input" placeholder="Ask Reel to find a photo..." type="text"/>
+<!-- Send / Search Arrow Button (>=44px) -->
+<button aria-label="Search visual archive" class="w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-md bg-primary-container text-surface hover:bg-tertiary transition-colors flex-shrink-0 cursor-pointer shadow-sm" id="submit-prompt-btn" title="Search visual archive" type="button">
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Secondary CTA & Helper line -->
+<div class="mt-space-md flex flex-wrap items-center justify-center gap-space-md">
+<button class="min-h-[44px] px-space-md py-space-xs rounded inline-flex items-center gap-2 bg-surface-container-low hover:bg-surface-container text-on-tertiary-fixed-variant font-label-lg text-label-lg transition-colors cursor-pointer shadow-sm" id="tour-modal-trigger" type="button">
+<span class="material-symbols-outlined text-[18px] text-on-tertiary-fixed-variant">explore</span>
+<span>Take the 60-second tour</span>
+</button>
+<span class="font-label-sm text-label-sm text-outline hidden sm:inline">No account needed • Grounded evidence logs</span>
+</div>
+</div>
+<!-- Tappable Example Prompts Ribbon Title -->
+<div class="w-full max-w-5xl mt-14 flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Exemplar Archival Queries</span>
+<span class="font-label-sm text-label-sm text-outline">Click any prompt to sample</span>
+</div>
+<!-- 4 Tappable Example Cards Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md w-full max-w-5xl mt-space-sm text-left">
+<!-- Card 1 -->
+<div class="prompt-card group flex flex-col justify-between bg-surface-container rounded-xl p-3 shadow-sm hover:shadow-md hover:bg-surface-container-high transition-all cursor-pointer" data-prompt="A busy street market with fresh vegetables">
+<div>
+<div class="p-2 bg-surface-container-high rounded-lg mb-3">
+<div class="overflow-hidden rounded h-36 w-full relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Vibrant outdoor vegetable stall at Nairobi City Market Marikiti with stacked crates of fresh collard greens, deep red tomatoes, carrots, and sweet potatoes under diffused morning equatorial sunlight, captured on 35mm archival natural film stock with earthy terracotta undertones and subtle dust." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDseTPdmyBcvGmrh97thBVCgNTuXyg_qjWSY91QcpEb2KB6c9mDrivIFbMriem6-28-xV_6St-s8BIX4HK_GESH0ME7YehKpOLCfCqhtyesx1jkcp9pVfXV-JpnuD0MyMFA-TJRj3cusMakSKbAz9pVm-tkPe8BZdmcrl11-teWYpGmt8UgsK4gjVblTzpOV5vNml_uxoMPu99v6MuD-THOzLHtm3Oc_AondDVmu0g"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded bg-surface-container-lowest/90 font-label-sm text-label-sm text-secondary font-medium backdrop-blur-xs">PRODUCE SECTOR</span>
+</div>
+</div>
+<p class="font-headline-sm text-[16px] leading-[22px] text-primary group-hover:text-on-tertiary-fixed-variant transition-colors line-clamp-2">
+              “A busy street market with fresh vegetables”
+            </p>
+</div>
+<div class="mt-4 pt-3 bg-surface-container-low -mx-3 -mb-3 p-3 rounded-b-xl flex flex-col gap-0.5">
+<span class="font-body-sm text-body-sm text-on-surface font-medium truncate">Nairobi City Market / Marikiti</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Photo credit: C. Karanja • CC BY-SA 4.0</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="prompt-card group flex flex-col justify-between bg-surface-container rounded-xl p-3 shadow-sm hover:shadow-md hover:bg-surface-container-high transition-all cursor-pointer" data-prompt="The city skyline from above">
+<div>
+<div class="p-2 bg-surface-container-high rounded-lg mb-3">
+<div class="overflow-hidden rounded h-36 w-full relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Elevated panoramic perspective overlooking the Nairobi central business district and Upper Hill skyline during late afternoon golden hour with warm earthen sandstone towers, long casting shadows, modernist concrete geometries and clear horizon under a soft papyrus sky." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdbeBmTzBRMmpzbT9yXdMVAjedv5ihRScflhsUiGDpEewHsEn8x0l_R1slZ271eOgExwpaM40qrFlRxZRNSUYSrHoNRtwIWBN1tiXvWXElsxlKVVSTNY7QcZSU4o0FXhSFe6qOc_mxK-lHy14LbmjpBwkG7q3G4_by1uNFq5a3Nbxcq7VG4rLr-JaHxttXCVl-R8Lk5MdtumPkK1gadj1Pn2PQ8-SUVthMlD7Rgg8"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded bg-surface-container-lowest/90 font-label-sm text-label-sm text-secondary font-medium backdrop-blur-xs">ELEVATED VANTAGE</span>
+</div>
+</div>
+<p class="font-headline-sm text-[16px] leading-[22px] text-primary group-hover:text-on-tertiary-fixed-variant transition-colors line-clamp-2">
+              “The city skyline from above”
+            </p>
+</div>
+<div class="mt-4 pt-3 bg-surface-container-low -mx-3 -mb-3 p-3 rounded-b-xl flex flex-col gap-0.5">
+<span class="font-body-sm text-body-sm text-on-surface font-medium truncate">Upper Hill &amp; CBD view</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Photo credit: D. Mumo • CC BY 4.0</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="prompt-card group flex flex-col justify-between bg-surface-container rounded-xl p-3 shadow-sm hover:shadow-md hover:bg-surface-container-high transition-all cursor-pointer" data-prompt="The entrance of KICC">
+<div>
+<div class="p-2 bg-surface-container-high rounded-lg mb-3">
+<div class="overflow-hidden rounded h-36 w-full relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Archival architectural photograph of the Kenyatta International Conference Centre main entrance plaza on Harambee Avenue showing the fluted cylindrical amphitheatre concrete drum, textured terracotta tiled ground paving, and monumental civic entrance in crisp daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJJuvu4qkEXdNAWsLK8Nhw92iM-w40CIWXXoGZjqt6OsM63vlp9MyTfbUDenpwMz9fDxyZRH-zQ5Je6PQVO0Cgr1oYPXwvoOSrEToJG1RvnUnCOMYfxv54re96VFbSDLGPLoGucvz7C9Vw__E4FDLe2VMCTQcA9N8G2YnwRCvXLyVsBuKSxb3mvGoTmxfV_vszMN8m92NA2_XnUPUxAEWPOoK835VejajMdVF-15U"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded bg-surface-container-lowest/90 font-label-sm text-label-sm text-secondary font-medium backdrop-blur-xs">CIVIC MONUMENT</span>
+</div>
+</div>
+<p class="font-headline-sm text-[16px] leading-[22px] text-primary group-hover:text-on-tertiary-fixed-variant transition-colors line-clamp-2">
+              “The entrance of KICC”
+            </p>
+</div>
+<div class="mt-4 pt-3 bg-surface-container-low -mx-3 -mb-3 p-3 rounded-b-xl flex flex-col gap-0.5">
+<span class="font-body-sm text-body-sm text-on-surface font-medium truncate">Harambee Avenue forecourt</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Photo credit: Nairobi Archival Trust • Public Domain</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="prompt-card group flex flex-col justify-between bg-surface-container rounded-xl p-3 shadow-sm hover:shadow-md hover:bg-surface-container-high transition-all cursor-pointer" data-prompt="A street in Nairobi with matatus">
+<div>
+<div class="p-2 bg-surface-container-high rounded-lg mb-3">
+<div class="overflow-hidden rounded h-36 w-full relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Street-level documentary photograph on Moi Avenue Nairobi featuring customized transit minibuses called matatus with intricate custom typography, vibrant yellow and terracotta accents, busy city commuters walking along shop verandas on a warm dusty midday." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGHkCSFu5Bk4-MMJ-dfET0UmjE7d5xHFYV2x2jNRHAnGGLTmqFC6TXQQtTgw4Hf0Mzbup6bcdSPywZVREaKuLO3KZvpJZBbaTmfC2SmAIjoD7MXDI1e1Go1X07XqnI9Otr3JLcBoDsIs6Hw_23lcRCP23t_LnMrQ71c9TcQvb0Lhsiz_pCTq2q5UMRiGwZGrSVMRjhzHoKB6k5gpibtnxwpUY62gGrFuI0I6CiGw0"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded bg-surface-container-lowest/90 font-label-sm text-label-sm text-secondary font-medium backdrop-blur-xs">URBAN TRANSIT</span>
+</div>
+</div>
+<p class="font-headline-sm text-[16px] leading-[22px] text-primary group-hover:text-on-tertiary-fixed-variant transition-colors line-clamp-2">
+              “A street in Nairobi with matatus”
+            </p>
+</div>
+<div class="mt-4 pt-3 bg-surface-container-low -mx-3 -mb-3 p-3 rounded-b-xl flex flex-col gap-0.5">
+<span class="font-body-sm text-body-sm text-on-surface font-medium truncate">Moi Avenue concourse</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Photo credit: F. Omar • CC BY-SA 4.0</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 1: How it works -->
+<section class="w-full py-16 px-margin-mobile md:px-margin-tablet lg:px-margin bg-surface-container-low">
+<div class="max-w-6xl mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-2">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold">METHODOLOGY &amp; RETRIEVAL</span>
+<h2 class="font-headline-lg text-headline-lg text-primary mt-1">How it works</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-md">
+          A conversational interface connected directly to physical landmarks, sightline geometries, and verifiable architectural evidence.
+        </p>
+</div>
+<!-- Three Crisp Step Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+<!-- Step 1 -->
+<div class="bg-surface-container rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-6">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">chat_bubble_outline</span>
+</div>
+<span class="font-headline-md text-headline-md text-outline-variant font-light">01</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">Describe it</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Use plain conversational English to describe what you remember or seek.
+            </p>
+</div>
+<div class="mt-6 pt-4 bg-surface-container-high/40 rounded p-2.5">
+<span class="font-label-sm text-label-sm text-outline">Semantic queries parsed without keyword matching syntax.</span>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="bg-surface-container rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-6">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-on-tertiary-fixed-variant">
+<span class="material-symbols-outlined text-[24px]">find_in_page</span>
+</div>
+<span class="font-headline-md text-headline-md text-outline-variant font-light">02</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">See the evidence</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Reel highlights why photos matched with verified signs, landmarks, and vantage angles.
+            </p>
+</div>
+<div class="mt-6 pt-4 bg-surface-container-high/40 rounded p-2.5">
+<span class="font-label-sm text-label-sm text-outline">Every retrieval cites observable facade elements and signboards.</span>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="bg-surface-container rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-6">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[24px]">hub</span>
+</div>
+<span class="font-headline-md text-headline-md text-outline-variant font-light">03</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">Connect your photos to the world</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Bridge your personal Kenyan photos into the shared architectural cadastre.
+            </p>
+</div>
+<div class="mt-6 pt-4 bg-surface-container-high/40 rounded p-2.5">
+<span class="font-label-sm text-label-sm text-outline">Matches link private viewpoints to publicly documented angles.</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Why you can trust Reel -->
+<section class="w-full py-16 px-margin-mobile md:px-margin-tablet lg:px-margin bg-surface">
+<div class="max-w-6xl mx-auto">
+<div class="max-w-3xl mb-12">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold">RADICAL TRANSPARENCY &amp; VERIFICATION</span>
+<h2 class="font-headline-lg text-headline-lg text-primary mt-1">Why you can trust Reel</h2>
+<p class="mt-3 font-headline-sm text-headline-sm text-primary font-normal leading-snug">
+          “Reel tells you when it is not sure, and says what it could not find.”
+        </p>
+<p class="mt-2 font-body-md text-body-md text-on-surface-variant">
+          Conventional search hallucinates confidence. Reel provides reproducible visual proof, logs uncertainties, and respects physical sightlines.
+        </p>
+</div>
+<!-- Live-Looking Honest Verification Sample Container -->
+<div class="bg-surface-container rounded-2xl p-6 md:p-8 shadow-sm">
+<div class="flex flex-col lg:flex-row gap-8 items-start">
+<!-- Left: Verification Badges & Audit Rubric -->
+<div class="w-full lg:w-5/12 flex flex-col gap-6">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold block mb-3">Verification Badge System</span>
+<!-- Match Confidence Pair -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm mb-3">
+<span class="font-label-sm text-label-sm text-outline block mb-2">Match Confidence Indicators</span>
+<div class="flex flex-wrap items-center gap-2">
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+<span>Confirmed</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-label-md">
+<span class="w-2 h-2 rounded-full bg-on-tertiary-container"></span>
+<span>Candidate</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">
+                  Confirmed requires 3+ invariant structural points. Candidate prompts human archivist inspection.
+                </p>
+</div>
+<!-- OCR Transcription Pair -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm">
+<span class="font-label-sm text-label-sm text-outline block mb-2">Signage Transcription Reliability</span>
+<div class="flex flex-wrap items-center gap-2">
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-secondary">spellcheck</span>
+<span>Clear</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-outline">text_fields</span>
+<span>Partial</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">
+                  Partial indicates angle distortion, dust, or partial vehicle occlusions on text signs.
+                </p>
+</div>
+</div>
+<!-- Integrity Guarantee Micro-box -->
+<div class="flex items-center gap-3 p-3 rounded-lg bg-surface-container-high text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px] text-secondary">verified_user</span>
+<span class="font-body-sm text-body-sm">Facial biometric recognition is strictly excluded across the entire corpus.</span>
+</div>
+</div>
+<!-- Right: Live Honest Evidence Breakdown Snippet -->
+<div class="w-full lg:w-7/12 bg-surface-container-lowest rounded-xl p-6 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-4 mb-4 bg-surface-container-low -mx-6 -mt-6 p-4 rounded-t-xl">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-primary">terminal</span>
+<span class="font-label-md text-label-md font-semibold text-primary">AUDIT LOG #KE-2024-884-RETRIEVAL</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm font-semibold">GROUND TRUTH LOG</span>
+</div>
+<!-- Audited Visual Subject -->
+<div class="flex flex-col sm:flex-row gap-4 items-start mb-5">
+<div class="w-24 h-24 rounded-lg overflow-hidden bg-surface-container-high flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Close architectural framing of the circular amphitheater base of Kenyatta International Convention Centre with angled sunlit concrete fluting and Harambee Avenue pedestrian pavers." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVAX8QixA2J67LPJ-AYB5LdfGyjWe78Xq2ywcgMal4YKgn7T7Aej6fA_Qt9tdeoK_aOoyCOpFXK8Vf7_-Q4hi9C2Maqvt7uMHAhwHAUij9bYMxVbj_0_Ml2h1-qJJum31Wpg5ldYS6gpHWxypXceGB7oNleLuS4NiKqtDkhP3FMOc1l5whNRV-LKufmB77vsS9425GeMRaCicqL5L1XA6J18yy0fTICVuS8HTNN4k"/>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="font-headline-sm text-[16px] font-semibold text-primary">Item #104: Harambee Ave Forecourt</span>
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm">Confirmed</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Subject: Kenyatta International Convention Centre (Harambee Ave facade). Matched against 14 correlated angle frames.
+                  </p>
+</div>
+</div>
+<!-- The Honest Assessment Box -->
+<div class="space-y-3 p-4 rounded-lg bg-surface-container-low text-on-surface">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[18px] mt-0.5 flex-shrink-0">check_circle</span>
+<div class="font-body-sm text-body-sm">
+<strong class="font-semibold text-primary">Matched:</strong> Kenyatta International Convention Centre (Harambee Ave facade). Modernist amphitheater drum curvature verified via 12 sun-shadow vectors.
+                  </div>
+</div>
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-on-tertiary-container text-[18px] mt-0.5 flex-shrink-0">warning</span>
+<div class="font-body-sm text-body-sm">
+<strong class="font-semibold text-on-tertiary-container">Unverified:</strong> Southern plinth steps obscured by vehicle shadows. Horizon elevation indeterminable from current angle.
+                  </div>
+</div>
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-outline text-[18px] mt-0.5 flex-shrink-0">shield</span>
+<div class="font-body-sm text-body-sm">
+<strong class="font-semibold text-primary">Privacy safeguard:</strong> No pedestrian facial data recorded. Public space license confirmed.
+                  </div>
+</div>
+</div>
+</div>
+<!-- Footer Stamp -->
+<div class="mt-6 pt-3 flex items-center justify-between text-outline font-label-sm text-label-sm">
+<span>Audited by Reel Engine v2.4 (Nairobi Core)</span>
+<span>100% Deterministic Attribution</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Dedicated Showcase: Quiet Preview of Connected Ring Diagram -->
+<section class="w-full py-16 px-margin-mobile md:px-margin-tablet lg:px-margin bg-surface-container-low">
+<div class="max-w-6xl mx-auto">
+<div class="text-center max-w-2xl mx-auto mb-10">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold">SPATIAL RELATIONAL GRAPH</span>
+<h2 class="font-headline-lg text-headline-lg text-primary mt-1">The Connected Ring Diagram</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">
+          Discover how individual photographs reveal hidden relationships through shared facades and collective viewpoints.
+        </p>
+</div>
+<!-- Diagram Canvas Container -->
+<div class="bg-surface rounded-2xl p-6 md:p-12 shadow-sm flex flex-col items-center">
+<!-- Curated SVG Architecture Ring Visualization -->
+<div class="w-full max-w-3xl aspect-[16/10] relative flex items-center justify-center">
+<svg class="w-full h-full" fill="none" viewbox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+<!-- Concentric Guide Rings -->
+<circle class="text-outline-variant" cx="400" cy="250" opacity="0.4" r="190" stroke="currentColor" stroke-dasharray="3 3" stroke-width="1"></circle>
+<circle class="text-outline-variant" cx="400" cy="250" opacity="0.6" r="120" stroke="currentColor" stroke-dasharray="2 4" stroke-width="1"></circle>
+<!-- Radiating Vector Sightlines -->
+<!-- Link to Top-Left Node -->
+<path class="text-secondary" d="M 400 250 Q 280 200 200 120" stroke="currentColor" stroke-dasharray="4 3" stroke-width="1.5"></path>
+<!-- Link to Top-Right Node -->
+<path class="text-on-tertiary-container" d="M 400 250 Q 520 180 610 110" stroke="currentColor" stroke-dasharray="4 3" stroke-width="1.5"></path>
+<!-- Link to Bottom-Right Node -->
+<path class="text-secondary" d="M 400 250 Q 530 330 620 380" stroke="currentColor" stroke-dasharray="4 3" stroke-width="1.5"></path>
+<!-- Link to Bottom-Left Node -->
+<path class="text-on-tertiary-container" d="M 400 250 Q 290 320 190 370" stroke="currentColor" stroke-dasharray="4 3" stroke-width="1.5"></path>
+<!-- Relationship Badge 1: Same vantage (Top Left) -->
+<rect class="fill-secondary-container" height="24" rx="4" width="102" x="235" y="150"></rect>
+<text class="fill-on-secondary-fixed-variant" font-family="Plus Jakarta Sans" font-size="11" font-weight="600" text-anchor="middle" x="286" y="166">Same vantage</text>
+<!-- Relationship Badge 2: Opposite angle (Top Right) -->
+<rect class="fill-tertiary-fixed" height="24" rx="4" width="106" x="460" y="130"></rect>
+<text class="fill-on-tertiary-fixed" font-family="Plus Jakarta Sans" font-size="11" font-weight="600" text-anchor="middle" x="513" y="146">Opposite angle</text>
+<!-- Relationship Badge 3: Within 50m (Bottom Right) -->
+<rect class="fill-secondary-container" height="24" rx="4" width="88" x="475" y="325"></rect>
+<text class="fill-on-secondary-fixed-variant" font-family="Plus Jakarta Sans" font-size="11" font-weight="600" text-anchor="middle" x="519" y="341">Within 50m</text>
+<!-- Relationship Badge 4: Sightline intersection (Bottom Left) -->
+<rect class="fill-surface-container-high" height="24" rx="4" width="94" x="230" y="315"></rect>
+<text class="fill-on-surface-variant" font-family="Plus Jakarta Sans" font-size="11" font-weight="600" text-anchor="middle" x="277" y="331">Shared sightline</text>
+<!-- Central Hub (User's Photo) -->
+<g transform="translate(350, 200)">
+<rect class="fill-surface shadow-md" height="100" rx="12" width="100"></rect>
+<rect class="fill-primary-container" height="88" rx="8" width="88" x="6" y="6"></rect>
+<circle class="fill-surface-container" cx="50" cy="50" r="26"></circle>
+<path class="fill-secondary" d="M42 50 C42 45 46 42 50 42 C54 42 58 45 58 50 C58 55 54 58 50 58 C46 58 42 55 42 50 Z"></path>
+<circle class="fill-surface" cx="50" cy="50" r="4"></circle>
+<rect class="fill-surface-container-highest" height="14" rx="3" width="64" x="18" y="78"></rect>
+<text class="fill-primary" font-family="Plus Jakarta Sans" font-size="9" font-weight="700" text-anchor="middle" x="50" y="88">YOUR PHOTO</text>
+</g>
+<!-- Satellite Node 1: Top Left (World Photo A) -->
+<g transform="translate(140, 60)">
+<rect class="fill-surface-container-high shadow-sm" height="74" rx="8" width="84"></rect>
+<rect class="fill-surface-dim" height="48" rx="4" width="76" x="4" y="4"></rect>
+<!-- Architectural silhouette in card -->
+<path class="fill-on-surface-variant" d="M20 44 L32 20 L44 44 Z M48 44 L56 30 L64 44 Z" opacity="0.3"></path>
+<text class="fill-primary" font-family="Plus Jakarta Sans" font-size="9" font-weight="600" text-anchor="middle" x="42" y="64">Archive #0412</text>
+</g>
+<!-- Satellite Node 2: Top Right (World Photo B) -->
+<g transform="translate(580, 50)">
+<rect class="fill-surface-container-high shadow-sm" height="74" rx="8" width="84"></rect>
+<rect class="fill-surface-dim" height="48" rx="4" width="76" x="4" y="4"></rect>
+<!-- Geometric tower silhouette -->
+<rect class="fill-on-surface-variant" height="32" opacity="0.3" width="16" x="36" y="16"></rect>
+<text class="fill-primary" font-family="Plus Jakarta Sans" font-size="9" font-weight="600" text-anchor="middle" x="42" y="64">Archive #0881</text>
+</g>
+<!-- Satellite Node 3: Bottom Right (World Photo C) -->
+<g transform="translate(590, 340)">
+<rect class="fill-surface-container-high shadow-sm" height="74" rx="8" width="84"></rect>
+<rect class="fill-surface-dim" height="48" rx="4" width="76" x="4" y="4"></rect>
+<!-- Market stall silhouette -->
+<path class="fill-on-surface-variant" d="M16 26 L68 26 L60 44 L24 44 Z" opacity="0.3"></path>
+<text class="fill-primary" font-family="Plus Jakarta Sans" font-size="9" font-weight="600" text-anchor="middle" x="42" y="64">Archive #1209</text>
+</g>
+<!-- Satellite Node 4: Bottom Left (World Photo D) -->
+<g transform="translate(130, 330)">
+<rect class="fill-surface-container-high shadow-sm" height="74" rx="8" width="84"></rect>
+<rect class="fill-surface-dim" height="48" rx="4" width="76" x="4" y="4"></rect>
+<!-- Colonnade silhouette -->
+<rect class="fill-on-surface-variant" height="22" opacity="0.3" width="6" x="22" y="24"></rect>
+<rect class="fill-on-surface-variant" height="22" opacity="0.3" width="6" x="34" y="24"></rect>
+<rect class="fill-on-surface-variant" height="22" opacity="0.3" width="6" x="46" y="24"></rect>
+<rect class="fill-on-surface-variant" height="22" opacity="0.3" width="6" x="58" y="24"></rect>
+<text class="fill-primary" font-family="Plus Jakarta Sans" font-size="9" font-weight="600" text-anchor="middle" x="42" y="64">Archive #0924</text>
+</g>
+</svg>
+</div>
+<!-- Verbatim Caption Required -->
+<p class="mt-6 text-center font-body-sm text-body-sm text-on-surface-variant max-w-2xl text-balance">
+          The Connected ring diagram: see how a single photo you took links across vantage points, facades, and sightlines to the shared world cadastre.
+        </p>
+</div>
+</div>
+</section>
+<!-- Section 3: The collection in real numbers -->
+<section class="w-full py-20 px-margin-mobile md:px-margin-tablet lg:px-margin bg-surface">
+<div class="max-w-6xl mx-auto flex flex-col items-center text-center">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold">VERIFIED CADASTRE METRICS</span>
+<h2 class="font-headline-lg text-headline-lg text-primary mt-1">The collection in real numbers</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl mt-2">
+        Every record is peer-reviewed by Kenyan cultural custodians and referenced against municipal architectural blueprints.
+      </p>
+<!-- Three Stat Metrics Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl mt-12 text-left">
+<!-- Stat 1 -->
+<div class="bg-surface-container rounded-xl p-6 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-baseline gap-1">
+<span class="font-display-lg text-display-lg text-primary tracking-tight">1,420</span>
+<span class="font-headline-md text-headline-md text-on-tertiary-fixed-variant font-light">+</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-primary block mt-1">Photos</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">
+              Verified open archival photographs with documented attribution rights.
+            </p>
+</div>
+<div class="mt-6 pt-3 bg-surface-container-high/40 rounded p-2">
+<span class="font-label-sm text-label-sm text-secondary font-medium">100% Provenance Recorded</span>
+</div>
+</div>
+<!-- Stat 2 -->
+<div class="bg-surface-container rounded-xl p-6 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-baseline gap-1">
+<span class="font-display-lg text-display-lg text-primary tracking-tight">48</span>
+<span class="font-headline-md text-headline-md text-secondary font-light">sites</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-primary block mt-1">Places</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">
+              Documented architectural monographs and precincts across Kenyan urban centers.
+            </p>
+</div>
+<div class="mt-6 pt-3 bg-surface-container-high/40 rounded p-2">
+<span class="font-label-sm text-label-sm text-secondary font-medium">Nairobi • Mombasa • Kisumu</span>
+</div>
+</div>
+<!-- Stat 3 -->
+<div class="bg-surface-container rounded-xl p-6 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-baseline gap-1">
+<span class="font-display-lg text-display-lg text-primary tracking-tight">16</span>
+<span class="font-headline-md text-headline-md text-outline font-light">axes</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-primary block mt-1">Themes</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">
+              From modernist civic basilicas to bustling open markets and transit networks.
+            </p>
+</div>
+<div class="mt-6 pt-3 bg-surface-container-high/40 rounded p-2">
+<span class="font-label-sm text-label-sm text-secondary font-medium">Living Urban Typologies</span>
+</div>
+</div>
+</div>
+<!-- Refined Direct Link to Browse (>=44px) -->
+<div class="mt-14">
+<a class="min-h-[48px] px-8 py-3 rounded-lg inline-flex items-center gap-3 bg-primary-container text-surface hover:bg-tertiary transition-colors shadow-sm font-label-lg text-label-lg group cursor-pointer" data-path="browse" href="#">
+<span>Explore the full collection in Browse</span>
+<span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Interactive 60-Second Tour Lightbox Modal (Client-side micro-interaction) -->
+<div class="fixed inset-0 z-50 bg-primary/40 backdrop-blur-sm hidden items-center justify-center p-4 transition-opacity" id="tour-modal">
+<div class="bg-surface rounded-2xl max-w-lg w-full p-6 shadow-xl relative animate-in fade-in">
+<div class="flex items-center justify-between pb-3 mb-4 bg-surface-container -mx-6 -mt-6 p-4 rounded-t-2xl">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant text-[22px]">explore</span>
+<span class="font-headline-sm text-[18px] text-primary">60-Second Tour of Reel</span>
+</div>
+<button aria-label="Close tour" class="w-8 h-8 rounded-full bg-surface-container-high hover:bg-surface-container-highest flex items-center justify-center text-on-surface cursor-pointer" id="close-tour-modal" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<div class="space-y-4 py-2 font-body-md text-body-md text-on-surface-variant">
+<div class="flex gap-3 items-start">
+<span class="w-6 h-6 rounded-full bg-secondary-container text-secondary flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">1</span>
+<p><strong class="text-primary font-semibold">Conversational search:</strong> Reel does not rely on keywords. Describe light, architectural shapes, or street scenes.</p>
+</div>
+<div class="flex gap-3 items-start">
+<span class="w-6 h-6 rounded-full bg-secondary-container text-secondary flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">2</span>
+<p><strong class="text-primary font-semibold">Evidence inspection:</strong> Every photo returned shows pinpoint bounding boxes and explains why the match was made.</p>
+</div>
+<div class="flex gap-3 items-start">
+<span class="w-6 h-6 rounded-full bg-secondary-container text-secondary flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">3</span>
+<p><strong class="text-primary font-semibold">Private by design:</strong> When you connect your own photos to explore vantage points, they remain private on your device.</p>
+</div>
+</div>
+<div class="mt-6 pt-4 bg-surface-container -mx-6 -mb-6 p-4 rounded-b-2xl flex items-center justify-end gap-2">
+<button class="min-h-[44px] px-5 py-2 rounded bg-primary-container text-surface hover:bg-tertiary font-label-md text-label-md cursor-pointer transition-colors" id="tour-got-it-btn" type="button">
+          Ready to Search
+        </button>
+</div>
+</div>
+</div>
+<!-- Micro-Interactions Client Script -->
+<script>
+    (function initReelInteractions() {
+      // 1. Tappable prompt cards fill and focus the architectural prompt bar
+      const promptInput = document.getElementById('archival-prompt-input');
+      const promptCards = document.querySelectorAll('.prompt-card');
+      const submitBtn = document.getElementById('submit-prompt-btn');
+
+      promptCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const query = card.getAttribute('data-prompt');
+          if (promptInput && query) {
+            promptInput.value = query;
+            promptInput.focus();
+            promptInput.parentElement.classList.add('ring-2', 'ring-on-tertiary-fixed-variant');
+            setTimeout(() => {
+              promptInput.parentElement.classList.remove('ring-2', 'ring-on-tertiary-fixed-variant');
+            }, 600);
+          }
+        });
+      });
+
+      // 2. Submit prompt button feedback
+      if (submitBtn && promptInput) {
+        submitBtn.addEventListener('click', () => {
+          if (!promptInput.value.trim()) {
+            promptInput.focus();
+            promptInput.placeholder = "Please enter a description (e.g. 'Moi Avenue bus stop')...";
+          } else {
+            // Simulated search trigger
+            submitBtn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">progress_activity</span>';
+            setTimeout(() => {
+              submitBtn.innerHTML = '<span class="material-symbols-outlined text-[20px]">arrow_forward</span>';
+              const targetPath = document.querySelector('nav a[data-path="browse"]');
+              if (targetPath) targetPath.click();
+            }, 500);
+          }
+        });
+
+        promptInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            submitBtn.click();
+          }
+        });
+      }
+
+      // 3. Upload evidence photo feedback
+      const uploadBtn = document.getElementById('upload-evidence-btn');
+      if (uploadBtn && promptInput) {
+        uploadBtn.addEventListener('click', () => {
+          promptInput.value = "Analyzing photo: [Upper Hill view 2024.jpg] — Searching cadastre...";
+          promptInput.focus();
+        });
+      }
+
+      // 4. 60-Second Tour Lightbox Modal controls
+      const tourTrigger = document.getElementById('tour-modal-trigger');
+      const tourModal = document.getElementById('tour-modal');
+      const closeTourBtn = document.getElementById('close-tour-modal');
+      const gotItBtn = document.getElementById('tour-got-it-btn');
+
+      function openModal() {
+        if (tourModal) {
+          tourModal.classList.remove('hidden');
+          tourModal.classList.add('flex');
+        }
+      }
+
+      function closeModal() {
+        if (tourModal) {
+          tourModal.classList.add('hidden');
+          tourModal.classList.remove('flex');
+        }
+      }
+
+      if (tourTrigger) tourTrigger.addEventListener('click', openModal);
+      if (closeTourBtn) closeTourBtn.addEventListener('click', closeModal);
+      if (gotItBtn) gotItBtn.addEventListener('click', closeModal);
+
+      if (tourModal) {
+        tourModal.addEventListener('click', (e) => {
+          if (e.target === tourModal) closeModal();
+        });
+      }
+    })();
+  </script>
+</div></main><footer class="w-full bg-surface-container-low py-space-xl shadow-[0_-1px_8px_rgba(27,30,35,0.03)]"><div class="w-full px-margin-mobile md:px-margin-tablet lg:px-margin flex flex-col md:flex-row items-center justify-between gap-space-md"><div class="flex flex-wrap items-center gap-space-md"><span class="font-label-sm text-label-sm text-on-surface-variant">Built with Muse Spark Open</span><span class="text-outline-variant font-label-sm">•</span><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">GitHub</a><span class="text-outline-variant font-label-sm">•</span><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="about" href="#">About</a><span class="text-outline-variant font-label-sm">•</span><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="credits" href="#">Credits</a></div><div class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant"><span class="material-symbols-outlined text-[16px] text-secondary">lock</span><span>Your photos are private by default</span></div></div></footer></body></html>

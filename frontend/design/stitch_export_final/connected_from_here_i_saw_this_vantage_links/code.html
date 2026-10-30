@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+
+<html lang="en" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ReelWorld - Conversational Visual Archive</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            papyrus: {
+              50: '#FAF6F1',
+              100: '#F4EFEB',
+              200: '#ECE5DD',
+              300: '#E4DCD2',
+              400: '#D5CDC2',
+              500: '#CBC2B5',
+            },
+            parchment: {
+              card: '#ECE5DD',
+              input: '#F4EFEB',
+              border: '#D8CFC3',
+              hover: '#E2D8CC',
+              muted: '#DFD5C7',
+            },
+            espresso: {
+              950: '#151311',
+              900: '#1E1C1A',
+              850: '#282522',
+              800: '#35312C',
+              700: '#4D4740',
+              600: '#686057',
+              500: '#8A8074',
+            },
+            ochre: {
+              DEFAULT: '#C85A32',
+              dark: '#AF4A24',
+              clay: '#D35400',
+              glow: '#E0693E',
+              warm: '#D9822B',
+              soft: '#F4DFD2',
+              subtle: '#FAEEE7',
+            },
+            sage: {
+              900: '#1D2E24',
+              800: '#284133',
+              700: '#345241',
+              600: '#3D604E',
+              DEFAULT: '#476E5B',
+              light: '#E2ECE6',
+              border: '#B3C8BD',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          boxShadow: {
+            archival: '0 1px 3px rgba(30,28,26,0.06), 0 1px 2px rgba(30,28,26,0.04)',
+            elevated: '0 10px 28px -4px rgba(30,28,26,0.09), 0 4px 10px -2px rgba(30,28,26,0.05)',
+            card: '0 4px 18px -2px rgba(30,28,26,0.07), 0 2px 6px -1px rgba(30,28,26,0.04)',
+            ochreGlow: '0 0 22px -3px rgba(200,90,50,0.32)',
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #F4EFEB;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #1E1C1A;
+      overflow-x: hidden;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 4px;
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: #D5CDC2;
+      border-radius: 9999px;
+    }
+  </style>
+<meta content="web_standard" name="shell-type"/></head>
+<body class="min-h-screen bg-papyrus-100 text-espresso-900 flex flex-col antialiased selection:bg-ochre selection:text-white">
+<!-- Desktop Sticky Header (1440px target) -->
+<header class="sticky top-0 z-50 w-full bg-parchment-card/90 backdrop-blur-xl border-b border-parchment-border transition-all">
+<div class="max-w-[1440px] mx-auto h-20 px-8 flex items-center justify-between gap-6">
+<!-- Brand & Muse Spark Emblem -->
+<div class="flex items-center gap-4 flex-shrink-0">
+<div class="flex items-center gap-3 group cursor-pointer">
+<!-- Geometric Lens Emblem -->
+<div class="relative w-10 h-10 rounded-xl bg-espresso-900 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform overflow-hidden border border-espresso-800">
+<div class="absolute inset-0 bg-gradient-to-tr from-espresso-950 via-espresso-900 to-espresso-850"></div>
+<div class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-ochre blur-sm opacity-80 animate-pulse"></div>
+<span class="material-symbols-outlined text-[22px] text-ochre-warm relative z-10 font-bold">flare</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xl font-bold tracking-tight text-espresso-950 leading-none">ReelWorld</span>
+<span class="text-[11px] font-semibold tracking-wider text-espresso-600 uppercase">Visual Archive</span>
+</div>
+</div>
+<!-- Muse Spark Open Badge Pill -->
+<div class="h-6 w-px bg-parchment-border mx-1"></div>
+<div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-papyrus-200 border-2 border-ochre/40 shadow-sm transition-all"><span class="relative flex h-2.5 w-2.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-ochre opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-ochre"></span></span><span class="text-xs font-bold text-espresso-950 tracking-tight uppercase">Built with Muse Spark Open</span><span class="px-2 py-0.5 rounded text-[11px] font-extrabold bg-ochre text-white tracking-wide shadow-sm">v2.4</span></div>
+</div>
+<!-- Center Desktop Navigation Tabs -->
+<nav class="flex items-center gap-1 bg-papyrus-200/90 p-1.5 rounded-full border border-parchment-border shadow-inner">
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px] text-ochre">public</span>
+<span class="">World</span>
+</a>
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px]">photo_library</span>
+<span class="">My Photos</span>
+<span class="ml-0.5 px-1.5 py-0.2 rounded-full bg-papyrus-300 text-[11px] font-semibold text-espresso-700">84</span>
+</a>
+<a class="px-5 py-2 rounded-full bg-papyrus-100 text-espresso-950 font-bold text-sm shadow-archival border border-parchment-border transition-all flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[18px]">sensors</span>
+<span class="">Connected</span>
+<span class="w-1.5 h-1.5 rounded-full bg-sage-600"></span>
+</a>
+<a class="px-5 py-2 rounded-full text-espresso-700 hover:text-espresso-950 font-medium text-sm transition-colors flex items-center gap-2 hover:bg-papyrus-100/70" href="#">
+<span class="material-symbols-outlined text-[18px]">auto_stories</span>
+<span class="">Curated Journals</span>
+</a>
+</nav>
+<!-- Right Utility Bar -->
+<div class="flex items-center gap-3">
+<!-- Assistant Status Indicator -->
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-papyrus-200 hover:bg-parchment-hover text-espresso-700 text-xs font-semibold transition-colors border border-parchment-border">
+<span class="material-symbols-outlined text-[16px] text-ochre">auto_awesome</span>
+<span class="">Semantic Agent Active</span>
+</button>
+<!-- Lens / Camera Fast Tool -->
+<button class="w-10 h-10 rounded-full bg-papyrus-200 hover:bg-ochre-soft hover:text-ochre text-espresso-700 flex items-center justify-center transition-colors border border-parchment-border" title="Fast Capture Lens">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+</button>
+<!-- Primary Upload Action -->
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-espresso-900 text-papyrus-100 hover:bg-espresso-800 text-sm font-semibold shadow-archival transition-all active:scale-95 group border border-espresso-800">
+<span class="material-symbols-outlined text-[18px] text-ochre-warm group-hover:rotate-90 transition-transform">add</span>
+<span class="">Upload Artifact</span>
+</button>
+<!-- User Profile Avatar with Connected Pill -->
+</div>
+</div>
+</header>
+<!-- Main Content Space (Max 1440px Container) -->
+<main class="w-full max-w-[1440px] mx-auto px-8 py-8 flex flex-col gap-8 flex-1"><div class="flex flex-col w-full">
+<!-- Sub-Navigation for Connected Section -->
+<div class="w-full flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6">
+<div class="flex items-center gap-1 overflow-x-auto custom-scrollbar py-1">
+<a class="px-4 py-2.5 min-h-[44px] flex items-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-md text-label-md transition-colors whitespace-nowrap" href="#">
+        Where you've been
+      </a>
+<a class="px-4 py-2.5 min-h-[44px] flex items-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-md text-label-md transition-colors whitespace-nowrap" href="#">
+        Ring Diagram
+      </a>
+<a class="px-4 py-2.5 min-h-[44px] flex items-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-md text-label-md transition-colors whitespace-nowrap" href="#">
+        Link Evidence
+      </a>
+<a class="px-4 py-2.5 min-h-[44px] flex items-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-md text-label-md transition-colors whitespace-nowrap" href="#">
+        How are these connected?
+      </a>
+<a class="px-4 py-2.5 min-h-[44px] flex items-center rounded-lg bg-primary text-on-primary font-label-md text-label-md shadow-sm whitespace-nowrap" href="#">
+<span class="material-symbols-outlined text-[16px] mr-1.5 text-on-tertiary-container">visibility</span>
+        From here, I saw this
+      </a>
+</div>
+<!-- Mode Badge -->
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container-high self-start md:self-auto">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Sightline Vector Mode</span>
+</div>
+</div>
+<!-- Editorial Orientation & Curatorial Banner -->
+<section class="flex flex-col gap-6 pt-2 pb-10">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="flex flex-col gap-2 max-w-3xl">
+<div class="flex items-center gap-3">
+<span class="px-2.5 py-1 rounded bg-surface-container-highest text-secondary font-label-sm text-label-sm uppercase tracking-wider">Intrapersonal Cadastre</span>
+<span class="text-outline text-label-sm font-label-sm">ARCH-KE-VANTAGE-05</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">FROM HERE, I SAW THIS</h1>
+<p class="font-headline-sm text-headline-sm text-on-surface-variant">Visual Sightline Triangulation • Intrapersonal Photo Vantage Links</p>
+</div>
+<!-- Curatorial Counters Widget -->
+<div class="flex items-center gap-4 bg-surface-container p-4 rounded-xl shadow-archival self-start md:self-auto">
+<div class="flex flex-col pr-4">
+<span class="font-headline-md text-headline-md text-primary font-bold">14</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Vantage Pairs Established</span>
+</div>
+<div class="w-px h-8 bg-surface-variant"></div>
+<div class="flex flex-col px-4">
+<span class="font-headline-md text-headline-md text-secondary font-bold">9</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">User Captures Linked</span>
+</div>
+<div class="w-px h-8 bg-surface-variant"></div>
+<div class="flex flex-col pl-4">
+<span class="font-headline-md text-headline-md text-on-tertiary-container font-bold">0</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">AI Hallucinations / GPS Inference</span>
+</div>
+</div>
+</div>
+<!-- Methodological Premise Callout -->
+<div class="w-full bg-surface-container-low rounded-xl p-6 shadow-sm flex flex-col md:flex-row gap-5 items-start">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center flex-shrink-0 text-on-tertiary-container">
+<span class="material-symbols-outlined text-[24px]">architecture</span>
+</div>
+<div class="flex flex-col gap-1.5 flex-1">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider">Physical Sightline Corridors</span>
+<span class="text-outline text-label-sm font-label-sm">• Geometric Parapet Solvers</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Links between your own photos trace your footsteps and physical sightlines through the city. An arrow connects where your feet were planted to what your camera looked out upon—derived strictly from registered architectural parapets and continuous sight corridors.
+        </p>
+</div>
+<div class="hidden lg:flex flex-col items-end flex-shrink-0 pl-4 text-right">
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">Muse Spark Open Framework</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Continuous optical ray intersection</span>
+</div>
+</div>
+</section>
+<!-- Vantage Pair Section -->
+<section class="flex flex-col gap-10 pb-16">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px] text-secondary">timeline</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Registered Visual Corridors (Nairobi CBD)</h2>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-md text-label-md">
+<span>Order: Chronological Discovery</span>
+<span class="material-symbols-outlined text-[16px]">tune</span>
+</div>
+</div>
+<!-- Pair 1: KICC Helipad to Parliament Colonnades -->
+<article class="w-full bg-surface-container rounded-xl p-6 md:p-8 shadow-card flex flex-col gap-6 transition-all hover:bg-surface-container-high/60">
+<!-- Pair Metadata Header -->
+<div class="flex flex-wrap items-center justify-between gap-4 pb-2">
+<div class="flex items-center gap-2.5">
+<span class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-sm text-label-sm font-bold">01</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">KICC Amphitheatre Terrace → Parliament Colonnades</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Spatial Pair #VK-042 • Harambee District Cadastre</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-3 py-1 rounded bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+            Vector Verified
+          </span>
+<span class="px-3 py-1 rounded bg-surface-variant text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">240m Ray Length</span>
+</div>
+</div>
+<!-- Vantage Visual Assembly (Where You Stood -> Arrow -> What You Saw) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+<!-- Left: Where you stood (Anchor) -->
+<div class="lg:col-span-5 flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-tertiary-container font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">pin_drop</span>
+              Where You Stood
+            </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Elev: +142.0m Plinth</span>
+</div>
+<!-- Framed Mat Photo -->
+<div class="bg-surface-variant p-3 rounded-xl shadow-inner group">
+<div class="relative overflow-hidden rounded-lg aspect-[4/3] bg-surface-dim">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Photographic perspective from the elevated circular concrete terrace of KICC in Nairobi looking downward at the stone plinth and amphitheatre rim with warm cast shadows of afternoon light, textured basalt pavers, architectural balustrade in sharp focus, warm archival earth tone aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxNdTsuEvsnO7TzaHYftkgIjSQpYQ0Zo3K2hVO2wHD8u5R-h9eSuf-_vrRzTFWgn5CNc-7T_Wkuad_BcBXAHStc3Dlxd_QMH0AH6nGJcWF4nrfojEsf3CEo5XtwzziCUEob3KUCgwA_Pv9M8am3tX9vaT8Xcm0KDOkuRH1iM7QB5h01BfQ7EYB7GSsfw1PScULLybA0dk87hKVv5XBMQ0IjbBhc1ayK1-lFhWEtDU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-transparent to-transparent flex items-end p-4">
+<div class="flex flex-col text-on-primary">
+<span class="font-headline-sm text-headline-sm font-semibold">KICC Amphitheatre Rim</span>
+<span class="font-body-sm text-body-sm opacity-90">Ground Anchor Point • Facing South-Southwest</span>
+</div>
+</div>
+<!-- Aperture Calibration Markers -->
+<div class="absolute top-2 left-2 flex items-center gap-1 bg-primary/80 backdrop-blur-sm px-2 py-0.5 rounded text-on-primary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[12px]">camera</span>
+<span>f/8.0 • 28mm</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Center: Sightline Vector Bridge -->
+<div class="lg:col-span-2 flex flex-col items-center justify-center py-4 lg:py-0 px-2 text-center">
+<div class="w-full flex items-center justify-center gap-2 mb-2">
+<div class="h-0.5 flex-1 bg-surface-variant"></div>
+<span class="w-2.5 h-2.5 rounded-full bg-on-tertiary-container"></span>
+<div class="h-0.5 flex-1 bg-surface-variant"></div>
+</div>
+<div class="flex flex-col items-center gap-1 bg-surface-container-high p-3 rounded-lg w-full shadow-sm">
+<span class="material-symbols-outlined text-[28px] text-on-tertiary-container rotate-90 lg:rotate-0">trending_flat</span>
+<span class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider">360° Radial</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">18° Pitch Downward</span>
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold mt-1">Air Corridor Clear</span>
+</div>
+<div class="w-full flex items-center justify-center gap-2 mt-2">
+<div class="h-0.5 flex-1 bg-surface-variant"></div>
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<div class="h-0.5 flex-1 bg-surface-variant"></div>
+</div>
+</div>
+<!-- Right: What you saw (Outlook) -->
+<div class="lg:col-span-5 flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">travel_explore</span>
+              What You Saw
+            </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Dist: 240m Radial</span>
+</div>
+<!-- Framed Mat Photo -->
+<div class="bg-surface-variant p-3 rounded-xl shadow-inner group">
+<div class="relative overflow-hidden rounded-lg aspect-[4/3] bg-surface-dim">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Telephoto perspective looking down onto the geometric stone colonnades and garden terraces of the Kenyan Parliament Buildings in Nairobi, terracotta roof tiles, lush mature acacia trees, afternoon low sun highlighting the fluted columns and basalt gravel walkways, warm archival tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzsXhe4mc-URdQq6CE3q3AEKdLpp7bYunR4665SeBrIBBdhnj_x3wkrC_-jdvI7oDQCMAcFPdv1hvjcjxxrTy6lcsVzRliLriK6bxfbuLm4PX5lkKAcw1ciT33FNtUeQahxC1cnCLx4kRJuUdBEyhwk4FBYL9Q_zxvwU0gCNVUds-iG6cnVGWAhvGyK8xvmM6Zes8okFDerBmC1QgOmYUlBoz2py8Z-F1rNSVxUvM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-transparent to-transparent flex items-end p-4">
+<div class="flex flex-col text-on-primary">
+<span class="font-headline-sm text-headline-sm font-semibold">Parliament Colonnades &amp; Gardens</span>
+<span class="font-body-sm text-body-sm opacity-90">Visual Target • Downward Sight Angle</span>
+</div>
+</div>
+<div class="absolute top-2 right-2 flex items-center gap-1 bg-primary/80 backdrop-blur-sm px-2 py-0.5 rounded text-on-primary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[12px]">filter_center_focus</span>
+<span>f/5.6 • 70mm</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Field Note & Sightline Corroboration -->
+<div class="bg-surface-container-low p-4 rounded-xl flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
+<div class="flex flex-col gap-1 max-w-3xl">
+<div class="flex items-center gap-2 text-on-surface font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px] text-on-tertiary-container">notes</span>
+<span>Cadastral Field Note:</span>
+<span class="font-body-md text-body-md text-on-surface">You were at KICC amphitheatre terrace, then looked down onto the Parliament colonnade.</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant pl-6">
+            Evidence: Both photos share identical afternoon cast-shadow angles on the basalt pavers and matching solar azimuth registered at 242° southwest. Zero intervening structures obscure the 240m line of sight.
+          </p>
+</div>
+<!-- Tactile Actions (Min 44px target) -->
+<div class="flex items-center gap-2 self-stretch md:self-auto flex-wrap">
+<button class="px-4 py-2.5 min-h-[44px] rounded-lg bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-md text-label-md transition-all active:scale-95 flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">straighten</span>
+<span>Inspect Corridor</span>
+</button>
+<button class="px-4 py-2.5 min-h-[44px] rounded-lg bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-md text-label-md transition-all active:scale-95 flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">library_add</span>
+<span>Add to Story</span>
+</button>
+<button class="px-4 py-2.5 min-h-[44px] rounded-lg bg-primary text-on-primary hover:bg-espresso-800 font-label-md text-label-md transition-all active:scale-95 flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-on-tertiary-container">donut_large</span>
+<span>Open in Ring Diagram</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Pair 2: Nairobi City Market Nave Interior to Muindi Mbingu Street -->
+<article class="w-full bg-surface-container rounded-xl p-6 md:p-8 shadow-card flex flex-col gap-6 transition-all hover:bg-surface-container-high/60">
+<!-- Pair Metadata Header -->
+<div class="flex flex-wrap items-center justify-between gap-4 pb-2">
+<div class="flex items-center gap-2.5">
+<span class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-sm text-label-sm font-bold">02</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">City Market Central Nave → Muindi Mbingu Street Facades</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Spatial Pair #VK-088 • Central Market Vault Cadastre</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-3 py-1 rounded bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+            Vector Verified
+          </span>
+<span class="px-3 py-1 rounded bg-surface-variant text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">65m Portal Axis</span>
+</div>
+</div>
+<!-- Vantage Visual Assembly -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+<!-- Left: Where you stood (Anchor) -->
+<div class="lg:col-span-5 flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-tertiary-container font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">pin_drop</span>
+              Where You Stood
+            </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Elev: 0.0m Nave Paving</span>
+</div>
+<!-- Framed Mat Photo -->
+<div class="bg-surface-variant p-3 rounded-xl shadow-inner group">
+<div class="relative overflow-hidden rounded-lg aspect-[4/3] bg-surface-dim">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Interior of the historic Nairobi City Market with monumental reinforced concrete parabolic arches soaring overhead, market stall displays with carved wooden artifacts and soapstone, dust motes in natural clerestory sunlight, warm ochre and terracotta textures, tactile archival photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCATr9H2x08u-bNVZYCwzkARR8nRw7YEEqiBESIlKh4gllCTxFVEisrZ5k7CPdgvEb5TAACPuNJqDN214JOlu2_AOK_9VnKhzV8OlUqkVNB4F02ic6QssVHMF-wBjh_LKL06zUqBxg_LJ9-FJf_THaKhcAWeKvpcdL1gx3yzXpLAbt1E5ZfrzrSPidMAKzzwujXL7z1swXPJFcndpb4jVau7ii2EJUo185VtkhqBII"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-transparent to-transparent flex items-end p-4">
+<div class="flex flex-col text-on-primary">
+<span class="font-headline-sm text-headline-sm font-semibold">City Market Interior Nave</span>
+<span class="font-body-sm text-body-sm opacity-90">Ground Anchor Point • Facing South Vault</span>
+</div>
+</div>
+<div class="absolute top-2 left-2 flex items-center gap-1 bg-primary/80 backdrop-blur-sm px-2 py-0.5 rounded text-on-primary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[12px]">camera</span>
+<span>f/4.0 • 24mm</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Center: Sightline Vector Bridge -->
+<div class="lg:col-span-2 flex flex-col items-center justify-center py-4 lg:py-0 px-2 text-center">
+<div class="w-full flex items-center justify-center gap-2 mb-2">
+<div class="h-0.5 flex-1 bg-surface-variant"></div>
+<span class="w-2.5 h-2.5 rounded-full bg-on-tertiary-container"></span>
+<div class="h-0.5 flex-1 bg-surface-variant"></div>
+</div>
+<div class="flex flex-col items-center gap-1 bg-surface-container-high p-3 rounded-lg w-full shadow-sm">
+<span class="material-symbols-outlined text-[28px] text-on-tertiary-container rotate-90 lg:rotate-0">trending_flat</span>
+<span class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider">Vault Portal</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Street-Level Axis</span>
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold mt-1">Direct Aperture</span>
+</div>
+<div class="w-full flex items-center justify-center gap-2 mt-2">
+<div class="h-0.5 flex-1 bg-surface-variant"></div>
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<div class="h-0.5 flex-1 bg-surface-variant"></div>
+</div>
+</div>
+<!-- Right: What you saw (Outlook) -->
+<div class="lg:col-span-5 flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">travel_explore</span>
+              What You Saw
+            </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Dist: 65m Through Arch</span>
+</div>
+<!-- Framed Mat Photo -->
+<div class="bg-surface-variant p-3 rounded-xl shadow-inner group">
+<div class="relative overflow-hidden rounded-lg aspect-[4/3] bg-surface-dim">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Framed perspective looking through the large open concrete doorway arch of Nairobi City Market toward bright exterior daylight onto Muindi Mbingu Street, colorful fabric stalls and pedestrian street activity outside, architectural contrast between shaded interior concrete and sunlit street facades, archival museum quality" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyiI5YTXHZlhSdIkQmfwWMGAhNZB7XkXzG0J2_OmsU8oCLbjuTCwM05t1KiDLB5Atakghy92RlAUMD82RNhfr5DJxSHGQbYPs6tkVWIGGkwMbj0ZcQ3scOCiqlI9r5Sr7Gx_WB8AktJQLtXilK6vVnh4bYm9b5J28Dj5LwIZAkpm6SIJSpohBeKktdeVP8IMgpWBX48ol4z49ClyFoMV056CAZnlf9-Psdqm4zxXM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-transparent to-transparent flex items-end p-4">
+<div class="flex flex-col text-on-primary">
+<span class="font-headline-sm text-headline-sm font-semibold">Muindi Mbingu Street Facades</span>
+<span class="font-body-sm text-body-sm opacity-90">Visual Target • Portal Exit Frame</span>
+</div>
+</div>
+<div class="absolute top-2 right-2 flex items-center gap-1 bg-primary/80 backdrop-blur-sm px-2 py-0.5 rounded text-on-primary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[12px]">filter_center_focus</span>
+<span>f/5.6 • 35mm</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Field Note & Sightline Corroboration -->
+<div class="bg-surface-container-low p-4 rounded-xl flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
+<div class="flex flex-col gap-1 max-w-3xl">
+<div class="flex items-center gap-2 text-on-surface font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px] text-on-tertiary-container">notes</span>
+<span>Cadastral Field Note:</span>
+<span class="font-body-md text-body-md text-on-surface">You were inside City Market under the concrete vaults, then looked through the entrance toward Muindi Mbingu Street.</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant pl-6">
+            Evidence: The parabolic concrete portal arch frames the street-level shopfront in both frames. Continuous tessellated floor tile transitions from covered interior threshold directly to sidewalk kerb stone.
+          </p>
+</div>
+<!-- Tactile Actions (Min 44px target) -->
+<div class="flex items-center gap-2 self-stretch md:self-auto flex-wrap">
+<button class="px-4 py-2.5 min-h-[44px] rounded-lg bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-md text-label-md transition-all active:scale-95 flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">straighten</span>
+<span>Inspect Corridor</span>
+</button>
+<button class="px-4 py-2.5 min-h-[44px] rounded-lg bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-md text-label-md transition-all active:scale-95 flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">library_add</span>
+<span>Add to Story</span>
+</button>
+<button class="px-4 py-2.5 min-h-[44px] rounded-lg bg-primary text-on-primary hover:bg-espresso-800 font-label-md text-label-md transition-all active:scale-95 flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-on-tertiary-container">donut_large</span>
+<span>Open in Ring Diagram</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Pair 3: Harambee Avenue Sidewalk Plinth to CBK Pension Towers -->
+<article class="w-full bg-surface-container rounded-xl p-6 md:p-8 shadow-card flex flex-col gap-6 transition-all hover:bg-surface-container-high/60">
+<!-- Pair Metadata Header -->
+<div class="flex flex-wrap items-center justify-between gap-4 pb-2">
+<div class="flex items-center gap-2.5">
+<span class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-sm text-label-sm font-bold">03</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Harambee Avenue Sidewalk Plinth → CBK Pension Towers Fluted Crown</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Spatial Pair #VK-102 • Parliament Roundabout Corridor</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-3 py-1 rounded bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+            Vector Verified
+          </span>
+<span class="px-3 py-1 rounded bg-surface-variant text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">185m High Pitch</span>
+</div>
+</div>
+<!-- Vantage Visual Assembly -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+<!-- Left: Where you stood (Anchor) -->
+<div class="lg:col-span-5 flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-tertiary-container font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">pin_drop</span>
+              Where You Stood
+            </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Elev: Street Level Kerb</span>
+</div>
+<!-- Framed Mat Photo -->
+<div class="bg-surface-variant p-3 rounded-xl shadow-inner group">
+<div class="relative overflow-hidden rounded-lg aspect-[4/3] bg-surface-dim">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Wide street-level photograph along the sidewalk of Harambee Avenue in Nairobi, showing the paved pedestrian sidewalk, government building security bollards, native yellow fever acacia tree trunks, and foreground municipal bronze survey marker, warm natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKAd2meeE-0o1vvXqkMzI46ZGcRESoSuSSGVQK4sjXQ3gUx7XtrTy_QGJC1iji9yKj8BTBCYRWXr6EdxJ9dBnoqiqQ5Ug4Re8PtJ2qDMx_eCDkTc7w2XC1apD9jr9WAnRaIhCIkb0VSzvP_0-9wXnPQZR3BtwcbrEM9NVjAS4DwqjCvnmABI2EJHc9QHd8xjINndJOCSAStlakKk7l-4q7PJvAyHH2TQpRXl7-tbA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-transparent to-transparent flex items-end p-4">
+<div class="flex flex-col text-on-primary">
+<span class="font-headline-sm text-headline-sm font-semibold">Harambee Avenue Sidewalk</span>
+<span class="font-body-sm text-body-sm opacity-90">Ground Anchor Point • Facing Northwest</span>
+</div>
+</div>
+<div class="absolute top-2 left-2 flex items-center gap-1 bg-primary/80 backdrop-blur-sm px-2 py-0.5 rounded text-on-primary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[12px]">camera</span>
+<span>f/6.3 • 35mm</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Center: Sightline Vector Bridge -->
+<div class="lg:col-span-2 flex flex-col items-center justify-center py-4 lg:py-0 px-2 text-center">
+<div class="w-full flex items-center justify-center gap-2 mb-2">
+<div class="h-0.5 flex-1 bg-surface-variant"></div>
+<span class="w-2.5 h-2.5 rounded-full bg-on-tertiary-container"></span>
+<div class="h-0.5 flex-1 bg-surface-variant"></div>
+</div>
+<div class="flex flex-col items-center gap-1 bg-surface-container-high p-3 rounded-lg w-full shadow-sm">
+<span class="material-symbols-outlined text-[28px] text-on-tertiary-container rotate-90 lg:rotate-0">trending_flat</span>
+<span class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider">312° Vector</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">34° Upward Pitch</span>
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold mt-1">Zero Parapet Cut</span>
+</div>
+<div class="w-full flex items-center justify-center gap-2 mt-2">
+<div class="h-0.5 flex-1 bg-surface-variant"></div>
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<div class="h-0.5 flex-1 bg-surface-variant"></div>
+</div>
+</div>
+<!-- Right: What you saw (Outlook) -->
+<div class="lg:col-span-5 flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">travel_explore</span>
+              What You Saw
+            </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Dist: 185m Skyward Axis</span>
+</div>
+<!-- Framed Mat Photo -->
+<div class="bg-surface-variant p-3 rounded-xl shadow-inner group">
+<div class="relative overflow-hidden rounded-lg aspect-[4/3] bg-surface-dim">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Dramatic architectural low-angle photograph looking straight up at the curving, fluted twin towers of the Central Bank of Kenya CBK Pension Towers in Nairobi, sleek modernist facade fins catching the golden hour sky, geometric architectural rhythms, heavy basalt plinth below, warm editorial color system" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBqFYUuzQ-hOUJHBS7nq4aRA_APzRyPtNDGR6AghUJM6RhcIH45ozwQx2rBYR27ff2JTwZYTN76iJ-GFzCsWCy6ZCLM6UyVQjpVWovSeXTpfIGB3B5PEnuPR8UvtX_FY4LNtjOZDC49apUCQeUS5WWUlqYURCwN6e9g0Dd6bWNSBDLZ7VWbpQQgBDf0pJdaGl0ctm-dmw7xjs84YOsoii84yf5KhEPunO1nIS-K-k"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-transparent to-transparent flex items-end p-4">
+<div class="flex flex-col text-on-primary">
+<span class="font-headline-sm text-headline-sm font-semibold">CBK Pension Towers Fluted Plinth</span>
+<span class="font-body-sm text-body-sm opacity-90">Visual Target • Steep Elevation</span>
+</div>
+</div>
+<div class="absolute top-2 right-2 flex items-center gap-1 bg-primary/80 backdrop-blur-sm px-2 py-0.5 rounded text-on-primary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[12px]">filter_center_focus</span>
+<span>f/8.0 • 50mm</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Field Note & Sightline Corroboration -->
+<div class="bg-surface-container-low p-4 rounded-xl flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
+<div class="flex flex-col gap-1 max-w-3xl">
+<div class="flex items-center gap-2 text-on-surface font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px] text-on-tertiary-container">notes</span>
+<span>Cadastral Field Note:</span>
+<span class="font-body-md text-body-md text-on-surface">You were at Harambee Avenue, then aimed your camera upward at the CBK Pension Towers fluted plinth.</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant pl-6">
+            Evidence: Continuous street kerb alignment and bronze municipal cadastre plaque visible in the foreground anchor. Zero opaque structures blocking the direct northwest 185m sight corridor.
+          </p>
+</div>
+<!-- Tactile Actions (Min 44px target) -->
+<div class="flex items-center gap-2 self-stretch md:self-auto flex-wrap">
+<button class="px-4 py-2.5 min-h-[44px] rounded-lg bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-md text-label-md transition-all active:scale-95 flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">straighten</span>
+<span>Inspect Corridor</span>
+</button>
+<button class="px-4 py-2.5 min-h-[44px] rounded-lg bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-md text-label-md transition-all active:scale-95 flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">library_add</span>
+<span>Add to Story</span>
+</button>
+<button class="px-4 py-2.5 min-h-[44px] rounded-lg bg-primary text-on-primary hover:bg-espresso-800 font-label-md text-label-md transition-all active:scale-95 flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-on-tertiary-container">donut_large</span>
+<span>Open in Ring Diagram</span>
+</button>
+</div>
+</div>
+</article>
+</section>
+<!-- Sightline Vector Triangulation Telemetry Sandbox -->
+<section class="w-full bg-surface-container rounded-xl p-8 shadow-card mb-12 flex flex-col gap-6">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[24px]">hub</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Intrapersonal Vector Alignment Matrix</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Continuous geometric ray tracing across 9 user captures in the Harambee &amp; City Market sectors</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-3 py-1 rounded bg-surface-variant font-label-sm text-label-sm text-on-surface-variant uppercase">3 Linked Sectors</span>
+<span class="px-3 py-1 rounded bg-secondary-container font-label-sm text-label-sm text-on-secondary-fixed uppercase">No Drift Detected</span>
+</div>
+</div>
+<!-- Inline Vector Matrix Visualization SVG -->
+<div class="w-full bg-surface-container-low rounded-xl p-6 flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="flex-1 w-full flex flex-col gap-3">
+<div class="flex items-center justify-between font-label-md text-label-md text-on-surface">
+<span>Harambee Ave Plinth → Parliament</span>
+<span class="text-secondary font-bold">100% Ray Clearance</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2 overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 100%"></div>
+</div>
+<div class="flex items-center justify-between font-label-md text-label-md text-on-surface mt-2">
+<span>City Market Interior → Street Curb Portal</span>
+<span class="text-secondary font-bold">100% Ray Clearance</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2 overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 100%"></div>
+</div>
+<div class="flex items-center justify-between font-label-md text-label-md text-on-surface mt-2">
+<span>KICC Rim → Parliament Colonnades</span>
+<span class="text-secondary font-bold">100% Ray Clearance</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2 overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 100%"></div>
+</div>
+</div>
+<!-- Compact Sightline Vector Graphic -->
+<div class="flex-shrink-0 flex items-center justify-center p-4 bg-surface-container-high rounded-xl">
+<svg class="text-primary" fill="none" height="120" viewbox="0 0 240 120" width="240" xmlns="http://www.w3.org/2000/svg">
+<!-- Background Cadastral Grid Dots -->
+<circle cx="20" cy="20" fill="currentColor" opacity="0.15" r="1.5"></circle>
+<circle cx="60" cy="20" fill="currentColor" opacity="0.15" r="1.5"></circle>
+<circle cx="100" cy="20" fill="currentColor" opacity="0.15" r="1.5"></circle>
+<circle cx="140" cy="20" fill="currentColor" opacity="0.15" r="1.5"></circle>
+<circle cx="180" cy="20" fill="currentColor" opacity="0.15" r="1.5"></circle>
+<circle cx="220" cy="20" fill="currentColor" opacity="0.15" r="1.5"></circle>
+<circle cx="20" cy="60" fill="currentColor" opacity="0.15" r="1.5"></circle>
+<circle cx="60" cy="60" fill="currentColor" opacity="0.15" r="1.5"></circle>
+<circle cx="100" cy="60" fill="currentColor" opacity="0.15" r="1.5"></circle>
+<circle cx="140" cy="60" fill="currentColor" opacity="0.15" r="1.5"></circle>
+<circle cx="180" cy="60" fill="currentColor" opacity="0.15" r="1.5"></circle>
+<circle cx="220" cy="60" fill="currentColor" opacity="0.15" r="1.5"></circle>
+<circle cx="20" cy="100" fill="currentColor" opacity="0.15" r="1.5"></circle>
+<circle cx="60" cy="100" fill="currentColor" opacity="0.15" r="1.5"></circle>
+<circle cx="100" cy="100" fill="currentColor" opacity="0.15" r="1.5"></circle>
+<circle cx="140" cy="100" fill="currentColor" opacity="0.15" r="1.5"></circle>
+<circle cx="180" cy="100" fill="currentColor" opacity="0.15" r="1.5"></circle>
+<circle cx="220" cy="100" fill="currentColor" opacity="0.15" r="1.5"></circle>
+<!-- Vantage Vectors -->
+<line stroke="#C85A32" stroke-dasharray="4 2" stroke-width="2.5" x1="40" x2="190" y1="80" y2="35"></line>
+<circle cx="40" cy="80" fill="#C85A32" r="6"></circle>
+<circle cx="40" cy="80" fill="#FAF6F1" r="2"></circle>
+<circle cx="190" cy="35" fill="#476E5B" r="6"></circle>
+<circle cx="190" cy="35" fill="#FAF6F1" r="2"></circle>
+<!-- Label markers -->
+<text fill="#1E1C1A" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="600" x="30" y="104">STANCE (KICC)</text>
+<text fill="#476E5B" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="600" x="160" y="24">TARGET (PARLIAMENT)</text>
+</svg>
+</div>
+</div>
+</section>
+<!-- Empty State Sandbox / Discovery Invitation -->
+<section class="w-full bg-surface-container-low rounded-xl p-8 md:p-12 shadow-archival mb-8">
+<div class="max-w-2xl mx-auto flex flex-col items-center text-center gap-5">
+<!-- Paired Camera Lens Outline Illustration with Dotted Vector Bridge -->
+<div class="flex items-center gap-6 py-4">
+<!-- Anchor Lens -->
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[28px]">crop_free</span>
+</div>
+<!-- Empty Dotted Sightline Arrow -->
+<div class="flex items-center gap-1.5 px-3">
+<span class="w-2 h-2 rounded-full bg-surface-variant"></span>
+<div class="w-12 md:w-20 h-0.5 bg-surface-variant"></div>
+<span class="material-symbols-outlined text-[20px] text-outline">arrow_forward</span>
+</div>
+<!-- Outlook Lens -->
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[28px]">photo_camera</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">Add more photos to see how they connect.</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          When you photograph a location and then photograph the view looking outward from it, ReelWorld traces the geometric sightline between them without using GPS tracking or synthetic interpolation.
+        </p>
+</div>
+<!-- Action Buttons with 44px min target -->
+<div class="flex flex-col sm:flex-row items-center gap-3 pt-2">
+<button class="w-full sm:w-auto px-6 py-3 min-h-[44px] rounded-lg bg-primary text-on-primary hover:bg-espresso-800 font-label-md text-label-md font-semibold transition-all active:scale-95 flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[20px] text-on-tertiary-container">add_a_photo</span>
+<span>+ Upload photos to discover vantage links</span>
+</button>
+<button class="w-full sm:w-auto px-6 py-3 min-h-[44px] rounded-lg bg-surface-container hover:bg-surface-variant text-on-surface font-label-md text-label-md font-semibold transition-all active:scale-95 flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[20px] text-secondary">collections</span>
+<span>Browse unconnected photos (12 candidates)</span>
+</button>
+</div>
+<!-- Cadastre Note -->
+<div class="pt-4 flex items-center gap-2 text-outline font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+<span>ReelWorld Kenya Archival Precision • Continuous Sight Corridor Validation</span>
+</div>
+</div>
+</section>
+</div></main>
+<!-- Desktop Persistent Footer / System Status Bar -->
+<footer class="w-full bg-espresso-950 border-t border-espresso-850 text-papyrus-300 mt-12">
+<div class="max-w-[1440px] mx-auto px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+<div class="flex items-center gap-3">
+<div class="w-7 h-7 rounded-lg bg-espresso-900 border border-espresso-800 flex items-center justify-center text-ochre-warm">
+<span class="material-symbols-outlined text-[16px]">flare</span>
+</div>
+<div>
+<span class="text-papyrus-100 font-bold">ReelWorld Kenya Semantic Visual Pipeline</span>
+<span class="mx-2 text-espresso-700">•</span>
+<span class="">Powered by Muse Spark Open Framework</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-sage-DEFAULT"></span>
+<span class="text-papyrus-200">Nairobi Edge Cluster: Online (32ms)</span>
+</div>
+<a class="hover:text-ochre-warm transition-colors" href="#">Documentation</a>
+<a class="hover:text-ochre-warm transition-colors" href="#">Archive Telemetry</a>
+<a class="hover:text-ochre-warm transition-colors" href="#">Privacy &amp; Provenance</a>
+</div>
+</div>
+</footer>
+<script>
+    function setQuery(text) {
+      const input = document.getElementById('conversational-input');
+      if (input) {
+        input.value = text;
+        input.focus();
+        input.parentElement.parentElement.classList.add('ring-2', 'ring-ochre');
+        setTimeout(() => {
+          input.parentElement.parentElement.classList.remove('ring-2', 'ring-ochre');
+        }, 800);
+      }
+    }
+  </script>
+</body></html>

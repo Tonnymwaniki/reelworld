@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-dim":"#ded9d5","surface-tint":"#5c5e64","outline-variant":"#c6c6cb","background":"#fef8f4","primary-fixed":"#e1e2e9","surface-bright":"#fef8f4","inverse-primary":"#c4c6cd","secondary":"#476556","on-secondary-fixed-variant":"#304d3f","on-primary-fixed":"#191c21","on-error-container":"#93000a","on-background":"#1d1b19","inverse-on-surface":"#f5f0ec","on-surface-variant":"#45474b","on-primary-fixed-variant":"#44474c","outline":"#76777b","surface-container-lowest":"#ffffff","inverse-surface":"#32302e","on-tertiary-fixed-variant":"#822801","error-container":"#ffdad6","on-surface":"#1d1b19","secondary-fixed-dim":"#aecebc","tertiary":"#0e0100","surface-variant":"#e6e2de","secondary-container":"#c9ead8","on-primary-container":"#83868c","surface-container-highest":"#e6e2de","surface-container-low":"#f8f3ef","primary-fixed-dim":"#c4c6cd","tertiary-fixed-dim":"#ffb59c","on-tertiary-fixed":"#390c00","surface-container-high":"#ece7e3","on-primary":"#ffffff","on-secondary":"#ffffff","error":"#ba1a1a","primary":"#030408","on-secondary-container":"#4d6b5c","on-error":"#ffffff","surface":"#fef8f4","on-tertiary-container":"#d5643b","tertiary-container":"#3d0d00","secondary-fixed":"#c9ead8","tertiary-fixed":"#ffdbcf","primary-container":"#1b1e23","on-tertiary":"#ffffff","surface-container":"#f2ede9","on-secondary-fixed":"#032015"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"gutter-mobile":"1rem","margin-mobile":"1.25rem","margin-tablet":"2rem","space-md":"1rem","gutter":"1.5rem","space-lg":"1.5rem","margin":"3rem","space-xl":"2.5rem","space-sm":"0.5rem","space-xs":"0.25rem"},"fontFamily":{"headline-md":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"display-lg-mobile":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"]},"fontSize":{"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.005em","fontWeight":"600"}],"display-lg":["56px",{"lineHeight":"64px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"body-md":["15px",{"lineHeight":"24px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.06em","fontWeight":"500"}],"body-sm":["13px",{"lineHeight":"20px","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.02em","fontWeight":"600"}],"display-lg-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.015em","fontWeight":"700"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"600"}],"headline-lg-mobile":["26px",{"lineHeight":"34px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="h-20 w-full px-margin-mobile md:px-margin-tablet lg:px-margin flex items-center justify-between"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><div class="w-7 h-7 bg-primary flex items-center justify-center rounded-lg"><span class="material-symbols-outlined text-surface-bright text-[16px]">filter_vintage</span></div><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">ReelWorld</span></div><div class="hidden xl:flex items-center gap-space-xs px-2.5 py-1 bg-surface-container rounded-full text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span><span>Built with Muse Spark Open v2.4</span></div></div><nav class="hidden md:flex items-center gap-1" data-active-classes="bg-surface-container-high text-on-surface font-semibold rounded-lg"><a aria-current="page" class="px-3.5 py-2 transition-colors bg-surface-container-high text-on-surface font-semibold rounded-lg" data-path="reel" href="#">Reel</a><a class="px-3.5 py-2 font-label-md text-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="browse" href="#">Browse</a><a class="px-3.5 py-2 font-label-md text-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="connected" href="#">Connected</a><a class="px-3.5 py-2 font-label-md text-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="stories" href="#">Stories</a><a class="px-3.5 py-2 font-label-md text-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="about" href="#">About</a></nav><div class="flex items-center gap-space-md"><div class="hidden sm:flex items-center gap-space-xs px-3 py-1.5 bg-surface-container-low rounded-full text-secondary font-label-sm text-label-sm"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-medium">Nairobi Edge Cluster: Online (32ms)</span></div><div class="flex items-center gap-space-xs px-3 py-1.5 bg-surface-container rounded-lg text-on-surface font-label-sm text-label-sm"><span class="material-symbols-outlined text-[16px] text-secondary">lock</span><span class="font-semibold uppercase tracking-wider">Private Vault</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-[calc(100vh-5rem)]"><div class="flex flex-col w-full pb-32">
+<!-- Conversation Stream Container -->
+<div class="w-full max-w-4xl mx-auto px-gutter-mobile sm:px-gutter py-space-lg flex flex-col space-y-space-xl">
+<!-- Exchange 1: User Message -->
+<div class="flex flex-col items-end w-full">
+<div class="flex items-center gap-space-xs mb-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span>Curator Query</span>
+<span>•</span>
+<span>10:42 AM</span>
+</div>
+<div class="bg-surface-container text-on-surface rounded-2xl rounded-tr-sm px-space-lg py-space-md max-w-lg shadow-sm">
+<p class="font-body-lg text-body-lg leading-relaxed text-primary-container">a busy street market with fresh vegetables</p>
+</div>
+</div>
+<!-- Exchange 1: Reel Assistant Reply -->
+<div class="flex flex-col items-start w-full">
+<!-- Agent Metadata Header -->
+<div class="flex flex-wrap items-center justify-between w-full gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-7 h-7 rounded bg-primary-container flex items-center justify-center text-surface-bright shadow-sm">
+<span class="material-symbols-outlined text-[17px]">cc_attribution</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">Reel</span>
+<div class="flex items-center gap-space-xs px-2.5 py-1 bg-surface-container-high rounded text-secondary font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>Muse Spark Open v2.4 • 94.6% corroborated</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Archival Batch #2904</span>
+</div>
+<!-- Agent Direct Answer Text -->
+<p class="font-body-md text-body-md text-on-surface font-medium mb-space-md">Here is what I found.</p>
+<!-- Active Query Modifiers (Removable Filter Chips) -->
+<div class="flex flex-wrap items-center gap-space-xs mb-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mr-1">Active Constraints:</span>
+<button class="group flex items-center gap-1.5 px-2.5 py-1 bg-surface-container-high rounded text-on-surface font-label-sm text-label-sm hover:bg-surface-variant transition-colors min-h-[44px]" type="button">
+<span>“From above”</span>
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant group-hover:text-tertiary-container transition-colors">close</span>
+</button>
+<button class="group flex items-center gap-1.5 px-2.5 py-1 bg-surface-container-high rounded text-on-surface font-label-sm text-label-sm hover:bg-surface-variant transition-colors min-h-[44px]" type="button">
+<span>“No people”</span>
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant group-hover:text-tertiary-container transition-colors">close</span>
+</button>
+</div>
+<!-- Photo Block Container (1 Prominent + 4 Grid) -->
+<div class="w-full bg-surface-container-low p-space-md rounded-xl shadow-sm mb-space-md">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md">
+<!-- Left Hero Photo Mount (7 Cols) -->
+<div class="md:col-span-7 flex flex-col bg-surface-container-high p-space-sm rounded-lg group">
+<div class="relative overflow-hidden rounded bg-surface-dim aspect-[4/3]">
+<img class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" data-alt="Sun-cured archival medium format photograph of Marikiti Market interior hall in Nairobi Kenya with wooden tables piled high with fresh green cabbages, vibrant red tomatoes, and earthen root vegetables. Natural dust motes catch the high skylight beams, illuminating market vendors and wooden crates with warm roasted espresso and ochre undertones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHrq8lahZqlCltrKCIC2wv9UKGexH5rewhwbJMnT_Ch5L7fWsxRo5dluchiO2vs3iaYp3w2SasW3dRi9T4t4UCw_gX8zT7CJQqVIUCelvuo1p6tkZJlP9Vcp4Xb7iMtBBb2fPwzG9Wjd8N-OtMS2lyDHCXhXUraW2SmR7Dvg3ZbwbIY3fRnXEdzCri4qOWhzc5OUjcjhWQoNixCvDLnwKczVbJAAfiCAU_0ae6HyI"/>
+<div class="absolute bottom-2 left-2 bg-primary-container/90 backdrop-blur-sm text-surface-bright px-2 py-0.5 rounded text-label-sm font-label-sm uppercase tracking-wide">
+                Plate #NBO-0045
+              </div>
+</div>
+<div class="flex items-center justify-between gap-space-xs mt-space-sm px-1">
+<span class="inline-flex items-center gap-1 text-secondary font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[14px]">search_check</span>
+                matched: market hall, vendors
+              </span>
+<span class="text-on-surface-variant font-body-sm text-body-sm">Photo: C. Karanja • CC BY-SA 4.0</span>
+</div>
+</div>
+<!-- Right Grid of 4 Smaller Photos (5 Cols) -->
+<div class="md:col-span-5 grid grid-cols-2 gap-space-sm">
+<!-- Sub Photo 1 -->
+<div class="flex flex-col bg-surface-container-high p-space-xs rounded-lg group">
+<div class="relative overflow-hidden rounded bg-surface-dim aspect-square">
+<img class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" data-alt="Archival photograph of Kenyatta Avenue open produce trading in Nairobi, displaying woven baskets filled with fresh yellow passionfruit and dark leafy greens under canvas tarps with soft terracotta shadows and warm sunlight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgc6GVE9ySmYhNz5MRYsMxYkfznkL4zpNUfCqamwLE7gdiObPmOFGwljRFAYmFYaR6fel82nNForv8DHs9v6K_iSPuHbbZHB-TYpYTaAl-JNuLutCcDQFcXvw9h386ZgsMbm8ExIEt6Mnh84J2MUFNCv0dcYlFzvYAybiCBahx8587Na820jSBuZrYFknMu8X4ZIP0RTENVTWfIiLSsvhqVrkLuaE0hjZOCXNFVLg"/>
+<span class="absolute bottom-1 left-1 bg-primary-container/85 text-surface-bright px-1.5 py-0.5 rounded text-[10px] font-label-sm uppercase">#NBO-0046</span>
+</div>
+<div class="mt-1 px-0.5">
+<span class="text-secondary font-label-sm text-label-sm block truncate">matched: fresh vegetables, stalls</span>
+<span class="text-on-surface-variant text-[11px] block truncate">Photo: D. Mumo • CC BY 4.0</span>
+</div>
+</div>
+<!-- Sub Photo 2 -->
+<div class="flex flex-col bg-surface-container-high p-space-xs rounded-lg group">
+<div class="relative overflow-hidden rounded bg-surface-dim aspect-square">
+<img class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" data-alt="Documentary street photo of Muindi Mbingu street traders in Nairobi arranging bundles of fresh coriander, carrots, and sweet potatoes on earthen burlap sacks during early morning light with deep ink shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ8-Foc48yGubBzwm5F-cOymbSy29oNwuohDJayxtxsOnKsKbq9kx_zdy1vKYzTwV7dqH7Bss8_H1GYuymob39ZXmTrKMEpqYVw96i_NTkKG37gKypxDQvgKreh2LqLl5jH04biSKKho7wwLtQrG0PcWcWg-rvdGIaCPCfvpO7k6Z3VALPeDFZFO8vGqAlch3zIToQy6s50YtWdgPlGzLZ5DEcvUQDrVTpspQpSnc"/>
+<span class="absolute bottom-1 left-1 bg-primary-container/85 text-surface-bright px-1.5 py-0.5 rounded text-[10px] font-label-sm uppercase">#NBO-0047</span>
+</div>
+<div class="mt-1 px-0.5">
+<span class="text-secondary font-label-sm text-label-sm block truncate">matched: market, street</span>
+<span class="text-on-surface-variant text-[11px] block truncate">Photo: P. Mutua • CC BY 4.0</span>
+</div>
+</div>
+<!-- Sub Photo 3 -->
+<div class="flex flex-col bg-surface-container-high p-space-xs rounded-lg group">
+<div class="relative overflow-hidden rounded bg-surface-dim aspect-square">
+<img class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" data-alt="Vintage documentary visual of Haile Selassie produce trucks unloading fresh green plantains and cabbages into Nairobi market stalls with warm dust and early morning atmospheric backlighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmId7zBxx0MXXphU8KI8n_XZUOC6sAMmdAQkILye-00F-oWa3PzjJjSsq0jQD8NcU-im1ujQxbwNC2ZZwWkt7-42Zfz_wcscHUjlZvOVfjpRszxCBNueTK5cKK-Rn3-UlVQI5iKfCJzCJZDsXmST9AlQnHvOE_quce2ZXXvhZ0uhe7IGyt-DHYodA_AaZYO5AlRwkdLC6yNQPRK_8m2vabI1oLXx2HkxrPF9Qi9OQ"/>
+<span class="absolute bottom-1 left-1 bg-primary-container/85 text-surface-bright px-1.5 py-0.5 rounded text-[10px] font-label-sm uppercase">#NBO-0048</span>
+</div>
+<div class="mt-1 px-0.5">
+<span class="text-secondary font-label-sm text-label-sm block truncate">matched: produce crates, stalls</span>
+<span class="text-on-surface-variant text-[11px] block truncate">Photo: G. Otieno • CC BY-SA 4.0</span>
+</div>
+</div>
+<!-- Sub Photo 4 -->
+<div class="flex flex-col bg-surface-container-high p-space-xs rounded-lg group">
+<div class="relative overflow-hidden rounded bg-surface-dim aspect-square">
+<img class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" data-alt="Historical Nairobi City Market open courtyard photo showing timber trestle tables heaped with scarlet chilies and seasonal squash surrounded by woven fiber bags in gentle earthen light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAB7DvA_xajjzRFVTM3_8vgh26oiwus26BesYZPBAKhNkdavB9LPfRmUsy4fBtTv12BD12YJFLxiEw3U8UWpc-Q08UgwdHpJFwPJsCci-edrwr3k38_NoL8SIRK3OJPfkTsyLvyiVFMng3KL7YKRx47HQmH4UsAfx_1ZqcDrk-NMABNbhYwz7uc2dr9AzuAYs8rjGMGmVFYUwLuodsUX4KENRheD3I3ToZfJoTuNCU"/>
+<span class="absolute bottom-1 left-1 bg-primary-container/85 text-surface-bright px-1.5 py-0.5 rounded text-[10px] font-label-sm uppercase">#NBO-0049</span>
+</div>
+<div class="mt-1 px-0.5">
+<span class="text-secondary font-label-sm text-label-sm block truncate">matched: courtyard vendors</span>
+<span class="text-on-surface-variant text-[11px] block truncate">Photo: J. Kimani • Public Domain</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Chips (Photo Specific Interactions) -->
+<div class="flex flex-wrap items-center gap-space-sm mb-space-sm">
+<button class="min-h-[44px] px-3.5 py-2 bg-surface-container hover:bg-surface-container-high text-on-surface rounded font-label-md text-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">photo_camera_back</span>
+<span>Another angle</span>
+</button>
+<button class="min-h-[44px] px-3.5 py-2 bg-surface-container hover:bg-surface-container-high text-on-surface rounded font-label-md text-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">grain</span>
+<span>More like this</span>
+</button>
+<button class="min-h-[44px] px-3.5 py-2 bg-surface-container hover:bg-surface-container-high text-on-surface rounded font-label-md text-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+<span>Not this one</span>
+</button>
+<button class="min-h-[44px] px-3.5 py-2 bg-surface-container hover:bg-surface-container-high text-on-surface rounded font-label-md text-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">compare_arrows</span>
+<span>Compare</span>
+</button>
+</div>
+<!-- Suggested Follow-Up Chips -->
+<div class="flex flex-wrap items-center gap-space-xs mb-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium mr-1">Suggestions:</span>
+<button class="min-h-[44px] px-3 py-1.5 bg-surface-container-low hover:bg-surface-container text-on-surface rounded font-body-sm text-body-sm transition-colors" type="button">
+          “From above”
+        </button>
+<button class="min-h-[44px] px-3 py-1.5 bg-surface-container-low hover:bg-surface-container text-on-surface rounded font-body-sm text-body-sm transition-colors" type="button">
+          “No people”
+        </button>
+<button class="min-h-[44px] px-3 py-1.5 bg-surface-container-low hover:bg-surface-container text-on-surface rounded font-body-sm text-body-sm transition-colors" type="button">
+          “Show only City Market”
+        </button>
+</div>
+<!-- Collapsible Diagnostic Metadata ("How I found this") -->
+<details class="w-full bg-surface-container-low rounded-lg p-space-sm group">
+<summary class="list-none flex items-center justify-between cursor-pointer min-h-[44px] select-none text-on-surface-variant hover:text-on-surface transition-colors">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] group-open:rotate-90 transition-transform duration-200">arrow_right</span>
+<span class="font-label-md text-label-md font-semibold tracking-wide uppercase">How I found this</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-medium">Vector similarity 0.92 • Spatial index: Nairobi Central</span>
+</summary>
+<div class="pt-space-sm pb-space-xs px-space-md flex flex-col space-y-space-xs text-on-surface-variant font-body-sm text-body-sm bg-surface-container rounded mt-2">
+<div class="flex items-center justify-between">
+<span>Latent Embedding Distance:</span>
+<span class="font-semibold text-on-surface">0.081 Euclidean</span>
+</div>
+<div class="flex items-center justify-between">
+<span>Visual Vocabulary Cluster:</span>
+<span class="font-semibold text-on-surface">#NBO-PRODUCE-1970-1995</span>
+</div>
+<div class="flex items-center justify-between">
+<span>Corroborating Repositories:</span>
+<span class="font-semibold text-on-surface">Kenya National Archives • McMillan Memorial</span>
+</div>
+</div>
+</details>
+</div>
+<!-- Exchange 2: User Follow-up Query -->
+<div class="flex flex-col items-end w-full">
+<div class="flex items-center gap-space-xs mb-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span>Curator Query</span>
+<span>•</span>
+<span>10:44 AM</span>
+</div>
+<div class="bg-surface-container text-on-surface rounded-2xl rounded-tr-sm px-space-lg py-space-md max-w-lg shadow-sm">
+<p class="font-body-lg text-body-lg leading-relaxed text-primary-container">not this one, from a higher angle</p>
+</div>
+</div>
+<!-- Exchange 2: Reel Assistant Reply with Selection/Comparison State -->
+<div class="flex flex-col items-start w-full">
+<!-- Agent Metadata Header -->
+<div class="flex flex-wrap items-center justify-between w-full gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-7 h-7 rounded bg-primary-container flex items-center justify-center text-surface-bright shadow-sm">
+<span class="material-symbols-outlined text-[17px]">cc_attribution</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">Reel</span>
+<div class="flex items-center gap-space-xs px-2.5 py-1 bg-surface-container-high rounded text-secondary font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>Muse Spark Open v2.4 • 98.1% corroborated</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Archival Batch #2908</span>
+</div>
+<!-- Agent Direct Answer Text -->
+<p class="font-body-md text-body-md text-on-surface font-medium mb-space-md">
+        Showing elevated perspectives with fewer crowds across the market quarter.
+      </p>
+<!-- Second Photo Block (1 Hero Elevated + 4 Vantage Captures with 2 Selected) -->
+<div class="w-full bg-surface-container-low p-space-md rounded-xl shadow-sm mb-space-md relative">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md">
+<!-- Plate 1: Hero Elevated Photo (Selected for Comparison) -->
+<div class="md:col-span-7 flex flex-col bg-surface-container-high p-space-sm rounded-lg relative ring-2 ring-primary-container shadow-md">
+<!-- Selected Badge Indicator -->
+<div class="absolute top-4 right-4 z-10 flex items-center gap-1.5 px-2.5 py-1.5 bg-primary-container text-surface-bright rounded shadow font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px] text-secondary-fixed">check_circle</span>
+<span class="font-semibold">✓ Selected for comparison</span>
+</div>
+<div class="relative overflow-hidden rounded bg-surface-dim aspect-[4/3]">
+<img class="w-full h-full object-cover" data-alt="Elevated architectural viewpoint photograph of Nairobi City Market soaring steel roof trusses and timber stalls below. Morning skylight casts dramatic geometry over geometric rows of squash, bananas, and produce crates on the earthen concrete floor with gentle parchment tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBewSvi5qIRrsTAr04-n5UcG53i8lpfALZWDAk3phHFFstIifowrmUXcjRVUekXlNAQmgvrTcCmwxFGsuCNW-bsFDHE8yc-iil7slnG9p9uVYuS6i1jgy8l574nVOY-JFjLTfybW1yEpjFbMnOLH0t5B-hOrTJ3wHNyLR7ZGA-Fm2G2uLpyKaECjpOfavuFASfgzyxgg0gEADBcWZRKKNStpRy08O1hvQ9wKQs_eUE"/>
+<div class="absolute bottom-2 left-2 bg-primary-container/90 backdrop-blur-sm text-surface-bright px-2 py-0.5 rounded text-label-sm font-label-sm uppercase tracking-wide">
+                Plate #NBO-0082
+              </div>
+</div>
+<div class="flex items-center justify-between gap-space-xs mt-space-sm px-1">
+<span class="inline-flex items-center gap-1 text-secondary font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[14px]">altitude</span>
+                matched: high angle, market floor overview
+              </span>
+<span class="text-on-surface-variant font-body-sm text-body-sm">Photo: K. Njoroge • CC BY-SA 4.0</span>
+</div>
+</div>
+<!-- Right Grid of 4 Smaller Photos (1 also selected) -->
+<div class="md:col-span-5 grid grid-cols-2 gap-space-sm">
+<!-- Plate 2: Selected for Comparison -->
+<div class="flex flex-col bg-surface-container-high p-space-xs rounded-lg relative ring-2 ring-primary-container shadow-md group">
+<!-- Selected Badge Indicator -->
+<div class="absolute top-2 right-2 z-10 flex items-center gap-1 px-1.5 py-0.5 bg-primary-container text-surface-bright rounded shadow font-label-sm text-[10px]">
+<span class="material-symbols-outlined text-[12px] text-secondary-fixed">check_circle</span>
+<span>✓ Selected</span>
+</div>
+<div class="relative overflow-hidden rounded bg-surface-dim aspect-square">
+<img class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" data-alt="Upper mezzanine perspective photograph looking straight down on vegetable vendors arranging stacks of fresh watermelons and root vegetables in Nairobi market hall, high bird's eye view with rich roasted espresso shadows and warm earthen tiles." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBprD3XhTCLlokGsqoMM900R4y73pPY61WbazI15Mi0j5jzkyML2gwAhgjDAHCIB6_KfmRvzAXk4qq9L6xchIeyfOHtHa8LJcgc57jk-Zk6MlBgjL7EJ6NhFykd89A_Bm0db8_Dfj02P__d88J7Q6iIb-WkVxJ_KOBz1uB4GiOpg4F1TNUS4RvQQBntQKMX3hjtaZ_RxKozx-7oIIe2QijPfA416cLKwaursltgYXo"/>
+<span class="absolute bottom-1 left-1 bg-primary-container/85 text-surface-bright px-1.5 py-0.5 rounded text-[10px] font-label-sm uppercase">#NBO-0091</span>
+</div>
+<div class="mt-1 px-0.5">
+<span class="text-secondary font-label-sm text-label-sm block truncate">matched: mezzanine vantage, produce tables</span>
+<span class="text-on-surface-variant text-[11px] block truncate">Photo: C. Karanja • CC BY 4.0</span>
+</div>
+</div>
+<!-- Plate 3: Rooftop View -->
+<div class="flex flex-col bg-surface-container-high p-space-xs rounded-lg group">
+<div class="relative overflow-hidden rounded bg-surface-dim aspect-square">
+<img class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" data-alt="Rooftop panoramic sightline photograph over Muindi Mbingu produce stalls with tin awnings and wooden vegetable tables stretching down the sunlit street with rich ochre and sand textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEc6iangPi5Wq5JphdjCG29eTfjhmWDpbtfPCvfuNMjFF0WctLEVoZQ2sPP2CA1fqKoLJGA2Bwtpgum5HIJB4h2_-h2alza_oMvokdkLzVpn7R2iTOoNHFAR_mLiuWh5O8gUHoWBG7BdZ60xk_PoSRiRZyvEYpwmqdKJJOwWikUYn-lsyauPNIv451pvRdZfcOYD55bN8V1GKCQeVdocCS5I5osFl22LdvAxbDcnE"/>
+<span class="absolute bottom-1 left-1 bg-primary-container/85 text-surface-bright px-1.5 py-0.5 rounded text-[10px] font-label-sm uppercase">#NBO-0103</span>
+</div>
+<div class="mt-1 px-0.5">
+<span class="text-secondary font-label-sm text-label-sm block truncate">matched: rooftop sightline, street market</span>
+<span class="text-on-surface-variant text-[11px] block truncate">Photo: T. Omwamba • CC BY-SA 4.0</span>
+</div>
+</div>
+<!-- Plate 4: Perimeter Shot -->
+<div class="flex flex-col bg-surface-container-high p-space-xs rounded-lg group">
+<div class="relative overflow-hidden rounded bg-surface-dim aspect-square">
+<img class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" data-alt="High-angle daylight photograph overlooking the Marikiti perimeter with stacked fruit crates and pineapples seen from a second-story masonry window frame in Nairobi Kenya." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0KV-Px2gY9MC-AaPTxc3caoX0uwQUKlrH6-7NFYvOuFX6XY0aCc4bLt3u4FrLYkW5Ud3LOdZapi39V1I5PLPsjvSJEcS5vy_q_SrPkWavMQ581t-1HHVyKDxRqexNl5dNqoGF2bU1FAlqQuyh4GgC29O66QpiPoLIexPkd-nPiWje9tkurLSV-A9JgUyTXjd0oMVLXZ23cXz2CwYHkrs63yxT9bBNrDK7jltLpxQ"/>
+<span class="absolute bottom-1 left-1 bg-primary-container/85 text-surface-bright px-1.5 py-0.5 rounded text-[10px] font-label-sm uppercase">#NBO-0115</span>
+</div>
+<div class="mt-1 px-0.5">
+<span class="text-secondary font-label-sm text-label-sm block truncate">matched: elevated perspective, fruit crates</span>
+<span class="text-on-surface-variant text-[11px] block truncate">Photo: D. Mumo • Public Domain</span>
+</div>
+</div>
+<!-- Plate 5: Balcony Sightline -->
+<div class="flex flex-col bg-surface-container-high p-space-xs rounded-lg group">
+<div class="relative overflow-hidden rounded bg-surface-dim aspect-square">
+<img class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" data-alt="Balcony sightline vintage photograph looking into the courtyard sellers and striped canvas canopies with soft morning sun and mineral earth ground in Nairobi's old commercial center." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnK9HXo-NxEF832ESm6_un3TpQORZbSaRUhQbfHz4_9Y8HoTGLmFpj5WXjiXa-WCADcRIrfq9pJQ4fr7zg4O1C9BLqYzLB56CnQ3sn-dPDh-ohfoTPAtuWIFqH4nWRqByy_gfUmCXLkNQoB5_xbWT77Ub9hzeUk5Mmoy47tEwNpViUZSoFV1mRp3sJ4zOKW8AfTisEBX38M3fpPVVgbmT-33j2GvxQG_-YM6-OB2Y"/>
+<span class="absolute bottom-1 left-1 bg-primary-container/85 text-surface-bright px-1.5 py-0.5 rounded text-[10px] font-label-sm uppercase">#NBO-0129</span>
+</div>
+<div class="mt-1 px-0.5">
+<span class="text-secondary font-label-sm text-label-sm block truncate">matched: upper balcony, canopy view</span>
+<span class="text-on-surface-variant text-[11px] block truncate">Photo: A. Waweru • CC BY 4.0</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Comparison Action Bar -->
+<div class="mt-space-md flex flex-col sm:flex-row items-center justify-between bg-primary-container text-surface-bright p-space-sm sm:px-space-md rounded-lg shadow-lg gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary-fixed text-[22px]">auto_awesome_motion</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold">2 Archival Plates Selected</span>
+<span class="font-body-sm text-body-sm text-surface-container-high">Plate #NBO-0082 • Plate #NBO-0091</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs w-full sm:w-auto">
+<button class="min-h-[44px] px-3 text-surface-dim hover:text-surface-bright font-label-sm text-label-sm uppercase transition-colors" type="button">
+              Clear
+            </button>
+<button class="min-h-[44px] flex-1 sm:flex-initial px-space-md bg-on-tertiary-container hover:bg-tertiary text-on-tertiary rounded font-label-md text-label-md flex items-center justify-center gap-1.5 transition-colors shadow-sm" type="button">
+<span>Compare 2 selected photos</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Action Chips (Reply 2) -->
+<div class="flex flex-wrap items-center gap-space-sm mb-space-sm">
+<button class="min-h-[44px] px-3.5 py-2 bg-surface-container hover:bg-surface-container-high text-on-surface rounded font-label-md text-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">photo_camera_back</span>
+<span>Another angle</span>
+</button>
+<button class="min-h-[44px] px-3.5 py-2 bg-surface-container hover:bg-surface-container-high text-on-surface rounded font-label-md text-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">grain</span>
+<span>More like this</span>
+</button>
+<button class="min-h-[44px] px-3.5 py-2 bg-surface-container hover:bg-surface-container-high text-on-surface rounded font-label-md text-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+<span>Not this one</span>
+</button>
+<button class="min-h-[44px] px-3.5 py-2 bg-primary-container text-surface-bright rounded font-label-md text-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">compare_arrows</span>
+<span>Compare active (2)</span>
+</button>
+</div>
+<!-- Follow-Up Suggestions (Reply 2) -->
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium mr-1">Suggestions:</span>
+<button class="min-h-[44px] px-3 py-1.5 bg-surface-container-low hover:bg-surface-container text-on-surface rounded font-body-sm text-body-sm transition-colors" type="button">
+          “Show roof rafters only”
+        </button>
+<button class="min-h-[44px] px-3 py-1.5 bg-surface-container-low hover:bg-surface-container text-on-surface rounded font-body-sm text-body-sm transition-colors" type="button">
+          “Earlier decade (1960s)”
+        </button>
+<button class="min-h-[44px] px-3 py-1.5 bg-surface-container-low hover:bg-surface-container text-on-surface rounded font-body-sm text-body-sm transition-colors" type="button">
+          “Exterior perspective”
+        </button>
+</div>
+</div>
+</div>
+<!-- Pinned Bottom Composer Bar -->
+<div class="fixed bottom-0 left-0 right-0 z-40 bg-surface/95 backdrop-blur-md px-gutter-mobile sm:px-gutter py-space-sm shadow-[0_-4px_24px_rgba(27,30,35,0.05)]">
+<div class="w-full max-w-4xl mx-auto flex flex-col space-y-space-xs">
+<!-- Context Pill (Pinned Reference Image) -->
+<div class="self-start flex items-center gap-space-sm px-space-sm py-1 bg-surface-container-high rounded-full shadow-sm">
+<div class="w-6 h-6 rounded-full overflow-hidden bg-surface-dim flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Micro thumbnail of street_025 Marikiti Market produce hall with fresh green vegetables." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCk9RwCM4On9qiHElXyUDArF85I70C24Rbjc9amUOrpbdwywVBmZ37fSwPDWrlkDX-l2uDgcR-fff-tnUxq2C-G2lj2Zplfbd4o30FJgYUknIFBQKl2DSHLzOdVUpnuxzxplZrADasaAYKKSFA0AjglvS9lzCgF6_Lm_k7ZsL6rddDMsUNtYrrHGJ5sRVT8sX6IoWBRfgxyylFQKaWTS9D5wQEgWsgzWKeQdhuJx9w"/>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface font-medium truncate max-w-[280px] sm:max-w-md">
+          Asking about: <strong class="font-semibold text-primary">street_025</strong> (Marikiti Market #NBO-0045)
+        </span>
+<button aria-label="Remove context artifact" class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors rounded-full" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<!-- Composer Input Row -->
+<div class="flex items-center gap-space-sm bg-surface-container p-1.5 sm:p-2 rounded-2xl shadow-sm">
+<!-- Add/Upload Photo Button (≥44px touch target) -->
+<button aria-label="Upload reference photographic plate" class="w-11 h-11 min-h-[44px] min-w-[44px] flex items-center justify-center bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded-xl transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px]">add_photo_alternate</span>
+</button>
+<!-- Main Query Input -->
+<div class="flex-1 relative flex items-center">
+<input class="w-full h-11 bg-transparent px-space-sm font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none" placeholder="Ask Reel to find a photo..." type="text"/>
+</div>
+<!-- Filter / Lens Button (≥44px touch target) -->
+<button aria-label="Adjust photographic search lenses" class="w-11 h-11 min-h-[44px] min-w-[44px] hidden sm:flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors rounded-xl" type="button">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+</button>
+<!-- Send Arrow Button (≥44px touch target) -->
+<button aria-label="Send prompt to Reel" class="w-11 h-11 min-h-[44px] min-w-[44px] flex items-center justify-center bg-primary-container text-surface-bright hover:bg-on-tertiary-container transition-colors rounded-xl shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px]">arrow_upward</span>
+</button>
+</div>
+<!-- Safe Footnote / Status Indicator -->
+<div class="flex items-center justify-between px-space-xs text-[11px] font-label-sm text-on-surface-variant">
+<span>Museum-grade archival retrieval with zero generative synthesis.</span>
+<span class="hidden sm:inline">Press ↑ ↓ to navigate history</span>
+</div>
+</div>
+</div>
+<script>
+    // Micro-interactions for interactive action chips and comparisons
+    document.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        // Simple tactile pulse feedback
+        btn.classList.add('scale-[0.98]');
+        setTimeout(() => btn.classList.remove('scale-[0.98]'), 120);
+      });
+    });
+  </script>
+</div></main><footer class="w-full bg-surface-container-low mt-space-xl"><div class="w-full px-margin-mobile md:px-margin-tablet lg:px-margin py-space-xl flex flex-col md:flex-row items-center justify-between gap-space-md font-body-sm text-body-sm text-on-surface-variant"><div class="flex items-center gap-space-md"><span>© ReelWorld Knowledge Network</span><span class="hidden md:inline">•</span><span class="hidden md:inline">Sun-Cured Photographic Archives &amp; Intelligence</span></div><div class="flex items-center gap-space-lg font-label-md text-label-md"><a class="hover:text-on-surface transition-colors" href="#">Provenance &amp; Citations</a><a class="hover:text-on-surface transition-colors" href="#">Neural Spec</a><a class="hover:text-on-surface transition-colors" href="#">Security Enclave</a></div></div></footer></body></html>
