@@ -25,15 +25,22 @@ if not key:
 body = json.dumps({"model": model,
                    "messages": [{"role": "user", "content": "say ok"}],
                    "max_tokens": 10}).encode()
-req = urllib.request.Request(
-    "https://api.llama.com/compat/v1/chat/completions", data=body,
-    headers={"Content-Type": "application/json",
-             "Authorization": "Bearer " + key})
-try:
-    with urllib.request.urlopen(req, timeout=30) as r:
-        out = json.loads(r.read().decode("utf-8", "replace"))
-    print("HTTP", r.status)
-    print("reply:", out["choices"][0]["message"]["content"].strip()[:200])
-except urllib.error.HTTPError as e:
-    print("HTTP", e.code)
-    print(e.read().decode("utf-8", "replace")[:500])
+schemes = [
+    ("bearer", {"Authorization": "Bearer " + key}),
+    ("x-api-key", {"X-API-Key": key}),
+    ("raw", {"Authorization": key}),
+]
+for name, auth in schemes:
+    headers = {"Content-Type": "application/json"}
+    headers.update(auth)
+    req = urllib.request.Request(
+        "https://api.llama.com/compat/v1/chat/completions", data=body,
+        headers=headers)
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            out = json.loads(r.read().decode("utf-8", "replace"))
+        print(f"[{name}] HTTP", r.status,
+              "reply:", out["choices"][0]["message"]["content"].strip()[:120])
+    except urllib.error.HTTPError as e:
+        print(f"[{name}] HTTP", e.code,
+              e.read().decode("utf-8", "replace")[:160].replace("\n", " "))
