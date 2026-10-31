@@ -5229,9 +5229,53 @@ function placeLinkClick(e) {
 }
 
 /* ---------- story view ---------- */
+/* ---------- directed film: player + exporter share one canvas renderer ---------- */
+function filmFromFull(full) {
+  const SR = (typeof window !== "undefined" && window.StoryRender) || null;
+  if (!SR) return null;
+  if (full && full.scenes && full.scenes.length) {
+    const title = (full.story && full.story.title) || "";
+    return SR.adaptFilm({ title: title, scenes: full.scenes });
+  }
+  return SR.migrateChapters(full || {});
+}
+
+function filmSources(film) {
+  const map = {};
+  (film.scenes || []).forEach((s) => {
+    if (s.photo_id && s.src) map[s.photo_id] = s.src;
+    const fs = s.frame_srcs || {};
+    Object.keys(fs).forEach((pid) => { map[pid] = fs[pid]; });
+  });
+  return map;
+}
+
+function loadImage(src) {
+  return new Promise((res) => {
+    const im = new Image();
+    im.onload = () => res(im);
+    im.onerror = () => res(null);
+    im.src = src;
+  });
+}
+
+async function loadFilmImages(film, onOne) {
+  const srcs = filmSources(film);
+  film.images = film.images || {};
+  for (const pid of Object.keys(srcs)) {
+    if (film.images[pid]) continue;
+    const im = await loadImage(srcs[pid]);
+    if (im) {
+      film.images[pid] = im;
+      if (onOne) onOne();
+    }
+  }
+  return film;
+}
+
 /* ---------- story player (shared by studio preview and showcase) ---------- */
 const player = {
-  timer: null,
+  raf: null,
   st: null,
 
   fmt(s) {
@@ -5241,21 +5285,28 @@ const player = {
 
   mount(root, full) {
     this.destroy();
-    const chapters = (full && full.chapters) || [];
+    const SR = window.StoryRender;
     root.innerHTML = "";
-    if (!chapters.length) {
+    if (!SR) {
+      root.textContent = "The story player failed to load. Refresh the page.";
+      return;
+    }
+    const film = filmFromFull(full);
+    if (!film.scenes.length) {
       root.textContent = "This story has no scenes.";
       return;
     }
-    const reduce = !!(window.matchMedia &&
+    film.reducedMotion = !!(window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    const total = SR.timeline(film).total;
     const frame = document.createElement("div");
     frame.className = "relative w-full aspect-[9/16] rounded-xl overflow-hidden bg-black shadow-md";
-    const img = document.createElement("img");
-    img.className = "absolute inset-0 w-full h-full object-cover";
-    img.alt = "";
-    const grad = document.createElement("div");
-    grad.className = "absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/80 to-transparent pointer-events-none";
+    const cv = document.createElement("canvas");
+    cv.width = 540;
+    cv.height = 960;
+    cv.className = "absolute inset-0 w-full h-full";
+    cv.setAttribute("role", "img");
+    cv.setAttribute("aria-label", film.title || "Story");
     const top = document.createElement("div");
     top.className = "absolute top-0 inset-x-0 flex items-center justify-between px-3 py-2 text-white font-label-sm text-label-sm";
     const tag = document.createElement("span");
@@ -5263,16 +5314,7 @@ const player = {
     const time = document.createElement("span");
     time.className = "px-2 py-0.5 rounded bg-black/50 font-mono";
     top.append(tag, time);
-    const bot = document.createElement("div");
-    bot.className = "absolute bottom-0 inset-x-0 p-3 flex flex-col gap-1";
-    const head = document.createElement("div");
-    head.className = "text-white font-label-lg text-label-lg font-bold";
-    const cap = document.createElement("div");
-    cap.className = "text-white/90 font-body-sm text-body-sm";
-    const cred = document.createElement("div");
-    cred.className = "text-white/70 font-label-sm text-label-sm";
-    bot.append(head, cap, cred);
-    frame.append(img, grad, top, bot);
+    frame.append(cv, top);
     const track = document.createElement("div");
     track.className = "h-1 rounded bg-surface-container-high overflow-hidden mt-2";
     const bar = document.createElement("div");
@@ -5298,8 +5340,8 @@ const player = {
     const next = mk("skip_next", "Next scene");
     const replay = mk("replay", "Replay");
     replay.classList.add("hidden");
-    prev.addEventListener("click", () => this.jump(this.st.idx - 1));
-    next.addEventListener("click", () => this.jump(this.st.idx + 1));
+    prev.addEventListener("click", () => this.jump(this.curIdx() - 1));
+    next.addEventListener("click", () => this.jump(this.curIdx() + 1));
     play.addEventListener("click", () => this.toggle());
     replay.addEventListener("click", () => {
       replay.classList.add("hidden");
@@ -5309,7 +5351,7 @@ const player = {
     ctrls.append(prev, play, next, replay);
     const strip = document.createElement("div");
     strip.className = "flex gap-2 overflow-x-auto py-1 mt-1";
-    chapters.forEach((c) => {
+    film.scenes.forEach((c) => {
       const t = document.createElement("button");
       t.type = "button";
       t.className = "w-12 h-16 rounded-lg overflow-hidden flex-shrink-0 border-2 border-transparent p-0";
@@ -5325,92 +5367,84 @@ const player = {
       t.addEventListener("click", () => this.jump(i));
     });
     root.append(frame, track, ctrls, strip);
-    this.st = { root: root, chapters: chapters, idx: 0, elapsed: 0, playing: true,
-      reduce: reduce, img: img, tag: tag, time: time, head: head, cap: cap,
-      cred: cred, bar: bar, play: play, replay: replay, strip: strip,
-      painted: -1,
-      total: chapters.reduce((t, c) => t + (Number(c.seconds) || 0), 0) };
-    this.paint(true);
+    this.st = { root: root, film: film, t: 0, last: 0, playing: true,
+      total: total, cv: cv, ctx: cv.getContext("2d"), tag: tag, time: time,
+      bar: bar, play: play, replay: replay, strip: strip,
+      size: { width: cv.width, height: cv.height } };
+    this.paint();
     const self = this;
-    this.timer = setInterval(() => self.tick(), 100);
+    loadFilmImages(film, () => self.paint());
+    const loop = (now) => {
+      if (!self.st) return;
+      self.tick(now);
+      self.raf = requestAnimationFrame(loop);
+    };
+    this.raf = requestAnimationFrame(loop);
   },
 
   destroy() {
-    if (this.timer) { clearInterval(this.timer); this.timer = null; }
+    if (this.raf) { cancelAnimationFrame(this.raf); this.raf = null; }
     this.st = null;
   },
 
-  sceneStart(i) {
-    let t = 0;
-    for (let k = 0; k < i; k++) t += Number(this.st.chapters[k].seconds) || 0;
-    return t;
+  curIdx() {
+    const st = this.st;
+    if (!st) return 0;
+    const pos = window.StoryRender.sceneAt(st.film, st.t);
+    if (pos.kind === "end") return st.film.scenes.length - 1;
+    return pos.index !== undefined ? pos.index : pos.to;
   },
 
-  paint(full) {
+  paint() {
     const st = this.st;
     if (!st) return;
-    const c = st.chapters[st.idx];
-    if (full || st.painted !== st.idx) {
-      st.img.src = c.src;
-      st.img.alt = c.caption || c.photo_id;
-      st.head.textContent = c.heading || ("Scene " + (st.idx + 1));
-      st.cap.textContent = c.caption || "";
-      st.cred.textContent = creditText(c.credit, c.collection) || "";
-      Array.prototype.forEach.call(st.strip.children, (t, i) => {
-        t.classList.toggle("border-secondary", i === st.idx);
-        t.classList.toggle("border-transparent", i !== st.idx);
-      });
-      st.painted = st.idx;
-    }
-    st.tag.textContent = (st.idx + 1) + "/" + st.chapters.length +
-      (c.heading ? " · " + c.heading : "");
-    const abs = this.sceneStart(st.idx) + st.elapsed;
-    st.time.textContent = this.fmt(abs) + " / " + this.fmt(st.total);
-    st.bar.style.width = (st.total ? Math.min(100, (abs / st.total) * 100) : 0) + "%";
+    window.StoryRender.renderFrame(st.film, st.t, st.ctx, st.size);
+    const idx = this.curIdx();
+    const sc = st.film.scenes[idx];
+    st.tag.textContent = (idx + 1) + "/" + st.film.scenes.length +
+      (sc.caption_note ? " · " + sc.caption_note : "");
+    st.time.textContent = this.fmt(st.t) + " / " + this.fmt(st.total);
+    st.bar.style.width = (st.total ? Math.min(100, (st.t / st.total) * 100) : 0) + "%";
     st.play.firstChild.textContent = st.playing ? "pause" : "play_arrow";
+    st.cv.setAttribute("aria-label", (sc.caption || st.film.title || "Story").slice(0, 200));
+    Array.prototype.forEach.call(st.strip.children, (t, i) => {
+      t.classList.toggle("border-secondary", i === idx);
+      t.classList.toggle("border-transparent", i !== idx);
+    });
   },
 
-  tick() {
+  tick(now) {
     const st = this.st;
     if (!st) return;
     if (!st.root.isConnected) { this.destroy(); return; }
-    if (!st.playing) return;
-    st.elapsed += 0.1;
-    const dur = Number(st.chapters[st.idx].seconds) || 0;
-    if (st.elapsed >= dur) {
-      if (st.idx + 1 >= st.chapters.length) {
-        st.elapsed = dur;
+    if (st.last && st.playing) {
+      st.t += (now - st.last) / 1000;
+      if (st.t >= st.total) {
+        st.t = st.total;
         st.playing = false;
         st.replay.classList.remove("hidden");
-        this.paint(false);
-        return;
       }
-      st.idx++;
-      st.elapsed = 0;
     }
-    if (!st.reduce) {
-      const prog = dur ? Math.min(1, st.elapsed / dur) : 0;
-      const z = st.idx % 2 ? 1.1 - 0.1 * prog : 1 + 0.1 * prog;
-      st.img.style.transform = "scale(" + z.toFixed(3) + ")";
-    }
-    this.paint(false);
+    st.last = now;
+    this.paint();
   },
 
   jump(i) {
     const st = this.st;
     if (!st) return;
+    const starts = window.StoryRender.timeline(st.film).starts;
     if (i < 0) i = 0;
-    if (i >= st.chapters.length) i = st.chapters.length - 1;
-    st.idx = i;
-    st.elapsed = 0;
+    if (i >= starts.length) i = starts.length - 1;
+    st.t = starts[i];
+    st.last = 0;
     st.replay.classList.add("hidden");
-    this.paint(true);
+    this.paint();
   },
 
   play() {
     if (this.st) {
       this.st.playing = true;
-      this.paint(false);
+      this.paint();
     }
   },
 
@@ -5418,15 +5452,14 @@ const player = {
     const st = this.st;
     if (!st) return;
     if (!st.playing) {
-      const dur = Number(st.chapters[st.idx].seconds) || 0;
-      if (st.idx >= st.chapters.length - 1 && st.elapsed >= dur) {
-        st.idx = 0;
-        st.elapsed = 0;
+      if (st.t >= st.total) {
+        st.t = 0;
         st.replay.classList.add("hidden");
       }
       st.playing = true;
     } else st.playing = false;
-    this.paint(false);
+    st.last = 0;
+    this.paint();
   },
 };
 
@@ -5940,48 +5973,9 @@ const builder = {
     }
   },
 
-  loadImage(src) {
-    return new Promise((res) => {
-      const im = new Image();
-      im.onload = () => res(im);
-      im.onerror = () => res(null);
-      im.src = src;
-    });
-  },
-
-  drawScene(ctx, im, ch, prog, idx, W, H) {
-    const z = idx % 2 ? 1.1 - 0.1 * prog : 1 + 0.1 * prog;
-    const iw = im.naturalWidth || W;
-    const ih = im.naturalHeight || H;
-    const cover = Math.max(W / iw, H / ih) * z;
-    const dw = iw * cover;
-    const dh = ih * cover;
-    ctx.fillStyle = "#000";
-    ctx.fillRect(0, 0, W, H);
-    ctx.drawImage(im, (W - dw) / 2, (H - dh) / 2, dw, dh);
-    const grad = ctx.createLinearGradient(0, H * 0.6, 0, H);
-    grad.addColorStop(0, "rgba(0,0,0,0)");
-    grad.addColorStop(1, "rgba(0,0,0,0.8)");
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, H * 0.6, W, H * 0.4);
-    ctx.fillStyle = "#fff";
-    ctx.font = '700 30px "Plus Jakarta Sans", sans-serif';
-    ctx.fillText(String(ch.heading || ("Scene " + (idx + 1))).slice(0, 60), 28, H - 120);
-    ctx.font = '400 22px "Plus Jakarta Sans", sans-serif';
-    ctx.fillStyle = "rgba(255,255,255,0.9)";
-    ctx.fillText(String(ch.caption || "").slice(0, 80), 28, H - 84);
-    const ct = creditText(ch.credit, ch.collection) || "";
-    if (ct) {
-      ctx.font = '400 18px "Plus Jakarta Sans", sans-serif';
-      ctx.fillStyle = "rgba(255,255,255,0.7)";
-      ctx.fillText(ct.slice(0, 80), 28, H - 52);
-    }
-  },
-
   async recordWebm() {
     const view = this.view;
-    const full = this.full;
-    const chapters = (full && full.chapters) || [];
+    const SR = window.StoryRender;
     const status = $("#bld-webm-status", view);
     const bar = $("#bld-webm-bar", view);
     const track = $("#bld-webm-track", view);
@@ -5995,7 +5989,12 @@ const builder = {
     };
     dl.classList.add("hidden");
     dl.classList.remove("inline-flex");
-    if (!chapters.length) {
+    if (!SR) {
+      status.textContent = "The video renderer failed to load. Refresh and try again.";
+      return;
+    }
+    const film = filmFromFull(this.full);
+    if (!film.scenes.length) {
       status.textContent = "This story has no scenes.";
       return;
     }
@@ -6015,25 +6014,45 @@ const builder = {
     track.classList.remove("hidden");
     bar.style.width = "0%";
     status.textContent = "Loading photos…";
-    const imgs = [];
-    for (const c of chapters) {
-      const im = await this.loadImage(c.src);
+    const srcs = filmSources(film);
+    film.images = {};
+    for (const pid of Object.keys(srcs)) {
+      const im = await loadImage(srcs[pid]);
       if (!im) {
-        status.textContent = "Could not load " + c.photo_id + "; export stopped.";
+        status.textContent = "Could not load " + pid + "; export stopped.";
         reset();
         return;
       }
-      imgs.push(im);
+      film.images[pid] = im;
       if (!view.isConnected) return;
     }
-    const W = 540;
-    const H = 960;
+    film.reducedMotion = !!(window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    const total = SR.timeline(film).total;
+    let W = SR.WANT_W;
+    let H = SR.WANT_H;
     const cv = document.createElement("canvas");
     cv.width = W;
     cv.height = H;
     const ctx = cv.getContext("2d");
+    const size = { width: W, height: H };
+    status.textContent = "Checking speed…";
+    const bench0 = performance.now();
+    for (let b = 0; b < 30; b++) {
+      SR.renderFrame(film, (b / 30) * Math.min(2, total), ctx, size);
+    }
+    let resNote = "1080×1920";
+    if ((performance.now() - bench0) / 30 > 33) {
+      W = SR.FALLBACK_W;
+      H = SR.FALLBACK_H;
+      cv.width = W;
+      cv.height = H;
+      size.width = W;
+      size.height = H;
+      resNote = "720×1280";
+    }
     const stream = cv.captureStream(30);
-    const rec = new MediaRecorder(stream, { mimeType: webm, videoBitsPerSecond: 2500000 });
+    const rec = new MediaRecorder(stream, { mimeType: webm, videoBitsPerSecond: 8000000 });
     this.rec = rec;
     this.recCancel = false;
     const chunks = [];
@@ -6042,21 +6061,19 @@ const builder = {
     };
     const stopped = new Promise((res) => { rec.onstop = res; });
     rec.start(250);
-    const total = chapters.reduce((t, c) => t + (Number(c.seconds) || 0), 0);
-    let done = 0;
+    const frames = Math.max(1, Math.round(total * 30));
     const t0 = performance.now();
-    for (let i = 0; i < chapters.length; i++) {
-      const secs = Number(chapters[i].seconds) || 4;
-      const frames = Math.max(1, Math.round(secs * 30));
-      for (let f = 0; f < frames; f++) {
-        if (this.recCancel || !view.isConnected) break;
-        this.drawScene(ctx, imgs[i], chapters[i], f / frames, i, W, H);
-        bar.style.width = Math.min(100, ((done + (f / frames) * secs) / total) * 100) + "%";
-        status.textContent = "Recording scene " + (i + 1) + "/" + chapters.length + "…";
-        await new Promise((r) => setTimeout(r, 1000 / 30));
-      }
+    for (let f = 0; f < frames; f++) {
       if (this.recCancel || !view.isConnected) break;
-      done += secs;
+      SR.renderFrame(film, f / 30, ctx, size);
+      if (f % 6 === 0 || f === frames - 1) {
+        bar.style.width = Math.min(100, ((f + 1) / frames) * 100) + "%";
+        const pos = SR.sceneAt(film, f / 30);
+        const n = pos.kind === "end" ? film.scenes.length :
+          (pos.index !== undefined ? pos.index : pos.to) + 1;
+        status.textContent = "Recording scene " + n + "/" + film.scenes.length + "…";
+      }
+      await new Promise((r) => setTimeout(r, 1000 / 30));
     }
     const cancelled = this.recCancel || !view.isConnected;
     try { rec.stop(); } catch (e) { /* already stopped */ }
@@ -6071,14 +6088,14 @@ const builder = {
     const blob = new Blob(chunks, { type: "video/webm" });
     dl.href = URL.createObjectURL(blob);
     dl.download = "reelworld-" + this.id + ".webm";
-    dl.childNodes.forEach(() => {});
     dl.innerHTML = "";
-    dl.appendChild(document.createTextNode(
-      "Download video (" + (blob.size / 1048576).toFixed(1) + " MB WebM)"));
+    dl.appendChild(document.createTextNode("Download video (" +
+      (blob.size / 1048576).toFixed(1) + " MB WebM, " + resNote + ")"));
     dl.classList.remove("hidden");
     dl.classList.add("inline-flex");
     const took = Math.round((performance.now() - t0) / 1000);
-    status.textContent = "Recorded " + total + "s of story in " + took + "s.";
+    status.textContent = "Recorded " + total.toFixed(0) + "s at " + resNote +
+      (film.reducedMotion ? " (reduced motion)" : "") + " in " + took + "s.";
     setTimeout(() => URL.revokeObjectURL(dl.href), 60000);
     reset();
   },

@@ -29,6 +29,23 @@ Shell configuration + real collection totals. No secrets are ever returned.
 - `demo_mode` comes from `DEMO_MODE` in `.env` (default true). Counts are
   `null` when the database is unreachable.
 
+## `GET /api/profile`, `PUT /api/profile`, `DELETE /api/profile`
+
+The owner's display name for narration, stored in local git-ignored
+`data/profile.json`: `{name, refer_as, created_at, updated_at}`.
+`refer_as` is `name`, `you` or `i` (default `name`). The name comes
+only from what the owner types — never from a model, never from a
+face. The public demo has no profile, so no name is ever shown there.
+
+- `GET` returns `{"profile": {...}}` or `{"profile": null}`. Never gated.
+- `PUT {"name", "refer_as"?}` creates or updates (omitted `refer_as`
+  keeps the old choice). Name: 1–40 chars, letters, spaces, hyphens
+  and apostrophes only; violations are 400 with the reason.
+- `DELETE` removes the profile (owner-tag cleanup lands with tags in
+  step 2) and returns `{"ok": true, "removed": {"profile": bool}}`.
+- `PUT` and `DELETE` need the demo code when `DEMO_MODE` is true (403
+  otherwise); with `DEMO_MODE=false` they are open.
+
 ## `GET /og-image.png`
 
 The landing share-preview image (1200×630 PNG), rebuilt honestly from

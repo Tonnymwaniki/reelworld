@@ -56,6 +56,7 @@ from supabase import create_client
 import annotate as annotate_mod
 import chat as chat_module
 import llm as llm_mod
+import owner_profile as owner_profile_mod
 import place_pass as place_pass_mod
 from chat import (ANSWER_PROMPT, EMPTY_SPEC, Engine, extract_json)
 from retrieval import is_specific, meta_for, score_against, search_text
@@ -423,6 +424,35 @@ def api_config():
             "swahili_enabled": ENABLE_SWAHILI,
             "counts": _collection_counts(),
             "evaluation": _evaluation_text()}
+
+
+class ProfileRequest(BaseModel):
+    name: str = Field(min_length=1)
+    refer_as: Optional[str] = None
+
+
+@app.get("/api/profile")
+def get_profile():
+    """The owner's display name for narration, or null. Local only;
+    the public demo has no profile, so no name is ever shown there."""
+    return {"profile": owner_profile_mod.load_profile()}
+
+
+@app.put("/api/profile")
+def put_profile(req: ProfileRequest, request: Request):
+    _demo_guard(request)
+    try:
+        saved = owner_profile_mod.save_profile(req.name, req.refer_as)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    return {"profile": saved}
+
+
+@app.delete("/api/profile")
+def delete_profile(request: Request):
+    _demo_guard(request)
+    had = owner_profile_mod.delete_profile()
+    return {"ok": True, "removed": {"profile": had}}
 
 
 @app.get("/og-image.png")

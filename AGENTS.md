@@ -58,6 +58,17 @@ The UI offers a code field and keeps the code in `sessionStorage` only.
 `DEMO_MODE=false` enables everything (the local real library). Same data
 either way; the flag gates writes, not reads.
 
+## Owner names (no face recognition, ever)
+
+Stories and answers may call the owner by name in their own photos, but
+names come ONLY from what the owner tells us — the system must never
+work out who someone is from their face, and must never name anyone
+other than the owner. `data/profile.json` (git-ignored, local) holds
+`{name, refer_as, created_at, updated_at}` via `backend/owner_profile.py`
+and `GET/PUT/DELETE /api/profile` (writes demo-gated). A photo counts
+as "owner is in it" only when the owner has tagged it so (owner tags,
+next). The public demo has no profile and shows no name.
+
 ## Model providers and limits (settings live in `.env`, names only here)
 
 All reasoning goes through `backend/llm.py`. The primary provider answers;

@@ -443,3 +443,18 @@ the first unfinished phase.
 - Tests: render 40/40, stories 118/118; live play + WebM
   export of a chapter story (resolution + size reported).
 - Commit id: (this commit; see `git log`).
+
+## Owner names, step 1: profile store (user-run green)
+
+- New `backend/owner_profile.py`: local git-ignored
+  `data/profile.json` (`{name, refer_as, created_at,
+  updated_at}`), name validation (1-40 chars, letters/
+  spaces/hyphens/apostrophes), `refer_as` in name/you/i.
+- `GET/PUT/DELETE /api/profile` in `api.py` (Pydantic body,
+  400 on bad input, writes demo-gated); `test_routes.py`
+  grows to 18/18; new `test_owner_profile.py` 21/21.
+- Contract + AGENTS.md + this log updated. Tag cleanup on
+  delete lands with owner tags in step 2.
+- Tests: owner_profile 21/21, routes 18/18; live PUT/GET/
+  DELETE incl. 403 without the demo code.
+- Commit id: (this commit; see `git log`).

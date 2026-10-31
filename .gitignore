@@ -15,4 +15,5 @@ data/focal/
 data/cache/
 data/llm_calls.jsonl
 data/outlines/
+data/profile.json
 frontend/design/assets/
