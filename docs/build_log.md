@@ -284,3 +284,13 @@ the first unfinished phase.
 - Tests: `test_llm.py` 28/28; live probe: Modal
   meta-models/Muse-Spark-Open-816B-A42B accepts images.
 - Commit id: (this commit; see `git log`).
+
+## Modal switchboard, step 3: status (user-run green)
+
+- `llm.status()`: provider names/hosts/models, avg seconds +
+  success rate over the last 50 calls, tokens today, budget
+  left, last error, image capability. No model calls, no keys.
+- New `GET /api/llm/status` (always available, never gated).
+- Tests: `test_llm.py` 35/35; live status showed the Modal
+  primary, 2008 probe tokens today, images handled by modal.
+- Commit id: (this commit; see `git log`).

@@ -7,7 +7,7 @@ root:  python backend/test_llm.py
 import os
 import sys
 import tempfile
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -208,6 +208,39 @@ os.environ["DAILY_TOKEN_BUDGET"] = "1"
 check(llm.probe_images()["primary_accepts_images"], "probe bypasses budget")
 del os.environ["FORCE_PRIMARY_FAIL"]
 del os.environ["DAILY_TOKEN_BUDGET"]
+
+# status assembly (seeded rows only)
+llm._calls.clear()
+llm.CALLS_PATH.write_text("", encoding="utf-8")
+now = datetime.now(timezone.utc).isoformat()
+
+
+def _row(provider, seconds, ok, error=""):
+    return {"timestamp": now, "provider": provider, "model": "m",
+            "purpose": "chat", "seconds": seconds, "prompt_tokens": 10,
+            "completion_tokens": 5, "ok": ok, "error": error,
+            "fallback_used": False}
+
+
+for seed in (_row("modal", 2.0, True), _row("modal", 4.0, True),
+             _row("baseten", 6.0, False, "Boom")):
+    llm._log_call(seed)
+st = llm.status()
+check(st["avg_seconds_per_provider"] == {"modal": 3.0, "baseten": 6.0},
+      "avg seconds per provider")
+check(st["success_rate"] == round(2 / 3, 3) and st["window"] == 3,
+      "success rate + window")
+check(st["tokens_today"] == 45 and st["daily_budget"] == 3000000
+      and st["budget_left"] == 3000000 - 45, "tokens + budget left")
+check(st["last_error"] == "Boom", "last error")
+check(st["primary"]["host"] == "modal.example.com"
+      and "secret" not in json.dumps(st), "hosts only, no keys")
+check(st["images"]["handled_by"] == "modal", "images handled by primary")
+llm.CAPS_PATH.unlink()
+st = llm.status()
+check(st["images"]["primary_accepts_images"] is None
+      and st["images"]["handled_by"] == "unknown (not probed yet)",
+      "status never probes")
 
 for v, val in saved.items():
     if val is not None:

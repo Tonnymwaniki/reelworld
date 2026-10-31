@@ -205,19 +205,13 @@ def probe_images():
 
 def image_capability():
     """Cached caps, probing on first image use (never raises)."""
-    try:
-        caps = json.loads(CAPS_PATH.read_text(encoding="utf-8"))
-        if isinstance(caps, dict) and "primary_accepts_images" in caps:
-            return caps
-    except (OSError, ValueError):
-        pass
+    caps = _caps_file()
+    if caps is not None:
+        return caps
     with _caps_lock:
-        try:
-            caps = json.loads(CAPS_PATH.read_text(encoding="utf-8"))
-            if isinstance(caps, dict) and "primary_accepts_images" in caps:
-                return caps
-        except (OSError, ValueError):
-            pass
+        caps = _caps_file()
+        if caps is not None:
+            return caps
         return probe_images()
 
 
@@ -235,6 +229,57 @@ def _log_call(row):
 def recent_calls(n=50):
     """Last n logged calls, newest last."""
     return list(_calls)[-n:]
+
+
+def _caps_file():
+    """Saved capability result, or None when never probed (no probing)."""
+    try:
+        caps = json.loads(CAPS_PATH.read_text(encoding="utf-8"))
+        if isinstance(caps, dict) and "primary_accepts_images" in caps:
+            return caps
+    except (OSError, ValueError):
+        pass
+    return None
+
+
+def status():
+    """Provider status for GET /api/llm/status. Makes no model calls
+    and returns no keys."""
+    cfg = config()
+    primary = {"name": provider_name(cfg["primary"]["base_url"]),
+               "model": cfg["primary"]["model"],
+               "host": provider_host(cfg["primary"]["base_url"])}
+    fallback = {"name": provider_name(cfg["fallback"]["base_url"]),
+                "model": cfg["fallback"]["model"],
+                "host": provider_host(cfg["fallback"]["base_url"])}
+    window = recent_calls(50)
+    secs: dict = {}
+    for row in window:
+        secs.setdefault(row.get("provider", "?"), []).append(row.get("seconds", 0) or 0)
+    avg = {p: round(sum(v) / len(v), 2) for p, v in secs.items()}
+    ok = sum(1 for row in window if row.get("ok"))
+    last_err = ""
+    for row in reversed(window):
+        if not row.get("ok") and row.get("error"):
+            last_err = row["error"]
+            break
+    caps = _caps_file()
+    if caps is None:
+        images = {"primary_accepts_images": None, "checked_at": None,
+                  "error": "", "handled_by": "unknown (not probed yet)"}
+    else:
+        images = {"primary_accepts_images": caps.get("primary_accepts_images"),
+                  "checked_at": caps.get("checked_at"), "error": caps.get("error", ""),
+                  "handled_by": (primary["name"] if caps.get("primary_accepts_images")
+                                 else fallback["name"])}
+    used = tokens_today()
+    budget = cfg["budget"]
+    return {"primary": primary, "fallback": fallback,
+            "avg_seconds_per_provider": avg, "window": len(window),
+            "success_rate": (round(ok / len(window), 3) if window else None),
+            "tokens_today": used, "daily_budget": budget,
+            "budget_left": max(0, budget - used),
+            "last_error": last_err, "images": images}
 
 
 def tokens_today():

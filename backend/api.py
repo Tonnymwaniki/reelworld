@@ -249,7 +249,15 @@ def llm_probe():
                      "model": cfg["fallback"]["model"],
                      "host": llm_mod.provider_host(cfg["fallback"]["base_url"])},
         "images": caps,
-    }
+    }
+
+
+@app.get("/api/llm/status")
+def llm_status():
+    """Provider status: names, hosts, models, speeds, success rate,
+    today's tokens, budget left, last error, image capability.
+    Makes no model calls; never returns keys."""
+    return llm_mod.status()
 
 
 DEMO_MODE = os.getenv("DEMO_MODE", "true").strip().lower() == "true"
