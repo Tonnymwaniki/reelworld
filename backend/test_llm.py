@@ -31,6 +31,7 @@ def check(cond, label):
 tmp = tempfile.TemporaryDirectory()
 llm.DOTENV = Path(tmp.name) / ".env"
 llm.CALLS_PATH = Path(tmp.name) / "calls.jsonl"
+llm.CAPS_PATH = Path(tmp.name) / "caps.json"
 llm._calls.clear()
 VARS = ("PARSER_BASE_URL", "PARSER_KEY_ENV", "PARSER_MODEL",
         "FALLBACK_BASE_URL", "FALLBACK_KEY_ENV", "FALLBACK_MODEL",
@@ -170,6 +171,43 @@ del os.environ["LLM_TIMEOUT_SECONDS"]
 with open(llm.DOTENV, "a", encoding="utf-8") as f:
     f.write('QUOTED="a=b"\n')
 check(llm._env("QUOTED") == "a=b", ".env quotes and equals")
+
+# image capability probe
+BEHAVIOR["https://modal.example.com/v1"] = "red"
+caps = llm.probe_images()
+check(caps["primary_accepts_images"] and caps["checked_at"]
+      and json.loads(llm.CAPS_PATH.read_text())["primary_accepts_images"],
+      "probe success cached")
+BEHAVIOR["https://modal.example.com/v1"] = RuntimeError("no images here")
+caps = llm.probe_images()
+check(not caps["primary_accepts_images"] and "no images here" in caps["error"],
+      "probe failure recorded")
+CREATED.clear()
+check(llm.image_capability()["primary_accepts_images"] is False
+      and not CREATED, "caps cache hit makes no call")
+llm.CAPS_PATH.write_text(json.dumps({"primary_accepts_images": False,
+                                     "checked_at": None, "error": "x"}))
+BEHAVIOR["https://fallback.example.com/v1"] = "fallback sees it"
+CREATED.clear()
+r = llm.ask("what?", image_path=str(img), purpose="chat")
+tried = [u for u, _ in CREATED if u != "__init__"]
+check(r["fallback_used"] and "https://modal.example.com/v1" not in tried
+      and tried[0] == "https://fallback.example.com/v1",
+      "images go straight to fallback")
+llm.CAPS_PATH.write_text(json.dumps({"primary_accepts_images": True,
+                                     "checked_at": "t", "error": ""}))
+BEHAVIOR["https://modal.example.com/v1"] = "modal sees it"
+CREATED.clear()
+r = llm.ask("what?", image_path=str(img), purpose="chat")
+tried = [u for u, _ in CREATED if u != "__init__"]
+check(not r["fallback_used"] and tried[0] == "https://modal.example.com/v1",
+      "images use primary when accepted")
+os.environ["FORCE_PRIMARY_FAIL"] = "true"
+check(llm.probe_images()["primary_accepts_images"], "probe ignores fail switch")
+os.environ["DAILY_TOKEN_BUDGET"] = "1"
+check(llm.probe_images()["primary_accepts_images"], "probe bypasses budget")
+del os.environ["FORCE_PRIMARY_FAIL"]
+del os.environ["DAILY_TOKEN_BUDGET"]
 
 for v, val in saved.items():
     if val is not None:

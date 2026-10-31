@@ -55,7 +55,8 @@ from pydantic import BaseModel, Field
 from supabase import create_client
 
 import annotate as annotate_mod
-import chat as chat_module
+import chat as chat_module
+import llm as llm_mod
 import place_pass as place_pass_mod
 from chat import (ANSWER_PROMPT, EMPTY_SPEC, PARSER_BASE_URL, PARSER_KEY, PARSER_MODEL,
                   Engine, extract_json, chat_create)
@@ -229,7 +230,26 @@ def view(name: str):
 
 @app.get("/health")
 def health():
-    return {"status": "ok"}
+    return {"status": "ok"}
+
+
+@app.post("/api/llm/probe")
+def llm_probe():
+    """Re-probe whether the primary provider accepts images.
+
+    Returns the provider names/hosts plus the saved capability result.
+    No keys are ever returned."""
+    cfg = llm_mod.config()
+    caps = llm_mod.probe_images()
+    return {
+        "primary": {"name": llm_mod.provider_name(cfg["primary"]["base_url"]),
+                    "model": cfg["primary"]["model"],
+                    "host": llm_mod.provider_host(cfg["primary"]["base_url"])},
+        "fallback": {"name": llm_mod.provider_name(cfg["fallback"]["base_url"]),
+                     "model": cfg["fallback"]["model"],
+                     "host": llm_mod.provider_host(cfg["fallback"]["base_url"])},
+        "images": caps,
+    }
 
 
 DEMO_MODE = os.getenv("DEMO_MODE", "true").strip().lower() == "true"

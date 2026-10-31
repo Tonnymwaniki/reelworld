@@ -272,3 +272,15 @@ the first unfinished phase.
 - Tests: `test_llm.py` 21/21, `test_focal.py` 17/17 here; live
   focal probe returned real JSON (confidence 0.82).
 - Commit id: (this commit; see `git log`).
+
+## Modal switchboard, step 2: image probe (user-run green)
+
+- `probe_images()` in `llm.py`: tiny generated PNG + one-word
+  question; transport success = accepts. Cached at
+  `data/cache/llm_caps.json`; lazy on first image use; ignores
+  FORCE_PRIMARY_FAIL and the budget; never raises.
+- Image calls skip a rejecting primary, straight to fallback.
+- New `POST /api/llm/probe` (names/hosts/models + caps, no keys).
+- Tests: `test_llm.py` 28/28; live probe: Modal
+  meta-models/Muse-Spark-Open-816B-A42B accepts images.
+- Commit id: (this commit; see `git log`).

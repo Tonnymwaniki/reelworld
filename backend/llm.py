@@ -11,8 +11,10 @@ FORCE_PRIMARY_FAIL apply without a restart. Keys are read by name and
 never printed, logged or returned.
 """
 import base64
+import io
 import json
 import os
+import threading
 import time
 from collections import deque
 from datetime import datetime, timedelta, timezone
@@ -20,12 +22,14 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from openai import OpenAI
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
 DOTENV = ROOT / ".env"
 DATA = ROOT / "data"
 CACHE_DIR = DATA / "cache"
 CALLS_PATH = DATA / "llm_calls.jsonl"
+CAPS_PATH = CACHE_DIR / "llm_caps.json"
 
 MIN_TOKENS = 8000  # reasoning answers starve below this (except "simple")
 FALLBACK_DEFAULTS = {
@@ -134,12 +138,87 @@ def _extract_text(resp):
     return extra if isinstance(extra, str) else ""
 
 
+def _image_data_block(raw, mime):
+    """Raw image bytes as a base64 data-URL block, as annotate.py does."""
+    b64 = base64.b64encode(raw).decode()
+    return {"type": "image_url", "image_url": {"url": f"data:{mime};base64,{b64}"}}
+
+
 def _image_block(image_path):
     """Image file as a base64 data-URL block, as annotate.py does."""
     p = Path(image_path)
     mime = "image/png" if p.suffix.lower() == ".png" else "image/jpeg"
-    b64 = base64.b64encode(p.read_bytes()).decode()
-    return {"type": "image_url", "image_url": {"url": f"data:{mime};base64,{b64}"}}
+    return _image_data_block(p.read_bytes(), mime)
+
+
+_caps_lock = threading.Lock()
+
+
+def _tiny_image_bytes():
+    """16px generated PNG for the capability probe."""
+    buf = io.BytesIO()
+    Image.new("RGB", (16, 16), (200, 30, 30)).save(buf, "PNG")
+    return buf.getvalue()
+
+
+def probe_images():
+    """Force-probe: does the primary accept images? Saves + returns caps.
+
+    Acceptance is transport success on one tiny image call (the reply
+    text does not matter). Ignores FORCE_PRIMARY_FAIL and the budget:
+    this tests real capability. Never raises; failures are recorded.
+    """
+    cfg = config()
+    prov = cfg["primary"]
+    caps = {"primary_accepts_images": False, "checked_at": None, "error": ""}
+    name = provider_name(prov["base_url"])
+    try:
+        key = _env(prov["key_env"]) or ""
+        if not prov["base_url"] or not prov["model"] or not key:
+            raise RuntimeError("primary provider is not configured")
+        content = [{"type": "text",
+                    "text": "What is in this image? Reply with one word."},
+                   _image_data_block(_tiny_image_bytes(), "image/png")]
+        _text, pt, ct, secs = _call_one(
+            prov["base_url"], key, prov["model"], content,
+            0.0, MIN_TOKENS, cfg["timeout"], None)
+        caps["primary_accepts_images"] = True
+        caps["checked_at"] = datetime.now(timezone.utc).isoformat()
+        _log_call({"timestamp": caps["checked_at"], "provider": name,
+                   "model": prov["model"], "purpose": "probe",
+                   "seconds": round(secs, 2), "prompt_tokens": pt,
+                   "completion_tokens": ct, "ok": True, "error": "",
+                   "fallback_used": False})
+    except Exception as e:
+        caps["error"] = f"{type(e).__name__}: {e}"[:200]
+        _log_call({"timestamp": datetime.now(timezone.utc).isoformat(),
+                   "provider": name, "model": prov["model"], "purpose": "probe",
+                   "seconds": 0.0, "prompt_tokens": 0, "completion_tokens": 0,
+                   "ok": False, "error": caps["error"], "fallback_used": False})
+    try:
+        CAPS_PATH.parent.mkdir(parents=True, exist_ok=True)
+        CAPS_PATH.write_text(json.dumps(caps, ensure_ascii=False), encoding="utf-8")
+    except OSError:
+        pass
+    return caps
+
+
+def image_capability():
+    """Cached caps, probing on first image use (never raises)."""
+    try:
+        caps = json.loads(CAPS_PATH.read_text(encoding="utf-8"))
+        if isinstance(caps, dict) and "primary_accepts_images" in caps:
+            return caps
+    except (OSError, ValueError):
+        pass
+    with _caps_lock:
+        try:
+            caps = json.loads(CAPS_PATH.read_text(encoding="utf-8"))
+            if isinstance(caps, dict) and "primary_accepts_images" in caps:
+                return caps
+        except (OSError, ValueError):
+            pass
+        return probe_images()
 
 
 def _log_call(row):
@@ -206,6 +285,9 @@ def ask(prompt, max_tokens=8000, temperature=0.1, image_path=None,
         content.append(_image_block(image_path))
     force_fail = (_env("FORCE_PRIMARY_FAIL", "false").strip().lower() == "true")
     attempts = [("primary", cfg["primary"]), ("fallback", cfg["fallback"])]
+    if image_path is not None and not image_capability().get("primary_accepts_images"):
+        if cfg["fallback"]["base_url"] and cfg["fallback"]["model"]:
+            attempts = [("fallback", cfg["fallback"])]
     text, pt, ct, secs, err, used = "", 0, 0, 0.0, "", False
     for role, prov in attempts:
         name = provider_name(prov["base_url"])
