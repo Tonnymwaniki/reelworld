@@ -922,6 +922,12 @@ def ask(req: AskRequest, request: Request, response: Response):
         raise HTTPException(status_code=404, detail="I could not find that photo.")
     rec = rows[0]["record"]
     compact = _compact_record(rec)
+    ckey = llm_mod.cache_key("ask", [pid], req.question, [rec])
+    hit = llm_mod.cache_get(ckey)
+    if hit is not None:
+        hit["trace"] = (hit.get("trace") or []) + [
+            {"step": "cache", "detail": "Answered earlier from the cache."}]
+        return hit
     try:
         resp = chat_create(get_llm(), 
             model=PARSER_MODEL, temperature=0.1, max_tokens=3000,
@@ -931,16 +937,20 @@ def ask(req: AskRequest, request: Request, response: Response):
         raise HTTPException(status_code=502, detail=f"answer failed: {e}")
     answer = _msg_text(resp.choices[0].message).strip()
     if not any(p in answer.lower() for p in ANNOTATION_MISS):
-        return {"photo_id": pid, "question": req.question, "answer": answer,
-                "source": "annotation", "note": None,
-                "trace": [{"step": "answered",
-                           "detail": "Answered from the stored annotation."}]}
+        out = {"photo_id": pid, "question": req.question, "answer": answer,
+               "source": "annotation", "note": None,
+               "trace": [{"step": "answered",
+                          "detail": "Answered from the stored annotation."}]}
+        llm_mod.cache_put(ckey, out)
+        return out
     img_path = ROOT / str(rows[0].get("file") or "")
     if not img_path.exists():
-        return {"photo_id": pid, "question": req.question, "answer": answer,
-                "source": "annotation", "note": None,
-                "trace": [{"step": "answered",
-                           "detail": "Answered from the stored annotation."}]}
+        out = {"photo_id": pid, "question": req.question, "answer": answer,
+               "source": "annotation", "note": None,
+               "trace": [{"step": "answered",
+                          "detail": "Answered from the stored annotation."}]}
+        llm_mod.cache_put(ckey, out)
+        return out
     mime = "image/png" if img_path.suffix.lower() == ".png" else "image/jpeg"
     b64 = base64.b64encode(img_path.read_bytes()).decode()
     try:
@@ -955,12 +965,14 @@ def ask(req: AskRequest, request: Request, response: Response):
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"image look failed: {e}")
     img_answer = " ".join(_msg_text(resp.choices[0].message).strip().split()[:120])
-    return {"photo_id": pid, "question": req.question, "answer": img_answer,
-            "source": "image", "note": "This answer came from looking at the photo again.",
-            "trace": [{"step": "reinspected",
-                       "detail": "The stored annotation could not answer, so I looked at the photo again."},
-                      {"step": "answered",
-                       "detail": "Answered from looking at the photo again."}]}
+    out = {"photo_id": pid, "question": req.question, "answer": img_answer,
+           "source": "image", "note": "This answer came from looking at the photo again.",
+           "trace": [{"step": "reinspected",
+                      "detail": "The stored annotation could not answer, so I looked at the photo again."},
+                     {"step": "answered",
+                      "detail": "Answered from looking at the photo again."}]}
+    llm_mod.cache_put(ckey, out)
+    return out
 
 
 def _record_or_404(pid):
@@ -981,6 +993,13 @@ def compare(req: CompareRequest, request: Request, response: Response):
         raise HTTPException(status_code=400, detail="photo_a and photo_b must be different.")
     rec_a = _record_or_404(req.photo_a)
     rec_b = _record_or_404(req.photo_b)
+    ckey = llm_mod.cache_key("compare", [req.photo_a, req.photo_b],
+                             req.question, [rec_a, rec_b])
+    hit = llm_mod.cache_get(ckey)
+    if hit is not None:
+        hit["trace"] = (hit.get("trace") or []) + [
+            {"step": "cache", "detail": "Answered earlier from the cache."}]
+        return hit
     try:
         resp = chat_create(get_llm(), 
             model=PARSER_MODEL, temperature=0.1, max_tokens=8000,
@@ -1004,9 +1023,13 @@ def compare(req: CompareRequest, request: Request, response: Response):
                 diffs.append({"aspect": str(d.get("aspect", "")),
                               "a": str(d.get("a", "")), "b": str(d.get("b", ""))})
     answer = " ".join(str(data.get("answer", "")).split()[:150])
-    return {"photo_a": req.photo_a, "photo_b": req.photo_b,
-            "question": req.question, "answer": answer,
-            "differences": diffs, "source": "annotation"}
+    out = {"photo_a": req.photo_a, "photo_b": req.photo_b,
+           "question": req.question, "answer": answer,
+           "differences": diffs, "source": "annotation",
+           "trace": [{"step": "compared",
+                      "detail": "Compared the two stored annotations."}]}
+    llm_mod.cache_put(ckey, out)
+    return out
 
 
 class StoryRequest(BaseModel):
@@ -2145,6 +2168,13 @@ def explain(req: ExplainRequest, request: Request, response: Response):
         photo_a=a_id, photo_b=b_id,
         record_a=json.dumps(_safe_compact(a.get("record")), ensure_ascii=False),
         record_b=json.dumps(_safe_compact(b.get("record")), ensure_ascii=False))
+    ckey = llm_mod.cache_key("explain", [a_id, b_id], "",
+                             [a.get("record") or {}, b.get("record") or {}])
+    hit = llm_mod.cache_get(ckey)
+    if hit is not None:
+        hit["trace"] = (hit.get("trace") or []) + [
+            {"step": "cache", "detail": "Answered earlier from the cache."}]
+        return hit
     try:
         resp = chat_create(get_llm(), model=PARSER_MODEL, temperature=0.1,
                            max_tokens=800,
@@ -2155,11 +2185,13 @@ def explain(req: ExplainRequest, request: Request, response: Response):
     if not text:
         text = ("The records link these photos (" + ", ".join(kinds) + ") but "
                 "the model returned no wording; the facts above are the evidence.")
-    return {**base, "linked": True, "text": text,
-            "trace": [{"step": "checked",
-                       "detail": "Compared captions, signs, landmarks and place verdicts."},
-                      {"step": "wrote",
-                       "detail": "Wrote the connection from the records."}]}
+    out = {**base, "linked": True, "text": text,
+           "trace": [{"step": "checked",
+                      "detail": "Compared captions, signs, landmarks and place verdicts."},
+                     {"step": "wrote",
+                      "detail": "Wrote the connection from the records."}]}
+    llm_mod.cache_put(ckey, out)
+    return out
 
 
 # ----- Phase 4: story drafts (engine) + publish -----

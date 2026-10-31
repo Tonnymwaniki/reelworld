@@ -319,3 +319,15 @@ the first unfinished phase.
   (`*.py text eol=lf`) so it never recurs. Lesson: never
   whole-file writes from PowerShell; bytes or the edit tool.
 - Commit id: (this commit; see `git log`).
+
+## Modal switchboard, step 5: answer cache (user-run green)
+
+- `llm.cache_key/get/put`: key from purpose + ordered ids +
+  question + record content hashes; 24h TTL in
+  `data/cache/llm/`; corrupt/expired miss; puts never raise.
+- Ask, compare (gains a `trace` field) and explain (model
+  branch) check-then-store; hits append "Answered earlier
+  from the cache." and skip the model + budget entirely.
+- Tests: `test_llm.py` 43/43; live ask twice, second trace
+  showed the cache row.
+- Commit id: (this commit; see `git log`).

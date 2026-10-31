@@ -32,6 +32,7 @@ tmp = tempfile.TemporaryDirectory()
 llm.DOTENV = Path(tmp.name) / ".env"
 llm.CALLS_PATH = Path(tmp.name) / "calls.jsonl"
 llm.CAPS_PATH = Path(tmp.name) / "caps.json"
+llm.ANSWER_CACHE_DIR = Path(tmp.name) / "answers"
 llm._calls.clear()
 VARS = ("PARSER_BASE_URL", "PARSER_KEY_ENV", "PARSER_MODEL",
         "FALLBACK_BASE_URL", "FALLBACK_KEY_ENV", "FALLBACK_MODEL",
@@ -241,6 +242,25 @@ st = llm.status()
 check(st["images"]["primary_accepts_images"] is None
       and st["images"]["handled_by"] == "unknown (not probed yet)",
       "status never probes")
+
+# answer cache
+rec = {"observed": {"caption": "a street"}, "n": 1}
+k1 = llm.cache_key("ask", ["p1"], " What? ", [rec])
+k2 = llm.cache_key("ask", ["p1"], "What?", [rec])
+check(k1 == k2 and len(k1) == 16, "key stable, whitespace ignored")
+check(llm.cache_key("ask", ["p1"], "When?", [rec]) != k1, "question matters")
+check(llm.cache_key("ask", ["p1"], "What?", [{"n": 2}]) != k1, "record matters")
+check(llm.cache_key("ask", ["p1", "p2"], "What?", [rec, rec])
+      != llm.cache_key("ask", ["p2", "p1"], "What?", [rec, rec]), "id order matters")
+check(llm.cache_get(k1) is None, "miss on empty cache")
+llm.cache_put(k1, {"answer": "hi"})
+check(llm.cache_get(k1) == {"answer": "hi"}, "roundtrip")
+old = datetime.now(timezone.utc) - timedelta(hours=25)
+(llm.ANSWER_CACHE_DIR / f"{k1}.json").write_text(
+    json.dumps({"created_at": old.isoformat(), "payload": {"answer": "stale"}}))
+check(llm.cache_get(k1) is None, "expired entries miss")
+(llm.ANSWER_CACHE_DIR / f"{k1}.json").write_text("not json{{")
+check(llm.cache_get(k1) is None, "corrupt entries miss")
 
 for v, val in saved.items():
     if val is not None:

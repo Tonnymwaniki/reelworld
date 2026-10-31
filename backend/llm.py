@@ -11,6 +11,7 @@ FORCE_PRIMARY_FAIL apply without a restart. Keys are read by name and
 never printed, logged or returned.
 """
 import base64
+import hashlib
 import io
 import json
 import os
@@ -30,6 +31,8 @@ DATA = ROOT / "data"
 CACHE_DIR = DATA / "cache"
 CALLS_PATH = DATA / "llm_calls.jsonl"
 CAPS_PATH = CACHE_DIR / "llm_caps.json"
+ANSWER_CACHE_DIR = CACHE_DIR / "llm"
+CACHE_TTL_HOURS = 24
 
 MIN_TOKENS = 8000  # reasoning answers starve below this (except "simple")
 FALLBACK_DEFAULTS = {
@@ -234,6 +237,50 @@ def _log_call(row):
 def recent_calls(n=50):
     """Last n logged calls, newest last."""
     return list(_calls)[-n:]
+
+
+def _record_version(record):
+    """Content hash of a stored record: any annotation edit invalidates."""
+    canon = json.dumps(record, sort_keys=True, ensure_ascii=False, default=str)
+    return hashlib.sha1(canon.encode()).hexdigest()[:16]
+
+
+def cache_key(purpose, photo_ids, question, records):
+    """Cache key from photo ids (ordered), question and record versions."""
+    canon = {"purpose": purpose, "photo_ids": list(photo_ids),
+             "question": (question or "").strip(),
+             "records": [_record_version(r) for r in records]}
+    return hashlib.sha1(json.dumps(canon, sort_keys=True).encode()).hexdigest()[:16]
+
+
+def cache_get(key):
+    """Cached answer payload, or None when missing/expired/corrupt."""
+    try:
+        raw = json.loads((ANSWER_CACHE_DIR / f"{key}.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    if not isinstance(raw, dict) or "payload" not in raw:
+        return None
+    try:
+        created = datetime.fromisoformat(raw.get("created_at", ""))
+    except ValueError:
+        return None
+    if created.tzinfo is None:
+        created = created.replace(tzinfo=timezone.utc)
+    if datetime.now(timezone.utc) - created > timedelta(hours=CACHE_TTL_HOURS):
+        return None
+    return raw["payload"]
+
+
+def cache_put(key, payload):
+    """Store an answer payload for 24h. Caching never breaks the call."""
+    try:
+        ANSWER_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+        (ANSWER_CACHE_DIR / f"{key}.json").write_text(
+            json.dumps({"created_at": datetime.now(timezone.utc).isoformat(),
+                        "payload": payload}, ensure_ascii=False), encoding="utf-8")
+    except OSError:
+        pass
 
 
 def _caps_file():
