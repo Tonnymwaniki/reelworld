@@ -595,5 +595,9 @@ the first unfinished phase.
   and the home trust line now describe owner-only suggest-confirm
   matching; design exports untouched (history); AGENTS.md rule
   qualified the same way.
-- Tests: profile 68→80. Live: upload a close-up, scan, confirm
-  one Yes + one No from the suggestion rows (pending user run).
+- Tests: profile 80/80, face_match 17/17, routes 26/26
+  (user-run green). Live: tag-page scan + Yes/No confirms, 15 of
+  16 reviewed through the rows. Steps 8–9 done.
+- Commit id: 1b6a35b (a first take, f498153, briefly swept in
+  the user's selfie.jpeg; reset before any push and recommitted
+  without it — the photo never left the machine).
