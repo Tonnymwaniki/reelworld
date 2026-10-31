@@ -237,6 +237,14 @@ def llm_probe(request: Request = None, response: Response = None):
     }
 
 
+@app.get("/api/llm/status")
+def llm_status():
+    """Provider status: names, hosts, models, speeds, success rate,
+    today's tokens, budget left, last error, image capability.
+    Makes no model calls; never returns keys."""
+    return llm_mod.status()
+
+
 DEMO_MODE = os.getenv("DEMO_MODE", "true").strip().lower() == "true"
 DEMO_CODE = os.getenv("DEMO_CODE", "")
 FEATURE_OUTLINES = os.getenv("FEATURE_OUTLINES", "true").strip().lower() == "true"

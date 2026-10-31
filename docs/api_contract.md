@@ -552,6 +552,72 @@ Response:
 - 404 unknown photo id, same message as `/api/photo/{photo_id}`
 - 502 lookup/search failed
 
+## `GET /api/llm/status`
+
+Provider status. Makes no model calls, so it always works; never
+returns keys.
+
+```json
+{ "primary": {"name": "modal", "model": "…", "host": "…"},
+  "fallback": {"name": "baseten", "model": "…", "host": "…"},
+  "avg_seconds_per_provider": {"modal": 4.1}, "window": 12,
+  "success_rate": 1.0, "tokens_today": 2008,
+  "daily_budget": 3000000, "budget_left": 2997992,
+  "last_error": "",
+  "images": {"primary_accepts_images": true, "checked_at": "…",
+             "error": "", "handled_by": "modal"} }
+```
+
+- Hosts are host parts only. Speeds and `success_rate` cover the
+  last 50 logged calls (`window` says how many exist yet).
+- `tokens_today` counts real prompt + completion tokens since
+  midnight Africa/Nairobi. `success_rate` is null before the
+  first logged call.
+- `images.handled_by` names the provider image calls use; when
+  never probed, `primary_accepts_images` is null and
+  `handled_by` reads "unknown (not probed yet)".
+
+## `POST /api/llm/probe`
+
+Re-tests whether the primary accepts images (one tiny generated
+image + a one-word question) and saves the result to
+`data/cache/llm_caps.json`. Same `primary`/`fallback` shapes as
+status plus `"images"` (the saved caps). Counted against the
+visitor rate limit (429 when limited), like other model calls.
+
+## Rate limits and the resting reply
+
+With `DEMO_MODE=true`, model-calling endpoints are limited per
+visitor (IP + `rw_visitor` cookie): `REQUESTS_PER_MINUTE`
+(default 6) and `REQUESTS_PER_DAY` (default 60), quadrupled with
+a valid demo code; the daily token budget is checked first.
+With `DEMO_MODE=false` there are no limits.
+
+- `POST /chat` (and `/chat/stream`, as one `result` event)
+  answers 200 with `kind: "resting"`, the calm message as
+  `text`, empty results and a `rested` trace row.
+- `POST /api/ask`, `/api/compare`, `/api/explain`, `/api/story`
+  and `/api/llm/probe` answer 429 with the calm message as
+  `{"detail"}`.
+- Model-free endpoints (browse, place, credits, tour,
+  Connected, photos, status) are never limited.
+
+## Answer cache
+
+Ask, compare and explain answers are cached 24h in
+`data/cache/llm/`, keyed by purpose + photo ids + question +
+record content hashes. Cache hits return the stored payload
+with `{"step": "cache", "detail": "Answered earlier from the
+cache."}` appended to the trace, and use no tokens.
+`POST /api/compare` responses now always carry a `trace` array.
+
+## Provider traces
+
+Model-backed traces name the answering provider and seconds:
+`/chat` appends `{"step": "model", "detail": "Reasoning by
+<providers> in <s>s (<n> calls)."}`; ask, compare and explain
+append `(<provider>, <s>s)` to their answer trace details.
+
 ## Story engine v2 (directed film; in progress)
 
 Step 1 adds no endpoints and changes no response. Internals only:

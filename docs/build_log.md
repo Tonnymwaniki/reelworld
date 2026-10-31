@@ -346,3 +346,20 @@ the first unfinished phase.
 - Tests: `test_guard.py` 13/13; live chat showed "Reasoning
   by modal in 3.8s", live ask "(modal, 6.58s)".
 - Commit id: (this commit; see `git log`).
+
+## Modal switchboard, step 7: docs + full tests (done)
+
+- Settings table (names + defaults) in `AGENTS.md` and
+  `README.md`; `api_contract.md` gains llm/status/probe,
+  resting/429 rules, cache behavior, provider traces.
+- Regression found live: the whitespace repair had restored
+  `api.py` from the step-2 commit, dropping `GET
+  /api/llm/status` (404). Re-added + new `backend/test_routes.py`
+  (15 checks: routes registered, direct-call defaults kept).
+- Final evidence: all 10 backend suites green (177 checks);
+  (a) status live; (b) chat model row; (c) image ask via
+  modal 7.63s; (d) fallback user-confirmed, then modal again;
+  (e) 6 ok + resting; (f) browse 132 + place 13 under spent
+  budget (chat-resting covered by unit tests + live 429 text);
+  (g) cache hit with token count unchanged (31775).
+- Commit id: (this commit; see `git log`).
