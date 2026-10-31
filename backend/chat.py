@@ -42,9 +42,9 @@ from pathlib import Path
 
 import numpy as np
 from dotenv import load_dotenv
-from openai import OpenAI
 from supabase import create_client
 
+import llm as llm_mod
 from retrieval import get_model, score_against, tokens
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -56,11 +56,6 @@ def _env_or(name, default):
     if not v or v.lower().startswith("paste_") or v.startswith("<"):
         return default
     return v
-
-
-def _msg_text(msg):
-    """Chat message text, tolerating reasoning-style null content."""
-    return msg.content or getattr(msg, "reasoning_content", None) or ""
 
 
 def _key_ok(name):
@@ -290,18 +285,19 @@ def extract_json(text):
 class Engine:
     def __init__(self):
         self.sb = create_client(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SERVICE_KEY"])
-        self.llm = OpenAI(base_url=PARSER_BASE_URL, api_key=PARSER_KEY)
         self.embedder = get_model()
         self.state = {"spec": dict(EMPTY_SPEC), "focus": None, "last": [], "rejected": set()}
+        self.session_id = None  # set by api.get_engine for Modal affinity
+        self.turn_llm = []  # per-turn [{provider, seconds}], reset in turn_stream
 
     # ----- helpers -----
 
-    def ask(self, prompt, max_tokens=6000):
+    def ask(self, prompt, max_tokens=6000, purpose="chat"):
         print("(thinking ...)", flush=True)
-        resp = chat_create(self.llm,
-            model=PARSER_MODEL, temperature=0.1, max_tokens=max_tokens,
-            messages=[{"role": "user", "content": prompt}])
-        return _msg_text(resp.choices[0].message)
+        res = llm_mod.ask(prompt, max_tokens=max_tokens, temperature=0.1,
+                          purpose=purpose, session_id=self.session_id)
+        self.turn_llm.append({"provider": res["provider"], "seconds": res["seconds"]})
+        return res["text"]
 
     def embed(self, text):
         v = np.array(next(iter(self.embedder.query_embed(text))), dtype="float32")
@@ -331,12 +327,14 @@ class Engine:
         prompt = PARSE_PROMPT.format(spec=json.dumps(self.state["spec"]), focus=focus_txt,
                                      message=message, viewpoints=", ".join(VIEWPOINTS))
         try:
-            data = extract_json(self.ask(prompt))
+            data = extract_json(self.ask(prompt, purpose="parse"))
             spec = {**EMPTY_SPEC, **(data.get("spec") or {})}
             if not spec["query"]:
                 spec["query"] = message
             data["spec"] = spec
             return data, False
+        except llm_mod.LLMBudgetSpent:
+            raise
         except Exception as e:
             print(f"(could not understand the message structure: {e}; treating it as a new search)")
             return ({"action": "search", "spec": {**EMPTY_SPEC, "query": message}, "anchor": None,
@@ -442,7 +440,8 @@ class Engine:
                    "inferred": {k: rec["inferred"].get(k) for k in
                                 ["landmarks", "place", "taken_from", "cultural_context", "uncertainties"]}}
         return self.ask(ANSWER_PROMPT.format(record=json.dumps(compact, ensure_ascii=False),
-                                             question=question), max_tokens=3000).strip()
+                                             question=question), max_tokens=3000,
+                        purpose="answer").strip()
 
     # ----- one conversation turn -----
 
@@ -458,6 +457,7 @@ class Engine:
         detail) for understood/searched/checked/wrote as each stage really
         runs, then ("result", response dict). Stages that do not run are
         never emitted."""
+        self.turn_llm = []
         st = self.state
         trace = []
         m = re.fullmatch(r"\s*open\s+(\d)\s*", message, re.I)

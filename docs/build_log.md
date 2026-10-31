@@ -331,3 +331,18 @@ the first unfinished phase.
 - Tests: `test_llm.py` 43/43; live ask twice, second trace
   showed the cache row.
 - Commit id: (this commit; see `git log`).
+
+## Modal switchboard, step 6: every call via llm.ask (user-run green)
+
+- `Engine.ask` (parse/answer, session affinity, per-turn model
+  trace row), ask text + vision (Modal-first now), compare,
+  story `_llm_json`, explain: all through `llm.ask` with a
+  purpose label; provider + seconds in traces; 429/resting on
+  budget races. Removed `get_llm`, dead `_msg_text`s, unused
+  imports. Endpoint request/response default None so direct
+  calls (verify_meta) work; direct calls skip rate, honor
+  budget. `sam.py` outlines + upload annotation untouched
+  (different API/pipeline).
+- Tests: `test_guard.py` 13/13; live chat showed "Reasoning
+  by modal in 3.8s", live ask "(modal, 6.58s)".
+- Commit id: (this commit; see `git log`).

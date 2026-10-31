@@ -114,6 +114,11 @@ try:
 except Exception as e:
     check(getattr(e, "status_code", None) == 429, "429 raised")
 
+check(api._guard_expensive(None, None) is None, "direct call allowed")
+api.llm_mod.tokens_today = lambda: 10 ** 9
+check(api._guard_expensive(None, None) == "budget", "direct call honors budget")
+api.llm_mod.tokens_today = lambda: 0
+
 api.DEMO_MODE, api.DEMO_CODE = saved_demo, saved_code
 api.llm_mod.tokens_today = orig_tokens
 

@@ -31,7 +31,6 @@ Then open http://127.0.0.1:8000 in a browser.
 """
 from __future__ import annotations
 
-import base64
 import csv
 import json
 import os
@@ -58,8 +57,7 @@ import annotate as annotate_mod
 import chat as chat_module
 import llm as llm_mod
 import place_pass as place_pass_mod
-from chat import (ANSWER_PROMPT, EMPTY_SPEC, PARSER_BASE_URL, PARSER_KEY, PARSER_MODEL,
-                  Engine, extract_json, chat_create)
+from chat import (ANSWER_PROMPT, EMPTY_SPEC, Engine, extract_json)
 from retrieval import is_specific, meta_for, score_against, search_text
 from story_engine import StoryError
 
@@ -105,6 +103,7 @@ def get_engine(session_id: str) -> Engine:
         eng = _sessions.get(sid)
         if eng is None:
             eng = Engine()
+            eng.session_id = sid
             _sessions[sid] = eng
         return eng
 
@@ -138,13 +137,7 @@ def attach_credits(rows):
 
 # ----- shared lightweight clients (no embedding model) -----
 _sb = None
-_llm = None
 _clients_lock = threading.Lock()
-
-
-def _msg_text(msg):
-    """Chat message text, tolerating reasoning-style null content."""
-    return msg.content or getattr(msg, "reasoning_content", None) or ""
 
 
 def get_sb():
@@ -154,15 +147,6 @@ def get_sb():
         if _sb is None:
             _sb = create_client(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SERVICE_KEY"])
         return _sb
-
-
-def get_llm():
-    """Shared LLM client for /api/ask."""
-    global _llm
-    with _clients_lock:
-        if _llm is None:
-            _llm = OpenAI(base_url=PARSER_BASE_URL, api_key=PARSER_KEY)
-        return _llm
 
 
 def photo_url(file):
@@ -234,7 +218,7 @@ def health():
 
 
 @app.post("/api/llm/probe")
-def llm_probe(request: Request, response: Response):
+def llm_probe(request: Request = None, response: Response = None):
     """Re-probe whether the primary provider accepts images.
 
     Returns the provider names/hosts plus the saved capability result.
@@ -306,7 +290,15 @@ def _guard_expensive(request, response):
     """Rate + budget guard for model-calling endpoints.
 
     Returns None when allowed, else minute/day/budget. Mints the visitor
-    cookie when missing. No limits at all when DEMO_MODE is false."""
+    cookie when missing. No limits at all when DEMO_MODE is false.
+    A None request (direct in-process call, no HTTP visitor) skips
+    rate accounting but still honors the budget."""
+    if request is None:
+        if not DEMO_MODE:
+            return None
+        if llm_mod.tokens_today() >= llm_mod.config()["budget"]:
+            return "budget"
+        return None
     try:
         has_cookie = request.cookies.get(VISITOR_COOKIE)
     except Exception:
@@ -426,7 +418,7 @@ def og_image():
 
 
 @app.post("/chat", response_model=ChatResponse)
-def chat(req: ChatRequest, request: Request, response: Response):
+def chat(req: ChatRequest, request: Request = None, response: Response = None):
     limited = _guard_expensive(request, response)
     if limited is not None:
         _sid = req.session_id.strip() or "default"
@@ -439,6 +431,8 @@ def chat(req: ChatRequest, request: Request, response: Response):
     with _turn_lock:
         try:
             out = eng.turn(req.message)
+        except llm_mod.LLMBudgetSpent:
+            return _resting_payload(sid, eng, "budget")
         except Exception as e:
             raise HTTPException(status_code=502, detail=f"search failed: {e}")
         return _chat_payload(sid, eng, out)
@@ -454,6 +448,13 @@ def _chat_payload(sid, eng, out):
         spec = eng.state.get("spec") or {}
     rows = [public_row(r) for r in out.get("results", [])]
     attach_credits(rows)
+    trace = list(out.get("trace", []))
+    calls = getattr(eng, "turn_llm", None) or []
+    if calls:
+        provs = ", ".join(sorted({c["provider"] for c in calls}))
+        secs = sum(c["seconds"] for c in calls)
+        trace.append({"step": "model",
+                      "detail": f"Reasoning by {provs} in {secs:.1f}s ({len(calls)} calls)."})
     return {
         "session_id": sid,
         "text": out.get("text", ""),
@@ -462,7 +463,7 @@ def _chat_payload(sid, eng, out):
         "spec": {k: spec.get(k) for k in ("query", "collection", "viewpoints",
                                           "max_people", "must_include", "avoid_terms")},
         "kind": out.get("kind", "ok"),
-        "trace": out.get("trace", []),
+        "trace": trace,
     }
 
 
@@ -471,7 +472,8 @@ def _sse(event, data):
 
 
 @app.post("/chat/stream")
-def chat_stream(req: ChatRequest, request: Request, response: Response):
+def chat_stream(req: ChatRequest, request: Request = None,
+                response: Response = None):
     """Same turn as POST /chat, streamed: `step` events (understood /
     searched / checked / wrote) as each stage really runs, then one
     `result` event with the full /chat payload. Mid-stream failures
@@ -496,6 +498,8 @@ def chat_stream(req: ChatRequest, request: Request, response: Response):
                         yield _sse("step", {"step": item[1], "detail": item[2]})
                     else:
                         yield _sse("result", _chat_payload(sid, eng, item[1]))
+        except llm_mod.LLMBudgetSpent:
+            yield _sse("result", _resting_payload(sid, eng, "budget"))
         except Exception as e:
             yield _sse("error", {"detail": f"search failed: {e}"})
 
@@ -910,7 +914,7 @@ def _photo_detail_shape(r):
 
 
 @app.post("/api/ask")
-def ask(req: AskRequest, request: Request, response: Response):
+def ask(req: AskRequest, request: Request = None, response: Response = None):
     _guard_or_429(request, response)
     pid = req.photo_id.strip()
     try:
@@ -929,18 +933,20 @@ def ask(req: AskRequest, request: Request, response: Response):
             {"step": "cache", "detail": "Answered earlier from the cache."}]
         return hit
     try:
-        resp = chat_create(get_llm(), 
-            model=PARSER_MODEL, temperature=0.1, max_tokens=3000,
-            messages=[{"role": "user", "content": ANSWER_PROMPT.format(
-                record=json.dumps(compact, ensure_ascii=False), question=req.question)}])
+        res = llm_mod.ask(ANSWER_PROMPT.format(
+            record=json.dumps(compact, ensure_ascii=False), question=req.question),
+            purpose="ask", session_id=req.session_id)
+    except llm_mod.LLMBudgetSpent:
+        raise HTTPException(status_code=429, detail=RESTING_TEXT)
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"answer failed: {e}")
-    answer = _msg_text(resp.choices[0].message).strip()
+    answer = res["text"].strip()
+    via = f" ({res['provider']}, {res['seconds']}s)"
     if not any(p in answer.lower() for p in ANNOTATION_MISS):
         out = {"photo_id": pid, "question": req.question, "answer": answer,
                "source": "annotation", "note": None,
                "trace": [{"step": "answered",
-                          "detail": "Answered from the stored annotation."}]}
+                          "detail": f"Answered from the stored annotation{via}."}]}
         llm_mod.cache_put(ckey, out)
         return out
     img_path = ROOT / str(rows[0].get("file") or "")
@@ -948,29 +954,25 @@ def ask(req: AskRequest, request: Request, response: Response):
         out = {"photo_id": pid, "question": req.question, "answer": answer,
                "source": "annotation", "note": None,
                "trace": [{"step": "answered",
-                          "detail": "Answered from the stored annotation."}]}
+                          "detail": f"Answered from the stored annotation{via}."}]}
         llm_mod.cache_put(ckey, out)
         return out
-    mime = "image/png" if img_path.suffix.lower() == ".png" else "image/jpeg"
-    b64 = base64.b64encode(img_path.read_bytes()).decode()
     try:
-        vision = OpenAI(base_url=annotate_mod.BASE_URL, api_key=os.environ["BASETEN_API_KEY"])
-        resp = vision.chat.completions.create(
-            model=annotate_mod.MODEL, temperature=0.1, max_tokens=3000,
-            messages=[{"role": "user", "content": [
-                {"type": "text", "text": IMAGE_ANSWER_PROMPT.format(
-                    record=json.dumps(compact, ensure_ascii=False), question=req.question)},
-                {"type": "image_url", "image_url": {"url": f"data:{mime};base64,{b64}"}},
-            ]}])
+        res = llm_mod.ask(IMAGE_ANSWER_PROMPT.format(
+            record=json.dumps(compact, ensure_ascii=False), question=req.question),
+            image_path=str(img_path), purpose="ask", session_id=req.session_id)
+    except llm_mod.LLMBudgetSpent:
+        raise HTTPException(status_code=429, detail=RESTING_TEXT)
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"image look failed: {e}")
-    img_answer = " ".join(_msg_text(resp.choices[0].message).strip().split()[:120])
+    img_answer = " ".join(res["text"].strip().split()[:120])
+    via = f" ({res['provider']}, {res['seconds']}s)"
     out = {"photo_id": pid, "question": req.question, "answer": img_answer,
            "source": "image", "note": "This answer came from looking at the photo again.",
            "trace": [{"step": "reinspected",
                       "detail": "The stored annotation could not answer, so I looked at the photo again."},
                      {"step": "answered",
-                      "detail": "Answered from looking at the photo again."}]}
+                      "detail": f"Answered from looking at the photo again{via}."}]}
     llm_mod.cache_put(ckey, out)
     return out
 
@@ -987,7 +989,8 @@ def _record_or_404(pid):
 
 
 @app.post("/api/compare")
-def compare(req: CompareRequest, request: Request, response: Response):
+def compare(req: CompareRequest, request: Request = None,
+            response: Response = None):
     _guard_or_429(request, response)
     if req.photo_a == req.photo_b:
         raise HTTPException(status_code=400, detail="photo_a and photo_b must be different.")
@@ -1001,18 +1004,19 @@ def compare(req: CompareRequest, request: Request, response: Response):
             {"step": "cache", "detail": "Answered earlier from the cache."}]
         return hit
     try:
-        resp = chat_create(get_llm(), 
-            model=PARSER_MODEL, temperature=0.1, max_tokens=8000,
-            messages=[{"role": "user", "content": COMPARE_PROMPT.format(
-                photo_a=req.photo_a,
-                record_a=json.dumps(_compact_record(rec_a), ensure_ascii=False),
-                photo_b=req.photo_b,
-                record_b=json.dumps(_compact_record(rec_b), ensure_ascii=False),
-                question=req.question or "(no question: summarise the main differences)")}])
+        res = llm_mod.ask(COMPARE_PROMPT.format(
+            photo_a=req.photo_a,
+            record_a=json.dumps(_compact_record(rec_a), ensure_ascii=False),
+            photo_b=req.photo_b,
+            record_b=json.dumps(_compact_record(rec_b), ensure_ascii=False),
+            question=req.question or "(no question: summarise the main differences)"),
+            purpose="compare")
+    except llm_mod.LLMBudgetSpent:
+        raise HTTPException(status_code=429, detail=RESTING_TEXT)
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"compare failed: {e}")
     try:
-        data = extract_json(_msg_text(resp.choices[0].message))
+        data = extract_json(res["text"])
     except Exception:
         raise HTTPException(status_code=502, detail="compare failed: bad model reply.")
     diffs = []
@@ -1027,7 +1031,8 @@ def compare(req: CompareRequest, request: Request, response: Response):
            "question": req.question, "answer": answer,
            "differences": diffs, "source": "annotation",
            "trace": [{"step": "compared",
-                      "detail": "Compared the two stored annotations."}]}
+                      "detail": ("Compared the two stored annotations "
+                                 f"({res['provider']}, {res['seconds']}s).")}]}
     llm_mod.cache_put(ckey, out)
     return out
 
@@ -1140,6 +1145,8 @@ def _rewrite_heading(heading, problem, briefs):
         data = _llm_json(STORY_HEADING_PROMPT.format(
             heading=heading, problem=problem, facts="\n".join(briefs)),
             0.2, 4000, tries=2)
+    except llm_mod.LLMBudgetSpent:
+        raise
     except Exception:
         return None
     if data.get("drop"):
@@ -1183,10 +1190,11 @@ def _llm_json(prompt, temperature, max_tokens, tries=3):
     last = None
     for attempt in range(tries):
         try:
-            resp = chat_create(get_llm(), 
-                model=PARSER_MODEL, temperature=temperature, max_tokens=max_tokens,
-                messages=[{"role": "user", "content": prompt}])
-            return extract_json(_msg_text(resp.choices[0].message))
+            res = llm_mod.ask(prompt, max_tokens=max_tokens, temperature=temperature,
+                              purpose="story")
+            return extract_json(res["text"])
+        except llm_mod.LLMBudgetSpent:
+            raise
         except Exception as e:
             last = e
             time.sleep(2 * (attempt + 1))
@@ -1194,7 +1202,8 @@ def _llm_json(prompt, temperature, max_tokens, tries=3):
 
 
 @app.post("/api/story")
-def story(req: StoryRequest, request: Request, response: Response):
+def story(req: StoryRequest, request: Request = None,
+          response: Response = None):
     """A small agent: plan chapters, run a real engine search per chapter,
     pick 1-2 unused photos each, and write record-only chapter text."""
     _guard_or_429(request, response)
@@ -1212,6 +1221,8 @@ def story(req: StoryRequest, request: Request, response: Response):
         raise HTTPException(status_code=503, detail=f"engine unavailable: {e}")
     try:
         plan = _llm_json(STORY_PLAN_PROMPT.format(theme=theme), 0.3, 4000)
+    except llm_mod.LLMBudgetSpent:
+        raise HTTPException(status_code=429, detail=RESTING_TEXT)
     except Exception:
         raise HTTPException(status_code=502, detail="story planning failed.")
     raw = plan.get("chapters") or []
@@ -1253,8 +1264,11 @@ def story(req: StoryRequest, request: Request, response: Response):
         problems = _heading_problems(heading, facts)
         if problems:
             problem = "; ".join(problems)
-            new_heading = _rewrite_heading(
-                heading, problem, [_photo_brief(r, c) for r, c in compacts])
+            try:
+                new_heading = _rewrite_heading(
+                    heading, problem, [_photo_brief(r, c) for r, c in compacts])
+            except llm_mod.LLMBudgetSpent:
+                raise HTTPException(status_code=429, detail=RESTING_TEXT)
             if new_heading and not _heading_problems(new_heading, facts):
                 trace.append({"step": "rewrote", "detail":
                               f"Rewrote {heading!r} as {new_heading!r}: {problem}."})
@@ -1274,6 +1288,8 @@ def story(req: StoryRequest, request: Request, response: Response):
                 if text:
                     picked = att
                     break
+            except llm_mod.LLMBudgetSpent:
+                raise HTTPException(status_code=429, detail=RESTING_TEXT)
             except Exception:
                 text = None
         if not text:
@@ -2138,7 +2154,8 @@ def _safe_compact(rec):
 
 
 @app.post("/api/explain")
-def explain(req: ExplainRequest, request: Request, response: Response):
+def explain(req: ExplainRequest, request: Request = None,
+            response: Response = None):
     _guard_or_429(request, response)
     a_id, b_id = req.photo_a.strip(), req.photo_b.strip()
     by_id = _photos_by_ids([a_id, b_id])
@@ -2176,12 +2193,13 @@ def explain(req: ExplainRequest, request: Request, response: Response):
             {"step": "cache", "detail": "Answered earlier from the cache."}]
         return hit
     try:
-        resp = chat_create(get_llm(), model=PARSER_MODEL, temperature=0.1,
-                           max_tokens=800,
-                           messages=[{"role": "user", "content": prompt}])
+        res = llm_mod.ask(prompt, max_tokens=800, temperature=0.1, purpose="explain")
+    except llm_mod.LLMBudgetSpent:
+        raise HTTPException(status_code=429, detail=RESTING_TEXT)
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"explain failed: {e}")
-    text = _msg_text(resp.choices[0].message).strip()
+    text = res["text"].strip()
+    via = f" ({res['provider']}, {res['seconds']}s)"
     if not text:
         text = ("The records link these photos (" + ", ".join(kinds) + ") but "
                 "the model returned no wording; the facts above are the evidence.")
@@ -2189,7 +2207,7 @@ def explain(req: ExplainRequest, request: Request, response: Response):
            "trace": [{"step": "checked",
                       "detail": "Compared captions, signs, landmarks and place verdicts."},
                      {"step": "wrote",
-                      "detail": "Wrote the connection from the records."}]}
+                      "detail": f"Wrote the connection from the records{via}."}]}
     llm_mod.cache_put(ckey, out)
     return out
 
