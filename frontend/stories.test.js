@@ -129,6 +129,10 @@ async function main() {
   ok(src.indexOf('"?public=1"') !== -1, "showcase fetches the public story version");
   ok(read("builder").indexOf("Include my name in this public story") !== -1,
      "builder.html has the name opt-in");
+  ok(src.indexOf("Read captions aloud") !== -1, "player has a read-aloud toggle");
+  ok(src.indexOf("speechSynthesis") !== -1, "read-aloud uses speechSynthesis");
+  ok(src.indexOf("not included in the exported video") !== -1,
+     "read-aloud export note");
 
   console.log("stories.test.js: " + n + "/" + n + " checks passed");
 }

@@ -128,7 +128,7 @@
     }
     let camera = CAMERAS.indexOf(scene.camera) >= 0 ? scene.camera : "hold";
     if (reduced || (scene.frames && scene.frames.length > 1)) camera = "hold";
-    if (camera === "hold") return fitRect(bx, by, bw, bh, iw, ih, canvasAspect);
+    if (camera === "hold") return biasSpot(img, scene, fitRect(bx, by, bw, bh, iw, ih, canvasAspect), p, reduced);
     const e = easeInOut(p);
     const f = (scene.focal && scene.focal.focal) || null;
     const fx = f ? f.x * iw : bx + bw / 2;
@@ -149,8 +149,44 @@
       cx = bx + bw / 2 + (fx - (bx + bw / 2)) * e;
       cy = by + bh / 2 + (fy - (by + bh / 2)) * e;
     }
-    return fitRect(cx - (bw * zoom) / 2, cy - (bh * zoom) / 2,
-                   bw * zoom, bh * zoom, iw, ih, canvasAspect);
+    return biasSpot(img, scene, fitRect(cx - (bw * zoom) / 2, cy - (bh * zoom) / 2,
+                   bw * zoom, bh * zoom, iw, ih, canvasAspect), p, reduced);
+  }
+
+  /* Spotlight push: drift the crop toward the outlined subject and zoom
+     slightly. Skipped under reduced motion; the dim overlay still applies. */
+  function biasSpot(img, scene, r, p, reduced) {
+    const s = scene.spotlight;
+    if (!s || reduced || !isFinite(s.x) || !isFinite(s.y)) return r;
+    const dims = imgDims(img);
+    const e = easeInOut(p);
+    const sx = s.x * dims.w;
+    const sy = s.y * dims.h;
+    const cx = r.sx + r.sw / 2;
+    const cy = r.sy + r.sh / 2;
+    const k = 0.35 * e;
+    const zoom = 1 - 0.10 * e;
+    const w = r.sw * zoom;
+    const h = r.sh * zoom;
+    return fitRect(cx + (sx - cx) * k - w / 2, cy + (sy - cy) * k - h / 2,
+                   w, h, dims.w, dims.h, r.sw / r.sh);
+  }
+
+  /* Spotlight dim: darken the frame except a circle on the subject. */
+  function drawSpotlight(ctx, img, scene, r, W, H, dx, dy) {
+    const s = scene.spotlight;
+    if (!s || !isFinite(s.x) || !isFinite(s.y)) return;
+    const dims = imgDims(img);
+    const cx = ((s.x * dims.w - r.sx) / r.sw) * W + dx;
+    const cy = ((s.y * dims.h - r.sy) / r.sh) * H + dy;
+    const rad = (Number(s.r) > 0 ? Number(s.r) : 0.35) * Math.min(W, H);
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(0, 0, W, H);
+    ctx.arc(cx, cy, rad, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(10,8,6,0.55)";
+    ctx.fill("evenodd");
+    ctx.restore();
   }
 
   function fitRect(x, y, w, h, iw, ih, aspect) {
@@ -337,6 +373,7 @@
     if (hasCrop) {
       const r = sourceRect(img, scene, p, W / H, !!story.reducedMotion);
       drawCover(ctx, img, r, W, H, opts.dx || 0, opts.dy || 0);
+      drawSpotlight(ctx, img, scene, r, W, H, opts.dx || 0, opts.dy || 0);
     } else {
       drawBlurFill(ctx, img, W, H);
     }

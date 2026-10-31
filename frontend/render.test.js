@@ -243,6 +243,39 @@ const FOCAL = {
   check("ctx state restored", c8.globalAlpha === 1 && c8.filter === "none");
 }
 
+/* --- spotlight --- */
+{
+  const evenodd = (c) => c.calls.some((x) => x.m === "fill" && x.args[0] === "evenodd");
+  const spot = film();
+  spot.scenes[0].focal = FOCAL;
+  spot.scenes[0].spotlight = { x: 0.4, y: 0.45, r: 0.3 };
+  spot.scenes[1].transition_in = "cut";
+  const cs = fakeCtx();
+  R.renderFrame(spot, 1, cs, SIZE);
+  check("spotlight dims frame", evenodd(cs));
+  const plain = film();
+  plain.scenes[0].focal = FOCAL;
+  plain.scenes[1].transition_in = "cut";
+  const cp = fakeCtx();
+  R.renderFrame(plain, 1, cp, SIZE);
+  check("no spotlight no dim", !evenodd(cp));
+  const img = fakeImg(1200, 800);
+  const asp = SIZE.width / SIZE.height;
+  const pushed = R.sourceRect(img, spot.scenes[0], 0.9, asp, false);
+  const base = R.sourceRect(img, plain.scenes[0], 0.9, asp, false);
+  check("spotlight pushes crop", pushed.sw < base.sw);
+  const red = R.sourceRect(img, spot.scenes[0], 0.9, asp, true);
+  const redBase = R.sourceRect(img, plain.scenes[0], 0.9, asp, true);
+  check("reduced skips push", red.sw === redBase.sw);
+  const bad = film();
+  bad.scenes[0].focal = FOCAL;
+  bad.scenes[0].spotlight = { x: "left" };
+  bad.scenes[1].transition_in = "cut";
+  const cb = fakeCtx();
+  R.renderFrame(bad, 1, cb, SIZE);
+  check("malformed spotlight ignored", !evenodd(cb));
+}
+
 /* --- adapt + migrate + wiring --- */
 {
   const ad = R.adaptFilm({ title: "T", scenes: [{ photo_id: "x", caption_note: "hi" }] });

@@ -5,6 +5,7 @@ no model. Run from the project root:  python backend/test_film.py
 """
 import json
 import sys
+import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -271,6 +272,29 @@ try:
           "build_film end to end")
 finally:
     llm.ask = orig_ask
+
+tmp = tempfile.TemporaryDirectory()
+odir = Path(tmp.name)
+odir.joinpath("a1.json").write_text(json.dumps(
+    {"matches": [{"box_norm": {"x1": 0.2, "y1": 0.3, "x2": 0.6, "y2": 0.7}}]}),
+    encoding="utf-8")
+odir.joinpath("bad.json").write_text("not json", encoding="utf-8")
+odir.joinpath("empty.json").write_text(json.dumps({"matches": []}),
+                                       encoding="utf-8")
+sp = film_mod.spotlight_for("a1", outlines_dir=odir)
+check(sp == {"x": 0.4, "y": 0.5, "r": 0.28}, "spotlight from box")
+check(film_mod.spotlight_for("missing", outlines_dir=odir) is None,
+      "spotlight missing silent")
+check(film_mod.spotlight_for("bad", outlines_dir=odir) is None,
+      "spotlight malformed silent")
+check(film_mod.spotlight_for("empty", outlines_dir=odir) is None,
+      "spotlight no matches silent")
+check(film_mod.spotlight_for("a1", outlines_dir=odir, enabled=False) is None,
+      "spotlight flag off silent")
+scenes = [{"photo_id": "a1"}, {"photo_id": "missing"}]
+check(film_mod.attach_spotlights(scenes, outlines_dir=odir) == 1
+      and scenes[0]["spotlight"] == sp and "spotlight" not in scenes[1],
+      "attach counts and skips")
 
 print(f"test_film.py: {total - fails}/{total} checks passed")
 sys.exit(1 if fails else 0)

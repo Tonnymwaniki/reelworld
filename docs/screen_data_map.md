@@ -122,6 +122,8 @@ and mood surface in the player/exporter from step 7 on, and
 | Play / pause / prev / next / replay / scene strip | player chrome in `app.js` | unchanged controls; scene strip thumbnails from `scene.src` |
 | WebM export | same `renderFrame` at 1080×1920, 30 fps | `canvas.captureStream` + MediaRecorder (vp9 → vp8 → webm); status names resolution, size, seconds; 720×1280 fallback when the benchmark is slow |
 | Reduced motion | `prefers-reduced-motion` at mount/export | dissolves only, no zooms or slides, 1.25× holds; export status says "(reduced motion)" |
+| Read aloud (play only) | player toggle + `speechSynthesis` (English voice) | reads each scene caption in sync; stops on pause, jump, end, or toggle-off; UI states it is not in the exported video |
+| Spotlight | `scene.spotlight {x, y, r}` from `data/outlines/<id>.json` (first match) when `FEATURE_OUTLINES` is on | renderer drifts the crop toward the subject + slight push (skipped under reduced motion) and dims the frame except the subject circle; missing/disabled/malformed outlines ignored silently; captions stay undimmed |
 | Missing photo | image fails to load | player paints a "Photo unavailable" placeholder and keeps playing; export stops with the photo id named |
 | Old stories | chapters, no scenes | migrated on read (heading + text joined, 3s scenes, plain cuts); they play and export unchanged otherwise |
 | Burst frames (step 11 contract) | `scene.frame_srcs` map | the v2 story endpoint must serve a src per burst frame id; unknown frame ids paint the placeholder |

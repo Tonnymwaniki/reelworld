@@ -5455,6 +5455,19 @@ const player = {
       this.play();
     });
     ctrls.append(prev, play, next, replay);
+    let readBtn = null;
+    let readRow = null;
+    if ("speechSynthesis" in window) {
+      readRow = document.createElement("div");
+      readRow.className = "flex items-center justify-center gap-2 mt-2";
+      readBtn = mk("volume_off", "Read captions aloud");
+      readBtn.setAttribute("aria-pressed", "false");
+      readBtn.addEventListener("click", () => this.toggleRead());
+      const note = document.createElement("span");
+      note.className = "font-body-sm text-body-sm text-on-surface-variant";
+      note.textContent = "Read aloud is not included in the exported video.";
+      readRow.append(readBtn, note);
+    }
     const strip = document.createElement("div");
     strip.className = "flex gap-2 overflow-x-auto py-1 mt-1";
     film.scenes.forEach((c) => {
@@ -5473,9 +5486,11 @@ const player = {
       t.addEventListener("click", () => this.jump(i));
     });
     root.append(frame, track, ctrls, strip);
+    if (readRow) ctrls.after(readRow);
     this.st = { root: root, film: film, t: 0, last: 0, playing: true,
       total: total, cv: cv, ctx: cv.getContext("2d"), tag: tag, time: time,
-      bar: bar, play: play, replay: replay, strip: strip,
+      bar: bar, play: play, replay: replay, strip: strip, readBtn: readBtn,
+      read: false, spoken: -1,
       size: { width: cv.width, height: cv.height } };
     this.paint();
     const self = this;
@@ -5490,7 +5505,49 @@ const player = {
 
   destroy() {
     if (this.raf) { cancelAnimationFrame(this.raf); this.raf = null; }
+    this.stopSpeak();
     this.st = null;
+  },
+
+  speak(text) {
+    try {
+      const synth = window.speechSynthesis;
+      if (!synth) return;
+      synth.cancel();
+      const u = new SpeechSynthesisUtterance(String(text || "").slice(0, 400));
+      u.lang = "en-US";
+      const v = (synth.getVoices() || []).find((x) =>
+        String(x.lang || "").toLowerCase().startsWith("en"));
+      if (v) u.voice = v;
+      synth.speak(u);
+    } catch (e) { /* speech unavailable */ }
+  },
+
+  stopSpeak() {
+    try {
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
+    } catch (e) { /* speech unavailable */ }
+  },
+
+  maybeSpeak(idx) {
+    const st = this.st;
+    if (!st || !st.read || !st.playing || st.spoken === idx) return;
+    st.spoken = idx;
+    const sc = st.film.scenes[idx];
+    if (sc && sc.caption) this.speak(sc.caption);
+  },
+
+  toggleRead() {
+    const st = this.st;
+    if (!st) return;
+    st.read = !st.read;
+    st.spoken = -1;
+    if (st.readBtn) {
+      st.readBtn.firstChild.textContent = st.read ? "volume_up" : "volume_off";
+      st.readBtn.setAttribute("aria-pressed", st.read ? "true" : "false");
+    }
+    if (!st.read) this.stopSpeak();
+    else this.maybeSpeak(this.curIdx());
   },
 
   curIdx() {
@@ -5517,6 +5574,7 @@ const player = {
       t.classList.toggle("border-secondary", i === idx);
       t.classList.toggle("border-transparent", i !== idx);
     });
+    this.maybeSpeak(idx);
   },
 
   tick(now) {
@@ -5529,6 +5587,7 @@ const player = {
         st.t = st.total;
         st.playing = false;
         st.replay.classList.remove("hidden");
+        this.stopSpeak();
       }
     }
     st.last = now;
@@ -5543,6 +5602,8 @@ const player = {
     if (i >= starts.length) i = starts.length - 1;
     st.t = starts[i];
     st.last = 0;
+    st.spoken = -1;
+    this.stopSpeak();
     st.replay.classList.add("hidden");
     this.paint();
   },
@@ -5563,7 +5624,11 @@ const player = {
         st.replay.classList.add("hidden");
       }
       st.playing = true;
-    } else st.playing = false;
+      st.spoken = -1;
+    } else {
+      st.playing = false;
+      this.stopSpeak();
+    }
     st.last = 0;
     this.paint();
   },

@@ -601,3 +601,25 @@ the first unfinished phase.
 - Commit id: 1b6a35b (a first take, f498153, briefly swept in
   the user's selfie.jpeg; reset before any push and recommitted
   without it — the photo never left the machine).
+
+## Directed-film Stories, step 8: read aloud (code done, user run pending)
+
+- Player gains a Read-aloud toggle (hidden when speechSynthesis
+  is missing): English voice reads each scene caption in sync,
+  stops on pause/jump/end/toggle-off/destroy. UI states plainly
+  it is not in the exported video. Works for v1 + v2 films.
+- Tests: studio 131→134 (static). Live: toggle in Player
+  preview, hear captions; export a WebM, confirm silent
+  (pending user run).
+
+## Directed-film Stories, step 9: spotlight hook (code done, user run pending)
+
+- Renderer: `scene.spotlight {x, y, r}` drifts the crop toward
+  the subject with a slight push (skipped under reduced motion)
+  and dims the frame except the subject circle; captions and
+  tags stay undimmed. film.py attaches it from the first
+  outline match when `FEATURE_OUTLINES` is on, silent
+  otherwise; never calls any outline service.
+- Tests: render 40→45, film 43→49. Live: labeled outline
+  fixture → film_check shows the spotlight + trace row, then
+  the fixture is removed (pending user run).

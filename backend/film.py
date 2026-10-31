@@ -4,13 +4,18 @@ Transitions, cards and pacing are pure code; captions and the editor
 pass use the reasoning model via llm.ask, always checked against the
 stored records. build_film runs the whole pipeline.
 """
+import json
+import os
 import re
+from pathlib import Path
 
 import llm
 import narration as narration_mod
 import owner_profile as owner_profile_mod
 from chat import extract_json
 from director import CAMERAS, PACINGS, ROLES, summarize_record
+
+ROOT = Path(__file__).resolve().parent.parent
 
 TRANSITIONS = ("dissolve", "rise", "descend", "dip", "iris", "vantage",
                "cut")
@@ -480,16 +485,63 @@ def _refit_scenes(scenes, metas, records):
     return scenes
 
 
+def spotlight_for(photo_id, outlines_dir=None, enabled=True):
+    """{x, y, r} spotlight from the saved outline, or None.
+
+    Pure file read of data/outlines/<photo_id>.json (the first
+    match's box_norm); missing, disabled or malformed files are
+    ignored silently. Never calls any outline service.
+    """
+    if not enabled or not photo_id:
+        return None
+    base = Path(outlines_dir) if outlines_dir else ROOT / "data" / "outlines"
+    try:
+        data = json.loads((base / f"{photo_id}.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    matches = data.get("matches") if isinstance(data, dict) else None
+    if not matches:
+        return None
+    bn = (matches[0] or {}).get("box_norm") or {}
+    try:
+        x1, y1, x2, y2 = (float(bn[k]) for k in ("x1", "y1", "x2", "y2"))
+    except (TypeError, ValueError):
+        return None
+    if not (0 <= x1 < x2 <= 1 and 0 <= y1 < y2 <= 1):
+        return None
+    size = max(x2 - x1, y2 - y1)
+    return {"x": round((x1 + x2) / 2, 4), "y": round((y1 + y2) / 2, 4),
+            "r": round(min(0.6, max(0.25, 0.7 * size)), 4)}
+
+
+def attach_spotlights(scenes, outlines_dir=None, enabled=True):
+    """Attach spotlight dicts where outline files exist (in place).
+
+    Returns the count attached. Silent when none apply.
+    """
+    n = 0
+    for s in scenes or []:
+        sp = spotlight_for(s.get("photo_id"), outlines_dir, enabled)
+        if sp:
+            s["spotlight"] = sp
+            n += 1
+    return n
+
+
 def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
-               trace=None, session_id=None, voice=None, profile=None):
+               trace=None, session_id=None, voice=None, profile=None,
+               outlines_enabled=None):
     """Full pipeline: scenes, cards, pacing, captions, editor, re-pace.
 
     rows_by_id maps photo_id -> row {place_key, viewpoint,
     collection, record}. Returns the film dict (title, cover,
     beats, scenes, total_seconds, verification). voice/profile
-    override the stored profile for narration. Trace is appended,
-    never replaced. Budget errors propagate.
+    override the stored profile for narration. outlines_enabled
+    defaults to FEATURE_OUTLINES. Trace is appended, never
+    replaced. Budget errors propagate.
     """
+    if outlines_enabled is None:
+        outlines_enabled = os.getenv("FEATURE_OUTLINES", "true").strip().lower() == "true"
     briefs, metas, records = {}, {}, {}
     for pid, row in (rows_by_id or {}).items():
         row = row or {}
@@ -525,6 +577,10 @@ def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
         if trace is not None:
             trace.append({"step": "checked",
                           "detail": "Cover scene was dropped; using the first scene."})
+    n_spot = attach_spotlights(kept, enabled=outlines_enabled)
+    if n_spot and trace is not None:
+        trace.append({"step": "staged",
+                      "detail": f"Spotlight on {n_spot} scene(s) with outlines."})
     return {"title": title, "cover": cover, "beats": beats, "scenes": kept,
             "total_seconds": round(sum(s["seconds"] for s in kept), 2),
             "verification": verification}
