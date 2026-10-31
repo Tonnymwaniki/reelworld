@@ -306,3 +306,16 @@ the first unfinished phase.
 - Tests: `test_guard.py` 11/11; live 7 rapid chats gave 6 ok
   then resting.
 - Commit id: (this commit; see `git log`).
+
+## Repair: api.py whitespace damage + LF normalization (committed)
+
+- The step-4 commit rewrote `backend/api.py` with a blank line
+  after every line (a PowerShell whole-file write). Python ran
+  it fine, but the diff was noise. Restored the file from the
+  step-3 commit and re-applied the identical guard wiring with
+  single-line edits (+127/-9, verified same behaviour).
+- Normalized `backend/api.py` and `backend/chat.py` to LF
+  (byte-exact, `git diff -w` clean) and added `.gitattributes`
+  (`*.py text eol=lf`) so it never recurs. Lesson: never
+  whole-file writes from PowerShell; bytes or the edit tool.
+- Commit id: (this commit; see `git log`).
