@@ -82,12 +82,15 @@ async function refreshShell() {
 function paintDemo() {
   const banner = $("#demo-banner");
   if (!banner) return;
-  if (!rwConfig.demo_mode) { banner.classList.add("hidden"); return; }
-  banner.classList.remove("hidden");
+  if (!rwConfig.demo_mode) banner.classList.add("hidden");
+  else banner.classList.remove("hidden");
   const t = $("#demo-text", banner);
   if (t) t.textContent = demoCode()
     ? "Demo mode: a demo code is saved for this visit — writes are unlocked if it matches."
-    : "Demo mode: uploads, publishing and corrections need the demo code.";
+    : "Demo mode: uploads, publishing, corrections, profile and tagging need the demo code.";
+  const main = $("#view");
+  const header = document.querySelector("header");
+  if (main && header) main.style.paddingTop = (header.offsetHeight + 16) + "px";
 }
 
 function setActiveTab(tab) {
@@ -111,6 +114,7 @@ const KIND_BADGE = {
   no_strong_match: "Closest matches shown",
   no_other_angle: "No other angle found",
   need_focus: "Needs a photo first",
+  need_tags: "No tagged photos yet",
   not_found: "Photo not found",
   question_answer: "Answer",
 };
@@ -270,6 +274,7 @@ function specChips(spec) {
   if (spec.collection && spec.collection !== "world") {
     out.push({ key: "collection", label: spec.collection === "personal" ? "Your photos" : String(spec.collection) });
   }
+  if (spec.owner_only) out.push({ key: "owner_only", label: "Photos of me" });
   for (const v of spec.viewpoints || []) {
     out.push({ key: "viewpoints:" + v, label: (typeof VP_LABEL !== "undefined" && VP_LABEL[v]) || v });
   }
@@ -284,6 +289,7 @@ function applyChipRemove(spec, key) {
   const s = JSON.parse(JSON.stringify(spec || {}));
   if (key === "collection") { s.collection = "world"; return s; }
   if (key === "max_people") { s.max_people = null; return s; }
+  if (key === "owner_only") { s.owner_only = false; return s; }
   const i = key.indexOf(":");
   const field = key.slice(0, i), val = key.slice(i + 1);
   s[field] = (s[field] || []).filter((x) => x !== val);
@@ -407,7 +413,9 @@ const RWTEST = { fmtScore: fmtScore, shortReasons: shortReasons, creditText: cre
   ringLayout: ringLayout, ringLabel: ringLabel, evidenceRows: evidenceRows,
   KIND_LABEL: KIND_LABEL, storyTotals: storyTotals,
   chaptersWithPeople: chaptersWithPeople, buildStoryMarkdown: buildStoryMarkdown,
-  fmtBytes: fmtBytes, gapText: gapText };
+  fmtBytes: fmtBytes, gapText: gapText,
+  voiceExamples: voiceExamples, tagSort: tagSort, tagPhotos: tagPhotos,
+  libSearch: libSearch };
 
 const home = {
   view: null, xlist: null, loadingTimer: null, abort: null,
@@ -705,7 +713,8 @@ const home = {
     if (results.length) this.renderAssistant(data);
     else if (data.kind === "question_answer") await this.renderAnswer(data, userText);
     else this.renderText(data);
-    if (!results.length && (data.kind === "ok" || data.kind === "no_strong_match")) {
+    if (!results.length && (data.kind === "ok" || data.kind === "no_strong_match") &&
+        !(data.spec && data.spec.owner_only)) {
       const node = cloneTpl(this.view, "tpl-nomatch");
       const btn = node.querySelector("button");
       if (btn) btn.addEventListener("click", () => this.pickFile());
@@ -1003,6 +1012,13 @@ const home = {
     if (header.children[1]) header.children[1].textContent = "No photos";
     const p = node.querySelector("p");
     if (p) p.textContent = data.text || "";
+    if (data.kind === "need_tags" && p) {
+      const a = document.createElement("a");
+      a.href = "#/profile/tag";
+      a.className = "min-h-[44px] px-5 py-2.5 rounded-lg bg-primary-container text-surface hover:bg-primary font-label-md text-label-md inline-flex items-center w-fit mt-2";
+      a.textContent = "Tag your photos";
+      p.after(a);
+    }
     this.fillChips(node, data.spec);
     const box = node.querySelector("div.w-full.bg-surface-container-low");
     if (box) hide(box);
@@ -2297,6 +2313,8 @@ const photo = {
     $("#file-name", view).textContent = String(d.file || d.photo_id).split("/").pop();
     $("#collection-chip", view).textContent =
       d.collection === "world" ? "World archive" : "My photo";
+    const obadge = $("#owner-badge", view);
+    if (obadge) obadge.classList.toggle("hidden", d.owner_present !== true);
     $("#strip-place", view).textContent = (d.place && d.place.name) || "Place unknown";
     const img = $("#hero-photo", view);
     img.src = d.src;
@@ -3133,6 +3151,7 @@ const add = {
         $("#eta-icon", this.view).textContent = "check_circle";
         this.renderStepper(4, job);
         this.renderResult(job.result);
+        this.mountOwnerAsk();
         this.switchPhase(3);
       } else if (job.status === "error") {
         if (this.pollTimer) { clearInterval(this.pollTimer); this.pollTimer = null; }
@@ -3182,6 +3201,21 @@ const add = {
       $("[data-slot=sub]", node).textContent = sub;
       box.appendChild(node);
     });
+  },
+
+  mountOwnerAsk() {
+    const view = this.view;
+    if (!view || !this.photoId) return;
+    let box = $("#add-owner-ask", view);
+    if (!box) {
+      box = document.createElement("div");
+      box.id = "add-owner-ask";
+      box.className = "flex flex-col gap-2";
+      $("#result-pane", view).appendChild(box);
+    }
+    if (!this.askBag) this.askBag = {};
+    box.innerHTML = "";
+    box.appendChild(ownerAsk.build(this.photoId, this.askBag, () => box.remove()));
   },
 
   renderResult(result) {
@@ -4111,7 +4145,18 @@ const library = {
     });
     $("#lib-back", view).addEventListener("click", () => {
       this.drill = null;
+      const inp = $("#lib-search", view);
+      if (inp) inp.value = "";
+      const clear = $("#lib-search-clear", view);
+      if (clear) clear.classList.add("hidden");
       this.paintMain();
+    });
+    $("#lib-search", view).addEventListener("input", (e) => this.search(e.target.value));
+    $("#lib-search-clear", view).addEventListener("click", () => {
+      const inp = $("#lib-search", view);
+      if (inp) inp.value = "";
+      this.search("");
+      if (inp) inp.focus();
     });
     $("#lib-detail-grid", view).addEventListener("click", (e) => {
       const t = e.target.closest("[data-pid]");
@@ -4246,7 +4291,7 @@ const library = {
     const box = $("#lib-album-cards", view);
     box.innerHTML = "";
     const T = $("#tpl-lib-album", view).content.firstElementChild;
-    ["all", "above", "signs", "people", "look"].forEach((key) => {
+    ["all", "above", "signs", "people", "me", "look"].forEach((key) => {
       const a = this.albumByKey(key);
       if (!a) return;
       const node = T.cloneNode(true);
@@ -4333,12 +4378,44 @@ const library = {
     }
   },
 
+  search(q) {
+    const view = this.view;
+    const needle = (q || "").trim();
+    const clear = $("#lib-search-clear", view);
+    if (clear) clear.classList.toggle("hidden", !needle);
+    if (!needle) {
+      if (this.drill && this.drill.key === "search") {
+        this.drill = null;
+        this.paintMain();
+      }
+      return;
+    }
+    const ids = libSearch((this.data && this.data.photos) || {}, needle);
+    this.showTab("albums");
+    this.drill = { kind: "album", key: "search",
+      title: 'Matches for "' + needle + '"', ids: ids };
+    this.paintMain();
+    this.paintDetail();
+  },
+
   paintDetail() {
     const view = this.view;
     $("#lib-detail-title", view).textContent =
       this.drill.title + " (" + this.drill.ids.length + ")";
     const grid = $("#lib-detail-grid", view);
     grid.innerHTML = "";
+    if (!this.drill.ids.length && this.drill.key === "me") {
+      const p = document.createElement("p");
+      p.className = "font-body-md text-body-md text-on-surface-variant";
+      p.textContent = "No photos tagged yet. ";
+      const a = document.createElement("a");
+      a.className = "text-on-tertiary-container hover:underline";
+      a.href = "#/profile/tag";
+      a.textContent = "Tag yourself";
+      p.appendChild(a);
+      grid.appendChild(p);
+      return;
+    }
     const T = $("#tpl-lib-tile", view).content.firstElementChild;
     const photos = (this.data && this.data.photos) || {};
     this.drill.ids.forEach((pid) => {
@@ -4350,6 +4427,12 @@ const library = {
       const img = $("[data-slot=img]", node);
       img.src = m.src || "";
       img.alt = m.caption || pid;
+      if (m.owner_present === true) {
+        const badge = document.createElement("span");
+        badge.className = "absolute bottom-2 left-2 px-2 py-0.5 rounded bg-primary-container/85 text-surface-container-lowest font-label-sm text-label-sm";
+        badge.textContent = "You are in this photo";
+        link.appendChild(badge);
+      }
       $("[data-slot=cap]", node).textContent = m.caption || pid;
       $("[data-slot=sub]", node).textContent = m.place || "Place unknown";
       grid.appendChild(node);
@@ -4525,6 +4608,13 @@ const library = {
       if (f.status === "done" && f.photoId) {
         link.href = "#/photo/" + f.photoId;
         link.classList.remove("hidden");
+      }
+      if (f.status === "done" && f.photoId && !f.ownerDone) {
+        if (!f.ownerBag) f.ownerBag = {};
+        node.appendChild(ownerAsk.build(f.photoId, f.ownerBag, () => {
+          f.ownerDone = true;
+          if (this.view && this.view.isConnected) this.paintQueue();
+        }));
       }
       box.appendChild(node);
     });
@@ -5477,8 +5567,13 @@ const stories = {
     this.tone = "postcard";
     this.source = "both";
     this.target = "short";
+    this.voice = "name";
     this.making = false;
     this.paintPills();
+    api("/api/profile").then((p) => {
+      const choice = p && p.profile && p.profile.refer_as;
+      if (choice && view.isConnected) { this.voice = choice; this.paintPills(); }
+    }).catch(() => {});
     const pick = (id, key) => {
       $("#" + id, view).addEventListener("click", (e) => {
         const b = e.target.closest("button[data-" + key + "]");
@@ -5490,6 +5585,7 @@ const stories = {
     pick("story-tones", "tone");
     pick("story-sources", "source");
     pick("story-targets", "target");
+    pick("story-voices", "voice");
     $("#story-suggest", view).addEventListener("click", (e) => {
       const b = e.target.closest("[data-prompt]");
       if (b) $("#story-create-prompt", view).value = b.dataset.prompt;
@@ -5506,7 +5602,7 @@ const stories = {
 
   paintPills() {
     const view = this.view;
-    const groups = [["story-tones", "tone"], ["story-sources", "source"], ["story-targets", "target"]];
+    const groups = [["story-tones", "tone"], ["story-sources", "source"], ["story-targets", "target"], ["story-voices", "voice"]];
     groups.forEach(([id, key]) => {
       $$("#" + id + " button", view).forEach((b) => {
         const on = b.dataset[key] === this[key];
@@ -5556,6 +5652,7 @@ const stories = {
         body: JSON.stringify({
           title: $("#story-create-title", view).value.trim(),
           prompt: prompt, tone: this.tone, source: this.source, target: this.target,
+          voice: this.voice,
         }),
       });
       try {
@@ -5667,6 +5764,7 @@ const builder = {
     $("#bld-scenes", view).addEventListener("input", () => this.markDirty());
     $("#bld-scenes", view).addEventListener("click", (e) => this.sceneClick(e));
     $("#bld-shorter", view).addEventListener("click", () => this.makeShorter());
+    $("#bld-refresh", view).addEventListener("click", () => this.refresh());
     $("#bld-save", view).addEventListener("click", () => this.save());
     $("#bld-delete", view).addEventListener("click", () => this.del());
     $("#bld-webm-record", view).addEventListener("click", () => this.recordWebm());
@@ -5805,6 +5903,9 @@ const builder = {
         ". Faces are never published — remove those scenes first.";
       fb.classList.remove("hidden");
     } else fb.classList.add("hidden");
+    const box = $("#bld-pub-name", view);
+    box.checked = pub ? st.include_name === true : box.checked;
+    box.disabled = pub;
     $("#bld-publish", view).disabled = pub || blocked.length > 0;
     const link = $("#bld-showcase-link", view);
     link.classList.toggle("hidden", !pub);
@@ -5907,6 +6008,37 @@ const builder = {
     }
   },
 
+  async refresh() {
+    const view = this.view;
+    const btn = $("#bld-refresh", view);
+    const st = $("#bld-save-status", view);
+    btn.disabled = true;
+    st.textContent = "Refreshing narration…";
+    try {
+      const out = await api("/api/stories/" + encodeURIComponent(this.id) + "/refresh", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({}),
+      });
+      if (!view.isConnected) return;
+      this.full = out;
+      this.paintAll();
+      const box = $("#bld-trace", view);
+      if (out.trace && out.trace.length) {
+        box.innerHTML = "";
+        renderTrace(box, out.trace);
+        this.show(box, true);
+      }
+      st.textContent = "Narration refreshed.";
+      if (this.stage === "player") player.mount($("#bld-player", view), this.full);
+    } catch (e) {
+      if (!view.isConnected) return;
+      st.textContent = String((e && e.message) || e);
+    } finally {
+      if (view.isConnected) btn.disabled = false;
+    }
+  },
+
   async del() {
     const btn = $("#bld-delete", this.view);
     if (!btn.dataset.armed) {
@@ -5959,7 +6091,11 @@ const builder = {
     const st = $("#bld-pub-status", view);
     st.textContent = "Publishing…";
     try {
-      const out = await api("/api/stories/" + encodeURIComponent(this.id) + "/publish", { method: "POST" });
+      const out = await api("/api/stories/" + encodeURIComponent(this.id) + "/publish", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ include_name: $("#bld-pub-name", view).checked }),
+      });
       if (!view.isConnected) return;
       this.full = out;
       this.paintAll();
@@ -6201,7 +6337,7 @@ const showcase = {
     m.classList.add("flex");
     $("#sc-title", view).textContent = "Loading…";
     try {
-      const full = await api("/api/stories/" + encodeURIComponent(sid));
+      const full = await api("/api/stories/" + encodeURIComponent(sid) + "?public=1");
       if (!view.isConnected) return;
       $("#sc-title", view).textContent = full.story.title || sid;
       player.mount($("#sc-player", view), full);
@@ -6293,6 +6429,587 @@ async function show404() {
       "The link you followed does not match any page.");
   }
 }
+
+/* ---------- owner profile + self-tagging ---------- */
+function voiceExamples(name) {
+  const n = (name || "").trim() || "Your name";
+  return {
+    name: "\u201c" + n + " is among the people at the entrance.\u201d",
+    you: "\u201cYou are among the people at the entrance.\u201d",
+    i: "\u201cI am among the people at the entrance.\u201d",
+  };
+}
+
+function tagSort(photos) {
+  return (photos || []).slice().sort((a, b) =>
+    (((b.people || 0) > 0) - ((a.people || 0) > 0)) ||
+    ((b.people || 0) - (a.people || 0)) ||
+    (a.photo_id < b.photo_id ? -1 : a.photo_id > b.photo_id ? 1 : 0));
+}
+
+/* Library search: every query word must appear in id, caption or place. */
+function libSearch(photos, q) {
+  const words = (q || "").trim().toLowerCase().split(/\s+/).filter(Boolean);
+  if (!words.length) return [];
+  return Object.keys(photos || {}).filter((pid) => {
+    const m = photos[pid] || {};
+    const hay = [pid, m.caption, m.place].filter(Boolean).join(" ").toLowerCase();
+    return words.every((w) => hay.indexOf(w) >= 0);
+  });
+}
+
+/* Sorted tile entries sharing references with byId, so tag updates repaint. */
+function tagPhotos(byId) {
+  const ids = Object.keys(byId || {});
+  ids.forEach((pid) => { byId[pid].photo_id = pid; });
+  return tagSort(ids.map((pid) => byId[pid]));
+}
+
+const profile = {
+  view: null, data: null,
+
+  mount(view) {
+    this.view = view;
+    $("#pf-save", view).addEventListener("click", () => this.save());
+    $$("#pf-voice input", view).forEach((r) =>
+      r.addEventListener("change", () => this.saveVoice()));
+    $("#pf-del", view).addEventListener("click", () => {
+      const c = $("#pf-del-confirm", view);
+      c.classList.remove("hidden");
+      c.classList.add("flex");
+    });
+    $("#pf-del-no", view).addEventListener("click", () => {
+      const c = $("#pf-del-confirm", view);
+      c.classList.add("hidden");
+      c.classList.remove("flex");
+    });
+    $("#pf-del-yes", view).addEventListener("click", () => this.destroy());
+    this.load();
+  },
+
+  async load() {
+    const view = this.view;
+    $("#pf-loading", view).hidden = false;
+    $("#pf-main", view).hidden = true;
+    $("#pf-error", view).classList.add("hidden");
+    try {
+      const out = await api("/api/profile");
+      if (!view.isConnected) return;
+      this.data = (out && out.profile) || null;
+      this.paint();
+      $("#pf-loading", view).hidden = true;
+      $("#pf-main", view).hidden = false;
+    } catch (e) {
+      if (!view.isConnected) return;
+      $("#pf-loading", view).hidden = true;
+      const box = $("#pf-error", view);
+      box.textContent = String((e && e.message) || e);
+      box.classList.remove("hidden");
+    }
+  },
+
+  paint() {
+    const view = this.view;
+    const d = this.data || {};
+    $("#pf-name", view).value = d.name || "";
+    const ex = voiceExamples(d.name || "");
+    $("#pf-ex-name", view).textContent = ex.name;
+    $("#pf-ex-you", view).textContent = ex.you;
+    $("#pf-ex-i", view).textContent = ex.i;
+    $$("#pf-voice input", view).forEach((r) => {
+      r.checked = (d.refer_as || "name") === r.value;
+    });
+  },
+
+  pickedVoice() {
+    const r = this.view.querySelector("#pf-voice input:checked");
+    return r ? r.value : "name";
+  },
+
+  async save() {
+    const view = this.view;
+    const st = $("#pf-status", view);
+    const name = $("#pf-name", view).value.trim();
+    if (!name) { st.textContent = "Type your name first."; return; }
+    st.textContent = "Saving…";
+    try {
+      const out = await api("/api/profile", {
+        method: "PUT", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: name, refer_as: this.pickedVoice() }),
+      });
+      if (!view.isConnected) return;
+      this.data = out.profile;
+      ownerAsk.prof = out.profile;
+      this.paint();
+      st.textContent = "Saved.";
+    } catch (e) {
+      if (!view.isConnected) return;
+      st.textContent = String((e && e.message) || e);
+    }
+  },
+
+  async saveVoice() {
+    const view = this.view;
+    const name = $("#pf-name", view).value.trim() || (this.data && this.data.name) || "";
+    if (!name) {
+      $("#pf-status", view).textContent = "Type your name and save it first, then pick a voice.";
+      this.paint();
+      return;
+    }
+    const st = $("#pf-status", view);
+    st.textContent = "Saving…";
+    try {
+      const out = await api("/api/profile", {
+        method: "PUT", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: name, refer_as: this.pickedVoice() }),
+      });
+      if (!view.isConnected) return;
+      this.data = out.profile;
+      ownerAsk.prof = out.profile;
+      this.paint();
+      st.textContent = "Saved.";
+    } catch (e) {
+      if (!view.isConnected) return;
+      st.textContent = String((e && e.message) || e);
+      this.paint();
+    }
+  },
+
+  async destroy() {
+    const view = this.view;
+    const st = $("#pf-del-status", view);
+    st.textContent = "Deleting…";
+    try {
+      await api("/api/profile", { method: "DELETE" });
+      if (!view.isConnected) return;
+      this.data = null;
+      ownerAsk.prof = null;
+      const c = $("#pf-del-confirm", view);
+      c.classList.add("hidden");
+      c.classList.remove("flex");
+      this.paint();
+      st.textContent = "Your profile is deleted.";
+    } catch (e) {
+      if (!view.isConnected) return;
+      st.textContent = String((e && e.message) || e);
+    }
+  },
+};
+
+const tag = {
+  view: null, photos: [], byId: {}, sel: {}, lastOp: null,
+  pending: null, profName: null, summary: null,
+
+  mount(view) {
+    this.view = view;
+    this.sel = {};
+    this.lastOp = null;
+    this.pending = null;
+    this.busy = false;
+    $("#tg-bulk-yes", view).addEventListener("click", () => this.bulkYes());
+    $("#tg-bulk-clear", view).addEventListener("click", () => {
+      this.sel = {};
+      this.paint();
+    });
+    $("#tg-undo", view).addEventListener("click", () => this.undo());
+    $("#tg-name-save", view).addEventListener("click", () => this.saveName());
+    this.load();
+  },
+
+  async load() {
+    const view = this.view;
+    $("#tg-loading", view).hidden = false;
+    $("#tg-main", view).hidden = true;
+    $("#tg-error", view).classList.add("hidden");
+    try {
+      const [albums, summary, prof] = await Promise.all([
+        api("/api/albums"),
+        api("/api/owner-tags/summary").catch(() => null),
+        api("/api/profile").catch(() => ({ profile: null })),
+      ]);
+      if (!view.isConnected) return;
+      this.byId = (albums && albums.photos) || {};
+      this.photos = tagPhotos(this.byId);
+      this.summary = summary;
+      this.profName = (prof && prof.profile && prof.profile.name) || null;
+      ownerAsk.prof = (prof && prof.profile) || null;
+      this.paint();
+      $("#tg-loading", view).hidden = true;
+      $("#tg-main", view).hidden = false;
+    } catch (e) {
+      if (!view.isConnected) return;
+      $("#tg-loading", view).hidden = true;
+      const box = $("#tg-error", view);
+      box.textContent = String((e && e.message) || e);
+      box.classList.remove("hidden");
+    }
+  },
+
+  counts() {
+    if (this.summary) return this.summary;
+    let yes = 0;
+    let no = 0;
+    this.photos.forEach((m) => {
+      if (m.owner_present === true) yes++;
+      else if (m.owner_present === false) no++;
+    });
+    return { yes: yes, no: no, unreviewed: this.photos.length - yes - no,
+             total: this.photos.length };
+  },
+
+  paint() {
+    const view = this.view;
+    const c = this.counts();
+    const done = c.yes + c.no;
+    $("#tg-progress", view).textContent = c.total
+      ? done + " of " + c.total + " reviewed (" + c.yes + " you, " + c.no + " not you)"
+      : "No photos yet.";
+    $("#tg-bar", view).style.width = (c.total ? Math.round((done / c.total) * 100) : 0) + "%";
+    const selIds = Object.keys(this.sel).filter((pid) => this.sel[pid]);
+    const bulk = $("#tg-bulk", view);
+    bulk.classList.toggle("hidden", !selIds.length);
+    bulk.classList.toggle("flex", !!selIds.length);
+    $("#tg-bulk-count", view).textContent =
+      selIds.length + (selIds.length === 1 ? " selected" : " selected");
+    const grid = $("#tg-grid", view);
+    grid.innerHTML = "";
+    this.photos.forEach((m) => grid.appendChild(this.tile(m)));
+    $("#tg-undo", view).classList.toggle("hidden", !this.lastOp);
+  },
+
+  statePill(m) {
+    const s = document.createElement("span");
+    s.className = "px-2 py-0.5 rounded font-label-sm text-label-sm ";
+    if (m.owner_present === true) {
+      s.className += "bg-secondary-container text-on-secondary-fixed";
+      s.textContent = "You’re in this";
+    } else if (m.owner_present === false) {
+      s.className += "bg-surface-container-high text-on-surface-variant";
+      s.textContent = "Not you";
+    } else {
+      s.className += "bg-surface-container-high text-on-surface-variant";
+      s.textContent = "Not reviewed";
+    }
+    return s;
+  },
+
+  tile(m) {
+    const pid = m.photo_id;
+    const card = document.createElement("article");
+    card.className = "bg-surface-container-low rounded-xl overflow-hidden shadow-sm flex flex-col" +
+      (this.sel[pid] ? " ring-2 ring-secondary" : "");
+    const pick = document.createElement("button");
+    pick.type = "button";
+    pick.className = "relative w-full aspect-[4/3] bg-surface-container-high block p-0";
+    pick.setAttribute("aria-label", "Select " + pid);
+    const img = document.createElement("img");
+    img.src = m.src || "";
+    img.alt = m.caption || pid;
+    img.loading = "lazy";
+    img.className = "w-full h-full object-cover";
+    pick.appendChild(img);
+    pick.addEventListener("click", () => {
+      this.sel[pid] = !this.sel[pid];
+      this.paint();
+    });
+    const body = document.createElement("div");
+    body.className = "p-3 flex flex-col gap-2";
+    const top = document.createElement("div");
+    top.className = "flex items-center justify-between gap-2";
+    const cap = document.createElement("p");
+    cap.className = "font-body-sm text-body-sm text-on-surface truncate";
+    cap.textContent = (m.caption || pid) + " · " +
+      ((m.people || 0) + ((m.people || 0) === 1 ? " person" : " people"));
+    top.append(cap, this.statePill(m));
+    const row = document.createElement("div");
+    row.className = "flex gap-2";
+    const yes = document.createElement("button");
+    yes.type = "button";
+    yes.className = "flex-1 min-h-[44px] px-2 rounded-lg bg-primary-container text-surface hover:bg-primary font-label-md text-label-md";
+    yes.textContent = "I’m in this";
+    yes.addEventListener("click", () => this.tagSome([pid], true, m.owner_position || null));
+    const no = document.createElement("button");
+    no.type = "button";
+    no.className = "flex-1 min-h-[44px] px-2 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md";
+    no.textContent = "Not me";
+    no.addEventListener("click", () => this.tagSome([pid], false, null));
+    row.append(yes, no);
+    body.append(top, row);
+    if ((m.people || 0) > 1) {
+      const pos = document.createElement("div");
+      pos.className = "flex items-center gap-2 flex-wrap";
+      const lab = document.createElement("span");
+      lab.className = "font-label-sm text-label-sm text-on-surface-variant";
+      lab.textContent = "Where are you?";
+      pos.appendChild(lab);
+      ["left", "centre", "right"].forEach((p) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        const on = m.owner_present === true && m.owner_position === p;
+        b.className = "min-h-[44px] px-3 rounded-lg font-label-md text-label-md " +
+          (on ? "bg-secondary text-surface" : "bg-surface-container-high hover:bg-surface-dim text-on-surface");
+        b.textContent = p[0].toUpperCase() + p.slice(1);
+        b.addEventListener("click", () => this.tagSome([pid], true, p));
+        pos.appendChild(b);
+      });
+      body.appendChild(pos);
+    }
+    const dos = document.createElement("a");
+    dos.className = "font-label-sm text-label-sm text-on-tertiary-container hover:underline w-fit";
+    dos.href = "#/photo/" + pid;
+    dos.textContent = "Open dossier";
+    body.appendChild(dos);
+    card.append(pick, body);
+    return card;
+  },
+
+  async tagSome(pids, present, position) {
+    const view = this.view;
+    if (present && !this.profName) {
+      this.pending = { pids: pids, present: present, position: position };
+      const box = $("#tg-name-prompt", view);
+      box.classList.remove("hidden");
+      box.classList.add("flex");
+      $("#tg-name-status", view).textContent = "";
+      const inp = $("#tg-name", view);
+      if (inp) inp.focus();
+      return;
+    }
+    if (this.busy) return;
+    this.busy = true;
+    const st = $("#tg-status", view);
+    st.textContent = "Saving " + pids.length + (pids.length === 1 ? " photo…" : " photos…");
+    const prev = {};
+    pids.forEach((pid) => {
+      const m = this.byId[pid] || {};
+      prev[pid] = { present: m.owner_present == null ? null : !!m.owner_present,
+                    position: m.owner_position || null };
+    });
+    try {
+      const body = { photo_ids: pids, present: present };
+      if (present && position) body.position = position;
+      await api("/api/owner-tags", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (!view.isConnected) return;
+      pids.forEach((pid) => {
+        if (this.byId[pid]) {
+          this.byId[pid].owner_present = present;
+          if (present && position) this.byId[pid].owner_position = position;
+          if (!present) this.byId[pid].owner_position = null;
+        }
+      });
+      this.sel = {};
+      this.lastOp = { pids: pids.slice(), prev: prev };
+      this.summary = null;
+      this.paint();
+      st.textContent = "Saved.";
+    } catch (e) {
+      if (!view.isConnected) return;
+      st.textContent = String((e && e.message) || e);
+    }
+    this.busy = false;
+  },
+
+  async bulkYes() {
+    const selIds = Object.keys(this.sel).filter((pid) => this.sel[pid]);
+    if (!selIds.length) return;
+    await this.tagSome(selIds, true, null);
+  },
+
+  async saveName() {
+    const view = this.view;
+    const st = $("#tg-name-status", view);
+    const name = $("#tg-name", view).value.trim();
+    if (!name) { st.textContent = "Type your name first."; return; }
+    st.textContent = "Saving…";
+    try {
+      const out = await api("/api/profile", {
+        method: "PUT", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: name }),
+      });
+      if (!view.isConnected) return;
+      this.profName = out.profile.name;
+      ownerAsk.prof = out.profile;
+      const box = $("#tg-name-prompt", view);
+      box.classList.add("hidden");
+      box.classList.remove("flex");
+      const pend = this.pending;
+      this.pending = null;
+      if (pend) await this.tagSome(pend.pids, pend.present, pend.position);
+    } catch (e) {
+      if (!view.isConnected) return;
+      st.textContent = String((e && e.message) || e);
+    }
+  },
+
+  async undo() {
+    const op = this.lastOp;
+    if (!op || this.busy) return;
+    this.busy = true;
+    const view = this.view;
+    const st = $("#tg-status", view);
+    st.textContent = "Undoing…";
+    const groups = {};
+    op.pids.forEach((pid) => {
+      const p = op.prev[pid] || { present: null, position: null };
+      const key = JSON.stringify([p.present, p.position]);
+      (groups[key] = groups[key] || { present: p.present, position: p.position, ids: [] }).ids.push(pid);
+    });
+    try {
+      for (const key of Object.keys(groups)) {
+        const g = groups[key];
+        const body = { photo_ids: g.ids, present: g.present };
+        if (g.present) body.position = g.position;
+        await api("/api/owner-tags", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+        if (!view.isConnected) return;
+      }
+      op.pids.forEach((pid) => {
+        const p = op.prev[pid] || { present: null, position: null };
+        if (this.byId[pid]) {
+          this.byId[pid].owner_present = p.present;
+          this.byId[pid].owner_position = p.position;
+        }
+      });
+      this.lastOp = null;
+      this.summary = null;
+      this.paint();
+      st.textContent = "Undone.";
+    } catch (e) {
+      if (!view.isConnected) return;
+      st.textContent = String((e && e.message) || e);
+    }
+    this.busy = false;
+  },
+};
+
+const ownerAsk = {
+  prof: undefined,
+
+  async getProfile() {
+    if (this.prof === undefined) {
+      try {
+        const out = await api("/api/profile");
+        this.prof = (out && out.profile) || null;
+      } catch (e) {
+        this.prof = null;
+      }
+    }
+    return this.prof;
+  },
+
+  /* "Are you in this photo?" box. bag holds naming/name across repaints;
+     onDone fires after an answer is stored or skipped. */
+  build(pid, bag, onDone) {
+    const box = document.createElement("div");
+    box.className = "flex flex-col gap-2 rounded-xl bg-surface-container-low p-3";
+    const repaint = () => {
+      const fresh = this.build(pid, bag, onDone);
+      if (box.isConnected) box.replaceWith(fresh);
+    };
+    const q = document.createElement("p");
+    q.className = "font-body-md text-body-md text-on-surface";
+    q.textContent = "Are you in this photo?";
+    box.appendChild(q);
+    const st = document.createElement("span");
+    st.className = "font-body-sm text-body-sm text-on-surface-variant";
+    const busy = (b) => box.querySelectorAll("button").forEach((x) => { x.disabled = b; });
+    if (bag.naming) {
+      const row = document.createElement("div");
+      row.className = "flex flex-col sm:flex-row gap-2";
+      const inp = document.createElement("input");
+      inp.className = "flex-1 px-3 py-2 min-h-[44px] rounded-lg bg-surface-container-highest text-on-surface font-body-md text-body-md focus:outline-none";
+      inp.placeholder = "Your name";
+      inp.maxLength = 40;
+      inp.autocomplete = "off";
+      inp.value = bag.name || "";
+      inp.addEventListener("input", () => { bag.name = inp.value; });
+      const save = document.createElement("button");
+      save.type = "button";
+      save.className = "min-h-[44px] px-4 rounded-lg bg-primary-container text-surface hover:bg-primary font-label-md text-label-md";
+      save.textContent = "Save and tag";
+      save.addEventListener("click", async () => {
+        const name = (bag.name || "").trim();
+        if (!name) { st.textContent = "Type your name first."; return; }
+        busy(true);
+        st.textContent = "Saving…";
+        try {
+          const out = await api("/api/profile", {
+            method: "PUT", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: name }),
+          });
+          this.prof = out.profile;
+          await api("/api/owner-tags", {
+            method: "POST", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ photo_ids: [pid], present: true }),
+          });
+          onDone();
+        } catch (e) {
+          busy(false);
+          st.textContent = String((e && e.message) || e);
+        }
+      });
+      row.append(inp, save);
+      box.append(row, st);
+      return box;
+    }
+    const row = document.createElement("div");
+    row.className = "flex flex-wrap gap-2";
+    const mk = (label, primary) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "min-h-[44px] px-4 rounded-lg font-label-md text-label-md " +
+        (primary ? "bg-primary-container text-surface hover:bg-primary"
+                 : "bg-surface-container-high hover:bg-surface-dim text-on-surface");
+      b.textContent = label;
+      row.appendChild(b);
+      return b;
+    };
+    mk("Yes", true).addEventListener("click", async () => {
+      busy(true);
+      st.textContent = "";
+      const p = await this.getProfile();
+      if (!box.isConnected) return;
+      if (!p) {
+        bag.naming = true;
+        repaint();
+        return;
+      }
+      st.textContent = "Saving…";
+      try {
+        await api("/api/owner-tags", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ photo_ids: [pid], present: true }),
+        });
+        onDone();
+      } catch (e) {
+        busy(false);
+        st.textContent = String((e && e.message) || e);
+      }
+    });
+    mk("No", false).addEventListener("click", async () => {
+      busy(true);
+      st.textContent = "Saving…";
+      try {
+        await api("/api/owner-tags", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ photo_ids: [pid], present: false }),
+        });
+        onDone();
+      } catch (e) {
+        busy(false);
+        st.textContent = String((e && e.message) || e);
+      }
+    });
+    mk("Skip", false).addEventListener("click", () => onDone());
+    box.append(row, st);
+    return box;
+  },
+};
 
 async function route() {
   const hash = location.hash || "#/";
@@ -6425,6 +7142,28 @@ async function route() {
     }
     return;
   }
+  if (hash === "#/profile/tag") {
+    setActiveTab("");
+    try {
+      const html = await loadView("tag");
+      $("#view").innerHTML = html;
+      tag.mount($("#view"));
+    } catch (e) {
+      showErrorView(String((e && e.message) || e), () => route());
+    }
+    return;
+  }
+  if (hash === "#/profile") {
+    setActiveTab("");
+    try {
+      const html = await loadView("profile");
+      $("#view").innerHTML = html;
+      profile.mount($("#view"));
+    } catch (e) {
+      showErrorView(String((e && e.message) || e), () => route());
+    }
+    return;
+  }
   if (hash === "#/" || hash === "") {
     setActiveTab("reel");
     try {
@@ -6457,7 +7196,17 @@ $("#demo-form").addEventListener("submit", (e) => {
   } catch (err) { /* private mode */
   }
   $("#demo-code").value = "";
+  const btn = e.target.querySelector("button[type=submit]");
+  if (btn) {
+    btn.textContent = v ? "Saved ✓" : "Cleared";
+    setTimeout(() => { btn.textContent = "Unlock"; }, 1600);
+  }
   paintDemo();
+});
+let paintDemoT = null;
+window.addEventListener("resize", () => {
+  if (paintDemoT) clearTimeout(paintDemoT);
+  paintDemoT = setTimeout(paintDemo, 150);
 });
 window.addEventListener("hashchange", route);
 refreshShell();

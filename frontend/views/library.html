@@ -16,10 +16,16 @@
 <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Your private library</h1>
 <p class="font-body-md text-body-md text-on-surface-variant" id="lib-sub">—</p>
 </div>
+<div class="flex flex-wrap items-center gap-3">
 <a class="min-h-[44px] px-5 py-2.5 rounded bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-lg text-label-lg inline-flex items-center gap-2 shadow-sm active:scale-95 w-fit" href="#/browse">
 <span class="material-symbols-outlined text-[18px]">public</span>
 <span>Browse the world</span>
 </a>
+<a class="min-h-[44px] px-5 py-2.5 rounded bg-primary-container text-surface hover:bg-primary font-label-lg text-label-lg inline-flex items-center gap-2 shadow-sm active:scale-95 w-fit" href="#/profile">
+<span class="material-symbols-outlined text-[18px]">account_circle</span>
+<span>Profile &amp; tagging</span>
+</a>
+</div>
 </div>
 <div class="flex items-center gap-1 p-1 bg-surface-container-low rounded-xl shadow-sm w-fit" id="lib-tabs" role="tablist">
 <button class="min-h-[44px] px-5 rounded-lg font-label-md text-label-md transition-all" data-ltab="albums" role="tab" type="button">Albums</button>
@@ -35,6 +41,11 @@
 <div class="flex-col gap-6" id="lib-main" hidden>
 <!-- ALBUMS -->
 <section class="flex-col gap-4" id="lib-albums">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">search</span>
+<input autocomplete="off" class="flex-1 px-3 py-2 min-h-[44px] rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:outline-none" id="lib-search" placeholder="Search your photos…" type="text"/>
+<button class="hidden min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md" id="lib-search-clear" type="button">Clear</button>
+</div>
 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4" id="lib-album-cards"></div>
 <div class="flex-col gap-2" id="lib-places-wrap">
 <h2 class="font-headline-sm text-headline-sm text-on-surface">Places</h2>

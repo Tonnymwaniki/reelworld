@@ -35,7 +35,11 @@ for path, methods in (("/api/llm/status", ("GET",)),
                       ("/api/story", ("POST",)),
                       ("/api/profile", ("GET",)),
                       ("/api/profile", ("PUT",)),
-                      ("/api/profile", ("DELETE",))):
+                      ("/api/profile", ("DELETE",)),
+                      ("/api/owner-tags", ("POST",)),
+                      ("/api/owner-tags/summary", ("GET",)),
+                      ("/api/stories/{story_id}/refresh", ("POST",)),
+                      ("/api/stories/{story_id}/publish", ("POST",))):
     check((path, methods) in routes, f"route {methods[0]} {path}")
 
 import inspect  # noqa: E402

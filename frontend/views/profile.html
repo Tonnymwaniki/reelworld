@@ -1,0 +1,68 @@
+<div class="flex flex-col gap-6 max-w-2xl">
+<a class="font-label-md text-label-md text-on-tertiary-container hover:underline w-fit" href="#/library">← Back to My Photos</a>
+<div class="flex flex-col gap-1">
+<h1 class="font-headline-md text-headline-md text-on-surface">Your profile</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Your name is used only on photos you say you appear in — never worked out from a face.</p>
+</div>
+<div class="flex-col gap-8 animate-pulse" id="pf-loading" hidden>
+<div class="h-10 rounded-lg bg-surface-container-high"></div>
+<div class="h-24 rounded-xl bg-surface-container-high"></div>
+</div>
+<div class="hidden font-body-md text-body-md text-error" id="pf-error" role="alert"></div>
+<div class="flex-col gap-6" id="pf-main" hidden>
+<section class="flex flex-col gap-2">
+<h2 class="font-label-lg text-label-lg text-on-surface">Your name</h2>
+<div class="flex flex-col sm:flex-row gap-2">
+<input autocomplete="off" class="flex-1 px-3 py-2.5 min-h-[44px] rounded-lg bg-surface-container-highest text-on-surface font-body-md text-body-md focus:outline-none" id="pf-name" maxlength="40" placeholder="e.g. Tonny" type="text"/>
+<button class="min-h-[44px] px-5 rounded-lg bg-primary-container text-surface hover:bg-primary font-label-md text-label-md transition-colors active:scale-95" id="pf-save" type="button">Save name</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Letters, spaces, hyphens and apostrophes, up to 40 characters.</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="pf-status" role="status"></span>
+</section>
+<section class="flex flex-col gap-2">
+<h2 class="font-label-lg text-label-lg text-on-surface">How should Reel refer to you?</h2>
+<div class="flex flex-col gap-2" id="pf-voice" role="radiogroup" aria-label="Narration voice">
+<label class="flex items-start gap-3 p-3 rounded-xl bg-surface-container-low cursor-pointer">
+<input class="mt-1" name="pf-voice" type="radio" value="name"/>
+<span class="flex flex-col gap-0.5">
+<span class="font-body-md text-body-md text-on-surface">By name</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="pf-ex-name">—</span>
+</span>
+</label>
+<label class="flex items-start gap-3 p-3 rounded-xl bg-surface-container-low cursor-pointer">
+<input class="mt-1" name="pf-voice" type="radio" value="you"/>
+<span class="flex flex-col gap-0.5">
+<span class="font-body-md text-body-md text-on-surface">As “you”</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="pf-ex-you">—</span>
+</span>
+</label>
+<label class="flex items-start gap-3 p-3 rounded-xl bg-surface-container-low cursor-pointer">
+<input class="mt-1" name="pf-voice" type="radio" value="i"/>
+<span class="flex flex-col gap-0.5">
+<span class="font-body-md text-body-md text-on-surface">As “I”</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="pf-ex-i">—</span>
+</span>
+</label>
+</div>
+</section>
+<section class="rounded-xl bg-surface-container-low p-4">
+<p class="font-body-md text-body-md text-on-surface" id="pf-privacy">Reel never works out who someone is from their face. You tell Reel which photos you are in, and only then is your name used.</p>
+</section>
+<div class="flex flex-wrap items-center gap-3">
+<a class="min-h-[44px] px-5 py-2.5 rounded-lg bg-primary-container text-surface hover:bg-primary font-label-md text-label-md inline-flex items-center" href="#/profile/tag" id="pf-tag-link">Tag your photos</a>
+<a class="min-h-[44px] px-5 py-2.5 rounded-lg bg-surface-container-highest hover:bg-surface-dim text-on-surface font-label-md text-label-md inline-flex items-center gap-2" download href="/api/export" id="pf-export">Export my data</a>
+</div>
+<section class="flex flex-col gap-2 border-t border-outline-variant/40 pt-4">
+<h2 class="font-label-lg text-label-lg text-on-surface">Delete</h2>
+<button class="min-h-[44px] px-5 rounded-lg bg-error-container text-on-error-container hover:opacity-90 font-label-md text-label-md transition-colors w-fit" id="pf-del" type="button">Delete my profile</button>
+<div class="hidden flex-col gap-2 rounded-xl bg-error-container/20 p-4" id="pf-del-confirm">
+<p class="font-body-md text-body-md text-on-surface">Delete your name and voice choice from this device? This cannot be undone.</p>
+<div class="flex flex-wrap gap-2">
+<button class="min-h-[44px] px-5 rounded-lg bg-error text-on-error hover:opacity-90 font-label-md text-label-md" id="pf-del-yes" type="button">Yes, delete it</button>
+<button class="min-h-[44px] px-5 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md" id="pf-del-no" type="button">Cancel</button>
+</div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="pf-del-status" role="status"></span>
+</section>
+</div>
+</div>

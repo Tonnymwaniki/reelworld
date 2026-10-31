@@ -113,23 +113,31 @@ def _check_chapters(chapters, fetch):
 
 
 def create(*, title="", prompt="", tone="postcard", source="both",
-           target="short", chapters, fetch):
+           target="short", chapters, fetch, voice=None):
     if tone not in TONES:
         raise StoryError(400, "tone must be postcard, field-notes or documentary.")
     if source not in SOURCES:
         raise StoryError(400, "source must be mine, world or both.")
     if target not in TARGETS:
         raise StoryError(400, "target must be short or medium.")
+    if voice is not None and voice not in ("name", "you", "i"):
+        raise StoryError(400, "voice must be name, you or i.")
     story = {"id": _next_id(), "title": (title or "").strip()[:80] or "Untitled story",
              "prompt": (prompt or "").strip()[:280], "tone": tone, "source": source,
              "target": target, "status": "draft", "created_at": _now(),
-             "published_at": None, "chapters": _check_chapters(chapters, fetch)}
+             "published_at": None, "voice": voice,
+             "chapters": _check_chapters(chapters, fetch)}
     save(story)
     return story
 
 
-def update(sid, *, title=None, tone=None, target=None, chapters=None, fetch):
+def update(sid, *, title=None, tone=None, target=None, chapters=None, fetch,
+           voice="__keep__"):
     story = load(sid)
+    if voice != "__keep__":
+        if voice is not None and voice not in ("name", "you", "i"):
+            raise StoryError(400, "voice must be name, you or i.")
+        story["voice"] = voice
     if title is not None:
         story["title"] = str(title).strip()[:80] or story["title"]
     if tone is not None:
@@ -168,7 +176,9 @@ def _require_faceless(story):
                          {"blocked": blocked})
 
 
-def publish(sid, fetch):
+def publish(sid, fetch, include_name=False):
+    if type(include_name) is not bool:
+        raise StoryError(400, "include_name must be true or false.")
     story = load(sid)
     if story.get("status") == "published":
         return story
@@ -178,5 +188,6 @@ def publish(sid, fetch):
     _require_faceless(story)
     story["status"] = "published"
     story["published_at"] = _now()
+    story["include_name"] = include_name
     save(story)
     return story

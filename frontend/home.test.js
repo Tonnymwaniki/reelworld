@@ -98,6 +98,11 @@ async function main() {
   ok(T.applyChipRemove(spec, "must_include:tower").must_include.length === 0, "must_include removed");
   const kept = T.applyChipRemove(spec, "avoid_terms:cars");
   ok(kept.avoid_terms.length === 0 && kept.must_include.length === 1, "only the named term removed");
+  const ownChips = T.specChips({ query: "q", collection: "personal", viewpoints: [],
+    max_people: null, must_include: [], avoid_terms: [], owner_only: true });
+  ok(ownChips.some((c) => c.label === "Photos of me"), "owner_only chip");
+  ok(T.applyChipRemove({ owner_only: true }, "owner_only").owner_only === false,
+    "owner_only clears");
 
   // ---- suggestions ----
   const sug = T.buildSuggestions({ viewpoints: [], max_people: null, collection: "world" }, null);

@@ -458,3 +458,91 @@ the first unfinished phase.
 - Tests: owner_profile 21/21, routes 18/18; live PUT/GET/
   DELETE incl. 403 without the demo code.
 - Commit id: (this commit; see `git log`).
+
+## Owner names, step 2: owner tags (user-run green)
+
+- New `backend/owner_tags.py` (pure set/get/clear, position
+  forced null unless present) + `test_owner_tags.py` 16/16.
+- `POST /api/owner-tags` (bulk, personal only, demo-gated,
+  rewrites the annotation file, patches record +
+  owner_present + best-effort re-embed) and open
+  `GET /api/owner-tags/summary` (yes/no/unreviewed/total).
+- `owner_present` on photo detail, /api/photos (new column
+  in select), /api/world, albums, place groups — from the
+  record except /api/photos. Chat results deferred to step 4
+  (search_photos SQL), story/ring shapes to their steps.
+- `backend/schema_v3.sql` (ADD COLUMN owner_present) +
+  loader mirrors it; created missing
+  `docs/annotation_schema.md`; contract + AGENTS.md updated.
+- Tests: owner_tags 16/16, routes 20/20; live SQL + reload
+  + tag 3 yes / 1 no + summary + detail field.
+- Commit id: (this commit; see `git log`).
+
+## Owner names, step 3: tagging UI (user-run green)
+
+- New `#/profile` (name, voice + 3 examples, exact privacy
+  note, export, confirmed delete) and `#/profile/tag` grids
+  (people-first, per-tile tag + position, bulk, progress,
+  undo, first-tag name prompt); shared `ownerAsk` prompt in
+  library queue rows + `#/add` results; "You are in this
+  photo" badges on library tiles + dossier; `me` album.
+- Backend: `me` album + `people`/`owner_position` in album
+  entries; `POST /api/owner-tags` now clears on
+  `present: null` (undo) and preserves position when omitted.
+- In-thread add-photo flow has no ask box (queue + `#/add`
+  only); profile delete removes the profile, tags follow in
+  the final step.
+- Tests: profile.test.js 67/67, library 16/16; live tour of
+  both screens + badge + Me album + post-upload ask.
+- Commit id: (this commit; see `git log`).
+
+## Owner names, step 4: search + chat (user-run green)
+
+- `owner_only` in the spec (parser rule + coerce, forces
+  personal), `filter_owner` in `search_photos` v2 (appended
+  to `schema_v3.sql`, `owner_present` in RETURNS TABLE),
+  "Photos of me" chip (removable), `need_tags` reply with
+  the exact none-tagged message + tagging link, honest note
+  when tagged photos exist but none match.
+- `search_text` gains "Owner is in this photo." for tagged
+  photos; index rebuilt + Supabase reloaded after.
+- Tests: search_spec 7/7, home 50/50; live "me at KICC"
+  (tagged only) + none-tagged message + tour regression.
+- Drive-by: library search box (client-side filter over the
+  loaded photos, `libSearch` in RWTEST); library.test.js
+  172→179.
+- Commit id: (pending: steps 1–5 + film step 7 batch, see `git log`).
+
+## Owner names, step 5: narration rules (code done, user run pending)
+
+- `backend/narration.py`: prompt `rules_block` (profile + voice +
+  per-photo owner facts) + code `check_text`/`repair_text` (name
+  strict everywhere; you/I only in caption scope).
+- `POST /api/story` + `POST /api/stories` accept `voice`
+  (name/you/i, default profile `refer_as`); chapter texts via
+  `_chapter_text` (repair or drop, trace names it); story keeps
+  `voice`; `problems` flag bad headings; new
+  `POST /api/stories/{id}/refresh` rewrites old stories.
+- Ask/compare/explain carry the same rules + `checked` trace row.
+- Studio UI: voice pills on Create (profile default), Refresh
+  narration button in review with trace.
+- Tests: narration 19, routes 21 (+refresh), stories 127
+  (+voice/refresh checks). Live: KICC story name-only-on-tagged,
+  ask/compare/explain green; studio create 500 fixed (facts-list
+  shadowed the owner-facts dict in _story_full) + test_story_full.py
+  regression (4 checks); refresh 500 fixed (wrong guard name,
+  caught by scripts/refresh_probe.py); chapter texts warmed to a
+  vlog voice with cross-chapter flow.
+
+## Owner names, step 6: publishing gating (code done, user run pending)
+
+- `publish(..., include_name=False)` stores the opt-in; face rule
+  untouched (409). `narration.public_text` swaps the name for "the
+  photographer". `GET ...?public=1` renders the Showcase version
+  (title/headings/texts); drafts, opt-ins and the studio keep it.
+- Studio checkbox (default off, frozen once published); Showcase
+  modal fetches `?public=1`. Unlisted links stay deferred (no such
+  feature; deferred.md row 21) — gating covers the Showcase.
+- Tests: stories 15→18, narration 19→23, story_full 4→9,
+  routes 21→22, studio suite +4. Live (f): publish a faceless
+  story with the box off, show "the photographer" (pending).

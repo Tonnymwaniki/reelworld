@@ -8,8 +8,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from api import (LibraryError, _theme_of, apply_correction,  # noqa: E402
-                 cluster_bursts, gap_list)
+from api import (LibraryError, _lib_mini, _me_ids, _theme_of,  # noqa: E402
+                 apply_correction, cluster_bursts, gap_list)
 
 fails = 0
 total = 0
@@ -75,6 +75,23 @@ check(gap_list([], {"unknown/x": {"name": "X"}}) == [], "unknown skipped")
 check(_theme_of("data/photos/world/market/m_001.jpg") == "market", "theme path")
 check(_theme_of("C:\\x\\world\\cbd\\c.jpg") == "cbd", "theme windows")
 check(_theme_of("data/photos/personal/p.jpg") == "", "theme personal blank")
+
+TAGROWS = [
+    {"photo_id": "p1",
+     "record": {"provided": {"owner": {"present": True, "position": "left"}}}},
+    {"photo_id": "p2",
+     "record": {"provided": {"owner": {"present": False, "position": None}}}},
+    {"photo_id": "p3", "record": {}},
+]
+check(_me_ids(TAGROWS) == ["p1"], "me album ids")
+m = _lib_mini({"photo_id": "p1", "file": "data/photos/personal/p1.jpg",
+               "caption": "c", "viewpoint": "ground_level",
+               "place_name": "N", "place_key": "k",
+               "record": {"observed": {"people": {"count": 3}},
+                          "provided": {"owner": {"present": True,
+                                                 "position": "right"}}}})
+check(m["people"] == 3 and m["owner_present"] is True
+      and m["owner_position"] == "right", "mini people + owner")
 
 print(f"test_library.py: {total - fails}/{total} checks passed")
 sys.exit(1 if fails else 0)

@@ -1,0 +1,43 @@
+<div class="flex flex-col gap-6">
+<a class="font-label-md text-label-md text-on-tertiary-container hover:underline w-fit" href="#/profile">← Profile</a>
+<div class="flex flex-col gap-1">
+<h1 class="font-headline-md text-headline-md text-on-surface">Tag yourself</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Tap “I’m in this” on every photo you appear in. Photos with people are listed first. Reel only uses your name on photos you tag.</p>
+</div>
+<div class="flex-col gap-8 animate-pulse" id="tg-loading" hidden>
+<div class="h-6 rounded-lg bg-surface-container-high"></div>
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+<div class="aspect-square rounded-xl bg-surface-container-high"></div>
+<div class="aspect-square rounded-xl bg-surface-container-high"></div>
+<div class="aspect-square rounded-xl bg-surface-container-high"></div>
+<div class="aspect-square rounded-xl bg-surface-container-high"></div>
+</div>
+</div>
+<div class="hidden font-body-md text-body-md text-error" id="tg-error" role="alert"></div>
+<div class="flex-col gap-4" id="tg-main" hidden>
+<div class="flex flex-col gap-1">
+<p class="font-body-sm text-body-sm text-on-surface-variant" id="tg-progress">—</p>
+<div class="h-1.5 rounded bg-surface-container-high overflow-hidden">
+<div class="h-full bg-secondary rounded" id="tg-bar" style="width: 0%"></div>
+</div>
+</div>
+<div class="hidden flex-wrap items-center gap-2 rounded-xl bg-surface-container-low p-3" id="tg-bulk">
+<span class="font-body-md text-body-md text-on-surface" id="tg-bulk-count">0 selected</span>
+<button class="min-h-[44px] px-4 rounded-lg bg-primary-container text-surface hover:bg-primary font-label-md text-label-md" id="tg-bulk-yes" type="button">I'm in all selected</button>
+<button class="min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md" id="tg-bulk-clear" type="button">Clear</button>
+</div>
+<div class="hidden flex-col gap-2 rounded-xl bg-surface-container-low p-4" id="tg-name-prompt">
+<p class="font-body-md text-body-md text-on-surface">What should Reel call you? Your name is only used on photos you tag.</p>
+<div class="flex flex-col sm:flex-row gap-2">
+<input autocomplete="off" class="flex-1 px-3 py-2.5 min-h-[44px] rounded-lg bg-surface-container-highest text-on-surface font-body-md text-body-md focus:outline-none" id="tg-name" maxlength="40" placeholder="e.g. Tonny" type="text"/>
+<button class="min-h-[44px] px-5 rounded-lg bg-primary-container text-surface hover:bg-primary font-label-md text-label-md" id="tg-name-save" type="button">Save and continue</button>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="tg-name-status" role="status"></span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="tg-grid"></div>
+<div class="flex flex-wrap items-center gap-3">
+<button class="hidden min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md" id="tg-undo" type="button">Undo last change</button>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="tg-status" role="status"></span>
+</div>
+</div>
+</div>

@@ -90,6 +90,8 @@ def search_text(rec):
                  f"crowd {sc.get('crowd_level')}. Viewpoint: {cam.get('viewpoint')}, "
                  f"{cam.get('distance')} distance, facing {cam.get('facing')}.")
     parts.append(f"People count: {obs.get('people', {}).get('count', 0)}")
+    if ((rec.get("provided") or {}).get("owner") or {}).get("present") is True:
+        parts.append("Owner is in this photo.")
     cc = [c["term"] for c in inf.get("cultural_context", [])]
     if cc:
         parts.append("Local terms: " + ", ".join(cc))

@@ -56,9 +56,12 @@ from supabase import create_client
 import annotate as annotate_mod
 import chat as chat_module
 import llm as llm_mod
+import narration as narration_mod
 import owner_profile as owner_profile_mod
+import owner_tags as owner_tags_mod
 import place_pass as place_pass_mod
-from chat import (ANSWER_PROMPT, EMPTY_SPEC, Engine, extract_json)
+from chat import (ANSWER_PROMPT, EMPTY_SPEC, NO_TAGS_TEXT, Engine,
+                    extract_json)
 from retrieval import is_specific, meta_for, score_against, search_text
 from story_engine import StoryError
 
@@ -69,7 +72,7 @@ INDEX_HTML = FRONTEND_DIR / "index.html"
 # Hash views the app may fetch. Anything else under frontend/ (notably
 # frontend/design/) is never served, so exports stay out of the page bundle.
 VIEW_NAMES = ("home", "photo", "add", "connected", "place", "stories",
-              "builder", "showcase", "library", "browse",
+              "builder", "showcase", "library", "browse", "profile", "tag",
               "404", "about", "credits")
 
 # ----- share one embedding model across all sessions -----
@@ -372,7 +375,8 @@ def _resting_payload(sid, eng, reason):
         "results": [],
         "focus_photo_id": focus.get("photo_id"),
         "spec": {k: spec.get(k) for k in ("query", "collection", "viewpoints",
-                                          "max_people", "must_include", "avoid_terms")},
+                                          "max_people", "must_include", "avoid_terms",
+                                          "owner_only")},
         "kind": "resting",
         "trace": [{"step": "rested",
                    "detail": _REST_LIMIT_DETAIL.get(reason, "Resting briefly.")}],
@@ -455,6 +459,90 @@ def delete_profile(request: Request):
     return {"ok": True, "removed": {"profile": had}}
 
 
+class OwnerTagsRequest(BaseModel):
+    photo_ids: List[str] = Field(min_length=1)
+    present: Optional[bool]
+    position: Optional[str] = None
+
+
+@app.post("/api/owner-tags")
+def set_owner_tags(req: OwnerTagsRequest, request: Request):
+    """Bulk owner tag: "I'm in these" / "Not me" / null clears back to
+    unreviewed (undo). Personal photos only, set by the owner tapping —
+    never by a model, never from a face. An omitted position keeps each
+    photo's stored position; an explicit null clears it."""
+    _demo_guard(request)
+    if req.present is not None and type(req.present) is not bool:
+        raise HTTPException(status_code=400, detail="present must be true, false or null.")
+    fields_set = getattr(req, "model_fields_set",
+                         getattr(req, "__fields_set__", set())) or set()
+    pos_given = "position" in fields_set
+    if pos_given and req.position is not None and req.position not in owner_tags_mod.POSITIONS:
+        raise HTTPException(status_code=400,
+                            detail="position must be one of: left, centre, right")
+    pids = list(dict.fromkeys((p or "").strip() for p in req.photo_ids))
+    if any(not p for p in pids):
+        raise HTTPException(status_code=400, detail="photo_ids must not be empty.")
+    updated = []
+    reembedded = 0
+    for pid in pids:
+        row = _one_photo(pid)
+        if row.get("collection") != "personal":
+            raise HTTPException(status_code=400,
+                                detail=f"owner tags apply to your photos: {pid} is a world photo.")
+        rec = row.get("record") or {}
+        if req.present is None:
+            new_rec = owner_tags_mod.clear_owner(rec)
+        else:
+            if pos_given:
+                pos = req.position
+            else:
+                pos = owner_tags_mod.get_owner(rec)["position"] if req.present else None
+            try:
+                new_rec = owner_tags_mod.set_owner(rec, req.present, pos)
+            except ValueError as e:
+                raise HTTPException(status_code=400, detail=str(e))
+        ann = ROOT / "data" / "annotations" / "personal" / (pid + ".json")
+        try:
+            ann.parent.mkdir(parents=True, exist_ok=True)
+            ann.write_text(json.dumps({**new_rec, "photo_id": pid},
+                                      ensure_ascii=False, indent=1), encoding="utf-8")
+        except OSError as e:
+            raise HTTPException(status_code=502, detail=f"annotation write failed: {e}")
+        patch = {"record": new_rec, "owner_present": req.present}
+        try:
+            text = search_text(new_rec)
+            vec = np.array(list(chat_module.get_model().embed([text]))[0], dtype="float32")
+            patch["embedding"] = (vec / np.linalg.norm(vec)).tolist()
+            reembedded += 1
+        except Exception as e:
+            print(f"(re-embed failed for {pid}: {e})")
+        try:
+            get_sb().table("photos").update(patch).eq("photo_id", pid).execute()
+        except Exception as e:
+            raise HTTPException(status_code=502, detail=f"photo update failed: {e}")
+        updated.append(pid)
+    return {"updated": updated, "present": req.present,
+            "position": req.position if pos_given else None,
+            "reembedded": reembedded}
+
+
+@app.get("/api/owner-tags/summary")
+def owner_tags_summary():
+    """How many of your photos are tagged yes / no / not reviewed."""
+    try:
+        rows = (get_sb().table("photos").select("photo_id,record")
+                .eq("collection", "personal").execute().data or [])
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"tag summary failed: {e}")
+    yes = sum(1 for r in rows
+              if owner_tags_mod.owner_present_of(r.get("record") or {}) is True)
+    no = sum(1 for r in rows
+             if owner_tags_mod.owner_present_of(r.get("record") or {}) is False)
+    return {"yes": yes, "no": no, "unreviewed": len(rows) - yes - no,
+            "total": len(rows)}
+
+
 @app.get("/og-image.png")
 def og_image():
     p = FRONTEND_DIR / "og-image.png"
@@ -507,7 +595,8 @@ def _chat_payload(sid, eng, out):
         "results": rows,
         "focus_photo_id": focus.get("photo_id"),
         "spec": {k: spec.get(k) for k in ("query", "collection", "viewpoints",
-                                          "max_people", "must_include", "avoid_terms")},
+                                          "max_people", "must_include", "avoid_terms",
+                                          "owner_only")},
         "kind": out.get("kind", "ok"),
         "trace": trace,
     }
@@ -762,6 +851,10 @@ def clean_spec(raw):
         if not isinstance(spec[k], list) or any(not isinstance(w, str) for w in spec[k]):
             raise HTTPException(status_code=400, detail=f"spec.{k} must be a list of strings")
         spec[k] = [w.strip().lower() for w in spec[k] if w.strip()]
+    if not isinstance(spec["owner_only"], bool):
+        raise HTTPException(status_code=400, detail="spec.owner_only must be true or false")
+    if spec["owner_only"]:
+        spec["collection"] = "personal"
     return spec
 
 
@@ -775,6 +868,21 @@ def api_search(req: SearchRequest):
         eng = get_engine(sid)
     except Exception as e:
         raise HTTPException(status_code=503, detail=f"engine unavailable: {e}")
+    if spec.get("owner_only") and eng.tagged_count() == 0:
+        eng.state["spec"] = spec
+        focus = eng.state.get("focus") or {}
+        return {
+            "session_id": sid,
+            "text": NO_TAGS_TEXT,
+            "results": [],
+            "focus_photo_id": focus.get("photo_id"),
+            "spec": {k: spec.get(k) for k in ("query", "collection", "viewpoints",
+                                              "max_people", "must_include", "avoid_terms",
+                                              "owner_only")},
+            "kind": "need_tags",
+            "trace": [{"step": "answered",
+                       "detail": "No tagged photos yet, so I pointed at the tagging page."}],
+        }
     with _turn_lock:
         try:
             rows, note, trace = eng.search(spec, eng.state["rejected"])
@@ -796,7 +904,8 @@ def api_search(req: SearchRequest):
         "results": out_rows,
         "focus_photo_id": focus.get("photo_id"),
         "spec": {k: spec.get(k) for k in ("query", "collection", "viewpoints",
-                                          "max_people", "must_include", "avoid_terms")},
+                                          "max_people", "must_include", "avoid_terms",
+                                          "owner_only")},
         "kind": "no_strong_match" if note else "ok",
         "trace": trace,
     }
@@ -860,12 +969,37 @@ Question: {question}"""
 
 
 def _compact_record(rec):
+    own = ((rec.get("provided") or {}).get("owner") or {})
+    present = own.get("present")
     return {"observed": {k: rec["observed"].get(k) for k in
                          ["caption", "description", "scene", "camera", "entities",
                           "spatial_relations", "visible_text", "people"]},
             "inferred": {k: rec["inferred"].get(k) for k in
                          ["landmarks", "place", "taken_from", "cultural_context",
-                          "uncertainties"]}}
+                          "uncertainties"]},
+            "owner": {"present": present if present is True else (
+                          False if present is False else None),
+                      "position": own.get("position")}}
+
+
+def _narration(records, story_voice=None):
+    """(rules, repair) for model text about these {photo_id: record}."""
+    try:
+        prof = owner_profile_mod.load_profile()
+    except Exception:
+        prof = None
+    voice = narration_mod.resolve_voice(story_voice, prof)
+    facts = narration_mod.owner_facts(records)
+
+    def repair(text, scope="chat", fallback=""):
+        name = (prof or {}).get("name") or ""
+        allowed = any(f.get("present") is True for f in facts.values())
+        fixed, bad = narration_mod.repair_text(text, name, allowed, scope)
+        if bad and not fixed and fallback:
+            fixed = fallback
+        return fixed, bad
+
+    return narration_mod.rules_block(prof, facts, voice), repair
 
 
 @app.get("/api/photos")
@@ -875,7 +1009,7 @@ def list_photos(collection: str = "world", limit: int = 24):
     limit = max(1, min(int(limit), 200))
     try:
         rows = (get_sb().table("photos")
-                .select("photo_id,collection,file,caption,viewpoint,place_name,place_key")
+                .select("photo_id,collection,file,caption,viewpoint,place_name,place_key,owner_present")
                 .eq("collection", collection).order("photo_id").limit(limit).execute().data or [])
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"photo list failed: {e}")
@@ -883,7 +1017,8 @@ def list_photos(collection: str = "world", limit: int = 24):
             "photos": [{"photo_id": r["photo_id"], "collection": r["collection"],
                         "src": photo_url(r.get("file")), "caption": r.get("caption"),
                         "viewpoint": r.get("viewpoint"), "place": r.get("place_name"),
-                        "place_key": r.get("place_key")}
+                        "place_key": r.get("place_key"),
+                        "owner_present": r.get("owner_present")}
                        for r in rows]}
 
 
@@ -944,6 +1079,7 @@ def _photo_detail_shape(r):
         "scene": {"type": scene.get("type"), "time_of_day": scene.get("time_of_day"),
                   "setting": scene.get("setting")},
         "people_count": people_count,
+        "owner_present": owner_tags_mod.owner_present_of(rec),
         "things": [{"label": e.get("label"), "attributes": e.get("attributes") or [],
                     "salience": e.get("salience"), "confidence": e.get("confidence")}
                    for e in ents[:8]],
@@ -972,6 +1108,7 @@ def ask(req: AskRequest, request: Request = None, response: Response = None):
         raise HTTPException(status_code=404, detail="I could not find that photo.")
     rec = rows[0]["record"]
     compact = _compact_record(rec)
+    rules, repair = _narration({pid: rec})
     ckey = llm_mod.cache_key("ask", [pid], req.question, [rec])
     hit = llm_mod.cache_get(ckey)
     if hit is not None:
@@ -980,19 +1117,22 @@ def ask(req: AskRequest, request: Request = None, response: Response = None):
         return hit
     try:
         res = llm_mod.ask(ANSWER_PROMPT.format(
-            record=json.dumps(compact, ensure_ascii=False), question=req.question),
-            purpose="ask", session_id=req.session_id)
+            record=json.dumps(compact, ensure_ascii=False), question=req.question)
+            + "\n" + rules, purpose="ask", session_id=req.session_id)
     except llm_mod.LLMBudgetSpent:
         raise HTTPException(status_code=429, detail=RESTING_TEXT)
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"answer failed: {e}")
-    answer = res["text"].strip()
+    answer, bad = repair(res["text"].strip(),
+                         fallback="I cannot tell from the stored annotation.")
+    checked = [{"step": "checked",
+                "detail": "Removed an unsupported owner reference."}] if bad else []
     via = f" ({res['provider']}, {res['seconds']}s)"
     if not any(p in answer.lower() for p in ANNOTATION_MISS):
         out = {"photo_id": pid, "question": req.question, "answer": answer,
                "source": "annotation", "note": None,
                "trace": [{"step": "answered",
-                          "detail": f"Answered from the stored annotation{via}."}]}
+                          "detail": f"Answered from the stored annotation{via}."}] + checked}
         llm_mod.cache_put(ckey, out)
         return out
     img_path = ROOT / str(rows[0].get("file") or "")
@@ -1000,25 +1140,30 @@ def ask(req: AskRequest, request: Request = None, response: Response = None):
         out = {"photo_id": pid, "question": req.question, "answer": answer,
                "source": "annotation", "note": None,
                "trace": [{"step": "answered",
-                          "detail": f"Answered from the stored annotation{via}."}]}
+                          "detail": f"Answered from the stored annotation{via}."}] + checked}
         llm_mod.cache_put(ckey, out)
         return out
     try:
         res = llm_mod.ask(IMAGE_ANSWER_PROMPT.format(
-            record=json.dumps(compact, ensure_ascii=False), question=req.question),
-            image_path=str(img_path), purpose="ask", session_id=req.session_id)
+            record=json.dumps(compact, ensure_ascii=False), question=req.question)
+            + "\n" + rules, image_path=str(img_path), purpose="ask",
+            session_id=req.session_id)
     except llm_mod.LLMBudgetSpent:
         raise HTTPException(status_code=429, detail=RESTING_TEXT)
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"image look failed: {e}")
-    img_answer = " ".join(res["text"].strip().split()[:120])
+    img_answer, img_bad = repair(" ".join(res["text"].strip().split()[:120]),
+                                 fallback="I cannot tell from looking at the photo.")
+    if img_bad:
+        checked = checked + [{"step": "checked",
+                              "detail": "Removed an unsupported owner reference."}]
     via = f" ({res['provider']}, {res['seconds']}s)"
     out = {"photo_id": pid, "question": req.question, "answer": img_answer,
            "source": "image", "note": "This answer came from looking at the photo again.",
            "trace": [{"step": "reinspected",
                       "detail": "The stored annotation could not answer, so I looked at the photo again."},
                      {"step": "answered",
-                      "detail": f"Answered from looking at the photo again{via}."}]}
+                      "detail": f"Answered from looking at the photo again{via}."}] + checked}
     llm_mod.cache_put(ckey, out)
     return out
 
@@ -1042,6 +1187,7 @@ def compare(req: CompareRequest, request: Request = None,
         raise HTTPException(status_code=400, detail="photo_a and photo_b must be different.")
     rec_a = _record_or_404(req.photo_a)
     rec_b = _record_or_404(req.photo_b)
+    rules, repair = _narration({req.photo_a: rec_a, req.photo_b: rec_b})
     ckey = llm_mod.cache_key("compare", [req.photo_a, req.photo_b],
                              req.question, [rec_a, rec_b])
     hit = llm_mod.cache_get(ckey)
@@ -1055,8 +1201,8 @@ def compare(req: CompareRequest, request: Request = None,
             record_a=json.dumps(_compact_record(rec_a), ensure_ascii=False),
             photo_b=req.photo_b,
             record_b=json.dumps(_compact_record(rec_b), ensure_ascii=False),
-            question=req.question or "(no question: summarise the main differences)"),
-            purpose="compare")
+            question=req.question or "(no question: summarise the main differences)")
+            + "\n" + rules, purpose="compare")
     except llm_mod.LLMBudgetSpent:
         raise HTTPException(status_code=429, detail=RESTING_TEXT)
     except Exception as e:
@@ -1065,20 +1211,35 @@ def compare(req: CompareRequest, request: Request = None,
         data = extract_json(res["text"])
     except Exception:
         raise HTTPException(status_code=502, detail="compare failed: bad model reply.")
+    checked = []
     diffs = []
     raw = data.get("differences") or []
     if isinstance(raw, list):
         for d in raw[:6]:
             if isinstance(d, dict):
-                diffs.append({"aspect": str(d.get("aspect", "")),
-                              "a": str(d.get("a", "")), "b": str(d.get("b", ""))})
-    answer = " ".join(str(data.get("answer", "")).split()[:150])
+                row = {"aspect": str(d.get("aspect", "")),
+                       "a": str(d.get("a", "")), "b": str(d.get("b", ""))}
+                kept = True
+                for k in ("aspect", "a", "b"):
+                    row[k], bad = repair(row[k])
+                    if bad:
+                        checked = [{"step": "checked", "detail":
+                                    "Removed an unsupported owner reference."}]
+                    if bad and not row[k]:
+                        kept = False
+                if kept:
+                    diffs.append(row)
+    answer, bad = repair(" ".join(str(data.get("answer", "")).split()[:150]),
+                         fallback="The records do not state a clear difference.")
+    if bad:
+        checked = [{"step": "checked",
+                    "detail": "Removed an unsupported owner reference."}]
     out = {"photo_a": req.photo_a, "photo_b": req.photo_b,
            "question": req.question, "answer": answer,
            "differences": diffs, "source": "annotation",
            "trace": [{"step": "compared",
                       "detail": ("Compared the two stored annotations "
-                                 f"({res['provider']}, {res['seconds']}s).")}]}
+                                 f"({res['provider']}, {res['seconds']}s).")}] + checked}
     llm_mod.cache_put(ckey, out)
     return out
 
@@ -1087,6 +1248,7 @@ class StoryRequest(BaseModel):
     theme: str = Field(min_length=1)
     collection: str = "world"
     lang: Optional[str] = "en"
+    voice: Optional[str] = None
 
 
 STORY_PLAN_PROMPT = """You plan a photo story: a short visual tour of one theme told with photos from a Nairobi photo archive.
@@ -1095,8 +1257,9 @@ Return ONE JSON object and nothing else:
 {{"title": "a short story title", "chapters": [{{"heading": "...", "query": "..."}}]}}
 Rules: 3 to 5 chapters. Every chapter query must be a plain, concrete, visual photo-search query in English that a photo archive could answer (things, places, views, times of day). Do not repeat queries. Do not plan chapters that need dates, names of people, or outside facts."""
 
-STORY_TEXT_PROMPT = """You write one chapter of a photo story. Chapter heading: {heading}
-You may use ONLY facts stated in the photo records below. Never add outside facts: no dates, no history, no causes, no names of people, no claims about anything not in the records. If the records say little, write little. Write one or two sentences. Never identify a person (people only by count, activity or clothing).
+STORY_TEXT_PROMPT = """You write one chapter of a photo vlog: one outing told across photos, warm and lively like someone showing a friend their day. Chapter heading: {heading}
+Earlier chapters (for flow; do not repeat them): {earlier}
+You may use ONLY facts stated in the photo records below. Never add outside facts: no dates, no history, no causes, no names of people except the owner as instructed below, no claims about anything not in the records. If the records say little, write little. Write one or two sentences. Sound like a vlog: energetic verbs and a sense of moving through the outing (then, next, from there), but every claim must come from the records. Never address a viewer: no "you guys", no "look at this" (when the voice below says to use "you" for the owner, that "you" means the owner only). Never identify any person other than the owner (other people only by count, activity or clothing).
 Records:
 {records}
 Return ONE JSON object and nothing else: {{"text": "..."}}"""
@@ -1231,6 +1394,31 @@ def _story_credits(photo_ids):
     return credits
 
 
+def _chapter_text(heading, compacts, att, voice, prior=""):
+    """(text, flag): one v1 chapter text + owner repair. compacts are
+    (row, compact) pairs; att is the attempt's rows; prior is the
+    earlier chapters' heading+text for story flow. flag is None,
+    "repaired", or "heading" (drop the chapter). None text on empty."""
+    ids = {r["photo_id"] for r in att}
+    shown = [{r["photo_id"]: c} for r, c in compacts if r["photo_id"] in ids]
+    nrec = {r["photo_id"]: _record_or_404(r["photo_id"]) for r in att}
+    rules, repair = _narration(nrec, voice)
+    text = str(_llm_json(STORY_TEXT_PROMPT.format(
+        heading=heading, earlier=prior or "(none yet — this opens the outing.)",
+        records=json.dumps(shown, ensure_ascii=False))
+        + "\n" + rules, 0.2, 8000, tries=1).get("text") or "").strip()
+    if not text:
+        return None, None
+    _, hbad = repair(heading, scope="caption")
+    if hbad:
+        return None, "heading"
+    cap0 = next((c.get("observed", {}).get("caption", "") for r, c in compacts
+                 if r["photo_id"] == att[0]["photo_id"]), "")
+    text, tbad = repair(text, scope="caption",
+                        fallback=cap0 or att[0]["photo_id"])
+    return text, ("repaired" if tbad else None)
+
+
 def _llm_json(prompt, temperature, max_tokens, tries=3):
     """One JSON-object model call, retried for transient API failures."""
     last = None
@@ -1324,29 +1512,38 @@ def story(req: StoryRequest, request: Request = None,
                               f"Dropped {heading!r}: {problem}; no honest heading fit."})
                 continue
         text, attempt_sets = None, [picked, picked[:1]]
+        heading_bad, repaired = False, False
+        prior = "; ".join(f"{c['heading']}: {c['text']}" for c in chapters[-2:])
         for att in attempt_sets:
             try:
-                ids = {r["photo_id"] for r in att}
-                recs = [{r["photo_id"]: c} for r, c in compacts if r["photo_id"] in ids]
-                text = str(_llm_json(STORY_TEXT_PROMPT.format(
-                    heading=heading, records=json.dumps(recs, ensure_ascii=False)),
-                    0.2, 8000, tries=1).get("text") or "").strip()
+                text, flag = _chapter_text(heading, compacts, att, req.voice,
+                                           prior)
                 if text:
                     picked = att
+                    repaired = (flag == "repaired")
+                    break
+                if flag == "heading":
+                    heading_bad = True
                     break
             except llm_mod.LLMBudgetSpent:
                 raise HTTPException(status_code=429, detail=RESTING_TEXT)
             except Exception:
                 text = None
         if not text:
-            trace.append({"step": "dropped", "detail":
-                          f"Dropped {heading!r}: no chapter text came back."})
+            if heading_bad:
+                trace.append({"step": "dropped", "detail":
+                              f"Dropped {heading!r}: the heading named someone it should not have."})
+            else:
+                trace.append({"step": "dropped", "detail":
+                              f"Dropped {heading!r}: no chapter text came back."})
             continue
         for r in picked:
             used.add(r["photo_id"])
             photo_ids.append(r["photo_id"])
-        trace.append({"step": "written", "detail":
-                      f"Wrote {heading!r} from {len(picked)} photo record(s)."})
+        detail = f"Wrote {heading!r} from {len(picked)} photo record(s)."
+        if repaired:
+            detail += " Removed an unsupported owner reference."
+        trace.append({"step": "written", "detail": detail})
         chapters.append({"heading": heading,
                          "photos": [{"photo_id": r["photo_id"], "collection": r.get("collection"),
                                      "src": photo_url(r.get("file")), "caption": r.get("caption")}
@@ -1683,7 +1880,8 @@ def place_page(place_key: str, collection: str = "world"):
     for r in shown:
         by_viewpoint.setdefault(r.get("viewpoint") or "unknown", []).append(
             {"photo_id": r["photo_id"], "collection": r.get("collection"),
-             "src": photo_url(r.get("file")), "caption": r.get("caption")})
+             "src": photo_url(r.get("file")), "caption": r.get("caption"),
+             "owner_present": owner_tags_mod.owner_present_of(r.get("record") or {})})
     signs = {}
     for r in shown:
         seen_here = set()
@@ -2231,6 +2429,9 @@ def explain(req: ExplainRequest, request: Request = None,
         photo_a=a_id, photo_b=b_id,
         record_a=json.dumps(_safe_compact(a.get("record")), ensure_ascii=False),
         record_b=json.dumps(_safe_compact(b.get("record")), ensure_ascii=False))
+    rules, repair = _narration({a_id: a.get("record") or {},
+                                b_id: b.get("record") or {}})
+    prompt = prompt + "\n" + rules
     ckey = llm_mod.cache_key("explain", [a_id, b_id], "",
                              [a.get("record") or {}, b.get("record") or {}])
     hit = llm_mod.cache_get(ckey)
@@ -2246,14 +2447,19 @@ def explain(req: ExplainRequest, request: Request = None,
         raise HTTPException(status_code=502, detail=f"explain failed: {e}")
     text = res["text"].strip()
     via = f" ({res['provider']}, {res['seconds']}s)"
+    text, bad = repair(
+        text, fallback="The records link these photos (" + ", ".join(kinds) + ") but "
+        "the wording named someone it should not have; the facts above are the evidence.")
     if not text:
         text = ("The records link these photos (" + ", ".join(kinds) + ") but "
                 "the model returned no wording; the facts above are the evidence.")
+    checked = [{"step": "checked",
+                "detail": "Removed an unsupported owner reference."}] if bad else []
     out = {**base, "linked": True, "text": text,
            "trace": [{"step": "checked",
                       "detail": "Compared captions, signs, landmarks and place verdicts."},
                      {"step": "wrote",
-                      "detail": f"Wrote the connection from the records{via}."}]}
+                      "detail": f"Wrote the connection from the records{via}."}] + checked}
     llm_mod.cache_put(ckey, out)
     return out
 
@@ -2267,6 +2473,7 @@ class StoryCreateRequest(BaseModel):
     source: str = "both"
     target: str = "short"
     photo_ids: Optional[List[str]] = None
+    voice: Optional[str] = None
 
 
 class StoryPatchRequest(BaseModel):
@@ -2274,6 +2481,10 @@ class StoryPatchRequest(BaseModel):
     tone: Optional[str] = None
     target: Optional[str] = None
     chapters: Optional[List[Dict[str, Any]]] = None
+
+
+class StoryRefreshRequest(BaseModel):
+    voice: Optional[str] = None
 
 
 def _story_fetch_for(ids):
@@ -2295,8 +2506,10 @@ def _story_fetch_for(ids):
     return fetch
 
 
-def _story_full(story):
-    """Stored story + live photo data, heading problems and face flags."""
+def _story_full(story, public=False):
+    """Stored story + live photo data, heading problems and face flags.
+    public=True renders the Showcase version: on a published story
+    whose owner did not opt in, the name becomes "the photographer"."""
     ids = [c["photo_id"] for c in story.get("chapters") or []]
     by_id = _photos_by_ids(ids) if ids else {}
     chapters = []
@@ -2311,6 +2524,14 @@ def _story_full(story):
                          "people": (obs.get("people") or {}).get("count", 0) or 0})
     attach_credits(chapters)
     problems = {}
+    try:
+        prof = owner_profile_mod.load_profile()
+    except Exception:
+        prof = None
+    name = (prof or {}).get("name") or ""
+    owner = narration_mod.owner_facts(
+        {c["photo_id"]: (by_id.get(c["photo_id"]) or {}).get("record")
+         for c in story.get("chapters") or []})
     for i, c in enumerate(story.get("chapters") or []):
         if not (c.get("heading") or "").strip():
             continue
@@ -2325,6 +2546,19 @@ def _story_full(story):
         bad = _heading_problems(c["heading"], facts)
         if bad:
             problems[str(i)] = bad
+        allowed = (owner.get(c["photo_id"]) or {}).get("present") is True
+        if prof and narration_mod.check_text(c["heading"], name, allowed,
+                                             scope="caption"):
+            more = problems.setdefault(str(i), [])
+            more.append("uses a name or you/I for a photo you did not tag yourself in; "
+                        "change it or refresh the narration.")
+    if public and story.get("status") == "published" \
+            and not story.get("include_name", False) and name:
+        pub = narration_mod.public_text
+        story = dict(story, title=pub(story.get("title") or "", name))
+        for c in chapters:
+            c["heading"] = pub(c["heading"], name)
+            c["text"] = pub(c["text"], name)
     return {"story": story, "chapters": chapters,
             "totals": {"scenes": len(chapters),
                        "seconds": sum(c.get("seconds", 0) for c in chapters)},
@@ -2350,8 +2584,15 @@ def stories_create(req: StoryCreateRequest):
     source = {"mine": "personal", "world": "world", "both": "both"}.get(req.source)
     if source is None:
         raise HTTPException(status_code=400, detail="source must be mine, world or both.")
+    if req.voice is not None and req.voice not in ("name", "you", "i"):
+        raise HTTPException(status_code=400, detail="voice must be name, you or i.")
+    try:
+        prof = owner_profile_mod.load_profile()
+    except Exception:
+        prof = None
+    voice = narration_mod.resolve_voice(req.voice, prof)
     if prompt:
-        planned = story(StoryRequest(theme=prompt, collection=source))
+        planned = story(StoryRequest(theme=prompt, collection=source, voice=voice))
         if not planned["chapters"]:
             raise HTTPException(status_code=502,
                                 detail=f"no story photos found for {prompt!r}.")
@@ -2374,7 +2615,8 @@ def stories_create(req: StoryCreateRequest):
         title = (req.title or "").strip()
     fetch = _story_fetch_for([c["photo_id"] for c in chapters])
     made = _story_err(create, title=title, prompt=prompt, tone=req.tone,
-                      source=req.source, target=req.target, chapters=chapters, fetch=fetch)
+                      source=req.source, target=req.target, chapters=chapters,
+                      fetch=fetch, voice=voice)
     return {**_story_full(made), "trace": trace}
 
 
@@ -2391,9 +2633,9 @@ def stories_list(status: Optional[str] = None):
 
 
 @app.get("/api/stories/{story_id}")
-def story_detail(story_id: str):
+def story_detail(story_id: str, public: bool = False):
     from story_engine import load
-    return _story_full(_story_err(load, story_id.strip()))
+    return _story_full(_story_err(load, story_id.strip()), public)
 
 
 @app.patch("/api/stories/{story_id}")
@@ -2408,6 +2650,56 @@ def story_update(story_id: str, req: StoryPatchRequest):
     return _story_full(made)
 
 
+@app.post("/api/stories/{story_id}/refresh")
+def story_refresh(story_id: str, req: StoryRefreshRequest, request: Request):
+    """Rewrite a story's chapter texts with the current profile + tags."""
+    _demo_guard(request)
+    from story_engine import load, update
+    story = _story_err(load, story_id.strip())
+    if req.voice is not None and req.voice not in ("name", "you", "i"):
+        raise HTTPException(status_code=400, detail="voice must be name, you or i.")
+    old = story.get("chapters") or []
+    ids = [c.get("photo_id") for c in old if c.get("photo_id")]
+    by_id = _photos_by_ids(ids) if ids else {}
+    new, trace = [], []
+    for c in old:
+        r = by_id.get(c.get("photo_id"))
+        if r is None:
+            new.append(c)
+            trace.append({"step": "kept", "detail":
+                          f"Kept {c.get('photo_id')}: photo no longer found."})
+            continue
+        prior = "; ".join(f"{n.get('heading')}: {n.get('text')}"
+                          for n in new[-2:])
+        try:
+            compact = _compact_record(r.get("record") or {})
+            text, flag = _chapter_text(c.get("heading") or "", [(r, compact)],
+                                       [r], req.voice, prior)
+        except llm_mod.LLMBudgetSpent:
+            raise HTTPException(status_code=429, detail=RESTING_TEXT)
+        except Exception as e:
+            new.append(c)
+            trace.append({"step": "kept", "detail":
+                          f"Kept {c.get('photo_id')}: rewrite failed ({e})."})
+            continue
+        if not text:
+            new.append(c)
+            trace.append({"step": "kept", "detail":
+                          f"Kept {c.get('photo_id')}: no narration came back."})
+            continue
+        detail = f"Refreshed {r.get('photo_id')}."
+        if flag == "repaired":
+            detail += " Removed an unsupported owner reference."
+        trace.append({"step": "refreshed", "detail": detail})
+        new.append({"photo_id": r["photo_id"], "seconds": c.get("seconds", 4),
+                    "heading": c.get("heading") or "", "text": text})
+    fetch = _story_fetch_for([c.get("photo_id") for c in new if c.get("photo_id")])
+    made = _story_err(update, story_id.strip(), chapters=new, fetch=fetch,
+                      voice=(req.voice if req.voice in ("name", "you", "i")
+                             else story.get("voice")))
+    return {**_story_full(made), "trace": trace}
+
+
 @app.delete("/api/stories/{story_id}")
 def story_delete(story_id: str):
     from story_engine import remove
@@ -2415,15 +2707,21 @@ def story_delete(story_id: str):
     return {"ok": True, "id": story_id.strip()}
 
 
+class StoryPublishRequest(BaseModel):
+    include_name: bool = False
+
+
 @app.post("/api/stories/{story_id}/publish")
-def story_publish(story_id: str, request: Request):
+def story_publish(story_id: str, request: Request,
+                  req: Optional[StoryPublishRequest] = None):
     # Drafts are local and private (ungated, like flags); publishing puts
     # the story on the public Showcase, so it needs the demo code.
     _demo_guard(request)
     from story_engine import load, publish
     current = _story_err(load, story_id.strip())
     fetch = _story_fetch_for([c["photo_id"] for c in current.get("chapters") or []])
-    made = _story_err(publish, story_id.strip(), fetch=fetch)
+    made = _story_err(publish, story_id.strip(), fetch=fetch,
+                      include_name=(req.include_name if req else False))
     return _story_full(made)
 
 
@@ -2494,9 +2792,20 @@ def _personal_rows():
 
 
 def _lib_mini(r):
+    rec = r.get("record") or {}
+    obs = (rec.get("observed") or {})
     return {"photo_id": r["photo_id"], "src": photo_url(r.get("file")),
             "caption": r.get("caption"), "viewpoint": r.get("viewpoint"),
-            "place": r.get("place_name"), "place_key": r.get("place_key")}
+            "place": r.get("place_name"), "place_key": r.get("place_key"),
+            "people": (obs.get("people") or {}).get("count", 0) or 0,
+            "owner_present": owner_tags_mod.owner_present_of(rec),
+            "owner_position": owner_tags_mod.get_owner(rec)["position"]}
+
+
+def _me_ids(rows):
+    """Ids of personal photos tagged owner-present (pure over rows)."""
+    return [r["photo_id"] for r in rows
+            if owner_tags_mod.owner_present_of(r.get("record") or {}) is True]
 
 
 @app.get("/api/albums")
@@ -2536,6 +2845,7 @@ def albums():
     above_ids = [i for i in ids if by_id[i].get("viewpoint") in ("elevated", "aerial")]
     signs_ids = [i for i in ids if infos[i]["signs"]]
     people_ids = [i for i in ids if infos[i]["people"]]
+    me_ids = _me_ids(rows)
     look_ids = [i for i in ids if not by_id[i].get("place_key")
                 or not infos[i]["confirmed"] or infos[i]["uncertain"]]
     return {
@@ -2551,6 +2861,8 @@ def albums():
              "count": len(signs_ids), "ids": signs_ids},
             {"key": "people", "label": "With people",
              "count": len(people_ids), "ids": people_ids},
+            {"key": "me", "label": "Me",
+             "count": len(me_ids), "ids": me_ids},
             {"key": "look", "label": "Needs a look",
              "count": len(look_ids), "ids": look_ids},
             {"key": "bursts", "label": "Bursts", "count": len(bursts), "sets": bursts},
@@ -2640,6 +2952,7 @@ def world(place_key: Optional[str] = None, theme: Optional[str] = None,
                     "caption": r.get("caption"), "viewpoint": r.get("viewpoint"),
                     "place": r.get("place_name"), "place_key": r.get("place_key"),
                     "theme": r["_theme"], "people": r["_people"],
+                    "owner_present": owner_tags_mod.owner_present_of(r.get("record") or {}),
                     "credit": {"author": prov.get("author"), "license": prov.get("license"),
                                "source_url": prov.get("source_url")}
                     if (prov.get("author") or prov.get("license")) else None})

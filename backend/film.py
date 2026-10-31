@@ -7,6 +7,8 @@ stored records. build_film runs the whole pipeline.
 import re
 
 import llm
+import narration as narration_mod
+import owner_profile as owner_profile_mod
 from chat import extract_json
 from director import CAMERAS, PACINGS, ROLES, summarize_record
 
@@ -187,22 +189,57 @@ def apply_pacing(scenes, target, trace=None):
 
 def _brief_text(b):
     b = b or {}
+    own = b.get("owner_present")
+    if own is True:
+        pos = b.get("owner_position")
+        owner_bit = "owner: present" + (f" ({pos})" if pos else "")
+    elif own is False:
+        owner_bit = "owner: absent"
+    else:
+        owner_bit = "owner: unknown"
     return (f"{b.get('place') or 'unknown place'} "
             f"({b.get('place_status') or 'unknown'}), "
             f"{b.get('viewpoint') or 'unknown'}, {b.get('scene') or 'unknown scene'}; "
             f"things: {', '.join(b.get('things') or []) or 'none'}; "
             f"signs: {'; '.join(b.get('signs') or []) or 'none'}; "
             f"taken from: {b.get('taken_from') or 'unknown'}; "
-            f"people: {b.get('people', 0)}")
+            f"people: {b.get('people', 0)}; {owner_bit}")
 
 
-def write_captions(scenes, briefs, trace=None, session_id=None):
+def _narration_for(briefs, pids, voice, profile):
+    """(voice, profile, facts) for caption/editor prompts (pure)."""
+    if profile is None:
+        try:
+            profile = owner_profile_mod.load_profile()
+        except Exception:
+            profile = None
+    voice = narration_mod.resolve_voice(voice, profile)
+    facts = {}
+    for pid in pids:
+        b = briefs.get(pid) or {}
+        facts[pid] = {"present": b.get("owner_present"),
+                      "position": b.get("owner_position"),
+                      "people": b.get("people", 0) or 0}
+    return voice, profile, facts
+
+
+def _scene_owner_ok(text, name, brief, scope="caption"):
+    """(repaired, violations) for one scene caption."""
+    allowed = (brief or {}).get("owner_present") is True
+    return narration_mod.repair_text(text, name, allowed, scope)
+
+
+def write_captions(scenes, briefs, trace=None, session_id=None,
+                   voice=None, profile=None):
     """One caption per scene from the records only (one model call).
 
     briefs maps photo_id -> summarize_record() dict. Vantage scenes
     keep their note as the whole caption (set in code, no model).
     Invalid output retries once, then falls back to the stored
-    caption. Sets caption + caption_source. Budget errors propagate.
+    caption. Model captions are code-checked for owner references;
+    repaired ones fall back to the stored caption when emptied.
+    voice/profile override the stored profile (tests). Sets caption
+    + caption_source. Budget errors propagate.
     """
     need = [s for s in scenes if not s.get("caption_note")]
     for s in scenes:
@@ -211,8 +248,12 @@ def write_captions(scenes, briefs, trace=None, session_id=None):
             s["caption_source"] = "vantage-note"
     if not need:
         return scenes
+    voice, profile, facts = _narration_for(
+        briefs, [s["photo_id"] for s in need], voice, profile)
+    name = (profile or {}).get("name") or ""
     lines = ["Write one caption (1-2 sentences, under 280 characters) per photo,",
-             "using ONLY these stored facts. Never add outside facts, never invent."]
+             "using ONLY these stored facts. Never add outside facts, never invent.",
+             narration_mod.rules_block(profile, facts, voice)]
     for s in need:
         lines.append(f"- {s['photo_id']}: {_brief_text(briefs.get(s['photo_id']))}")
     base = ("\n".join(lines)
@@ -238,12 +279,22 @@ def write_captions(scenes, briefs, trace=None, session_id=None):
                    or not data[p].strip()]
         last_problems = [f"missing caption for {p}" for p in missing]
         if not last_problems:
+            repaired = 0
             for s in need:
-                s["caption"] = data[s["photo_id"]].strip()[:280]
+                cap = data[s["photo_id"]].strip()[:280]
+                fixed_cap, bad = _scene_owner_ok(
+                    cap, name, briefs.get(s["photo_id"]))
+                if bad:
+                    repaired += 1
+                    cap = fixed_cap or (((briefs.get(s["photo_id"]) or {}).get("caption")
+                                          or s["photo_id"])[:280])
+                s["caption"] = cap
                 s["caption_source"] = "records-model"
             if trace is not None:
-                trace.append({"step": "wrote",
-                              "detail": f"Wrote {len(need)} captions from the records."})
+                detail = f"Wrote {len(need)} captions from the records."
+                if repaired:
+                    detail += f" Removed unsupported owner references in {repaired}."
+                trace.append({"step": "wrote", "detail": detail})
             return scenes
     for s in need:
         s["caption"] = ((briefs.get(s["photo_id"]) or {}).get("caption")
@@ -264,20 +315,30 @@ def _check_verdict(v):
         and (v.get("rewrite") is None or isinstance(v.get("rewrite"), str))
 
 
-def edit_captions(title, beats, scenes, briefs, trace=None, session_id=None):
+def edit_captions(title, beats, scenes, briefs, trace=None, session_id=None,
+                  voice=None, profile=None):
     """Verify every caption sentence against the records (one model call).
 
     Vantage-note captions are code, already true, and skipped. Returns
     (title, beats, scenes, verification). Unsupported claims are
     rewritten once or removed; scenes left empty are dropped; the
-    title and beat intents are rewritten when fixable. Any failure
-    of the pass itself marks the film not verified. Budget errors
-    propagate.
+    title and beat intents are rewritten when fixable. The owner's
+    name (or you/I) may stay only in scenes whose photos have
+    owner.present true — the model verdicts enforce this, and a code
+    check afterwards drops what slips through. Any failure of the
+    pass itself marks the film not verified. Budget errors propagate.
     """
     beats = [dict(b) for b in (beats or [])]
     checkable = [s for s in scenes if not s.get("caption_note")]
     sents = {s["photo_id"]: _sentences(s.get("caption")) for s in checkable}
+    voice, profile, facts = _narration_for(
+        briefs, [s["photo_id"] for s in checkable], voice, profile)
+    name = (profile or {}).get("name") or ""
     lines = ["Check each sentence against ONLY the stored facts for its photo.",
+             narration_mod.rules_block(profile, facts, voice),
+             "Judge owner references by those rules: the owner's name (or you/I) "
+             "is supported ONLY in a scene whose photo facts say owner present, "
+             "unsupported everywhere else (rewrite without it, or null).",
              'Verdict per claim: "supported" or "unsupported". For unsupported',
              "claims give a rewrite from stored facts only, or null to remove.",
              "Output ONE JSON object, no prose:",
@@ -352,7 +413,14 @@ def edit_captions(title, beats, scenes, briefs, trace=None, session_id=None):
             if not out:
                 verification["dropped"].append(s["photo_id"])
                 continue
-            s["caption"] = " ".join(out)[:280]
+            cap = " ".join(out)[:280]
+            cap, bad = _scene_owner_ok(cap, name, briefs.get(s["photo_id"]))
+            if bad:
+                fixed += 1
+                if not cap:
+                    verification["dropped"].append(s["photo_id"])
+                    continue
+            s["caption"] = cap
         kept.append(s)
     checked = sum(len(v) for v in sents.values()) + 1 + len(beats)
     verification["checked"] = checked
@@ -413,12 +481,13 @@ def _refit_scenes(scenes, metas, records):
 
 
 def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
-               trace=None, session_id=None):
+               trace=None, session_id=None, voice=None, profile=None):
     """Full pipeline: scenes, cards, pacing, captions, editor, re-pace.
 
     rows_by_id maps photo_id -> row {place_key, viewpoint,
     collection, record}. Returns the film dict (title, cover,
-    beats, scenes, total_seconds, verification). Trace is appended,
+    beats, scenes, total_seconds, verification). voice/profile
+    override the stored profile for narration. Trace is appended,
     never replaced. Budget errors propagate.
     """
     briefs, metas, records = {}, {}, {}
@@ -435,10 +504,10 @@ def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
     scenes = assemble_scenes(beatsheet, metas, records)
     scenes = merge_bursts(scenes, bursts)
     apply_pacing(scenes, target, trace)
-    write_captions(scenes, briefs, trace, session_id)
+    write_captions(scenes, briefs, trace, session_id, voice, profile)
     title, beats, kept, verification = edit_captions(
         beatsheet.get("title"), beatsheet.get("beats"), scenes,
-        briefs, trace, session_id)
+        briefs, trace, session_id, voice, profile)
     if len(kept) != len(scenes):
         _refit_scenes(kept, metas, records)
         apply_pacing(kept, target, trace)

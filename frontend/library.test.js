@@ -76,9 +76,19 @@ async function main() {
   ok(T.gapText({ count: 1, missing: [] }) === "Only one photo.", "single record");
   ok(T.gapText({ count: 5, missing: [] }) === "Covered from every angle.", "covered");
 
+  // ---- libSearch ----
+  const LB = { p1: { caption: "Busy market", place: "City Market" },
+               p2: { caption: "Quiet street", place: "CBD" } };
+  ok(T.libSearch(LB, "market").join() === "p1", "matches caption");
+  ok(T.libSearch(LB, "cbd street").join() === "p2", "all words must match");
+  ok(T.libSearch(LB, "market street").length === 0, "no partial match");
+  ok(T.libSearch(LB, "  ").length === 0, "blank query");
+  ok(T.libSearch(LB, "P1").join() === "p1", "matches id, case-insensitive");
+
   // ---- static view checks ----
   const read = (v) => fs.readFileSync(path.join(__dirname, "views", v + ".html"), "utf8");
   ["lib-sub", "lib-tabs", "lib-loading", "lib-error", "lib-main", "lib-albums",
+    "lib-search", "lib-search-clear",
     "lib-album-cards", "lib-places-wrap", "lib-places", "lib-bursts-wrap",
     "lib-bursts", "lib-empty", "lib-empty-add", "lib-detail", "lib-back",
     "lib-detail-title", "lib-detail-grid", "lib-burst", "burst-back",

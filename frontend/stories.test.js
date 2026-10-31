@@ -92,17 +92,21 @@ async function main() {
   // ---- static view checks ----
   const read = (v) => fs.readFileSync(path.join(__dirname, "views", v + ".html"), "utf8");
   ["story-create-title", "story-create-prompt", "story-suggest", "story-tones",
-    "story-sources", "story-targets", "story-make", "story-making",
+    "story-sources", "story-targets", "story-voices", "story-make", "story-making",
     "story-make-error", "stories-grid", "stories-count", "stories-empty",
     "stories-error", "tpl-story-card",
   ].forEach((id) => ok(read("stories").indexOf('id="' + id + '"') !== -1, "stories.html has #" + id));
+  ["name", "you", "i"].forEach((v) =>
+    ok(read("stories").indexOf('data-voice="' + v + '"') !== -1, "stories.html has voice " + v));
+  ok(read("stories").indexOf("only on photos you tagged yourself in") !== -1,
+     "stories.html voice honesty note");
   ["bld-back", "bld-title", "bld-status", "bld-delete", "bld-loading", "bld-error",
     "bld-main", "bld-tabs", "bld-building", "bld-elapsed", "bld-trace",
     "stage-review", "stage-player", "stage-export", "bld-tones", "bld-scenes",
-    "bld-shorter", "bld-save", "bld-save-status", "bld-player",
+    "bld-shorter", "bld-refresh", "bld-save", "bld-save-status", "bld-player",
     "bld-webm-record", "bld-webm-cancel", "bld-webm-track", "bld-webm-bar",
     "bld-webm-status", "bld-webm-dl", "bld-md", "bld-json", "bld-link",
-    "bld-link-status", "bld-publish", "bld-pub-note", "bld-faces",
+    "bld-link-status", "bld-publish", "bld-pub-note", "bld-pub-name", "bld-faces",
     "bld-pub-status", "bld-showcase-link", "tpl-bld-scene",
   ].forEach((id) => ok(read("builder").indexOf('id="' + id + '"') !== -1, "builder.html has #" + id));
   ["sc-count", "sc-error", "sc-main", "sc-featured", "sc-f-img", "sc-f-title",
@@ -117,6 +121,14 @@ async function main() {
       "MP4", "mp4", "NBO-0021"].forEach((s) =>
       ok(live.indexOf(s) === -1, v + ".html free of " + s));
   });
+
+  ok(src.indexOf('pick("story-voices", "voice")') !== -1, "app.js wires the voice pills");
+  ok(src.indexOf("voice: this.voice") !== -1, "app.js sends voice on story create");
+  ok(src.indexOf('"/refresh"') !== -1, "app.js posts to the refresh endpoint");
+  ok(src.indexOf("include_name") !== -1, "app.js sends the name opt-in on publish");
+  ok(src.indexOf('"?public=1"') !== -1, "showcase fetches the public story version");
+  ok(read("builder").indexOf("Include my name in this public story") !== -1,
+     "builder.html has the name opt-in");
 
   console.log("stories.test.js: " + n + "/" + n + " checks passed");
 }

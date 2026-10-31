@@ -41,9 +41,11 @@ authoritative; wire them exactly, only adding behaviour and data.
    evidence, explain-a-connection, phone fallback rows.
 4. **Stories** (`#/stories`, `#/showcase`): story engine, player, review,
    WebM export, publish flow with faces-blocking, Showcase (no likes/comments).
-5. **My Photos** (`#/library`): smart albums, upload queue, bursts, correction,
-   real deletion, data export. **World** (`#/browse` + `#/place/<key>`):
+5. **My Photos** (`#/library`): smart albums, search box, upload queue, bursts,
+   correction, real deletion, data export. **World** (`#/browse` + `#/place/<key>`):
    filtered browse, place pages, gaps, "Add the first photo".
+   **Profile** (`#/profile` + `#/profile/tag`): name, voice, privacy note,
+   export, delete; self-tagging grid (owner taps only, never a model).
 
 Honest wording matters: when the engine says it found no other view of a
 place, show that message, never pad results. Never invent data; unbackable
@@ -66,8 +68,11 @@ work out who someone is from their face, and must never name anyone
 other than the owner. `data/profile.json` (git-ignored, local) holds
 `{name, refer_as, created_at, updated_at}` via `backend/owner_profile.py`
 and `GET/PUT/DELETE /api/profile` (writes demo-gated). A photo counts
-as "owner is in it" only when the owner has tagged it so (owner tags,
-next). The public demo has no profile and shows no name.
+as "owner is in it" only when the owner has tagged it so:
+`provided.owner` in the record (`backend/owner_tags.py`,
+`POST /api/owner-tags`, `GET /api/owner-tags/summary`, Supabase
+column `owner_present` via `backend/schema_v3.sql`). The public demo
+has no profile and shows no name.
 
 ## Model providers and limits (settings live in `.env`, names only here)
 

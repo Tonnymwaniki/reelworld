@@ -18,7 +18,7 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 | Element | Endpoint | Fields |
 |---|---|---|
 | Chat bar | `POST /chat` `{session_id, message}` | send `message`; read `text`, `kind` |
-| Filter chips | `POST /chat` → `spec` | `viewpoints`, `max_people`, `collection`, `must_include`, `avoid_terms`; removing one sends the spec minus that filter to `POST /api/search` `{session_id, spec}` |
+| Filter chips | `POST /chat` → `spec` | `viewpoints`, `max_people`, `collection`, `must_include`, `avoid_terms`, `owner_only` ("Photos of me"); removing one sends the spec minus that filter to `POST /api/search` `{session_id, spec}` |
 | Results grid | `POST /chat` / `POST /api/search` → `results[]` | `photo_id`, `file` → `/photos/…` URL, `caption`, `reasons`, `score` |
 | Card "why it matched" line | same row | `reasons` joined with " · " |
 | "How I found this" (under results, collapsed) | `POST /chat` / `POST /api/search` → `trace[]` | `step` (plain label) + `detail` verbatim, in order |
@@ -29,6 +29,7 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 | Empty (no search yet) | — | static suggestions; no call |
 | `no_strong_match` | `kind` + `text` | show `text` verbatim above the closest-match grid, plus the "Add the first one" card; its button opens `#/add` and the `spec.query` is remembered for the note field |
 | `need_focus` / `not_found` | `kind` + `text` | show `text` verbatim, no grid |
+| `need_tags` (zero tagged photos) | `kind` + `text` | show `text` verbatim, no grid, plus a "Tag your photos" button linking `#/profile/tag`; "Photos of me" chip stays |
 | Loading | — | spinner + "Searching…"; replies take 15–40s |
 | Error | HTTP status | `{"detail"}` message verbatim |
 
@@ -124,3 +125,27 @@ and mood surface in the player/exporter from step 7 on, and
 | Missing photo | image fails to load | player paints a "Photo unavailable" placeholder and keeps playing; export stops with the photo id named |
 | Old stories | chapters, no scenes | migrated on read (heading + text joined, 3s scenes, plain cuts); they play and export unchanged otherwise |
 | Burst frames (step 11 contract) | `scene.frame_srcs` map | the v2 story endpoint must serve a src per burst frame id; unknown frame ids paint the placeholder |
+
+## 9. Profile (`#/profile`) + self-tagging (`#/profile/tag`)
+
+| Element | Endpoint | Fields |
+|---|---|---|
+| Name input + save | `PUT /api/profile` | `name`; 400 text shown verbatim; demo code needed for the write |
+| Voice choice + 3 example sentences | same PUT | `refer_as` saved with the name (voice alone needs a saved name first); examples use the profile name or "Your name" |
+| Privacy block | none (static) | "Reel never works out who someone is from their face. You tell Reel which photos you are in, and only then is your name used." |
+| Tag/export/delete | `#/profile/tag`, `/api/export`, `DELETE /api/profile` | delete runs only after the inline confirm panel; tag cleanup on delete lands in the final step |
+| Tag grid | `GET /api/albums` photo entries | `src`, `caption`, `people`, `owner_present`, `owner_position`; people-first order; dossier link per tile |
+| I'm in this / Not me / Left-Centre-Right | `POST /api/owner-tags` | per-tile immediate tag; position row only when people > 1; bulk "I'm in all selected" for the selection |
+| Progress + undo | `GET /api/owner-tags/summary` | "N of M reviewed (X you, Y not you)" + bar; undo restores each photo's previous state (null clears) |
+| Name prompt | `PUT /api/profile` | first present-tag without a profile asks for the name, then continues the pending tag |
+| "Are you in this photo?" | same two endpoints | library queue rows + `#/add` result pane after a job finishes: Yes / No / Skip, inline name prompt when needed |
+| "You are in this photo" badge | `owner_present` | library tiles + photo dossier (links to the tag page); "Me" album in the library, with a tag-yourself empty state |
+
+## 10. Story studio narration (`#/stories`, `#/stories/<id>`)
+
+| Element | Endpoint | Fields |
+|---|---|---|
+| Narration voice pills (By name / As you / As I) | `GET /api/profile` default, sent on `POST /api/stories` as `voice` | starts from the profile's `refer_as` (else By name); honesty note: the name is used only on tagged photos |
+| Scene problem flags | `problems` in the story detail | headings using the name or you/I on untagged photos are flagged with "change it or refresh the narration" |
+| Refresh narration | `POST /api/stories/{id}/refresh` | rewrites texts with the current name + tags; trace painted under the review tab; demo code needed |
+| "Include my name in this public story" | `POST /api/stories/{id}/publish` `{include_name}` | checkbox, default off; disabled once published showing the stored choice; off means the Showcase shows "the photographer" |

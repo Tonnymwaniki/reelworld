@@ -46,6 +46,40 @@ face. The public demo has no profile, so no name is ever shown there.
 - `PUT` and `DELETE` need the demo code when `DEMO_MODE` is true (403
   otherwise); with `DEMO_MODE=false` they are open.
 
+## `POST /api/owner-tags`, `GET /api/owner-tags/summary`
+
+Bulk owner presence tags on personal photos. Request:
+`{"photo_ids": [...], "present": true|false|null, "position"?}` —
+position is `left`/`centre`/`right`, kept only when present is
+true; an omitted position keeps each photo's stored position
+while an explicit null clears it; `present: null` clears the
+tag back to unreviewed (undo). Each photo's record gains or
+loses `provided.owner`, its annotation file is rewritten, and
+its Supabase row is patched (`record`, `owner_present`,
+best-effort re-embed). Response:
+`{"updated": [...], "present", "position", "reembedded": n}`.
+Unknown id → 404; world photo, empty id or bad position → 400.
+Writes need the demo code when `DEMO_MODE` is true.
+
+- `GET /api/owner-tags/summary` returns
+  `{"yes", "no", "unreviewed", "total"}` over your photos. Never gated.
+- Step 4: "photos of me" parses to `owner_only` (personal only,
+  tagged photos only; "Photos of me" filter chip, removable);
+  `search_text` gains "Owner is in this photo." for tagged photos
+  (rebuild the index + reload after tagging).
+- `owner_present` (true/false/null) now rides on
+  `GET /api/photo/{id}`, `/api/photos`, `/api/world`,
+  `/api/albums` photo entries and `/api/place` viewpoint groups —
+  from the record, except `/api/photos` which reads the
+  `owner_present` column (run `backend/schema_v3.sql` first).
+- Chat results gain `owner_present` in step 4 with the
+  `search_photos` filter; story/ring shapes in their own steps.
+- Step 3 adds the `me` smart album to `GET /api/albums`
+  (photos tagged owner-present) and `people`,
+  `owner_position` to its photo entries. No new endpoints:
+  the profile/tag screens reuse `/api/profile`,
+  `/api/owner-tags`, `/api/owner-tags/summary`, `/api/albums`.
+
 ## `GET /og-image.png`
 
 The landing share-preview image (1200×630 PNG), rebuilt honestly from
@@ -142,11 +176,14 @@ Missing keys fall back to empty (`""` / `"world"` / `[]` / null);
 unknown keys are ignored. `query` must be non-empty, `collection` one
 of `world`, `personal`, `both`, `viewpoints` from `ground_level`,
 `elevated`, `aerial`, `interior`, `water_level`, `max_people` null or
->= 0, word lists holding strings (lowercased on the way in).
+>= 0, word lists holding strings (lowercased on the way in),
+`owner_only` a real boolean (default false). `owner_only` true forces
+`collection` to `personal` and filters to photos tagged owner-present
+(`filter_owner` in `search_photos` v2, see `backend/schema_v3.sql`).
 
 Response: the same shape as `/chat` (`session_id`, `text`, `results`
 with credit, `focus_photo_id`, `spec`, `kind`, where `kind` is `ok` or
-`no_strong_match`, plus `trace`). The trace holds `searched`,
+`no_strong_match` or `need_tags`, plus `trace`). The trace holds `searched`,
 `rejected` (when any) and `answered` — never `understood`, since no
 message was parsed.
 
@@ -223,17 +260,27 @@ the other, signs read, and place; says when the records cannot tell.
 A small agent builds a photo story: it plans 3–5 chapters for the
 theme, runs a real `Engine.search` per chapter, keeps 1–2 unused
 photos per chapter (never repeating a photo), and writes one or two
-sentences per chapter using ONLY facts in the chosen photos' stored
-records (the prompt forbids outside facts). Every planned heading is checked against its photos' stored time, setting and viewpoint; a contradicted heading is rewritten from the records or the chapter is dropped (`rewrote` in the trace). Chapters the collection
+sentences per chapter in a warm vlog voice with flow across chapters,
+using ONLY facts in the chosen photos' stored records (the prompt
+forbids outside facts). Every planned heading is checked against its photos' stored time, setting and viewpoint; a contradicted heading is rewritten from the records or the chapter is dropped (`rewrote` in the trace). Chapters the collection
 cannot support are dropped and named in the trace instead of padded, as are chapters whose text does not come back.
 
 ```json
 // request
-{ "theme": "Nairobi's markets", "collection": "world", "lang": "en" }
+{ "theme": "Nairobi's markets", "collection": "world", "lang": "en",
+  "voice": "name" }
 ```
 
 - `theme`: non-empty string. `collection`: `world` (default),
-  `personal`, `both`. `lang`: `"en"` only for now.
+  `personal`, `both`. `lang`: `"en"` only for now. `voice`: `name`,
+  `you` or `i` (default: the profile's `refer_as`, else `name`) —
+  how the text refers to the owner, and only on photos the owner
+  tagged themselves in.
+- Chapter texts and headings pass the owner-narration code check
+  (`backend/narration.py`): sentences that name the owner where no
+  chapter photo is tagged fall back to the stored caption; a heading
+  that names the owner drops the chapter. Repairs are named in the
+  trace (`Removed an unsupported owner reference`).
 
 ```json
 // response
@@ -252,8 +299,31 @@ cannot support are dropped and named in the trace instead of padded, as are chap
   `trace` steps are `planned`, `searched`, `rewrote`, `dropped`, `written`,
   recorded from the run. Empty story (no chapters) is honest, not an
   error.
-- Unknown collection or non-`"en"` lang → 400. No usable chapters is
-  still 200 with `chapters: []`.
+- Unknown collection or non-`"en"` lang → 400. Unknown `voice` →
+  400. No usable chapters is still 200 with `chapters: []`.
+
+## Story drafts (`/api/stories`)
+
+- `POST /api/stories` accepts the planner fields plus `voice`
+  (`name`/`you`/`i`, default: profile choice). The stored story keeps
+  `voice`; scenes' `problems` flag headings that use the owner's name
+  or you/I for a photo the owner did not tag.
+- `POST /api/stories/{id}/refresh` rewrites every chapter text with
+  the current profile name and owner tags (optional `voice` override,
+  kept otherwise), for stories made before the profile existed.
+  Chapters that cannot be rewritten keep their old text and are named
+  in the returned `trace`. Demo write rules apply.
+- `POST /api/stories/{id}/publish` takes `{include_name}` (default
+  false) and stores it; the face rule still blocks any scene with
+  people visible (409). `GET /api/stories/{id}?public=1` renders the
+  Showcase version: on a published story without the opt-in, the
+  owner's name becomes "the photographer" in the title, headings and
+  texts; drafts, opted-in stories and the studio view keep the name.
+- Owner narration also covers `POST /api/ask`, `/api/compare` and
+  `/api/explain`: each prompt carries the profile (`name`, effective
+  voice) and the per-photo owner facts, and each answer passes the
+  code check; repairs add a `checked` trace row. No profile, no tags:
+  people are "a person"/"someone"/"a few people", never named.
 
 ## `GET /api/photo/{photo_id}`
 

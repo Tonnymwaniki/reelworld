@@ -28,6 +28,11 @@ INDEX = ROOT / "data" / "index"
 BATCH = 40
 
 
+def _owner_present(rec):
+    p = ((rec.get("provided") or {}).get("owner") or {}).get("present")
+    return p if isinstance(p, bool) else None
+
+
 def main():
     load_dotenv(ROOT / ".env")
     sb = create_client(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SERVICE_KEY"])
@@ -62,6 +67,7 @@ def main():
             "scene_type": m["scene_type"],
             "people_count": m["people_count"],
             "lex": m["lex"],
+            "owner_present": _owner_present(rec),
             "record": rec,
             "embedding": [float(x) for x in v],
         })

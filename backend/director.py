@@ -44,7 +44,13 @@ def summarize_record(photo_id, viewpoint, record):
     place = inf.get("place") or {}
     taken = inf.get("taken_from") or {}
     scene_bits = [scene.get("type"), scene.get("setting"), scene.get("time_of_day")]
+    own = (rec.get("provided") or {}).get("owner") or {}
+    present = own.get("present")
     return {"photo_id": photo_id,
+            "owner_present": present if present is True else (
+                False if present is False else None),
+            "owner_position": own.get("position") if own.get("position") in (
+                "left", "centre", "right") else None,
             "caption": str(obs.get("caption") or ""),
             "place": (place.get("name") or "unknown place").strip(),
             "place_status": place.get("status"),

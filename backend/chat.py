@@ -45,6 +45,8 @@ from dotenv import load_dotenv
 from supabase import create_client
 
 import llm as llm_mod
+import narration as narration_mod
+import owner_profile as owner_profile_mod
 from retrieval import get_model, score_against, tokens
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -178,6 +180,8 @@ def spec_words(spec):
         bits.append("must show: " + ", ".join(spec["must_include"]))
     if spec.get("avoid_terms"):
         bits.append("avoiding: " + ", ".join(spec["avoid_terms"]))
+    if spec.get("owner_only"):
+        bits.append("only photos you're in")
     return "Looking for " + ", ".join(bits)
 
 
@@ -202,7 +206,11 @@ def rejected_step(exclude):
 
 
 EMPTY_SPEC = {"query": "", "collection": "world", "viewpoints": [],
-              "max_people": None, "must_include": [], "avoid_terms": []}
+              "max_people": None, "must_include": [], "avoid_terms": [],
+              "owner_only": False}
+
+NO_TAGS_TEXT = ("You have not told me which photos you are in. "
+                "Tag a few and I will find them.")
 
 PARSE_PROMPT = """You turn a user's message in a photo-search chat into a structured action.
 Return ONE JSON object and nothing else.
@@ -224,7 +232,8 @@ Return:
     "viewpoints": [],
     "max_people": null,
     "must_include": [],
-    "avoid_terms": []
+    "avoid_terms": [],
+    "owner_only": false
   }},
   "anchor": null,
   "focus_index": null,
@@ -249,6 +258,11 @@ Rules:
 - max_people: 0 for "no people / empty"; otherwise null.
 - collection: "personal" for "my photos / my gallery"; "both" for "everything /
   mine and the world"; otherwise "world".
+- owner_only: true for "photos of me", "me at KICC", "pictures where I'm
+  standing" — the owner in their own photos, matched only against photos
+  the owner tagged, never against faces. owner_only always pairs with
+  collection "personal". "my photos" alone (no "me" in the picture) is just
+  collection "personal" with owner_only false.
 - must_include: the concrete things the user asks for, as single lowercase words
   (for example "vegetables", "watermelons", "sign", "palm"). Always fill it for a
   search or refine when the user names specific objects. Include only words they
@@ -314,6 +328,8 @@ class Engine:
                 params["filter_viewpoints"] = vps
             if spec.get("max_people") is not None:
                 params["max_people"] = int(spec["max_people"])
+            if spec.get("owner_only"):
+                params["filter_owner"] = True
         if exclude:
             params["exclude_ids"] = sorted(exclude)
         return self.sb.rpc("search_photos", params).execute().data or []
@@ -331,6 +347,9 @@ class Engine:
             spec = {**EMPTY_SPEC, **(data.get("spec") or {})}
             if not spec["query"]:
                 spec["query"] = message
+            spec["owner_only"] = bool(spec.get("owner_only"))
+            if spec["owner_only"]:
+                spec["collection"] = "personal"
             data["spec"] = spec
             return data, False
         except llm_mod.LLMBudgetSpent:
@@ -376,6 +395,8 @@ class Engine:
             filters.append("must show " + ", ".join(spec["must_include"]))
         if spec.get("avoid_terms"):
             filters.append("avoiding " + ", ".join(spec["avoid_terms"]))
+        if spec.get("owner_only"):
+            filters.append("only photos you're in")
         trace.append({"step": "searched", "detail":
                       f"Searched {COLL_WORDS.get(spec.get('collection'), 'the world photos')} "
                       f"({'; '.join(filters) if filters else 'no filters'}); "
@@ -384,6 +405,9 @@ class Engine:
         if words and not any(any(w.lower() in r["lex"] for w in words) for r in top):
             note = ("I could not find a photo that clearly shows " + ", ".join(words)
                     + ". Here are the closest matches:")
+        elif spec.get("owner_only") and not top:
+            note = ("None of the photos you're in match that. "
+                    "Try fewer details, or tag more photos.")
         else:
             note = None
         return top, note, trace
@@ -391,6 +415,15 @@ class Engine:
     def fetch_photo(self, photo_id, columns):
         data = self.sb.table("photos").select(columns).eq("photo_id", photo_id).execute().data
         return data[0] if data else None
+
+    def tagged_count(self):
+        """How many personal photos the owner tagged themselves in."""
+        try:
+            res = (self.sb.table("photos").select("photo_id", count="exact", head=True)
+                   .eq("collection", "personal").is_("owner_present", True).execute())
+        except Exception:
+            return 0
+        return res.count or 0
 
     def related(self, anchor_id, spec, exclude, angle_mode):
         """Returns (rows, note). note is set when no true other view of the place exists."""
@@ -434,14 +467,33 @@ class Engine:
         if not row:
             return "I could not find that photo."
         rec = row["record"]
+        own = ((rec.get("provided") or {}).get("owner") or {})
+        present = own.get("present")
         compact = {"observed": {k: rec["observed"].get(k) for k in
                                 ["caption", "description", "scene", "camera", "entities",
                                  "spatial_relations", "visible_text", "people"]},
                    "inferred": {k: rec["inferred"].get(k) for k in
-                                ["landmarks", "place", "taken_from", "cultural_context", "uncertainties"]}}
-        return self.ask(ANSWER_PROMPT.format(record=json.dumps(compact, ensure_ascii=False),
-                                             question=question), max_tokens=3000,
-                        purpose="answer").strip()
+                                ["landmarks", "place", "taken_from", "cultural_context", "uncertainties"]},
+                   "owner": {"present": present if present is True else (
+                       False if present is False else None),
+                       "position": own.get("position")}}
+        try:
+            prof = owner_profile_mod.load_profile()
+        except Exception:
+            prof = None
+        facts = narration_mod.owner_facts({photo_id: rec})
+        voice = narration_mod.resolve_voice(None, prof)
+        rules = narration_mod.rules_block(prof, facts, voice)
+        out = self.ask(ANSWER_PROMPT.format(
+            record=json.dumps(compact, ensure_ascii=False),
+            question=question) + "\n" + rules, max_tokens=3000,
+            purpose="answer").strip()
+        name = (prof or {}).get("name") or ""
+        allowed = facts[photo_id]["present"] is True
+        out, bad = narration_mod.repair_text(out, name, allowed, "chat")
+        if bad and not out:
+            out = "I cannot tell from the stored annotation."
+        return out
 
     # ----- one conversation turn -----
 
@@ -564,6 +616,14 @@ class Engine:
 
         u = understood_step(intent, st["spec"], fell_back=fell_back)
         yield ("step", "understood", u["detail"])
+        if st["spec"].get("owner_only") and self.tagged_count() == 0:
+            trace.append(u)
+            trace.append({"step": "answered",
+                          "detail": "No tagged photos yet, so I pointed at the tagging page."})
+            yield ("step", "wrote", "Reply ready.")
+            yield ("result", {"text": NO_TAGS_TEXT, "results": [],
+                              "kind": "need_tags", "trace": trace})
+            return
         rows, note, sub = self.search(st["spec"], st["rejected"])
         for t in sub:
             if t["step"] == "searched":
