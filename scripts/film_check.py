@@ -70,14 +70,15 @@ def main(ns):
     focals = ensure_focal(ids, load_bytes=load_bytes_for(by_file), trace=trace)
     sheet, source = plan_beats(ns.prompt or "untitled", ns.style, ns.target,
                                briefs, focals, trace=trace)
-    metas = {}
+    metas, records = {}, {}
     for r in rows:
         taken = ((r.get("record") or {}).get("inferred") or {}).get("taken_from") or {}
         metas[r["photo_id"]] = {"place_key": r.get("place_key"),
                                 "viewpoint": r.get("viewpoint"),
                                 "collection": r.get("collection"),
                                 "taken_from_key": taken.get("key")}
-    scenes = assemble_scenes(sheet, metas)
+        records[r["photo_id"]] = r.get("record") or {}
+    scenes = assemble_scenes(sheet, metas, records)
     print(json.dumps({"source": source, "beatsheet": sheet, "scenes": scenes,
                       "trace": trace,
                       "focal_fallbacks": sorted(p for p, f in focals.items()

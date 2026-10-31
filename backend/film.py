@@ -10,6 +10,7 @@ TRANSITIONS = ("dissolve", "rise", "descend", "dip", "iris", "vantage",
                "cut")
 VANTAGE_A = "You were here"
 VANTAGE_B = "and this is what you saw"
+FOUND_MIN, FOUND_MAX = 4, 60
 
 HIGH = ("elevated", "aerial")
 
@@ -40,12 +41,32 @@ def transition_for(prev, curr):
     return "cut"
 
 
-def assemble_scenes(beatsheet, metas):
+def found_text_for(record, place_status):
+    """First clear sign of 4-60 chars as a title card (pure).
+
+    Returns {"text", "badge"} or None. The text is the stored
+    string exactly, unchanged; badge is Confirmed/Candidate only
+    when the place status is known.
+    """
+    obs = (record or {}).get("observed") or {}
+    for t in obs.get("visible_text") or []:
+        text = t.get("text") or ""
+        if t.get("legibility") == "clear" and FOUND_MIN <= len(text) <= FOUND_MAX:
+            status = (place_status or "").lower()
+            badge = ("Confirmed" if status == "confirmed"
+                     else "Candidate" if status == "candidate" else None)
+            return {"text": text, "badge": badge}
+    return None
+
+
+def assemble_scenes(beatsheet, metas, records=None):
     """Beats -> ordered scenes with role/pacing/camera/transition (pure).
 
     metas maps photo_id -> {place_key, viewpoint, collection,
-    taken_from_key}. The first scene has transition_in None; a
-    vantage transition writes the caption notes on both scenes.
+    taken_from_key}; records maps photo_id -> annotation record.
+    The first scene has transition_in None; a vantage transition
+    writes the caption notes on both scenes; only the first scene
+    of each place gets a found-text card.
     """
     scenes = []
     for b in beatsheet.get("beats") or []:
@@ -55,8 +76,17 @@ def assemble_scenes(beatsheet, metas):
         for pid in b.get("photo_ids") or []:
             scenes.append({"photo_id": pid, "role": role, "pacing": pacing,
                            "camera": camera, "transition_in": None,
-                           "caption_note": None,
+                           "caption_note": None, "found_text": None,
                            "why": str(b.get("reason") or "")})
+    seen_places = set()
+    for s in scenes:
+        key = (metas.get(s["photo_id"]) or {}).get("place_key") or None
+        if key in seen_places:
+            continue
+        seen_places.add(key)
+        rec = (records or {}).get(s["photo_id"])
+        status = ((rec or {}).get("inferred") or {}).get("place") or {}
+        s["found_text"] = found_text_for(rec, status.get("status"))
     for i in range(1, len(scenes)):
         prev = metas.get(scenes[i - 1]["photo_id"]) or {}
         curr = metas.get(scenes[i]["photo_id"]) or {}

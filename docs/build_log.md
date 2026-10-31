@@ -388,3 +388,15 @@ the first unfinished phase.
 - Tests: 13/13; live KICC film showed dissolve + a genuine
   vantage pair (personal_002 -> personal_006) with both notes.
 - Commit id: (this commit; see `git log`).
+
+## Directed-film Stories, step 4: found-text cards (user-run green)
+
+- `found_text_for` in `film.py`: first clear 4-60 char sign,
+  exact text, Confirmed/Candidate badge when known; assembly
+  gives it only to the first scene of each place.
+- `test_film.py` grows to 21/21; probe prints cards; contract
+  v2 section extended.
+- Tests: 21/21; live KICC film showed the Confirmed KICC card,
+  none on the same-place scene, a Candidate CBK card on the
+  new place.
+- Commit id: (this commit; see `git log`).

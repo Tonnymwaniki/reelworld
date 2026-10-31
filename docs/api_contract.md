@@ -648,3 +648,6 @@ Step 1 adds no endpoints and changes no response. Internals only:
   neighbours' records (vantage > iris > rise/descend >
   dissolve > dip > cut; unknown places never match), vantage
   caption notes on both scenes, first scene null.
+- Step 4 adds found-text cards: the first clear 4-60 character
+  sign, exact text, Confirmed/Candidate badge when known, only
+  on the first scene of each place.

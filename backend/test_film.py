@@ -64,5 +64,41 @@ check(len(scenes) == 2 and scenes[0]["transition_in"] is None
       and scenes[0]["role"] == "establish"
       and scenes[0]["why"] == "why-a", "assemble flattens + vantage notes")
 
+F = film_mod.found_text_for
+
+
+def rec_with(*signs):
+    return {"observed": {"visible_text": list(signs)},
+            "inferred": {"place": {"status": "confirmed"}}}
+
+
+check(F(rec_with({"text": "KICC", "legibility": "clear"}), "confirmed")
+      == {"text": "KICC", "badge": "Confirmed"}, "clear sign cards")
+check(F(rec_with({"text": "  KeEp  ", "legibility": "clear"}), "candidate")
+      == {"text": "  KeEp  ", "badge": "Candidate"}, "text kept exactly")
+check(F(rec_with({"text": "KICC", "legibility": "partial"}), "confirmed") is None,
+      "partial sign skipped")
+check(F(rec_with({"text": "ABC", "legibility": "clear"}), "confirmed") is None,
+      "short text skipped")
+check(F(rec_with({"text": "x" * 61, "legibility": "clear"}), "confirmed") is None,
+      "long text skipped")
+check(F(rec_with({"text": "KICC", "legibility": "clear"}), None)
+      == {"text": "KICC", "badge": None}, "no badge when unknown")
+check(F(rec_with({"text": "no", "legibility": "clear"},
+                 {"text": "SECOND ONE", "legibility": "clear"}), "confirmed")
+      == {"text": "SECOND ONE", "badge": "Confirmed"}, "first qualifying wins")
+
+sheet3 = {"title": "t", "cover": "a",
+          "beats": [{"role": "build", "intent": "go", "photo_ids": ["a", "b", "c"],
+                     "pacing": "medium", "camera": "hold", "reason": "r"}]}
+metas3 = {"a": meta("x"), "b": meta("x"), "c": meta("y")}
+recs3 = {p: rec_with({"text": "SIGN HERE", "legibility": "clear"})
+         for p in ("a", "b", "c")}
+scenes3 = film_mod.assemble_scenes(sheet3, metas3, recs3)
+check(scenes3[0]["found_text"] == {"text": "SIGN HERE", "badge": "Confirmed"}
+      and scenes3[1]["found_text"] is None
+      and scenes3[2]["found_text"] == {"text": "SIGN HERE", "badge": "Confirmed"},
+      "first scene of each place only")
+
 print(f"test_film.py: {total - fails}/{total} checks passed")
 sys.exit(1 if fails else 0)
