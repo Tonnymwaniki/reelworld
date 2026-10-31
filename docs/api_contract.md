@@ -638,3 +638,8 @@ Step 1 adds no endpoints and changes no response. Internals only:
 - Focal data is computed lazily the first time a story uses a
   photo, and in the background for new uploads (`run_upload_job`,
   after the job is marked done; failures are logged, never fatal).
+- Step 2 adds the director (`backend/director.py`): a text-only
+  planning call returning a validated beat sheet (title, cover,
+  beats with role/intent/photos/pacing/camera/reason), retried
+  once, then a deterministic fallback. Probed via
+  `scripts/film_check.py`; no endpoint or screen changes yet.

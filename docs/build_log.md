@@ -363,3 +363,16 @@ the first unfinished phase.
   budget (chat-resting covered by unit tests + live 429 text);
   (g) cache hit with token count unchanged (31775).
 - Commit id: (this commit; see `git log`).
+
+## Directed-film Stories, step 2: director pass (user-run green)
+
+- New `backend/director.py`: record summaries + focal moods into
+  a text-only planning call; style arcs, short 3-6 / medium 6-12
+  photos; strict validation, one retry with problems listed,
+  then a deterministic code fallback. Budget errors propagate.
+- New `backend/test_director.py` (20 checks, stubbed model) and
+  `scripts/film_check.py` (search or --ids, lazy focal, prints
+  sheet + source + trace). Contract v2 section extended.
+- Tests: 20/20; live "my day at KICC" gave 3 postcard beats
+  from personal photos, no focal fallbacks.
+- Commit id: (this commit; see `git log`).
