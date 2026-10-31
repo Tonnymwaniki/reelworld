@@ -19,6 +19,7 @@ from api import ROOT, get_sb  # noqa: E402
 from chat import EMPTY_SPEC, Engine  # noqa: E402
 from director import (TARGET_SCENES, fallback_beats, plan_beats,  # noqa: E402
                       summarize_record)
+from film import assemble_scenes  # noqa: E402
 from focal import ensure_focal  # noqa: E402
 
 SOURCE_MAP = {"mine": "personal", "world": "world", "both": "both"}
@@ -26,7 +27,7 @@ SOURCE_MAP = {"mine": "personal", "world": "world", "both": "both"}
 
 def fetch_rows(ids):
     rows = (get_sb().table("photos")
-            .select("photo_id,viewpoint,file,record,collection")
+            .select("photo_id,viewpoint,file,record,collection,place_key")
             .in_("photo_id", ids).execute().data or [])
     by_id = {r["photo_id"]: r for r in rows}
     missing = [i for i in ids if i not in by_id]
@@ -69,7 +70,16 @@ def main(ns):
     focals = ensure_focal(ids, load_bytes=load_bytes_for(by_file), trace=trace)
     sheet, source = plan_beats(ns.prompt or "untitled", ns.style, ns.target,
                                briefs, focals, trace=trace)
-    print(json.dumps({"source": source, "beatsheet": sheet, "trace": trace,
+    metas = {}
+    for r in rows:
+        taken = ((r.get("record") or {}).get("inferred") or {}).get("taken_from") or {}
+        metas[r["photo_id"]] = {"place_key": r.get("place_key"),
+                                "viewpoint": r.get("viewpoint"),
+                                "collection": r.get("collection"),
+                                "taken_from_key": taken.get("key")}
+    scenes = assemble_scenes(sheet, metas)
+    print(json.dumps({"source": source, "beatsheet": sheet, "scenes": scenes,
+                      "trace": trace,
                       "focal_fallbacks": sorted(p for p, f in focals.items()
                                                 if f.get("fallback"))},
                      ensure_ascii=False, indent=1))

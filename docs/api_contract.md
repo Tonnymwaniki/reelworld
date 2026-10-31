@@ -643,3 +643,8 @@ Step 1 adds no endpoints and changes no response. Internals only:
   beats with role/intent/photos/pacing/camera/reason), retried
   once, then a deterministic fallback. Probed via
   `scripts/film_check.py`; no endpoint or screen changes yet.
+- Step 3 adds scene assembly (`backend/film.py`): beats flatten
+  to scenes with `transition_in` chosen in code from the
+  neighbours' records (vantage > iris > rise/descend >
+  dissolve > dip > cut; unknown places never match), vantage
+  caption notes on both scenes, first scene null.

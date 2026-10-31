@@ -376,3 +376,15 @@ the first unfinished phase.
 - Tests: 20/20; live "my day at KICC" gave 3 postcard beats
   from personal photos, no focal fallbacks.
 - Commit id: (this commit; see `git log`).
+
+## Directed-film Stories, step 3: transitions (user-run green)
+
+- New `backend/film.py`: `transition_for` (vantage > iris >
+  rise/descend > dissolve > dip > cut; unknown places never
+  match) + `assemble_scenes` (role/pacing/camera/transition/
+  why, vantage notes, first scene null).
+- New `backend/test_film.py` (13 checks); probe prints scenes;
+  contract v2 section extended.
+- Tests: 13/13; live KICC film showed dissolve + a genuine
+  vantage pair (personal_002 -> personal_006) with both notes.
+- Commit id: (this commit; see `git log`).
