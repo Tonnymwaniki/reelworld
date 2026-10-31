@@ -551,3 +551,24 @@ Response:
 
 - 404 unknown photo id, same message as `/api/photo/{photo_id}`
 - 502 lookup/search failed
+
+## Story engine v2 (directed film; in progress)
+
+Step 1 adds no endpoints and changes no response. Internals only:
+
+- `backend/llm.py` is the single door to the model for everything,
+  text and vision. Callers never touch keys or base URLs.
+- `backend/focal.py` produces per-photo composition data via vision
+  (`ensure_focal`), batched as a Pillow contact sheet (up to 8 photos)
+  with strict per-id JSON. Vision output is used for composition
+  only — never as a source of facts.
+- Cache: `data/focal/<photo_id>.json` (git-ignored). Entry shape:
+  `{photo_id, focal: {x, y}, subject_box or null,
+  safe_crop_916 or null, mood, confidence, fallback}`. All
+  coordinates are 0–1 fractions. `mood` is one of calm, busy,
+  grand, intimate. On vision failure or confidence below 0.3 the
+  entry falls back to the image centre with confidence 0 and
+  `fallback: true`, plus a trace note.
+- Focal data is computed lazily the first time a story uses a
+  photo, and in the background for new uploads (`run_upload_job`,
+  after the job is marked done; failures are logged, never fatal).

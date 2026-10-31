@@ -240,8 +240,35 @@ the first unfinished phase.
 - Tests: `home.test.js` grows to 48/48 with template-hygiene
   regressions; all suites 498/498 here.
 - Commit id: (this commit; see `git log`).
+
+## Directed-film Stories, step 1: focal data (tests user-run, commit pending)
+
+- New `backend/llm.py`: single door to the model for all calls
+  (text + vision), key name never printed.
+- New `backend/focal.py`: contact-sheet vision (Pillow, up to 8
+  thumbs, 512px + id labels), strict per-id JSON, cache at
+  `data/focal/<photo_id>.json` (git-ignored), centre fallback
+  with confidence 0 + trace note below 0.3 or on failure.
+- Upload hook: `run_upload_job` computes focal after done, in its
+  own try/except so it can never flip the job to error.
+- New `backend/test_focal.py` (17 checks, no model) and
+  `scripts/focal_check.py <photo_id> [...]` (live probe).
+- Docs: `api_contract.md` + `screen_data_map.md` gain a
+  step-1 section (no endpoint or screen changes yet).
+- `backend/annotate.py`, `backend/place_pass.py` untouched.
 - Commit id: (this commit; see `git log`).
-- Commit id: (this commit; see `git log`).
-- Commit id: (this commit; see `git log`).
-- Commit id: (this commit; see `git log`).
+
+## Modal switchboard, step 1: llm.py primary/fallback (user-run green)
+
+- `backend/llm.py` rewritten: `ask()` returns text + metadata,
+  primary from PARSER_* (live .env re-read, no restart), Baseten
+  fallback, one retry on error/timeout/empty, 8000-token floor
+  except purpose "simple", annotate-style image data URLs,
+  Modal-Routing-Affinity-Key only for modal hosts with a session.
+- `focal.py`, `test_focal.py`, `focal_check.py` moved to the new
+  signature (sheets via `data/cache/focal_sheets/`).
+- New `backend/test_llm.py` (21 checks, stubbed client, no net).
+- `.gitignore` gains `data/cache/`, `data/llm_calls.jsonl`.
+- Tests: `test_llm.py` 21/21, `test_focal.py` 17/17 here; live
+  focal probe returned real JSON (confidence 0.82).
 - Commit id: (this commit; see `git log`).

@@ -11,5 +11,8 @@ data/personal_manifest.csv
 data/verify_report.json
 data/stories/
 data/library.json
+data/focal/
+data/cache/
+data/llm_calls.jsonl
 data/outlines/
 frontend/design/assets/

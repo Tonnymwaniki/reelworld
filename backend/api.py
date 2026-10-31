@@ -1237,6 +1237,14 @@ def load_personal_notes():
     return notes
 
 
+def _upload_focal_bytes(photo_id):
+    for ext in (".jpg", ".png"):
+        p = UPLOAD_DIR / f"{photo_id}{ext}"
+        if p.exists():
+            return p.read_bytes(), "image/png" if ext == ".png" else "image/jpeg"
+    return None
+
+
 def run_upload_job(job_id, photo_id, owner_note):
     """Pass A -> Pass B -> embed -> Supabase upsert. Runs in a worker thread."""
     _job_set(job_id, status="running", stage="looking")
@@ -1300,7 +1308,12 @@ def run_upload_job(job_id, photo_id, owner_note):
         _job_set(job_id, status="done", stage="done", result=result)
         with _jobs_lock:
             snap = dict(_jobs.get(job_id) or {})
-        _record_duration(snap)
+        _record_duration(snap)
+        try:
+            from focal import ensure_focal
+            ensure_focal([photo_id], load_bytes=_upload_focal_bytes)
+        except Exception as e:
+            print(f"(focal compute failed for {photo_id}: {e})")
     except Exception as e:
         _job_set(job_id, status="error", error=str(e)[:500])
 

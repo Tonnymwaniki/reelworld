@@ -105,3 +105,10 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 | Share this story | local canvas card, no endpoint | 1080×1350 PNG reusing the photo-card builder: cover photo, title, chapter list, credit line; Web Share API when available, else download |
 | Trace | `trace[]` | `planned` / `searched` / `rewrote` / `dropped` / `written` + `detail`, collapsed |
 | Empty / error | no chapters → honest line + trace; HTTP status → `{"detail"}` verbatim + retry |
+
+## 7. Story engine v2 (directed film; step 1: no screen changes)
+
+Step 1 is backend-only (focal cache + background compute). No story
+screen gains or loses any element yet: the focal point, safe crop
+and mood surface in the player/exporter from step 7 on, and
+"why this shot" in the review screen from step 10 on.
