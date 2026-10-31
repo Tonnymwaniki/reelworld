@@ -662,3 +662,15 @@ Step 1 adds no endpoints and changes no response. Internals only:
   claims, M fixed", failures mark not verified) and
   `build_film` (full pipeline with refit + re-pace after
   drops, why-with-mood, focal per scene).
+- Step 7 adds `GET /story-render.js` (static; served before
+  `/app.js`) exposing the global `StoryRender` with
+  `renderFrame(story, t, ctx, size)` — the single frame
+  painter used by BOTH the story player and the WebM
+  exporter, so preview and export are pixel-identical. Old
+  chapter stories play through `migrateChapters` (heading +
+  text joined, 3s scenes, plain cuts). Export records
+  1080×1920 at 30 fps to WebM (720×1280 fallback when the
+  30-frame benchmark averages over 33 ms/frame); reduced
+  motion renders dissolves-only at 1.25× holds in both. No
+  API response changes yet; v2 scene serving lands in
+  step 11.

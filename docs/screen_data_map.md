@@ -112,3 +112,15 @@ Step 1 is backend-only (focal cache + background compute). No story
 screen gains or loses any element yet: the focal point, safe crop
 and mood surface in the player/exporter from step 7 on, and
 "why this shot" in the review screen from step 10 on.
+
+## 8. Story player + WebM export (step 7: one canvas renderer)
+
+| Element | Source | Behaviour |
+|---|---|---|
+| Player frame | `StoryRender.renderFrame` on a 540×960 canvas | smart 9:16 crop, focal camera moves, transitions, found-text cards, lower-third captions, "From the world" tags, burst stop-motion, end card with credits |
+| Play / pause / prev / next / replay / scene strip | player chrome in `app.js` | unchanged controls; scene strip thumbnails from `scene.src` |
+| WebM export | same `renderFrame` at 1080×1920, 30 fps | `canvas.captureStream` + MediaRecorder (vp9 → vp8 → webm); status names resolution, size, seconds; 720×1280 fallback when the benchmark is slow |
+| Reduced motion | `prefers-reduced-motion` at mount/export | dissolves only, no zooms or slides, 1.25× holds; export status says "(reduced motion)" |
+| Missing photo | image fails to load | player paints a "Photo unavailable" placeholder and keeps playing; export stops with the photo id named |
+| Old stories | chapters, no scenes | migrated on read (heading + text joined, 3s scenes, plain cuts); they play and export unchanged otherwise |
+| Burst frames (step 11 contract) | `scene.frame_srcs` map | the v2 story endpoint must serve a src per burst frame id; unknown frame ids paint the placeholder |

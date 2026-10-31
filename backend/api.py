@@ -194,6 +194,14 @@ def app_js():
     return FileResponse(str(p), media_type="application/javascript")
 
 
+@app.get("/story-render.js")
+def story_render_js():
+    p = FRONTEND_DIR / "story-render.js"
+    if not p.exists():
+        raise HTTPException(status_code=503, detail="frontend not built")
+    return FileResponse(str(p), media_type="application/javascript")
+
+
 @app.get("/styles.css")
 def styles_css():
     p = FRONTEND_DIR / "styles.css"

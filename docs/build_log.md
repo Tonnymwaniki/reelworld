@@ -425,3 +425,21 @@ the first unfinished phase.
 - Tests: 43/43 + director 20/20; live KICC film: 4 beats,
   vantage pair, 2 model captions, 9 claims verified, 20.0s.
 - Commit id: (this commit; see `git log`).
+
+## Directed-film Stories, step 7: one canvas renderer (user-run green)
+
+- New `frontend/story-render.js` (global `StoryRender`, plain
+  script): `renderFrame(story, t, ctx, size)` paints smart
+  9:16 crops, focal camera moves, all six transitions,
+  found-text cards, captions, world tags, burst stop-motion
+  and the end card; reduced motion dissolves at 1.25x holds.
+- Player (`app.js`) is canvas + `requestAnimationFrame` now
+  (same chrome); exporter calls the same `renderFrame` at
+  1080x1920/30fps WebM with a 30-frame benchmark falling
+  back to 720x1280. Old chapter stories migrate on read.
+- `GET /story-render.js` route + script tag before `/app.js`;
+  `frontend/render.test.js` (fake ctx); contract + screen
+  map + this log updated.
+- Tests: render 40/40, stories 118/118; live play + WebM
+  export of a chapter story (resolution + size reported).
+- Commit id: (this commit; see `git log`).
