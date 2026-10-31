@@ -45,6 +45,7 @@ def summarize_record(photo_id, viewpoint, record):
     taken = inf.get("taken_from") or {}
     scene_bits = [scene.get("type"), scene.get("setting"), scene.get("time_of_day")]
     return {"photo_id": photo_id,
+            "caption": str(obs.get("caption") or ""),
             "place": (place.get("name") or "unknown place").strip(),
             "place_status": place.get("status"),
             "viewpoint": viewpoint or "unknown",

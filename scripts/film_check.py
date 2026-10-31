@@ -1,4 +1,4 @@
-"""Directed-film probe (grows one step at a time; step 2: beat sheet).
+"""Directed-film probe (full pipeline since step 6: beat sheet to film).
 
 Usage from the project root:
   python scripts/film_check.py --prompt "my day at KICC" [--source mine|world|both]
@@ -20,7 +20,7 @@ from api import (ROOT, _coerce_embedding, _cosine,  # noqa: E402
 from chat import EMPTY_SPEC, Engine  # noqa: E402
 from director import (TARGET_SCENES, fallback_beats, plan_beats,  # noqa: E402
                       summarize_record)
-from film import apply_pacing, assemble_scenes, merge_bursts  # noqa: E402
+from film import build_film  # noqa: E402
 from focal import ensure_focal  # noqa: E402
 
 SOURCE_MAP = {"mine": "personal", "world": "world", "both": "both"}
@@ -71,25 +71,15 @@ def main(ns):
     focals = ensure_focal(ids, load_bytes=load_bytes_for(by_file), trace=trace)
     sheet, source = plan_beats(ns.prompt or "untitled", ns.style, ns.target,
                                briefs, focals, trace=trace)
-    metas, records = {}, {}
-    for r in rows:
-        taken = ((r.get("record") or {}).get("inferred") or {}).get("taken_from") or {}
-        metas[r["photo_id"]] = {"place_key": r.get("place_key"),
-                                "viewpoint": r.get("viewpoint"),
-                                "collection": r.get("collection"),
-                                "taken_from_key": taken.get("key")}
-        records[r["photo_id"]] = r.get("record") or {}
-    scenes = assemble_scenes(sheet, metas, records)
+    rows_by_id = {r["photo_id"]: r for r in rows}
     pids = [r["photo_id"] for r in rows if r.get("collection") == "personal"]
     vecs = {r["photo_id"]: _coerce_embedding(r.get("embedding") or [])
             for r in rows if r["photo_id"] in pids}
     sim = {(pids[i], pids[j]): _cosine(vecs[pids[i]], vecs[pids[j]])
            for i in range(len(pids)) for j in range(i + 1, len(pids))}
-    scenes = merge_bursts(scenes, cluster_bursts(pids, sim))
-    apply_pacing(scenes, ns.target, trace)
-    print(json.dumps({"source": source, "beatsheet": sheet, "scenes": scenes,
-                      "total_seconds": round(sum(s["seconds"] for s in scenes), 2),
-                      "trace": trace,
+    film = build_film(sheet, rows_by_id, focals, ns.target,
+                      cluster_bursts(pids, sim), trace)
+    print(json.dumps({"source": source, "film": film, "trace": trace,
                       "focal_fallbacks": sorted(p for p, f in focals.items()
                                                 if f.get("fallback"))},
                      ensure_ascii=False, indent=1))

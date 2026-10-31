@@ -3,12 +3,14 @@
 Transitions from metadata, precedence, vantage notes: pure code,
 no model. Run from the project root:  python backend/test_film.py
 """
+import json
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import film as film_mod  # noqa: E402  (needs the sys.path line above)
+import llm  # noqa: E402
 
 fails = 0
 total = 0
@@ -141,6 +143,134 @@ check(one[0]["seconds"] == 8.0 and "Outside" in tr2[0]["detail"],
       "clamped and noted")
 film_mod.apply_pacing([], "short", trace=(tr3 := []))
 check("Outside" in tr3[0]["detail"], "empty film noted")
+
+BRIEFS = {"p1": {"caption": "Stored one.", "place": "K", "place_status": "confirmed",
+                       "viewpoint": "ground_level", "scene": "street",
+                       "things": ["bus"], "signs": [], "taken_from": None,
+                       "people": 0},
+            "p2": {"caption": "Stored two.", "place": "K", "place_status": None,
+                   "viewpoint": "ground_level", "scene": "plaza", "things": [],
+                   "signs": [], "taken_from": None, "people": 0}}
+SUP = {"verdict": "supported", "rewrite": None}
+
+orig_ask = llm.ask
+try:
+    llm.ask = lambda *a, **k: {"text": json.dumps({"p1": "Buses park here."})}
+    w = film_mod.write_captions([sc("p1"), {**sc("p2"), "caption_note": "You were here"}],
+                                BRIEFS, trace=(tw := []))
+    check(w[0]["caption"] == "Buses park here." and w[0]["caption_source"] == "records-model"
+          and w[1]["caption"] == "You were here" and len(tw) == 1, "captions written")
+    replies = [json.dumps({"p9": "wrong id"}), json.dumps({"p1": "Second try."})]
+    llm.ask = lambda *a, **k: {"text": replies.pop(0)}
+    w = film_mod.write_captions([sc("p1")], BRIEFS)
+    check(w[0]["caption"] == "Second try.", "caption retry recovers")
+    llm.ask = lambda *a, **k: {"text": "garbage"}
+    w = film_mod.write_captions([sc("p1")], BRIEFS, trace=(tw2 := []))
+    check(w[0]["caption"] == "Stored one." and w[0]["caption_source"] == "stored-caption"
+          and "stored captions" in tw2[0]["detail"], "caption fallback")
+
+    s1 = sc("p1")
+    s1["caption"] = "Buses park here. People wait."
+    llm.ask = lambda *a, **k: {"text": json.dumps(
+        {"title": SUP, "intents": [SUP],
+         "scenes": {"p1": {"claims": [SUP, SUP]}}})}
+    _t, _b, kept, ver = film_mod.edit_captions("T", [{"intent": "go"}], [s1],
+                                               BRIEFS, trace=(te := []))
+    check(ver["verified"] and ver["checked"] == 4 and ver["fixed"] == 0
+          and "4 claims, 0 fixed" in te[0]["detail"], "clean edit verifies")
+    s1["caption"] = "Buses park here. Elephants dance."
+    llm.ask = lambda *a, **k: {"text": json.dumps(
+        {"title": SUP, "intents": [SUP],
+         "scenes": {"p1": {"claims": [SUP, {"verdict": "unsupported",
+                                            "rewrite": "People wait."}]}}})}
+    _t, _b, kept, ver = film_mod.edit_captions("T", [{"intent": "go"}], [s1],
+                                               BRIEFS)
+    check(kept[0]["caption"] == "Buses park here. People wait." and ver["fixed"] == 1,
+          "rewrite applied")
+    llm.ask = lambda *a, **k: {"text": json.dumps(
+        {"title": SUP, "intents": [SUP],
+         "scenes": {"p1": {"claims": [SUP, {"verdict": "unsupported",
+                                            "rewrite": None}]}}})}
+    _t, _b, kept, ver = film_mod.edit_captions("T", [{"intent": "go"}], [s1],
+                                               BRIEFS)
+    check(kept[0]["caption"] == "Buses park here." and ver["fixed"] == 1,
+          "claim removed")
+    s1["caption"] = "Elephants dance."
+    llm.ask = lambda *a, **k: {"text": json.dumps(
+        {"title": SUP, "intents": [SUP],
+         "scenes": {"p1": {"claims": [{"verdict": "unsupported",
+                                       "rewrite": None}]}}})}
+    _t, _b, kept, ver = film_mod.edit_captions("T", [{"intent": "go"}], [s1],
+                                               BRIEFS)
+    check(kept == [] and ver["dropped"] == ["p1"], "empty scene dropped")
+    s1["caption"] = "Buses park here."
+    llm.ask = lambda *a, **k: {"text": json.dumps(
+        {"title": {"verdict": "unsupported", "rewrite": "Better title"},
+         "intents": [SUP], "scenes": {"p1": {"claims": [SUP]}}})}
+    nt, _b, _k, ver = film_mod.edit_captions("Old", [{"intent": "go"}], [s1],
+                                             BRIEFS)
+    check(nt == "Better title" and ver["verified"], "title rewritten")
+    llm.ask = lambda *a, **k: {"text": json.dumps(
+        {"title": {"verdict": "unsupported", "rewrite": None},
+         "intents": [SUP], "scenes": {"p1": {"claims": [SUP]}}})}
+    _t, _b, _k, ver = film_mod.edit_captions("Old", [{"intent": "go"}], [s1],
+                                             BRIEFS)
+    check(not ver["verified"] and "not verified" in ver["note"],
+          "unfixable title flagged")
+    llm.ask = lambda *a, **k: {"text": "garbage"}
+    _t, _b, kept, ver = film_mod.edit_captions("T", [{"intent": "go"}], [s1],
+                                               BRIEFS, trace=(te2 := []))
+    check(not ver["verified"] and kept[0]["caption"] == "Buses park here."
+          and "not verified" in te2[0]["detail"], "failed pass flagged")
+
+    def spent(*a, **k):
+        raise llm.LLMBudgetSpent("spent")
+    llm.ask = spent
+    try:
+        film_mod.write_captions([sc("p1")], BRIEFS)
+        check(False, "writer budget propagates")
+    except llm.LLMBudgetSpent:
+        check(True, "writer budget propagates")
+    try:
+        film_mod.edit_captions("T", [], [sc("p1")], BRIEFS)
+        check(False, "editor budget propagates")
+    except llm.LLMBudgetSpent:
+        check(True, "editor budget propagates")
+
+    vA = {**sc("a"), "caption_note": "You were here", "caption": "You were here",
+          "caption_source": "vantage-note"}
+    film_mod._refit_scenes(
+        [vA, sc("c")],
+        {"a": meta("x", coll="personal"), "c": meta("y")},
+        {"a": {"observed": {"caption": "Stored A."}}})
+    check(vA["caption_note"] is None and vA["caption"] == "Stored A."
+          and vA["caption_source"] == "stored-caption", "orphan note repaired")
+
+    rows = {"p1": {"place_key": "k", "viewpoint": "ground_level",
+                   "collection": "world", "record": {"observed": {
+                       "scene": {"type": "street"}, "entities": [],
+                       "visible_text": [], "people": {"count": 0},
+                       "caption": "Stored one."},
+                       "inferred": {"place": {"name": "K", "status": "confirmed"},
+                                    "taken_from": {}}}}}
+    foc = {"p1": {"mood": "busy", "confidence": 0.8}}
+    sheet = {"title": "T", "cover": "p1",
+             "beats": [{"role": "build", "intent": "go", "photo_ids": ["p1"],
+                        "pacing": "medium", "camera": "hold", "reason": "r"}]}
+    llm.ask = lambda *a, **k: {"text": json.dumps(
+        {"p1": "Buses park here."} if k.get("purpose") == "captions" else
+        {"title": SUP, "intents": [SUP], "scenes": {"p1": {"claims": [SUP]}}})}
+    film = film_mod.build_film(sheet, rows, foc, "short", trace=(tb := []))
+    check(film["cover"] == "p1" and len(film["scenes"]) == 1
+          and film["scenes"][0]["caption"] == "Buses park here."
+          and "(mood: busy)" in film["scenes"][0]["why"]
+          and film["scenes"][0]["focal"]["mood"] == "busy"
+          and film["verification"]["verified"]
+          and film["total_seconds"] == 8.0
+          and any("Outside" in t["detail"] for t in tb),
+          "build_film end to end")
+finally:
+    llm.ask = orig_ask
 
 print(f"test_film.py: {total - fails}/{total} checks passed")
 sys.exit(1 if fails else 0)

@@ -656,3 +656,9 @@ Step 1 adds no endpoints and changes no response. Internals only:
   0.18s per frame by pacing; normal scenes scale to the 20s /
   40s target (bursts keep their rate), clamped 1-8s, misses
   past 10 percent noted in the trace.
+- Step 6 adds record-only captions (vantage notes set in code,
+  stored-caption fallback), the editor pass (rewrite/remove/
+  drop, title + intents checked, "checked against records: N
+  claims, M fixed", failures mark not verified) and
+  `build_film` (full pipeline with refit + re-pace after
+  drops, why-with-mood, focal per scene).

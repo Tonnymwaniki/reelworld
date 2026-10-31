@@ -411,3 +411,17 @@ the first unfinished phase.
   probe prints seconds + total; contract extended.
 - Tests: 29/29; live KICC film paced 14.4s -> 20.01s.
 - Commit id: (this commit; see `git log`).
+
+## Directed-film Stories, step 6: captions + editor (user-run green)
+
+- `write_captions` (one batched records-only call, vantage
+  notes verbatim in code, stored-caption fallback) +
+  `edit_captions` (per-claim verdicts, rewrite/remove/drop,
+  title + intents checked, failures mark not verified,
+  budget propagates) + `build_film` (refit + re-pace after
+  drops, why-with-mood, focal per scene, cover guard).
+- `test_film.py` grows to 43/43; probe prints the whole film;
+  contract extended.
+- Tests: 43/43 + director 20/20; live KICC film: 4 beats,
+  vantage pair, 2 model captions, 9 claims verified, 20.0s.
+- Commit id: (this commit; see `git log`).
