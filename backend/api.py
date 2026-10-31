@@ -456,7 +456,47 @@ def put_profile(req: ProfileRequest, request: Request):
 def delete_profile(request: Request):
     _demo_guard(request)
     had = owner_profile_mod.delete_profile()
-    return {"ok": True, "removed": {"profile": had}}
+    try:
+        rows = (get_sb().table("photos").select("photo_id,record")
+                .eq("collection", "personal").execute().data or [])
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"photo lookup failed: {e}")
+    cleared, reembedded = [], 0
+    for r in rows:
+        pid = r["photo_id"]
+        if not ((r.get("record") or {}).get("provided") or {}).get("owner"):
+            continue
+        reembedded += _persist_owner_tag(
+            pid, owner_tags_mod.clear_owner(r.get("record") or {}), None)
+        cleared.append(pid)
+    return {"ok": True, "removed": {"profile": had, "tags": cleared,
+                                    "reembedded": reembedded}}
+
+
+def _persist_owner_tag(pid, new_rec, present):
+    """Write one tag change to the annotation file + Supabase (record,
+    owner_present, fresh embedding). Returns 1 when re-embedded."""
+    ann = ROOT / "data" / "annotations" / "personal" / (pid + ".json")
+    try:
+        ann.parent.mkdir(parents=True, exist_ok=True)
+        ann.write_text(json.dumps({**new_rec, "photo_id": pid},
+                                  ensure_ascii=False, indent=1), encoding="utf-8")
+    except OSError as e:
+        raise HTTPException(status_code=502, detail=f"annotation write failed: {e}")
+    patch = {"record": new_rec, "owner_present": present}
+    try:
+        text = search_text(new_rec)
+        vec = np.array(list(chat_module.get_model().embed([text]))[0], dtype="float32")
+        patch["embedding"] = (vec / np.linalg.norm(vec)).tolist()
+        reembedded = 1
+    except Exception as e:
+        print(f"(re-embed failed for {pid}: {e})")
+        reembedded = 0
+    try:
+        get_sb().table("photos").update(patch).eq("photo_id", pid).execute()
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"photo update failed: {e}")
+    return reembedded
 
 
 class OwnerTagsRequest(BaseModel):
@@ -502,25 +542,7 @@ def set_owner_tags(req: OwnerTagsRequest, request: Request):
                 new_rec = owner_tags_mod.set_owner(rec, req.present, pos)
             except ValueError as e:
                 raise HTTPException(status_code=400, detail=str(e))
-        ann = ROOT / "data" / "annotations" / "personal" / (pid + ".json")
-        try:
-            ann.parent.mkdir(parents=True, exist_ok=True)
-            ann.write_text(json.dumps({**new_rec, "photo_id": pid},
-                                      ensure_ascii=False, indent=1), encoding="utf-8")
-        except OSError as e:
-            raise HTTPException(status_code=502, detail=f"annotation write failed: {e}")
-        patch = {"record": new_rec, "owner_present": req.present}
-        try:
-            text = search_text(new_rec)
-            vec = np.array(list(chat_module.get_model().embed([text]))[0], dtype="float32")
-            patch["embedding"] = (vec / np.linalg.norm(vec)).tolist()
-            reembedded += 1
-        except Exception as e:
-            print(f"(re-embed failed for {pid}: {e})")
-        try:
-            get_sb().table("photos").update(patch).eq("photo_id", pid).execute()
-        except Exception as e:
-            raise HTTPException(status_code=502, detail=f"photo update failed: {e}")
+        reembedded += _persist_owner_tag(pid, new_rec, req.present)
         updated.append(pid)
     return {"updated": updated, "present": req.present,
             "position": req.position if pos_given else None,
@@ -3195,6 +3217,19 @@ def export_mine():
         zf.writestr("manifest.json", json.dumps(
             {"exported_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
              "count": len(names), "photos": names}, ensure_ascii=False, indent=1))
+        try:
+            prof = owner_profile_mod.load_profile()
+        except Exception:
+            prof = None
+        zf.writestr("profile.json",
+                    json.dumps(prof or {}, ensure_ascii=False, indent=1))
+        tags = {}
+        for r in rows:
+            own = ((r.get("record") or {}).get("provided") or {}).get("owner")
+            if own:
+                tags[r["photo_id"]] = own
+        zf.writestr("owner_tags.json",
+                    json.dumps(tags, ensure_ascii=False, indent=1))
         zf.writestr("README.txt", "ReelWorld personal export.\n"
                     f"{len(names)} photos with annotations, exported "
                     f"{datetime.now(timezone.utc).date().isoformat()}.\n")

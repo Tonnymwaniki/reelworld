@@ -133,13 +133,13 @@ and mood surface in the player/exporter from step 7 on, and
 | Name input + save | `PUT /api/profile` | `name`; 400 text shown verbatim; demo code needed for the write |
 | Voice choice + 3 example sentences | same PUT | `refer_as` saved with the name (voice alone needs a saved name first); examples use the profile name or "Your name" |
 | Privacy block | none (static) | "Reel never works out who someone is from their face. You tell Reel which photos you are in, and only then is your name used." |
-| Tag/export/delete | `#/profile/tag`, `/api/export`, `DELETE /api/profile` | delete runs only after the inline confirm panel; tag cleanup on delete lands in the final step |
+| Tag/export/delete | `#/profile/tag`, `/api/export`, `DELETE /api/profile` | delete runs only after the inline confirm panel; delete clears the profile + every tag (records, Supabase, fresh embeddings) and reports "Your profile and N photo tags are deleted."; export zip gains `profile.json` + `owner_tags.json` |
 | Tag grid | `GET /api/albums` photo entries | `src`, `caption`, `people`, `owner_present`, `owner_position`; people-first order; dossier link per tile |
 | I'm in this / Not me / Left-Centre-Right | `POST /api/owner-tags` | per-tile immediate tag; position row only when people > 1; bulk "I'm in all selected" for the selection |
 | Progress + undo | `GET /api/owner-tags/summary` | "N of M reviewed (X you, Y not you)" + bar; undo restores each photo's previous state (null clears) |
 | Name prompt | `PUT /api/profile` | first present-tag without a profile asks for the name, then continues the pending tag |
 | "Are you in this photo?" | same two endpoints | library queue rows + `#/add` result pane after a job finishes: Yes / No / Skip, inline name prompt when needed |
-| "You are in this photo" badge | `owner_present` | library tiles + photo dossier (links to the tag page); "Me" album in the library, with a tag-yourself empty state |
+| "You are in this photo" badge | `owner_present` | library tiles + photo dossier (links to the tag page) + Reel result mounts (top-right) + Connected ring nodes (dot + title note); "Me" album in the library, with a tag-yourself empty state |
 
 ## 10. Story studio narration (`#/stories`, `#/stories/<id>`)
 

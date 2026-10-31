@@ -543,6 +543,24 @@ the first unfinished phase.
 - Studio checkbox (default off, frozen once published); Showcase
   modal fetches `?public=1`. Unlisted links stay deferred (no such
   feature; deferred.md row 21) — gating covers the Showcase.
-- Tests: stories 15→18, narration 19→23, story_full 4→9,
-  routes 21→22, studio suite +4. Live (f): publish a faceless
-  story with the box off, show "the photographer" (pending).
+- Tests: stories 18/18, narration 23/23, story_full 9/9,
+  routes 22/22, studio 131/131 (all user-run green).
+- Live (f): faceless story st-20261031-0007 published with the box
+  off; owner view keeps "Tonny", `?public=1` shows
+  "the photographer"; untagged scenes name-free in both.
+
+## Owner names, step 7: across the platform (code done, user run pending)
+
+- Badge in Reel mounts (top-right) + Connected ring nodes (dot);
+  chat/ring rows already carried `owner_present` via search_photos.
+- Export zip gains `profile.json` + `owner_tags.json`.
+- `DELETE /api/profile` clears every tag (annotation files,
+  Supabase `owner_present` null, fresh embeddings) via shared
+  `_persist_owner_tag` (extracted from the tag endpoint) and
+  reports `{"profile", "tags", "reembedded"}`; UI prints the
+  count. LLM cache keys on record versions (self-invalidating).
+- Tests: home 52/52, connected 102/102, profile 68, owner_tags
+  16/16 (user-run green). Live: chat + rings rows carry the flag;
+  export holds profile.json (Tonny) + owner_tags.json; delete
+  cleared profile + 13 tags (reembedded 13), summary 0/0/16,
+  profile null. Step 7 done.

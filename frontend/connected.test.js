@@ -121,6 +121,8 @@ async function main() {
   const live = view.replace(/<!--[\s\S]*?-->/g, "");
   ["lh3.googleusercontent", "cadastre.reelworld.org", "sha256", "v2.4",
     "NBO-0021", "18°", "+28m"].forEach((s) => ok(live.indexOf(s) === -1, "connected.html free of " + s));
+  ok(src.indexOf("m.owner_present === true") !== -1, "ring node owner dot gated on flag");
+  ok(src.indexOf("you are in this photo") !== -1, "ring node owner title present");
 
   console.log("connected.test.js: " + n + "/" + n + " checks passed");
 }

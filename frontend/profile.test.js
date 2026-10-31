@@ -110,6 +110,7 @@ async function main() {
     "tag route is checked before the profile route");
   ok(src.indexOf('"people", "me", "look"') >= 0, "library paints the Me album");
   ok(src.indexOf("You are in this photo") >= 0, "badge text present");
+  ok(src.indexOf("photo tag") >= 0, "delete reports removed tags");
 
   console.log(`profile.test.js: ${n} checks passed`);
 }

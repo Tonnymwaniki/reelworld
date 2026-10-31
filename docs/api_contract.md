@@ -41,8 +41,12 @@ face. The public demo has no profile, so no name is ever shown there.
 - `PUT {"name", "refer_as"?}` creates or updates (omitted `refer_as`
   keeps the old choice). Name: 1–40 chars, letters, spaces, hyphens
   and apostrophes only; violations are 400 with the reason.
-- `DELETE` removes the profile (owner-tag cleanup lands with tags in
-  step 2) and returns `{"ok": true, "removed": {"profile": bool}}`.
+- `DELETE` removes the profile AND every owner tag: annotation
+  files lose `provided.owner`, Supabase rows go back to
+  `owner_present: null` with fresh embeddings, and returns
+  `{"ok": true, "removed": {"profile": bool, "tags": [...],
+  "reembedded": n}}`. Cached answers key on record versions, so they
+  invalidate themselves.
 - `PUT` and `DELETE` need the demo code when `DEMO_MODE` is true (403
   otherwise); with `DEMO_MODE=false` they are open.
 
@@ -69,9 +73,11 @@ Writes need the demo code when `DEMO_MODE` is true.
   (rebuild the index + reload after tagging).
 - `owner_present` (true/false/null) now rides on
   `GET /api/photo/{id}`, `/api/photos`, `/api/world`,
-  `/api/albums` photo entries and `/api/place` viewpoint groups —
-  from the record, except `/api/photos` which reads the
-  `owner_present` column (run `backend/schema_v3.sql` first).
+  `/api/albums` photo entries, `/api/place` viewpoint groups,
+  `/chat` + `/chat/stream` results and `/api/rings` members —
+  from the record, except `/api/photos`, chat and rings which
+  read the `owner_present` column (run `backend/schema_v3.sql`
+  first). These feed every "You are in this photo" badge.
 - Chat results gain `owner_present` in step 4 with the
   `search_photos` filter; story/ring shapes in their own steps.
 - Step 3 adds the `me` smart album to `GET /api/albums`

@@ -789,6 +789,15 @@ const home = {
       const wrap = mount.querySelector(".relative");
       if (wrap) wrap.appendChild(badgeTpl.cloneNode(true));
     }
+    if (row.owner_present === true) {
+      const wrap = mount.querySelector(".relative");
+      if (wrap) {
+        const badge = document.createElement("span");
+        badge.className = "absolute top-2 right-2 px-2 py-0.5 rounded bg-primary-container/85 text-surface-container-lowest font-label-sm text-label-sm";
+        badge.textContent = "You are in this photo";
+        wrap.appendChild(badge);
+      }
+    }
   },
 
   fillChips(node, spec) {
@@ -3783,6 +3792,13 @@ const connected = {
         tag.className = "absolute -bottom-2 left-1/2 -translate-x-1/2 px-1.5 rounded bg-primary-container text-surface font-label-sm text-[10px] font-bold";
         tag.textContent = ringLabel(ri, i);
         b.append(img, tag);
+        if (m.owner_present === true) {
+          const dot = document.createElement("span");
+          dot.className = "absolute top-0 right-0 w-3.5 h-3.5 rounded-full bg-secondary border-2 border-surface-container";
+          dot.title = "You are in this photo";
+          b.appendChild(dot);
+          b.title += " (you are in this photo)";
+        }
         nodes.appendChild(b);
       });
     });
@@ -6580,7 +6596,7 @@ const profile = {
     const st = $("#pf-del-status", view);
     st.textContent = "Deleting…";
     try {
-      await api("/api/profile", { method: "DELETE" });
+      const out = await api("/api/profile", { method: "DELETE" });
       if (!view.isConnected) return;
       this.data = null;
       ownerAsk.prof = null;
@@ -6588,7 +6604,10 @@ const profile = {
       c.classList.add("hidden");
       c.classList.remove("flex");
       this.paint();
-      st.textContent = "Your profile is deleted.";
+      const n = (((out || {}).removed || {}).tags || []).length;
+      st.textContent = n
+        ? "Your profile and " + n + " photo tag" + (n === 1 ? "" : "s") + " are deleted."
+        : "Your profile is deleted.";
     } catch (e) {
       if (!view.isConnected) return;
       st.textContent = String((e && e.message) || e);

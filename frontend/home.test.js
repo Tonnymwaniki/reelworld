@@ -139,6 +139,8 @@ async function main() {
     "94.6", "C. Karanja", "TIFF source", "Batch #"].forEach((s) => {
     ok(liveHome.indexOf(s) === -1, "home.html free of " + s);
   });
+  ok(src.indexOf("You are in this photo") !== -1, "reel owner badge text present");
+  ok(src.indexOf("row.owner_present === true") !== -1, "reel badge gated on owner_present");
 
   console.log("home.test.js: " + n + "/" + n + " checks passed");
 }
