@@ -15,11 +15,12 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "backend"))
 
-from api import ROOT, get_sb  # noqa: E402
+from api import (ROOT, _coerce_embedding, _cosine,  # noqa: E402
+                   cluster_bursts, get_sb)
 from chat import EMPTY_SPEC, Engine  # noqa: E402
 from director import (TARGET_SCENES, fallback_beats, plan_beats,  # noqa: E402
                       summarize_record)
-from film import assemble_scenes  # noqa: E402
+from film import apply_pacing, assemble_scenes, merge_bursts  # noqa: E402
 from focal import ensure_focal  # noqa: E402
 
 SOURCE_MAP = {"mine": "personal", "world": "world", "both": "both"}
@@ -27,7 +28,7 @@ SOURCE_MAP = {"mine": "personal", "world": "world", "both": "both"}
 
 def fetch_rows(ids):
     rows = (get_sb().table("photos")
-            .select("photo_id,viewpoint,file,record,collection,place_key")
+            .select("photo_id,viewpoint,file,record,collection,place_key,embedding")
             .in_("photo_id", ids).execute().data or [])
     by_id = {r["photo_id"]: r for r in rows}
     missing = [i for i in ids if i not in by_id]
@@ -79,7 +80,15 @@ def main(ns):
                                 "taken_from_key": taken.get("key")}
         records[r["photo_id"]] = r.get("record") or {}
     scenes = assemble_scenes(sheet, metas, records)
+    pids = [r["photo_id"] for r in rows if r.get("collection") == "personal"]
+    vecs = {r["photo_id"]: _coerce_embedding(r.get("embedding") or [])
+            for r in rows if r["photo_id"] in pids}
+    sim = {(pids[i], pids[j]): _cosine(vecs[pids[i]], vecs[pids[j]])
+           for i in range(len(pids)) for j in range(i + 1, len(pids))}
+    scenes = merge_bursts(scenes, cluster_bursts(pids, sim))
+    apply_pacing(scenes, ns.target, trace)
     print(json.dumps({"source": source, "beatsheet": sheet, "scenes": scenes,
+                      "total_seconds": round(sum(s["seconds"] for s in scenes), 2),
                       "trace": trace,
                       "focal_fallbacks": sorted(p for p, f in focals.items()
                                                 if f.get("fallback"))},

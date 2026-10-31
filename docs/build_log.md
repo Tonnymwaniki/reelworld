@@ -400,3 +400,14 @@ the first unfinished phase.
   none on the same-place scene, a Candidate CBK card on the
   new place.
 - Commit id: (this commit; see `git log`).
+
+## Directed-film Stories, step 5: pacing (user-run green)
+
+- `merge_bursts` (library cosine groups, same-direction
+  consecutive frames, 0.25/0.21/0.18s rates) + `apply_pacing`
+  (4/3/2s base, +0.5s bookends, +1.2s cards, scale normals to
+  20/40s, bursts fixed, 1-8s clamps, misses noted).
+- `test_film.py` grows to 29/29 (one float-equality fix);
+  probe prints seconds + total; contract extended.
+- Tests: 29/29; live KICC film paced 14.4s -> 20.01s.
+- Commit id: (this commit; see `git log`).

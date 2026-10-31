@@ -100,5 +100,47 @@ check(scenes3[0]["found_text"] == {"text": "SIGN HERE", "badge": "Confirmed"}
       and scenes3[2]["found_text"] == {"text": "SIGN HERE", "badge": "Confirmed"},
       "first scene of each place only")
 
+def sc(pid, role="build", pacing="medium", card=None):
+    return {"photo_id": pid, "role": role, "pacing": pacing,
+            "camera": "hold", "transition_in": None, "caption_note": None,
+            "found_text": card, "why": ""}
+
+
+CARD = {"text": "X", "badge": None}
+m = film_mod.merge_bursts([sc("a"), sc("b"), sc("c")], [["a", "b"]])
+check(len(m) == 2 and m[0]["frames"] == ["a", "b"]
+      and m[0]["frame_seconds"] == 0.21 and m[1]["frames"] == ["c"]
+      and m[1]["frame_seconds"] is None, "burst merges")
+m = film_mod.merge_bursts([sc("a", role="establish"), sc("b", role="build")],
+                          [["a", "b"]])
+check(len(m) == 2, "different roles stay split")
+
+three = film_mod.apply_pacing([sc("a"), sc("b"), sc("c")], "short")
+check([s["seconds"] for s in three] == [6.67, 6.67, 6.67]
+      and abs(sum(s["seconds"] for s in three) - 20.0) <= 0.1,
+      "scales to target")
+four = film_mod.apply_pacing([sc("a", card=CARD), sc("b", pacing="quick"),
+                              sc("c"), sc("d")], "short")
+check(abs(four[0]["seconds"] / four[1]["seconds"] - 2.1) < 0.01,
+      "card bonus in formula")
+mixed = film_mod.merge_bursts(
+    [sc(p) for p in ("a", "b", "c", "d", "e", "f", "g", "h", "i")],
+    [["a", "b", "c", "d"]])
+mixed = film_mod.apply_pacing(mixed, "short")
+check(mixed[0]["seconds"] == 0.84 and mixed[0]["burst"]
+      and abs(sum(s["seconds"] for s in mixed) - 20.0) <= 0.1,
+      "bursts keep rate, rest scales")
+only_burst = film_mod.apply_pacing(
+    film_mod.merge_bursts([sc("a", pacing="quick"), sc("z", pacing="quick")],
+                          [["a", "z"]]), "short", trace=(tr := []))
+check(only_burst[0]["seconds"] == 0.36 and "Outside" in tr[0]["detail"],
+      "all-burst noted")
+one = film_mod.apply_pacing([sc("a", pacing="quick")], "short",
+                            trace=(tr2 := []))
+check(one[0]["seconds"] == 8.0 and "Outside" in tr2[0]["detail"],
+      "clamped and noted")
+film_mod.apply_pacing([], "short", trace=(tr3 := []))
+check("Outside" in tr3[0]["detail"], "empty film noted")
+
 print(f"test_film.py: {total - fails}/{total} checks passed")
 sys.exit(1 if fails else 0)

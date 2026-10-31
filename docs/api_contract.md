@@ -651,3 +651,8 @@ Step 1 adds no endpoints and changes no response. Internals only:
 - Step 4 adds found-text cards: the first clear 4-60 character
   sign, exact text, Confirmed/Candidate badge when known, only
   on the first scene of each place.
+- Step 5 adds pacing in code: pacing base (4/3/2s), +0.5s for
+  establish/resolve, +1.2s with a card, bursts at 0.25/0.21/
+  0.18s per frame by pacing; normal scenes scale to the 20s /
+  40s target (bursts keep their rate), clamped 1-8s, misses
+  past 10 percent noted in the trace.
