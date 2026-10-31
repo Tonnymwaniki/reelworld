@@ -294,3 +294,15 @@ the first unfinished phase.
 - Tests: `test_llm.py` 35/35; live status showed the Modal
   primary, 2008 probe tokens today, images handled by modal.
 - Commit id: (this commit; see `git log`).
+
+## Modal switchboard, step 4: budget + rate limits (user-run green)
+
+- Visitor = IP + `rw_visitor` cookie (minted when missing);
+  6/min + 60/day per visitor, x4 with the demo code, live-read,
+  none when DEMO_MODE is false. Budget (real tokens) checked
+  first. Chat answers kind `resting` (stream: one result event);
+  ask/compare/explain/story/probe answer 429. Reads untouched.
+- New `backend/test_guard.py` (11 checks, fake requests).
+- Tests: `test_guard.py` 11/11; live 7 rapid chats gave 6 ok
+  then resting.
+- Commit id: (this commit; see `git log`).

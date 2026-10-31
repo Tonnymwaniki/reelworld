@@ -75,6 +75,11 @@ def _int_env(name, default):
         return default
 
 
+def setting(name, default=None):
+    """Public read of a live setting (process env first, then .env)."""
+    return _env(name, default)
+
+
 def provider_name(base_url):
     """Short provider name from a base URL (pure)."""
     host = (urlparse(base_url or "").hostname or "").lower()
