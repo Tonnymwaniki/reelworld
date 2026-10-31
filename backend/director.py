@@ -151,16 +151,19 @@ def validate_beatsheet(data, photo_ids, target):
             "beats": clean}, None
 
 
-def fallback_beats(user_prompt, style, target, briefs, focals):
+def fallback_beats(user_prompt, style, target, briefs, focals, seed=0):
     """Deterministic valid beats when the model fails twice (pure).
 
-    Photos in candidate order, roles along the arc, camera from
-    focal confidence. Always valid by construction.
+    Photos in candidate order rotated by the seed, roles along the
+    arc, camera from focal confidence. Always valid by construction.
     """
     lo, hi = TARGET_SCENES[target]
     ids = [b["photo_id"] for b in briefs]
     n = min(max(len(ids), min(lo, len(ids))), hi)
     take = ids[:max(n, 1)]
+    if len(take) > 1:
+        rot = int(seed or 0) % len(take)
+        take = take[rot:] + take[:rot]
     roles = ["establish", "build", "turn", "resolve"][:max(1, min(len(take), 4))]
     phases = ARCS[style].split(", ")
     beats = []
@@ -179,13 +182,15 @@ def fallback_beats(user_prompt, style, target, briefs, focals):
 
 
 def plan_beats(user_prompt, style, target, briefs, focals, trace=None,
-               fallback=None, session_id=None):
+               fallback=None, session_id=None, seed=None):
     """Beat sheet via the director (reasoning, text only).
 
     briefs: summarize_record() dicts; focals: {photo_id: focal entry}.
     fallback(briefs) may replace the built-in code fallback (the API
-    passes the current planner there). Returns (beatsheet, source)
-    where source is "director", "director-retry" or "fallback".
+    passes the current planner there). seed asks for a different arc
+    shape than other seeds ("Try another direction"). Returns
+    (beatsheet, source) where source is "director", "director-retry"
+    or "fallback".
     """
     style = normalize_style(style)
     if target not in TARGET_SCENES:
@@ -193,6 +198,9 @@ def plan_beats(user_prompt, style, target, briefs, focals, trace=None,
     if not briefs:
         raise ValueError("the director needs at least one photo.")
     base = build_director_prompt(user_prompt, style, target, briefs, focals)
+    if seed is not None:
+        base += (f"\nArc seed {seed}: take a noticeably different arc shape "
+                 f"and photo order than other seeds would.")
     allowed = [b["photo_id"] for b in briefs]
     last_problems = []
     for attempt in (1, 2):
@@ -210,18 +218,22 @@ def plan_beats(user_prompt, style, target, briefs, focals, trace=None,
             sheet, last_problems = None, [f"unusable reply: {e}"[:120]]
         if sheet is not None:
             if trace is not None:
-                trace.append({"step": "planned",
-                              "detail": f"Director planned {len(sheet['beats'])} beats "
-                                        f"({sum(len(b['photo_ids']) for b in sheet['beats'])} "
-                                        f"photos) for {style}, {target}."})
+                detail = (f"Director planned {len(sheet['beats'])} beats "
+                          f"({sum(len(b['photo_ids']) for b in sheet['beats'])} "
+                          f"photos) for {style}, {target}.")
+                if seed is not None:
+                    detail += f" (seed {seed})."
+                trace.append({"step": "planned", "detail": detail})
             return sheet, ("director" if attempt == 1 else "director-retry")
         if trace is not None:
             trace.append({"step": "planned",
                           "detail": f"Director attempt {attempt} rejected: "
                                     f"{'; '.join(last_problems)}."})
     sheet = fallback(briefs) if fallback else fallback_beats(
-        user_prompt, style, target, briefs, focals)
+        user_prompt, style, target, briefs, focals, seed or 0)
     if trace is not None:
-        trace.append({"step": "planned",
-                      "detail": "Model beats failed twice; using the fallback plan."})
+        detail = "Model beats failed twice; using the fallback plan."
+        if seed is not None:
+            detail += f" (seed {seed})."
+        trace.append({"step": "planned", "detail": detail})
     return sheet, "fallback"

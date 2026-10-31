@@ -1361,9 +1361,10 @@ Return ONE JSON object and nothing else:
 {{"title": "a short story title", "chapters": [{{"heading": "...", "query": "..."}}]}}
 Rules: 3 to 5 chapters. Every chapter query must be a plain, concrete, visual photo-search query in English that a photo archive could answer (things, places, views, times of day). Do not repeat queries. Do not plan chapters that need dates, names of people, or outside facts."""
 
-STORY_TEXT_PROMPT = """You write one chapter of a photo vlog: one outing told across photos, warm and lively like someone showing a friend their day. Chapter heading: {heading}
+STORY_TEXT_PROMPT = """You write one chapter of a photo vlog about: {theme}
+Chapter heading: {heading}
 Earlier chapters (for flow; do not repeat them): {earlier}
-You may use ONLY facts stated in the photo records below. Never add outside facts: no dates, no history, no causes, no names of people except the owner as instructed below, no claims about anything not in the records. If the records say little, write little. Write one or two sentences. Sound like a vlog: energetic verbs and a sense of moving through the outing (then, next, from there), but every claim must come from the records. Never address a viewer: no "you guys", no "look at this" (when the voice below says to use "you" for the owner, that "you" means the owner only). Never identify any person other than the owner (other people only by count, activity or clothing).
+Study the attached photos (labelled top to bottom) together with the records below. Let the photos guide the feel and the choice of detail — what the moment looks like, where the eye goes — but the records are the fact authority: every claim must be backed by them. You may use ONLY facts stated in the photo records below. Never add outside facts: no dates, no history, no causes, no names of people except the owner as instructed below, no claims about anything not in the records. If the records say little, write little. Write ONE sentence, under 25 words, that fits a 4-second scene. Do not repeat the heading; start directly with the story. Sound like a vlog: energetic verbs and a sense of moving through the outing (then, next, from there), but every claim must come from the records. Vary every chapter: name a place or sign ONCE per story (first chapter that shows it); later chapters say here, this view, the plaza. Lead with what is NEW in these photos versus the earlier chapters, never re-list shared facts. Never begin with the same first word as any earlier chapter above. Never address a viewer: no "you guys", no "look at this" (when the voice below says to use "you" for the owner, that "you" means the owner only). Never identify any person other than the owner (other people only by count, activity or clothing).
 Records:
 {records}
 Return ONE JSON object and nothing else: {{"text": "..."}}"""
@@ -1498,19 +1499,51 @@ def _story_credits(photo_ids):
     return credits
 
 
-def _chapter_text(heading, compacts, att, voice, prior=""):
+def _story_sheet_items(att):
+    """[(photo_id, bytes)] for rows whose files exist (pure of the model)."""
+    items = []
+    for r in att or []:
+        f = r.get("file")
+        if not f:
+            continue
+        try:
+            p = ROOT / str(f)
+            if p.exists():
+                items.append((r["photo_id"], p.read_bytes()))
+        except OSError:
+            continue
+    return items
+
+
+def _chapter_text(heading, compacts, att, voice, prior="", theme="",
+                  novision=None):
     """(text, flag): one v1 chapter text + owner repair. compacts are
     (row, compact) pairs; att is the attempt's rows; prior is the
-    earlier chapters' heading+text for story flow. flag is None,
-    "repaired", or "heading" (drop the chapter). None text on empty."""
+    earlier chapters' heading+text for story flow. The model studies
+    the chapter's photos plus the records; photo ids it could not see
+    go into novision. flag is None, "repaired", or "heading" (drop
+    the chapter). None text on empty."""
     ids = {r["photo_id"] for r in att}
     shown = [{r["photo_id"]: c} for r, c in compacts if r["photo_id"] in ids]
     nrec = {r["photo_id"]: _record_or_404(r["photo_id"]) for r in att}
     rules, repair = _narration(nrec, voice)
-    text = str(_llm_json(STORY_TEXT_PROMPT.format(
+    sheet = None
+    try:
+        from focal import save_sheet
+        items = _story_sheet_items(att)
+        if items:
+            sheet = save_sheet(items)
+    except Exception:
+        sheet = None
+    if sheet is None and novision is not None:
+        novision.extend(r["photo_id"] for r in att)
+    prompt = (STORY_TEXT_PROMPT.format(
+        theme=theme or "(no description)",
         heading=heading, earlier=prior or "(none yet — this opens the outing.)",
         records=json.dumps(shown, ensure_ascii=False))
-        + "\n" + rules, 0.2, 8000, tries=1).get("text") or "").strip()
+        + "\n" + rules)
+    text = str(_llm_json(prompt, 0.2, 8000, tries=1,
+                         image_path=sheet).get("text") or "").strip()
     if not text:
         return None, None
     _, hbad = repair(heading, scope="caption")
@@ -1520,16 +1553,46 @@ def _chapter_text(heading, compacts, att, voice, prior=""):
                  if r["photo_id"] == att[0]["photo_id"]), "")
     text, tbad = repair(text, scope="caption",
                         fallback=cap0 or att[0]["photo_id"])
+    vprof = None
+    try:
+        vprof = owner_profile_mod.load_profile()
+    except Exception:
+        vprof = None
+    vname = (vprof or {}).get("name") or ""
+    vvoice = narration_mod.resolve_voice(voice, vprof)
+    vfacts = narration_mod.owner_facts(nrec)
+    if (text and vvoice in ("you", "i") and vname
+            and any(f.get("present") is True for f in vfacts.values())
+            and narration_mod.voice_spans(text, vname, vvoice)):
+        want = '"you"' if vvoice == "you" else '"I"'
+        try:
+            retry = str(_llm_json(
+                prompt + f"\nYou used the owner's name; rewrite the same "
+                         f"sentence using {want} for the owner and no name.",
+                0.2, 8000, tries=1, image_path=sheet).get("text") or "").strip()
+        except Exception:
+            retry = ""
+        if retry:
+            text = retry
+            text, tbad2 = repair(text, scope="caption",
+                                 fallback=cap0 or att[0]["photo_id"])
+            tbad = tbad or tbad2
+        if narration_mod.voice_spans(text, vname, vvoice):
+            text = narration_mod.drop_sentences(
+                text, narration_mod.voice_spans(text, vname, vvoice))
+            if not text:
+                text = cap0 or att[0]["photo_id"]
+            tbad = tbad or ["voice"]
     return text, ("repaired" if tbad else None)
 
 
-def _llm_json(prompt, temperature, max_tokens, tries=3):
+def _llm_json(prompt, temperature, max_tokens, tries=3, image_path=None):
     """One JSON-object model call, retried for transient API failures."""
     last = None
     for attempt in range(tries):
         try:
             res = llm_mod.ask(prompt, max_tokens=max_tokens, temperature=temperature,
-                              purpose="story")
+                              purpose="story", image_path=image_path)
             return extract_json(res["text"])
         except llm_mod.LLMBudgetSpent:
             raise
@@ -1569,6 +1632,7 @@ def story(req: StoryRequest, request: Request = None,
     trace = [{"step": "planned",
               "detail": f"Planned {len(raw[:5])} chapters for {theme!r}."}]
     chapters, used, photo_ids = [], set(), []
+    novision = []
     for ch in raw[:5]:
         if not isinstance(ch, dict):
             continue
@@ -1621,7 +1685,7 @@ def story(req: StoryRequest, request: Request = None,
         for att in attempt_sets:
             try:
                 text, flag = _chapter_text(heading, compacts, att, req.voice,
-                                           prior)
+                                           prior, theme, novision)
                 if text:
                     picked = att
                     repaired = (flag == "repaired")
@@ -1644,7 +1708,8 @@ def story(req: StoryRequest, request: Request = None,
         for r in picked:
             used.add(r["photo_id"])
             photo_ids.append(r["photo_id"])
-        detail = f"Wrote {heading!r} from {len(picked)} photo record(s)."
+        detail = (f"Wrote {heading!r} from {len(picked)} photo(s), "
+                  "studying the photos with their records.")
         if repaired:
             detail += " Removed an unsupported owner reference."
         trace.append({"step": "written", "detail": detail})
@@ -1653,6 +1718,11 @@ def story(req: StoryRequest, request: Request = None,
                                      "src": photo_url(r.get("file")), "caption": r.get("caption")}
                                     for r in picked],
                          "text": text})
+    if novision:
+        trace.append({"step": "seen",
+                      "detail": ("The model could not see these photos, so their "
+                                 "chapters used the records only: "
+                                 + ", ".join(sorted(set(novision))) + ".")})
     title = str(plan.get("title") or theme).strip() or theme
     if chapters:
         n = len(chapters)
@@ -2762,10 +2832,13 @@ def story_refresh(story_id: str, req: StoryRefreshRequest, request: Request):
     story = _story_err(load, story_id.strip())
     if req.voice is not None and req.voice not in ("name", "you", "i"):
         raise HTTPException(status_code=400, detail="voice must be name, you or i.")
+    wvoice = req.voice if req.voice in ("name", "you", "i") else story.get("voice")
     old = story.get("chapters") or []
     ids = [c.get("photo_id") for c in old if c.get("photo_id")]
     by_id = _photos_by_ids(ids) if ids else {}
     new, trace = [], []
+    novision = []
+    retheme = story.get("prompt") or story.get("title") or ""
     for c in old:
         r = by_id.get(c.get("photo_id"))
         if r is None:
@@ -2778,7 +2851,8 @@ def story_refresh(story_id: str, req: StoryRefreshRequest, request: Request):
         try:
             compact = _compact_record(r.get("record") or {})
             text, flag = _chapter_text(c.get("heading") or "", [(r, compact)],
-                                       [r], req.voice, prior)
+                                       [r], wvoice, prior, retheme,
+                                       novision)
         except llm_mod.LLMBudgetSpent:
             raise HTTPException(status_code=429, detail=RESTING_TEXT)
         except Exception as e:
@@ -2797,10 +2871,14 @@ def story_refresh(story_id: str, req: StoryRefreshRequest, request: Request):
         trace.append({"step": "refreshed", "detail": detail})
         new.append({"photo_id": r["photo_id"], "seconds": c.get("seconds", 4),
                     "heading": c.get("heading") or "", "text": text})
+    if novision:
+        trace.append({"step": "seen",
+                      "detail": ("The model could not see these photos, so their "
+                                 "chapters used the records only: "
+                                 + ", ".join(sorted(set(novision))) + ".")})
     fetch = _story_fetch_for([c.get("photo_id") for c in new if c.get("photo_id")])
     made = _story_err(update, story_id.strip(), chapters=new, fetch=fetch,
-                      voice=(req.voice if req.voice in ("name", "you", "i")
-                             else story.get("voice")))
+                      voice=wvoice)
     return {**_story_full(made), "trace": trace}
 
 
@@ -2827,6 +2905,115 @@ def story_publish(story_id: str, request: Request,
     made = _story_err(publish, story_id.strip(), fetch=fetch,
                       include_name=(req.include_name if req else False))
     return _story_full(made)
+
+
+class FilmRequest(BaseModel):
+    photo_ids: List[str] = Field(min_length=1)
+    prompt: str = ""
+    style: str = "postcard"
+    target: str = "short"
+    voice: Optional[str] = None
+    seed: Optional[int] = None
+
+
+@app.post("/api/films")
+def films_build(req: FilmRequest, request: Request = None,
+                response: Response = None):
+    """Direct a v2 film from explicit photo ids.
+
+    Stateless: nothing is stored; the client holds the film JSON.
+    seed varies the direction ("Try another direction") while
+    keeping the same photos.
+    """
+    _guard_or_429(request, response)
+    from director import (TARGET_SCENES, normalize_style, plan_beats,
+                          summarize_record)
+    from film import build_film
+    from focal import ensure_focal
+    try:
+        style = normalize_style(req.style)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    if req.target not in TARGET_SCENES:
+        raise HTTPException(status_code=400, detail="target must be short or medium.")
+    if req.voice is not None and req.voice not in ("name", "you", "i"):
+        raise HTTPException(status_code=400, detail="voice must be name, you or i.")
+    if req.seed is not None and (type(req.seed) is not int or req.seed < 0):
+        raise HTTPException(status_code=400,
+                            detail="seed must be a non-negative integer.")
+    ids = [i for i in dict.fromkeys((p or "").strip() for p in req.photo_ids) if i]
+    if not ids:
+        raise HTTPException(status_code=400, detail="photo_ids must not be empty.")
+    try:
+        prof = owner_profile_mod.load_profile()
+    except Exception:
+        prof = None
+    voice = narration_mod.resolve_voice(req.voice, prof)
+    try:
+        rows = (get_sb().table("photos")
+                .select("photo_id,viewpoint,file,record,collection,place_key,embedding")
+                .in_("photo_id", ids).execute().data or [])
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"photo lookup failed: {e}")
+    by_id = {r["photo_id"]: r for r in rows}
+    missing = [i for i in ids if i not in by_id]
+    if missing:
+        raise HTTPException(status_code=404,
+                            detail=f"unknown photo ids: {', '.join(missing)}")
+    rows = [by_id[i] for i in ids]
+    trace = []
+
+    def load_bytes(pid):
+        p = ROOT / str(by_id[pid].get("file") or "")
+        return ((p.read_bytes(), "image/png" if p.suffix.lower() == ".png"
+                 else "image/jpeg") if p.exists() else None)
+
+    try:
+        focals = ensure_focal(ids, load_bytes=load_bytes, trace=trace)
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"focal data failed: {e}")
+    briefs = [summarize_record(r["photo_id"], r.get("viewpoint"),
+                               r.get("record") or {}) for r in rows]
+    try:
+        sheet, source = plan_beats(req.prompt.strip() or "untitled", style,
+                                   req.target, briefs, focals, trace=trace,
+                                   seed=req.seed)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except llm_mod.LLMBudgetSpent:
+        raise HTTPException(status_code=429, detail=RESTING_TEXT)
+    rows_by_id = {r["photo_id"]: r for r in rows}
+    pids = [r["photo_id"] for r in rows if r.get("collection") == "personal"]
+    vecs = {r["photo_id"]: _coerce_embedding(r.get("embedding") or [])
+            for r in rows if r["photo_id"] in pids}
+    sim = {(pids[i], pids[j]): _cosine(vecs[pids[i]], vecs[pids[j]])
+           for i in range(len(pids)) for j in range(i + 1, len(pids))}
+    from focal import save_sheet
+    items = [(r["photo_id"], got[0]) for r in rows
+             if (got := load_bytes(r["photo_id"])) is not None]
+    vision_sheet = save_sheet(items) if items else None
+    if vision_sheet is None:
+        trace.append({"step": "seen",
+                      "detail": ("The model could not see the photos, so captions "
+                                 "used the records only.")})
+    try:
+        film = build_film(sheet, rows_by_id, focals, req.target,
+                          cluster_bursts(pids, sim), trace,
+                          voice=voice, profile=prof,
+                          image_path=vision_sheet)
+    except llm_mod.LLMBudgetSpent:
+        raise HTTPException(status_code=429, detail=RESTING_TEXT)
+    for s in film["scenes"]:
+        r = rows_by_id.get(s["photo_id"]) or {}
+        s["src"] = photo_url(r.get("file"))
+        s["collection"] = r.get("collection")
+        for f in s.get("frames") or []:
+            fr = rows_by_id.get(f) or {}
+            s.setdefault("frame_srcs", {})[f] = photo_url(fr.get("file"))
+    attach_credits(film["scenes"])
+    return {"film": film, "source": source, "trace": trace,
+            "focal_fallbacks": sorted(p for p, f in focals.items()
+                                      if f.get("fallback"))}
 
 
 # ----- Phase 5: library albums, world browse, gaps, correction, deletion, export -----

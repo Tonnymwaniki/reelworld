@@ -169,6 +169,23 @@ try:
     w = film_mod.write_captions([sc("p1")], BRIEFS, trace=(tw2 := []))
     check(w[0]["caption"] == "Stored one." and w[0]["caption_source"] == "stored-caption"
           and "stored captions" in tw2[0]["detail"], "caption fallback")
+    seen = {}
+    llm.ask = lambda *a, **k: (seen.update(prompt=a[0], **k),
+                               {"text": json.dumps({"p1": "Buses park here."})})[1]
+    w = film_mod.write_captions([sc("p1")], BRIEFS, trace=(tw3 := []),
+                                image_path="sheet.jpg")
+    check(seen.get("image_path") == "sheet.jpg"
+          and "attached photos" in seen.get("prompt", "")
+          and "same word" in seen.get("prompt", "")
+          and "studying the photos" in tw3[0]["detail"],
+          "captions study the photos")
+    vreplies = [json.dumps({"p1": "Tonny skates."}),
+                json.dumps({"p1": "I skate."})]
+    llm.ask = lambda *a, **k: {"text": vreplies.pop(0)}
+    vbriefs = {"p1": dict(BRIEFS["p1"], owner_present=True)}
+    w = film_mod.write_captions([sc("p1")], vbriefs, voice="i",
+                                profile={"name": "Tonny"})
+    check(w[0]["caption"] == "I skate.", "wrong voice retried")
 
     s1 = sc("p1")
     s1["caption"] = "Buses park here. People wait."
@@ -270,6 +287,12 @@ try:
           and film["total_seconds"] == 8.0
           and any("Outside" in t["detail"] for t in tb),
           "build_film end to end")
+    check(film["version"] == 2, "film schema v2")
+    check(all(s["duration"] == s["seconds"] for s in film["scenes"]),
+          "duration mirrors seconds")
+    check(all(isinstance(s["evidence"], list) and s["evidence"]
+              and all(isinstance(e, str) for e in s["evidence"])
+              for s in film["scenes"]), "scenes carry evidence")
 finally:
     llm.ask = orig_ask
 

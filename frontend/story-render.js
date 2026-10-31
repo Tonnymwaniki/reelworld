@@ -533,11 +533,23 @@
 
   /* Legacy chapter stories play through the same renderer. Captions are
    * joined heading + text; every other v2 field takes its plain default. */
+  /* Stored chapter texts often echo the heading ("Morning Arrival:
+     Tonny ..."); drop the echo so captions read (and speak) once. */
+  function stripHeadingEcho(heading, text) {
+    const h = String(heading || "").trim();
+    const t = String(text || "");
+    if (!h || !t) return t;
+    const esc = h.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return t.replace(new RegExp("^" + esc + "\\s*[:.\\-\\u2013\\u2014\\n]+\\s*", "i"), "");
+  }
+
   function migrateChapters(full) {
     const film = {
       title: (full.story && full.story.title) || "ReelWorld story",
-      scenes: (full.chapters || []).map((c) => {
-        const parts = [c.heading, c.text || c.caption].filter(Boolean);
+      scenes: (full.chapters || []).map((c, i, arr) => {
+        const body = c.text ? stripHeadingEcho(c.heading, c.text) : (c.caption || "");
+        const prev = i > 0 ? arr[i - 1].heading : null;
+        const parts = [c.heading !== prev ? c.heading : null, body].filter(Boolean);
         return {
           photo_id: c.photo_id || "",
           src: c.src || "",
@@ -551,6 +563,23 @@
     return adaptFilm(film);
   }
 
+  function firstSpoken(caption) {
+    const s = String(caption || "").trim();
+    if (!s) return "";
+    const m = s.match(/^[^.!?]+[.!?]/);
+    const one = (m ? m[0] : s).trim();
+    if (one.length <= 140) return one;
+    const cut = one.slice(0, 140);
+    return cut.slice(0, Math.max(40, cut.lastIndexOf(" "))).trim();
+  }
+
+  function readHold(seconds, caption) {
+    const words = firstSpoken(caption).split(/\s+/).filter(Boolean).length;
+    const need = words / 2.4 + 0.8;
+    const base = Number(seconds) || 0;
+    return Math.round(Math.max(base, Math.min(need, base + 10)) * 10) / 10;
+  }
+
   return {
     WANT_W: WANT_W, WANT_H: WANT_H, FALLBACK_W: FALLBACK_W, FALLBACK_H: FALLBACK_H,
     FPS: FPS, END_CARD_SECONDS: END_CARD_SECONDS, REDUCED_SCALE: REDUCED_SCALE,
@@ -559,5 +588,6 @@
     transitionName: transitionName, transitionDur: transitionDur,
     sourceRect: sourceRect, wrapLines: wrapLines, canvasFocal: canvasFocal,
     adaptFilm: adaptFilm, migrateChapters: migrateChapters,
+    firstSpoken: firstSpoken, readHold: readHold,
   };
 });

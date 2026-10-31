@@ -100,6 +100,19 @@ def check_text(text, name, allowed, scope="chat"):
     return bad
 
 
+def voice_spans(text, name, voice):
+    """Name spans that violate a you/I voice (empty otherwise).
+
+    Under voice "you"/"i" the owner's name must never appear; the
+    model was told to use that voice and no other. Voice "name"
+    (or no name) has nothing to violate.
+    """
+    if voice not in ("you", "i") or not name:
+        return []
+    return [{"type": "voice_name", "start": m.start(), "end": m.end(),
+             "text": m.group(0)} for m in _name_spans(text, name)]
+
+
 def drop_sentences(text, spans):
     """Remove every sentence containing a violation span (pure)."""
     if not spans:

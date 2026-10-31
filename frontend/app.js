@@ -4099,7 +4099,8 @@ const TRACE_LABELS = {
   understood: "Understood", searched: "Searched", rejected: "Skipped",
   fallback: "Fallback", reinspected: "Looked again", answered: "Answered",
   planned: "Planned", dropped: "Dropped", written: "Written",
-  rewrote: "Rewrote",
+  rewrote: "Rewrote", checked: "Checked", paced: "Paced", staged: "Staged",
+  refreshed: "Refreshed", kept: "Kept",
 };
 
 function renderTrace(ol, trace) {
@@ -5340,7 +5341,7 @@ function filmFromFull(full) {
   const SR = (typeof window !== "undefined" && window.StoryRender) || null;
   if (!SR) return null;
   if (full && full.scenes && full.scenes.length) {
-    const title = (full.story && full.story.title) || "";
+    const title = (full.story && full.story.title) || full.title || "";
     return SR.adaptFilm({ title: title, scenes: full.scenes });
   }
   return SR.migrateChapters(full || {});
@@ -5487,7 +5488,7 @@ const player = {
     });
     root.append(frame, track, ctrls, strip);
     if (readRow) ctrls.after(readRow);
-    this.st = { root: root, film: film, t: 0, last: 0, playing: true,
+    this.st = { root: root, film: film, baseFilm: film, t: 0, last: 0, playing: true,
       total: total, cv: cv, ctx: cv.getContext("2d"), tag: tag, time: time,
       bar: bar, play: play, replay: replay, strip: strip, readBtn: readBtn,
       read: false, spoken: -1,
@@ -5509,22 +5510,30 @@ const player = {
     this.st = null;
   },
 
-  speak(text) {
+  speak(text, idx) {
     try {
       const synth = window.speechSynthesis;
       if (!synth) return;
       synth.cancel();
-      const u = new SpeechSynthesisUtterance(String(text || "").slice(0, 400));
+      const SR = window.StoryRender || {};
+      const line = SR.firstSpoken ? SR.firstSpoken(text) : String(text || "");
+      if (!line) return;
+      const st = this.st;
+      const token = st ? (st.speechToken = (st.speechToken || 0) + 1) : 0;
+      const u = new SpeechSynthesisUtterance(line);
       u.lang = "en-US";
       const v = (synth.getVoices() || []).find((x) =>
         String(x.lang || "").toLowerCase().startsWith("en"));
       if (v) u.voice = v;
+      const self = this;
+      u.onend = u.onerror = () => self.onSpeechEnd(idx, token);
       synth.speak(u);
     } catch (e) { /* speech unavailable */ }
   },
 
   stopSpeak() {
     try {
+      if (this.st) this.st.speechToken = (this.st.speechToken || 0) + 1;
       if (window.speechSynthesis) window.speechSynthesis.cancel();
     } catch (e) { /* speech unavailable */ }
   },
@@ -5534,20 +5543,65 @@ const player = {
     if (!st || !st.read || !st.playing || st.spoken === idx) return;
     st.spoken = idx;
     const sc = st.film.scenes[idx];
-    if (sc && sc.caption) this.speak(sc.caption);
+    const now = (typeof performance !== "undefined" ? performance.now() : Date.now());
+    if (sc && sc.caption && window.speechSynthesis) {
+      st.speakDeadline = now + ((Number(sc.seconds) || 4) + 15) * 1000;
+      this.speak(sc.caption, idx);
+    } else {
+      st.speakDeadline = now + (Number(sc && sc.seconds) || 4) * 1000;
+    }
+  },
+
+  onSpeechEnd(idx, token) {
+    const st = this.st;
+    if (!st || token !== st.speechToken || !st.read || !st.playing) return;
+    st.speakDeadline = 0;
+    if (idx === undefined || idx >= st.film.scenes.length - 1) {
+      st.t = st.total;
+      st.playing = false;
+      st.replay.classList.remove("hidden");
+      this.paint();
+    } else {
+      this.jump(idx + 1);
+    }
+  },
+
+  holdAt() {
+    const st = this.st;
+    const SR = window.StoryRender || {};
+    if (!st || !SR.timeline) return st ? st.total : 0;
+    const tl = SR.timeline(st.film);
+    const idx = this.curIdx();
+    const end = idx + 1 < tl.starts.length ? tl.starts[idx + 1] : st.total;
+    let trans = 0;
+    if (SR.transitionDur && idx + 1 < st.film.scenes.length) {
+      try { trans = SR.transitionDur(st.film, idx + 1) || 0; } catch (e) { /* plain cut */ }
+    }
+    return Math.max(tl.starts[idx] || 0, end - trans - 0.01);
   },
 
   toggleRead() {
     const st = this.st;
     if (!st) return;
+    const SR = window.StoryRender || {};
+    const idx = this.curIdx();
     st.read = !st.read;
-    st.spoken = -1;
+    if (st.baseFilm && SR.timeline) {
+      if (st.read && SR.readHold) {
+        st.film = Object.assign({}, st.baseFilm, {
+          scenes: st.baseFilm.scenes.map((sc) =>
+            Object.assign({}, sc, { seconds: SR.readHold(sc.seconds, sc.caption) })),
+        });
+      } else {
+        st.film = st.baseFilm;
+      }
+      st.total = SR.timeline(st.film).total;
+    }
     if (st.readBtn) {
       st.readBtn.firstChild.textContent = st.read ? "volume_up" : "volume_off";
       st.readBtn.setAttribute("aria-pressed", st.read ? "true" : "false");
     }
-    if (!st.read) this.stopSpeak();
-    else this.maybeSpeak(this.curIdx());
+    this.jump(idx);
   },
 
   curIdx() {
@@ -5583,11 +5637,19 @@ const player = {
     if (!st.root.isConnected) { this.destroy(); return; }
     if (st.last && st.playing) {
       st.t += (now - st.last) / 1000;
+      if (st.read) st.t = Math.min(st.t, this.holdAt());
       if (st.t >= st.total) {
-        st.t = st.total;
-        st.playing = false;
-        st.replay.classList.remove("hidden");
-        this.stopSpeak();
+        if (st.read && st.spoken === st.film.scenes.length - 1) {
+          st.t = st.total;
+        } else {
+          st.t = st.total;
+          st.playing = false;
+          st.replay.classList.remove("hidden");
+          this.stopSpeak();
+        }
+      }
+      if (st.read && st.playing && st.speakDeadline && now >= st.speakDeadline) {
+        this.onSpeechEnd(st.spoken, st.speechToken);
       }
     }
     st.last = now;
@@ -5603,6 +5665,7 @@ const player = {
     st.t = starts[i];
     st.last = 0;
     st.spoken = -1;
+    st.speakDeadline = 0;
     this.stopSpeak();
     st.replay.classList.add("hidden");
     this.paint();
@@ -5830,6 +5893,11 @@ const builder = {
     this.stage = "review";
     this.rec = null;
     this.recCancel = false;
+    this.film = null;
+    this.filmSeed = 0;
+    this.filmPhotos = "";
+    this.useFilm = false;
+    this.directing = false;
     $("#bld-tabs", view).addEventListener("click", (e) => {
       const b = e.target.closest("[data-stage]");
       if (b) this.showStage(b.dataset.stage);
@@ -5846,6 +5914,10 @@ const builder = {
     $("#bld-scenes", view).addEventListener("click", (e) => this.sceneClick(e));
     $("#bld-shorter", view).addEventListener("click", () => this.makeShorter());
     $("#bld-refresh", view).addEventListener("click", () => this.refresh());
+    $("#bld-direct", view).addEventListener("click", () => this.direct(0));
+    $("#bld-redirect", view).addEventListener("click", () => this.direct(this.filmSeed + 1));
+    $("#bld-film-play", view).addEventListener("click", () => this.playFilm());
+    $("#bld-film-back", view).addEventListener("click", () => this.backToStory());
     $("#bld-save", view).addEventListener("click", () => this.save());
     $("#bld-delete", view).addEventListener("click", () => this.del());
     $("#bld-webm-record", view).addEventListener("click", () => this.recordWebm());
@@ -5881,8 +5953,18 @@ const builder = {
     ["review", "player", "export"].forEach((t) => {
       this.show($("#stage-" + t, view), t === stage);
     });
-    if (stage === "player" && this.full) player.mount($("#bld-player", view), this.full);
-    else player.destroy();
+    if (stage === "player" && this.full) {
+      player.mount($("#bld-player", view), this.cutSource());
+      const note = $("#bld-cut-note", view);
+      if (this.useFilm && this.film) {
+        note.textContent = "Previewing the directed cut (direction " + this.filmSeed + ").";
+        note.classList.remove("hidden");
+      } else note.classList.add("hidden");
+    } else player.destroy();
+  },
+
+  cutSource() {
+    return (this.useFilm && this.film) || this.full;
   },
 
   async load() {
@@ -5930,6 +6012,7 @@ const builder = {
     this.paintTones();
     this.paintScenes();
     this.paintPublish();
+    this.paintFilm();
     $("#bld-save", view).disabled = true;
     $("#bld-save-status", view).textContent = "";
   },
@@ -6081,7 +6164,7 @@ const builder = {
       this.full = out;
       this.paintAll();
       $("#bld-save-status", view).textContent = "Saved.";
-      if (this.stage === "player") player.mount($("#bld-player", view), this.full);
+      if (this.stage === "player") player.mount($("#bld-player", view), this.cutSource());
     } catch (e) {
       if (!view.isConnected) return;
       btn.disabled = false;
@@ -6111,13 +6194,148 @@ const builder = {
         this.show(box, true);
       }
       st.textContent = "Narration refreshed.";
-      if (this.stage === "player") player.mount($("#bld-player", view), this.full);
+      if (this.stage === "player") player.mount($("#bld-player", view), this.cutSource());
     } catch (e) {
       if (!view.isConnected) return;
       st.textContent = String((e && e.message) || e);
     } finally {
       if (view.isConnected) btn.disabled = false;
     }
+  },
+
+  filmIds() {
+    return (this.full.chapters || []).map((c) => c.photo_id).filter(Boolean);
+  },
+
+  async direct(seed) {
+    const view = this.view;
+    if (this.directing || !this.full) return;
+    const ids = this.filmIds();
+    const st = $("#bld-film-status", view);
+    if (!ids.length) {
+      st.textContent = "Add scenes to the story first.";
+      return;
+    }
+    this.directing = true;
+    $("#bld-direct", view).disabled = true;
+    $("#bld-redirect", view).disabled = true;
+    const t0 = performance.now();
+    st.textContent = "Directing…";
+    const timer = setInterval(() => {
+      if (view.isConnected)
+        st.textContent = "Directing… " + Math.round((performance.now() - t0) / 1000) + "s elapsed";
+    }, 1000);
+    try {
+      const out = await api("/api/films", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          photo_ids: ids, prompt: this.full.story.prompt || "",
+          style: this.full.story.tone || "postcard",
+          target: this.full.story.target || "short",
+          voice: this.full.story.voice || null, seed: seed,
+        }),
+      });
+      if (!view.isConnected) return;
+      this.film = out.film;
+      this.filmSeed = seed;
+      this.filmPhotos = ids.join(",");
+      this.filmTrace = out.trace || [];
+      this.useFilm = false;
+      this.paintFilm();
+      const n = (out.film.scenes || []).length;
+      st.textContent = "Directed cut ready: " + n + (n === 1 ? " scene" : " scenes") +
+        " (direction " + seed + "). Preview it or try another direction.";
+    } catch (e) {
+      if (view.isConnected) st.textContent = String((e && e.message) || e);
+    } finally {
+      clearInterval(timer);
+      this.directing = false;
+      if (view.isConnected) {
+        $("#bld-direct", view).disabled = false;
+        $("#bld-redirect", view).disabled = false;
+      }
+    }
+  },
+
+  paintFilm() {
+    const view = this.view;
+    const box = $("#bld-film-list", view);
+    box.innerHTML = "";
+    const has = !!(this.film && (this.film.scenes || []).length);
+    const stale = has && this.filmPhotos !== this.filmIds().join(",");
+    $("#bld-redirect", view).classList.toggle("hidden", !has);
+    $("#bld-film-play", view).classList.toggle("hidden", !has);
+    $("#bld-film-back", view).classList.toggle("hidden", !this.useFilm);
+    $("#bld-film-play", view).disabled = !has || stale;
+    if (!has) {
+      this.show($("#bld-film-trace", view), false);
+      return;
+    }
+    const v = this.film.verification || {};
+    const pill = document.createElement("p");
+    pill.className = "font-label-md text-label-md " +
+      (v.verified ? "text-secondary" : "text-error");
+    pill.textContent = v.verified
+      ? "Verified against the records (" + (v.checked || 0) + " claims)."
+      : "Not verified — " + (v.note || "see the trace.");
+    box.appendChild(pill);
+    (this.film.scenes || []).forEach((s, i) => {
+      const row = document.createElement("div");
+      row.className = "flex gap-3 rounded-lg bg-surface-container-highest p-2";
+      const img = document.createElement("img");
+      img.src = s.src || "";
+      img.alt = s.caption || s.photo_id;
+      img.loading = "lazy";
+      img.className = "rw-photo w-16 h-24 rounded-lg object-cover flex-shrink-0 bg-surface-container-high";
+      const mid = document.createElement("div");
+      mid.className = "flex flex-col gap-1 flex-1 min-w-0";
+      const meta = document.createElement("span");
+      meta.className = "font-label-md text-label-md text-secondary";
+      meta.textContent = "Scene " + (i + 1) + " · " + [s.role, s.camera,
+        s.transition_in, (s.seconds != null ? s.seconds + "s" : null)]
+        .filter(Boolean).join(" · ");
+      const why = document.createElement("span");
+      why.className = "font-body-md text-body-md text-on-surface";
+      why.textContent = "Why this shot: " + (s.why || "—");
+      const cap = document.createElement("span");
+      cap.className = "font-body-sm text-body-sm text-on-surface-variant";
+      cap.textContent = s.caption || "";
+      mid.append(meta, why, cap);
+      if ((s.evidence || []).length) {
+        const ev = document.createElement("span");
+        ev.className = "font-body-sm text-body-sm text-on-surface-variant";
+        ev.textContent = "Evidence: " + s.evidence.join("; ");
+        mid.appendChild(ev);
+      }
+      row.append(img, mid);
+      box.appendChild(row);
+    });
+    const tbox = $("#bld-film-trace", view);
+    if ((this.filmTrace || []).length) {
+      renderTrace(tbox, this.filmTrace);
+      this.show(tbox, true);
+    } else this.show(tbox, false);
+    if (stale) {
+      $("#bld-film-status", view).textContent =
+        "The story changed since this direction — re-direct to refresh it.";
+      if (this.useFilm) this.backToStory(true);
+    }
+  },
+
+  playFilm() {
+    if (!this.film || this.directing) return;
+    this.useFilm = true;
+    this.paintFilm();
+    this.showStage("player");
+  },
+
+  backToStory(silent) {
+    this.useFilm = false;
+    if (!silent) this.paintFilm();
+    if (this.stage === "player" && this.full)
+      player.mount($("#bld-player", this.view), this.full);
+    $("#bld-cut-note", this.view).classList.add("hidden");
   },
 
   async del() {
@@ -6210,7 +6428,7 @@ const builder = {
       status.textContent = "The video renderer failed to load. Refresh and try again.";
       return;
     }
-    const film = filmFromFull(this.full);
+    const film = filmFromFull(this.cutSource());
     if (!film.scenes.length) {
       status.textContent = "This story has no scenes.";
       return;
@@ -6312,7 +6530,9 @@ const builder = {
     dl.classList.add("inline-flex");
     const took = Math.round((performance.now() - t0) / 1000);
     status.textContent = "Recorded " + total.toFixed(0) + "s at " + resNote +
-      (film.reducedMotion ? " (reduced motion)" : "") + " in " + took + "s.";
+      (film.reducedMotion ? " (reduced motion)" : "") +
+      (this.useFilm && this.film ? " (directed cut " + this.filmSeed + ")" : "") +
+      " in " + took + "s.";
     setTimeout(() => URL.revokeObjectURL(dl.href), 60000);
     reset();
   },

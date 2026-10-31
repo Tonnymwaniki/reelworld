@@ -53,6 +53,32 @@ async function main() {
 
   ok(typeof app.player.mount === "function", "player.mount exists");
   ok(typeof app.player.destroy === "function", "player.destroy exists");
+
+  // ---- read-aloud voice pacing ----
+  const P = app.player;
+  const savedJump = P.jump;
+  const savedPaint = P.paint;
+  let jumped = -1;
+  let painted = 0;
+  P.jump = (i) => { jumped = i; };
+  P.paint = () => { painted++; };
+  P.st = { film: { scenes: [{ caption: "One." }, { caption: "Two." }] },
+    t: 0, total: 20, playing: true, read: true, spoken: 0,
+    speechToken: 1, speakDeadline: 5, replay: stubEl() };
+  P.onSpeechEnd(0, 1);
+  ok(jumped === 1 && P.st.speakDeadline === 0, "speech end advances the scene");
+  jumped = -1;
+  P.onSpeechEnd(0, 999);
+  ok(jumped === -1, "stale speech events are ignored");
+  P.st.read = false;
+  P.onSpeechEnd(0, 1);
+  ok(jumped === -1, "speech end ignored when reading is off");
+  P.st.read = true;
+  P.onSpeechEnd(1, 1);
+  ok(P.st.playing === false && P.st.t === 20 && painted > 0, "last speech ends the film");
+  P.jump = savedJump;
+  P.paint = savedPaint;
+  P.st = null;
   ["mount", "make", "load", "del"].forEach((m) =>
     ok(typeof app.stories[m] === "function", "stories." + m + " exists"));
   ["mount", "load", "save", "publish", "recordWebm", "downloadFile",
@@ -107,6 +133,8 @@ async function main() {
     "bld-webm-record", "bld-webm-cancel", "bld-webm-track", "bld-webm-bar",
     "bld-webm-status", "bld-webm-dl", "bld-md", "bld-json", "bld-link",
     "bld-link-status", "bld-publish", "bld-pub-note", "bld-pub-name", "bld-faces",
+    "bld-filmbox", "bld-direct", "bld-redirect", "bld-film-play", "bld-film-back",
+    "bld-film-status", "bld-film-list", "bld-film-trace", "bld-cut-note",
     "bld-pub-status", "bld-showcase-link", "tpl-bld-scene",
   ].forEach((id) => ok(read("builder").indexOf('id="' + id + '"') !== -1, "builder.html has #" + id));
   ["sc-count", "sc-error", "sc-main", "sc-featured", "sc-f-img", "sc-f-title",
@@ -133,6 +161,9 @@ async function main() {
   ok(src.indexOf("speechSynthesis") !== -1, "read-aloud uses speechSynthesis");
   ok(src.indexOf("not included in the exported video") !== -1,
      "read-aloud export note");
+  ok(src.indexOf('"/api/films"') !== -1, "studio directs films via the endpoint");
+  ok(src.indexOf("Why this shot") !== -1, "film review shows why per scene");
+  ok(read("builder").indexOf("Try another direction") !== -1, "film review re-directs");
 
   console.log("stories.test.js: " + n + "/" + n + " checks passed");
 }

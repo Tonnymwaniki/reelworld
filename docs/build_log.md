@@ -620,6 +620,69 @@ the first unfinished phase.
   tags stay undimmed. film.py attaches it from the first
   outline match when `FEATURE_OUTLINES` is on, silent
   otherwise; never calls any outline service.
-- Tests: render 40→45, film 43→49. Live: labeled outline
-  fixture → film_check shows the spotlight + trace row, then
-  the fixture is removed (pending user run).
+- Tests: render 45/45, film 49/49 (user-run green). Live:
+  labeled fixtures → spotlight {x:0.5,y:0.4,r:0.28} on both
+  scenes + "staged" trace row; fixtures removed after.
+- Commit: folded into b08542d (step 8's `git add -A` swept the
+  step 9 files, already written). No separate commit possible.
+
+## Directed-film Stories, step 11: schema v2 + film endpoint (code done, user run pending)
+
+- Schema: films carry `version: 2`; scenes gain `duration`
+  (= `seconds`, kept for the renderer) and record-only
+  `evidence` strings; endpoint enriches `src`/`collection`/
+  `credit`/`frame_srcs`. v1 stories migrate on read
+  (`migrateChapters`, documented).
+- Director takes `seed` (prompt line + fallback rotation);
+  `POST /api/films {photo_ids, prompt?, style?, target?,
+  voice?, seed?}` is stateless (re-direct = same ids, new
+  seed), guarded like `/api/story`. film_check gains --seed.
+- Tests: director 24/24, film 52/52, routes 27/27 (user-run
+  green). Live: endpoint directed seed 0 (001→002→006) and seed 1
+  (006→001→002), same photos, visibly different arcs. Step 11 done.
+
+## Directed-film Stories, step 10: studio Direct mode (code done, user run pending)
+
+- Review tab gains a Directed-film section: direct from chapter
+  photos, why/caption/evidence per scene, verification pill,
+  trace, "Try another direction" (same photos, seed+1),
+  "Preview this direction" (player + export follow the cut with
+  notes), stale warning + "Back to story cut". v1 actions kept.
+- filmFromFull takes v2 films as-is (title fix); export names
+  the cut; new trace labels (checked/paced/staged/refreshed/kept).
+- Tests: studio 134→146. Live: direct, re-direct, preview the
+  cut, export its WebM (pending user run).
+- Fix (user-reported repeat): stored chapter texts echo the
+  heading, so captions read/spoke it twice. Prompt now forbids
+  the echo (new texts) and migrateChapters strips it (old
+  texts play clean). Render 46/46 green; the nameless newest
+  story was a tag-gap timing issue, refresh restored its names.
+- Fix 2 (same-place drone): v1 texts now ONE sentence ≤25 words,
+  places/signs named once per story, each chapter leads with
+  what is new; film captions one sentence ≤140 chars with the
+  same variety rule; repeated consecutive headings speak once.
+  Render green (confirmed in the Fix 4 run).
+- Fix 3 (vision-grounded narration): chapter/caption writers
+  now study the photos (contact sheet) + records + user theme;
+  records stay the fact authority, editor unchanged. A `seen`
+  trace step names photos the model could not see. Tests:
+  story_full 14/14, film 53/53 green; refresh showed no `seen`
+  step (model saw every photo).
+- Fix 4 (voice left behind + Then-droning): read-aloud speaks
+  each scene's first sentence only and stretches scenes to fit
+  the speech (preview-only clone, export untouched); chapter
+  and caption prompts must vary openers. Render 52/52,
+  story_full 14/14, film 53/53 green; refreshed texts varied.
+- Fix 5 (voice choice + voice pacing): story voice you/I is
+  now enforced — wrong-voice chapters rewrite once, else fall
+  back to the stored caption; film captions re-check voice in
+  the retry loop. Read-aloud paces the picture: scenes advance
+  on utterance end and hold (pre-transition frame) while speech
+  runs long; stale speech events ignored via token; silent
+  scenes keep normal pacing. Tests green: narration 28/28,
+  story_full 16/16, film 54/54, stories 150/150.
+- Fix 6 (refresh ignored stored voice): refresh wrote with
+  req.voice (None on {}) so voice fell back to the profile
+  default "name" — the story's "i" was save-only. Refresh now
+  writes in req.voice or the stored voice. story_full 18/18
+  green; user confirms "I" texts and voice-paced playback.

@@ -280,10 +280,15 @@ the other, signs read, and place; says when the records cannot tell.
 
 A small agent builds a photo story: it plans 3–5 chapters for the
 theme, runs a real `Engine.search` per chapter, keeps 1–2 unused
-photos per chapter (never repeating a photo), and writes one or two
-sentences per chapter in a warm vlog voice with flow across chapters,
-using ONLY facts in the chosen photos' stored records (the prompt
-forbids outside facts). Every planned heading is checked against its photos' stored time, setting and viewpoint; a contradicted heading is rewritten from the records or the chapter is dropped (`rewrote` in the trace). Chapters the collection
+photos per chapter (never repeating a photo), and writes one
+sentence per chapter (under 25 words) in a warm vlog voice with
+flow across chapters. The writer studies the chapter photos
+plus their stored records plus the user's theme; the records
+are the fact authority (the prompt forbids outside facts).
+Places and signs are named once per story; later chapters say
+here / this view and lead with what is new. Shared headings
+speak once. Chapters whose photos the model could not see are
+named in a `seen` trace step. Every planned heading is checked against its photos' stored time, setting and viewpoint; a contradicted heading is rewritten from the records or the chapter is dropped (`rewrote` in the trace). Chapters the collection
 cannot support are dropped and named in the trace instead of padded, as are chapters whose text does not come back.
 
 ```json
@@ -301,7 +306,10 @@ cannot support are dropped and named in the trace instead of padded, as are chap
   (`backend/narration.py`): sentences that name the owner where no
   chapter photo is tagged fall back to the stored caption; a heading
   that names the owner drops the chapter. Repairs are named in the
-  trace (`Removed an unsupported owner reference`).
+  trace (`Removed an unsupported owner reference`). Under story
+  voice you/I a chapter that still uses the owner's name is
+  rewritten once in that voice, else falls back to the stored
+  caption; film captions re-check voice the same way.
 
 ```json
 // response
@@ -345,6 +353,29 @@ cannot support are dropped and named in the trace instead of padded, as are chap
   voice) and the per-photo owner facts, and each answer passes the
   code check; repairs add a `checked` trace row. No profile, no tags:
   people are "a person"/"someone"/"a few people", never named.
+
+## Directed films (`POST /api/films`, schema v2)
+
+- Request: `{photo_ids[] (required), prompt?, style?, target?,
+  voice?, seed?}`. Same validation wording as the planners
+  (400s); unknown ids are 404; model-budget trips are 429.
+- Stateless: nothing is stored. The client holds the film JSON;
+  re-direct by posting the same `photo_ids` with a new `seed`.
+  Rate/budget guarded like `/api/story`.
+- The film carries `version: 2`, `title`, `cover`, `beats`,
+  `scenes`, `total_seconds`, `verification`. Each scene carries
+  `photo_id`, `src`, `collection`, `credit`, `role`, `pacing`,
+  `camera`, `transition_in`, `focal`, `seconds` (= `duration`),
+  `found_text`, `why`, `caption` (+`caption_note`), `evidence`
+  (record-only fact strings), `frames` (+`frame_srcs`),
+  optional `spotlight`. Captions are written by the model
+  studying the scene photos with their records (records are
+  the fact authority); a `seen` trace step names it when the
+  photos could not be shown.
+- Old v1 chapter stories still load and play: the player and
+  exporter run them through `migrateChapters` (heading + text
+  become the caption with heading echoes stripped, plain `cut`s,
+  no focal data), so no migration of stored stories is needed.
 
 ## `GET /api/photo/{photo_id}`
 

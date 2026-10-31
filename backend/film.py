@@ -235,14 +235,16 @@ def _scene_owner_ok(text, name, brief, scope="caption"):
 
 
 def write_captions(scenes, briefs, trace=None, session_id=None,
-                   voice=None, profile=None):
-    """One caption per scene from the records only (one model call).
+                   voice=None, profile=None, image_path=None):
+    """One caption per scene from photos + records (one model call).
 
-    briefs maps photo_id -> summarize_record() dict. Vantage scenes
-    keep their note as the whole caption (set in code, no model).
-    Invalid output retries once, then falls back to the stored
-    caption. Model captions are code-checked for owner references;
-    repaired ones fall back to the stored caption when emptied.
+    briefs maps photo_id -> summarize_record() dict. The model
+    studies the attached photos for feel and detail, but the
+    records are the fact authority. Vantage scenes keep their note
+    as the whole caption (set in code, no model). Invalid output
+    retries once, then falls back to the stored caption. Model
+    captions are code-checked for owner references; repaired ones
+    fall back to the stored caption when emptied.
     voice/profile override the stored profile (tests). Sets caption
     + caption_source. Budget errors propagate.
     """
@@ -256,8 +258,16 @@ def write_captions(scenes, briefs, trace=None, session_id=None,
     voice, profile, facts = _narration_for(
         briefs, [s["photo_id"] for s in need], voice, profile)
     name = (profile or {}).get("name") or ""
-    lines = ["Write one caption (1-2 sentences, under 280 characters) per photo,",
+    lines = ["Write one caption (ONE sentence, under 140 characters) per photo,",
              "using ONLY these stored facts. Never add outside facts, never invent.",
+             "Study the attached photos (labelled top to bottom) with these facts:",
+             "let the photos guide the feel and the choice of detail, but every",
+             "claim must be backed by the stored facts.",
+             "Sound like a vlog voiceover: varied, energetic, moving through an outing.",
+             "Vary the set: name a shared place or sign ONCE across all captions;",
+             "other captions say here / this view / the plaza, and lead with what is",
+             "new in that photo instead of re-listing shared facts.",
+             "Never start two captions with the same word.",
              narration_mod.rules_block(profile, facts, voice)]
     for s in need:
         lines.append(f"- {s['photo_id']}: {_brief_text(briefs.get(s['photo_id']))}")
@@ -271,7 +281,7 @@ def write_captions(scenes, briefs, trace=None, session_id=None,
         try:
             data = extract_json(llm.ask(
                 prompt, temperature=0.1, purpose="captions",
-                session_id=session_id)["text"])
+                session_id=session_id, image_path=image_path)["text"])
         except llm.LLMBudgetSpent:
             raise
         except (RuntimeError, ValueError) as e:
@@ -283,6 +293,14 @@ def write_captions(scenes, briefs, trace=None, session_id=None,
         missing = [p for p in pids if not isinstance(data.get(p), str)
                    or not data[p].strip()]
         last_problems = [f"missing caption for {p}" for p in missing]
+        if voice in ("you", "i"):
+            want = '"you"' if voice == "you" else '"I"'
+            last_problems += [
+                f"wrong voice in {p}: use {want}, not the name"
+                for p in pids
+                if isinstance(data.get(p), str) and data[p].strip()
+                and (briefs.get(p) or {}).get("owner_present") is True
+                and narration_mod.voice_spans(data[p], name, voice)]
         if not last_problems:
             repaired = 0
             for s in need:
@@ -296,7 +314,10 @@ def write_captions(scenes, briefs, trace=None, session_id=None,
                 s["caption"] = cap
                 s["caption_source"] = "records-model"
             if trace is not None:
-                detail = f"Wrote {len(need)} captions from the records."
+                detail = (f"Wrote {len(need)} captions from the records."
+                          if image_path is None else
+                          f"Wrote {len(need)} captions studying the photos "
+                          "with their records.")
                 if repaired:
                     detail += f" Removed unsupported owner references in {repaired}."
                 trace.append({"step": "wrote", "detail": detail})
@@ -485,6 +506,27 @@ def _refit_scenes(scenes, metas, records):
     return scenes
 
 
+def evidence_for(brief):
+    """Short fact strings backing one scene (pure): place, viewpoint,
+    signs, things, people, taken-from. Records only, no model."""
+    b = brief or {}
+    ev = []
+    place = (b.get("place") or "unknown place").strip() or "unknown place"
+    st = b.get("place_status")
+    ev.append(f"place: {place}" + (f" ({st})" if st else ""))
+    if b.get("viewpoint"):
+        ev.append(f"viewpoint: {b['viewpoint']}")
+    for s in (b.get("signs") or [])[:2]:
+        ev.append(f"sign: {s}")
+    things = ", ".join((b.get("things") or [])[:3])
+    if things:
+        ev.append(f"shows: {things}")
+    ev.append(f"people: {b.get('people', 0)}")
+    if b.get("taken_from"):
+        ev.append(f"taken from: {b['taken_from']}")
+    return ev
+
+
 def spotlight_for(photo_id, outlines_dir=None, enabled=True):
     """{x, y, r} spotlight from the saved outline, or None.
 
@@ -530,15 +572,17 @@ def attach_spotlights(scenes, outlines_dir=None, enabled=True):
 
 def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
                trace=None, session_id=None, voice=None, profile=None,
-               outlines_enabled=None):
+               outlines_enabled=None, image_path=None):
     """Full pipeline: scenes, cards, pacing, captions, editor, re-pace.
 
     rows_by_id maps photo_id -> row {place_key, viewpoint,
     collection, record}. Returns the film dict (title, cover,
     beats, scenes, total_seconds, verification). voice/profile
     override the stored profile for narration. outlines_enabled
-    defaults to FEATURE_OUTLINES. Trace is appended, never
-    replaced. Budget errors propagate.
+    defaults to FEATURE_OUTLINES. image_path is a contact sheet
+    the caption writer studies with the records (None writes from
+    the records only). Trace is appended, never replaced. Budget
+    errors propagate.
     """
     if outlines_enabled is None:
         outlines_enabled = os.getenv("FEATURE_OUTLINES", "true").strip().lower() == "true"
@@ -556,7 +600,8 @@ def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
     scenes = assemble_scenes(beatsheet, metas, records)
     scenes = merge_bursts(scenes, bursts)
     apply_pacing(scenes, target, trace)
-    write_captions(scenes, briefs, trace, session_id, voice, profile)
+    write_captions(scenes, briefs, trace, session_id, voice, profile,
+                   image_path=image_path)
     title, beats, kept, verification = edit_captions(
         beatsheet.get("title"), beatsheet.get("beats"), scenes,
         briefs, trace, session_id, voice, profile)
@@ -571,6 +616,8 @@ def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
         base_why = s.get("why") or ""
         s["why"] = f"{base_why} (mood: {f.get('mood', 'unknown')})".strip()
         s["focal"] = f or None
+        s["duration"] = s["seconds"]
+        s["evidence"] = evidence_for(briefs.get(s["photo_id"]))
     cover = beatsheet.get("cover")
     if cover not in [s["photo_id"] for s in kept]:
         cover = kept[0]["photo_id"] if kept else None
@@ -581,6 +628,7 @@ def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
     if n_spot and trace is not None:
         trace.append({"step": "staged",
                       "detail": f"Spotlight on {n_spot} scene(s) with outlines."})
-    return {"title": title, "cover": cover, "beats": beats, "scenes": kept,
+    return {"version": 2, "title": title, "cover": cover, "beats": beats,
+            "scenes": kept,
             "total_seconds": round(sum(s["seconds"] for s in kept), 2),
             "verification": verification}

@@ -116,6 +116,22 @@ def build_contact_sheet(items):
     return buf.getvalue(), sizes
 
 
+def save_sheet(items):
+    """Contact sheet to a cached file; path str, or None on any failure."""
+    if not items:
+        return None
+    try:
+        sheet, _ = build_contact_sheet(items)
+        SHEETS_DIR.mkdir(parents=True, exist_ok=True)
+        key = hashlib.sha1(
+            ",".join(sorted(p for p, _ in items)).encode()).hexdigest()[:16]
+        path = SHEETS_DIR / f"{key}.jpg"
+        path.write_bytes(sheet)
+        return str(path)
+    except Exception:
+        return None
+
+
 def fallback_entry(pid, size, reason):
     """Centre focal, confidence 0; crop only when dimensions are known."""
     return {"photo_id": pid, "focal": {"x": 0.5, "y": 0.5},

@@ -73,5 +73,11 @@ check(narr.public_text("Tonny waves.", "") == "Tonny waves.", "public no name")
 check(narr.public_text("A person walks.", "Tonny") == "A person walks.",
       "public plain kept")
 
+check(narr.voice_spans("Tonny walks.", "Tonny", "i") != [], "name violates i")
+check(narr.voice_spans("Tonny walks.", "Tonny", "you") != [], "name violates you")
+check(narr.voice_spans("I walk.", "Tonny", "i") == [], "I keeps i")
+check(narr.voice_spans("Tonny walks.", "Tonny", "name") == [], "name keeps name")
+check(narr.voice_spans("Tonny walks.", "", "i") == [], "no name no voice")
+
 print(f"test_narration.py: {total - fails}/{total} checks passed")
 sys.exit(1 if fails else 0)

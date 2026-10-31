@@ -287,6 +287,30 @@ const FOCAL = {
     chapters: [{ photo_id: "p", heading: "Head", text: "Body text." }] });
   check("migrateChapters joins caption", mig.title === "Old" &&
         mig.scenes[0].caption === "Head. Body text." && mig.scenes[0].seconds === 3);
+  const echo = R.migrateChapters({ story: {},
+    chapters: [{ photo_id: "p", heading: "Morning Arrival",
+                 text: "Morning Arrival\n\nTonny kicks off the day." }] });
+  check("migrateChapters strips heading echo",
+    echo.scenes[0].caption === "Morning Arrival. Tonny kicks off the day.");
+  const dup = R.migrateChapters({ story: {},
+    chapters: [{ photo_id: "a", heading: "Same", text: "First." },
+               { photo_id: "b", heading: "Same", text: "Second." },
+               { photo_id: "c", heading: "Other", text: "Third." }] });
+  check("migrateChapters drops repeated headings",
+    dup.scenes[0].caption === "Same. First." &&
+    dup.scenes[1].caption === "Second." &&
+    dup.scenes[2].caption === "Other. Third.");
+  check(R.firstSpoken("Morning. Tonny walks on.") === "Morning.",
+    "firstSpoken takes one sentence");
+  check(R.firstSpoken("") === "" && R.firstSpoken(null) === "",
+    "firstSpoken empty safe");
+  check(R.firstSpoken("No stop here") === "No stop here",
+    "firstSpoken keeps stop-less text");
+  check(R.readHold(3, "Morning. Tonny walks on.") === 3,
+    "readHold keeps roomy scenes");
+  const long = R.firstSpoken("Word ".repeat(30).trim() + ". Next.");
+  check(long.split(/\s+/).length <= 28 && R.readHold(3, long + " Next.") > 3,
+    "readHold stretches short scenes for speech");
   const html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
   const ri = html.indexOf("story-render.js");
   const ai = html.indexOf('src="/app.js"');

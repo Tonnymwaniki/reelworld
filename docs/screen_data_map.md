@@ -122,7 +122,7 @@ and mood surface in the player/exporter from step 7 on, and
 | Play / pause / prev / next / replay / scene strip | player chrome in `app.js` | unchanged controls; scene strip thumbnails from `scene.src` |
 | WebM export | same `renderFrame` at 1080×1920, 30 fps | `canvas.captureStream` + MediaRecorder (vp9 → vp8 → webm); status names resolution, size, seconds; 720×1280 fallback when the benchmark is slow |
 | Reduced motion | `prefers-reduced-motion` at mount/export | dissolves only, no zooms or slides, 1.25× holds; export status says "(reduced motion)" |
-| Read aloud (play only) | player toggle + `speechSynthesis` (English voice) | reads each scene caption in sync; stops on pause, jump, end, or toggle-off; UI states it is not in the exported video |
+| Read aloud (play only) | player toggle + `speechSynthesis` (English voice) | speaks each scene's first sentence; scenes advance when the voice finishes and hold their last clean frame if speech runs long (preview only, export unchanged); stops on pause, jump, end, or toggle-off; UI states it is not in the exported video |
 | Spotlight | `scene.spotlight {x, y, r}` from `data/outlines/<id>.json` (first match) when `FEATURE_OUTLINES` is on | renderer drifts the crop toward the subject + slight push (skipped under reduced motion) and dims the frame except the subject circle; missing/disabled/malformed outlines ignored silently; captions stay undimmed |
 | Missing photo | image fails to load | player paints a "Photo unavailable" placeholder and keeps playing; export stops with the photo id named |
 | Old stories | chapters, no scenes | migrated on read (heading + text joined, 3s scenes, plain cuts); they play and export unchanged otherwise |
@@ -152,3 +152,5 @@ and mood surface in the player/exporter from step 7 on, and
 | Scene problem flags | `problems` in the story detail | headings using the name or you/I on untagged photos are flagged with "change it or refresh the narration" |
 | Refresh narration | `POST /api/stories/{id}/refresh` | rewrites texts with the current name + tags; trace painted under the review tab; demo code needed |
 | "Include my name in this public story" | `POST /api/stories/{id}/publish` `{include_name}` | checkbox, default off; disabled once published showing the stored choice; off means the Showcase shows "the photographer" |
+| Directed film section | `POST /api/films` | "Direct this story" builds a v2 cut from the chapter photos; each scene shows role/camera/transition/duration, "Why this shot", caption, evidence, verification pill, trace |
+| Try another direction | same endpoint + `seed` | same photos, new seed; "Preview this direction" plays/exports the cut (player + export note the cut); stale warning when chapters change; "Back to story cut" restores v1 |

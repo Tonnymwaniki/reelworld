@@ -139,5 +139,22 @@ try:
 finally:
     llm.ask = orig_ask
 
+f0 = director_mod.fallback_beats("x", "postcard", "short", BRIEFS, {})
+f1 = director_mod.fallback_beats("x", "postcard", "short", BRIEFS, {}, seed=1)
+flat = lambda s: [p for b in s["beats"] for p in b["photo_ids"]]
+check(flat(f0) != flat(f1) and sorted(flat(f0)) == sorted(flat(f1)),
+      "fallback seed rotates")
+check(f0["cover"] == "p1" and f1["cover"] == "p2", "fallback seed cover")
+orig_ask = llm.ask
+seen = {}
+llm.ask = lambda prompt, **k: seen.update(prompt=prompt) or {"text": '{"nope": 1}'}
+tb = []
+try:
+    director_mod.plan_beats("x", "postcard", "short", BRIEFS, {}, trace=tb, seed=3)
+finally:
+    llm.ask = orig_ask
+check("Arc seed 3" in seen["prompt"], "director prompt carries seed")
+check(any("(seed 3)" in t["detail"] for t in tb), "fallback trace names seed")
+
 print(f"test_director.py: {total - fails}/{total} checks passed")
 sys.exit(1 if fails else 0)

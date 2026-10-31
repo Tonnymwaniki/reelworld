@@ -70,7 +70,7 @@ def main(ns):
     by_file = {r["photo_id"]: r.get("file") for r in rows}
     focals = ensure_focal(ids, load_bytes=load_bytes_for(by_file), trace=trace)
     sheet, source = plan_beats(ns.prompt or "untitled", ns.style, ns.target,
-                               briefs, focals, trace=trace)
+                               briefs, focals, trace=trace, seed=ns.seed)
     rows_by_id = {r["photo_id"]: r for r in rows}
     pids = [r["photo_id"] for r in rows if r.get("collection") == "personal"]
     vecs = {r["photo_id"]: _coerce_embedding(r.get("embedding") or [])
@@ -92,6 +92,7 @@ if __name__ == "__main__":
     ap.add_argument("--target", default="short", choices=["short", "medium"])
     ap.add_argument("--style", default="postcard")
     ap.add_argument("--ids", default="")
+    ap.add_argument("--seed", type=int, default=None)
     ns = ap.parse_args()
     if not ns.prompt and not ns.ids:
         ap.error("give --prompt or --ids")
