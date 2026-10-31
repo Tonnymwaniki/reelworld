@@ -953,7 +953,8 @@ def ask(req: AskRequest, request: Request, response: Response):
                 {"type": "image_url", "image_url": {"url": f"data:{mime};base64,{b64}"}},
             ]}])
     except Exception as e:
-        raise HTTPException(status_code=502, detail=f"image look failed: {e}")    img_answer = " ".join(_msg_text(resp.choices[0].message).strip().split()[:120])
+        raise HTTPException(status_code=502, detail=f"image look failed: {e}")
+    img_answer = " ".join(_msg_text(resp.choices[0].message).strip().split()[:120])
     return {"photo_id": pid, "question": req.question, "answer": img_answer,
             "source": "image", "note": "This answer came from looking at the photo again.",
             "trace": [{"step": "reinspected",
