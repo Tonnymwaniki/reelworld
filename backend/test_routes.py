@@ -39,7 +39,11 @@ for path, methods in (("/api/llm/status", ("GET",)),
                       ("/api/owner-tags", ("POST",)),
                       ("/api/owner-tags/summary", ("GET",)),
                       ("/api/stories/{story_id}/refresh", ("POST",)),
-                      ("/api/stories/{story_id}/publish", ("POST",))):
+                      ("/api/stories/{story_id}/publish", ("POST",)),
+                      ("/api/face-reference", ("POST",)),
+                      ("/api/face-reference", ("GET",)),
+                      ("/api/face-reference", ("DELETE",)),
+                      ("/api/face-scan", ("POST",))):
     check((path, methods) in routes, f"route {methods[0]} {path}")
 
 import inspect  # noqa: E402

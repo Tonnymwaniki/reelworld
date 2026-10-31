@@ -565,6 +565,88 @@ def owner_tags_summary():
             "total": len(rows)}
 
 
+class FaceReferenceRequest(BaseModel):
+    image_b64: str = Field(min_length=1)
+
+
+class FaceScanRequest(BaseModel):
+    photo_ids: Optional[List[str]] = None
+
+
+@app.post("/api/face-reference")
+def face_reference_save(req: FaceReferenceRequest, request: Request):
+    """Keep the owner's reference face (largest face found). Write: demo-guarded."""
+    _demo_guard(request)
+    import face_match as face_match_mod
+    try:
+        found = face_match_mod.save_reference(face_match_mod.b64_to_bytes(req.image_b64))
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    return {"ok": True, **found,
+            "preview": face_match_mod.reference_preview_b64()}
+
+
+@app.get("/api/face-reference")
+def face_reference_get():
+    """Whether a reference face is saved, plus its preview for the owner."""
+    import face_match as face_match_mod
+    return {"present": face_match_mod.reference_present(),
+            "preview": face_match_mod.reference_preview_b64()}
+
+
+@app.delete("/api/face-reference")
+def face_reference_delete(request: Request):
+    _demo_guard(request)
+    import face_match as face_match_mod
+    return {"ok": True, "removed": face_match_mod.clear_reference()}
+
+
+@app.post("/api/face-scan")
+def face_scan(req: Optional[FaceScanRequest] = None):
+    """Rank the owner's photos by similarity to the reference face.
+
+    Suggestions only: this writes nothing. Confirm each with
+    POST /api/owner-tags ("I'm in this" / "Not me")."""
+    import face_match as face_match_mod
+    crop = face_match_mod.load_reference_crop()
+    if crop is None:
+        raise HTTPException(status_code=400,
+                            detail="upload a reference face first.")
+    try:
+        recog = face_match_mod.train(crop)
+    except RuntimeError as e:
+        raise HTTPException(status_code=501, detail=str(e))
+    try:
+        rows = (get_sb().table("photos")
+                .select("photo_id,file,caption,record")
+                .eq("collection", "personal").order("photo_id").execute().data or [])
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"photo lookup failed: {e}")
+    want = None
+    if req and req.photo_ids:
+        want = {(p or "").strip() for p in req.photo_ids if (p or "").strip()}
+    out, skipped = [], 0
+    for r in rows:
+        if want is not None and r["photo_id"] not in want:
+            continue
+        path = ROOT / str(r.get("file") or "")
+        try:
+            res = face_match_mod.scan_photo(path, recog)
+        except RuntimeError as e:
+            raise HTTPException(status_code=501, detail=str(e))
+        if res.get("unreadable"):
+            skipped += 1
+            continue
+        out.append({"photo_id": r["photo_id"], "src": photo_url(r.get("file")),
+                    "caption": r.get("caption"), "faces": res["faces"],
+                    "distance": (round(res["distance"], 1)
+                                 if res["distance"] is not None else None),
+                    "band": face_match_mod.band(res["distance"]),
+                    "present": owner_tags_mod.owner_present_of(r.get("record") or {})})
+    out.sort(key=lambda s: (s["distance"] is None, s["distance"] or 0.0))
+    return {"suggestions": out, "scanned": len(out), "skipped": skipped}
+
+
 @app.get("/og-image.png")
 def og_image():
     p = FRONTEND_DIR / "og-image.png"

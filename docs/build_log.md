@@ -511,7 +511,7 @@ the first unfinished phase.
 - Drive-by: library search box (client-side filter over the
   loaded photos, `libSearch` in RWTEST); library.test.js
   172→179.
-- Commit id: (pending: steps 1–5 + film step 7 batch, see `git log`).
+- Commit id: c7ff494 (plus earlier step commits; see `git log`).
 
 ## Owner names, step 5: narration rules (code done, user run pending)
 
@@ -564,3 +564,36 @@ the first unfinished phase.
   export holds profile.json (Tonny) + owner_tags.json; delete
   cleared profile + 13 tags (reembedded 13), summary 0/0/16,
   profile null. Step 7 done.
+
+## Owner names, step 8: face-match backend (code done, user run pending)
+
+- `backend/face_match.py`: Haar detection + LBPH matching, bands
+  strong <60 / likely <90 / weak; reference in git-ignored
+  `data/face/` (original + 128px crop). Suggest-confirm only:
+  nothing writes a tag. No install needed (cv2 5.0 + contrib
+  already in the user's interpreter).
+- Endpoints: reference POST/GET/DELETE (writes demo-guarded),
+  `POST /api/face-scan` (read, ungated) ranking personal photos
+  with distance/band/faces/current tag; 400 without reference,
+  501 without face data.
+- Tests: face_match 17/17, routes 26/26 (user-run green).
+- Live: reference from personal_004 (stale-variable accident,
+  kept: it is the owner); scan ranked all 16, previously tagged
+  self-photos 94-101, known not-me 111. Step 8 done.
+- Fix: this cv2 wheel ships no Haar data, so the cascade loads
+  from OpenCV's dir or `data/face/` via scripts/fetch_face_data.py
+  (one-time download, verified size + XML).
+
+## Owner names, step 9: suggestions UI + wording (code done, user run pending)
+
+- Tag page gains the Match-my-face panel: reference upload with
+  preview, scan button, ranked suggestion rows (band pill, face
+  count, tag state, Yes/No confirming through `tagSome`), remove
+  reference, unscored-count note. Bands retuned on the first real
+  scan (strong <95 / likely <110; known not-me scored 111).
+- Wording: profile privacy block, About covenant + faces section
+  and the home trust line now describe owner-only suggest-confirm
+  matching; design exports untouched (history); AGENTS.md rule
+  qualified the same way.
+- Tests: profile 68→80. Live: upload a close-up, scan, confirm
+  one Yes + one No from the suggestion rows (pending user run).

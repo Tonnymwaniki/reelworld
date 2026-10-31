@@ -6618,6 +6618,7 @@ const profile = {
 const tag = {
   view: null, photos: [], byId: {}, sel: {}, lastOp: null,
   pending: null, profName: null, summary: null,
+  face: null, scan: null,
 
   mount(view) {
     this.view = view;
@@ -6625,6 +6626,8 @@ const tag = {
     this.lastOp = null;
     this.pending = null;
     this.busy = false;
+    this.face = null;
+    this.scan = null;
     $("#tg-bulk-yes", view).addEventListener("click", () => this.bulkYes());
     $("#tg-bulk-clear", view).addEventListener("click", () => {
       this.sel = {};
@@ -6632,6 +6635,15 @@ const tag = {
     });
     $("#tg-undo", view).addEventListener("click", () => this.undo());
     $("#tg-name-save", view).addEventListener("click", () => this.saveName());
+    $("#tg-face-pick", view).addEventListener("click", () => $("#tg-face-file", view).click());
+    $("#tg-face-file", view).addEventListener("change", (e) => this.saveFace(e.target));
+    $("#tg-face-scan", view).addEventListener("click", () => this.scanFace());
+    $("#tg-face-clear", view).addEventListener("click", () => this.clearFace());
+    $("#tg-face-list", view).addEventListener("click", (e) => {
+      const b = e.target.closest("button[data-pid]");
+      if (!b || this.busy) return;
+      this.confirmFace(b.dataset.pid, b.dataset.yes === "1");
+    });
     this.load();
   },
 
@@ -6641,10 +6653,11 @@ const tag = {
     $("#tg-main", view).hidden = true;
     $("#tg-error", view).classList.add("hidden");
     try {
-      const [albums, summary, prof] = await Promise.all([
+      const [albums, summary, prof, face] = await Promise.all([
         api("/api/albums"),
         api("/api/owner-tags/summary").catch(() => null),
         api("/api/profile").catch(() => ({ profile: null })),
+        api("/api/face-reference").catch(() => null),
       ]);
       if (!view.isConnected) return;
       this.byId = (albums && albums.photos) || {};
@@ -6652,6 +6665,7 @@ const tag = {
       this.summary = summary;
       this.profName = (prof && prof.profile && prof.profile.name) || null;
       ownerAsk.prof = (prof && prof.profile) || null;
+      this.face = face;
       this.paint();
       $("#tg-loading", view).hidden = true;
       $("#tg-main", view).hidden = false;
@@ -6694,6 +6708,165 @@ const tag = {
     grid.innerHTML = "";
     this.photos.forEach((m) => grid.appendChild(this.tile(m)));
     $("#tg-undo", view).classList.toggle("hidden", !this.lastOp);
+    this.paintFace();
+    this.paintFaceList();
+  },
+
+  paintFace() {
+    const view = this.view;
+    const img = $("#tg-face-img", view);
+    const has = !!(this.face && this.face.present && this.face.preview);
+    img.classList.toggle("hidden", !has);
+    if (has) img.src = this.face.preview;
+    $("#tg-face-clear", view).classList.toggle("hidden", !has);
+  },
+
+  paintFaceList() {
+    const view = this.view;
+    const box = $("#tg-face-list", view);
+    box.innerHTML = "";
+    if (!this.scan) return;
+    const scored = this.scan.filter((s) => s.band);
+    const pills = { strong: ["Strong match", "bg-secondary-container text-on-secondary-fixed"],
+      likely: ["Likely", "bg-primary-container text-surface"],
+      weak: ["Weak", "bg-surface-container-high text-on-surface-variant"] };
+    scored.forEach((s) => {
+      const m = this.byId[s.photo_id] || {};
+      const row = document.createElement("div");
+      row.className = "flex items-center gap-3 rounded-lg bg-surface-container-highest p-2";
+      const img = document.createElement("img");
+      img.src = s.src || m.src || "";
+      img.alt = s.caption || s.photo_id;
+      img.loading = "lazy";
+      img.className = "rw-photo w-14 h-14 rounded-lg object-cover flex-shrink-0 bg-surface-container-high";
+      const mid = document.createElement("div");
+      mid.className = "flex flex-col gap-1 flex-1 min-w-0";
+      const cap = document.createElement("span");
+      cap.className = "font-body-sm text-body-sm text-on-surface truncate";
+      cap.textContent = s.caption || s.photo_id;
+      const meta = document.createElement("span");
+      meta.className = "font-label-sm text-label-sm text-on-surface-variant";
+      const st = m.owner_present === true ? "tagged you" :
+        (m.owner_present === false ? "tagged not you" : "not reviewed");
+      meta.textContent = s.faces + (s.faces === 1 ? " face" : " faces") + " · " + st;
+      const pill = document.createElement("span");
+      const [txt, cls] = pills[s.band] || pills.weak;
+      pill.className = "px-2 py-0.5 rounded font-label-sm text-label-sm w-fit " + cls;
+      pill.textContent = txt;
+      mid.append(cap, meta, pill);
+      const yes = document.createElement("button");
+      yes.type = "button";
+      yes.dataset.pid = s.photo_id;
+      yes.dataset.yes = "1";
+      yes.className = "min-h-[44px] px-4 rounded-lg bg-primary-container text-surface hover:bg-primary font-label-md text-label-md flex-shrink-0";
+      yes.textContent = "Yes, me";
+      const no = document.createElement("button");
+      no.type = "button";
+      no.dataset.pid = s.photo_id;
+      no.dataset.yes = "0";
+      no.className = "min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md flex-shrink-0";
+      no.textContent = "Not me";
+      row.append(img, mid, yes, no);
+      box.appendChild(row);
+    });
+    const skipped = this.scan.length - scored.length;
+    if (skipped > 0) {
+      const p = document.createElement("p");
+      p.className = "font-body-sm text-body-sm text-on-surface-variant";
+      p.textContent = skipped + (skipped === 1 ? " photo had" : " photos had") +
+        " no detectable face — tag " + (skipped === 1 ? "it" : "them") + " by hand below.";
+      box.appendChild(p);
+    }
+  },
+
+  faceSay(text) {
+    $("#tg-face-status", this.view).textContent = text || "";
+  },
+
+  async saveFace(input) {
+    const view = this.view;
+    const file = input && input.files && input.files[0];
+    input.value = "";
+    if (!file || this.busy) return;
+    this.faceSay("Reading your photo…");
+    const dataUrl = await new Promise((res, rej) => {
+      const r = new FileReader();
+      r.onload = () => res(r.result);
+      r.onerror = () => rej(new Error("could not read that file."));
+      r.readAsDataURL(file);
+    }).catch((e) => { if (view.isConnected) this.faceSay(String((e && e.message) || e)); return null; });
+    if (!dataUrl || !view.isConnected) return;
+    this.busy = true;
+    this.faceSay("Saving your reference face…");
+    try {
+      const out = await api("/api/face-reference", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ image_b64: dataUrl }),
+      });
+      if (!view.isConnected) return;
+      this.face = { present: true, preview: out.preview };
+      this.scan = null;
+      this.paintFace();
+      this.paintFaceList();
+      this.faceSay("Reference saved (" + out.faces + (out.faces === 1 ? " face" : " faces") +
+        " found). Now press “Find me in my photos”.");
+    } catch (e) {
+      if (view.isConnected) this.faceSay(String((e && e.message) || e));
+    } finally {
+      this.busy = false;
+    }
+  },
+
+  async scanFace() {
+    const view = this.view;
+    if (this.busy) return;
+    this.busy = true;
+    this.faceSay("Scanning your photos…");
+    try {
+      const out = await api("/api/face-scan", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({}),
+      });
+      if (!view.isConnected) return;
+      this.scan = out.suggestions || [];
+      this.paintFaceList();
+      const n = this.scan.filter((s) => s.band).length;
+      this.faceSay("Found " + n + (n === 1 ? " suggestion" : " suggestions") +
+        " in " + out.scanned + " photos. Confirm each one — nothing is tagged yet.");
+    } catch (e) {
+      if (view.isConnected) this.faceSay(String((e && e.message) || e));
+    } finally {
+      this.busy = false;
+    }
+  },
+
+  async clearFace() {
+    const view = this.view;
+    if (this.busy) return;
+    this.busy = true;
+    try {
+      await api("/api/face-reference", { method: "DELETE" });
+      if (!view.isConnected) return;
+      this.face = null;
+      this.scan = null;
+      this.paintFace();
+      this.paintFaceList();
+      this.faceSay("Reference removed.");
+    } catch (e) {
+      if (view.isConnected) this.faceSay(String((e && e.message) || e));
+    } finally {
+      this.busy = false;
+    }
+  },
+
+  async confirmFace(pid, yes) {
+    await this.tagSome([pid], yes, null);
+    if (this.view.isConnected) {
+      this.paintFaceList();
+      this.faceSay(yes ? "Tagged — that's you." : "Tagged — not you.");
+    }
   },
 
   statePill(m) {

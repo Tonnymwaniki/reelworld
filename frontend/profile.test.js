@@ -91,16 +91,20 @@ async function main() {
     "pf-ex-i", "pf-privacy", "pf-tag-link", "pf-export", "pf-del",
     "pf-del-confirm", "pf-del-yes", "pf-del-no", "pf-del-status",
   ].forEach((id) => ok(profileHtml.indexOf('id="' + id + '"') >= 0, "profile.html has " + id));
-  ok(profileHtml.indexOf("Reel never works out who someone is from their face. " +
-    "You tell Reel which photos you are in, and only then is your name used.") >= 0,
+  ok(profileHtml.indexOf("Face matching only compares the reference photo you upload against your own photos, to suggest which ones you are in. " +
+    "Nothing is tagged until you confirm it, no one else is ever identified, and your name is used only on photos you tag.") >= 0,
     "privacy wording exact");
 
   const tagHtml = fs.readFileSync(path.join(__dirname, "views", "tag.html"), "utf8");
   ["tg-grid", "tg-progress", "tg-bar", "tg-bulk", "tg-bulk-yes", "tg-bulk-clear",
     "tg-bulk-count", "tg-name-prompt", "tg-name", "tg-name-save", "tg-name-status",
     "tg-undo", "tg-status", "tg-error", "tg-loading", "tg-main",
+    "tg-face", "tg-face-img", "tg-face-file", "tg-face-pick", "tg-face-scan",
+    "tg-face-clear", "tg-face-status", "tg-face-list",
   ].forEach((id) => ok(tagHtml.indexOf('id="' + id + '"') >= 0, "tag.html has " + id));
   ok(tagHtml.indexOf("I'm in all selected") >= 0, "bulk button label");
+  ok(tagHtml.indexOf("Suggestions never tag anything by themselves") >= 0,
+     "face panel honesty note");
 
   const photoHtml = fs.readFileSync(path.join(__dirname, "views", "photo.html"), "utf8");
   ok(photoHtml.indexOf('id="owner-badge"') >= 0, "photo.html has owner-badge");
@@ -111,6 +115,9 @@ async function main() {
   ok(src.indexOf('"people", "me", "look"') >= 0, "library paints the Me album");
   ok(src.indexOf("You are in this photo") >= 0, "badge text present");
   ok(src.indexOf("photo tag") >= 0, "delete reports removed tags");
+  ok(src.indexOf('"/api/face-scan"') >= 0, "tag page scans for suggestions");
+  ok(src.indexOf('"/api/face-reference"') >= 0, "tag page manages the reference");
+  ok(src.indexOf("confirmFace") >= 0, "suggestions confirm through tagging");
 
   console.log(`profile.test.js: ${n} checks passed`);
 }

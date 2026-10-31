@@ -134,7 +134,11 @@ calls + page load), show the output, commit. Do not ask unless truly blocked.
   `data/photos`, `data/index`, `data/annotations/personal`,
   `data/annotations/raw`, `data/cache`, `data/llm_calls.jsonl` stay
   git-ignored.
-- Do not identify people in photos. Personal photos are private by default.
+- Do not identify people in photos, except the owner's own
+  suggest-confirm face matching (their uploaded reference against
+  their own photos, explicit Yes/No per suggestion, never
+  automatic, never anyone else). Personal photos are private by
+  default.
 - Do not change the annotation schema or the existing scripts without asking.
 - Ask before installing a new package; prefer what is already used
   (`openai`, `supabase`, `fastembed`, `numpy`, `python-dotenv`).

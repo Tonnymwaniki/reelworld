@@ -16,4 +16,5 @@ data/cache/
 data/llm_calls.jsonl
 data/outlines/
 data/profile.json
+data/face/
 frontend/design/assets/

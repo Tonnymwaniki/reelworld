@@ -34,6 +34,19 @@
 </div>
 <span class="font-body-sm text-body-sm text-on-surface-variant" id="tg-name-status" role="status"></span>
 </div>
+<div class="flex flex-col gap-3 rounded-xl bg-surface-container-low p-4" id="tg-face">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider font-semibold">Match my face (optional)</span>
+<p class="font-body-md text-body-md text-on-surface-variant">Upload one clear face photo and Reel will suggest which of your photos you are in. Suggestions never tag anything by themselves — you confirm each one, and no one else is ever identified.</p>
+<div class="flex flex-wrap items-center gap-3">
+<img alt="Your reference face" class="hidden w-20 h-20 rounded-lg object-cover bg-surface-container-high" id="tg-face-img"/>
+<input accept="image/*" class="hidden" id="tg-face-file" type="file"/>
+<button class="min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md" id="tg-face-pick" type="button">Choose face photo</button>
+<button class="min-h-[44px] px-4 rounded-lg bg-primary-container text-surface hover:bg-primary font-label-md text-label-md disabled:opacity-45" id="tg-face-scan" type="button">Find me in my photos</button>
+<button class="hidden min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md" id="tg-face-clear" type="button">Remove reference</button>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="tg-face-status" role="status"></span>
+<div class="flex flex-col gap-2" id="tg-face-list"></div>
+</div>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="tg-grid"></div>
 <div class="flex flex-wrap items-center gap-3">
 <button class="hidden min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md" id="tg-undo" type="button">Undo last change</button>

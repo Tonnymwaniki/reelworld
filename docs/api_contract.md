@@ -86,6 +86,21 @@ Writes need the demo code when `DEMO_MODE` is true.
   the profile/tag screens reuse `/api/profile`,
   `/api/owner-tags`, `/api/owner-tags/summary`, `/api/albums`.
 
+## Face suggestions (`/api/face-reference`, `/api/face-scan`)
+
+Suggest-confirm only, OpenCV Haar + LBPH on the owner's own photos.
+`POST /api/face-reference {"image_b64"}` (raw or data-URL base64)
+keeps the largest face found as the reference in git-ignored
+`data/face/`; 400 when no face is found. `GET` returns
+`{present, preview}` (preview is the owner's own data URL or null).
+`DELETE` removes the reference files. `POST /api/face-scan
+{photo_ids?}` ranks personal photos by LBPH distance (lower is
+closer) with bands `strong`/`likely`/`weak`, face counts and each
+photo's current tag state; it writes nothing — confirm via
+`POST /api/owner-tags`. 400 without a reference; 501 when the
+OpenCV install lacks face data. Reference writes need the demo
+code when `DEMO_MODE` is true; the scan is a read (ungated).
+
 ## `GET /og-image.png`
 
 The landing share-preview image (1200×630 PNG), rebuilt honestly from
