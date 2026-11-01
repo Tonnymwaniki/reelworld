@@ -207,6 +207,32 @@ Response:
   run are absent: `open N` has only `answered`, for example.
 
 - 422 invalid body, 503 engine unavailable, 502 search failed
+- Optional `chat_id` records the turn into a saved chat (404 when the
+  chat does not exist in this scope) and runs it on that chat's
+  engine session, so turns continue exactly where the chat left off.
+
+## `/api/chats` (saved conversations)
+
+Local use keeps chats in git-ignored `data/chats/<id>.json` forever.
+The public demo scopes them per anonymous visitor cookie
+(`data/chats/<visitor>/<id>.json`, minted when missing) with 7-day
+expiry from the last update, cleaned lazily on every chats access.
+
+- `POST /api/chats {"title"?}` starts a chat (`chat_YYYYMMDD_NNNN`);
+  the title auto-fills from the first user message unless given.
+- `GET /api/chats` lists summaries (newest first): `{id, title,
+  updated_at, message_count, thumb {photo_id, file}}`.
+- `GET /api/chats/{id}` returns the full thread AND restores the
+  router state (spec, focus, rejected ids, replies, topic, recent
+  user texts) into that chat's engine session.
+- `PATCH /api/chats/{id} {"title"}` renames (manual titles stick).
+- `DELETE /api/chats/{id}` removes one chat and drops its session;
+  `DELETE /api/chats` removes every chat in this scope.
+- Each message stores role, text, kind, spec, result rows (ids plus
+  verdicts, reasons, captions, credits), the real trace, photo
+  binding, topic and label, and time. Reasoning content is never
+  captured, so it can never be stored.
+- 404 unknown chat (also when it belongs to another visitor).
 
 ## `POST /api/search`
 

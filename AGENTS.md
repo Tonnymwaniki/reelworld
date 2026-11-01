@@ -25,6 +25,11 @@ Hackathon (Indie track). Environment: Windows, PowerShell, Python 3.14.
   verify, ask_photo, compare, clarify), topics new/refine, photo-id
   validation, and a JSON fallback when tool calling breaks.
   `Engine.parse()` is legacy (only `scripts/verify_meta.py` uses it).
+- Conversations persist via `backend/chats.py` + `/api/chats` (create,
+  list, open, rename, delete one/all): git-ignored `data/chats/`,
+  per-visitor + 7-day expiry in demo mode, full message records with
+  verdicts and traces (never reasoning content), and router-state
+  restore on open. Turns record only when `/chat` carries `chat_id`.
 - `backend/attributes.py`: per-photo visual checklist (atmosphere, light,
   time_of_day, water, vegetation, crowd) judged from the image, cached in
   `data/attributes/*.json`, loaded into the Supabase `attributes` column

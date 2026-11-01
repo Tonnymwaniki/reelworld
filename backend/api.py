@@ -56,6 +56,7 @@ from supabase import create_client
 import annotate as annotate_mod
 import attributes as attributes_mod
 import chat as chat_module
+import chats as chats_mod
 import llm as llm_mod
 import narration as narration_mod
 import owner_profile as owner_profile_mod
@@ -114,6 +115,38 @@ def get_engine(session_id: str) -> Engine:
         return eng
 
 
+def _chat_scope(request, response):
+    """Chat storage scope: "local", or the demo visitor's cookie id.
+
+    A missing or malformed demo cookie mints a fresh visitor (set on
+    the response when one is available). Direct in-process calls
+    (no request) use the local scope.
+    """
+    if not DEMO_MODE or request is None:
+        return "local"
+    try:
+        visitor = request.cookies.get(VISITOR_COOKIE, "") or ""
+    except Exception:
+        visitor = ""
+    if not chats_mod.valid_scope(visitor):
+        visitor = uuid.uuid4().hex
+        try:
+            if response is not None:
+                response.set_cookie(VISITOR_COOKIE, visitor, samesite="lax")
+        except Exception:
+            pass
+    return visitor
+
+
+def _record_turn(chat_id, scope, message, payload, eng):
+    """Append one turn to a saved chat. Recording never breaks chat."""
+    try:
+        chats_mod.append_turn(scope, chat_id, message, payload,
+                              chats_mod.snapshot_state(eng.state))
+    except Exception:
+        pass
+
+
 def public_row(row: dict) -> dict:
     return {k: v for k, v in row.items() if k not in DROP_KEYS}
 
@@ -168,6 +201,7 @@ def photo_url(file):
 class ChatRequest(BaseModel):
     session_id: str = Field(default="default", min_length=1)
     message: str = Field(min_length=1)
+    chat_id: Optional[str] = None
 
 
 class ChatResponse(BaseModel):
@@ -670,7 +704,14 @@ def chat(req: ChatRequest, request: Request = None, response: Response = None):
     if limited is not None:
         _sid = req.session_id.strip() or "default"
         return _resting_payload(_sid, get_engine(_sid), limited)
-    sid = req.session_id.strip() or "default"
+    scope, cid = None, (req.chat_id or "").strip() or None
+    if cid:
+        scope = _chat_scope(request, response)
+        if chats_mod.load_chat(scope, cid) is None:
+            raise HTTPException(status_code=404, detail="I could not find that chat.")
+        sid = cid
+    else:
+        sid = req.session_id.strip() or "default"
     try:
         eng = get_engine(sid)
     except Exception as e:
@@ -682,7 +723,10 @@ def chat(req: ChatRequest, request: Request = None, response: Response = None):
             return _resting_payload(sid, eng, "budget")
         except Exception as e:
             raise HTTPException(status_code=502, detail=f"search failed: {e}")
-        return _chat_payload(sid, eng, out)
+        payload = _chat_payload(sid, eng, out)
+        if cid:
+            _record_turn(cid, scope, req.message, payload, eng)
+        return payload
 
 
 def _push_reply(eng, rows):
@@ -751,7 +795,14 @@ def chat_stream(req: ChatRequest, request: Request = None,
             _sid = req.session_id.strip() or "default"
             yield _sse("result", _resting_payload(_sid, get_engine(_sid), limited))
         return StreamingResponse(gen_resting(), media_type="text/event-stream")
-    sid = req.session_id.strip() or "default"
+    scope, cid = None, (req.chat_id or "").strip() or None
+    if cid:
+        scope = _chat_scope(request, response)
+        if chats_mod.load_chat(scope, cid) is None:
+            raise HTTPException(status_code=404, detail="I could not find that chat.")
+        sid = cid
+    else:
+        sid = req.session_id.strip() or "default"
     try:
         eng = get_engine(sid)
     except Exception as e:
@@ -764,13 +815,92 @@ def chat_stream(req: ChatRequest, request: Request = None,
                     if item[0] == "step":
                         yield _sse("step", {"step": item[1], "detail": item[2]})
                     else:
-                        yield _sse("result", _chat_payload(sid, eng, item[1]))
+                        payload = _chat_payload(sid, eng, item[1])
+                        if cid:
+                            _record_turn(cid, scope, req.message, payload, eng)
+                        yield _sse("result", payload)
         except llm_mod.LLMBudgetSpent:
             yield _sse("result", _resting_payload(sid, eng, "budget"))
         except Exception as e:
             yield _sse("error", {"detail": f"search failed: {e}"})
 
     return StreamingResponse(gen(), media_type="text/event-stream")
+
+
+class ChatsCreateRequest(BaseModel):
+    title: Optional[str] = None
+
+
+class ChatsRenameRequest(BaseModel):
+    title: str = Field(min_length=1)
+
+
+@app.get("/api/chats")
+def chats_list(request: Request = None, response: Response = None):
+    """Saved chats for this scope, newest first (summaries only)."""
+    return {"chats": chats_mod.list_chats(_chat_scope(request, response))}
+
+
+@app.post("/api/chats")
+def chats_create(req: ChatsCreateRequest = None,
+                 request: Request = None, response: Response = None):
+    """Start a chat; pass its id as chat_id on /chat to record turns."""
+    scope = _chat_scope(request, response)
+    title = (req.title if req and req.title else "") or ""
+    return {"chat": chats_mod.create_chat(scope, title or None)}
+
+
+@app.get("/api/chats/{chat_id}")
+def chats_get(chat_id: str, request: Request = None,
+              response: Response = None):
+    """Full thread plus router-state restore, so turns continue exactly."""
+    scope = _chat_scope(request, response)
+    chat = chats_mod.load_chat(scope, chat_id)
+    if chat is None:
+        raise HTTPException(status_code=404, detail="I could not find that chat.")
+    try:
+        eng = get_engine(chat_id)
+    except Exception as e:
+        raise HTTPException(status_code=503, detail=f"engine unavailable: {e}")
+    with _turn_lock:
+        chats_mod.apply_state(eng, chat)
+    return {"chat": chat}
+
+
+@app.patch("/api/chats/{chat_id}")
+def chats_rename(chat_id: str, req: ChatsRenameRequest,
+                 request: Request = None, response: Response = None):
+    """Rename a chat (manual titles stick; auto-titles stop)."""
+    scope = _chat_scope(request, response)
+    chat = chats_mod.load_chat(scope, chat_id)
+    if chat is None:
+        raise HTTPException(status_code=404, detail="I could not find that chat.")
+    title = (req.title or "").strip()
+    if not title:
+        raise HTTPException(status_code=400, detail="title must be non-empty")
+    chat["title"] = title[:80]
+    chat["title_auto"] = False
+    return {"chat": chats_mod.save_chat(scope, chat)}
+
+
+@app.delete("/api/chats/{chat_id}")
+def chats_delete(chat_id: str, request: Request = None,
+                 response: Response = None):
+    """Delete one chat and drop its engine session."""
+    scope = _chat_scope(request, response)
+    if chats_mod.load_chat(scope, chat_id) is None:
+        raise HTTPException(status_code=404, detail="I could not find that chat.")
+    chats_mod.delete_chat(scope, chat_id)
+    with _sessions_lock:
+        _sessions.pop(chat_id, None)
+    return {"ok": True, "deleted": chat_id}
+
+
+@app.delete("/api/chats")
+def chats_delete_all(request: Request = None, response: Response = None):
+    """Delete every chat in this scope (visitor-scoped in demo mode)."""
+    scope = _chat_scope(request, response)
+    return {"ok": True, "deleted": chats_mod.delete_all(scope)}
 
 
 LICENSE_DEEDS = {

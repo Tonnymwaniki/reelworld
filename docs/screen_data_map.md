@@ -31,6 +31,7 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 | `need_focus` / `not_found` | `kind` + `text` | show `text` verbatim, no grid |
 | `need_tags` (zero tagged photos) | `kind` + `text` | show `text` verbatim, no grid, plus a "Tag your photos" button linking `#/profile/tag`; "Photos of me" chip stays |
 | Router extras (step 6 renders) | `POST /chat` → `label`, `topic`, `options`, `about_photo_id`, `took_to_mean`, `differences` | currently ignored by the thread UI; text already carries clarify options inline |
+| Saved chats (step 6 sidebar) | `GET /api/chats` → summaries; `GET /api/chats/{id}` → thread + restored state | no UI yet; turns record only when `/chat` carries `chat_id` |
 | Loading | — | spinner + "Searching…"; replies take 15–40s |
 | Error | HTTP status | `{"detail"}` message verbatim |
 

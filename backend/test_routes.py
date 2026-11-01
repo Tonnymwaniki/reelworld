@@ -46,13 +46,21 @@ for path, methods in (("/api/llm/status", ("GET",)),
                       ("/api/face-scan", ("POST",)),
                       ("/api/films", ("POST",)),
                       ("/api/audio", ("POST",)),
-                      ("/api/audio/{rug}", ("GET",))):
+                      ("/api/audio/{rug}", ("GET",)),
+                      ("/api/chats", ("GET",)),
+                      ("/api/chats", ("POST",)),
+                      ("/api/chats/{chat_id}", ("GET",)),
+                      ("/api/chats/{chat_id}", ("PATCH",)),
+                      ("/api/chats/{chat_id}", ("DELETE",)),
+                      ("/api/chats", ("DELETE",))):
     check((path, methods) in routes, f"route {methods[0]} {path}")
 
 import inspect  # noqa: E402
 
 for fn in (api.chat, api.chat_stream, api.ask, api.compare, api.explain,
-           api.story, api.llm_probe, api.audio_speak):
+           api.story, api.llm_probe, api.audio_speak, api.chats_list,
+           api.chats_create, api.chats_get, api.chats_rename,
+           api.chats_delete, api.chats_delete_all):
     sig = inspect.signature(fn)
     params = sig.parameters
     check(params["request"].default is None and params["response"].default is None,

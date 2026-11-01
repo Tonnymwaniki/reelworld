@@ -19,5 +19,6 @@ data/profile.json
 data/face/
 data/audio/
 data/attributes/personal_*.json
+data/chats/
 frontend/design/assets/
 *.zip

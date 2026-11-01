@@ -848,4 +848,13 @@ the first unfinished phase.
   JSON fallback after malformed rounds; RRF alt_queries in
   search; verify_question; ChatResponse gains label/topic/
   options/about/differences; replies history in _chat_payload
-  + /api/search. Tests: test_router 28/28. (commit id on push.)
+  + /api/search. Tests: test_router 28/28. Committed 9ade960.
+  Live: native 1-round search + topic 1, refine stays on topic 2,
+  "second one" binds with took-note, count from data, JSON
+  fallback on forced failure.
+- Chat intelligence step 5 (saved chats + restore): backend/chats.py
+  (file storage, auto/manual titles, snapshots, restore, 7-day
+  demo expiry with lazy cleanup, reasoning scan); /chat +
+  /chat/stream record turns when chat_id is given (404 unknown);
+  6 /api/chats endpoints; replies/state restore on open. Tests:
+  test_chats 23/23, test_routes 42/42. (commit id on push.)
