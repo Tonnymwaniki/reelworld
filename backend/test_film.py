@@ -320,5 +320,61 @@ check(film_mod.attach_spotlights(scenes, outlines_dir=odir) == 1
       and scenes[0]["spotlight"] == sp and "spotlight" not in scenes[1],
       "attach counts and skips")
 
+SEL_BRIEFS = {"p1": BRIEFS["p1"], "p2": BRIEFS["p2"]}
+SEL_BEATS = [{"role": "build", "intent": "wander", "photo_ids": ["p1", "p2"]}]
+C1 = film_mod.evidence_for(BRIEFS["p1"])
+C2 = film_mod.evidence_for(BRIEFS["p2"])
+SEL_BRIEF = {"about": "a slow day", "feeling": "calm", "avoid": "buses"}
+BC1 = C1 + ["owner's brief: a slow day", "owner's feeling: calm"]
+BC2 = C2 + ["owner's brief: a slow day", "owner's feeling: calm"]
+GOOD_SEL = {"p1": {"focus": "the buses lined up", "focus_source": C1[0],
+                    "held_back": BC1[1:], "callback_of": None},
+            "p2": {"focus": "a slow day out",
+                    "focus_source": "owner's brief: a slow day",
+                    "held_back": [c for c in BC2
+                                  if c != "owner's brief: a slow day"],
+                    "callback_of": None}}
+orig_ask = llm.ask
+try:
+    seen = {}
+    llm.ask = lambda *a, **k: (seen.update(prompt=a[0]),
+                               {"text": json.dumps(GOOD_SEL)})[1]
+    ss = [sc("p1"), sc("p2")]
+    film_mod.select_details(ss, SEL_BEATS, SEL_BRIEFS, "A spine.",
+                            brief=SEL_BRIEF, trace=(tf := []))
+    check(ss[0]["focus_detail"] == {"text": "the buses lined up",
+                                    "source": C1[0]}
+          and ss[1]["focus_detail"]["source"] == "owner's brief: a slow day"
+          and len(ss[0]["held_back"]) == len(BC1) - 1
+          and any("Selected the focus" in t["detail"] for t in tf)
+          and "avoid: buses" in seen["prompt"], "focus selected")
+    replies = ["garbage", json.dumps(GOOD_SEL)]
+    llm.ask = lambda *a, **k: {"text": replies.pop(0)}
+    ss = [sc("p1"), sc("p2")]
+    film_mod.select_details(ss, SEL_BEATS, SEL_BRIEFS, "S.", brief=SEL_BRIEF)
+    check(ss[0]["focus_detail"]["source"] == C1[0], "focus retry recovers")
+    llm.ask = lambda *a, **k: {"text": "garbage"}
+    ss = [sc("p1")]
+    film_mod.select_details(ss, SEL_BEATS, SEL_BRIEFS, "S.", trace=(tf2 := []))
+    check(ss[0]["focus_detail"] == {"text": C1[0][:80], "source": C1[0]}
+          and any("first fact" in t["detail"] for t in tf2), "focus fallback")
+    same = {"p1": SEL_BRIEFS["p1"], "p2": SEL_BRIEFS["p1"]}
+    dup = {"p1": {"focus": "First", "focus_source": C1[0],
+                  "held_back": C1[1:], "callback_of": None},
+           "p2": {"focus": "Second", "focus_source": C1[0],
+                  "held_back": C1[1:], "callback_of": None}}
+    llm.ask = lambda *a, **k: {"text": json.dumps(dup)}
+    ss = [sc("p1"), sc("p2")]
+    film_mod.select_details(ss, SEL_BEATS, same, "S.", trace=(tf3 := []))
+    check(ss[1]["focus_detail"]["source"] == C1[1]
+          and any("switched" in t["detail"] for t in tf3),
+          "dup focus switched")
+finally:
+    llm.ask = orig_ask
+bad_cb = {"p1": {"focus": "X", "focus_source": C1[0], "held_back": [],
+                 "callback_of": "p9"}}
+check(film_mod._validate_selection(bad_cb, {"p1": C1}, ["p1"])[0] is None,
+      "bad callback rejected")
+
 print(f"test_film.py: {total - fails}/{total} checks passed")
 sys.exit(1 if fails else 0)

@@ -695,5 +695,13 @@ the first unfinished phase.
 - Creative scripts step 2 (spine): director returns a spine +
   per-beat serves_spine verdicts; off-spine beats drop with the
   reason traced (all-dropped falls back); spine rides the film
-  JSON and shows on the Review screen. Tests: director 24→30,
-  film 54→55, stories.test 163→164 (pending user run).
+  JSON and shows on the Review screen. Tests green:
+  director 30/30, film 55/55, stories.test 164/164; live
+  spine + serves_spine verdicts confirmed.
+- Creative scripts step 3 (detail selection): one model pass
+  picks each scene's focus_detail {text, source} + held_back +
+  callback_of from record evidence + brief (avoid honoured in
+  the prompt); retry once, then code takes each scene's first
+  fact; repeated focus without a callback switches in code.
+  /api/films takes brief; build_film threads it. Tests:
+  film 55→60 (pending user run).

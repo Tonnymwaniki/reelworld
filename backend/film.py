@@ -234,6 +234,158 @@ def _scene_owner_ok(text, name, brief, scope="caption"):
     return narration_mod.repair_text(text, name, allowed, scope)
 
 
+def _selection_candidates(evidence, brief):
+    """Candidate focus facts: record evidence + the owner's brief."""
+    cands = [e for e in (evidence or []) if isinstance(e, str) and e.strip()]
+    if isinstance(brief, dict):
+        if str(brief.get("about") or "").strip():
+            cands.append(f"owner's brief: {str(brief['about']).strip()}")
+        if str(brief.get("feeling") or "").strip():
+            cands.append(f"owner's feeling: {str(brief['feeling']).strip()}")
+    return cands
+
+
+def _validate_selection(data, cands_by_pid, order):
+    """(entries, problems): entries maps pid -> selection (pure)."""
+    if not isinstance(data, dict):
+        return None, ["reply is not a JSON object"]
+    entries, problems = {}, []
+    for pos, pid in enumerate(order):
+        raw = data.get(pid)
+        if not isinstance(raw, dict):
+            problems.append(f"missing selection for {pid}")
+            continue
+        if not (cands_by_pid.get(pid) or []):
+            if (raw.get("focus") or "") != "" or raw.get("held_back") != [] \
+                    or (raw.get("focus_source") or "") != "" \
+                    or raw.get("callback_of") is not None:
+                problems.append(f"{pid} has no candidates; leave it empty")
+            entries[pid] = {"focus": "", "focus_source": "",
+                            "held_back": [], "callback_of": None}
+            continue
+        focus = raw.get("focus")
+        if not isinstance(focus, str) or not focus.strip() or len(focus) > 80:
+            problems.append(f"{pid} focus must be 1-80 characters")
+        if raw.get("focus_source") not in (cands_by_pid.get(pid) or []):
+            problems.append(f"{pid} focus_source is not one of its candidates")
+        held = raw.get("held_back")
+        if not isinstance(held, list) or any(not isinstance(h, str) for h in held):
+            problems.append(f"{pid} held_back must be a string list")
+            held = []
+        elif any(h not in (cands_by_pid.get(pid) or []) for h in held):
+            problems.append(f"{pid} held_back leaves non-candidates")
+        cb = raw.get("callback_of")
+        if cb is not None and cb not in order[:pos]:
+            problems.append(f"{pid} callback_of is not an earlier scene")
+        entries[pid] = {"focus": focus.strip()[:80] if isinstance(focus, str) else "",
+                        "focus_source": raw.get("focus_source"),
+                        "held_back": list(held),
+                        "callback_of": cb if cb in order[:pos] else None}
+    if problems:
+        return None, problems
+    return entries, []
+
+
+def select_details(scenes, beats, briefs, spine, brief=None, trace=None,
+                   session_id=None):
+    """Pick each scene's focus detail (one model call, in place).
+
+    scenes gain focus_detail {text, source}, held_back [candidate
+    strings] and callback_of (photo_id or None). Candidates are the
+    record-only evidence strings plus the owner's brief words. The
+    focus must be one candidate; held_back lists the rest. Invalid
+    output retries once, then code takes each scene's first fact.
+    A repeated focus without a callback is switched in code to the
+    next unused candidate. Never raises except on budget.
+    """
+    order = [s["photo_id"] for s in scenes]
+    cands = {pid: _selection_candidates(
+        evidence_for(briefs.get(pid)), brief) for pid in order}
+    intents = {}
+    for b in beats or []:
+        for pid in b.get("photo_ids") or []:
+            intents.setdefault(pid, (b.get("role"), b.get("intent")))
+    lines = [f"Story spine: {spine or '(none)'}.",
+             "Choose what each scene is ABOUT: exactly one candidate fact per "
+             "scene. Reply ONE JSON object keyed by photo id, no prose:",
+             '{"<id>": {"focus": "the telling thing, max 80 chars", '
+             '"focus_source": "<exactly one candidate below>", '
+             '"held_back": ["<other candidates left out>"], '
+             '"callback_of": "<earlier photo id>" or null}}']
+    for s in scenes:
+        pid = s["photo_id"]
+        role, intent = intents.get(pid, (s.get("role"), ""))
+        lines.append(f"Scene {pid} ({role or 'scene'}: {intent or 'no intent'}):")
+        for i, c in enumerate(cands[pid], 1):
+            lines.append(f"{i}. {c}")
+        if not cands[pid]:
+            lines.append("(no candidates; leave this scene empty)")
+    if str((brief or {}).get("avoid") or "").strip():
+        lines.append("Never choose or echo anything matching what the owner "
+                     f"said to avoid: {str(brief['avoid']).strip()}")
+    lines.append("Rules: focus comes from focus_source (copy or close "
+                 "paraphrase, max 80 chars); held_back lists the other "
+                 "candidates left out on purpose; never repeat a "
+                 "focus_source across scenes unless callback_of names the "
+                 "earlier scene it deliberately echoes.")
+    base = "\n".join(lines)
+    entries, last_problems = None, []
+    for attempt in (1, 2):
+        prompt = base if attempt == 1 else (
+            base + "\nRejected: " + "; ".join(last_problems) + ". Fix every one.")
+        try:
+            data = extract_json(llm.ask(
+                prompt, temperature=0.2, purpose="script",
+                session_id=session_id)["text"])
+            entries, last_problems = _validate_selection(data, cands, order)
+        except llm.LLMBudgetSpent:
+            raise
+        except (RuntimeError, ValueError) as e:
+            entries, last_problems = None, [f"unusable reply: {e}"[:120]]
+        if entries is not None:
+            break
+    coded = entries is None
+    if coded:
+        entries = {}
+        for pid in order:
+            first = (cands[pid] or [""])[0]
+            entries[pid] = {"focus": first[:80], "focus_source": first,
+                            "held_back": cands[pid][1:], "callback_of": None}
+    for s in scenes:
+        e = entries[s["photo_id"]]
+        s["focus_detail"] = {"text": e["focus"], "source": e["focus_source"]}
+        s["held_back"] = e["held_back"]
+        s["callback_of"] = e["callback_of"]
+    if trace is not None:
+        trace.append({"step": "focused",
+                      "detail": ("Detail selection failed twice; using each "
+                                 "scene's first fact." if coded else
+                                 f"Selected the focus detail for {len(scenes)} "
+                                 "scene(s).")})
+    used = set()
+    for s in scenes:
+        src = (s.get("focus_detail") or {}).get("source") or ""
+        if src and src in used and not s.get("callback_of"):
+            alt = next((c for c in cands[s["photo_id"]] if c not in used), None)
+            if alt is None:
+                if trace is not None:
+                    trace.append({"step": "focused",
+                                  "detail": f"Scene {s['photo_id']} repeats an "
+                                  "earlier focus (no alternative candidate)."})
+                continue
+            s["focus_detail"] = {"text": alt[:80], "source": alt}
+            s["held_back"] = [src] + [h for h in s.get("held_back", [])
+                                      if h != alt]
+            if trace is not None:
+                trace.append({"step": "focused",
+                              "detail": f"Scene {s['photo_id']} focus repeated "
+                              f"an earlier scene; switched to {alt[:60]}."})
+            used.add(alt)
+        elif src:
+            used.add(src)
+    return scenes
+
+
 def write_captions(scenes, briefs, trace=None, session_id=None,
                    voice=None, profile=None, image_path=None):
     """One caption per scene from photos + records (one model call).
@@ -572,7 +724,7 @@ def attach_spotlights(scenes, outlines_dir=None, enabled=True):
 
 def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
                trace=None, session_id=None, voice=None, profile=None,
-               outlines_enabled=None, image_path=None):
+               outlines_enabled=None, image_path=None, brief=None):
     """Full pipeline: scenes, cards, pacing, captions, editor, re-pace.
 
     rows_by_id maps photo_id -> row {place_key, viewpoint,
@@ -581,8 +733,9 @@ def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
     override the stored profile for narration. outlines_enabled
     defaults to FEATURE_OUTLINES. image_path is a contact sheet
     the caption writer studies with the records (None writes from
-    the records only). Trace is appended, never replaced. Budget
-    errors propagate.
+    the records only). brief is the owner's day brief (provided
+    facts the focus pass may choose). Trace is appended, never
+    replaced. Budget errors propagate.
     """
     if outlines_enabled is None:
         outlines_enabled = os.getenv("FEATURE_OUTLINES", "true").strip().lower() == "true"
@@ -600,6 +753,9 @@ def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
     scenes = assemble_scenes(beatsheet, metas, records)
     scenes = merge_bursts(scenes, bursts)
     apply_pacing(scenes, target, trace)
+    select_details(scenes, beatsheet.get("beats"), briefs,
+                   beatsheet.get("spine"), brief=brief, trace=trace,
+                   session_id=session_id)
     write_captions(scenes, briefs, trace, session_id, voice, profile,
                    image_path=image_path)
     title, beats, kept, verification = edit_captions(

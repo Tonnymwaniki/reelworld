@@ -362,7 +362,8 @@ cannot support are dropped and named in the trace instead of padded, as are chap
 ## Directed films (`POST /api/films`, schema v2)
 
 - Request: `{photo_ids[] (required), prompt?, style?, target?,
-  voice?, seed?}`. Same validation wording as the planners
+  voice?, seed?, brief?}` (`brief` is the day brief, same shape
+  and 400s as stories). Same validation wording as the planners
   (400s); unknown ids are 404; model-budget trips are 429.
 - Stateless: nothing is stored. The client holds the film JSON;
   re-direct by posting the same `photo_ids` with a new `seed`.
@@ -373,9 +374,14 @@ cannot support are dropped and named in the trace instead of padded, as are chap
   spine are dropped and named in the trace. Each scene carries
   `photo_id`, `src`, `collection`, `credit`, `role`, `pacing`,
   `camera`, `transition_in`, `focal`, `seconds` (= `duration`),
-  `found_text`, `why`, `caption` (+`caption_note`), `evidence`
+  `found_text`, `why`, `focus_detail` {text, source} (the one
+  telling fact, from the records or the brief), `held_back`
+  (candidates left out on purpose), `callback_of` (photo id or
+  null), `caption` (+`caption_note`), `evidence`
   (record-only fact strings), `frames` (+`frame_srcs`),
-  optional `spotlight`. Captions are written by the model
+  optional `spotlight`. A `focused` trace step names the
+  selection; repeated focus without a callback is switched in
+  code. Captions are written by the model
   studying the scene photos with their records (records are
   the fact authority); a `seen` trace step names it when the
   photos could not be shown.

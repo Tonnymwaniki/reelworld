@@ -113,7 +113,7 @@ def _check_chapters(chapters, fetch):
     return out
 
 
-def _check_brief(brief):
+def check_brief(brief):
     """Normalized {about, feeling, avoid} or None when fully empty."""
     if brief is None:
         return None
@@ -146,7 +146,7 @@ def create(*, title="", prompt="", tone="postcard", source="both",
     story = {"id": _next_id(), "title": (title or "").strip()[:80] or "Untitled story",
              "prompt": (prompt or "").strip()[:280], "tone": tone, "source": source,
              "target": target, "status": "draft", "created_at": _now(),
-             "published_at": None, "voice": voice, "brief": _check_brief(brief),
+             "published_at": None, "voice": voice, "brief": check_brief(brief),
              "chapters": _check_chapters(chapters, fetch)}
     save(story)
     return story
@@ -160,7 +160,7 @@ def update(sid, *, title=None, tone=None, target=None, chapters=None, fetch,
             raise StoryError(400, "voice must be name, you or i.")
         story["voice"] = voice
     if brief != "__keep__":
-        story["brief"] = _check_brief(brief)
+        story["brief"] = check_brief(brief)
     if title is not None:
         story["title"] = str(title).strip()[:80] or story["title"]
     if tone is not None:
