@@ -749,4 +749,12 @@ the first unfinished phase.
   fact, editor honours notes, `noted` trace; studio keeps
   3 takes with a Take switcher, per-scene "why this line"
   (focus + held back), "your note" tag and note form.
-  Tests: film 84→90, stories suite (pending user run).
+  Tests: film 90/90, stories 174/174; live note attached +
+  `noted` trace (rewrite failed twice, draft kept honestly);
+  over-long note 400s; committed f85c39d.
+- Creative scripts step 9 (browser narration voice): English
+  voice chooser (natural/neural default, choice in
+  localStorage, async voiceschanged fill), rate 0.95, short
+  pause between scenes (guarded timer, cleared on stop),
+  silent scenes stay silent, export-exclusion note kept.
+  Tests: stories suite (pending user run) + live listen.

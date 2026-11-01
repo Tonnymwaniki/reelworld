@@ -5381,6 +5381,8 @@ async function loadFilmImages(film, onOne) {
 }
 
 /* ---------- story player (shared by studio preview and showcase) ---------- */
+const READ_PAUSE_MS = 450;
+const READ_VOICE_KEY = "rw.readVoice";
 const player = {
   raf: null,
   st: null,
@@ -5458,16 +5460,25 @@ const player = {
     ctrls.append(prev, play, next, replay);
     let readBtn = null;
     let readRow = null;
+    let readVsel = null;
     if ("speechSynthesis" in window) {
       readRow = document.createElement("div");
-      readRow.className = "flex items-center justify-center gap-2 mt-2";
+      readRow.className = "flex flex-wrap items-center justify-center gap-2 mt-2";
       readBtn = mk("volume_off", "Read captions aloud");
       readBtn.setAttribute("aria-pressed", "false");
       readBtn.addEventListener("click", () => this.toggleRead());
+      readVsel = document.createElement("select");
+      readVsel.className = "max-w-[220px] px-2 py-2 min-h-[44px] rounded-lg bg-surface-container-low " +
+        "text-on-surface font-body-sm text-body-sm";
+      readVsel.setAttribute("aria-label", "Narration voice");
+      readVsel.addEventListener("change", () => {
+        if (this.st) this.st.readVoiceURI = readVsel.value;
+        this.saveReadVoice(readVsel.value);
+      });
       const note = document.createElement("span");
       note.className = "font-body-sm text-body-sm text-on-surface-variant";
       note.textContent = "Read aloud is not included in the exported video.";
-      readRow.append(readBtn, note);
+      readRow.append(readBtn, readVsel, note);
     }
     const strip = document.createElement("div");
     strip.className = "flex gap-2 overflow-x-auto py-1 mt-1";
@@ -5491,10 +5502,18 @@ const player = {
     this.st = { root: root, film: film, baseFilm: film, t: 0, last: 0, playing: true,
       total: total, cv: cv, ctx: cv.getContext("2d"), tag: tag, time: time,
       bar: bar, play: play, replay: replay, strip: strip, readBtn: readBtn,
+      readVoice: readVsel, readVoiceURI: "", speechTimer: 0,
       read: false, spoken: -1,
       size: { width: cv.width, height: cv.height } };
     this.paint();
     const self = this;
+    if (readVsel) {
+      this.paintReadVoices();
+      try {
+        const synth = window.speechSynthesis;
+        if (synth) synth.onvoiceschanged = () => self.paintReadVoices();
+      } catch (e) { /* voices stay as listed */ }
+    }
     loadFilmImages(film, () => self.paint());
     const loop = (now) => {
       if (!self.st) return;
@@ -5522,8 +5541,8 @@ const player = {
       const token = st ? (st.speechToken = (st.speechToken || 0) + 1) : 0;
       const u = new SpeechSynthesisUtterance(line);
       u.lang = "en-US";
-      const v = (synth.getVoices() || []).find((x) =>
-        String(x.lang || "").toLowerCase().startsWith("en"));
+      u.rate = 0.95;
+      const v = this.pickReadVoice(this.readVoices(), st ? st.readVoiceURI : "");
       if (v) u.voice = v;
       const self = this;
       u.onend = u.onerror = () => self.onSpeechEnd(idx, token);
@@ -5533,9 +5552,66 @@ const player = {
 
   stopSpeak() {
     try {
-      if (this.st) this.st.speechToken = (this.st.speechToken || 0) + 1;
+      if (this.st) {
+        this.st.speechToken = (this.st.speechToken || 0) + 1;
+        if (this.st.speechTimer) {
+          clearTimeout(this.st.speechTimer);
+          this.st.speechTimer = 0;
+        }
+      }
       if (window.speechSynthesis) window.speechSynthesis.cancel();
     } catch (e) { /* speech unavailable */ }
+  },
+
+  readVoices() {
+    try {
+      return (window.speechSynthesis.getVoices() || []).filter((v) =>
+        String(v.lang || "").toLowerCase().startsWith("en"));
+    } catch (e) { return []; }
+  },
+
+  pickReadVoice(voices, saved) {
+    const list = voices || [];
+    if (saved) {
+      const hit = list.find((v) => v.voiceURI === saved || v.name === saved);
+      if (hit) return hit;
+    }
+    return list.find((v) => /natural|neural/i.test(v.name || "")) ||
+      list[0] || null;
+  },
+
+  loadReadVoice() {
+    try {
+      return window.localStorage.getItem(READ_VOICE_KEY) || "";
+    } catch (e) { return ""; }
+  },
+
+  saveReadVoice(uri) {
+    try {
+      window.localStorage.setItem(READ_VOICE_KEY, uri || "");
+    } catch (e) { /* choice lasts this visit only */ }
+  },
+
+  paintReadVoices() {
+    const st = this.st;
+    if (!st || !st.readVoice) return;
+    const sel = st.readVoice;
+    const voices = this.readVoices();
+    sel.innerHTML = "";
+    if (!voices.length) {
+      sel.classList.add("hidden");
+      return;
+    }
+    sel.classList.remove("hidden");
+    voices.forEach((v) => {
+      const o = document.createElement("option");
+      o.value = v.voiceURI || v.name;
+      o.textContent = v.name + (v.lang ? " (" + v.lang + ")" : "");
+      sel.appendChild(o);
+    });
+    const pick = this.pickReadVoice(voices, st.readVoiceURI || this.loadReadVoice());
+    if (pick) sel.value = pick.voiceURI || pick.name;
+    st.readVoiceURI = sel.value;
   },
 
   maybeSpeak(idx) {
@@ -5563,7 +5639,12 @@ const player = {
       st.replay.classList.remove("hidden");
       this.paint();
     } else {
-      this.jump(idx + 1);
+      const self = this;
+      st.speechTimer = setTimeout(() => {
+        if (self.st !== st || token !== st.speechToken ||
+            !st.read || !st.playing) return;
+        self.jump(idx + 1);
+      }, READ_PAUSE_MS);
     }
   },
 

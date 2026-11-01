@@ -66,7 +66,9 @@ async function main() {
     t: 0, total: 20, playing: true, read: true, spoken: 0,
     speechToken: 1, speakDeadline: 5, replay: stubEl() };
   P.onSpeechEnd(0, 1);
-  ok(jumped === 1 && P.st.speakDeadline === 0, "speech end advances the scene");
+  ok(jumped === -1 && P.st.speakDeadline === 0, "speech end pauses first");
+  await new Promise((r) => setTimeout(r, 600));
+  ok(jumped === 1, "speech end advances the scene after the pause");
   jumped = -1;
   P.onSpeechEnd(0, 999);
   ok(jumped === -1, "stale speech events are ignored");
@@ -172,6 +174,11 @@ async function main() {
   ok(read("builder").indexOf("Include my name in this public story") !== -1,
      "builder.html has the name opt-in");
   ok(src.indexOf("Read captions aloud") !== -1, "player has a read-aloud toggle");
+  ok(src.indexOf("Narration voice") !== -1, "player has a narration voice chooser");
+  ok(src.indexOf("neural") !== -1, "chooser prefers a natural or neural voice");
+  ok(src.indexOf("onvoiceschanged") !== -1, "chooser waits for browser voices");
+  ok(src.indexOf("u.rate = 0.95") !== -1, "read-aloud rate is 0.95");
+  ok(src.indexOf("READ_PAUSE_MS") !== -1, "short pause between spoken scenes");
   ok(src.indexOf("speechSynthesis") !== -1, "read-aloud uses speechSynthesis");
   ok(src.indexOf("not included in the exported video") !== -1,
      "read-aloud export note");
