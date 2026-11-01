@@ -334,9 +334,14 @@ cannot support are dropped and named in the trace instead of padded, as are chap
 ## Story drafts (`/api/stories`)
 
 - `POST /api/stories` accepts the planner fields plus `voice`
-  (`name`/`you`/`i`, default: profile choice). The stored story keeps
-  `voice`; scenes' `problems` flag headings that use the owner's name
-  or you/I for a photo the owner did not tag.
+  (`name`/`you`/`i`, default: profile choice) and an optional `brief`
+  `{about ≤280 chars, feeling ≤20 chars, avoid ≤280 chars}` (the
+  owner's own words about the day; stored as provided facts, null
+  when empty). The stored story keeps `voice` and `brief`; scenes'
+  `problems` flag headings that use the owner's name or you/I for a
+  photo the owner did not tag. `PATCH /api/stories/{id}` accepts
+  `brief` too (explicit null clears it). The public story view
+  scrubs the owner's name from the brief unless opted in.
 - `POST /api/stories/{id}/refresh` rewrites every chapter text with
   the current profile name and owner tags (optional `voice` override,
   kept otherwise), for stories made before the profile existed.

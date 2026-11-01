@@ -686,3 +686,9 @@ the first unfinished phase.
   default "name" — the story's "i" was save-only. Refresh now
   writes in req.voice or the stored voice. story_full 18/18
   green; user confirms "I" texts and voice-paced playback.
+- Creative scripts step 1 (story brief): engine stores brief
+  {about ≤280, feeling ≤20, avoid ≤280} (null when empty),
+  PATCH-able, public-scrubbed; Create screen gains a collapsed
+  brief section with feeling chips + custom word. Tests green:
+  stories 24/24, story_full 19/19, stories.test 163/163; live
+  brief echo confirmed.

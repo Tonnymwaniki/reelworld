@@ -14,6 +14,7 @@ STORIES_DIR = Path(__file__).resolve().parent.parent / "data" / "stories"
 TONES = ("postcard", "field-notes", "documentary")
 SOURCES = ("mine", "world", "both")
 TARGETS = ("short", "medium")
+FEELINGS = ("calm", "proud", "curious", "nostalgic", "joyful", "reflective")
 STATUSES = ("draft", "published")
 ID_RE = re.compile(r"^st-\d{8}-\d{4}$")
 MAX_SCENES = 12
@@ -112,8 +113,28 @@ def _check_chapters(chapters, fetch):
     return out
 
 
+def _check_brief(brief):
+    """Normalized {about, feeling, avoid} or None when fully empty."""
+    if brief is None:
+        return None
+    if not isinstance(brief, dict):
+        raise StoryError(400, "brief must be an object with about, feeling, avoid.")
+    about = str(brief.get("about") or "").strip()
+    feeling = str(brief.get("feeling") or "").strip()
+    avoid = str(brief.get("avoid") or "").strip()
+    if len(about) > 280:
+        raise StoryError(400, "brief.about must be 280 characters or fewer.")
+    if len(feeling) > 20:
+        raise StoryError(400, "brief.feeling must be 20 characters or fewer.")
+    if len(avoid) > 280:
+        raise StoryError(400, "brief.avoid must be 280 characters or fewer.")
+    if not (about or feeling or avoid):
+        return None
+    return {"about": about, "feeling": feeling, "avoid": avoid}
+
+
 def create(*, title="", prompt="", tone="postcard", source="both",
-           target="short", chapters, fetch, voice=None):
+           target="short", chapters, fetch, voice=None, brief=None):
     if tone not in TONES:
         raise StoryError(400, "tone must be postcard, field-notes or documentary.")
     if source not in SOURCES:
@@ -125,19 +146,21 @@ def create(*, title="", prompt="", tone="postcard", source="both",
     story = {"id": _next_id(), "title": (title or "").strip()[:80] or "Untitled story",
              "prompt": (prompt or "").strip()[:280], "tone": tone, "source": source,
              "target": target, "status": "draft", "created_at": _now(),
-             "published_at": None, "voice": voice,
+             "published_at": None, "voice": voice, "brief": _check_brief(brief),
              "chapters": _check_chapters(chapters, fetch)}
     save(story)
     return story
 
 
 def update(sid, *, title=None, tone=None, target=None, chapters=None, fetch,
-           voice="__keep__"):
+           voice="__keep__", brief="__keep__"):
     story = load(sid)
     if voice != "__keep__":
         if voice is not None and voice not in ("name", "you", "i"):
             raise StoryError(400, "voice must be name, you or i.")
         story["voice"] = voice
+    if brief != "__keep__":
+        story["brief"] = _check_brief(brief)
     if title is not None:
         story["title"] = str(title).strip()[:80] or story["title"]
     if tone is not None:

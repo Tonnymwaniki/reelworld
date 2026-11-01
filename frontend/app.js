@@ -5703,6 +5703,7 @@ const stories = {
   tone: "postcard",
   source: "both",
   target: "short",
+  feeling: "",
   making: false,
   makeTimer: null,
 
@@ -5711,6 +5712,7 @@ const stories = {
     this.tone = "postcard";
     this.source = "both";
     this.target = "short";
+    this.feeling = "";
     this.voice = "name";
     this.making = false;
     this.paintPills();
@@ -5730,6 +5732,14 @@ const stories = {
     pick("story-sources", "source");
     pick("story-targets", "target");
     pick("story-voices", "voice");
+    pick("story-feelings", "feeling");
+    $("#story-feelings", view).addEventListener("click", () => {
+      $("#story-feeling-custom", view).value = "";
+    });
+    $("#story-feeling-custom", view).addEventListener("input", (e) => {
+      this.feeling = e.target.value.trim().slice(0, 20);
+      this.paintPills();
+    });
     $("#story-suggest", view).addEventListener("click", (e) => {
       const b = e.target.closest("[data-prompt]");
       if (b) $("#story-create-prompt", view).value = b.dataset.prompt;
@@ -5746,11 +5756,13 @@ const stories = {
 
   paintPills() {
     const view = this.view;
-    const groups = [["story-tones", "tone"], ["story-sources", "source"], ["story-targets", "target"], ["story-voices", "voice"]];
-    groups.forEach(([id, key]) => {
+    const groups = [["story-tones", "tone"], ["story-sources", "source"], ["story-targets", "target"], ["story-voices", "voice"], ["story-feelings", "feeling", true]];
+    groups.forEach(([id, key, chips]) => {
       $$("#" + id + " button", view).forEach((b) => {
         const on = b.dataset[key] === this[key];
-        b.className = "min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all " +
+        b.className = (chips
+          ? "px-3 py-1.5 rounded-full font-label-sm text-label-sm min-h-[36px] transition-colors "
+          : "min-h-[44px] px-4 rounded-lg font-label-md text-label-md transition-all ") +
           (on ? "bg-primary-container text-surface shadow-sm" : "bg-surface-container-high text-on-surface-variant hover:text-on-surface");
       });
     });
@@ -5797,6 +5809,11 @@ const stories = {
           title: $("#story-create-title", view).value.trim(),
           prompt: prompt, tone: this.tone, source: this.source, target: this.target,
           voice: this.voice,
+          brief: {
+            about: $("#story-brief-about", view).value.trim(),
+            feeling: this.feeling,
+            avoid: $("#story-brief-avoid", view).value.trim(),
+          },
         }),
       });
       try {

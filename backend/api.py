@@ -2648,6 +2648,7 @@ class StoryCreateRequest(BaseModel):
     target: str = "short"
     photo_ids: Optional[List[str]] = None
     voice: Optional[str] = None
+    brief: Optional[Dict[str, Any]] = None
 
 
 class StoryPatchRequest(BaseModel):
@@ -2655,6 +2656,7 @@ class StoryPatchRequest(BaseModel):
     tone: Optional[str] = None
     target: Optional[str] = None
     chapters: Optional[List[Dict[str, Any]]] = None
+    brief: Optional[Dict[str, Any]] = None
 
 
 class StoryRefreshRequest(BaseModel):
@@ -2730,6 +2732,9 @@ def _story_full(story, public=False):
             and not story.get("include_name", False) and name:
         pub = narration_mod.public_text
         story = dict(story, title=pub(story.get("title") or "", name))
+        if isinstance(story.get("brief"), dict):
+            story["brief"] = dict(story["brief"],
+                                  about=pub(story["brief"].get("about") or "", name))
         for c in chapters:
             c["heading"] = pub(c["heading"], name)
             c["text"] = pub(c["text"], name)
@@ -2790,7 +2795,7 @@ def stories_create(req: StoryCreateRequest):
     fetch = _story_fetch_for([c["photo_id"] for c in chapters])
     made = _story_err(create, title=title, prompt=prompt, tone=req.tone,
                       source=req.source, target=req.target, chapters=chapters,
-                      fetch=fetch, voice=voice)
+                      fetch=fetch, voice=voice, brief=req.brief)
     return {**_story_full(made), "trace": trace}
 
 
@@ -2819,8 +2824,12 @@ def story_update(story_id: str, req: StoryPatchRequest):
     ids = [c.get("photo_id") for c in (req.chapters if req.chapters is not None
                                        else current.get("chapters") or []) if c.get("photo_id")]
     fetch = _story_fetch_for(ids)
+    fields_set = getattr(req, "model_fields_set",
+                         getattr(req, "__fields_set__", set())) or set()
+    brief = req.brief if "brief" in fields_set else "__keep__"
     made = _story_err(update, story_id.strip(), title=req.title, tone=req.tone,
-                      target=req.target, chapters=req.chapters, fetch=fetch)
+                      target=req.target, chapters=req.chapters, fetch=fetch,
+                      brief=brief)
     return _story_full(made)
 
 

@@ -126,6 +126,13 @@ async function main() {
     ok(read("stories").indexOf('data-voice="' + v + '"') !== -1, "stories.html has voice " + v));
   ok(read("stories").indexOf("only on photos you tagged yourself in") !== -1,
      "stories.html voice honesty note");
+  ["story-brief-about", "story-feelings", "story-feeling-custom",
+   "story-brief-avoid",
+  ].forEach((id) => ok(read("stories").indexOf('id="' + id + '"') !== -1, "stories.html has #" + id));
+  ["calm", "proud", "curious", "nostalgic", "joyful", "reflective"].forEach((f) =>
+    ok(read("stories").indexOf('data-feeling="' + f + '"') !== -1, "stories.html has feeling " + f));
+  ok(read("stories").indexOf("Tell Reel about this day") !== -1,
+     "stories.html brief section");
   ["bld-back", "bld-title", "bld-status", "bld-delete", "bld-loading", "bld-error",
     "bld-main", "bld-tabs", "bld-building", "bld-elapsed", "bld-trace",
     "stage-review", "stage-player", "stage-export", "bld-tones", "bld-scenes",
@@ -152,6 +159,8 @@ async function main() {
 
   ok(src.indexOf('pick("story-voices", "voice")') !== -1, "app.js wires the voice pills");
   ok(src.indexOf("voice: this.voice") !== -1, "app.js sends voice on story create");
+  ok(src.indexOf('pick("story-feelings", "feeling")') !== -1, "app.js wires the feeling chips");
+  ok(src.indexOf("story-brief-about") !== -1, "app.js sends the brief on story create");
   ok(src.indexOf('"/refresh"') !== -1, "app.js posts to the refresh endpoint");
   ok(src.indexOf("include_name") !== -1, "app.js sends the name opt-in on publish");
   ok(src.indexOf('"?public=1"') !== -1, "showcase fetches the public story version");

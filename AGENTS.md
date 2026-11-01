@@ -41,6 +41,8 @@ authoritative; wire them exactly, only adding behaviour and data.
    evidence, explain-a-connection, phone fallback rows.
 4. **Stories** (`#/stories`, `#/showcase`): story engine, player, review,
    WebM export, publish flow with faces-blocking, Showcase (no likes/comments).
+   The Create screen takes an optional day brief (`brief {about, feeling,
+   avoid}` — the owner's own words, stored as provided facts, null when empty).
 5. **My Photos** (`#/library`): smart albums, search box, upload queue, bursts,
    correction, real deletion, data export. **World** (`#/browse` + `#/place/<key>`):
    filtered browse, place pages, gaps, "Add the first photo".

@@ -84,6 +84,22 @@ n = eng.create(title="Named", chapters=[{"photo_id": "a1"}], fetch=fetch)
 pn = eng.publish(n["id"], fetch, include_name=True)
 check(pn["include_name"] is True, "publish keeps opted-in name")
 expect(400, lambda: eng.publish(n["id"], fetch, include_name="yes"), "bad include_name 400")
+b = eng.create(chapters=[{"photo_id": "a1"}], fetch=fetch,
+                 brief={"about": "  A slow morning ", "feeling": "calm",
+                        "avoid": ""})
+check(b["brief"] == {"about": "A slow morning", "feeling": "calm", "avoid": ""},
+      "brief stored trimmed")
+e = eng.create(chapters=[{"photo_id": "a1"}], fetch=fetch)
+check(e["brief"] is None, "brief defaults empty")
+expect(400, lambda: eng.create(chapters=[{"photo_id": "a1"}], fetch=fetch,
+                               brief={"about": "x" * 281}), "long about 400")
+expect(400, lambda: eng.create(chapters=[{"photo_id": "a1"}], fetch=fetch,
+                               brief={"feeling": "y" * 21}), "long feeling 400")
+u2 = eng.update(b["id"], brief={"about": "", "feeling": "", "avoid": ""},
+                fetch=fetch)
+check(u2["brief"] is None, "empty brief clears")
+u3 = eng.update(e["id"], title="Kept", fetch=fetch)
+check(u3["brief"] is None and u3["title"] == "Kept", "patch keeps brief")
 eng.remove(n["id"])
 eng.remove(s["id"])
 expect(404, lambda: eng.load(s["id"]), "deleted story 404")

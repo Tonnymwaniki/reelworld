@@ -68,7 +68,9 @@ try:
           "tagged heading not flagged")
     check("2" not in probs, "plain heading clean")
     pub = {"status": "published", "include_name": False,
-           "title": "Tonny at KICC", "chapters": [
+           "title": "Tonny at KICC",
+           "brief": {"about": "Tonny day out", "feeling": "calm", "avoid": ""},
+           "chapters": [
                {"photo_id": "t2", "heading": "Tonny at the gate",
                 "text": "Tonny waves."}]}
     shown = api._story_full(pub, True)
@@ -76,6 +78,8 @@ try:
           and shown["chapters"][0]["text"] == "the photographer waves."
           and "Tonny" not in shown["chapters"][0]["heading"],
           "public hides name")
+    check(shown["story"]["brief"]["about"] == "the photographer day out",
+          "public scrubs brief")
     check(pub["title"] == "Tonny at KICC", "stored story untouched")
     kept = api._story_full(pub, False)
     check("Tonny" in kept["chapters"][0]["text"], "owner view keeps name")

@@ -149,6 +149,7 @@ and mood surface in the player/exporter from step 7 on, and
 | Element | Endpoint | Fields |
 |---|---|---|
 | Narration voice pills (By name / As you / As I) | `GET /api/profile` default, sent on `POST /api/stories` as `voice` | starts from the profile's `refer_as` (else By name); honesty note: the name is used only on tagged photos |
+| Day brief (collapsed) | sent on `POST /api/stories` as `brief` | "what was this day about" (≤280), feeling chips + custom word (≤20), "should not mention" (≤280); stored as provided facts, null when empty; guides the writer from step 5 on |
 | Scene problem flags | `problems` in the story detail | headings using the name or you/I on untagged photos are flagged with "change it or refresh the narration" |
 | Refresh narration | `POST /api/stories/{id}/refresh` | rewrites texts with the current name + tags; trace painted under the review tab; demo code needed |
 | "Include my name in this public story" | `POST /api/stories/{id}/publish` `{include_name}` | checkbox, default off; disabled once published showing the stored choice; off means the Showcase shows "the photographer" |
