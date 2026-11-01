@@ -220,6 +220,36 @@ try:
     check("present tense" in seen_style["prompt"]
           and "hustle and bustle" in seen_style["prompt"],
           "writer carries voice rules")
+    seen_cine = {}
+    llm.ask = lambda *a, **k: (seen_cine.update(prompt=a[0]), {"text": json.dumps(
+        {"title": "T", "openings": ["O1", "O2", "O3"],
+         "scenes": {"p1": {"narration": "Buses gather here in the morning light daily.",
+                            "caption": "Morning buses.", "silent_reason": ""},
+                    "p2": {"narration": "Morning buses rest here now in long rows.",
+                            "caption": "Resting buses.", "silent_reason": ""},
+                    "p3": {"narration": "", "caption": "",
+                            "silent_reason": "Let the street breathe."},
+                    "p4": {"narration": "Tired light fades over the waiting buses.",
+                            "caption": "Fading light.", "silent_reason": ""}}})})[1]
+    br4 = {**BRIEFS, "p3": BRIEFS["p1"], "p4": BRIEFS["p2"]}
+    w = [{**sc("p1"), "seconds": 4}, {**sc("p2"), "seconds": 4},
+         {**sc("p3"), "seconds": 4}, {**sc("p4"), "seconds": 4}]
+    film_mod.write_script(w, br4, SCRIPT_BEATS, "S.", style="cinematic")
+    check(w[2]["narration"] == "" and w[2]["silent"] is True
+          and w[2]["silent_reason"] == "Let the street breathe."
+          and "leave exactly one scene silent" in seen_cine["prompt"],
+          "cinematic silence applied")
+    seen_duo = {}
+    llm.ask = lambda *a, **k: (seen_duo.update(prompt=a[0]), {"text": json.dumps(
+        {"title": "T", "openings": ["O1", "O2", "O3"],
+         "scenes": {"p1": {"narration": "Buses gather here in the morning light daily.",
+                            "caption": "Morning buses.", "silent_reason": ""},
+                    "p2": {"narration": "Morning buses rest here now.",
+                            "caption": "Resting buses.", "silent_reason": ""}}})})[1]
+    w = [{**sc("p1"), "seconds": 4}, {**sc("p2"), "seconds": 4}]
+    film_mod.write_script(w, BRIEFS, SCRIPT_BEATS, "S.", style="cinematic")
+    check("leave exactly one scene silent" not in seen_duo["prompt"],
+          "silence nudge needs room")
 
     s1 = sc("p1")
     s1["caption"] = "Buses park here. People wait."
@@ -369,6 +399,17 @@ try:
     check(kept[0]["narration"] == "Buses park here."
           and kept[0]["caption"] == "Buses rest." and ver["fixed"] == 1,
           "narration and caption verified")
+    llm.ask = lambda *a, **k: {"text": json.dumps(
+        {"title": SUP, "intents": [SUP],
+         "scenes": {"p1": {"claims": [{"verdict": "unsupported",
+                                       "rewrite": None}, SUP]}}})}
+    s3 = {**sc("p1"), "narration": "The tower was completed in 1973.",
+          "caption": "Buses wait."}
+    _t, _b, kept3, ver3 = film_mod.edit_captions("T", [{"intent": "go"}],
+                                                [s3], BRIEFS)
+    check(kept3[0]["narration"] == "" and "1973" not in kept3[0]["caption"]
+          and kept3[0]["silent"] is True and ver3["fixed"] == 1,
+          "editor removes invented fact")
 finally:
     llm.ask = orig_ask
 
@@ -406,11 +447,19 @@ _, _, _, problems = film_mod._validate_script(
      "scenes": {"p1": {"narration": "", "caption": "", "silent_reason": ""},
                 "p2": {"narration": "Buses gather here in the morning light daily.",
                         "caption": "", "silent_reason": ""},
-                "p3": {"narration": "Buses gather here in the morning light daily.",
+                "p3": {"narration": "Afternoon buses wait here in long patient rows.",
                         "caption": "", "silent_reason": ""},
                 "p4": {"narration": "Morning buses rest here now.", "caption": "",
                         "silent_reason": ""}}}, NEED4, "")
 check(problems == ["p1 silent scene needs a reason"], "silent needs a reason")
+_, _, _, problems = film_mod._validate_script(
+    {"title": "T", "openings": ["O1", "O2", "O3"],
+     "scenes": {"p1": {"narration": "Buses gather here in the morning light daily.",
+                        "caption": "Buses.", "silent_reason": ""},
+                "p2": {"narration": "Buses gather here in the evening calm now.",
+                        "caption": "Evening.", "silent_reason": ""}}},
+    NEED2, "")
+check(problems == ["p2 opens the same way as p1"], "dup opener rejected")
 _, _, _, problems = film_mod._validate_script(
     script_reply("Buses gather here in the morning light daily.",
                  "Morning buses rest here now here here here here here here here here."),
@@ -445,6 +494,8 @@ try:
     check(flagged == {"p1": {"flags": ["repetition", "cliche"], "note": "dull"}}
           and any("2 issues in 1" in t["detail"] for t in tc),
           "critic flags parsed")
+    check(any("p1: repetition, cliche" in t["detail"] for t in tc),
+          "critic trace names flags")
     replies = ["garbage", json.dumps({"p1": {"flags": [], "note": ""}})]
     llm.ask = lambda *a, **k: {"text": replies.pop(0)}
     ss = [{**sc("p1"), "seconds": 4, "narration": "Buses rest."}]
@@ -535,15 +586,33 @@ try:
     def explode(*a, **k):
         raise AssertionError("no model call expected")
 
-    llm.ask = explode
+    llm.ask = lambda *a, **k: {"text": json.dumps(
+        {"p1": {"narration": "Buses gather here in the morning light.",
+                "caption": "Morning buses."}})}
     ss = [{**sc("p1"), "seconds": 4,
            "narration": " ".join(f"w{i}" for i in range(14))}]
     film_mod.fit_durations(ss, BRIEFS, "short", "postcard", None, None,
                            trace=(tf4 := []))
     check(ss[0]["seconds"] == 5.5
+          and ss[0]["narration"] == "Buses gather here in the morning light."
           and any("extended to 5.5s" in t["detail"] for t in tf4)
+          and any("over-long line" in t["detail"] for t in tf4)
           and any("outside 10 percent" in t["detail"] for t in tf4),
           "fit extends scenes")
+    llm.ask = lambda *a, **k: {"text": json.dumps(
+        {"p2": {"narration": "Quiet light settles over the waiting street.",
+                "caption": "Quiet light."}})}
+    ss = [{**sc("p1"), "seconds": 4,
+           "narration": "Buses gather here in the morning light daily."},
+          {**sc("p2"), "seconds": 7,
+           "narration": " ".join(f"w{i}" for i in range(14))}]
+    film_mod.fit_durations(ss, BRIEFS, "short", "postcard", None, None,
+                           trace=(tf9 := []))
+    check(ss[1]["seconds"] == 7
+          and ss[1]["narration"] == "Quiet light settles over the waiting street."
+          and ss[0]["narration"].startswith("Buses gather")
+          and any("over-long line" in t["detail"] for t in tf9),
+          "fit holds the closing line short")
     llm.ask = lambda *a, **k: {"text": json.dumps(
         {"p1": {"narration": "Buses gather here in the morning light.",
                 "caption": "Morning buses."}})}
@@ -573,7 +642,9 @@ try:
     check(ss[1]["seconds"] == 4
           and any("All lines fit" in t["detail"] for t in tf7),
           "fit skips fixed lines")
-    llm.ask = explode
+    llm.ask = lambda *a, **k: {"text": json.dumps(
+        {"p1": {"narration": "Buses gather here in the morning light.",
+                "caption": "Morning buses."}})}
     ss = [{**sc("p1"), "seconds": 7, "narration": "Buses rest here."},
           {**sc("p2"), "seconds": 7, "narration": "Buses rest here."},
           {**sc("p1"), "seconds": 4,

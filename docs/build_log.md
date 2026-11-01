@@ -769,4 +769,29 @@ the first unfinished phase.
   Tests: studio_voice 18/18, routes 30/30, stories 186/186;
   Modal CPU deploy live (miss→hit cache, WAV served, studio
   in status); export stretches scenes to fit audio (fix for
-  cut-off narration, pending user re-export).
+  cut-off narration, user-confirmed working); committed
+  025fcf4.
+- Acceptance tooling: `critiqued` trace names per-scene flags;
+  `scripts/script_check.py` (fit/banned/openers/silence/echo/
+  focus per film JSON) and `scripts/cost_check.py` (tokens,
+  seconds, $ estimate since a timestamp); film tests 90→92
+  (flags in trace, editor removes a planted year).
+- Acceptance fix: cinematic writer now asks for exactly one
+  silent scene when quota allows (4+ scripted scenes) — the
+  voice promises silence but the model never chose it.
+  Film tests 92→94.
+- Acceptance fix: the fit pass holds the closing line to 12
+  words (the editor had lengthened one to 14 after the
+  writer's validation; the checker caught it). Film tests
+  94→95.
+- Acceptance fix: writer validation rejects duplicate scene
+  openers (first 3 words) with a retry; the checker notes
+  under-minimum lines instead of failing them (short true
+  lines breathe; padding would risk invention). Tests 95→96.
+- Acceptance results (all live): (a) spine/beats/openings/
+  focus shown; (b) brief vs plain differ; (c) 8 issues in 5
+  lines, all rewritten, judge picked opening 2; (d) 17
+  claims/2 fixed + planted-year unit removal; (e) PASS;
+  (f) silent scene with reason + closing echo; (g) note
+  wording in the line; (h) seed take differs; (i) every line
+  fits; (j) one story ≈ $0.11 (8 calls, 122 model-seconds).

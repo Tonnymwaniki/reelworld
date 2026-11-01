@@ -474,6 +474,17 @@ def _validate_script(data, need, name):
                                           if isinstance(reason, str) else "")}
     if silent * 4 > len(need):
         problems.append(f"{silent} of {len(need)} scenes silent (max a quarter)")
+    openers = {}
+    for s in need:
+        narr = entries.get(s["photo_id"], {}).get("narration", "")
+        if not narr.strip():
+            continue
+        op = " ".join(narr.split()[:3]).lower()
+        if op in openers:
+            problems.append(
+                f"{s['photo_id']} opens the same way as {openers[op]}")
+        else:
+            openers[op] = s["photo_id"]
     first = entries.get(need[0]["photo_id"], {}).get("narration", "") if need else ""
     last = entries.get(need[-1]["photo_id"], {}).get("narration", "") if need else ""
     if first.strip() and last.strip() and \
@@ -575,6 +586,10 @@ def write_script(scenes, briefs, beats, spine, brief=None, style="postcard",
                      f"aim {lo}-{hi} words; intent: {intent or 'none'}):")
         lines.append(f"  focus: {foc}")
         lines.append(f"  facts: {_brief_text(briefs.get(pid))}")
+    if style == "cinematic" and len(need) >= 4:
+        lines.append("Cinematic craft: leave exactly one scene silent "
+                     "(empty narration with a silent_reason) — pick the "
+                     "scene where stillness says the most.")
     lines.append("Reply ONE JSON object, no prose: "
                  '{"title": "…", "openings": ["…", "…", "…"], '
                  '"scenes": {"<id>": {"narration": "the spoken line (or \\"\\" '
@@ -771,10 +786,14 @@ def critique_script(scenes, briefs, style, trace=None, session_id=None):
     flagged = {p: e for p, e in entries.items() if e["flags"]}
     if trace is not None:
         n = sum(len(e["flags"]) for e in flagged.values())
-        trace.append({"step": "critiqued",
-                      "detail": ("Critic found no issues." if not flagged else
-                                 f"Critic found {n} issues in {len(flagged)} "
-                                 "lines.")})
+        if not flagged:
+            detail = "Critic found no issues."
+        else:
+            per = "; ".join(f"{p}: {', '.join(e['flags'])}"
+                            for p, e in sorted(flagged.items()))
+            detail = (f"Critic found {n} issues in {len(flagged)} "
+                      f"lines ({per}).")
+        trace.append({"step": "critiqued", "detail": detail})
     return flagged
 
 
@@ -1017,9 +1036,20 @@ def fit_durations(scenes, briefs, target, style, voice, profile,
     A line longer than its scene extends the scene up to 1.5s;
     lines still too long go through the rewrite pass once with a
     too-long flag. Vantage and silent lines are fixed and skipped.
-    The final total is traced against the target (±10%). Never
-    raises except on budget.
+    The closing line is held to FINAL_SHORT_WORDS even when it
+    fits its scene's range (the editor can lengthen it after the
+    writer's validation). The final total is traced against the
+    target (±10%). Never raises except on budget.
     """
+    need = [s for s in scenes if not s.get("caption_note")]
+    final_pid = need[-1]["photo_id"] if need else None
+
+    def cap(s):
+        hi = _fit_range(s.get("seconds"))[1]
+        if final_pid is not None and s["photo_id"] == final_pid:
+            hi = min(FINAL_SHORT_WORDS, hi)
+        return hi
+
     extended = False
     for s in scenes:
         narr = (s.get("narration") or "").strip()
@@ -1027,7 +1057,7 @@ def fit_durations(scenes, briefs, target, style, voice, profile,
             continue
         words = len(narr.split())
         sec = float(s.get("seconds") or 0)
-        if words <= _fit_range(sec)[1]:
+        if words <= cap(s):
             continue
         ext = round(min(1.5, max(0.0, words / WORDS_PER_SECOND - sec)), 2)
         if ext > 0:
@@ -1039,7 +1069,7 @@ def fit_durations(scenes, briefs, target, style, voice, profile,
                               f"{s['seconds']}s for its narration."})
     left = [s["photo_id"] for s in scenes
             if (s.get("narration") or "").strip() and not s.get("caption_note")
-            and len(s["narration"].split()) > _fit_range(s.get("seconds"))[1]]
+            and len(s["narration"].split()) > cap(s)]
     if left:
         rewrite_lines(scenes, briefs,
                       {p: {"flags": ["too long for the scene"],
@@ -1049,7 +1079,7 @@ def fit_durations(scenes, briefs, target, style, voice, profile,
         for s in scenes:
             narr = (s.get("narration") or "").strip()
             if s["photo_id"] in left and narr \
-                    and len(narr.split()) > _fit_range(s.get("seconds"))[1]:
+                    and len(narr.split()) > cap(s):
                 if trace is not None:
                     trace.append({"step": "fitted",
                                   "detail": f"Scene {s['photo_id']} narration "

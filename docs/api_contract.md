@@ -422,11 +422,13 @@ cannot support are dropped and named in the trace instead of padded, as are chap
   restores the draft pair), and a judge call ranks the openings
   (the first fitting, echoing, owner-clean one replaces the
   opening line). Each pass retries once; any failure keeps the
-  previous version and says so in the trace (`critiqued`,
-  `rewrote`, `judged`). A final duration-fit pass extends any
+  previous version and says so in the trace (`critiqued`
+  with per-scene flags, `rewrote`, `judged`). A final
+  duration-fit pass extends any
   scene whose line still exceeds it (up to 1.5s), sends
-  leftovers through the rewrite once as over-long, and traces
-  the final length against the target (`fitted`). Optional
+  leftovers through the rewrite once as over-long (the closing
+  line is held to 12 words even when it fits its range), and
+  traces the final length against the target (`fitted`). Optional
   `notes` ({photo_id: text, 140 chars max, ids must be in the
   request) are owner-provided facts: attached to their scenes
   as `owner_note`, forced through the rewrite and honoured by
