@@ -797,10 +797,12 @@ the first unfinished phase.
   fits; (j) one story ≈ $0.11 (8 calls, 122 model-seconds).
 - Chat intelligence step 1 (visual attributes): attributes.py
   (4-per-sheet vision, strict enums, unsure→unknown,
-  fallbacks), tests 17/17 (pending user run), schema_v4.sql
-  (attributes jsonb + GIN + search_photos v3 filter),
-  loader + upload hook, scripts/attrs_run.py (pending:
-  full run + distribution + reload).
+  fallbacks), tests 17/17, schema_v4.sql (attributes jsonb +
+  GIN + search_photos v3 filter), loader + upload hook,
+  scripts/attrs_run.py. Live: 148/148 judged, 0 fallbacks;
+  atmosphere clear=31 hazy=11 misty=2 overcast=40
+  partly_cloudy=34 unknown=30; reloaded Supabase; committed
+  688e1c7.
 - Retrieval precision (mountain follow-up): avoid terms now
   exclude (stem-tolerant lex_has: "buildings" catches
   "building"), zero-term guesses dropped, empty results say
@@ -812,3 +814,13 @@ the first unfinished phase.
   `simple` carve-out fails on this reasoning model) → raised
   to 3000; mountain follow-up now excludes 15, model keeps
   the 3 true mountains, never padded.
+- Chat intelligence step 2 (constraints + chips): constraint shape
+  {attribute, op is/is_not, values} in attributes.py (normalize,
+  filter, violates), EMPTY_SPEC + parser prompt vocabulary in chat.py,
+  rpc_search honours is-constraints in SQL, search() applies is_not
+  in code keeping unknowns, /api/search validates and echoes,
+  frontend chips ("Mist", "Not crowded") removable with no model
+  call. Tests: test_constraints 13/13 (incl. a prompt-format
+  regression check — literal braces in the new prompt text broke
+  PARSE_PROMPT.format until doubled), test_search_verify 18/18,
+  home.test.js 54/54. (commit id on push.)

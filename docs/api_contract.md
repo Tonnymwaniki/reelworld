@@ -165,6 +165,15 @@ Response:
   `lex` are never sent. `credit` is the world's `{author, license,
   source_url, title}` and null for personal photos.
 - `text` is shown to the user verbatim.
+- `spec.constraints` holds visual-attribute constraints the parser heard:
+  `[{attribute, op: "is"|"is_not", values}]`, where `attribute` is one of
+  `atmosphere`, `light`, `time_of_day`, `water_visible`, `vegetation`,
+  `crowd` and `values` must be in that attribute's vocabulary
+  (`time_of_day` accepts free words). `is` filters inside
+  `search_photos`; `is_not` filters in code while keeping `unknown`
+  values for later visual checks. Each constraint shows as a removable
+  chip ("Mist", "Not crowded"); removing one re-runs via `/api/search`
+  with no model call.
 - `trace` is the "How I found this" list: ordered `{step, detail}`
   entries recorded from the steps that really ran — `understood` (the
   parsed spec in plain words), `searched` (collection, filters, how
@@ -204,6 +213,9 @@ of `world`, `personal`, `both`, `viewpoints` from `ground_level`,
 `owner_only` a real boolean (default false). `owner_only` true forces
 `collection` to `personal` and filters to photos tagged owner-present
 (`filter_owner` in `search_photos` v2, see `backend/schema_v3.sql`).
+`constraints` (default `[]`) is a list of `{attribute, op, values}`
+as in `/chat`; entries with an unknown attribute, a bad `op`, or
+values outside the attribute's vocabulary are dropped.
 
 Response: the same shape as `/chat` (`session_id`, `text`, `results`
 with credit, `focus_photo_id`, `spec`, `kind`, where `kind` is `ok` or

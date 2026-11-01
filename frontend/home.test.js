@@ -90,6 +90,14 @@ async function main() {
     must_include: ["tower"], avoid_terms: ["cars"] };
   const chips = T.specChips(spec);
   ok(chips.length === 5, "five chips from a full spec, got " + chips.length);
+
+const cspec = { query: "q", collection: "world", constraints: [
+  { attribute: "atmosphere", op: "is", values: ["misty_or_foggy"] },
+  { attribute: "crowd", op: "is_not", values: ["many"] }] };
+const cchips = T.specChips(cspec);
+ok(cchips.length === 2 && cchips[0].label === "Mist" && cchips[1].label === "Not crowded", "constraint chips labelled");
+const cspec1 = T.applyChipRemove(cspec, "constraints:0");
+ok(cspec1.constraints.length === 1 && cspec1.constraints[0].op === "is_not", "constraint chip removed by index");
   ok(T.specChips({ query: "q", collection: "world", viewpoints: [], max_people: null,
     must_include: [], avoid_terms: [] }).length === 0, "default spec has no chips");
   ok(T.applyChipRemove(spec, "collection").collection === "world", "collection resets to world");

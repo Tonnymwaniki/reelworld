@@ -20,6 +20,11 @@ Hackathon (Indie track). Environment: Windows, PowerShell, Python 3.14.
 - `backend/chat.py`: class `Engine` with `turn(message)` returning
   `{"text": str, "results": [rows]}`. It keeps conversation state (current spec,
   focus photo, rejected ids). It also has a terminal loop in `main()`.
+- `backend/attributes.py`: per-photo visual checklist (atmosphere, light,
+  time_of_day, water, vegetation, crowd) judged from the image, cached in
+  `data/attributes/*.json`, loaded into the Supabase `attributes` column
+  (`backend/schema_v4.sql`). Chat specs carry `constraints` on these that
+  filter searches and show as removable chips.
 
 ## The product (what the app must show)
 

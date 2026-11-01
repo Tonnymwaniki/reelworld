@@ -268,6 +268,26 @@ function areaOfKey(key) {
   if (parts.length < 3) return "";
   return parts.slice(1, -1).map((p) => p.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())).join(" / ");
 }
+const CONSTRAINT_VALUE_LABEL = {
+  clear: "Clear sky", partly_cloudy: "Partly cloudy", overcast: "Overcast",
+  hazy: "Haze", misty_or_foggy: "Mist", rainy: "Rain", dusty: "Dust",
+  golden_hour: "Golden hour", harsh_midday: "Harsh midday", soft: "Soft light",
+  night_lit: "Night lights", backlit: "Backlit",
+  dawn: "Dawn", morning: "Morning", midday: "Midday", afternoon: "Afternoon",
+  dusk: "Dusk", night: "Night",
+  none: "Bare ground", sparse: "Sparse greenery", lush: "Lush",
+  empty: "Empty", few: "Few people", many: "Crowded",
+};
+function constraintLabel(c) {
+  const bits = (c.values || []).map((v) => {
+    if (v === true) return "Water";
+    if (v === false) return "No water";
+    return CONSTRAINT_VALUE_LABEL[v] || String(v);
+  });
+  const text = bits.join(" or ") || "Anything";
+  if (c.op !== "is_not") return text;
+  return "Not " + text.charAt(0).toLowerCase() + text.slice(1);
+}
 function specChips(spec) {
   const out = [];
   if (!spec) return out;
@@ -283,6 +303,9 @@ function specChips(spec) {
   }
   for (const w of spec.must_include || []) out.push({ key: "must_include:" + w, label: "\u201C" + w + "\u201D" });
   for (const w of spec.avoid_terms || []) out.push({ key: "avoid_terms:" + w, label: "Not " + w });
+  (spec.constraints || []).forEach((c, i) => {
+    out.push({ key: "constraints:" + i, label: constraintLabel(c) });
+  });
   return out;
 }
 function applyChipRemove(spec, key) {
@@ -292,6 +315,10 @@ function applyChipRemove(spec, key) {
   if (key === "owner_only") { s.owner_only = false; return s; }
   const i = key.indexOf(":");
   const field = key.slice(0, i), val = key.slice(i + 1);
+  if (field === "constraints") {
+    s.constraints = (s.constraints || []).filter((_, j) => j !== Number(val));
+    return s;
+  }
   s[field] = (s[field] || []).filter((x) => x !== val);
   return s;
 }
@@ -407,7 +434,8 @@ function evidenceRows(facts, nameA, nameB) {
 }
 const RWTEST = { fmtScore: fmtScore, shortReasons: shortReasons, creditText: creditText,
   citeText: citeText, hostOf: hostOf, areaOfKey: areaOfKey, specChips: specChips,
-  applyChipRemove: applyChipRemove, buildSuggestions: buildSuggestions,
+  applyChipRemove: applyChipRemove, constraintLabel: constraintLabel,
+  buildSuggestions: buildSuggestions,
   sseParseChunk: sseParseChunk, licenseFamily: licenseFamily,
   licenseSummary: licenseSummary, kitCitation: kitCitation,
   ringLayout: ringLayout, ringLabel: ringLabel, evidenceRows: evidenceRows,

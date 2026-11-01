@@ -207,7 +207,7 @@ def rejected_step(exclude):
 
 EMPTY_SPEC = {"query": "", "collection": "world", "viewpoints": [],
               "max_people": None, "must_include": [], "avoid_terms": [],
-              "owner_only": False}
+              "owner_only": False, "constraints": []}
 
 NO_TAGS_TEXT = ("You have not told me which photos you are in. "
                 "Tag a few and I will find them.")
@@ -233,7 +233,8 @@ Return:
     "max_people": null,
     "must_include": [],
     "avoid_terms": [],
-    "owner_only": false
+    "owner_only": false,
+    "constraints": []
   }},
   "anchor": null,
   "focus_index": null,
@@ -268,6 +269,24 @@ Rules:
   search or refine when the user names specific objects. Include only words they
   actually used or clearly implied.
 - avoid_terms: things they do not want, as single lowercase words.
+- constraints: visual conditions as {{"attribute": ..., "op": "is"|"is_not",
+  "values": [...]}}. Attributes and values: atmosphere =
+  clear|partly_cloudy|overcast|hazy|misty_or_foggy|rainy|dusty;
+  light = golden_hour|harsh_midday|soft|night_lit|backlit;
+  time_of_day = dawn|morning|midday|afternoon|dusk|night;
+  water_visible = true|false (JSON booleans); vegetation =
+  none|sparse|lush; crowd = empty|few|many.
+  Mappings: "misty", "foggy", "with mist" = atmosphere is
+  [misty_or_foggy]; "without mist", "no fog", "not misty" =
+  atmosphere is_not [misty_or_foggy]; "not hazy" = atmosphere
+  is_not [hazy]; "clear sky", "clear day" = atmosphere is
+  [clear]; "cloudy" = atmosphere is [overcast, partly_cloudy];
+  "rainy" = atmosphere is [rainy]; "golden hour" = light is
+  [golden_hour]; "at night" = time_of_day is [night]; "empty"
+  = crowd is [empty]; "crowded" = crowd is [many]; "lush" =
+  vegetation is [lush]; "dry" = vegetation is [none]; "with
+  water" = water_visible is [true]. Refines keep earlier
+  constraints unless the user replaces or drops them.
 """
 
 ANSWER_PROMPT = """You answer a question about ONE photo using ONLY the stored annotation below.
@@ -380,6 +399,10 @@ class Engine:
                 params["max_people"] = int(spec["max_people"])
             if spec.get("owner_only"):
                 params["filter_owner"] = True
+            from attributes import attributes_filter  # lazy: attributes imports chat
+            filt = attributes_filter(spec.get("constraints"))
+            if filt:
+                params["filter_attributes"] = filt
         if exclude:
             params["exclude_ids"] = sorted(exclude)
         return self.sb.rpc("search_photos", params).execute().data or []
@@ -395,6 +418,8 @@ class Engine:
         try:
             data = extract_json(self.ask(prompt, purpose="parse"))
             spec = {**EMPTY_SPEC, **(data.get("spec") or {})}
+            from attributes import normalize_constraints  # lazy: attributes imports chat
+            spec["constraints"] = normalize_constraints(spec.get("constraints"))
             if not spec["query"]:
                 spec["query"] = message
             spec["owner_only"] = bool(spec.get("owner_only"))
@@ -476,6 +501,21 @@ class Engine:
             pos = only_matching(rows, toks, must)
             if pos:
                 rows = pos
+        constraints = spec.get("constraints") or []
+        if any(c.get("op") == "is_not" for c in constraints):
+            from attributes import violates_is_not  # lazy: attributes imports chat
+            kept = [r for r in rows
+                    if not violates_is_not(r.get("attributes"), constraints)]
+            dropped = len(rows) - len(kept)
+            if dropped and kept:
+                trace.append({"step": "filtered",
+                              "detail": f"Filtered out {dropped} against "
+                              f"the visual constraints."})
+                rows = kept
+            elif dropped:
+                trace.append({"step": "filtered",
+                              "detail": "Nothing fully passed the visual "
+                              "constraints; showing the closest."})
         for r in rows:
             hit = [t for t in toks if lex_has(r["lex"], t)]
             lex = (len(hit) / len(toks)) if toks else 0.0
@@ -506,6 +546,9 @@ class Engine:
             filters.append("must show " + ", ".join(spec["must_include"]))
         if spec.get("avoid_terms"):
             filters.append("avoiding " + ", ".join(spec["avoid_terms"]))
+        for c in spec.get("constraints") or []:
+            filters.append(("not " if c.get("op") == "is_not" else "")
+                           + ", ".join(str(v) for v in c.get("values") or []))
         if spec.get("owner_only"):
             filters.append("only photos you're in")
         trace.append({"step": "searched", "detail":

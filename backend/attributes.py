@@ -122,6 +122,72 @@ def _valid_objects(raw):
     return out
 
 
+CONSTRAINT_SLOTS = {"atmosphere": ATMOSPHERE, "light": LIGHT,
+                    "time_of_day": TIME_OF_DAY, "vegetation": VEGETATION,
+                    "crowd": CROWD}
+OPS = ("is", "is_not")
+
+
+def normalize_constraints(raw):
+    """Cleaned [{attribute, op, values}] (pure).
+
+    Drops anything malformed, unknown, or outside the slot enums
+    ("unknown" values included — they never match a filter, so
+    they are pointless, not harmful). Water takes true/false.
+    """
+    if not isinstance(raw, list):
+        return []
+    out = []
+    for c in raw:
+        if not isinstance(c, dict):
+            continue
+        attr = c.get("attribute")
+        op = c.get("op")
+        values = c.get("values")
+        if attr == "water_visible":
+            allowed = (True, False)
+        elif attr in CONSTRAINT_SLOTS:
+            allowed = CONSTRAINT_SLOTS[attr]
+        else:
+            continue
+        if op not in OPS or not isinstance(values, list) or not values:
+            continue
+        clean = [v for v in values if v in allowed]
+        if not clean:
+            continue
+        out.append({"attribute": attr, "op": op, "values": clean})
+    return out
+
+
+def attributes_filter(constraints):
+    """SQL filter_attributes param for "is" constraints (pure).
+
+    {"atmosphere": [...], ...} or None when no "is" constraint
+    exists. "is_not" is applied in code (unknowns are kept).
+    """
+    filt = {}
+    for c in constraints or []:
+        if c.get("op") == "is" and c.get("values"):
+            filt[c["attribute"]] = list(c["values"])
+    return filt or None
+
+
+def violates_is_not(attributes, constraints):
+    """True when stored attributes break an "is_not" constraint (pure).
+
+    Missing attributes or "unknown" values never violate: the
+    photo might still qualify (step 3 checks it visually).
+    """
+    attrs = attributes if isinstance(attributes, dict) else {}
+    for c in constraints or []:
+        if c.get("op") != "is_not":
+            continue
+        got = (attrs.get(c.get("attribute")) or {}).get("value")
+        if got is not None and got != "unknown" and got in (c.get("values") or []):
+            return True
+    return False
+
+
 def fallback_entry(pid, reason):
     """All-unknown entry; filtering treats it as no information."""
     unk = {"value": "unknown", "confidence": 0.0, "evidence": reason[:MAX_EVIDENCE]}

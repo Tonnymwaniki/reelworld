@@ -18,7 +18,7 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 | Element | Endpoint | Fields |
 |---|---|---|
 | Chat bar | `POST /chat` `{session_id, message}` | send `message`; read `text`, `kind` |
-| Filter chips | `POST /chat` → `spec` | `viewpoints`, `max_people`, `collection`, `must_include`, `avoid_terms`, `owner_only` ("Photos of me"); removing one sends the spec minus that filter to `POST /api/search` `{session_id, spec}` |
+| Filter chips | `POST /chat` → `spec` | `viewpoints`, `max_people`, `collection`, `must_include`, `avoid_terms`, `owner_only` ("Photos of me"), `constraints` ("Mist", "Not crowded"); removing one sends the spec minus that filter to `POST /api/search` `{session_id, spec}` |
 | Results grid | `POST /chat` / `POST /api/search` → `results[]` | `photo_id`, `file` → `/photos/…` URL, `caption`, `reasons`, `score` |
 | Card "why it matched" line | same row | `reasons` joined with " · " |
 | "How I found this" (under results, collapsed) | `POST /chat` / `POST /api/search` → `trace[]` | `step` (plain label) + `detail` verbatim, in order |

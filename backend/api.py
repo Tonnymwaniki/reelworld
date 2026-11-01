@@ -54,6 +54,7 @@ from pydantic import BaseModel, Field
 from supabase import create_client
 
 import annotate as annotate_mod
+import attributes as attributes_mod
 import chat as chat_module
 import llm as llm_mod
 import narration as narration_mod
@@ -377,7 +378,7 @@ def _resting_payload(sid, eng, reason):
         "focus_photo_id": focus.get("photo_id"),
         "spec": {k: spec.get(k) for k in ("query", "collection", "viewpoints",
                                           "max_people", "must_include", "avoid_terms",
-                                          "owner_only")},
+                                          "owner_only", "constraints")},
         "kind": "resting",
         "trace": [{"step": "rested",
                    "detail": _REST_LIMIT_DETAIL.get(reason, "Resting briefly.")}],
@@ -701,7 +702,7 @@ def _chat_payload(sid, eng, out):
         "focus_photo_id": focus.get("photo_id"),
         "spec": {k: spec.get(k) for k in ("query", "collection", "viewpoints",
                                           "max_people", "must_include", "avoid_terms",
-                                          "owner_only")},
+                                          "owner_only", "constraints")},
         "kind": out.get("kind", "ok"),
         "trace": trace,
     }
@@ -956,6 +957,7 @@ def clean_spec(raw):
         if not isinstance(spec[k], list) or any(not isinstance(w, str) for w in spec[k]):
             raise HTTPException(status_code=400, detail=f"spec.{k} must be a list of strings")
         spec[k] = [w.strip().lower() for w in spec[k] if w.strip()]
+    spec["constraints"] = attributes_mod.normalize_constraints(spec.get("constraints"))
     if not isinstance(spec["owner_only"], bool):
         raise HTTPException(status_code=400, detail="spec.owner_only must be true or false")
     if spec["owner_only"]:
@@ -983,7 +985,7 @@ def api_search(req: SearchRequest):
             "focus_photo_id": focus.get("photo_id"),
             "spec": {k: spec.get(k) for k in ("query", "collection", "viewpoints",
                                               "max_people", "must_include", "avoid_terms",
-                                              "owner_only")},
+                                              "owner_only", "constraints")},
             "kind": "need_tags",
             "trace": [{"step": "answered",
                        "detail": "No tagged photos yet, so I pointed at the tagging page."}],
@@ -1011,7 +1013,7 @@ def api_search(req: SearchRequest):
         "focus_photo_id": focus.get("photo_id"),
         "spec": {k: spec.get(k) for k in ("query", "collection", "viewpoints",
                                           "max_people", "must_include", "avoid_terms",
-                                          "owner_only")},
+                                          "owner_only", "constraints")},
         "kind": "no_strong_match" if note else "ok",
         "trace": trace,
     }
