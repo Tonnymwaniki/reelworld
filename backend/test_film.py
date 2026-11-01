@@ -272,7 +272,7 @@ try:
                        "inferred": {"place": {"name": "K", "status": "confirmed"},
                                     "taken_from": {}}}}}
     foc = {"p1": {"mood": "busy", "confidence": 0.8}}
-    sheet = {"title": "T", "cover": "p1",
+    sheet = {"title": "T", "cover": "p1", "spine": "The street, held still.",
              "beats": [{"role": "build", "intent": "go", "photo_ids": ["p1"],
                         "pacing": "medium", "camera": "hold", "reason": "r"}]}
     llm.ask = lambda *a, **k: {"text": json.dumps(
@@ -288,6 +288,7 @@ try:
           and any("Outside" in t["detail"] for t in tb),
           "build_film end to end")
     check(film["version"] == 2, "film schema v2")
+    check(film["spine"] == "The street, held still.", "film carries the spine")
     check(all(s["duration"] == s["seconds"] for s in film["scenes"]),
           "duration mirrors seconds")
     check(all(isinstance(s["evidence"], list) and s["evidence"]

@@ -368,7 +368,9 @@ cannot support are dropped and named in the trace instead of padded, as are chap
   re-direct by posting the same `photo_ids` with a new `seed`.
   Rate/budget guarded like `/api/story`.
 - The film carries `version: 2`, `title`, `cover`, `beats`,
-  `scenes`, `total_seconds`, `verification`. Each scene carries
+  `spine` (one sentence stating the story angle), `scenes`,
+  `total_seconds`, `verification`. Beats that do not serve the
+  spine are dropped and named in the trace. Each scene carries
   `photo_id`, `src`, `collection`, `credit`, `role`, `pacing`,
   `camera`, `transition_in`, `focal`, `seconds` (= `duration`),
   `found_text`, `why`, `caption` (+`caption_note`), `evidence`

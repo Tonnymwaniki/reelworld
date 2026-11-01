@@ -6290,6 +6290,12 @@ const builder = {
       return;
     }
     const v = this.film.verification || {};
+    if (this.film.spine) {
+      const sp = document.createElement("p");
+      sp.className = "font-body-md text-body-md text-on-surface";
+      sp.textContent = "Spine: " + this.film.spine;
+      box.appendChild(sp);
+    }
     const pill = document.createElement("p");
     pill.className = "font-label-md text-label-md " +
       (v.verified ? "text-secondary" : "text-error");

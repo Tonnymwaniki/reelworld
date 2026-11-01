@@ -1,11 +1,13 @@
 """Beat-sheet planning for directed stories (reasoning, text only).
 
 The director sees record summaries + focal moods (never pixels) and
-returns a beat sheet: title, cover photo, and beats with role, intent,
-photos, pacing, camera and reason. Output is strictly validated;
-invalid output is retried once (with the problems listed), then a
-deterministic fallback plan is built in code so the pipeline always
-has valid beats. Every path is noted in the trace.
+returns a beat sheet: title, cover photo, a one-sentence spine, and
+beats with role, intent, photos, pacing, camera, reason and a
+serves_spine verdict. Output is strictly validated; invalid output
+is retried once (with the problems listed), then a deterministic
+fallback plan is built in code so the pipeline always has valid
+beats. Beats that do not serve the spine are dropped. Every path
+is noted in the trace.
 """
 import llm
 from chat import extract_json
@@ -81,12 +83,16 @@ def build_director_prompt(user_prompt, style, target, briefs, focals):
             f"(confidence {f.get('confidence', 0)}).")
     lines.append(
         'Output ONE JSON object, no prose: {"title": "…", "cover": "<photo_id>", '
+        '"spine": "one sentence stating the story angle", '
         '"beats": [{"role": establish|build|turn|resolve, "intent": "…", '
         '"photo_ids": ["…"], "pacing": slow|medium|quick, '
-        '"camera": push_in|pull_back|pan_to_focal|hold, "reason": "…"}]}. '
+        '"camera": push_in|pull_back|pan_to_focal|hold, "reason": "…", '
+        '"serves_spine": {"kept": true, "reason": "…"}}]}. '
         "Roles: establish opens, build gathers, turn shifts, resolve lands. "
         "Cameras: push_in moves closer, pull_back widens, pan_to_focal glides "
-        "to the subject, hold stays still.")
+        "to the subject, hold stays still. "
+        "Every beat must serve the spine; mark serves_spine.kept false "
+        "with a reason for any beat that does not — it will be dropped.")
     return (f"You plan a directed photo film about: {user_prompt}\n"
             + "\n".join(lines))
 
@@ -101,6 +107,9 @@ def validate_beatsheet(data, photo_ids, target):
     title = data.get("title")
     if not isinstance(title, str) or not title.strip():
         problems.append("title is missing")
+    spine = data.get("spine")
+    if not isinstance(spine, str) or not spine.strip():
+        problems.append("spine is missing")
     if data.get("cover") not in allowed:
         problems.append("cover is not one of the photos")
     beats = data.get("beats")
@@ -138,17 +147,25 @@ def validate_beatsheet(data, photo_ids, target):
             problems.append(f"{label} has a bad camera")
         if not isinstance(b.get("reason"), str) or not b["reason"].strip():
             problems.append(f"{label} has no reason")
+        ss = b.get("serves_spine")
+        if not isinstance(ss, dict) or type(ss.get("kept")) is not bool \
+                or not isinstance(ss.get("reason"), str) \
+                or not ss["reason"].strip():
+            problems.append(f"{label} has no serves_spine verdict")
+            ss = {"kept": True, "reason": ""}
         clean.append({"role": b.get("role"), "intent": str(b.get("intent") or ""),
                       "photo_ids": [p for p in pids if p in allowed],
                       "pacing": b.get("pacing"), "camera": b.get("camera"),
-                      "reason": str(b.get("reason") or "")})
+                      "reason": str(b.get("reason") or ""),
+                      "serves_spine": {"kept": ss["kept"],
+                                       "reason": str(ss["reason"]).strip()[:280]}})
     lo, hi = TARGET_SCENES[target]
     if not (total <= hi and (total >= lo or total == len(allowed))):
         problems.append(f"{total} photos does not fit {target} ({lo}-{hi})")
     if problems:
         return None, problems
     return {"title": title.strip()[:80], "cover": data["cover"],
-            "beats": clean}, None
+            "spine": spine.strip()[:280], "beats": clean}, None
 
 
 def fallback_beats(user_prompt, style, target, briefs, focals, seed=0):
@@ -176,9 +193,13 @@ def fallback_beats(user_prompt, style, target, briefs, focals, seed=0):
                       "intent": f"{phases[min(i, len(phases) - 1)]} (planned fallback)",
                       "photo_ids": chunk, "pacing": "medium",
                       "camera": "pan_to_focal" if conf >= 0.3 else "push_in",
-                      "reason": "Fallback plan: model beats failed validation twice."})
+                      "reason": "Fallback plan: model beats failed validation twice.",
+                      "serves_spine": {"kept": True,
+                                       "reason": "Fallback keeps every beat."}})
     return {"title": (user_prompt or "").strip()[:80] or "Untitled film",
-            "cover": take[0] if take else None, "beats": beats}
+            "cover": take[0] if take else None,
+            "spine": "A straightforward visit through the photos in order.",
+            "beats": beats}
 
 
 def plan_beats(user_prompt, style, target, briefs, focals, trace=None,
@@ -216,6 +237,20 @@ def plan_beats(user_prompt, style, target, briefs, focals, trace=None,
             raise
         except (RuntimeError, ValueError) as e:
             sheet, last_problems = None, [f"unusable reply: {e}"[:120]]
+        if sheet is not None:
+            kept = [b for b in sheet["beats"]
+                    if b["serves_spine"]["kept"] is not False]
+            if trace is not None:
+                for i, b in enumerate(sheet["beats"]):
+                    if b["serves_spine"]["kept"] is False:
+                        trace.append({"step": "planned",
+                                      "detail": f"Beat {i + 1} ({b['role']}) "
+                              "dropped: off-spine — "
+                              f"{b['serves_spine']['reason']}"[:280]})
+            if not kept:
+                sheet, last_problems = None, ["every beat was dropped as off-spine"]
+            else:
+                sheet["beats"] = kept
         if sheet is not None:
             if trace is not None:
                 detail = (f"Director planned {len(sheet['beats'])} beats "

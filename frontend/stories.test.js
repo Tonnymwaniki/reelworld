@@ -161,6 +161,7 @@ async function main() {
   ok(src.indexOf("voice: this.voice") !== -1, "app.js sends voice on story create");
   ok(src.indexOf('pick("story-feelings", "feeling")') !== -1, "app.js wires the feeling chips");
   ok(src.indexOf("story-brief-about") !== -1, "app.js sends the brief on story create");
+  ok(src.indexOf("this.film.spine") !== -1, "review shows the film spine");
   ok(src.indexOf('"/refresh"') !== -1, "app.js posts to the refresh endpoint");
   ok(src.indexOf("include_name") !== -1, "app.js sends the name opt-in on publish");
   ok(src.indexOf('"?public=1"') !== -1, "showcase fetches the public story version");

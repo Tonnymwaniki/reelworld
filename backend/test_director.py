@@ -58,12 +58,15 @@ prompt = director_mod.build_director_prompt("my day", "postcard", "short",
                                             BRIEFS, FOCALS)
 check("arrival" in prompt and "p3" in prompt and "busy" in prompt
       and "3 to 6" in prompt, "prompt carries arc, ids, moods")
+check("spine" in prompt and "serves_spine" in prompt, "prompt asks for a spine")
 
-GOOD = {"title": "My day", "cover": "p1",
+GOOD = {"title": "My day", "cover": "p1", "spine": "The city, seen on foot.",
         "beats": [{"role": "establish", "intent": "arrive", "photo_ids": ["p1", "p2"],
-                   "pacing": "slow", "camera": "push_in", "reason": "sets the scene"},
+                   "pacing": "slow", "camera": "push_in", "reason": "sets the scene",
+                   "serves_spine": {"kept": True, "reason": "opens on foot"}},
                   {"role": "resolve", "intent": "leave", "photo_ids": ["p3", "p4"],
-                   "pacing": "medium", "camera": "pull_back", "reason": "closes"}]}
+                   "pacing": "medium", "camera": "pull_back", "reason": "closes",
+                   "serves_spine": {"kept": True, "reason": "lands on foot"}}]}
 IDS = ["p1", "p2", "p3", "p4"]
 sheet, problems = director_mod.validate_beatsheet(GOOD, IDS, "short")
 check(sheet is not None and sheet["cover"] == "p1"
@@ -89,6 +92,8 @@ invalid(lambda d: d["beats"][1].__setitem__("photo_ids", ["p2", "p3"]),
         "repeated photo rejected")
 invalid(lambda d: d.update({"cover": "p9"}), "bad cover rejected")
 invalid(lambda d: d.update({"beats": []}), "empty beats rejected")
+invalid(lambda d: d.pop("spine"), "missing spine rejected")
+invalid(lambda d: d["beats"][0].pop("serves_spine"), "missing serves_spine rejected")
 many = {"title": "t", "cover": "p1",
         "beats": [{"role": "build", "intent": "x",
                    "photo_ids": chunk, "pacing": "quick",
@@ -103,6 +108,9 @@ check(sheet is None and any("7 photos" in p for p in problems),
 fb = director_mod.fallback_beats("my day", "postcard", "short", BRIEFS, FOCALS)
 sheet, problems = director_mod.validate_beatsheet(fb, IDS, "short")
 check(sheet is not None and fb["cover"] == "p1", "fallback valid")
+check(isinstance(fb.get("spine"), str) and fb["spine"]
+      and all(b["serves_spine"]["kept"] is True for b in fb["beats"]),
+      "fallback carries a spine")
 
 orig_ask = llm.ask
 try:
@@ -122,6 +130,22 @@ try:
                                             BRIEFS, FOCALS, trace=trace)
     check(source == "fallback" and sheet["cover"] == "p1"
           and any("fallback" in t["detail"] for t in trace), "fallback noted")
+    off = json.loads(json.dumps(GOOD))
+    off["beats"][1]["serves_spine"] = {"kept": False, "reason": "drifts away"}
+    llm.ask = lambda *a, **k: {"text": json.dumps(off)}
+    trace = []
+    sheet, source = director_mod.plan_beats("my day", "postcard", "short",
+                                            BRIEFS, FOCALS, trace=trace)
+    check(source == "director" and len(sheet["beats"]) == 1
+          and any("dropped" in t["detail"] and "drifts away" in t["detail"]
+                  for t in trace), "off-spine beat dropped")
+    none = json.loads(json.dumps(GOOD))
+    for b in none["beats"]:
+        b["serves_spine"] = {"kept": False, "reason": "off"}
+    llm.ask = lambda *a, **k: {"text": json.dumps(none)}
+    sheet, source = director_mod.plan_beats("my day", "postcard", "short",
+                                            BRIEFS, FOCALS, trace=[])
+    check(source == "fallback" and sheet["spine"], "all dropped falls back")
 
     def spent(*a, **k):
         raise llm.LLMBudgetSpent("spent")

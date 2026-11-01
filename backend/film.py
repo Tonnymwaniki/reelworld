@@ -577,7 +577,7 @@ def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
 
     rows_by_id maps photo_id -> row {place_key, viewpoint,
     collection, record}. Returns the film dict (title, cover,
-    beats, scenes, total_seconds, verification). voice/profile
+    beats, spine, scenes, total_seconds, verification). voice/profile
     override the stored profile for narration. outlines_enabled
     defaults to FEATURE_OUTLINES. image_path is a contact sheet
     the caption writer studies with the records (None writes from
@@ -629,6 +629,7 @@ def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
         trace.append({"step": "staged",
                       "detail": f"Spotlight on {n_spot} scene(s) with outlines."})
     return {"version": 2, "title": title, "cover": cover, "beats": beats,
+            "spine": beatsheet.get("spine"),
             "scenes": kept,
             "total_seconds": round(sum(s["seconds"] for s in kept), 2),
             "verification": verification}

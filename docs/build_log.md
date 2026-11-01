@@ -692,3 +692,8 @@ the first unfinished phase.
   brief section with feeling chips + custom word. Tests green:
   stories 24/24, story_full 19/19, stories.test 163/163; live
   brief echo confirmed.
+- Creative scripts step 2 (spine): director returns a spine +
+  per-beat serves_spine verdicts; off-spine beats drop with the
+  reason traced (all-dropped falls back); spine rides the film
+  JSON and shows on the Review screen. Tests: director 24→30,
+  film 54→55, stories.test 163→164 (pending user run).
