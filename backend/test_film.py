@@ -154,42 +154,69 @@ BRIEFS = {"p1": {"caption": "Stored one.", "place": "K", "place_status": "confir
                    "signs": [], "taken_from": None, "people": 0}}
 SUP = {"verdict": "supported", "rewrite": None}
 
+SCRIPT_BEATS = [{"role": "build", "intent": "wander", "photo_ids": ["p1"]}]
+GOOD_SCRIPT = {"title": "T", "openings": ["O1", "O2", "O3"],
+               "scenes": {"p1": {"narration": "Buses park here in the light.",
+                                 "caption": "Buses park.",
+                                 "silent_reason": ""}}}
 orig_ask = llm.ask
 try:
-    llm.ask = lambda *a, **k: {"text": json.dumps({"p1": "Buses park here."})}
-    w = film_mod.write_captions([sc("p1"), {**sc("p2"), "caption_note": "You were here"}],
-                                BRIEFS, trace=(tw := []))
-    check(w[0]["caption"] == "Buses park here." and w[0]["caption_source"] == "records-model"
-          and w[1]["caption"] == "You were here" and len(tw) == 1, "captions written")
-    replies = [json.dumps({"p9": "wrong id"}), json.dumps({"p1": "Second try."})]
+    llm.ask = lambda *a, **k: {"text": json.dumps(GOOD_SCRIPT)}
+    w = [{**sc("p1"), "seconds": 4},
+         {**sc("p2"), "seconds": 4, "caption_note": "You were here"}]
+    title, openings = film_mod.write_script(
+        w, BRIEFS, SCRIPT_BEATS, "S.", trace=(tw := []))
+    check(title == "T" and openings == ["O1", "O2", "O3"]
+          and w[0]["narration"] == "Buses park here in the light."
+          and w[0]["caption"] == "Buses park." and w[0]["silent"] is False
+          and w[0]["narration_source"] == "script-model"
+          and w[1]["narration"] == "You were here" and len(tw) == 1,
+          "script written")
+    replies = [json.dumps({"title": "T", "openings": ["O1", "O2", "O3"],
+                           "scenes": {"p9": {"narration": "x", "caption": "",
+                                             "silent_reason": ""}}}),
+               json.dumps(GOOD_SCRIPT)]
     llm.ask = lambda *a, **k: {"text": replies.pop(0)}
-    w = film_mod.write_captions([sc("p1")], BRIEFS)
-    check(w[0]["caption"] == "Second try.", "caption retry recovers")
+    w = [{**sc("p1"), "seconds": 4}]
+    film_mod.write_script(w, BRIEFS, SCRIPT_BEATS, "S.")
+    check(w[0]["narration"] == "Buses park here in the light.",
+          "script retry recovers")
     llm.ask = lambda *a, **k: {"text": "garbage"}
-    w = film_mod.write_captions([sc("p1")], BRIEFS, trace=(tw2 := []))
-    check(w[0]["caption"] == "Stored one." and w[0]["caption_source"] == "stored-caption"
-          and "stored captions" in tw2[0]["detail"], "caption fallback")
+    w = [{**sc("p1"), "seconds": 4}]
+    title, openings = film_mod.write_script(
+        w, BRIEFS, SCRIPT_BEATS, "S.", trace=(tw2 := []))
+    check(w[0]["narration"] == "Stored one."
+          and w[0]["narration_source"] == "stored-caption"
+          and title is None and openings == []
+          and "stored captions" in tw2[0]["detail"], "script fallback")
     seen = {}
     llm.ask = lambda *a, **k: (seen.update(prompt=a[0], **k),
-                               {"text": json.dumps({"p1": "Buses park here."})})[1]
-    w = film_mod.write_captions([sc("p1")], BRIEFS, trace=(tw3 := []),
-                                image_path="sheet.jpg")
+                               {"text": json.dumps(GOOD_SCRIPT)})[1]
+    w = [{**sc("p1"), "seconds": 4}]
+    film_mod.write_script(w, BRIEFS, SCRIPT_BEATS, "S.", trace=(tw3 := []),
+                          image_path="sheet.jpg")
     check(seen.get("image_path") == "sheet.jpg"
           and "attached photos" in seen.get("prompt", "")
-          and "same word" in seen.get("prompt", "")
+          and "same way" in seen.get("prompt", "")
           and "studying the photos" in tw3[0]["detail"],
-          "captions study the photos")
-    vreplies = [json.dumps({"p1": "Tonny skates."}),
-                json.dumps({"p1": "I skate."})]
+          "script studies the photos")
+    vgood = lambda narr: {"title": "T", "openings": ["O1", "O2", "O3"],
+                          "scenes": {"p1": {"narration": narr, "caption": "",
+                                            "silent_reason": ""}}}
+    vreplies = [json.dumps(vgood("Tonny skates across the plaza.")),
+                json.dumps(vgood("I skate across the plaza."))]
     llm.ask = lambda *a, **k: {"text": vreplies.pop(0)}
     vbriefs = {"p1": dict(BRIEFS["p1"], owner_present=True)}
-    w = film_mod.write_captions([sc("p1")], vbriefs, voice="i",
-                                profile={"name": "Tonny"})
-    check(w[0]["caption"] == "I skate.", "wrong voice retried")
+    w = [{**sc("p1"), "seconds": 4}]
+    film_mod.write_script(w, vbriefs, SCRIPT_BEATS, "S.", voice="i",
+                          profile={"name": "Tonny"})
+    check(w[0]["narration"] == "I skate across the plaza.",
+          "wrong voice retried")
     seen_style = {}
     llm.ask = lambda *a, **k: (seen_style.update(prompt=a[0]),
-                               {"text": json.dumps({"p1": "Towers hold still."})})[1]
-    w = film_mod.write_captions([sc("p1")], BRIEFS, style="cinematic")
+                               {"text": json.dumps(GOOD_SCRIPT)})[1]
+    w = [{**sc("p1"), "seconds": 4}]
+    film_mod.write_script(w, BRIEFS, SCRIPT_BEATS, "S.", style="cinematic")
     check("present tense" in seen_style["prompt"]
           and "hustle and bustle" in seen_style["prompt"],
           "writer carries voice rules")
@@ -252,7 +279,8 @@ try:
         raise llm.LLMBudgetSpent("spent")
     llm.ask = spent
     try:
-        film_mod.write_captions([sc("p1")], BRIEFS)
+        film_mod.write_script([{**sc("p1"), "seconds": 4}], BRIEFS,
+                              SCRIPT_BEATS, "S.")
         check(False, "writer budget propagates")
     except llm.LLMBudgetSpent:
         check(True, "writer budget propagates")
@@ -282,12 +310,32 @@ try:
     sheet = {"title": "T", "cover": "p1", "spine": "The street, held still.",
              "beats": [{"role": "build", "intent": "go", "photo_ids": ["p1"],
                         "pacing": "medium", "camera": "hold", "reason": "r"}]}
-    llm.ask = lambda *a, **k: {"text": json.dumps(
-        {"p1": "Buses park here."} if k.get("purpose") == "captions" else
-        {"title": SUP, "intents": [SUP], "scenes": {"p1": {"claims": [SUP]}}})}
+    script_calls = []
+
+    def fake_ask(*a, **k):
+        if k.get("purpose") == "script":
+            script_calls.append(1)
+            if len(script_calls) == 1:
+                return {"text": json.dumps({"p1": {
+                    "focus": "the street",
+                    "focus_source": "place: K (confirmed)",
+                    "held_back": ["viewpoint: ground_level", "people: 0"],
+                    "callback_of": None}})}
+            return {"text": json.dumps(
+                {"title": "T", "openings": ["O1", "O2", "O3"],
+                 "scenes": {"p1": {"narration": "Buses park here.",
+                                   "caption": "Buses wait.",
+                                   "silent_reason": ""}}})}
+        return {"text": json.dumps(
+            {"title": SUP, "intents": [SUP],
+             "scenes": {"p1": {"claims": [SUP, SUP]}}})}
+
+    llm.ask = fake_ask
     film = film_mod.build_film(sheet, rows, foc, "short", trace=(tb := []))
     check(film["cover"] == "p1" and len(film["scenes"]) == 1
-          and film["scenes"][0]["caption"] == "Buses park here."
+          and film["scenes"][0]["narration"] == "Buses park here."
+          and film["scenes"][0]["caption"] == "Buses wait."
+          and film["openings"] == ["O1", "O2", "O3"]
           and "(mood: busy)" in film["scenes"][0]["why"]
           and film["scenes"][0]["focal"]["mood"] == "busy"
           and film["verification"]["verified"]
@@ -301,8 +349,78 @@ try:
     check(all(isinstance(s["evidence"], list) and s["evidence"]
               and all(isinstance(e, str) for e in s["evidence"])
               for s in film["scenes"]), "scenes carry evidence")
+    s2 = {**sc("p1"), "narration": "Buses park here.", "caption": "Buses wait."}
+    llm.ask = lambda *a, **k: {"text": json.dumps(
+        {"title": SUP, "intents": [SUP],
+         "scenes": {"p1": {"claims": [SUP, {"verdict": "unsupported",
+                                            "rewrite": "Buses rest."}]}}})}
+    _t, _b, kept, ver = film_mod.edit_captions("T", [{"intent": "go"}], [s2],
+                                               BRIEFS)
+    check(kept[0]["narration"] == "Buses park here."
+          and kept[0]["caption"] == "Buses rest." and ver["fixed"] == 1,
+          "narration and caption verified")
 finally:
     llm.ask = orig_ask
+
+NEED2 = [{**sc("p1"), "seconds": 4}, {**sc("p2"), "seconds": 4}]
+
+
+def script_reply(n1, n2, cap="Short line.", openings=None, title="T"):
+    return {"title": title,
+            "openings": openings if openings is not None else ["O1", "O2", "O3"],
+            "scenes": {"p1": {"narration": n1, "caption": cap,
+                              "silent_reason": ""},
+                       "p2": {"narration": n2, "caption": cap,
+                              "silent_reason": ""}}}
+
+
+entries, _, _, problems = film_mod._validate_script(
+    script_reply("Buses gather here in the morning light daily.",
+                 "Morning buses rest here now."), NEED2, "")
+check(entries is not None and entries["p1"]["narration"].startswith("Buses gather"),
+      "valid script passes")
+_, _, _, problems = film_mod._validate_script(
+    script_reply(" ".join(f"w{i}" for i in range(20)),
+                 "Morning buses rest here now."), NEED2, "")
+check(any("needs 8-12" in p for p in problems), "long narration rejected")
+_, _, _, problems = film_mod._validate_script(
+    {"title": "T", "openings": ["O1", "O2", "O3"],
+     "scenes": {"p1": {"narration": "", "caption": "",
+                       "silent_reason": "Let it breathe."},
+                "p2": {"narration": "", "caption": "",
+                       "silent_reason": "Hold still."}}}, NEED2, "")
+check(any("max a quarter" in p for p in problems), "silent quota enforced")
+NEED4 = NEED2 + [{**sc("p3"), "seconds": 4}, {**sc("p4"), "seconds": 4}]
+_, _, _, problems = film_mod._validate_script(
+    {"title": "T", "openings": ["O1", "O2", "O3"],
+     "scenes": {"p1": {"narration": "", "caption": "", "silent_reason": ""},
+                "p2": {"narration": "Buses gather here in the morning light daily.",
+                        "caption": "", "silent_reason": ""},
+                "p3": {"narration": "Buses gather here in the morning light daily.",
+                        "caption": "", "silent_reason": ""},
+                "p4": {"narration": "Morning buses rest here now.", "caption": "",
+                        "silent_reason": ""}}}, NEED4, "")
+check(problems == ["p1 silent scene needs a reason"], "silent needs a reason")
+_, _, _, problems = film_mod._validate_script(
+    script_reply("Buses gather here in the morning light daily.",
+                 "Morning buses rest here now here here here here here here here here."),
+    NEED2, "")
+check(any("final line" in p for p in problems), "final stays short")
+_, _, _, problems = film_mod._validate_script(
+    script_reply("Buses gather here in the morning light daily.",
+                 "The plaza holds quiet shadows."), NEED2, "")
+check(any("echo" in p for p in problems), "closing echo enforced")
+_, _, _, problems = film_mod._validate_script(
+    script_reply("Buses gather here in the morning light daily.",
+                 "Morning buses rest here now.", openings=["O1", "O2"]),
+    NEED2, "")
+check(any("openings" in p for p in problems), "three openings required")
+_, _, _, problems = film_mod._validate_script(
+    script_reply("Buses gather here in the morning light daily.",
+                 "Morning buses rest here now.",
+                 cap="one two three four five six seven eight nine ten eleven"),
+    NEED2, "")
+check(any("10 words" in p for p in problems), "caption stays short")
 
 tmp = tempfile.TemporaryDirectory()
 odir = Path(tmp.name)

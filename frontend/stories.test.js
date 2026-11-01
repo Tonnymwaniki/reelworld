@@ -163,6 +163,9 @@ async function main() {
   ok(src.indexOf("story-brief-about") !== -1, "app.js sends the brief on story create");
   ok(src.indexOf("this.film.spine") !== -1, "review shows the film spine");
   ok(read("stories").indexOf('data-tone="cinematic"') !== -1, "stories.html has cinematic tone");
+  ok(src.indexOf("Narration: ") !== -1, "review shows scene narration");
+  ok(src.indexOf("Silent scene") !== -1, "review marks silent scenes");
+  ok(src.indexOf('("narration" in sc)') !== -1, "player speaks the narration");
   ok(src.indexOf('"/refresh"') !== -1, "app.js posts to the refresh endpoint");
   ok(src.indexOf("include_name") !== -1, "app.js sends the name opt-in on publish");
   ok(src.indexOf('"?public=1"') !== -1, "showcase fetches the public story version");

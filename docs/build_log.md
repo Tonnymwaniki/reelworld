@@ -713,3 +713,18 @@ the first unfinished phase.
   write_captions (unknown falls back to postcard, traced).
   Tests: voices 8 new, director 30→31, stories 24→25,
   film 60→61, stories.test 164→165 (pending user run).
+  (Step 4 verified: 8/8, 31/31, 25/25, 61/61, cinematic arc
+  live; committed 18a4932.)
+- Creative scripts step 5 (whole-script call): write_script
+  replaces write_captions — one call returns title, 3 openings
+  and per-scene narration + short caption; fit at 2.5 wps
+  ±15%, ≤25% silent with reasons, short final (lower bound
+  waived), closing echoes opening; retry once, then stored
+  fallback. Editor verifies narration + caption (legacy
+  caption-only path kept; silent scenes survive). Player
+  speaks narration (caption for legacy/v1); review shows
+  narration or the silent reason. Tests green: film 70/70,
+  render 53/53, stories.test 168/168; live title + openings +
+  per-scene narration confirmed (vantage pair took 2 of 3
+  scenes; editor trims can shorten under fit — step 7 will
+  re-measure).

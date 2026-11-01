@@ -384,14 +384,20 @@ cannot support are dropped and named in the trace instead of padded, as are chap
   `found_text`, `why`, `focus_detail` {text, source} (the one
   telling fact, from the records or the brief), `held_back`
   (candidates left out on purpose), `callback_of` (photo id or
-  null), `caption` (+`caption_note`), `evidence`
-  (record-only fact strings), `frames` (+`frame_srcs`),
-  optional `spotlight`. A `focused` trace step names the
-  selection; repeated focus without a callback is switched in
-  code. Captions are written by the model
-  studying the scene photos with their records (records are
-  the fact authority); a `seen` trace step names it when the
-  photos could not be shown.
+  null), `narration` (the spoken line, "" when silent), `silent`
+  + `silent_reason`, `caption` (on-screen text, 10 words or
+  fewer), `evidence` (record-only fact strings), `frames`
+  (+`frame_srcs`), optional `spotlight`. A `focused` trace step
+  names the selection; repeated focus without a callback is
+  switched in code. One script call writes every scene's
+  narration + caption from the spine, beats, focus, facts,
+  brief, style voice and durations (records stay the fact
+  authority; photos studied for feel); narration fits its scene
+  at ~2.5 words/s ±15%, at most a quarter of scenes are
+  silent, the final line is short, and the closing echoes the
+  opening. The film also carries `openings` (three alternative
+  first lines; the judge picks one in step 6). A `seen` trace
+  step names it when the photos could not be shown.
 - Old v1 chapter stories still load and play: the player and
   exporter run them through `migrateChapters` (heading + text
   become the caption with heading echoes stripped, plain `cut`s,

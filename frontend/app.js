@@ -5543,10 +5543,11 @@ const player = {
     if (!st || !st.read || !st.playing || st.spoken === idx) return;
     st.spoken = idx;
     const sc = st.film.scenes[idx];
+    const line = sc ? (("narration" in sc) ? sc.narration : sc.caption) : "";
     const now = (typeof performance !== "undefined" ? performance.now() : Date.now());
-    if (sc && sc.caption && window.speechSynthesis) {
+    if (line && window.speechSynthesis) {
       st.speakDeadline = now + ((Number(sc.seconds) || 4) + 15) * 1000;
-      this.speak(sc.caption, idx);
+      this.speak(line, idx);
     } else {
       st.speakDeadline = now + (Number(sc && sc.seconds) || 4) * 1000;
     }
@@ -6325,6 +6326,18 @@ const builder = {
       cap.className = "font-body-sm text-body-sm text-on-surface-variant";
       cap.textContent = s.caption || "";
       mid.append(meta, why, cap);
+      if (s.narration) {
+        const narr = document.createElement("span");
+        narr.className = "font-body-md text-body-md text-on-surface";
+        narr.textContent = "Narration: " + s.narration;
+        mid.appendChild(narr);
+      } else if ("narration" in s) {
+        const sil = document.createElement("span");
+        sil.className = "font-body-sm text-body-sm text-on-surface-variant";
+        sil.textContent = "Silent scene" +
+          (s.silent_reason ? " — " + s.silent_reason : "");
+        mid.appendChild(sil);
+      }
       if ((s.evidence || []).length) {
         const ev = document.createElement("span");
         ev.className = "font-body-sm text-body-sm text-on-surface-variant";

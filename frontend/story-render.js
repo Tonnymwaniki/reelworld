@@ -517,6 +517,7 @@
       found_text: s.found_text || null,
       caption_note: s.caption_note || null,
       caption: s.caption || s.caption_note || "",
+      ...(("narration" in s) ? { narration: s.narration || "" } : {}),
       why: s.why || "",
       frames: (s.frames && s.frames.length ? s.frames : [s.photo_id]).slice(),
       frame_seconds: Number(s.frame_seconds) || 0,

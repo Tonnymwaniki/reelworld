@@ -5,6 +5,7 @@ pass use the reasoning model via llm.ask, always checked against the
 stored records. build_film runs the whole pipeline.
 """
 import json
+import math
 import os
 import re
 from pathlib import Path
@@ -387,102 +388,280 @@ def select_details(scenes, beats, briefs, spine, brief=None, trace=None,
     return scenes
 
 
-def write_captions(scenes, briefs, trace=None, session_id=None,
-                   voice=None, profile=None, image_path=None, style="postcard"):
-    """One caption per scene from photos + records (one model call).
+WORDS_PER_SECOND = 2.5
+FINAL_SHORT_WORDS = 12
 
-    briefs maps photo_id -> summarize_record() dict. The model
-    studies the attached photos for feel and detail, but the
-    records are the fact authority. Vantage scenes keep their note
-    as the whole caption (set in code, no model). Invalid output
-    retries once, then falls back to the stored caption. Model
-    captions are code-checked for owner references; repaired ones
-    fall back to the stored caption when emptied.
-    voice/profile override the stored profile (tests). Sets caption
-    + caption_source. Budget errors propagate.
+
+def _fit_range(seconds):
+    """(lo, hi) narration words fitting a scene at 2.5 wps ±15% (pure)."""
+    sec = max(0.5, float(seconds or 0))
+    return int(WORDS_PER_SECOND * 0.85 * sec), math.ceil(WORDS_PER_SECOND * 1.15 * sec)
+
+
+_STOP_WORDS = frozenset(
+    "a an the and or but of to in on at for is are was were be been it its "
+    "as by from with that this these those then than next here there you your "
+    "yours i me my we our they them their what when where which while who how "
+    "not no yes if so very just more most into over after before again once "
+    "narrator vlog guys look see watch hey welcome back another across still "
+    "every under bright daylight".split())
+
+
+def _content_words(text, extra=()):
+    """Lowercased content words longer than 4 chars (pure)."""
+    stop = _STOP_WORDS | {w.lower() for w in extra}
+    return {w for w in re.findall(r"[a-z']+", (text or "").lower())
+            if len(w) > 4 and w not in stop}
+
+
+def _validate_script(data, need, name):
+    """(entries, title, openings, problems) for one script reply (pure).
+
+    need: scenes in order, each with photo_id + seconds. entries maps
+    pid -> {narration, caption, silent_reason}. The final scene must
+    land on a short non-silent line (lower fit bound waived); the
+    closing must share a content word with the opening unless the
+    opening is silent.
+    """
+    if not isinstance(data, dict):
+        return None, None, [], ["reply is not a JSON object"]
+    problems = []
+    title = data.get("title")
+    if not isinstance(title, str) or not title.strip() or len(title) > 80:
+        problems.append("title must be 1-80 characters")
+    openings = data.get("openings")
+    if not isinstance(openings, list) or len(openings) != 3 \
+            or any(not isinstance(o, str) or not o.strip() or len(o) > 280
+                   for o in openings):
+        problems.append("openings must be 3 non-empty lines")
+    got = data.get("scenes")
+    if not isinstance(got, dict):
+        return None, None, [], problems + ["scenes is not an object"]
+    entries, silent = {}, 0
+    for pos, s in enumerate(need):
+        pid = s["photo_id"]
+        raw = got.get(pid)
+        if not isinstance(raw, dict):
+            problems.append(f"missing script for {pid}")
+            continue
+        narr = raw.get("narration")
+        if not isinstance(narr, str):
+            problems.append(f"{pid} narration is not a string")
+            narr = ""
+        cap = raw.get("caption")
+        if not isinstance(cap, str) or len(cap.split()) > 10:
+            problems.append(f"{pid} caption must be 10 words or fewer")
+            cap = cap if isinstance(cap, str) else ""
+        reason = raw.get("silent_reason")
+        if narr.strip():
+            words = len(narr.split())
+            if pos == len(need) - 1:
+                hi = min(FINAL_SHORT_WORDS, _fit_range(s.get("seconds"))[1])
+                if words > hi:
+                    problems.append(f"{pid} final line must be {hi} words or fewer")
+            else:
+                lo, hi = _fit_range(s.get("seconds"))
+                if not lo <= words <= hi:
+                    problems.append(
+                        f"{pid} narration is {words} words, needs {lo}-{hi}")
+        else:
+            silent += 1
+            if not isinstance(reason, str) or not reason.strip():
+                problems.append(f"{pid} silent scene needs a reason")
+        entries[pid] = {"narration": narr.strip(),
+                        "caption": cap.strip(),
+                        "silent_reason": (reason.strip()[:140]
+                                          if isinstance(reason, str) else "")}
+    if silent * 4 > len(need):
+        problems.append(f"{silent} of {len(need)} scenes silent (max a quarter)")
+    first = entries.get(need[0]["photo_id"], {}).get("narration", "") if need else ""
+    last = entries.get(need[-1]["photo_id"], {}).get("narration", "") if need else ""
+    if first.strip() and last.strip() and \
+            not (_content_words(first, [name]) & _content_words(last, [name])):
+        problems.append("closing line does not echo the opening")
+    if problems:
+        return None, None, [], problems
+    return (entries, title.strip()[:80],
+            [o.strip()[:280] for o in openings], [])
+
+
+def _fit_fallback(stored, seconds):
+    """Stored caption cut to the scene's word budget (pure)."""
+    words = str(stored or "").split()
+    if not words:
+        return ""
+    _, hi = _fit_range(seconds)
+    if len(words) <= hi:
+        return " ".join(words)
+    sents = [s for s in re.split(r"(?<=[.!?])\s+", str(stored).strip()) if s]
+    out = []
+    for s in sents:
+        if len(" ".join(out + [s]).split()) <= hi:
+            out.append(s)
+        else:
+            break
+    if out:
+        return " ".join(out)
+    return " ".join(words[:hi])
+
+
+def write_script(scenes, briefs, beats, spine, brief=None, style="postcard",
+                 trace=None, session_id=None, voice=None, profile=None,
+                 image_path=None):
+    """(title, openings): the whole script in one model call.
+
+    briefs maps photo_id -> summarize_record() dict. Each scene gains
+    narration (the spoken line, "" when silent), silent + silent_reason,
+    caption (short on-screen text, "" allowed) and narration_source /
+    caption_source. Vantage scenes keep their note as both lines (set
+    in code, no model). The model studies the attached photos for
+    feel and detail, but the records are the fact authority. Invalid
+    output retries once, then each scene falls back to its stored
+    caption. Narration is code-checked for owner references and
+    voice; repaired lines fall back when emptied. Budget errors
+    propagate.
     """
     need = [s for s in scenes if not s.get("caption_note")]
     for s in scenes:
         if s.get("caption_note"):
+            s["narration"] = s["caption_note"]
             s["caption"] = s["caption_note"]
+            s["silent"] = False
+            s["silent_reason"] = ""
+            s["narration_source"] = "vantage-note"
             s["caption_source"] = "vantage-note"
     if not need:
-        return scenes
+        return None, []
     voice, profile, facts = _narration_for(
         briefs, [s["photo_id"] for s in need], voice, profile)
     name = (profile or {}).get("name") or ""
-    lines = ["Write one caption (ONE sentence, under 140 characters) per photo,",
-             "using ONLY these stored facts. Never add outside facts, never invent.",
-             "Study the attached photos (labelled top to bottom) with these facts:",
-             "let the photos guide the feel and the choice of detail, but every",
-             "claim must be backed by the stored facts.",
+    intents = {}
+    for b in beats or []:
+        for pid in b.get("photo_ids") or []:
+            intents.setdefault(pid, (b.get("role"), b.get("intent")))
+    lines = ["Write the whole film script in one voice, one line per scene.",
+             f"Story spine: {spine or '(none)'}.",
+             "A line never narrates what the viewer can already see: add the "
+             "angle it was seen from, the contrast with the previous scene, "
+             "what the owner told us about the day, or a reflection that "
+             "follows from the facts.",
+             "Use ONLY the stored facts below. Never add outside facts, never "
+             "invent: no dates, no history, no names but the owner's, no "
+             "places not in the records.",
+             "Study the attached photos (labelled top to bottom) with these "
+             "facts: let the photos guide the feel and the choice of detail, "
+             "but every claim must be backed by the stored facts.",
              voices_mod.voice_block(style),
-             "Vary the set: name a shared place or sign ONCE across all captions;",
-             "other captions say here / this view / the plaza, and lead with what is",
-             "new in that photo instead of re-listing shared facts.",
-             "Never start two captions with the same word.",
              narration_mod.rules_block(profile, facts, voice)]
+    if isinstance(brief, dict):
+        about = str(brief.get("about") or "").strip()
+        feeling = str(brief.get("feeling") or "").strip()
+        avoid = str(brief.get("avoid") or "").strip()
+        if about or feeling:
+            lines.append("The owner's own words about this day (provided "
+                         "facts, usable as facts): "
+                         + "; ".join(x for x in
+                                     [f"about: {about}" if about else "",
+                                      f"feeling: {feeling}" if feeling else ""]
+                                     if x))
+        if avoid:
+            lines.append(f"Never mention or echo: {avoid}.")
     for s in need:
-        lines.append(f"- {s['photo_id']}: {_brief_text(briefs.get(s['photo_id']))}")
-    base = ("\n".join(lines)
-            + '\nOutput ONE JSON object keyed by photo id: {"<id>": "caption"}.')
+        pid = s["photo_id"]
+        lo, hi = _fit_range(s.get("seconds"))
+        role, intent = intents.get(pid, (s.get("role"), ""))
+        foc = (s.get("focus_detail") or {}).get("text") or "(no focus)"
+        lines.append(f"Scene {pid} ({role or 'scene'}, {s.get('seconds')}s, "
+                     f"aim {lo}-{hi} words; intent: {intent or 'none'}):")
+        lines.append(f"  focus: {foc}")
+        lines.append(f"  facts: {_brief_text(briefs.get(pid))}")
+    lines.append("Reply ONE JSON object, no prose: "
+                 '{"title": "…", "openings": ["…", "…", "…"], '
+                 '"scenes": {"<id>": {"narration": "the spoken line (or \\"\\" '
+                 'for a deliberate silent scene)", "caption": "on-screen text, '
+                 '10 words or fewer (or \\"\\")", '
+                 '"silent_reason": "why silent (or \\"\\")"}}}. '
+                 "Rules: narration fits its scene at about 2.5 words per "
+                 "second (±15%); at most a quarter of the scenes are silent, "
+                 "each with a reason; the closing line echoes an image or "
+                 "phrase from the opening; the final scene lands on a short "
+                 "line (12 words or fewer). Openings are three alternative "
+                 "first lines.")
+    base = "\n".join(lines)
     pids = [s["photo_id"] for s in need]
-    last_problems = []
+    entries, wtitle, openings, last_problems = None, None, [], []
     for attempt in (1, 2):
         prompt = base if attempt == 1 else (
             base + "\nRejected: " + "; ".join(last_problems) + ". Fix every one.")
         try:
             data = extract_json(llm.ask(
-                prompt, temperature=0.1, purpose="captions",
+                prompt, temperature=0.3, purpose="script",
                 session_id=session_id, image_path=image_path)["text"])
+            entries, wtitle, openings, last_problems = _validate_script(
+                data, need, name)
         except llm.LLMBudgetSpent:
             raise
         except (RuntimeError, ValueError) as e:
-            last_problems = [f"unusable reply: {e}"[:120]]
+            entries, last_problems = None, [f"unusable reply: {e}"[:120]]
             continue
-        if not isinstance(data, dict):
-            last_problems = ["reply is not a JSON object"]
-            continue
-        missing = [p for p in pids if not isinstance(data.get(p), str)
-                   or not data[p].strip()]
-        last_problems = [f"missing caption for {p}" for p in missing]
-        if voice in ("you", "i"):
+        if entries is not None and voice in ("you", "i"):
             want = '"you"' if voice == "you" else '"I"'
-            last_problems += [
+            last_problems = [
                 f"wrong voice in {p}: use {want}, not the name"
                 for p in pids
-                if isinstance(data.get(p), str) and data[p].strip()
+                if entries[p]["narration"]
                 and (briefs.get(p) or {}).get("owner_present") is True
-                and narration_mod.voice_spans(data[p], name, voice)]
-        if not last_problems:
-            repaired = 0
-            for s in need:
-                cap = data[s["photo_id"]].strip()[:280]
-                fixed_cap, bad = _scene_owner_ok(
-                    cap, name, briefs.get(s["photo_id"]))
-                if bad:
-                    repaired += 1
-                    cap = fixed_cap or (((briefs.get(s["photo_id"]) or {}).get("caption")
-                                          or s["photo_id"])[:280])
-                s["caption"] = cap
-                s["caption_source"] = "records-model"
-            if trace is not None:
-                detail = (f"Wrote {len(need)} captions from the records."
-                          if image_path is None else
-                          f"Wrote {len(need)} captions studying the photos "
-                          "with their records.")
-                if repaired:
-                    detail += f" Removed unsupported owner references in {repaired}."
-                trace.append({"step": "wrote", "detail": detail})
-            return scenes
+                and narration_mod.voice_spans(entries[p]["narration"], name,
+                                              voice)]
+            if last_problems:
+                entries = None
+        if entries is not None:
+            break
+    if entries is None:
+        for s in need:
+            stored = ((briefs.get(s["photo_id"]) or {}).get("caption")
+                      or s["photo_id"])
+            s["narration"] = _fit_fallback(stored, s.get("seconds"))
+            s["caption"] = " ".join(stored.split()[:10])
+            s["silent"] = False
+            s["silent_reason"] = ""
+            s["narration_source"] = "stored-caption"
+            s["caption_source"] = "stored-caption"
+        if trace is not None:
+            trace.append({"step": "wrote",
+                          "detail": "Script writing failed twice; using stored "
+                                    "captions."})
+        return None, []
+    repaired = 0
     for s in need:
-        s["caption"] = ((briefs.get(s["photo_id"]) or {}).get("caption")
-                        or s["photo_id"])[:280]
-        s["caption_source"] = "stored-caption"
+        e = entries[s["photo_id"]]
+        narr, bad = _scene_owner_ok(e["narration"], name,
+                                    briefs.get(s["photo_id"]))
+        if bad:
+            repaired += 1
+            stored = ((briefs.get(s["photo_id"]) or {}).get("caption")
+                      or s["photo_id"])
+            narr = _fit_fallback(stored, s.get("seconds")) if not narr else narr
+        cap, bad_cap = _scene_owner_ok(e["caption"], name,
+                                       briefs.get(s["photo_id"]))
+        if bad_cap:
+            repaired += 1
+            cap = cap if cap else ""
+        s["narration"] = narr
+        s["caption"] = " ".join(cap.split()[:10])
+        s["silent"] = not bool(narr.strip())
+        s["silent_reason"] = e["silent_reason"] if s["silent"] else ""
+        s["narration_source"] = "script-model"
+        s["caption_source"] = "script-model"
     if trace is not None:
-        trace.append({"step": "wrote",
-                      "detail": "Caption writing failed twice; using stored captions."})
-    return scenes
+        detail = (f"Wrote the script for {len(need)} scenes."
+                  if image_path is None else
+                  f"Wrote the script for {len(need)} scenes studying the "
+                  "photos with their records.")
+        if repaired:
+            detail += f" Removed unsupported owner references in {repaired}."
+        trace.append({"step": "wrote", "detail": detail})
+    return wtitle, openings
 
 
 def _sentences(text):
@@ -496,20 +675,30 @@ def _check_verdict(v):
 
 def edit_captions(title, beats, scenes, briefs, trace=None, session_id=None,
                   voice=None, profile=None):
-    """Verify every caption sentence against the records (one model call).
+    """Verify every narration + caption sentence against the records.
 
-    Vantage-note captions are code, already true, and skipped. Returns
-    (title, beats, scenes, verification). Unsupported claims are
-    rewritten once or removed; scenes left empty are dropped; the
-    title and beat intents are rewritten when fixable. The owner's
-    name (or you/I) may stay only in scenes whose photos have
-    owner.present true — the model verdicts enforce this, and a code
-    check afterwards drops what slips through. Any failure of the
-    pass itself marks the film not verified. Budget errors propagate.
+    One model call. Vantage-note lines are code, already true, and
+    skipped. Returns (title, beats, scenes, verification).
+    Unsupported claims are rewritten once or removed; scenes left
+    fully empty are dropped; the title and beat intents are
+    rewritten when fixable. The owner's name (or you/I) may stay
+    only in scenes whose photos have owner.present true — the model
+    verdicts enforce this, and a code check afterwards drops what
+    slips through. Scenes without a narration key are checked
+    caption-only (legacy shape). Any failure of the pass itself
+    marks the film not verified. Budget errors propagate.
     """
     beats = [dict(b) for b in (beats or [])]
     checkable = [s for s in scenes if not s.get("caption_note")]
-    sents = {s["photo_id"]: _sentences(s.get("caption")) for s in checkable}
+    sents = {}
+    for s in checkable:
+        if s.get("narration") is None:
+            fields = [("caption", s.get("caption") or "")]
+        else:
+            fields = [("narration", s.get("narration") or ""),
+                      ("caption", s.get("caption") or "")]
+        sents[s["photo_id"]] = [(kind, sent) for kind, text in fields
+                                for sent in _sentences(text)]
     voice, profile, facts = _narration_for(
         briefs, [s["photo_id"] for s in checkable], voice, profile)
     name = (profile or {}).get("name") or ""
@@ -530,8 +719,8 @@ def edit_captions(title, beats, scenes, briefs, trace=None, session_id=None,
     for s in checkable:
         lines.append(f"Photo {s['photo_id']} facts: "
                      f"{_brief_text(briefs.get(s['photo_id']))}")
-        for i, sent in enumerate(sents[s["photo_id"]]):
-            lines.append(f"Photo {s['photo_id']} sentence {i}: {sent}")
+        for i, (kind, sent) in enumerate(sents[s["photo_id"]]):
+            lines.append(f"Photo {s['photo_id']} {kind} sentence {i}: {sent}")
     verification = {"checked": 0, "fixed": 0, "dropped": [],
                     "verified": True, "note": ""}
     try:
@@ -579,27 +768,46 @@ def edit_captions(title, beats, scenes, briefs, trace=None, session_id=None,
     kept = []
     for s in scenes:
         if s in checkable:
-            out = []
-            for sent, claim in zip(sents[s["photo_id"]],
-                                   data["scenes"][s["photo_id"]]["claims"]):
+            if not sents[s["photo_id"]] and s.get("narration") is not None:
+                kept.append(s)
+                continue
+            outs = {"narration": [], "caption": []}
+            for (kind, sent), claim in zip(sents[s["photo_id"]],
+                                           data["scenes"][s["photo_id"]]["claims"]):
                 if claim["verdict"] == "supported":
-                    out.append(sent)
+                    outs[kind].append(sent)
                 elif claim["rewrite"]:
-                    out.append(claim["rewrite"].strip())
+                    outs[kind].append(claim["rewrite"].strip())
                     fixed += 1
                 else:
                     fixed += 1
-            if not out:
-                verification["dropped"].append(s["photo_id"])
-                continue
-            cap = " ".join(out)[:280]
-            cap, bad = _scene_owner_ok(cap, name, briefs.get(s["photo_id"]))
-            if bad:
-                fixed += 1
-                if not cap:
+            if s.get("narration") is None:
+                if not outs["caption"]:
                     verification["dropped"].append(s["photo_id"])
                     continue
-            s["caption"] = cap
+                cap = " ".join(outs["caption"])[:280]
+                cap, bad = _scene_owner_ok(cap, name, briefs.get(s["photo_id"]))
+                if bad:
+                    fixed += 1
+                    if not cap:
+                        verification["dropped"].append(s["photo_id"])
+                        continue
+                s["caption"] = cap
+            else:
+                narr = " ".join(outs["narration"])[:280]
+                cap = " ".join(outs["caption"])[:280]
+                narr, bad_n = _scene_owner_ok(narr, name, briefs.get(s["photo_id"]))
+                cap, bad_c = _scene_owner_ok(cap, name, briefs.get(s["photo_id"]))
+                if bad_n or bad_c:
+                    fixed += 1
+                if not narr.strip() and not cap.strip():
+                    verification["dropped"].append(s["photo_id"])
+                    continue
+                s["narration"] = narr
+                s["caption"] = " ".join(cap.split()[:10])
+                s["silent"] = not bool(narr.strip())
+                if s["silent"] and not s.get("silent_reason"):
+                    s["silent_reason"] = "Every claim failed verification."
         kept.append(s)
     checked = sum(len(v) for v in sents.values()) + 1 + len(beats)
     verification["checked"] = checked
@@ -617,11 +825,11 @@ def edit_captions(title, beats, scenes, briefs, trace=None, session_id=None,
 
 
 def _refit_scenes(scenes, metas, records):
-    """Re-derive transitions, notes, captions and cards after drops (pure).
+    """Re-derive transitions, notes, lines and cards after drops (pure).
 
     Neighbourhoods changed, so transitions, vantage notes and
-    first-per-place cards are recomputed from scratch; model
-    captions stay, vantage captions follow their notes.
+    first-per-place cards are recomputed from scratch; model lines
+    stay, vantage lines follow their notes.
     """
     had_note = {s["photo_id"] for s in scenes if s.get("caption_note")}
     for s in scenes:
@@ -639,12 +847,21 @@ def _refit_scenes(scenes, metas, records):
             s["caption_note"] = VANTAGE_B
     for s in scenes:
         if s.get("caption_note"):
+            s["narration"] = s["caption_note"]
             s["caption"] = s["caption_note"]
+            s["silent"] = False
+            s["silent_reason"] = ""
+            s["narration_source"] = "vantage-note"
             s["caption_source"] = "vantage-note"
         elif s["photo_id"] in had_note:
             rec = (records or {}).get(s["photo_id"]) or {}
-            s["caption"] = ((rec.get("observed") or {}).get("caption")
-                            or s["photo_id"])[:280]
+            stored = ((rec.get("observed") or {}).get("caption")
+                      or s["photo_id"])[:280]
+            s["narration"] = stored
+            s["caption"] = stored
+            s["silent"] = False
+            s["silent_reason"] = ""
+            s["narration_source"] = "stored-caption"
             s["caption_source"] = "stored-caption"
     seen = set()
     for s in scenes:
@@ -766,10 +983,12 @@ def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
     select_details(scenes, beatsheet.get("beats"), briefs,
                    beatsheet.get("spine"), brief=brief, trace=trace,
                    session_id=session_id)
-    write_captions(scenes, briefs, trace, session_id, voice, profile,
-                   image_path=image_path, style=style)
+    wtitle, openings = write_script(
+        scenes, briefs, beatsheet.get("beats"), beatsheet.get("spine"),
+        brief=brief, style=style, trace=trace, session_id=session_id,
+        voice=voice, profile=profile, image_path=image_path)
     title, beats, kept, verification = edit_captions(
-        beatsheet.get("title"), beatsheet.get("beats"), scenes,
+        wtitle or beatsheet.get("title"), beatsheet.get("beats"), scenes,
         briefs, trace, session_id, voice, profile)
     if len(kept) != len(scenes):
         _refit_scenes(kept, metas, records)
@@ -795,7 +1014,7 @@ def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
         trace.append({"step": "staged",
                       "detail": f"Spotlight on {n_spot} scene(s) with outlines."})
     return {"version": 2, "title": title, "cover": cover, "beats": beats,
-            "spine": beatsheet.get("spine"),
+            "spine": beatsheet.get("spine"), "openings": openings,
             "scenes": kept,
             "total_seconds": round(sum(s["seconds"] for s in kept), 2),
             "verification": verification}

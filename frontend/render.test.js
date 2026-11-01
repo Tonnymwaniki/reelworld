@@ -283,6 +283,13 @@ const FOCAL = {
         ad.scenes[0].caption === "hi" &&
         JSON.stringify(ad.scenes[0].frames) === '["x"]' &&
         ad.reducedMotion === false);
+  const adn = R.adaptFilm({ title: "T", scenes: [
+    { photo_id: "a", narration: "Birds cross.", caption: "Birds." },
+    { photo_id: "b", narration: "", caption: "" },
+    { photo_id: "c", caption: "Legacy." }] });
+  check("adaptFilm carries narration", adn.scenes[0].narration === "Birds cross." &&
+        adn.scenes[1].narration === "" &&
+        !("narration" in adn.scenes[2]));
   const mig = R.migrateChapters({ story: { title: "Old" },
     chapters: [{ photo_id: "p", heading: "Head", text: "Body text." }] });
   check("migrateChapters joins caption", mig.title === "Old" &&
