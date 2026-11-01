@@ -795,3 +795,14 @@ the first unfinished phase.
   (f) silent scene with reason + closing echo; (g) note
   wording in the line; (h) seed take differs; (i) every line
   fits; (j) one story ≈ $0.11 (8 calls, 122 model-seconds).
+- Retrieval precision (mountain follow-up): avoid terms now
+  exclude (stem-tolerant lex_has: "buildings" catches
+  "building"), zero-term guesses dropped, empty results say
+  so; new model verify pass re-checks the top 10 on
+  constrained searches only (purpose "simple"); /api/search
+  keeps its no-model promise via verify=False. Trace gains
+  `excluded` + `checked`. Tests: test_search_verify 18/18.
+  Live: verify first starved at 800 completion tokens (the
+  `simple` carve-out fails on this reasoning model) → raised
+  to 3000; mountain follow-up now excludes 15, model keeps
+  the 3 true mountains, never padded.

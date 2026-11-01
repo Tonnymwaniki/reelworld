@@ -150,6 +150,26 @@ def tokens(query):
     return [w for w in re.findall(r"[a-z0-9]+", query.lower()) if len(w) >= 3 and w not in STOPWORDS]
 
 
+def lex_has(lex, term):
+    """True when a record's lex text mentions a term (pure).
+
+    Stem-tolerant: "buildings" matches "building", "house"
+    matches "houses". Guards short words and -ss endings so
+    "glass" never becomes "glas".
+    """
+    lex = lex or ""
+    term = (term or "").lower().strip()
+    if not term:
+        return False
+    forms = {term}
+    if len(term) > 4 and not term.endswith("ss"):
+        if term.endswith("s"):
+            forms.add(term[:-1])
+        else:
+            forms.add(term + "s")
+    return any(f in lex for f in forms)
+
+
 def search(query, collection=None, top=5, vecs=None, meta=None, model=None):
     if vecs is None:
         vecs, meta = load_index()

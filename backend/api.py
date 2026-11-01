@@ -990,7 +990,8 @@ def api_search(req: SearchRequest):
         }
     with _turn_lock:
         try:
-            rows, note, trace = eng.search(spec, eng.state["rejected"])
+            rows, note, trace = eng.search(spec, eng.state["rejected"],
+                                           verify=False)
         except Exception as e:
             raise HTTPException(status_code=502, detail=f"search failed: {e}")
         eng.state["spec"] = spec

@@ -47,7 +47,7 @@ from supabase import create_client
 import llm as llm_mod
 import narration as narration_mod
 import owner_profile as owner_profile_mod
-from retrieval import get_model, score_against, tokens
+from retrieval import get_model, lex_has, score_against, tokens
 
 ROOT = Path(__file__).resolve().parent.parent
 load_dotenv(ROOT / ".env")
@@ -285,6 +285,56 @@ Question: {question}
 """
 
 
+def build_verify_prompt(query, must, avoid, lines):
+    """Prompt that filters candidates against the request (pure).
+
+    lines are "- <photo_id>: <record text>" strings. The model
+    keeps at most 5, best first, with one-line reasons.
+    """
+    return ("""You filter photo results against the user's request. Reply ONE JSON object, """
+            """no prose: {"keep": [{"photo_id": "...", "reason": "..."}]} listing at most 5, """
+            """best first. Drop any photo that shows something the user excluded, or that does """
+            """not show what they asked for. Judge only from the descriptions given.\n\n"""
+            f"""Request: {query}\n"""
+            f"""Must show: {must or '(nothing specific)'}\n"""
+            f"""Must NOT show: {avoid or '(nothing excluded)'}\n\n"""
+            """Candidates:\n""" + "\n".join(lines))
+
+
+def apply_verify_order(rows, ids):
+    """Rows ordered by the verifier's ids, unlisted rows dropped (pure)."""
+    by_id = {r["photo_id"]: r for r in rows}
+    out = []
+    for pid in ids or []:
+        if pid in by_id and by_id[pid] not in out:
+            out.append(by_id[pid])
+    return out[:5]
+
+
+def split_avoid(rows, avoid_terms):
+    """(survivors, dropped): rows mentioning an avoid term (pure).
+
+    Matching is stem-tolerant (lex_has): "buildings" excludes a
+    record that only says "building".
+    """
+    terms = [t.lower() for t in avoid_terms or []]
+    kept = [r for r in rows
+            if not any(lex_has(r["lex"], t) for t in terms)]
+    return kept, len(rows) - len(kept)
+
+
+def only_matching(rows, toks, must):
+    """Rows matching a query token or must term (pure).
+
+    Pure-semantic guesses (neither) are dropped by the caller,
+    unless that would leave nothing.
+    """
+    terms = [t.lower() for t in must or []]
+    return [r for r in rows
+            if any(lex_has(r["lex"], t) for t in toks)
+            or any(lex_has(r["lex"], t) for t in terms)]
+
+
 def extract_json(text):
     text = (text or "").strip()
     fence = re.search(r"```(?:json)?\s*(.*?)```", text, re.S)
@@ -361,18 +411,76 @@ class Engine:
 
     # ----- the actions -----
 
-    def search(self, spec, exclude):
+    def verify(self, rows, spec):
+        """Model double-check of the top candidates (one small call).
+
+        Only runs when the spec has must/avoid terms; plain queries
+        keep the code ranking. Returns (rows, trace). Any failure
+        (including budget) keeps the code order and says so.
+        """
+        cands = rows[:10]
+        if not cands or not (spec.get("must_include") or spec.get("avoid_terms")):
+            return rows, []
+        lines = []
+        for r in cands:
+            blob = " ".join((r.get("lex") or "").split())[:600]
+            lines.append(f"- {r['photo_id']}: {blob}")
+        prompt = build_verify_prompt(
+            spec.get("query") or "",
+            ", ".join(spec.get("must_include") or []),
+            ", ".join(spec.get("avoid_terms") or []), lines)
+        try:
+            # 3000, not 800: the reasoning model spends ~800 tokens
+            # thinking and starves a shorter answer (seen live:
+            # completion stopped exactly at 800 with no JSON).
+            data = extract_json(self.ask(prompt, max_tokens=3000,
+                                         purpose="simple"))
+            ids = [k.get("photo_id") for k in data.get("keep") or []
+                   if isinstance(k, dict)]
+            kept = apply_verify_order(cands, ids)
+            if not kept:
+                raise ValueError("verifier kept nothing")
+            return kept, [{"step": "checked",
+                           "detail": f"Checked {len(cands)} candidates against "
+                           f"the request; kept {len(kept)}."}]
+        except Exception:
+            return rows, [{"step": "checked",
+                           "detail": "Could not double-check the ranking; "
+                           "kept the code order."}]
+
+    def search(self, spec, exclude, verify=True):
+        """Run a spec; verify=False skips the model double-check (pure code).
+
+        /api/search passes False to keep its no-model-call promise;
+        chat turns pass True.
+        """
         trace = []
         if exclude:
             trace.append(rejected_step(exclude))
         emb = self.embed(spec["query"])
         rows = self.rpc_search(emb, spec, exclude)
         toks = tokens(spec["query"])
+        must = spec.get("must_include") or []
+        avoid_terms = spec.get("avoid_terms") or []
+        survivors, dropped = split_avoid(rows, avoid_terms)
+        if dropped and survivors:
+            trace.append({"step": "excluded",
+                          "detail": f"Excluded {dropped} mentioning "
+                          f"{', '.join(avoid_terms)}."})
+            rows = survivors
+        elif dropped:
+            trace.append({"step": "excluded",
+                          "detail": f"Nothing was fully without "
+                          f"{', '.join(avoid_terms)}; showing the closest."})
+        if toks or must:
+            pos = only_matching(rows, toks, must)
+            if pos:
+                rows = pos
         for r in rows:
-            hit = [t for t in toks if t in r["lex"]]
+            hit = [t for t in toks if lex_has(r["lex"], t)]
             lex = (len(hit) / len(toks)) if toks else 0.0
-            inc = [t for t in spec.get("must_include") or [] if t.lower() in r["lex"]]
-            avoid = [t for t in spec.get("avoid_terms") or [] if t.lower() in r["lex"]]
+            inc = [t for t in spec.get("must_include") or [] if lex_has(r["lex"], t)]
+            avoid = [t for t in spec.get("avoid_terms") or [] if lex_has(r["lex"], t)]
             r["score"] = (r["similarity"] + 0.25 * lex + 0.12 * min(3, len(inc))
                           - 0.30 * min(2, len(avoid)))
             r["reasons"] = [f"meaning {r['similarity']:.2f}"]
@@ -382,6 +490,9 @@ class Engine:
             if avoid:
                 r["reasons"].append("mentions (unwanted): " + ", ".join(avoid))
         rows.sort(key=lambda r: r["score"], reverse=True)
+        if verify:
+            rows, vtrace = self.verify(rows, spec)
+            trace.extend(vtrace)
         top = rows[:5]
         filters = []
         vps = [VP_WORDS.get(v, v) for v in spec.get("viewpoints") or []]
@@ -402,12 +513,16 @@ class Engine:
                       f"({'; '.join(filters) if filters else 'no filters'}); "
                       f"{len(rows)} candidates, kept the top {len(top)}."})
         words = spec.get("must_include") or []
-        if words and not any(any(w.lower() in r["lex"] for w in words) for r in top):
+        if not top:
+            if spec.get("owner_only"):
+                note = ("None of the photos you're in match that. "
+                        "Try fewer details, or tag more photos.")
+            else:
+                note = ("Nothing matches all of that. "
+                        "Try dropping a detail.")
+        elif words and not any(any(w.lower() in r["lex"] for w in words) for r in top):
             note = ("I could not find a photo that clearly shows " + ", ".join(words)
                     + ". Here are the closest matches:")
-        elif spec.get("owner_only") and not top:
-            note = ("None of the photos you're in match that. "
-                    "Try fewer details, or tag more photos.")
         else:
             note = None
         return top, note, trace

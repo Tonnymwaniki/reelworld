@@ -169,7 +169,10 @@ Response:
   entries recorded from the steps that really ran — `understood` (the
   parsed spec in plain words), `searched` (collection, filters, how
   many candidates), `rejected` (photos skipped as user-rejected, only
-  when any), `fallback` (e.g. no other view exists, similar photos
+  when any), `excluded` (candidates dropped for mentioning an
+  avoided term, only when any), `checked` (the model's
+  double-check of the top candidates, on constrained searches
+  only), `fallback` (e.g. no other view exists, similar photos
   shown instead), `answered` (what the reply does). Steps that did not
   run are absent: `open N` has only `answered`, for example.
 
