@@ -107,7 +107,13 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 | Trace | `trace[]` | `planned` / `searched` / `rewrote` / `dropped` / `written` + `detail`, collapsed |
 | Empty / error | no chapters → honest line + trace; HTTP status → `{"detail"}` verbatim + retry |
 
-## 7. Story engine v2 (directed film; step 1: no screen changes)
+## 7. Chat intelligence step 1: no screen changes
+
+Step 1 is backend-only (attributes cache + background compute +
+`photos.attributes` column). No Reel screen gains or loses any
+element yet: verdicts, chips and the sidebar arrive in steps 2-6.
+
+## 7b. Story engine v2 (directed film; step 1: no screen changes)
 
 Step 1 is backend-only (focal cache + background compute). No story
 screen gains or loses any element yet: the focal point, safe crop

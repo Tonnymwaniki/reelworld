@@ -18,5 +18,6 @@ data/outlines/
 data/profile.json
 data/face/
 data/audio/
+data/attributes/personal_*.json
 frontend/design/assets/
 *.zip

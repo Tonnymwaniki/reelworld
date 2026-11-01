@@ -1910,6 +1910,15 @@ def run_upload_job(job_id, photo_id, owner_note):
             ensure_focal([photo_id], load_bytes=_upload_focal_bytes)
         except Exception as e:
             print(f"(focal compute failed for {photo_id}: {e})")
+        try:
+            from attributes import ensure_attributes
+            got = ensure_attributes([photo_id], load_bytes=_upload_focal_bytes)
+            if photo_id in got:
+                get_sb().table("photos").update(
+                    {"attributes": got[photo_id]}).eq(
+                    "photo_id", photo_id).execute()
+        except Exception as e:
+            print(f"(attributes compute failed for {photo_id}: {e})")
     except Exception as e:
         _job_set(job_id, status="error", error=str(e)[:500])
 

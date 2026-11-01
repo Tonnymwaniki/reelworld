@@ -795,6 +795,12 @@ the first unfinished phase.
   (f) silent scene with reason + closing echo; (g) note
   wording in the line; (h) seed take differs; (i) every line
   fits; (j) one story ≈ $0.11 (8 calls, 122 model-seconds).
+- Chat intelligence step 1 (visual attributes): attributes.py
+  (4-per-sheet vision, strict enums, unsure→unknown,
+  fallbacks), tests 17/17 (pending user run), schema_v4.sql
+  (attributes jsonb + GIN + search_photos v3 filter),
+  loader + upload hook, scripts/attrs_run.py (pending:
+  full run + distribution + reload).
 - Retrieval precision (mountain follow-up): avoid terms now
   exclude (stem-tolerant lex_has: "buildings" catches
   "building"), zero-term guesses dropped, empty results say

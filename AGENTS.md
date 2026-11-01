@@ -116,6 +116,14 @@ voice. Narration lines are synthesized once by Kokoro-82M on
 Modal and cached as WAV in `data/audio/` (git-ignored); the
 player prefers studio audio with browser-voice fallback, and
 the exporter mixes it into the WebM.
+- Visual attributes: `backend/attributes.py` judges a fixed
+  checklist per photo from the image (atmosphere, light,
+  time_of_day, water, vegetation, crowd, objects + confidences
+  and evidence), cached at `data/attributes/<photo_id>.json`
+  (personal ones git-ignored), mirrored to the
+  `photos.attributes` column (`backend/schema_v4.sql`, loaded
+  by `backend/load_supabase.py`, computed for new uploads in
+  the background). Script: `python scripts/attrs_run.py`.
 
 ## Build plan (phases; commit after each)
 

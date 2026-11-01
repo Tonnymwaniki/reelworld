@@ -33,6 +33,15 @@ def _owner_present(rec):
     return p if isinstance(p, bool) else None
 
 
+def _attributes(pid):
+    try:
+        entry = json.loads((ROOT / "data" / "attributes" / f"{pid}.json").read_text(
+            encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    return entry if isinstance(entry, dict) else None
+
+
 def main():
     load_dotenv(ROOT / ".env")
     sb = create_client(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SERVICE_KEY"])
@@ -68,6 +77,7 @@ def main():
             "people_count": m["people_count"],
             "lex": m["lex"],
             "owner_present": _owner_present(rec),
+            "attributes": _attributes(m["photo_id"]),
             "record": rec,
             "embedding": [float(x) for x in v],
         })
