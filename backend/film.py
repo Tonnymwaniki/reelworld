@@ -753,13 +753,13 @@ def critique_script(scenes, briefs, style, trace=None, session_id=None):
 
 
 def rewrite_lines(scenes, briefs, flagged, style, voice, profile,
-                  trace=None, session_id=None):
+                  trace=None, session_id=None, label="flagged"):
     """Rewrite flagged lines in place (one model call).
 
     Lines that fail fit, voice or owner checks keep their draft.
     If the rewrite breaks a working closing echo, the opening and
-    closing fall back to their draft lines. Never raises except
-    on budget.
+    closing fall back to their draft lines. label names the lines
+    in the trace. Never raises except on budget.
     """
     need = _speaking(scenes)
     order = [s["photo_id"] for s in need]
@@ -841,7 +841,7 @@ def rewrite_lines(scenes, briefs, flagged, style, voice, profile,
                           "detail": "Kept the draft opening and closing to "
                                     "preserve the echo."})
     if trace is not None:
-        detail = f"Rewrote {applied} flagged lines."
+        detail = f"Rewrote {applied} {label} line{'s' if applied != 1 else ''}."
         if kept:
             detail += f" Kept the draft for {kept}."
         trace.append({"step": "rewrote", "detail": detail})
@@ -977,6 +977,64 @@ def _validate_judge(data, openings):
     if problems:
         return None, "", problems
     return list(ranking), reason.strip()[:280], []
+
+
+def fit_durations(scenes, briefs, target, style, voice, profile,
+                  trace=None, session_id=None):
+    """Fit every narration inside its scene (in place).
+
+    A line longer than its scene extends the scene up to 1.5s;
+    lines still too long go through the rewrite pass once with a
+    too-long flag. Vantage and silent lines are fixed and skipped.
+    The final total is traced against the target (±10%). Never
+    raises except on budget.
+    """
+    extended = False
+    for s in scenes:
+        narr = (s.get("narration") or "").strip()
+        if not narr or s.get("caption_note"):
+            continue
+        words = len(narr.split())
+        sec = float(s.get("seconds") or 0)
+        if words <= _fit_range(sec)[1]:
+            continue
+        ext = round(min(1.5, max(0.0, words / WORDS_PER_SECOND - sec)), 2)
+        if ext > 0:
+            s["seconds"] = round(sec + ext, 2)
+            extended = True
+            if trace is not None:
+                trace.append({"step": "fitted",
+                              "detail": f"Scene {s['photo_id']} extended to "
+                              f"{s['seconds']}s for its narration."})
+    left = [s["photo_id"] for s in scenes
+            if (s.get("narration") or "").strip() and not s.get("caption_note")
+            and len(s["narration"].split()) > _fit_range(s.get("seconds"))[1]]
+    if left:
+        rewrite_lines(scenes, briefs,
+                      {p: {"flags": ["too long for the scene"],
+                           "note": "shorten to fit"} for p in left},
+                      style, voice, profile, trace, session_id,
+                      label="over-long")
+        for s in scenes:
+            narr = (s.get("narration") or "").strip()
+            if s["photo_id"] in left and narr \
+                    and len(narr.split()) > _fit_range(s.get("seconds"))[1]:
+                if trace is not None:
+                    trace.append({"step": "fitted",
+                                  "detail": f"Scene {s['photo_id']} narration "
+                                  f"still exceeds its scene ({len(narr.split())} "
+                                  "words)."})
+    total = round(sum(float(s.get("seconds") or 0) for s in scenes), 2)
+    room = TARGET_SECONDS.get(target, 20.0)
+    if trace is not None:
+        if not extended and not left:
+            trace.append({"step": "fitted",
+                          "detail": "All lines fit their scenes."})
+        else:
+            detail = f"Final length {total}s (target {room}s)."
+            if abs(total - room) > room * 0.1:
+                detail = f"Final length {total}s (target {room}s, outside 10 percent)."
+            trace.append({"step": "fitted", "detail": detail})
 
 
 def _sentences(text):
@@ -1260,7 +1318,7 @@ def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
                outlines_enabled=None, image_path=None, brief=None,
                style="postcard"):
     """Full pipeline: scenes, cards, pacing, script, critic, rewrite,
-    judge, editor, re-pace.
+    judge, editor, re-pace, duration fit.
 
     rows_by_id maps photo_id -> row {place_key, viewpoint,
     collection, record}. Returns the film dict (title, cover,
@@ -1318,6 +1376,8 @@ def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
         if trace is not None:
             trace.append({"step": "checked",
                           "detail": f"Re-fit {len(kept)} scenes after drops."})
+    fit_durations(kept, briefs, target, style, voice, profile,
+                  trace, session_id)
     for s in kept:
         f = (focals or {}).get(s["photo_id"]) or {}
         base_why = s.get("why") or ""

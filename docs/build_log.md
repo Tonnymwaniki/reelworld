@@ -734,4 +734,11 @@ the first unfinished phase.
   re-checked, echo pair restored when broken); judge ranks
   the 3 openings and the first fitting, echoing, owner-clean
   one wins. Every pass retries once, else keeps the previous
-  version traced. Tests: film 70→79 (pending user run).
+  version traced. Tests green: film 79/79; live critic
+  (3 issues) → rewrite → judge-keep → editor (1 fixed), all
+  traced; committed 413c800.
+- Creative scripts step 7 (duration fit): fit_durations
+  extends over-long scenes up to 1.5s, sends leftovers
+  through rewrite once as over-long, skips vantage/silent
+  lines, and traces the final total vs target. Tests:
+  film 79→84 (pending user run).

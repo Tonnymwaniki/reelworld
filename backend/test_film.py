@@ -530,6 +530,61 @@ try:
 finally:
     llm.ask = orig_ask
 
+orig_ask = llm.ask
+try:
+    def explode(*a, **k):
+        raise AssertionError("no model call expected")
+
+    llm.ask = explode
+    ss = [{**sc("p1"), "seconds": 4,
+           "narration": " ".join(f"w{i}" for i in range(14))}]
+    film_mod.fit_durations(ss, BRIEFS, "short", "postcard", None, None,
+                           trace=(tf4 := []))
+    check(ss[0]["seconds"] == 5.5
+          and any("extended to 5.5s" in t["detail"] for t in tf4)
+          and any("outside 10 percent" in t["detail"] for t in tf4),
+          "fit extends scenes")
+    llm.ask = lambda *a, **k: {"text": json.dumps(
+        {"p1": {"narration": "Buses gather here in the morning light.",
+                "caption": "Morning buses."}})}
+    ss = [{**sc("p1"), "seconds": 4,
+           "narration": " ".join(f"w{i}" for i in range(20))}]
+    film_mod.fit_durations(ss, BRIEFS, "short", "postcard", None, None,
+                           trace=(tf5 := []))
+    check(ss[0]["narration"] == "Buses gather here in the morning light."
+          and any("over-long line" in t["detail"] for t in tf5),
+          "fit shortens leftovers")
+    llm.ask = lambda *a, **k: {"text": json.dumps(
+        {"p1": {"narration": " ".join(f"w{i}" for i in range(30)),
+                "caption": "Still long."}})}
+    ss = [{**sc("p1"), "seconds": 4,
+           "narration": " ".join(f"w{i}" for i in range(20))}]
+    film_mod.fit_durations(ss, BRIEFS, "short", "postcard", None, None,
+                           trace=(tf6 := []))
+    check(ss[0]["narration"].split() == [f"w{i}" for i in range(20)]
+          and any("still exceeds" in t["detail"] for t in tf6),
+          "fit failure stays honest")
+    llm.ask = explode
+    ss = [{**sc("p1"), "seconds": 4, "narration": ""},
+          {**sc("p2"), "seconds": 4, "caption_note": "You were here",
+           "narration": " ".join(f"w{i}" for i in range(30))}]
+    film_mod.fit_durations(ss, BRIEFS, "short", "postcard", None, None,
+                           trace=(tf7 := []))
+    check(ss[1]["seconds"] == 4
+          and any("All lines fit" in t["detail"] for t in tf7),
+          "fit skips fixed lines")
+    llm.ask = explode
+    ss = [{**sc("p1"), "seconds": 7, "narration": "Buses rest here."},
+          {**sc("p2"), "seconds": 7, "narration": "Buses rest here."},
+          {**sc("p1"), "seconds": 4,
+           "narration": " ".join(f"w{i}" for i in range(14))}]
+    film_mod.fit_durations(ss, BRIEFS, "short", "postcard", None, None,
+                           trace=(tf8 := []))
+    check(any("Final length 19.5s (target 20.0s)." in t["detail"] for t in tf8),
+          "fit total within target")
+finally:
+    llm.ask = orig_ask
+
 tmp = tempfile.TemporaryDirectory()
 odir = Path(tmp.name)
 odir.joinpath("a1.json").write_text(json.dumps(
