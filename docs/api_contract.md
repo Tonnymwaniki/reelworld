@@ -164,6 +164,11 @@ Response:
   `place_name`, `taken_from_key`, `landmark_keys`, …). `embedding` and
   `lex` are never sent. `credit` is the world's `{author, license,
   source_url, title}` and null for personal photos.
+- On constrained chat searches each checked row carries
+  `check: {verdict: "yes"|"unsure"|"no", reason, detail[]}`
+  from looking at the photo (`detail` holds per-constraint
+  `{check, status, reason}`). Rows `/api/search` returns never
+  carry it (no model there).
 - `text` is shown to the user verbatim.
 - `spec.constraints` holds visual-attribute constraints the parser heard:
   `[{attribute, op: "is"|"is_not", values}]`, where `attribute` is one of
@@ -181,7 +186,10 @@ Response:
   when any), `excluded` (candidates dropped for mentioning an
   avoided term, only when any), `checked` (the model's
   double-check of the top candidates, on constrained searches
-  only), `fallback` (e.g. no other view exists, similar photos
+  only; for visual constraints this is a vision pass ("Looked
+  at N photos to check for …; kept M", plus a note when the
+  fallback provider checked the photos), `fallback` (e.g. no
+  other view exists, similar photos
   shown instead), `answered` (what the reply does). Steps that did not
   run are absent: `open N` has only `answered`, for example.
 

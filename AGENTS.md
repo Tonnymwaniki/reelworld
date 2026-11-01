@@ -24,7 +24,9 @@ Hackathon (Indie track). Environment: Windows, PowerShell, Python 3.14.
   time_of_day, water, vegetation, crowd) judged from the image, cached in
   `data/attributes/*.json`, loaded into the Supabase `attributes` column
   (`backend/schema_v4.sql`). Chat specs carry `constraints` on these that
-  filter searches and show as removable chips.
+  filter searches and show as removable chips. Constrained chat searches
+  automatically re-check the top 12 candidates against the photos
+  (`verify_photos`, cached verdicts, honest few/none wording).
 
 ## The product (what the app must show)
 

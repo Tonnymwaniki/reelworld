@@ -19,7 +19,7 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 |---|---|---|
 | Chat bar | `POST /chat` `{session_id, message}` | send `message`; read `text`, `kind` |
 | Filter chips | `POST /chat` → `spec` | `viewpoints`, `max_people`, `collection`, `must_include`, `avoid_terms`, `owner_only` ("Photos of me"), `constraints` ("Mist", "Not crowded"); removing one sends the spec minus that filter to `POST /api/search` `{session_id, spec}` |
-| Results grid | `POST /chat` / `POST /api/search` → `results[]` | `photo_id`, `file` → `/photos/…` URL, `caption`, `reasons`, `score` |
+| Results grid | `POST /chat` / `POST /api/search` → `results[]` | `photo_id`, `file` → `/photos/…` URL, `caption`, `reasons`, `score`, `check` (`verdict` yes/unsure/no + `reason`, constrained chat searches only) |
 | Card "why it matched" line | same row | `reasons` joined with " · " |
 | "How I found this" (under results, collapsed) | `POST /chat` / `POST /api/search` → `trace[]` | `step` (plain label) + `detail` verbatim, in order |
 | Compare toggle (each card) | local selection, max 2 (third replaces oldest) | `photo_id` per card |

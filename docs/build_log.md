@@ -823,4 +823,18 @@ the first unfinished phase.
   call. Tests: test_constraints 13/13 (incl. a prompt-format
   regression check — literal braces in the new prompt text broke
   PARSE_PROMPT.format until doubled), test_search_verify 18/18,
-  home.test.js 54/54. (commit id on push.)
+  home.test.js 54/54. Committed 33a5ca1. Live: "mountains with
+  mist" parses is-misty and returns exactly the 2 misty
+  photos; "without mist" flips to is_not and filters them.
+- Chat intelligence step 3 (rule-triggered verification):
+  verify_photos in attributes.py (numbered-check vision prompt
+  reusing the mist/haze definitions, sheets of 8, verdicts
+  cached per photo+condition in data/cache/verdicts with op
+  ignored so flips reuse them, failures stay unsure);
+  Engine.vision_check runs it on the top 12 for constrained
+  chat searches, keeps pass+unsure, drops fails, attaches
+  r["check"], and words honest few/none notes from the
+  verdicts plus stored attributes; mixed/maybe notes for
+  unsure verdicts, and turn_stream infers matched from yes
+  verdicts so kind/answered stay truthful. Tests:
+  test_vision_check 22/22. (commit id on push.)

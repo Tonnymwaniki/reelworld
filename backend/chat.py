@@ -473,6 +473,74 @@ class Engine:
                            "detail": "Could not double-check the ranking; "
                            "kept the code order."}]
 
+    def vision_check(self, rows, spec):
+        """Vision verdicts on the top candidates for constrained searches.
+
+        Runs automatically when the spec has constraints (chat turns
+        only — search() gates on verify, so /api/search stays
+        model-free). Keeps passes and unsure, drops clear fails,
+        attaches r["check"], and words the reply honestly from the
+        verdicts. Returns (rows, trace, note).
+        """
+        from attributes import (VERIFY_TOP,  # lazy: attributes imports chat
+                                constraint_display, constraint_words,
+                                few_note, mixed_note, maybe_note, none_note,
+                                normalize_constraints, verify_photos)
+        constraints = normalize_constraints(spec.get("constraints"))
+        cands = rows[:VERIFY_TOP]
+        if not cands or not constraints:
+            return rows, [], None
+        by_id = {r["photo_id"]: r for r in cands}
+
+        def load_bytes(pid):
+            p = ROOT / str(by_id[pid].get("file") or "")
+            if not p.is_file():
+                return None
+            return (p.read_bytes(), "image/png" if p.suffix.lower() == ".png"
+                    else "image/jpeg")
+
+        trace = []
+        results, info = verify_photos(
+            [r["photo_id"] for r in cands], constraints,
+            load_bytes=load_bytes, trace=trace,
+            session_id=self.session_id)
+        self.turn_llm.extend(info["calls"])
+        if info["fallback_used"]:
+            trace.append({"step": "checked",
+                          "detail": "The primary provider refused images, so "
+                          "the fallback checked the photos."})
+        for pid, res in results.items():
+            if pid in by_id:
+                by_id[pid]["check"] = {"verdict": res["verdict"],
+                                       "reason": res["reason"],
+                                       "detail": res["detail"]}
+        keep = [r for r in cands
+                if by_id[r["photo_id"]]["check"]["verdict"] in ("yes", "unsure")]
+        fails = [r for r in cands
+                 if by_id[r["photo_id"]]["check"]["verdict"] == "no"]
+        wants = []
+        for c in constraints:
+            wants.append(f"absence of {constraint_words(c)}"
+                         if c["op"] == "is_not" else constraint_display(c))
+        detail = (f"Looked at {len(cands)} photos to check for "
+                  f"{' and '.join(wants)}; kept {len(keep)}.")
+        if info["cached"]:
+            detail += f" ({info['cached']} from the cache.)"
+        trace.append({"step": "checked", "detail": detail})
+        if not keep and fails:
+            return fails[:3], trace, none_note(constraints, fails)
+        if keep and len(keep) < 3:
+            nclear = sum(1 for r in keep
+                         if by_id[r["photo_id"]]["check"]["verdict"] == "yes")
+            if nclear == len(keep):
+                note = few_note(len(keep), constraints)
+            elif nclear:
+                note = mixed_note(nclear, len(keep) - nclear, constraints)
+            else:
+                note = maybe_note(len(keep), constraints)
+            return keep + rows[VERIFY_TOP:], trace, note
+        return keep + rows[VERIFY_TOP:], trace, None
+
     def search(self, spec, exclude, verify=True):
         """Run a spec; verify=False skips the model double-check (pure code).
 
@@ -530,7 +598,11 @@ class Engine:
             if avoid:
                 r["reasons"].append("mentions (unwanted): " + ", ".join(avoid))
         rows.sort(key=lambda r: r["score"], reverse=True)
+        vnote = None
         if verify:
+            if spec.get("constraints"):
+                rows, vt, vnote = self.vision_check(rows, spec)
+                trace.extend(vt)
             rows, vtrace = self.verify(rows, spec)
             trace.extend(vtrace)
         top = rows[:5]
@@ -556,7 +628,9 @@ class Engine:
                       f"({'; '.join(filters) if filters else 'no filters'}); "
                       f"{len(rows)} candidates, kept the top {len(top)}."})
         words = spec.get("must_include") or []
-        if not top:
+        if vnote:
+            note = vnote
+        elif not top:
             if spec.get("owner_only"):
                 note = ("None of the photos you're in match that. "
                         "Try fewer details, or tag more photos.")
@@ -786,19 +860,29 @@ class Engine:
         for t in sub:
             if t["step"] == "searched":
                 yield ("step", "searched", t["detail"])
-        if note:
+        matched = any((r.get("check") or {}).get("verdict") == "yes"
+                      for r in rows)
+        if note and matched:
+            yield ("step", "checked",
+                   f"Checked the candidates: {len(rows)} clearly matched.")
+        elif note:
             words = ", ".join(st["spec"].get("must_include") or [])
             yield ("step", "checked", f"Checked the top {len(rows)} photos: nothing clearly shows {words}.")
         elif st["rejected"]:
             yield ("step", "checked", f"Skipped {len(st['rejected'])} rejected photo(s); verified the top {len(rows)} against your filters.")
         else:
             yield ("step", "checked", f"Verified the top {len(rows)} photos against your filters.")
-        kind = "no_strong_match" if note else "ok"
+        kind = "no_strong_match" if (note and not matched) else "ok"
         trace.append(u)
         trace.extend(sub)
-        trace.append({"step": "answered", "detail":
-                      (f"Nothing clearly matched; showing the {len(rows)} closest photos." if note
-                       else f"Showing {len(rows)} photos.")})
+        if note and matched:
+            answered = f"Showing the {len(rows)} photos that clearly matched."
+        elif note:
+            answered = (f"Nothing clearly matched; showing the {len(rows)} "
+                        "closest photos.")
+        else:
+            answered = f"Showing {len(rows)} photos."
+        trace.append({"step": "answered", "detail": answered})
         yield ("step", "wrote", f"Reply ready with {len(rows)} photos.")
         yield ("result", {"text": note or "Here is what I found:", "results": rows, "kind": kind, "trace": trace})
 
