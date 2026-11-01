@@ -408,8 +408,15 @@ cannot support are dropped and named in the trace instead of padded, as are chap
   `rewrote`, `judged`). A final duration-fit pass extends any
   scene whose line still exceeds it (up to 1.5s), sends
   leftovers through the rewrite once as over-long, and traces
-  the final length against the target (`fitted`). A `seen`
-  trace step names it when the photos could not be shown.
+  the final length against the target (`fitted`). Optional
+  `notes` ({photo_id: text, 140 chars max, ids must be in the
+  request) are owner-provided facts: attached to their scenes
+  as `owner_note`, forced through the rewrite and honoured by
+  the editor; notes on fixed (vantage/silent) lines are
+  skipped, all traced (`noted`). A `seen` trace step names it
+  when the photos could not be shown. Takes are client-side:
+  the studio keeps up to 3 directed cuts per story with a
+  Take switcher (oldest dropped, said in the status).
 - Old v1 chapter stories still load and play: the player and
   exporter run them through `migrateChapters` (heading + text
   become the caption with heading echoes stripped, plain `cut`s,

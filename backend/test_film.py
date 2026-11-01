@@ -663,6 +663,82 @@ bad_cb = {"p1": {"focus": "X", "focus_source": C1[0], "held_back": [],
                  "callback_of": "p9"}}
 check(film_mod._validate_selection(bad_cb, {"p1": C1}, ["p1"])[0] is None,
       "bad callback rejected")
+check(film_mod.check_notes({"p1": "  my first visit  ", "p2": "  "},
+                           ["p1", "p2"]) == {"p1": "my first visit"},
+      "notes cleaned")
+try:
+    film_mod.check_notes({"p9": "hi"}, ["p1"])
+    check(False, "note unknown photo rejected")
+except ValueError:
+    check(True, "note unknown photo rejected")
+try:
+    film_mod.check_notes({"p1": "x" * 141}, ["p1"])
+    check(False, "note too long rejected")
+except ValueError:
+    check(True, "note too long rejected")
+
+orig_ask = llm.ask
+try:
+    seen = {}
+    llm.ask = lambda *a, **k: (seen.update(prompt=a[0]), {"text": json.dumps(
+        {"p1": {"narration": "Buses gather here in the morning light daily.",
+                "caption": "Morning buses."}})})[1]
+    ss = [{**sc("p1"), "seconds": 4, "narration": "Buses rest here.",
+           "caption": "Old."},
+          {**sc("p2"), "seconds": 4, "narration": "Morning buses rest here now.",
+           "caption": "Old two."}]
+    film_mod.rewrite_lines(ss, BRIEFS, {"p1": {"flags": ["owner note"],
+                                              "note": ""}},
+                           "postcard", None, None, notes={"p1": "my first visit"})
+    check("my first visit" in seen["prompt"]
+          and "provided fact" in seen["prompt"], "rewrite uses the note")
+    seen = {}
+    llm.ask = lambda *a, **k: (seen.update(prompt=a[0]), {"text": json.dumps(
+        {"title": SUP, "intents": [SUP],
+         "scenes": {"p1": {"claims": [SUP, SUP]}}})})[1]
+    s2 = {**sc("p1"), "narration": "Buses park here.", "caption": "Buses wait."}
+    film_mod.edit_captions("T", [{"intent": "go"}], [s2], BRIEFS,
+                           notes={"p1": "my first visit"})
+    check("Owner note (provided fact): my first visit" in seen["prompt"],
+          "editor honours the note")
+
+    def note_ask(*a, **k):
+        purpose = k.get("purpose")
+        if purpose == "script":
+            note_ask.n = getattr(note_ask, "n", 0) + 1
+            if note_ask.n == 1:
+                return {"text": json.dumps({"p1": {
+                    "focus": "the street",
+                    "focus_source": "place: K (confirmed)",
+                    "held_back": ["viewpoint: ground_level"],
+                    "callback_of": None}})}
+            return {"text": json.dumps(
+                {"title": "T", "openings": ["O1", "O2", "O3"],
+                 "scenes": {"p1": {"narration": "Buses park here daily now.",
+                                   "caption": "Buses wait.",
+                                   "silent_reason": ""}}})}
+        if purpose == "critic":
+            return {"text": json.dumps({"p1": {"flags": [], "note": ""}})}
+        if purpose == "rewrite":
+            return {"text": json.dumps(
+                {"p1": {"narration": "Buses park here daily now.",
+                        "caption": "Buses wait."}})}
+        if purpose == "judge":
+            return {"text": json.dumps(
+                {"ranking": ["O1", "O2", "O3"], "reason": "short"})}
+        return {"text": json.dumps(
+            {"title": SUP, "intents": [SUP],
+             "scenes": {"p1": {"claims": [SUP, SUP]}}})}
+
+    llm.ask = note_ask
+    film = film_mod.build_film(sheet, rows, foc, "short", trace=(tn := []),
+                               notes={"p1": "my first visit"})
+    check(film["scenes"][0].get("owner_note") == "my first visit"
+          and film["scenes"][0]["narration_source"] == "script-rewrite"
+          and any(t["step"] == "noted" for t in tn),
+          "noted scene forced through rewrite")
+finally:
+    llm.ask = orig_ask
 
 print(f"test_film.py: {total - fails}/{total} checks passed")
 sys.exit(1 if fails else 0)

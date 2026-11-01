@@ -700,6 +700,32 @@ def _speaking(scenes):
             if not s.get("caption_note") and (s.get("narration") or "").strip()]
 
 
+def check_notes(notes, ids):
+    """Cleaned {photo_id: note} for scene notes (pure).
+
+    Notes are owner-provided facts (140 chars max). Unknown
+    photo ids, non-strings and over-long notes raise
+    ValueError; blank notes are dropped.
+    """
+    if not notes:
+        return {}
+    if not isinstance(notes, dict):
+        raise ValueError("notes must map photo ids to text.")
+    known = set(ids or [])
+    cleaned = {}
+    for pid, note in notes.items():
+        if pid not in known:
+            raise ValueError(f"note for unknown photo: {pid}")
+        if not isinstance(note, str) or not note.strip():
+            if isinstance(note, str):
+                continue
+            raise ValueError(f"note for {pid} must be text.")
+        if len(note.strip()) > 140:
+            raise ValueError(f"note for {pid} must be 140 characters or fewer.")
+        cleaned[pid] = note.strip()
+    return cleaned
+
+
 def critique_script(scenes, briefs, style, trace=None, session_id=None):
     """{pid: {flags, note}} for lines needing a rewrite (one model call).
 
@@ -753,13 +779,15 @@ def critique_script(scenes, briefs, style, trace=None, session_id=None):
 
 
 def rewrite_lines(scenes, briefs, flagged, style, voice, profile,
-                  trace=None, session_id=None, label="flagged"):
+                  trace=None, session_id=None, label="flagged", notes=None):
     """Rewrite flagged lines in place (one model call).
 
     Lines that fail fit, voice or owner checks keep their draft.
     If the rewrite breaks a working closing echo, the opening and
     closing fall back to their draft lines. label names the lines
-    in the trace. Never raises except on budget.
+    in the trace. notes maps photo ids to owner notes (provided
+    facts, worked into the flagged scenes that carry them).
+    Never raises except on budget.
     """
     need = _speaking(scenes)
     order = [s["photo_id"] for s in need]
@@ -793,6 +821,9 @@ def rewrite_lines(scenes, briefs, flagged, style, voice, profile,
                      f"note: {flagged[p]['note'] or '-'}):")
         lines.append(f"  line: {s.get('narration')}")
         lines.append(f"  facts: {_brief_text(briefs.get(p))}")
+        if (notes or {}).get(p):
+            lines.append("  owner note (the owner's own words, a provided "
+                         f"fact — work it in): {notes[p]}")
     base = "\n".join(lines)
     fresh, last_problems = None, []
     for attempt in (1, 2):
@@ -1047,11 +1078,13 @@ def _check_verdict(v):
 
 
 def edit_captions(title, beats, scenes, briefs, trace=None, session_id=None,
-                  voice=None, profile=None):
+                  voice=None, profile=None, notes=None):
     """Verify every narration + caption sentence against the records.
 
     One model call. Vantage-note lines are code, already true, and
-    skipped. Returns (title, beats, scenes, verification).
+    skipped. notes maps photo ids to owner notes, which count as
+    provided facts for their scenes. Returns (title, beats, scenes,
+    verification).
     Unsupported claims are rewritten once or removed; scenes left
     fully empty are dropped; the title and beat intents are
     rewritten when fixable. The owner's name (or you/I) may stay
@@ -1075,7 +1108,8 @@ def edit_captions(title, beats, scenes, briefs, trace=None, session_id=None,
     voice, profile, facts = _narration_for(
         briefs, [s["photo_id"] for s in checkable], voice, profile)
     name = (profile or {}).get("name") or ""
-    lines = ["Check each sentence against ONLY the stored facts for its photo.",
+    lines = ["Check each sentence against ONLY the stored facts for its photo,",
+             "plus any owner note given with those facts.",
              narration_mod.rules_block(profile, facts, voice),
              "Judge owner references by those rules: the owner's name (or you/I) "
              "is supported ONLY in a scene whose photo facts say owner present, "
@@ -1090,8 +1124,11 @@ def edit_captions(title, beats, scenes, briefs, trace=None, session_id=None,
     for i, b in enumerate(beats):
         lines.append(f"Intent {i}: {b.get('intent') or ''}")
     for s in checkable:
-        lines.append(f"Photo {s['photo_id']} facts: "
-                     f"{_brief_text(briefs.get(s['photo_id']))}")
+        facts_line = (f"Photo {s['photo_id']} facts: "
+                      f"{_brief_text(briefs.get(s['photo_id']))}")
+        if (notes or {}).get(s["photo_id"]):
+            facts_line += f" Owner note (provided fact): {notes[s['photo_id']]}"
+        lines.append(facts_line)
         for i, (kind, sent) in enumerate(sents[s["photo_id"]]):
             lines.append(f"Photo {s['photo_id']} {kind} sentence {i}: {sent}")
     verification = {"checked": 0, "fixed": 0, "dropped": [],
@@ -1316,7 +1353,7 @@ def attach_spotlights(scenes, outlines_dir=None, enabled=True):
 def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
                trace=None, session_id=None, voice=None, profile=None,
                outlines_enabled=None, image_path=None, brief=None,
-               style="postcard"):
+               style="postcard", notes=None):
     """Full pipeline: scenes, cards, pacing, script, critic, rewrite,
     judge, editor, re-pace, duration fit.
 
@@ -1328,8 +1365,11 @@ def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
     the caption writer studies with the records (None writes from
     the records only). brief is the owner's day brief (provided
     facts the focus pass may choose). style picks the writer's
-    voice (unknown falls back to postcard, traced). Trace is
-    appended, never replaced. Budget errors propagate.
+    voice (unknown falls back to postcard, traced). notes maps
+    photo ids to owner notes: provided facts attached to their
+    scenes, forced through the rewrite and honoured by the
+    editor. Trace is appended, never replaced. Budget errors
+    propagate.
     """
     try:
         style = normalize_style(style)
@@ -1361,15 +1401,33 @@ def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
         scenes, briefs, beatsheet.get("beats"), beatsheet.get("spine"),
         brief=brief, style=style, trace=trace, session_id=session_id,
         voice=voice, profile=profile, image_path=image_path)
+    notes = {p: n for p, n in (notes or {}).items()
+             if isinstance(n, str) and n.strip()
+             and p in {s["photo_id"] for s in scenes}}
+    for s in scenes:
+        if s["photo_id"] in notes:
+            s["owner_note"] = notes[s["photo_id"]]
     flagged = critique_script(scenes, briefs, style, trace, session_id)
+    if notes:
+        fixed = {s["photo_id"] for s in scenes} - \
+            {s["photo_id"] for s in _speaking(scenes)}
+        used = sorted(set(notes) - fixed)
+        for p in used:
+            flagged.setdefault(p, {"flags": [], "note": ""})
+            flagged[p]["flags"].append("owner note")
+        if trace is not None:
+            detail = f"Using owner notes on {len(used)} scene(s)."
+            if set(notes) & fixed:
+                detail += " Notes on fixed lines were skipped."
+            trace.append({"step": "noted", "detail": detail})
     if flagged:
         rewrite_lines(scenes, briefs, flagged, style, voice, profile,
-                      trace, session_id)
+                      trace, session_id, notes=notes)
     judge_opening(scenes, briefs, openings, beatsheet.get("spine"), style,
                   voice, profile, trace, session_id)
     title, beats, kept, verification = edit_captions(
         wtitle or beatsheet.get("title"), beatsheet.get("beats"), scenes,
-        briefs, trace, session_id, voice, profile)
+        briefs, trace, session_id, voice, profile, notes=notes)
     if len(kept) != len(scenes):
         _refit_scenes(kept, metas, records)
         apply_pacing(kept, target, trace)

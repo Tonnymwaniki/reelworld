@@ -141,7 +141,7 @@ async function main() {
     "bld-webm-status", "bld-webm-dl", "bld-md", "bld-json", "bld-link",
     "bld-link-status", "bld-publish", "bld-pub-note", "bld-pub-name", "bld-faces",
     "bld-filmbox", "bld-direct", "bld-redirect", "bld-film-play", "bld-film-back",
-    "bld-film-status", "bld-film-list", "bld-film-trace", "bld-cut-note",
+    "bld-film-status", "bld-takes", "bld-film-list", "bld-film-trace", "bld-cut-note",
     "bld-pub-status", "bld-showcase-link", "tpl-bld-scene",
   ].forEach((id) => ok(read("builder").indexOf('id="' + id + '"') !== -1, "builder.html has #" + id));
   ["sc-count", "sc-error", "sc-main", "sc-featured", "sc-f-img", "sc-f-title",
@@ -177,7 +177,12 @@ async function main() {
      "read-aloud export note");
   ok(src.indexOf('"/api/films"') !== -1, "studio directs films via the endpoint");
   ok(src.indexOf("Why this shot") !== -1, "film review shows why per scene");
-  ok(read("builder").indexOf("Try another direction") !== -1, "film review re-directs");
+  ok(read("builder").indexOf("Try another take") !== -1, "film review re-takes");
+  ok(src.indexOf("Why this line") !== -1, "film review shows why per line");
+  ok(src.indexOf("your note: ") !== -1, "film review tags owner notes");
+  ok(src.indexOf("Take ") !== -1, "film review has a take switcher");
+  ok(src.indexOf("selectTake") !== -1, "take switcher switches takes");
+  ok(src.indexOf("notes: this.filmNotes") !== -1, "studio sends scene notes");
 
   console.log("stories.test.js: " + n + "/" + n + " checks passed");
 }

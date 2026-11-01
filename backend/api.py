@@ -2924,6 +2924,7 @@ class FilmRequest(BaseModel):
     voice: Optional[str] = None
     seed: Optional[int] = None
     brief: Optional[Dict[str, Any]] = None
+    notes: Optional[Dict[str, str]] = None
 
 
 @app.post("/api/films")
@@ -2956,6 +2957,11 @@ def films_build(req: FilmRequest, request: Request = None,
         raise HTTPException(status_code=400, detail="photo_ids must not be empty.")
     from story_engine import check_brief
     brief = _story_err(check_brief, req.brief)
+    from film import check_notes
+    try:
+        notes = check_notes(req.notes, ids)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
     try:
         prof = owner_profile_mod.load_profile()
     except Exception:
@@ -3012,7 +3018,8 @@ def films_build(req: FilmRequest, request: Request = None,
         film = build_film(sheet, rows_by_id, focals, req.target,
                           cluster_bursts(pids, sim), trace,
                           voice=voice, profile=prof,
-                          image_path=vision_sheet, brief=brief, style=style)
+                          image_path=vision_sheet, brief=brief, style=style,
+                          notes=notes)
     except llm_mod.LLMBudgetSpent:
         raise HTTPException(status_code=429, detail=RESTING_TEXT)
     for s in film["scenes"]:

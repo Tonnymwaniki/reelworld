@@ -741,4 +741,12 @@ the first unfinished phase.
   extends over-long scenes up to 1.5s, sends leftovers
   through rewrite once as over-long, skips vantage/silent
   lines, and traces the final total vs target. Tests:
-  film 79→84 (pending user run).
+  film 84/84; live all-lines-fit + fitted trace; committed
+  b5a89ec.
+- Creative scripts step 8 (takes + notes): FilmRequest.notes
+  (check_notes validation), owner_note attached, noted
+  scenes forced through rewrite with the note as a provided
+  fact, editor honours notes, `noted` trace; studio keeps
+  3 takes with a Take switcher, per-scene "why this line"
+  (focus + held back), "your note" tag and note form.
+  Tests: film 84→90, stories suite (pending user run).

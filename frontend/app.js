@@ -5914,6 +5914,9 @@ const builder = {
     this.film = null;
     this.filmSeed = 0;
     this.filmPhotos = "";
+    this.takes = [];
+    this.takeIdx = 0;
+    this.filmNotes = {};
     this.useFilm = false;
     this.directing = false;
     $("#bld-tabs", view).addEventListener("click", (e) => {
@@ -5934,6 +5937,13 @@ const builder = {
     $("#bld-refresh", view).addEventListener("click", () => this.refresh());
     $("#bld-direct", view).addEventListener("click", () => this.direct(0));
     $("#bld-redirect", view).addEventListener("click", () => this.direct(this.filmSeed + 1));
+    $("#bld-film-list", view).addEventListener("submit", (e) => {
+      const form = e.target.closest("[data-note-form]");
+      if (!form) return;
+      e.preventDefault();
+      this.saveNote(form.dataset.noteForm,
+        (form.querySelector("input") || {}).value || "");
+    });
     $("#bld-film-play", view).addEventListener("click", () => this.playFilm());
     $("#bld-film-back", view).addEventListener("click", () => this.backToStory());
     $("#bld-save", view).addEventListener("click", () => this.save());
@@ -5975,7 +5985,7 @@ const builder = {
       player.mount($("#bld-player", view), this.cutSource());
       const note = $("#bld-cut-note", view);
       if (this.useFilm && this.film) {
-        note.textContent = "Previewing the directed cut (direction " + this.filmSeed + ").";
+        note.textContent = "Previewing the directed cut (take " + (this.takeIdx + 1) + ").";
         note.classList.remove("hidden");
       } else note.classList.add("hidden");
     } else player.destroy();
@@ -6225,6 +6235,16 @@ const builder = {
     return (this.full.chapters || []).map((c) => c.photo_id).filter(Boolean);
   },
 
+  saveNote(pid, value) {
+    const note = (value || "").trim().slice(0, 140);
+    if (!note) {
+      delete this.filmNotes[pid];
+    } else {
+      this.filmNotes[pid] = note;
+    }
+    this.direct(this.filmSeed);
+  },
+
   async direct(seed) {
     const view = this.view;
     if (this.directing || !this.full) return;
@@ -6252,18 +6272,26 @@ const builder = {
           style: this.full.story.tone || "postcard",
           target: this.full.story.target || "short",
           voice: this.full.story.voice || null, seed: seed,
+          notes: this.filmNotes,
         }),
       });
       if (!view.isConnected) return;
-      this.film = out.film;
-      this.filmSeed = seed;
-      this.filmPhotos = ids.join(",");
-      this.filmTrace = out.trace || [];
+      this.takes.push({ film: out.film, seed: seed, trace: out.trace || [],
+        photos: ids.join(",") });
+      let dropped = false;
+      if (this.takes.length > 3) {
+        this.takes.shift();
+        dropped = true;
+      }
+      this.takeIdx = this.takes.length - 1;
+      this.syncTake();
       this.useFilm = false;
       this.paintFilm();
       const n = (out.film.scenes || []).length;
-      st.textContent = "Directed cut ready: " + n + (n === 1 ? " scene" : " scenes") +
-        " (direction " + seed + "). Preview it or try another direction.";
+      st.textContent = "Take " + (this.takeIdx + 1) + " ready: " + n +
+        (n === 1 ? " scene" : " scenes") + " (direction " + seed + ")." +
+        (dropped ? " Take 1 was dropped (3 takes kept)." : "") +
+        " Preview it or try another take.";
     } catch (e) {
       if (view.isConnected) st.textContent = String((e && e.message) || e);
     } finally {
@@ -6276,10 +6304,46 @@ const builder = {
     }
   },
 
+  syncTake() {
+    const t = this.takes[this.takeIdx] || {};
+    this.film = t.film || null;
+    this.filmSeed = t.seed || 0;
+    this.filmPhotos = t.photos || "";
+    this.filmTrace = t.trace || [];
+  },
+
+  selectTake(i) {
+    if (i < 0 || i >= this.takes.length || this.directing) return;
+    this.takeIdx = i;
+    this.syncTake();
+    this.useFilm = false;
+    this.paintFilm();
+  },
+
+  paintTakes() {
+    const view = this.view;
+    const box = $("#bld-takes", view);
+    box.innerHTML = "";
+    if (this.takes.length < 2) return;
+    this.takes.forEach((t, i) => {
+      const b = document.createElement("button");
+      const on = i === this.takeIdx;
+      b.type = "button";
+      b.className = "min-h-[44px] px-4 rounded-lg font-label-md text-label-md " +
+        (on ? "bg-primary-container text-surface"
+          : "bg-surface-container-high text-on-surface");
+      b.textContent = "Take " + (i + 1);
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+      b.addEventListener("click", () => this.selectTake(i));
+      box.appendChild(b);
+    });
+  },
+
   paintFilm() {
     const view = this.view;
     const box = $("#bld-film-list", view);
     box.innerHTML = "";
+    this.paintTakes();
     const has = !!(this.film && (this.film.scenes || []).length);
     const stale = has && this.filmPhotos !== this.filmIds().join(",");
     $("#bld-redirect", view).classList.toggle("hidden", !has);
@@ -6344,6 +6408,39 @@ const builder = {
         ev.textContent = "Evidence: " + s.evidence.join("; ");
         mid.appendChild(ev);
       }
+      const focus = (s.focus_detail || {}).text;
+      if (focus) {
+        const wl = document.createElement("span");
+        wl.className = "font-body-sm text-body-sm text-on-surface-variant";
+        wl.textContent = "Why this line: " + focus +
+          ((s.held_back || []).length
+            ? " (held back: " + s.held_back.join("; ") + ")" : "");
+        mid.appendChild(wl);
+      }
+      if (s.owner_note) {
+        const tag = document.createElement("span");
+        tag.className = "font-label-md text-label-md text-secondary";
+        tag.textContent = "your note: " + s.owner_note;
+        mid.appendChild(tag);
+      }
+      const form = document.createElement("form");
+      form.className = "flex flex-wrap items-center gap-2";
+      form.dataset.noteForm = s.photo_id;
+      const inp = document.createElement("input");
+      inp.type = "text";
+      inp.maxLength = 140;
+      inp.placeholder = "Add a note for this scene (140 chars)";
+      inp.value = this.filmNotes[s.photo_id] || "";
+      inp.className = "flex-1 min-w-[160px] px-3 py-2 min-h-[44px] rounded-lg " +
+        "bg-surface-container-highest text-on-surface font-body-sm text-body-sm";
+      inp.setAttribute("aria-label", "Note for scene " + (i + 1));
+      const save = document.createElement("button");
+      save.type = "submit";
+      save.className = "min-h-[44px] px-3 rounded-lg bg-surface-container-high " +
+        "text-on-surface font-label-sm text-label-sm";
+      save.textContent = "Add note";
+      form.append(inp, save);
+      mid.appendChild(form);
       row.append(img, mid);
       box.appendChild(row);
     });
@@ -6567,7 +6664,7 @@ const builder = {
     const took = Math.round((performance.now() - t0) / 1000);
     status.textContent = "Recorded " + total.toFixed(0) + "s at " + resNote +
       (film.reducedMotion ? " (reduced motion)" : "") +
-      (this.useFilm && this.film ? " (directed cut " + this.filmSeed + ")" : "") +
+      (this.useFilm && this.film ? " (take " + (this.takeIdx + 1) + ")" : "") +
       " in " + took + "s.";
     setTimeout(() => URL.revokeObjectURL(dl.href), 60000);
     reset();
