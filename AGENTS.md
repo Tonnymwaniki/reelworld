@@ -20,6 +20,11 @@ Hackathon (Indie track). Environment: Windows, PowerShell, Python 3.14.
 - `backend/chat.py`: class `Engine` with `turn(message)` returning
   `{"text": str, "results": [rows]}`. It keeps conversation state (current spec,
   focus photo, rejected ids). It also has a terminal loop in `main()`.
+  Turns run through `backend/router.py`: one model call with a compact
+  state + 8 code-run tools (search, related, get_photo_facts, count,
+  verify, ask_photo, compare, clarify), topics new/refine, photo-id
+  validation, and a JSON fallback when tool calling breaks.
+  `Engine.parse()` is legacy (only `scripts/verify_meta.py` uses it).
 - `backend/attributes.py`: per-photo visual checklist (atmosphere, light,
   time_of_day, water, vegetation, crowd) judged from the image, cached in
   `data/attributes/*.json`, loaded into the Supabase `attributes` column

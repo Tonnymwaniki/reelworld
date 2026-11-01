@@ -178,6 +178,13 @@ class ChatResponse(BaseModel):
     spec: Dict[str, Any] = Field(default_factory=dict)
     kind: str = "ok"
     trace: List[dict] = Field(default_factory=list)
+    label: Optional[str] = None
+    topic: Optional[dict] = None
+    options: Optional[list] = None
+    about_photo_id: Optional[str] = None
+    about_photo_ids: Optional[list] = None
+    took_to_mean: Optional[str] = None
+    differences: Optional[list] = None
 
 
 app = FastAPI(title="ReelWorld API")
@@ -678,12 +685,24 @@ def chat(req: ChatRequest, request: Request = None, response: Response = None):
         return _chat_payload(sid, eng, out)
 
 
+def _push_reply(eng, rows):
+    """Remember the latest reply's photos for router references."""
+    photos = [{"id": r.get("photo_id"),
+               "label": (r.get("caption") or r.get("photo_id") or "")[:60],
+               "verdict": (r.get("check") or {}).get("verdict")}
+              for r in (rows or [])[:5] if r.get("photo_id")]
+    if not photos:
+        return
+    eng.state["replies"] = (eng.state.get("replies") or [])[-2:] + [{"photos": photos}]
+
+
 def _chat_payload(sid, eng, out):
     """Same bookkeeping as chat.main(): new results become last/focus."""
     with _turn_lock:
         if out.get("results"):
             eng.state["last"] = out["results"]
             eng.state["focus"] = out["results"][0]
+            _push_reply(eng, out["results"])
         focus = eng.state.get("focus") or {}
         spec = eng.state.get("spec") or {}
     rows = [public_row(r) for r in out.get("results", [])]
@@ -705,6 +724,13 @@ def _chat_payload(sid, eng, out):
                                           "owner_only", "constraints")},
         "kind": out.get("kind", "ok"),
         "trace": trace,
+        "label": out.get("label"),
+        "topic": out.get("topic"),
+        "options": out.get("options"),
+        "about_photo_id": out.get("about_photo_id"),
+        "about_photo_ids": out.get("about_photo_ids"),
+        "took_to_mean": out.get("took_to_mean"),
+        "differences": out.get("differences"),
     }
 
 
@@ -958,6 +984,10 @@ def clean_spec(raw):
             raise HTTPException(status_code=400, detail=f"spec.{k} must be a list of strings")
         spec[k] = [w.strip().lower() for w in spec[k] if w.strip()]
     spec["constraints"] = attributes_mod.normalize_constraints(spec.get("constraints"))
+    alts = raw.get("alt_queries", [])
+    if not isinstance(alts, list) or any(not isinstance(q, str) for q in alts):
+        raise HTTPException(status_code=400, detail="spec.alt_queries must be a list of strings")
+    spec["alt_queries"] = [q.strip() for q in alts if q.strip()][:2]
     if not isinstance(spec["owner_only"], bool):
         raise HTTPException(status_code=400, detail="spec.owner_only must be true or false")
     if spec["owner_only"]:
@@ -1000,6 +1030,7 @@ def api_search(req: SearchRequest):
         if rows:
             eng.state["last"] = rows
             eng.state["focus"] = rows[0]
+            _push_reply(eng, rows)
         focus = eng.state.get("focus") or {}
     out_rows = [public_row(r) for r in rows]
     attach_credits(out_rows)

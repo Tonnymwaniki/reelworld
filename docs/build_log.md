@@ -837,4 +837,15 @@ the first unfinished phase.
   verdicts plus stored attributes; mixed/maybe notes for
   unsure verdicts, and turn_stream infers matched from yes
   verdicts so kind/answered stay truthful. Tests:
-  test_vision_check 22/22. (commit id on push.)
+  test_vision_check 22/22. Committed ab1aed3. Live: 2 misty
+  photos verified yes, "Only 2..." + kind ok, cache noted.
+- Chat intelligence step 4 (hybrid router + topics):
+  backend/router.py (compact state, 8 tools, max 3 rounds,
+  terminal-only-when-all-terminal, id validation with
+  auto-clarify, pending options incl. topic shortcuts,
+  validated grounded text, code fallbacks); llm.ask_tools
+  (native calls, reasoning dropped, FORCE_TOOLCALL_FAIL);
+  JSON fallback after malformed rounds; RRF alt_queries in
+  search; verify_question; ChatResponse gains label/topic/
+  options/about/differences; replies history in _chat_payload
+  + /api/search. Tests: test_router 28/28. (commit id on push.)

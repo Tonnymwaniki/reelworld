@@ -445,3 +445,107 @@ def ask(prompt, max_tokens=8000, temperature=0.1, image_path=None,
     return {"text": text, "provider": provider, "model": model,
             "seconds": round(secs, 2), "prompt_tokens": pt,
             "completion_tokens": ct, "fallback_used": used}
+
+
+def _call_tools_one(base_url, key, model, messages, tools, temperature,
+                    max_tokens, timeout, affinity_key):
+    """Single tool-calling attempt. Returns (text, raw_calls, pt, ct, secs).
+
+    raw_calls is [(call_id, name, args_str)]. Only the real content
+    slot is read — reasoning_content is never used, shown or stored.
+    """
+    client = OpenAI(base_url=base_url, api_key=key, timeout=timeout)
+    kw = {}
+    if affinity_key:
+        kw["extra_headers"] = {"Modal-Routing-Affinity-Key": affinity_key}
+    t0 = time.monotonic()
+    resp = client.chat.completions.create(
+        model=model, temperature=temperature, max_tokens=max_tokens,
+        messages=messages, tools=tools, **kw)
+    seconds = time.monotonic() - t0
+    usage = getattr(resp, "usage", None)
+    pt = getattr(usage, "prompt_tokens", 0) or 0
+    ct = getattr(usage, "completion_tokens", 0) or 0
+    try:
+        msg = resp.choices[0].message
+    except (AttributeError, IndexError, TypeError):
+        return "", [], pt, ct, seconds
+    content = getattr(msg, "content", None)
+    text = content.strip() if isinstance(content, str) else ""
+    raw = []
+    for tc in getattr(msg, "tool_calls", None) or []:
+        fn = getattr(tc, "function", None)
+        if fn is None:
+            continue
+        raw.append((getattr(tc, "id", "") or "",
+                    getattr(fn, "name", "") or "",
+                    getattr(fn, "arguments", "") or ""))
+    return text, raw, pt, ct, seconds
+
+
+def ask_tools(messages, tools, purpose="route", session_id=None,
+              max_tokens=8000, temperature=0.1):
+    """One tool-calling round, retrying once on the fallback provider.
+
+    Returns {"text", "calls", "provider", "model", "seconds",
+    "fallback_used", "malformed"}. calls is [{id, name, args}]
+    with args parsed ({} when the JSON is broken, which marks the
+    round malformed). A round with no calls and no text is also
+    malformed — the caller falls back to a plain JSON prompt.
+    FORCE_TOOLCALL_FAIL=true simulates a broken provider (for the
+    fallback test): both attempts come back malformed without any
+    network use. Raises LLMBudgetSpent when the budget is spent.
+    """
+    max_tokens = max(max_tokens, MIN_TOKENS)
+    cfg = config()
+    ensure_budget()
+    force_fail = (_env("FORCE_TOOLCALL_FAIL", "false").strip().lower() == "true")
+    attempts = [("primary", cfg["primary"]), ("fallback", cfg["fallback"])]
+    text, calls, malformed = "", [], True
+    provider, model, secs, pt, ct, used = "", "", 0.0, 0, 0, False
+    for role, prov in attempts:
+        name = provider_name(prov["base_url"])
+        err = ""
+        try:
+            if force_fail:
+                raise RuntimeError("forced tool-call failure (FORCE_TOOLCALL_FAIL)")
+            key = _env(prov["key_env"]) or ""
+            if not prov["base_url"] or not prov["model"] or not key:
+                raise RuntimeError(f"{role} provider is not configured")
+            affinity = (session_id if role == "primary" and session_id
+                        and "modal" in provider_host(prov["base_url"]) else None)
+            atext, araw, apt, act, asecs = _call_tools_one(
+                prov["base_url"], key, prov["model"], messages, tools,
+                temperature, max_tokens, cfg["timeout"], affinity)
+            acalls, bad = [], False
+            for cid, cname, cargs in araw:
+                try:
+                    args = json.loads(cargs or "{}")
+                except ValueError:
+                    args, bad = {}, True
+                if not isinstance(args, dict):
+                    args, bad = {}, True
+                acalls.append({"id": cid, "name": cname, "args": args})
+            if bad or (not acalls and not atext):
+                raise RuntimeError("malformed tool-call reply")
+            text, calls, malformed = atext, acalls, False
+            pt, ct, secs = apt, act, asecs
+            used = (role == "fallback")
+            err = ""
+            provider, model = name, prov["model"]
+            ok = True
+        except Exception as e:
+            err = f"{type(e).__name__}: {e}"[:200]
+            provider, model = name, prov["model"]
+            ok = False
+        _log_call({"timestamp": datetime.now(timezone.utc).isoformat(),
+                   "provider": provider, "model": model, "purpose": purpose,
+                   "seconds": round(secs if ok else 0.0, 2),
+                   "prompt_tokens": pt if ok else 0,
+                   "completion_tokens": ct if ok else 0, "ok": ok,
+                   "error": err, "fallback_used": used})
+        if ok:
+            break
+    return {"text": text, "calls": calls, "provider": provider,
+            "model": model, "seconds": round(secs, 2),
+            "fallback_used": used, "malformed": malformed}

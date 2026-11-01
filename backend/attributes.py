@@ -660,3 +660,78 @@ def verify_photos(photo_ids, constraints, *, load_bytes, trace=None,
         results[pid] = {"verdict": verdict, "reason": reason,
                         "detail": detail}
     return results, info
+
+
+def verify_question(photo_ids, question, *, load_bytes, trace=None,
+                    session_id=None):
+    """Answer one question per photo from the images (cached, sheets of 8).
+
+    Powers the router's verify tool ("which of these show mist?").
+    Returns ({pid: {"verdict" (yes|unsure|no), "reason"}}, info)
+    with info shaped like verify_photos. Cached per photo and
+    question hash; failures stay "unsure" with a trace note.
+    """
+    qkey = "q:" + hashlib.sha1(
+        (question or "").strip().lower().encode()).hexdigest()[:12]
+    checks = [(qkey, (question or "").strip() or "anything")]
+    cached = {pid: load_verdicts(pid) for pid in photo_ids}
+    need = [pid for pid in photo_ids if qkey not in cached[pid]]
+    info = {"checked": len(photo_ids), "fresh": 0,
+            "cached": len(photo_ids) - len(need),
+            "calls": [], "fallback_used": False}
+    for i in range(0, len(need), VERIFY_BATCH):
+        batch = need[i:i + VERIFY_BATCH]
+        items = []
+        for pid in batch:
+            try:
+                got = load_bytes(pid)
+            except Exception:
+                got = None
+            if got is None:
+                cached[pid][qkey] = {"verdict": "unsure",
+                                     "reason": "photo unavailable"}
+            else:
+                items.append((pid, got[0]))
+        present = [pid for pid, _ in items]
+        if not items:
+            continue
+        try:
+            sheet, _ = build_contact_sheet(items)
+        except Exception as e:
+            sheet = None
+            if trace is not None:
+                trace.append({"step": "checked",
+                              "detail": f"contact sheet failed: {e}; "
+                              "photos kept as unsure."})
+        if sheet is None:
+            for pid in present:
+                cached[pid][qkey] = {"verdict": "unsure",
+                                     "reason": "check failed"}
+            continue
+        try:
+            res = llm.ask(build_verify_prompt(present, checks),
+                          image_path=_sheet_path(items, sheet),
+                          purpose="verify", session_id=session_id)
+            info["calls"].append({"provider": res.get("provider"),
+                                 "seconds": res.get("seconds")})
+            if res.get("fallback_used"):
+                info["fallback_used"] = True
+            for pid, per in parse_verify_response(
+                    res["text"], present, checks).items():
+                if per[qkey]["reason"] != "missing from reply":
+                    cached[pid][qkey] = per[qkey]
+                else:
+                    cached[pid][qkey] = {"verdict": "unsure",
+                                        "reason": "not judged"}
+                save_verdicts(pid, cached[pid])
+            info["fresh"] += len(present)
+        except RuntimeError as e:
+            if trace is not None:
+                trace.append({"step": "checked",
+                              "detail": f"visual check failed: {e}; "
+                              "photos kept as unsure."})
+            for pid in present:
+                cached[pid][qkey] = {"verdict": "unsure",
+                                     "reason": "check failed"}
+    return {pid: {"verdict": cached[pid][qkey]["verdict"],
+                 "reason": cached[pid][qkey]["reason"]} for pid in photo_ids}, info

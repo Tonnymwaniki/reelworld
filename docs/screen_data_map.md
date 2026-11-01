@@ -30,6 +30,7 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 | `no_strong_match` | `kind` + `text` | show `text` verbatim above the closest-match grid, plus the "Add the first one" card; its button opens `#/add` and the `spec.query` is remembered for the note field |
 | `need_focus` / `not_found` | `kind` + `text` | show `text` verbatim, no grid |
 | `need_tags` (zero tagged photos) | `kind` + `text` | show `text` verbatim, no grid, plus a "Tag your photos" button linking `#/profile/tag`; "Photos of me" chip stays |
+| Router extras (step 6 renders) | `POST /chat` → `label`, `topic`, `options`, `about_photo_id`, `took_to_mean`, `differences` | currently ignored by the thread UI; text already carries clarify options inline |
 | Loading | — | spinner + "Searching…"; replies take 15–40s |
 | Error | HTTP status | `{"detail"}` message verbatim |
 

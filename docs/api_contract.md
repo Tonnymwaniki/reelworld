@@ -156,10 +156,23 @@ Response:
 }
 ```
 
+- The router (backend/router.py) drives every turn: one model call with
+  a compact state (topic, spec, recent photos, focus, rejected count,
+  last user texts — never the history) plus 8 tools (search, related,
+  get_photo_facts, count, verify, ask_photo, compare, clarify), max 3
+  rounds. Code runs the tools, rejects photo ids outside the state,
+  and builds search text from results; only ask/compare/chitchat use
+  model text. New topics return `topic: {id, label, new: true}` and
+  clear rejected ids; `label` tags what was searched ("Mountains /
+  with mist"); `options` carries clarify buttons; `about_photo_id`
+  (+ `took_to_mean`) binds answers to a photo; `compare` adds
+  `about_photo_ids` + `differences`. Trace gains `routed` (tools,
+  rounds, native/JSON path) plus `facts`/`counted`/`asked` steps.
 - `kind` styles the reply: `ok`, `no_strong_match` (nothing clearly shows
   a required word), `no_other_angle` (no true other view exists),
   `need_focus` (search or open a photo first), `not_found` (named photo
-  id does not exist), `question_answer` (answer about the focus photo).
+  id does not exist), `question_answer` (answer about the focus photo),
+  `clarify` (ambiguous — reply with one of `options`), `compare`.
 - `results` rows also carry stored metadata columns (`place_key`,
   `place_name`, `taken_from_key`, `landmark_keys`, …). `embedding` and
   `lex` are never sent. `credit` is the world's `{author, license,
@@ -224,6 +237,8 @@ of `world`, `personal`, `both`, `viewpoints` from `ground_level`,
 `constraints` (default `[]`) is a list of `{attribute, op, values}`
 as in `/chat`; entries with an unknown attribute, a bad `op`, or
 values outside the attribute's vocabulary are dropped.
+`alt_queries` (default `[]`) holds up to 2 paraphrases, fused with
+reciprocal-rank fusion (a small bonus per extra phrasing).
 
 Response: the same shape as `/chat` (`session_id`, `text`, `results`
 with credit, `focus_photo_id`, `spec`, `kind`, where `kind` is `ok` or

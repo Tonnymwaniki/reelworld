@@ -354,6 +354,27 @@ def only_matching(rows, toks, must):
             or any(lex_has(r["lex"], t) for t in terms)]
 
 
+def fuse_ranked(lists):
+    """Reciprocal-rank fusion of per-phrasing candidate lists (pure).
+
+    Returns (rows, multi): each photo once (kept as its
+    best-ranked occurrence, best first), plus {photo_id: n} for
+    photos returned by more than one phrasing.
+    """
+    K = 60
+    best, score, hits = {}, {}, {}
+    for rows in lists:
+        for rank, r in enumerate(rows):
+            pid = r["photo_id"]
+            score[pid] = score.get(pid, 0.0) + 1.0 / (K + rank + 1)
+            hits[pid] = hits.get(pid, 0) + 1
+            if pid not in best:
+                best[pid] = r
+    order = sorted(score, key=score.get, reverse=True)
+    multi = {pid: hits[pid] for pid in order if hits[pid] > 1}
+    return [best[pid] for pid in order], multi
+
+
 def extract_json(text):
     text = (text or "").strip()
     fence = re.search(r"```(?:json)?\s*(.*?)```", text, re.S)
@@ -369,7 +390,9 @@ class Engine:
     def __init__(self):
         self.sb = create_client(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SERVICE_KEY"])
         self.embedder = get_model()
-        self.state = {"spec": dict(EMPTY_SPEC), "focus": None, "last": [], "rejected": set()}
+        self.state = {"spec": dict(EMPTY_SPEC), "focus": None, "last": [],
+                        "rejected": set(), "topic": {"id": 0, "label": ""},
+                        "replies": [], "user_texts": []}
         self.session_id = None  # set by api.get_engine for Modal affinity
         self.turn_llm = []  # per-turn [{provider, seconds}], reset in turn_stream
 
@@ -550,9 +573,16 @@ class Engine:
         trace = []
         if exclude:
             trace.append(rejected_step(exclude))
-        emb = self.embed(spec["query"])
-        rows = self.rpc_search(emb, spec, exclude)
-        toks = tokens(spec["query"])
+        phrasings = [spec["query"]] + [q for q in (spec.get("alt_queries") or [])
+                                       if isinstance(q, str) and q.strip()][:2]
+        multi = {}
+        if len(phrasings) > 1:
+            lists = [self.rpc_search(self.embed(q), spec, exclude)
+                     for q in phrasings]
+            rows, multi = fuse_ranked(lists)
+        else:
+            rows = self.rpc_search(self.embed(spec["query"]), spec, exclude)
+        toks = tokens(" ".join(phrasings))
         must = spec.get("must_include") or []
         avoid_terms = spec.get("avoid_terms") or []
         survivors, dropped = split_avoid(rows, avoid_terms)
@@ -591,10 +621,14 @@ class Engine:
             avoid = [t for t in spec.get("avoid_terms") or [] if lex_has(r["lex"], t)]
             r["score"] = (r["similarity"] + 0.25 * lex + 0.12 * min(3, len(inc))
                           - 0.30 * min(2, len(avoid)))
+            if r["photo_id"] in multi:
+                r["score"] += 0.05 * (multi[r["photo_id"]] - 1)
             r["reasons"] = [f"meaning {r['similarity']:.2f}"]
             words = sorted(set(hit) | {t.lower() for t in inc})
             if words:
                 r["reasons"].append("matches: " + ", ".join(words))
+            if r["photo_id"] in multi:
+                r["reasons"].append(f"in {multi[r['photo_id']]} phrasings")
             if avoid:
                 r["reasons"].append("mentions (unwanted): " + ", ".join(avoid))
         rows.sort(key=lambda r: r["score"], reverse=True)
@@ -626,7 +660,8 @@ class Engine:
         trace.append({"step": "searched", "detail":
                       f"Searched {COLL_WORDS.get(spec.get('collection'), 'the world photos')} "
                       f"({'; '.join(filters) if filters else 'no filters'}); "
-                      f"{len(rows)} candidates, kept the top {len(top)}."})
+                      f"{len(rows)} candidates, kept the top {len(top)}"
+                      f"{f'; tried {len(phrasings)} phrasings' if len(phrasings) > 1 else ''}."})
         words = spec.get("must_include") or []
         if vnote:
             note = vnote
@@ -737,154 +772,11 @@ class Engine:
         return result
 
     def turn_stream(self, message):
-        """Same turn as turn(), but yields live progress: ("step", name,
-        detail) for understood/searched/checked/wrote as each stage really
-        runs, then ("result", response dict). Stages that do not run are
-        never emitted."""
+        """One turn via the hybrid router: yields ("step", name, detail)
+        as each tool really runs, then ("result", response dict)."""
         self.turn_llm = []
-        st = self.state
-        trace = []
-        m = re.fullmatch(r"\s*open\s+(\d)\s*", message, re.I)
-        if m and st["last"] and 1 <= int(m.group(1)) <= len(st["last"]):
-            st["focus"] = st["last"][int(m.group(1)) - 1]
-            detail = f"Focused on result {m.group(1)}: {st['focus']['photo_id']}."
-            trace.append({"step": "answered", "detail": detail})
-            yield ("step", "understood", detail)
-            yield ("step", "wrote", "Reply ready.")
-            yield ("result", {"text": f"Focused on {st['focus']['photo_id']}: {st['focus']['caption']}", "results": [], "kind": "ok", "trace": trace})
-            return
-
-        soc = social_reply(message)
-        if soc is not None:
-            detail = "That message was small talk, not a search, so I just replied."
-            trace.append({"step": "answered", "detail": detail})
-            yield ("step", "understood", detail)
-            yield ("step", "wrote", "Reply ready.")
-            yield ("result", {"text": soc, "results": [], "kind": "chat", "trace": trace})
-            return
-
-        intent, fell_back = self.parse(message)
-        idx = intent.get("focus_index")
-        if isinstance(idx, int) and st["last"] and 1 <= idx <= len(st["last"]):
-            st["focus"] = st["last"][idx - 1]
-        if intent.get("reject_focus") and st["focus"]:
-            st["rejected"].add(st["focus"]["photo_id"])
-        st["spec"] = intent["spec"]
-        action = intent.get("action", "search")
-
-        if action == "question":
-            if not st["focus"]:
-                u = understood_step(intent, st["spec"], question=intent.get("question") or message, fell_back=fell_back)
-                trace.append(u)
-                yield ("step", "understood", u["detail"])
-                trace.append({"step": "answered", "detail": "No photo is in focus, so I asked you to open one first."})
-                yield ("step", "wrote", "Reply ready.")
-                yield ("result", {"text": "Open a photo first (say 'open 1'), then ask about it.", "results": [], "kind": "need_focus", "trace": trace})
-                return
-            q = intent.get("question") or message
-            u = understood_step(intent, st["spec"], question=q, fell_back=fell_back)
-            yield ("step", "understood", u["detail"])
-            text = self.answer(st["focus"]["photo_id"], q)
-            yield ("step", "checked", "Looked up the stored annotation for the photo in focus.")
-            trace.append(u)
-            trace.append({"step": "answered", "detail": "Answered from the stored annotation."})
-            yield ("step", "wrote", "Reply ready.")
-            yield ("result", {"text": text, "results": [], "kind": "question_answer", "trace": trace})
-            return
-
-        raw_anchor = intent.get("anchor")
-        anchor_txt = (raw_anchor if isinstance(raw_anchor, str)
-                      and raw_anchor.strip().lower() not in ("", "focus") else "the photo in focus")
-        if action in ("another_angle", "more_like_this"):
-            anchor = intent.get("anchor")
-            if (anchor is None or (isinstance(anchor, str)
-                    and anchor.strip().lower() in ("", "focus"))) and not st["focus"]:
-                u = understood_step(intent, st["spec"], anchor_txt=anchor_txt, fell_back=fell_back)
-                trace.append(u)
-                yield ("step", "understood", u["detail"])
-                trace.append({"step": "answered", "detail": "No photo to work from, so I asked you to search first."})
-                yield ("step", "wrote", "Reply ready.")
-                yield ("result", {"text": "Search for a photo first, then ask for other angles of it.",
-                        "results": [], "kind": "need_focus", "trace": trace})
-                return
-            anchor_id = st["focus"]["photo_id"] if anchor in (None, "focus") and st["focus"] else anchor
-            anchor_txt = anchor_id or anchor_txt
-            if not anchor_id:
-                u = understood_step(intent, st["spec"], anchor_txt=anchor_txt, fell_back=fell_back)
-                trace.append(u)
-                yield ("step", "understood", u["detail"])
-                trace.append({"step": "answered", "Detail": "No photo to work from, so I asked you to search first."})
-                yield ("step", "wrote", "Reply ready.")
-                yield ("result", {"text": "Tell me which photo, or search first so there is one in focus.", "results": [], "kind": "need_focus", "trace": trace})
-                return
-            if not self.fetch_photo(anchor_id, "photo_id"):
-                u = understood_step(intent, st["spec"], anchor_txt=anchor_txt, fell_back=fell_back)
-                trace.append(u)
-                yield ("step", "understood", u["detail"])
-                trace.append({"step": "answered", "Detail": f"{anchor_id} is not in the archive."})
-                yield ("step", "wrote", "Reply ready.")
-                yield ("result", {"text": "I could not find that photo.", "results": [], "kind": "not_found", "trace": trace})
-                return
-            u = understood_step(intent, st["spec"], anchor_txt=anchor_id, fell_back=fell_back)
-            yield ("step", "understood", u["detail"])
-            rows, note, sub = self.related(anchor_id, st["spec"], st["rejected"], action == "another_angle")
-            for t in sub:
-                if t["step"] == "searched":
-                    yield ("step", "searched", t["detail"])
-            if note:
-                yield ("step", "checked", f"Checked: no other view of {anchor_id} exists in this collection.")
-            else:
-                yield ("step", "checked", f"Checked candidates against {anchor_id}; kept {len(rows)}.")
-            label = "other angles of" if action == "another_angle" else "photos like"
-            kind = "no_other_angle" if note else "ok"
-            trace.append(u)
-            trace.extend(sub)
-            trace.append({"step": "answered", "detail":
-                          (f"Showed the {len(rows)} most similar photos instead." if note
-                           else f"Showing {label} {anchor_id}.")})
-            yield ("step", "wrote", f"Reply ready with {len(rows)} photos.")
-            yield ("result", {"text": note or f"Showing {label} {anchor_id}:", "results": rows, "kind": kind, "trace": trace})
-            return
-
-        u = understood_step(intent, st["spec"], fell_back=fell_back)
-        yield ("step", "understood", u["detail"])
-        if st["spec"].get("owner_only") and self.tagged_count() == 0:
-            trace.append(u)
-            trace.append({"step": "answered",
-                          "detail": "No tagged photos yet, so I pointed at the tagging page."})
-            yield ("step", "wrote", "Reply ready.")
-            yield ("result", {"text": NO_TAGS_TEXT, "results": [],
-                              "kind": "need_tags", "trace": trace})
-            return
-        rows, note, sub = self.search(st["spec"], st["rejected"])
-        for t in sub:
-            if t["step"] == "searched":
-                yield ("step", "searched", t["detail"])
-        matched = any((r.get("check") or {}).get("verdict") == "yes"
-                      for r in rows)
-        if note and matched:
-            yield ("step", "checked",
-                   f"Checked the candidates: {len(rows)} clearly matched.")
-        elif note:
-            words = ", ".join(st["spec"].get("must_include") or [])
-            yield ("step", "checked", f"Checked the top {len(rows)} photos: nothing clearly shows {words}.")
-        elif st["rejected"]:
-            yield ("step", "checked", f"Skipped {len(st['rejected'])} rejected photo(s); verified the top {len(rows)} against your filters.")
-        else:
-            yield ("step", "checked", f"Verified the top {len(rows)} photos against your filters.")
-        kind = "no_strong_match" if (note and not matched) else "ok"
-        trace.append(u)
-        trace.extend(sub)
-        if note and matched:
-            answered = f"Showing the {len(rows)} photos that clearly matched."
-        elif note:
-            answered = (f"Nothing clearly matched; showing the {len(rows)} "
-                        "closest photos.")
-        else:
-            answered = f"Showing {len(rows)} photos."
-        trace.append({"step": "answered", "detail": answered})
-        yield ("step", "wrote", f"Reply ready with {len(rows)} photos.")
-        yield ("result", {"text": note or "Here is what I found:", "results": rows, "kind": kind, "trace": trace})
+        from router import route_stream  # lazy: router imports chat
+        yield from route_stream(self, message)
 
 
 def show(rows):
