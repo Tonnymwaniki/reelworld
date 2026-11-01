@@ -664,6 +664,321 @@ def write_script(scenes, briefs, beats, spine, brief=None, style="postcard",
     return wtitle, openings
 
 
+CRITIC_FLAGS = ("lists", "cliche", "repetition", "narrates the obvious",
+                  "flat description", "too long for the scene",
+                  "breaks the voice", "uses a banned phrase")
+
+
+def _validate_critique(data, pids):
+    """(entries, problems) for one critic reply (pure)."""
+    if not isinstance(data, dict):
+        return None, ["reply is not a JSON object"]
+    entries, problems = {}, []
+    for pid in pids:
+        raw = data.get(pid)
+        if not isinstance(raw, dict):
+            problems.append(f"missing critique for {pid}")
+            continue
+        flags = raw.get("flags")
+        if not isinstance(flags, list) \
+                or any(f not in CRITIC_FLAGS for f in flags):
+            problems.append(f"{pid} flags must come from the allowed list")
+            flags = []
+        note = raw.get("note")
+        if note is not None and not isinstance(note, str):
+            problems.append(f"{pid} note is not a string")
+            note = ""
+        entries[pid] = {"flags": list(flags), "note": (note or "")[:280]}
+    if problems:
+        return None, problems
+    return entries, []
+
+
+def _speaking(scenes):
+    """Scenes with a draft spoken line (vantage + silent excluded)."""
+    return [s for s in scenes
+            if not s.get("caption_note") and (s.get("narration") or "").strip()]
+
+
+def critique_script(scenes, briefs, style, trace=None, session_id=None):
+    """{pid: {flags, note}} for lines needing a rewrite (one model call).
+
+    Only speaking scenes are judged. Invalid output retries once,
+    then the draft is kept. Never raises except on budget.
+    """
+    need = _speaking(scenes)
+    if not need:
+        return {}
+    lines = ["Criticize each narration line as craft, not facts. Voice: "
+             + style + ".",
+             "Reply ONE JSON object keyed by photo id, no prose: "
+             '{"<id>": {"flags": [...], "note": "..."}}. Use [] when a '
+             "line is fine. Allowed flags, exactly: " + "; ".join(CRITIC_FLAGS)
+             + "."]
+    for s in need:
+        lines.append(f"Scene {s['photo_id']} ({s.get('seconds')}s): "
+                     f"{s.get('narration')}")
+        lines.append(f"  focus: {(s.get('focus_detail') or {}).get('text') or '-'}")
+        lines.append(f"  facts: {_brief_text(briefs.get(s['photo_id']))}")
+    base = "\n".join(lines)
+    pids = [s["photo_id"] for s in need]
+    entries, last_problems = None, []
+    for attempt in (1, 2):
+        prompt = base if attempt == 1 else (
+            base + "\nRejected: " + "; ".join(last_problems) + ". Fix every one.")
+        try:
+            data = extract_json(llm.ask(
+                prompt, temperature=0.3, purpose="critic",
+                session_id=session_id)["text"])
+            entries, last_problems = _validate_critique(data, pids)
+        except llm.LLMBudgetSpent:
+            raise
+        except (RuntimeError, ValueError) as e:
+            entries, last_problems = None, [f"unusable reply: {e}"[:120]]
+        if entries is not None:
+            break
+    if entries is None:
+        if trace is not None:
+            trace.append({"step": "critiqued",
+                          "detail": "Critic failed twice; keeping the draft."})
+        return {}
+    flagged = {p: e for p, e in entries.items() if e["flags"]}
+    if trace is not None:
+        n = sum(len(e["flags"]) for e in flagged.values())
+        trace.append({"step": "critiqued",
+                      "detail": ("Critic found no issues." if not flagged else
+                                 f"Critic found {n} issues in {len(flagged)} "
+                                 "lines.")})
+    return flagged
+
+
+def rewrite_lines(scenes, briefs, flagged, style, voice, profile,
+                  trace=None, session_id=None):
+    """Rewrite flagged lines in place (one model call).
+
+    Lines that fail fit, voice or owner checks keep their draft.
+    If the rewrite breaks a working closing echo, the opening and
+    closing fall back to their draft lines. Never raises except
+    on budget.
+    """
+    need = _speaking(scenes)
+    order = [s["photo_id"] for s in need]
+    pids = [p for p in order if p in flagged]
+    if not pids:
+        return
+    by_id = {s["photo_id"]: s for s in scenes}
+    rvoice, rprofile, _ = _narration_for(briefs, pids, voice, profile)
+    name = (rprofile or {}).get("name") or ""
+    draft = {p: (by_id[p].get("narration") or "",
+                 by_id[p].get("caption") or "") for p in pids}
+    draft_echo = bool(_content_words(by_id[order[0]].get("narration"), [name])
+                      & _content_words(by_id[order[-1]].get("narration"), [name]))
+    lines = ["Rewrite these flagged narration lines in the " + style + " voice.",
+             narration_mod.rules_block(rprofile, {p: {
+                 "present": (briefs.get(p) or {}).get("owner_present"),
+                 "position": (briefs.get(p) or {}).get("owner_position"),
+                 "people": (briefs.get(p) or {}).get("people", 0) or 0}
+                 for p in pids}, rvoice),
+             "Reply ONE JSON object keyed by photo id, no prose: "
+             '{"<id>": {"narration": "…", "caption": "≤10 words"}}. '
+             "Keep each line's spirit; fix only what the flags name. "
+             "The closing line must still echo the opening."]
+    for p in pids:
+        s = by_id[p]
+        lo, hi = _fit_range(s.get("seconds"))
+        if p == order[-1]:
+            hi = min(FINAL_SHORT_WORDS, hi)
+        lines.append(f"Scene {p} (aim {lo}-{hi} words; "
+                     f"flags: {', '.join(flagged[p]['flags'])}; "
+                     f"note: {flagged[p]['note'] or '-'}):")
+        lines.append(f"  line: {s.get('narration')}")
+        lines.append(f"  facts: {_brief_text(briefs.get(p))}")
+    base = "\n".join(lines)
+    fresh, last_problems = None, []
+    for attempt in (1, 2):
+        prompt = base if attempt == 1 else (
+            base + "\nRejected: " + "; ".join(last_problems) + ". Fix every one.")
+        try:
+            data = extract_json(llm.ask(
+                prompt, temperature=0.3, purpose="rewrite",
+                session_id=session_id)["text"])
+            fresh, last_problems = _validate_rewrite(data, by_id, pids, order)
+        except llm.LLMBudgetSpent:
+            raise
+        except (RuntimeError, ValueError) as e:
+            fresh, last_problems = None, [f"unusable reply: {e}"[:120]]
+        if fresh is not None:
+            break
+    if fresh is None:
+        if trace is not None:
+            trace.append({"step": "rewrote",
+                          "detail": "Rewrite failed twice; keeping the draft lines."})
+        return
+    applied, kept = 0, 0
+    for p in pids:
+        narr, bad = narration_mod.repair_text(
+            fresh[p]["narration"], name,
+            (briefs.get(p) or {}).get("owner_present") is True, "caption")
+        cap, bad_cap = narration_mod.repair_text(
+            fresh[p]["caption"], name,
+            (briefs.get(p) or {}).get("owner_present") is True, "caption")
+        if bad or bad_cap or (rvoice in ("you", "i") and narration_mod.voice_spans(
+                narr, name, rvoice)):
+            kept += 1
+            continue
+        by_id[p]["narration"] = narr
+        by_id[p]["caption"] = " ".join(cap.split()[:10])
+        by_id[p]["narration_source"] = "script-rewrite"
+        by_id[p]["caption_source"] = "script-rewrite"
+        applied += 1
+    if draft_echo and not (_content_words(by_id[order[0]].get("narration"), [name])
+                           & _content_words(by_id[order[-1]].get("narration"), [name])):
+        for p in (order[0], order[-1]):
+            if p in pids:
+                by_id[p]["narration"], by_id[p]["caption"] = draft[p]
+        if trace is not None:
+            trace.append({"step": "rewrote",
+                          "detail": "Kept the draft opening and closing to "
+                                    "preserve the echo."})
+    if trace is not None:
+        detail = f"Rewrote {applied} flagged lines."
+        if kept:
+            detail += f" Kept the draft for {kept}."
+        trace.append({"step": "rewrote", "detail": detail})
+
+
+def _validate_rewrite(data, by_id, pids, order):
+    """(entries, problems) for one rewrite reply (pure)."""
+    if not isinstance(data, dict):
+        return None, ["reply is not a JSON object"]
+    entries, problems = {}, []
+    for p in pids:
+        raw = data.get(p)
+        if not isinstance(raw, dict):
+            problems.append(f"missing rewrite for {p}")
+            continue
+        narr = raw.get("narration")
+        if not isinstance(narr, str) or not narr.strip():
+            problems.append(f"{p} rewrite is empty")
+            continue
+        words = len(narr.split())
+        lo, hi = _fit_range(by_id[p].get("seconds"))
+        if p == order[-1]:
+            hi = min(FINAL_SHORT_WORDS, hi)
+            if words > hi:
+                problems.append(f"{p} rewrite must be {hi} words or fewer")
+        elif not lo <= words <= hi:
+            problems.append(f"{p} rewrite is {words} words, needs {lo}-{hi}")
+        cap = raw.get("caption")
+        if not isinstance(cap, str) or len(cap.split()) > 10:
+            problems.append(f"{p} rewritten caption must be 10 words or fewer")
+            cap = ""
+        entries[p] = {"narration": narr.strip(), "caption": cap.strip()}
+    if problems:
+        return None, problems
+    return entries, []
+
+
+def judge_opening(scenes, briefs, openings, spine, style, voice, profile,
+                  trace=None, session_id=None):
+    """Replace the opening line with the judged best alternative (in place).
+
+    One model call ranks the openings; the first one that fits the
+    opening scene, echoes the closing and passes the owner checks
+    wins. Anything failing keeps the draft opening. Never raises
+    except on budget.
+    """
+    if not openings:
+        if trace is not None:
+            trace.append({"step": "judged",
+                          "detail": "No alternative openings; kept the draft opening."})
+        return
+    first = scenes[0] if scenes else None
+    if first is None or first.get("caption_note") \
+            or not (first.get("narration") or "").strip():
+        if trace is not None:
+            trace.append({"step": "judged",
+                          "detail": "The opening is fixed; kept it."})
+        return
+    need = _speaking(scenes)
+    closing = need[-1].get("narration") or "" if need else ""
+    rvoice, rprofile, _ = _narration_for(
+        briefs, [first["photo_id"]], voice, profile)
+    name = (rprofile or {}).get("name") or ""
+    allowed = (briefs.get(first["photo_id"]) or {}).get("owner_present") is True
+    lo, hi = _fit_range(first.get("seconds"))
+    lines = ["Rank these three alternative opening lines for the film.",
+             f"Spine: {spine or '(none)'}. Voice: {style}.",
+             f"The winner must be {lo}-{hi} words and share a striking word "
+             f"with the closing line: {closing or '(none)'}.",
+             "Reply ONE JSON object, no prose: "
+             '{"ranking": ["<opening text>", ...], "reason": "..."}.']
+    for i, o in enumerate(openings, 1):
+        lines.append(f"{i}. {o}")
+    base = "\n".join(lines)
+    ranking, reason, last_problems = None, "", []
+    for attempt in (1, 2):
+        prompt = base if attempt == 1 else (
+            base + "\nRejected: " + "; ".join(last_problems) + ". Fix every one.")
+        try:
+            data = extract_json(llm.ask(
+                prompt, temperature=0.2, purpose="judge",
+                session_id=session_id)["text"])
+            ranking, reason, last_problems = _validate_judge(data, openings)
+        except llm.LLMBudgetSpent:
+            raise
+        except (RuntimeError, ValueError) as e:
+            ranking, last_problems = None, [f"unusable reply: {e}"[:120]]
+        if ranking is not None:
+            break
+    if ranking is None:
+        if trace is not None:
+            trace.append({"step": "judged",
+                          "detail": "Judge failed twice; kept the draft opening."})
+        return
+    for choice in ranking:
+        words = len(choice.split())
+        if not lo <= words <= hi:
+            continue
+        if len(need) <= 1:
+            echo_ok = bool(_content_words(choice, [name]))
+        else:
+            echo_ok = bool(_content_words(choice, [name])
+                            & _content_words(closing, [name]))
+        if not echo_ok:
+            continue
+        fixed, bad = narration_mod.repair_text(choice, name, allowed, "caption")
+        if bad or (rvoice in ("you", "i")
+                   and narration_mod.voice_spans(fixed, name, rvoice)):
+            continue
+        first["narration"] = fixed
+        first["narration_source"] = "script-judge"
+        if trace is not None:
+            n = openings.index(choice) + 1
+            trace.append({"step": "judged",
+                          "detail": f"Opening {n} chosen: {reason}"[:280]})
+        return
+    if trace is not None:
+        trace.append({"step": "judged",
+                      "detail": "No opening fit; kept the draft opening."})
+
+
+def _validate_judge(data, openings):
+    """(ranking, reason, problems) for one judge reply (pure)."""
+    if not isinstance(data, dict):
+        return None, "", ["reply is not a JSON object"]
+    ranking = data.get("ranking")
+    reason = data.get("reason")
+    problems = []
+    if not isinstance(ranking, list) or sorted(ranking) != sorted(openings):
+        problems.append("ranking must list the three openings")
+    if not isinstance(reason, str) or not reason.strip():
+        problems.append("judge gave no reason")
+    if problems:
+        return None, "", problems
+    return list(ranking), reason.strip()[:280], []
+
+
 def _sentences(text):
     return [s for s in re.split(r"(?<=[.!?])\s+", (text or "").strip()) if s]
 
@@ -944,7 +1259,8 @@ def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
                trace=None, session_id=None, voice=None, profile=None,
                outlines_enabled=None, image_path=None, brief=None,
                style="postcard"):
-    """Full pipeline: scenes, cards, pacing, captions, editor, re-pace.
+    """Full pipeline: scenes, cards, pacing, script, critic, rewrite,
+    judge, editor, re-pace.
 
     rows_by_id maps photo_id -> row {place_key, viewpoint,
     collection, record}. Returns the film dict (title, cover,
@@ -987,6 +1303,12 @@ def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
         scenes, briefs, beatsheet.get("beats"), beatsheet.get("spine"),
         brief=brief, style=style, trace=trace, session_id=session_id,
         voice=voice, profile=profile, image_path=image_path)
+    flagged = critique_script(scenes, briefs, style, trace, session_id)
+    if flagged:
+        rewrite_lines(scenes, briefs, flagged, style, voice, profile,
+                      trace, session_id)
+    judge_opening(scenes, briefs, openings, beatsheet.get("spine"), style,
+                  voice, profile, trace, session_id)
     title, beats, kept, verification = edit_captions(
         wtitle or beatsheet.get("title"), beatsheet.get("beats"), scenes,
         briefs, trace, session_id, voice, profile)

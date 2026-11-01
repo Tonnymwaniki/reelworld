@@ -396,8 +396,17 @@ cannot support are dropped and named in the trace instead of padded, as are chap
   at ~2.5 words/s ±15%, at most a quarter of scenes are
   silent, the final line is short, and the closing echoes the
   opening. The film also carries `openings` (three alternative
-  first lines; the judge picks one in step 6). A `seen` trace
-  step names it when the photos could not be shown.
+  first lines). After the draft, a critic call flags craft
+  issues per line (lists, cliche, repetition, narrates the
+  obvious, flat description, too long, breaks the voice, banned
+  phrase), a rewrite call fixes only flagged lines (fit,
+  voice and owner rules re-checked; a broken closing echo
+  restores the draft pair), and a judge call ranks the openings
+  (the first fitting, echoing, owner-clean one replaces the
+  opening line). Each pass retries once; any failure keeps the
+  previous version and says so in the trace (`critiqued`,
+  `rewrote`, `judged`). A `seen` trace step names it when the
+  photos could not be shown.
 - Old v1 chapter stories still load and play: the player and
   exporter run them through `migrateChapters` (heading + text
   become the caption with heading echoes stripped, plain `cut`s,

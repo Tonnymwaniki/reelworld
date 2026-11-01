@@ -728,3 +728,10 @@ the first unfinished phase.
   per-scene narration confirmed (vantage pair took 2 of 3
   scenes; editor trims can shorten under fit — step 7 will
   re-measure).
+- Creative scripts step 6 (critic/rewrite/judge): critic
+  flags craft issues per line from the fixed 8-flag list;
+  rewrite fixes flagged lines only (fit/voice/owner
+  re-checked, echo pair restored when broken); judge ranks
+  the 3 openings and the first fitting, echoing, owner-clean
+  one wins. Every pass retries once, else keeps the previous
+  version traced. Tests: film 70→79 (pending user run).

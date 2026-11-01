@@ -326,6 +326,16 @@ try:
                  "scenes": {"p1": {"narration": "Buses park here.",
                                    "caption": "Buses wait.",
                                    "silent_reason": ""}}})}
+        if k.get("purpose") == "critic":
+            return {"text": json.dumps(
+                {"p1": {"flags": ["flat description"], "note": "dull"}})}
+        if k.get("purpose") == "rewrite":
+            return {"text": json.dumps(
+                {"p1": {"narration": "Buses park here.",
+                        "caption": "Buses wait."}})}
+        if k.get("purpose") == "judge":
+            return {"text": json.dumps(
+                {"ranking": ["O1", "O2", "O3"], "reason": "short"})}
         return {"text": json.dumps(
             {"title": SUP, "intents": [SUP],
              "scenes": {"p1": {"claims": [SUP, SUP]}}})}
@@ -421,6 +431,104 @@ _, _, _, problems = film_mod._validate_script(
                  cap="one two three four five six seven eight nine ten eleven"),
     NEED2, "")
 check(any("10 words" in p for p in problems), "caption stays short")
+
+orig_ask = llm.ask
+try:
+    llm.ask = lambda *a, **k: {"text": json.dumps(
+        {"p1": {"flags": ["repetition", "cliche"], "note": "dull"},
+         "p2": {"flags": [], "note": ""}})}
+    ss = [{**sc("p1"), "seconds": 4, "narration": "Buses gather here daily.",
+           "focus_detail": {"text": "buses", "source": "x"}},
+          {**sc("p2"), "seconds": 4, "narration": "Morning buses rest.",
+           "focus_detail": {"text": "morning", "source": "y"}}]
+    flagged = film_mod.critique_script(ss, BRIEFS, "postcard", trace=(tc := []))
+    check(flagged == {"p1": {"flags": ["repetition", "cliche"], "note": "dull"}}
+          and any("2 issues in 1" in t["detail"] for t in tc),
+          "critic flags parsed")
+    replies = ["garbage", json.dumps({"p1": {"flags": [], "note": ""}})]
+    llm.ask = lambda *a, **k: {"text": replies.pop(0)}
+    ss = [{**sc("p1"), "seconds": 4, "narration": "Buses rest."}]
+    flagged = film_mod.critique_script(ss, BRIEFS, "postcard")
+    check(flagged == {}, "critic retry recovers")
+    llm.ask = lambda *a, **k: {"text": "garbage"}
+    flagged = film_mod.critique_script(ss, BRIEFS, "postcard", trace=(tc2 := []))
+    check(flagged == {} and any("keeping the draft" in t["detail"] for t in tc2),
+          "critic failure keeps draft")
+    flagged = {"p1": {"flags": ["flat description"], "note": "dull"}}
+    llm.ask = lambda *a, **k: {"text": json.dumps(
+        {"p1": {"narration": "Buses gather here in the morning light daily.",
+                "caption": "Morning buses."}})}
+    ss = [{**sc("p1"), "seconds": 4, "narration": "Buses rest here.",
+           "caption": "Old."},
+          {**sc("p2"), "seconds": 4, "narration": "Morning buses rest here now.",
+           "caption": "Old two."}]
+    film_mod.rewrite_lines(ss, BRIEFS, flagged, "postcard", None, None,
+                           trace=(tr := []))
+    check(ss[0]["narration"] == "Buses gather here in the morning light daily."
+          and ss[0]["narration_source"] == "script-rewrite"
+          and any("Rewrote 1" in t["detail"] for t in tr), "rewrite applies")
+    flagged = {"p1": {"flags": ["cliche"], "note": "x"}}
+    bad = {"p1": {"narration": " ".join(f"w{i}" for i in range(30)),
+                  "caption": "Way too long."}}
+    llm.ask = lambda *a, **k: {"text": json.dumps(bad)}
+    ss = [{**sc("p1"), "seconds": 4, "narration": "Buses rest here.",
+           "caption": "Old."}]
+    film_mod.rewrite_lines(ss, BRIEFS, flagged, "postcard", None, None,
+                           trace=(tr2 := []))
+    check(ss[0]["narration"] == "Buses rest here."
+          and any("failed twice" in t["detail"] for t in tr2),
+          "rewrite misfit keeps draft")
+    flagged = {"p1": {"flags": ["cliche"], "note": "x"},
+               "p2": {"flags": ["lists"], "note": "y"}}
+    llm.ask = lambda *a, **k: {"text": json.dumps(
+        {"p1": {"narration": "Towers loom above the empty streets tonight calm.",
+                "caption": "Towers."},
+         "p2": {"narration": "Shadows settle over the quiet marketplace stalls.",
+                "caption": "Shadows."}})}
+    ss = [{**sc("p1"), "seconds": 4, "narration": "Buses rest here.",
+           "caption": "Old one."},
+          {**sc("p2"), "seconds": 4, "narration": "Morning buses rest here now.",
+           "caption": "Old two."}]
+    film_mod.rewrite_lines(ss, BRIEFS, flagged, "postcard", None, None,
+                           trace=(tr3 := []))
+    check(ss[0]["narration"] == "Buses rest here."
+          and ss[1]["narration"] == "Morning buses rest here now."
+          and any("preserve the echo" in t["detail"] for t in tr3),
+          "rewrite preserves echo")
+    openings = ["Morning buses gather in the soft light daily now.",
+                "Buses.",
+                "Towers loom while the buses gather below."]
+    llm.ask = lambda *a, **k: {"text": json.dumps(
+        {"ranking": [openings[1], openings[0], openings[2]],
+         "reason": "echoes morning"})}
+    ss = [{**sc("p1"), "seconds": 4, "narration": "Buses rest here.",
+           "caption": "Old."},
+          {**sc("p2"), "seconds": 4, "narration": "Morning buses rest here now.",
+           "caption": "Old."}]
+    film_mod.judge_opening(ss, BRIEFS, openings, "S.", "postcard", None, None,
+                           trace=(tj := []))
+    check(ss[0]["narration"] == openings[0]
+          and ss[0]["narration_source"] == "script-judge"
+          and any("Opening 1 chosen" in t["detail"] for t in tj),
+          "judge picks opening")
+    llm.ask = lambda *a, **k: {"text": json.dumps(
+        {"ranking": ["Buses.", "Towers.", "Plaza."], "reason": "short"})}
+    ss = [{**sc("p1"), "seconds": 4, "narration": "Buses rest here.",
+           "caption": "Old."}]
+    film_mod.judge_opening(ss, BRIEFS, ["Buses.", "Towers.", "Plaza."], "S.",
+                           "postcard", None, None, trace=(tj2 := []))
+    check(ss[0]["narration"] == "Buses rest here."
+          and any("No opening fit" in t["detail"] for t in tj2),
+          "judge keeps on misfit")
+    ss = [{**sc("p1"), "seconds": 4, "caption_note": "You were here",
+           "narration": "You were here"}]
+    film_mod.judge_opening(ss, BRIEFS, ["A fine opening line here today.",
+                                        "Another fine opening line here today.",
+                                        "Yet another opening line here today."],
+                           "S.", "postcard", None, None, trace=(tj3 := []))
+    check(any("fixed" in t["detail"] for t in tj3), "judge skips fixed opening")
+finally:
+    llm.ask = orig_ask
 
 tmp = tempfile.TemporaryDirectory()
 odir = Path(tmp.name)
