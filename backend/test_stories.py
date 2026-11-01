@@ -100,6 +100,8 @@ u2 = eng.update(b["id"], brief={"about": "", "feeling": "", "avoid": ""},
 check(u2["brief"] is None, "empty brief clears")
 u3 = eng.update(e["id"], title="Kept", fetch=fetch)
 check(u3["brief"] is None and u3["title"] == "Kept", "patch keeps brief")
+c = eng.create(tone="cinematic", chapters=[{"photo_id": "a1"}], fetch=fetch)
+check(c["tone"] == "cinematic", "cinematic tone stored")
 eng.remove(n["id"])
 eng.remove(s["id"])
 expect(404, lambda: eng.load(s["id"]), "deleted story 404")

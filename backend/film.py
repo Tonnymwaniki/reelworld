@@ -12,8 +12,9 @@ from pathlib import Path
 import llm
 import narration as narration_mod
 import owner_profile as owner_profile_mod
+import voices as voices_mod
 from chat import extract_json
-from director import CAMERAS, PACINGS, ROLES, summarize_record
+from director import CAMERAS, PACINGS, ROLES, normalize_style, summarize_record
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -387,7 +388,7 @@ def select_details(scenes, beats, briefs, spine, brief=None, trace=None,
 
 
 def write_captions(scenes, briefs, trace=None, session_id=None,
-                   voice=None, profile=None, image_path=None):
+                   voice=None, profile=None, image_path=None, style="postcard"):
     """One caption per scene from photos + records (one model call).
 
     briefs maps photo_id -> summarize_record() dict. The model
@@ -415,7 +416,7 @@ def write_captions(scenes, briefs, trace=None, session_id=None,
              "Study the attached photos (labelled top to bottom) with these facts:",
              "let the photos guide the feel and the choice of detail, but every",
              "claim must be backed by the stored facts.",
-             "Sound like a vlog voiceover: varied, energetic, moving through an outing.",
+             voices_mod.voice_block(style),
              "Vary the set: name a shared place or sign ONCE across all captions;",
              "other captions say here / this view / the plaza, and lead with what is",
              "new in that photo instead of re-listing shared facts.",
@@ -724,7 +725,8 @@ def attach_spotlights(scenes, outlines_dir=None, enabled=True):
 
 def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
                trace=None, session_id=None, voice=None, profile=None,
-               outlines_enabled=None, image_path=None, brief=None):
+               outlines_enabled=None, image_path=None, brief=None,
+               style="postcard"):
     """Full pipeline: scenes, cards, pacing, captions, editor, re-pace.
 
     rows_by_id maps photo_id -> row {place_key, viewpoint,
@@ -734,9 +736,17 @@ def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
     defaults to FEATURE_OUTLINES. image_path is a contact sheet
     the caption writer studies with the records (None writes from
     the records only). brief is the owner's day brief (provided
-    facts the focus pass may choose). Trace is appended, never
-    replaced. Budget errors propagate.
+    facts the focus pass may choose). style picks the writer's
+    voice (unknown falls back to postcard, traced). Trace is
+    appended, never replaced. Budget errors propagate.
     """
+    try:
+        style = normalize_style(style)
+    except ValueError:
+        if trace is not None:
+            trace.append({"step": "styled",
+                          "detail": f"Unknown style {style!r}; using postcard."})
+        style = "postcard"
     if outlines_enabled is None:
         outlines_enabled = os.getenv("FEATURE_OUTLINES", "true").strip().lower() == "true"
     briefs, metas, records = {}, {}, {}
@@ -757,7 +767,7 @@ def build_film(beatsheet, rows_by_id, focals, target, bursts=None,
                    beatsheet.get("spine"), brief=brief, trace=trace,
                    session_id=session_id)
     write_captions(scenes, briefs, trace, session_id, voice, profile,
-                   image_path=image_path)
+                   image_path=image_path, style=style)
     title, beats, kept, verification = edit_captions(
         beatsheet.get("title"), beatsheet.get("beats"), scenes,
         briefs, trace, session_id, voice, profile)

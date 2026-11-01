@@ -186,6 +186,13 @@ try:
     w = film_mod.write_captions([sc("p1")], vbriefs, voice="i",
                                 profile={"name": "Tonny"})
     check(w[0]["caption"] == "I skate.", "wrong voice retried")
+    seen_style = {}
+    llm.ask = lambda *a, **k: (seen_style.update(prompt=a[0]),
+                               {"text": json.dumps({"p1": "Towers hold still."})})[1]
+    w = film_mod.write_captions([sc("p1")], BRIEFS, style="cinematic")
+    check("present tense" in seen_style["prompt"]
+          and "hustle and bustle" in seen_style["prompt"],
+          "writer carries voice rules")
 
     s1 = sc("p1")
     s1["caption"] = "Buses park here. People wait."

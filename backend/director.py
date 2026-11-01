@@ -15,11 +15,12 @@ from chat import extract_json
 ROLES = ("establish", "build", "turn", "resolve")
 PACINGS = ("slow", "medium", "quick")
 CAMERAS = ("push_in", "pull_back", "pan_to_focal", "hold")
-STYLES = ("postcard", "field-notes", "documentary")
+STYLES = ("postcard", "field-notes", "documentary", "cinematic")
 ARCS = {
     "postcard": "arrival, a telling detail, the reveal, a closing line",
     "field-notes": "a question, the evidence, the conclusion",
     "documentary": "the setting, the subject, the context, the change",
+    "cinematic": "the image, the tension, the quiet, the echo",
 }
 TARGET_SCENES = {"short": (3, 6), "medium": (6, 12)}
 MAX_BEATS = 4

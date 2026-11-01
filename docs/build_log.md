@@ -703,5 +703,13 @@ the first unfinished phase.
   callback_of from record evidence + brief (avoid honoured in
   the prompt); retry once, then code takes each scene's first
   fact; repeated focus without a callback switches in code.
-  /api/films takes brief; build_film threads it. Tests:
-  film 55→60 (pending user run).
+  /api/films takes brief; build_film threads it. Tests green:
+  film 60/60, stories 24/24; live focus + held_back + trace
+  confirmed.
+- Creative scripts step 4 (four voices): new backend/voices.py
+  (style paragraphs + universal rules incl. the banned list);
+  cinematic joins director arcs, engine tones and the Create
+  pills; style threads films_build → build_film →
+  write_captions (unknown falls back to postcard, traced).
+  Tests: voices 8 new, director 30→31, stories 24→25,
+  film 60→61, stories.test 164→165 (pending user run).

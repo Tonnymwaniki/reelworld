@@ -11,7 +11,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 STORIES_DIR = Path(__file__).resolve().parent.parent / "data" / "stories"
-TONES = ("postcard", "field-notes", "documentary")
+TONES = ("postcard", "field-notes", "documentary", "cinematic")
 SOURCES = ("mine", "world", "both")
 TARGETS = ("short", "medium")
 FEELINGS = ("calm", "proud", "curious", "nostalgic", "joyful", "reflective")
@@ -136,7 +136,8 @@ def check_brief(brief):
 def create(*, title="", prompt="", tone="postcard", source="both",
            target="short", chapters, fetch, voice=None, brief=None):
     if tone not in TONES:
-        raise StoryError(400, "tone must be postcard, field-notes or documentary.")
+        raise StoryError(
+            400, "tone must be postcard, field-notes, documentary or cinematic.")
     if source not in SOURCES:
         raise StoryError(400, "source must be mine, world or both.")
     if target not in TARGETS:
@@ -165,7 +166,8 @@ def update(sid, *, title=None, tone=None, target=None, chapters=None, fetch,
         story["title"] = str(title).strip()[:80] or story["title"]
     if tone is not None:
         if tone not in TONES:
-            raise StoryError(400, "tone must be postcard, field-notes or documentary.")
+            raise StoryError(
+                400, "tone must be postcard, field-notes, documentary or cinematic.")
         story["tone"] = tone
     if target is not None:
         if target not in TARGETS:

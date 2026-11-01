@@ -78,7 +78,7 @@ def main(ns):
     sim = {(pids[i], pids[j]): _cosine(vecs[pids[i]], vecs[pids[j]])
            for i in range(len(pids)) for j in range(i + 1, len(pids))}
     film = build_film(sheet, rows_by_id, focals, ns.target,
-                      cluster_bursts(pids, sim), trace)
+                      cluster_bursts(pids, sim), trace, style=ns.style)
     print(json.dumps({"source": source, "film": film, "trace": trace,
                       "focal_fallbacks": sorted(p for p, f in focals.items()
                                                 if f.get("fallback"))},

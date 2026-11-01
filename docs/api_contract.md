@@ -365,6 +365,13 @@ cannot support are dropped and named in the trace instead of padded, as are chap
   voice?, seed?, brief?}` (`brief` is the day brief, same shape
   and 400s as stories). Same validation wording as the planners
   (400s); unknown ids are 404; model-budget trips are 429.
+  `style` is one of postcard, field-notes, documentary,
+  cinematic: it shapes the director's arc and the writer's voice
+  (warm first-hand / evidence-first / measured / sparse present
+  tense). Every voice varies sentence length, never opens two
+  scenes the same way, uses no lists, no filler openers, no
+  banned phrases (unless quoted from a sign), no emojis, and no
+  exclamation marks except postcard.
 - Stateless: nothing is stored. The client holds the film JSON;
   re-direct by posting the same `photo_ids` with a new `seed`.
   Rate/budget guarded like `/api/story`.

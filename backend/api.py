@@ -3012,7 +3012,7 @@ def films_build(req: FilmRequest, request: Request = None,
         film = build_film(sheet, rows_by_id, focals, req.target,
                           cluster_bursts(pids, sim), trace,
                           voice=voice, profile=prof,
-                          image_path=vision_sheet, brief=brief)
+                          image_path=vision_sheet, brief=brief, style=style)
     except llm_mod.LLMBudgetSpent:
         raise HTTPException(status_code=429, detail=RESTING_TEXT)
     for s in film["scenes"]:

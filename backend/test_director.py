@@ -44,6 +44,8 @@ check(b["place"] == "unknown place" and b["taken_from"] is None
       and b["things"] == [] and b["people"] == 0, "empty record summary")
 check(director_mod.normalize_style("field_notes") == "field-notes",
       "style alias")
+check(director_mod.normalize_style("cinematic") == "cinematic"
+      and "tension" in director_mod.ARCS["cinematic"], "cinematic arc")
 try:
     director_mod.normalize_style("noir")
     check(False, "bad style raises")
