@@ -60,6 +60,7 @@ import narration as narration_mod
 import owner_profile as owner_profile_mod
 import owner_tags as owner_tags_mod
 import place_pass as place_pass_mod
+import studio_voice as studio_mod
 from chat import (ANSWER_PROMPT, EMPTY_SPEC, NO_TAGS_TEXT, Engine,
                     extract_json)
 from retrieval import is_specific, meta_for, score_against, search_text
@@ -3033,6 +3034,47 @@ def films_build(req: FilmRequest, request: Request = None,
     return {"film": film, "source": source, "trace": trace,
             "focal_fallbacks": sorted(p for p, f in focals.items()
                                       if f.get("fallback"))}
+
+
+class AudioRequest(BaseModel):
+    text: str = ""
+    voice: Optional[str] = None
+
+
+@app.post("/api/audio")
+def audio_speak(req: AudioRequest, request: Request = None,
+                response: Response = None):
+    """Synthesize one narration line with the studio voice (Kokoro).
+
+    Guarded like other model calls (429 when resting). Cached by
+    line hash, so repeats are free. 501 when the studio voice is
+    not configured, 502 when synthesis fails: the player falls
+    back to the browser voice in both cases.
+    """
+    _guard_or_429(request, response)
+    try:
+        t0 = time.monotonic()
+        rug, _raw, cached = studio_mod.speak(req.text, req.voice)
+        secs = time.monotonic() - t0
+    except studio_mod.StudioVoiceError as e:
+        if e.status == 502:
+            llm_mod.log_call("studio", studio_mod.MODEL, "tts", 0.0,
+                             False, e.detail)
+        raise HTTPException(status_code=e.status, detail=e.detail)
+    if not cached:
+        llm_mod.log_call("studio", studio_mod.MODEL, "tts", secs, True)
+    return {"hash": rug, "url": f"/api/audio/{rug}", "cached": cached,
+            "voice": (req.voice or "").strip() or studio_mod.DEFAULT_VOICE}
+
+
+@app.get("/api/audio/{rug}")
+def audio_fetch(rug: str):
+    """Cached studio narration line as WAV (404 when unknown)."""
+    raw = studio_mod.read_cached((rug or "").strip())
+    if raw is None:
+        raise HTTPException(status_code=404, detail="unknown audio hash.")
+    return FileResponse(str(studio_mod.AUDIO_DIR / f"{rug.strip()}.wav"),
+                        media_type="audio/wav")
 
 
 # ----- Phase 5: library albums, world browse, gaps, correction, deletion, export -----

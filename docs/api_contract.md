@@ -359,11 +359,29 @@ cannot support are dropped and named in the trace instead of padded, as are chap
   code check; repairs add a `checked` trace row. No profile, no tags:
   people are "a person"/"someone"/"a few people", never named.
 
+## Studio voice (`POST /api/audio`, `GET /api/audio/{hash}`)
+
+- `POST /api/audio` takes `{text (1–500 chars), voice?}` and
+  returns `{hash, url, cached, voice}`. The narration line is
+  synthesized once by Kokoro-82M on Modal and cached as
+  `data/audio/<hash>.wav` (git-ignored, 16-hex sha1 of
+  model|voice|text); repeats are cache hits. Rate/budget
+  guarded like other model calls (429 when resting); misses
+  are logged to the LLM call log as provider `studio` so they
+  show in the status averages.
+- Voices: `af_heart` (default), `af_sarah`, `am_adam`,
+  `am_michael`, `bf_emma`, `bm_george`. Unknown voices and bad
+  text are 400; missing config is 501; synthesis failure is
+  502. The player and exporter fall back (browser voice /
+  silent video) on 501/502/429 and say so.
+- `GET /api/audio/{hash}` serves the cached WAV (404 unknown).
+
 ## Directed films (`POST /api/films`, schema v2)
 
 - Request: `{photo_ids[] (required), prompt?, style?, target?,
-  voice?, seed?, brief?}` (`brief` is the day brief, same shape
-  and 400s as stories). Same validation wording as the planners
+  voice?, seed?, brief?, notes?}` (`brief` is the day brief,
+  same shape and 400s as stories). Same validation wording as
+  the planners
   (400s); unknown ids are 404; model-budget trips are 429.
   `style` is one of postcard, field-notes, documentary,
   cinematic: it shapes the director's arc and the writer's voice
@@ -749,7 +767,8 @@ returns keys.
   "daily_budget": 3000000, "budget_left": 2997992,
   "last_error": "",
   "images": {"primary_accepts_images": true, "checked_at": "…",
-             "error": "", "handled_by": "modal"} }
+             "error": "", "handled_by": "modal"},
+  "studio": {"model": "kokoro-82m", "host": "…", "configured": true} }
 ```
 
 - Hosts are host parts only. Speeds and `success_rate` cover the
@@ -780,9 +799,9 @@ With `DEMO_MODE=false` there are no limits.
 - `POST /chat` (and `/chat/stream`, as one `result` event)
   answers 200 with `kind: "resting"`, the calm message as
   `text`, empty results and a `rested` trace row.
-- `POST /api/ask`, `/api/compare`, `/api/explain`, `/api/story`
-  and `/api/llm/probe` answer 429 with the calm message as
-  `{"detail"}`.
+- `POST /api/ask`, `/api/compare`, `/api/explain`, `/api/story`,
+  `/api/audio` and `/api/llm/probe` answer 429 with the calm
+  message as `{"detail"}`.
 - Model-free endpoints (browse, place, credits, tour,
   Connected, photos, status) are never limited.
 

@@ -5383,6 +5383,7 @@ async function loadFilmImages(film, onOne) {
 /* ---------- story player (shared by studio preview and showcase) ---------- */
 const READ_PAUSE_MS = 450;
 const READ_VOICE_KEY = "rw.readVoice";
+const STUDIO_VOICE_VALUE = "__studio";
 const player = {
   raf: null,
   st: null,
@@ -5461,6 +5462,7 @@ const player = {
     let readBtn = null;
     let readRow = null;
     let readVsel = null;
+    let readNoteEl = null;
     if ("speechSynthesis" in window) {
       readRow = document.createElement("div");
       readRow.className = "flex flex-wrap items-center justify-center gap-2 mt-2";
@@ -5478,6 +5480,7 @@ const player = {
       const note = document.createElement("span");
       note.className = "font-body-sm text-body-sm text-on-surface-variant";
       note.textContent = "Read aloud is not included in the exported video.";
+      readNoteEl = note;
       readRow.append(readBtn, readVsel, note);
     }
     const strip = document.createElement("div");
@@ -5502,7 +5505,8 @@ const player = {
     this.st = { root: root, film: film, baseFilm: film, t: 0, last: 0, playing: true,
       total: total, cv: cv, ctx: cv.getContext("2d"), tag: tag, time: time,
       bar: bar, play: play, replay: replay, strip: strip, readBtn: readBtn,
-      readVoice: readVsel, readVoiceURI: "", speechTimer: 0,
+      readVoice: readVsel, readVoiceURI: "", readNote: readNoteEl,
+      speechTimer: 0, studio: "unknown", audioEl: null,
       read: false, spoken: -1,
       size: { width: cv.width, height: cv.height } };
     this.paint();
@@ -5558,9 +5562,68 @@ const player = {
           clearTimeout(this.st.speechTimer);
           this.st.speechTimer = 0;
         }
+        if (this.st.audioEl) {
+          this.st.audioEl.onended = this.st.audioEl.onerror = null;
+          this.st.audioEl.pause();
+        }
       }
       if (window.speechSynthesis) window.speechSynthesis.cancel();
     } catch (e) { /* speech unavailable */ }
+  },
+
+  async speakStudio(line, idx) {
+    const st = this.st;
+    const SR = window.StoryRender || {};
+    const text = SR.firstSpoken ? SR.firstSpoken(line) : String(line || "");
+    if (!text) return;
+    const token = st ? (st.speechToken = (st.speechToken || 0) + 1) : 0;
+    let out = null;
+    try {
+      out = await api("/api/audio", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: text }),
+      });
+    } catch (e) { out = null; }
+    if (!this.st || this.st !== st || token !== st.speechToken) return;
+    if (!out || !out.url) {
+      this.studioOff();
+      this.speak(line, idx);
+      return;
+    }
+    st.studio = "on";
+    this.paintReadNote();
+    try {
+      const el = st.audioEl || (st.audioEl = new Audio());
+      const self = this;
+      el.onended = () => self.onSpeechEnd(idx, token);
+      el.onerror = () => {
+        if (self.st !== st || token !== st.speechToken) return;
+        self.speak(line, idx);
+      };
+      el.src = out.url;
+      await el.play();
+    } catch (e) {
+      if (this.st !== st || token !== st.speechToken) return;
+      this.speak(line, idx);
+    }
+  },
+
+  studioOff() {
+    const st = this.st;
+    if (!st || st.studio === "off") return;
+    st.studio = "off";
+    this.paintReadVoices();
+    this.paintReadNote();
+  },
+
+  paintReadNote() {
+    const st = this.st;
+    if (!st || !st.readNote) return;
+    st.readNote.textContent =
+      (st.readVoiceURI === STUDIO_VOICE_VALUE && st.studio !== "off")
+        ? "Studio narration is included in the exported video."
+        : "Read aloud is not included in the exported video.";
   },
 
   readVoices() {
@@ -5598,7 +5661,13 @@ const player = {
     const sel = st.readVoice;
     const voices = this.readVoices();
     sel.innerHTML = "";
-    if (!voices.length) {
+    if (st.studio !== "off") {
+      const o = document.createElement("option");
+      o.value = STUDIO_VOICE_VALUE;
+      o.textContent = "Studio narrator";
+      sel.appendChild(o);
+    }
+    if (!voices.length && st.studio === "off") {
       sel.classList.add("hidden");
       return;
     }
@@ -5609,9 +5678,17 @@ const player = {
       o.textContent = v.name + (v.lang ? " (" + v.lang + ")" : "");
       sel.appendChild(o);
     });
-    const pick = this.pickReadVoice(voices, st.readVoiceURI || this.loadReadVoice());
-    if (pick) sel.value = pick.voiceURI || pick.name;
+    const saved = st.readVoiceURI || this.loadReadVoice();
+    if (st.studio !== "off" &&
+        (!saved || saved === STUDIO_VOICE_VALUE ||
+         !voices.some((v) => (v.voiceURI || v.name) === saved))) {
+      sel.value = STUDIO_VOICE_VALUE;
+    } else {
+      const pick = this.pickReadVoice(voices, saved);
+      if (pick) sel.value = pick.voiceURI || pick.name;
+    }
     st.readVoiceURI = sel.value;
+    this.paintReadNote();
   },
 
   maybeSpeak(idx) {
@@ -5623,7 +5700,11 @@ const player = {
     const now = (typeof performance !== "undefined" ? performance.now() : Date.now());
     if (line && window.speechSynthesis) {
       st.speakDeadline = now + ((Number(sc.seconds) || 4) + 15) * 1000;
-      this.speak(line, idx);
+      if (st.readVoiceURI === STUDIO_VOICE_VALUE && st.studio !== "off") {
+        this.speakStudio(line, idx);
+      } else {
+        this.speak(line, idx);
+      }
     } else {
       st.speakDeadline = now + (Number(sc && sc.seconds) || 4) * 1000;
     }
@@ -6622,6 +6703,57 @@ const builder = {
     }
   },
 
+  async filmAudio(film) {
+    const SR = window.StoryRender || {};
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    const lines = (film.scenes || []).map((sc) => {
+      const raw = ("narration" in sc) ? sc.narration : sc.caption;
+      return SR.firstSpoken ? SR.firstSpoken(raw) : String(raw || "");
+    });
+    if (!lines.some(Boolean)) return { ctx: null, dest: null, clips: [], stretched: 0 };
+    let ctx = null;
+    try {
+      ctx = new AC();
+      const clips = [];
+      for (let i = 0; i < lines.length; i++) {
+        if (!lines[i]) continue;
+        const out = await api("/api/audio", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text: lines[i] }),
+        });
+        const res = await fetch(out.url);
+        const buf = await res.arrayBuffer();
+        const decoded = await ctx.decodeAudioData(buf);
+        clips.push({ index: i, buffer: decoded });
+      }
+      if (!clips.length) {
+        await ctx.close().catch(() => {});
+        return { ctx: null, dest: null, clips: [], stretched: 0 };
+      }
+      // Stretch scenes to fit their audio (the export has no
+      // live hold like the player, so the timeline must fit).
+      let stretched = 0;
+      clips.forEach((c) => {
+        const sc = film.scenes[c.index];
+        const need = Math.ceil((c.buffer.duration + READ_PAUSE_MS / 1000) * 10) / 10;
+        if (need > (Number(sc.seconds) || 0)) {
+          stretched += need - (Number(sc.seconds) || 0);
+          sc.seconds = need;
+        }
+      });
+      const starts = SR.timeline(film).starts;
+      return { ctx: ctx, dest: ctx.createMediaStreamDestination(),
+        clips: clips.map((c) => ({ start: starts[c.index] || 0,
+          buffer: c.buffer })),
+        stretched: Math.round(stretched * 10) / 10 };
+    } catch (e) {
+      try { if (ctx) await ctx.close(); } catch (ignored) { /* already closed */ }
+      return null;
+    }
+  },
+
   async recordWebm() {
     const view = this.view;
     const SR = window.StoryRender;
@@ -6677,6 +6809,12 @@ const builder = {
     }
     film.reducedMotion = !!(window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    status.textContent = "Fetching narration audio…";
+    const tracks = await this.filmAudio(film);
+    if (!view.isConnected) return;
+    if (tracks === null) {
+      status.textContent = "Studio voice unavailable; exporting silent video.";
+    }
     const total = SR.timeline(film).total;
     let W = SR.WANT_W;
     let H = SR.WANT_H;
@@ -6701,7 +6839,12 @@ const builder = {
       resNote = "720×1280";
     }
     const stream = cv.captureStream(30);
-    const rec = new MediaRecorder(stream, { mimeType: webm, videoBitsPerSecond: 8000000 });
+    if (tracks && tracks.dest) {
+      stream.addTrack(tracks.dest.stream.getAudioTracks()[0]);
+    }
+    const recOpts = { mimeType: webm, videoBitsPerSecond: 8000000 };
+    if (tracks && tracks.dest) recOpts.audioBitsPerSecond = 128000;
+    const rec = new MediaRecorder(stream, recOpts);
     this.rec = rec;
     this.recCancel = false;
     const chunks = [];
@@ -6710,6 +6853,15 @@ const builder = {
     };
     const stopped = new Promise((res) => { rec.onstop = res; });
     rec.start(250);
+    if (tracks && tracks.dest) {
+      const t0a = tracks.ctx.currentTime + 0.1;
+      tracks.clips.forEach((c) => {
+        const src = tracks.ctx.createBufferSource();
+        src.buffer = c.buffer;
+        src.connect(tracks.dest);
+        src.start(Math.max(t0a, t0a + c.start));
+      });
+    }
     const frames = Math.max(1, Math.round(total * 30));
     const t0 = performance.now();
     for (let f = 0; f < frames; f++) {
@@ -6728,6 +6880,9 @@ const builder = {
     try { rec.stop(); } catch (e) { /* already stopped */ }
     await stopped;
     stream.getTracks().forEach((t) => t.stop());
+    if (tracks && tracks.ctx) {
+      try { await tracks.ctx.close(); } catch (e) { /* already closed */ }
+    }
     this.rec = null;
     if (cancelled) {
       if (view.isConnected) status.textContent = "Export cancelled.";
@@ -6743,10 +6898,13 @@ const builder = {
     dl.classList.remove("hidden");
     dl.classList.add("inline-flex");
     const took = Math.round((performance.now() - t0) / 1000);
+    const stretchNote = (tracks && tracks.stretched > 0.05)
+      ? " (+" + tracks.stretched.toFixed(1) + "s for narration)" : "";
     status.textContent = "Recorded " + total.toFixed(0) + "s at " + resNote +
       (film.reducedMotion ? " (reduced motion)" : "") +
       (this.useFilm && this.film ? " (take " + (this.takeIdx + 1) + ")" : "") +
-      " in " + took + "s.";
+      (tracks && tracks.dest ? " with studio narration" : " (silent)") +
+      stretchNote + " in " + took + "s.";
     setTimeout(() => URL.revokeObjectURL(dl.href), 60000);
     reset();
   },

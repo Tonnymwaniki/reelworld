@@ -757,4 +757,16 @@ the first unfinished phase.
   localStorage, async voiceschanged fill), rate 0.95, short
   pause between scenes (guarded timer, cleared on stop),
   silent scenes stay silent, export-exclusion note kept.
-  Tests: stories suite (pending user run) + live listen.
+  Tests: stories 180/180 (pause test re-encoded to the new
+  timing contract); committed 9107c10.
+- Creative scripts step 10 (studio voice, Kokoro approved):
+  `modal/tts.py` (T4, baked weights, key-checked speak),
+  `backend/studio_voice.py` (hash cache in data/audio),
+  `POST /api/audio` (guarded, studio-logged) +
+  `GET /api/audio/{hash}`, status gains `studio`; player
+  tries Studio narrator first with browser fallback; exporter
+  mixes lines at scene starts, silent + honest on failure.
+  Tests: studio_voice 18/18, routes 30/30, stories 186/186;
+  Modal CPU deploy live (miss→hit cache, WAV served, studio
+  in status); export stretches scenes to fit audio (fix for
+  cut-off narration, pending user re-export).

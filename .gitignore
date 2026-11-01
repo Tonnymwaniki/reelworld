@@ -17,5 +17,6 @@ data/llm_calls.jsonl
 data/outlines/
 data/profile.json
 data/face/
+data/audio/
 frontend/design/assets/
 *.zip

@@ -179,6 +179,16 @@ async function main() {
   ok(src.indexOf("onvoiceschanged") !== -1, "chooser waits for browser voices");
   ok(src.indexOf("u.rate = 0.95") !== -1, "read-aloud rate is 0.95");
   ok(src.indexOf("READ_PAUSE_MS") !== -1, "short pause between spoken scenes");
+  ok(src.indexOf("Studio narrator") !== -1, "chooser offers the studio narrator");
+  ok(src.indexOf('"/api/audio"') !== -1, "player and export fetch studio audio");
+  ok(src.indexOf("speakStudio") !== -1, "player plays studio audio first");
+  ok(src.indexOf("studioOff") !== -1, "player falls back when studio fails");
+  ok(src.indexOf("createMediaStreamDestination") !== -1,
+     "export mixes narration into the WebM");
+  ok(src.indexOf("for narration") !== -1,
+     "export stretches scenes to fit narration");
+  ok(src.indexOf("included in the exported video") !== -1,
+     "studio note states export inclusion");
   ok(src.indexOf("speechSynthesis") !== -1, "read-aloud uses speechSynthesis");
   ok(src.indexOf("not included in the exported video") !== -1,
      "read-aloud export note");

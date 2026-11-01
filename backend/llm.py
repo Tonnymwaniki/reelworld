@@ -239,6 +239,23 @@ def recent_calls(n=50):
     return list(_calls)[-n:]
 
 
+def log_call(provider, model, purpose, seconds, ok, error=""):
+    """Log a non-chat model call (e.g. studio voice synthesis).
+
+    TTS has no tokens, so it never spends the token budget, but it
+    shares the budget gate (resting blocks it) and shows up in the
+    status averages. Never raises.
+    """
+    try:
+        _log_call({"timestamp": datetime.now(timezone.utc).isoformat(),
+                   "provider": provider, "model": model, "purpose": purpose,
+                   "seconds": round(seconds, 2), "prompt_tokens": 0,
+                   "completion_tokens": 0, "ok": bool(ok),
+                   "error": (error or "")[:200], "fallback_used": False})
+    except Exception:
+        pass
+
+
 def _record_version(record):
     """Content hash of a stored record: any annotation edit invalidates."""
     canon = json.dumps(record, sort_keys=True, ensure_ascii=False, default=str)
@@ -326,12 +343,16 @@ def status():
                                  else fallback["name"])}
     used = tokens_today()
     budget = cfg["budget"]
+    studio_url = _env("STUDIO_VOICE_URL") or ""
+    studio = {"model": "kokoro-82m",
+              "host": provider_host(studio_url) if studio_url else "",
+              "configured": bool(studio_url.strip())}
     return {"primary": primary, "fallback": fallback,
             "avg_seconds_per_provider": avg, "window": len(window),
             "success_rate": (round(ok / len(window), 3) if window else None),
             "tokens_today": used, "daily_budget": budget,
             "budget_left": max(0, budget - used),
-            "last_error": last_err, "images": images}
+            "last_error": last_err, "images": images, "studio": studio}
 
 
 def tokens_today():

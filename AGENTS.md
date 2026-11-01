@@ -99,6 +99,9 @@ use a separate API and are outside the switchboard.
 | `REQUESTS_PER_MINUTE` | `6` | Per-visitor expensive requests per minute (`DEMO_MODE=true` only) |
 | `REQUESTS_PER_DAY` | `60` | Per-visitor expensive requests per day (`DEMO_MODE=true` only) |
 | `FORCE_PRIMARY_FAIL` | `false` | Testing only: `true` forces every primary attempt to fail so the fallback answers |
+| `STUDIO_VOICE_URL` | (empty = studio off) | Deployed Modal TTS endpoint (`modal deploy modal/tts.py`) |
+| `STUDIO_VOICE_KEY` | (required if above) | Shared secret, also in the Modal secret `reelworld-tts`; never printed or logged |
+| `STUDIO_VOICE_TIMEOUT` | `180` | Seconds to wait for one line (cold starts are slow) |
 
 Visitors are IP + `rw_visitor` cookie; a valid demo code quadruples the
 rate limits. When limited, chat answers kind `resting` with a calm
@@ -108,7 +111,11 @@ Ask/compare/explain answers are cached 24h in `data/cache/llm/`
 (keyed by photo ids + question + record hashes); hits show
 "answered earlier" and skip the budget. Calls are logged to
 `data/llm_calls.jsonl` (git-ignored); `GET /api/llm/status` shows
-providers, speeds, tokens, budget and image routing.
+providers, speeds, tokens, budget, image routing and studio
+voice. Narration lines are synthesized once by Kokoro-82M on
+Modal and cached as WAV in `data/audio/` (git-ignored); the
+player prefers studio audio with browser-voice fallback, and
+the exporter mixes it into the WebM.
 
 ## Build plan (phases; commit after each)
 
@@ -132,10 +139,10 @@ calls + page load), show the output, commit. Do not ask unless truly blocked.
 
 - Never print, log, commit or hard-code secrets. Keys live in `.env` only
   (`BASETEN_API_KEY`, `META_API_KEY`, `MODAL_API_KEY`, `SUPABASE_URL`,
-  `SUPABASE_SERVICE_KEY`). The frontend must never see a key. `.env` and
-  `data/photos`, `data/index`, `data/annotations/personal`,
-  `data/annotations/raw`, `data/cache`, `data/llm_calls.jsonl` stay
-  git-ignored.
+  `SUPABASE_SERVICE_KEY`, `STUDIO_VOICE_KEY`). The frontend must never see
+  a key. `.env` and `data/photos`, `data/index`,
+  `data/annotations/personal`, `data/annotations/raw`, `data/cache`,
+  `data/llm_calls.jsonl`, `data/audio` stay git-ignored.
 - Do not identify people in photos, except the owner's own
   suggest-confirm face matching (their uploaded reference against
   their own photos, explicit Yes/No per suggestion, never
