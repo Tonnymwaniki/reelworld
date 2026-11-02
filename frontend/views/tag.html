@@ -2,7 +2,7 @@
 <a class="font-label-md text-label-md text-on-tertiary-container hover:underline w-fit" href="#/profile">← Profile</a>
 <div class="flex flex-col gap-1">
 <h1 class="font-headline-md text-headline-md text-on-surface">Tag yourself</h1>
-<p class="font-body-md text-body-md text-on-surface-variant">Tap “I’m in this” on every photo you appear in. Photos with people are listed first. Reel only uses your name on photos you tag.</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Upload one selfie and Reel lines your photos up for a quick one-by-one review — or tap “I’m in this” on any photo below. Your name is only used on photos you tag.</p>
 </div>
 <div class="flex-col gap-8 animate-pulse" id="tg-loading" hidden>
 <div class="h-6 rounded-lg bg-surface-container-high"></div>
@@ -19,6 +19,25 @@
 <p class="font-body-sm text-body-sm text-on-surface-variant" id="tg-progress">—</p>
 <div class="h-1.5 rounded bg-surface-container-high overflow-hidden">
 <div class="h-full bg-secondary rounded" id="tg-bar" style="width: 0%"></div>
+</div>
+</div>
+<div class="hidden flex-col gap-3 rounded-xl bg-surface-container-low p-4" id="tg-done">
+<div class="flex items-center gap-3">
+<img alt="Your reference face" class="hidden w-16 h-16 rounded-full object-cover bg-surface-container-high" id="tg-done-face"/>
+<div class="flex flex-col gap-1">
+<span class="font-headline-sm text-headline-sm text-on-surface" id="tg-done-title">You're all tagged.</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="tg-done-stats">—</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Your name now appears on the photos you confirmed — in stories, answers, and the “Photos of me” album.</p>
+<div class="flex flex-wrap gap-2">
+<button class="min-h-[44px] px-4 rounded-lg bg-primary-container text-surface hover:bg-primary font-label-md text-label-md" id="tg-done-ask" type="button">Ask Reel for photos of me</button>
+<a class="min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md inline-flex items-center" href="#/library">Open My Photos</a>
+<a class="min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md inline-flex items-center" href="#/stories">Make a story</a>
+</div>
+<div class="flex flex-wrap gap-2">
+<button class="min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md" id="tg-done-change" type="button">Change tags</button>
+<button class="min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md" id="tg-done-retake" type="button">Retake selfie</button>
 </div>
 </div>
 <div class="hidden flex-wrap items-center gap-2 rounded-xl bg-surface-container-low p-3" id="tg-bulk">
@@ -42,10 +61,32 @@
 <input accept="image/*" class="hidden" id="tg-face-file" type="file"/>
 <button class="min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md" id="tg-face-pick" type="button">Choose face photo</button>
 <button class="min-h-[44px] px-4 rounded-lg bg-primary-container text-surface hover:bg-primary font-label-md text-label-md disabled:opacity-45" id="tg-face-scan" type="button">Find me in my photos</button>
+<button class="hidden min-h-[44px] px-4 rounded-lg bg-secondary-container text-on-secondary-fixed hover:bg-secondary hover:text-surface font-label-md text-label-md" id="tg-face-review" type="button">Review one by one</button>
 <button class="hidden min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md" id="tg-face-clear" type="button">Remove reference</button>
 </div>
 <span class="font-body-sm text-body-sm text-on-surface-variant" id="tg-face-status" role="status"></span>
 <div class="flex flex-col gap-2" id="tg-face-list"></div>
+</div>
+<div class="hidden flex-col gap-3 rounded-xl bg-surface-container-low p-4" id="tg-review">
+<div class="flex items-center justify-between gap-2">
+<span class="font-label-md text-label-md text-on-surface font-semibold" id="tg-review-count">—</span>
+<button class="min-h-[44px] px-3 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md" id="tg-review-exit" type="button">Done</button>
+</div>
+<div class="h-1.5 rounded bg-surface-container-high overflow-hidden">
+<div class="h-full bg-secondary rounded" id="tg-review-bar" style="width: 0%"></div>
+</div>
+<img alt="" class="rw-photo w-full max-h-[420px] rounded-xl object-cover bg-surface-container-high" id="tg-review-img"/>
+<p class="font-body-md text-body-md text-on-surface" id="tg-review-cap">—</p>
+<div class="flex flex-wrap items-center gap-2" id="tg-review-meta"></div>
+<div class="hidden flex-wrap items-center gap-2" id="tg-review-pos"></div>
+<div class="flex flex-wrap gap-2">
+<button class="min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md" id="tg-review-prev" type="button">← Back</button>
+<button class="flex-1 min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md" id="tg-review-no" type="button">Not me</button>
+<button class="flex-1 min-h-[44px] px-4 rounded-lg bg-primary-container text-surface hover:bg-primary font-label-md text-label-md" id="tg-review-yes" type="button">Yes, me</button>
+<button class="min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md" id="tg-review-skip" type="button">Skip</button>
+</div>
+<button class="min-h-[44px] px-4 rounded-lg bg-secondary-container text-on-secondary-fixed hover:bg-secondary hover:text-surface font-label-md text-label-md" id="tg-review-save" type="button">Save all</button>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="tg-review-status" role="status"></span>
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="tg-grid"></div>
 <div class="flex flex-wrap items-center gap-3">

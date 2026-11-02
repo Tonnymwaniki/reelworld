@@ -13,22 +13,30 @@ const assert = require("assert");
 const fs = require("fs");
 const path = require("path");
 
+const elRegistry = {};
 function stubEl() {
-  return {
+  const el = {
     dataset: {},
     style: {},
-    classList: { add() {}, remove() {}, toggle() {}, contains() { return false; } },
+    _ops: [],
     addEventListener() {},
     appendChild() {},
     prepend() {},
     remove() {},
-    querySelector() { return stubEl(); },
+    querySelector(sel) { return elRegistry[sel] || (elRegistry[sel] = stubEl()); },
     querySelectorAll() { return []; },
     closest() { return stubEl(); },
     innerHTML: "",
     textContent: "",
     value: "",
   };
+  el.classList = {
+    add(c) { el._ops.push("+" + c); },
+    remove(c) { el._ops.push("-" + c); },
+    toggle(c) { el._ops.push("~" + c); },
+    contains() { return false; },
+  };
+  return el;
 }
 
 async function main() {
@@ -141,6 +149,10 @@ ok(cspec1.constraints.length === 1 && cspec1.constraints[0].op === "is_not", "co
   ok(/opsz,wght,FILL,GRAD@20\.\.48,100\.\.700,0\.\.1,-50\.\.200/.test(shell), "font URL has full axis spec");
   ok(shell.includes("v2.4") === false, "no invented model version in shell");
   ok(shell.includes("Encrypted locally") === false, "no false encryption claim in shell");
+  ["demo-full", "demo-slim", "demo-change"].forEach((id) =>
+    ok(shell.indexOf('id="' + id + '"') >= 0, "shell has " + id));
+  ok(shell.split('class="rw-logo').length - 1 >= 2, "logo beside header and footer wordmarks");
+  ok(shell.indexOf('rel="icon"') !== -1, "shell has an svg favicon");
   const liveHome = fs.readFileSync(path.join(__dirname, "views/home.html"), "utf8")
     .replace(/<!--[\s\S]*?-->/g, "");
   ["v2.4", "NBO-", "Tesseract", "Public Works Gazette", "4096x2730", "242px",
@@ -149,6 +161,88 @@ ok(cspec1.constraints.length === 1 && cspec1.constraints[0].op === "is_not", "co
   });
   ok(src.indexOf("You are in this photo") !== -1, "reel owner badge text present");
   ok(src.indexOf("row.owner_present === true") !== -1, "reel badge gated on owner_present");
+  const homeHtml = fs.readFileSync(path.join(__dirname, "views/home.html"), "utf8");
+  ok(homeHtml.indexOf('id="chats-sidebar"') !== -1 &&
+    homeHtml.indexOf('id="chats-sidebar"') > homeHtml.indexOf('id="thread-wrap"'),
+    "chats sidebar lives inside the chat page");
+  ok(homeHtml.indexOf('id="chats-menu-landing"') !== -1, "landing has a chats menu button");
+  ok(homeHtml.indexOf('id="chats-home"') !== -1, "sidebar has a home button");
+  ok(homeHtml.indexOf('id="chats-clear"') !== -1 &&
+    homeHtml.indexOf('id="chats-clear"') < homeHtml.indexOf('id="chats-list"'),
+    "clear-all sits with the other chat actions");
+  ok(homeHtml.indexOf('thread-xlist" class="contents"') === -1, "thread list is a real scroll box");
+  ok(homeHtml.indexOf("rw-composer fixed") === -1, "composer is pinned, not floating");
+  ["rw-step-label", "rw-step-detail", "rw-progress-stop"].forEach((id) =>
+    ok(homeHtml.indexOf('id="' + id + '"') !== -1, "progress pill has " + id));
+  ok(homeHtml.indexOf("rw-spin") !== -1, "progress pill has the spinning reel");
+  ok(homeHtml.indexOf("Analyzing archival indices") === -1, "big loader text gone");
+  ok(homeHtml.indexOf("Provisional Visual Mount") === -1, "skeleton mount gone");
+  ok(src.indexOf("homeSeen") !== -1, "reel nav skips restore after first mount");
+  ok(src.indexOf("openChat(id, background)") !== -1, "chat restore can run in the background");
+
+  // ---- restore-in-background regression (landing stays on load) ----
+  const chatCalls = [];
+  const fetchStub2 = async (url) => {
+    chatCalls.push(String(url));
+    let body = {};
+    if (String(url) === "/api/chats") body = { chats: [] };
+    else if (String(url) === "/api/chats/chat_x") {
+      body = { chat: { id: "chat_x", messages: [] } };
+    }
+    return { ok: true, json: async () => body, text: async () => "" };
+  };
+  const store = { "rw.activeChat": "chat_x" };
+  global.localStorage = {
+    getItem: (k) => (k in store ? store[k] : null),
+    setItem: (k, v) => { store[k] = String(v); },
+    removeItem: (k) => { delete store[k]; },
+  };
+  try {
+    const opsBefore = ((elRegistry["#thread-wrap"] || {})._ops || []).length;
+    const app2 = factory(fetchStub2, documentStub, { addEventListener() {} }, { hash: "#/" });
+    await new Promise((r) => setTimeout(r, 150));
+    ok(chatCalls.includes("/api/chats/chat_x"), "first mount background-restores the saved chat");
+    ok(app2.home.chatId === "chat_x", "restored chat id kept in state");
+    const wrapOps = ((elRegistry["#thread-wrap"] || {})._ops || []).slice(opsBefore).join(",");
+    ok(wrapOps.indexOf("+block") === -1, "background restore never shows the thread");
+    const countRestores = () => chatCalls.filter((u) => u === "/api/chats/chat_x").length;
+    const before = countRestores();
+    app2.home.mount(documentStub.querySelector("#view"));
+    await new Promise((r) => setTimeout(r, 150));
+    ok(countRestores() === before, "reel nav revisit does not re-restore");
+  } finally {
+    delete global.localStorage;
+  }
+
+  // ---- step 6 chatbot helpers ----
+  const nowMs = Date.UTC(2026, 10, 1, 12, 0, 0);
+  ok(T.chatDay("2026-11-01T08:00:00+00:00", nowMs) === "Today", "chat day today");
+  ok(T.chatDay("2026-10-31T23:59:00+00:00", nowMs) === "Yesterday", "chat day yesterday");
+  ok(T.chatDay("2026-10-28T12:00:00+00:00", nowMs) === "2026-10-28", "chat day older date");
+  ok(T.chatDay("", nowMs) === "" && T.chatDay(null, nowMs) === "", "chat day empty");
+  const mist = [{ attribute: "atmosphere", op: "is", values: ["misty_or_foggy"] }];
+  ok(T.verdictMark({ verdict: "yes", reason: "soft layers" }, mist).label === "Mist",
+    "verdict yes labels the condition");
+  ok(T.verdictMark({ verdict: "no", reason: "haze only" }, mist).label === "No mist",
+    "verdict no negates the condition");
+  ok(T.verdictMark({ verdict: "unsure" }, mist).tone === "rw-v-unsure", "verdict unsure tone");
+  ok(T.verdictMark(null, mist) === null && T.verdictMark({}, mist) === null,
+    "verdict missing check -> null");
+  const dry = [{ attribute: "water_visible", op: "is", values: [false] }];
+  ok(T.verdictMark({ verdict: "yes" }, dry).label === "No water", "verdict water absent");
+  ok(T.verdictMark({ verdict: "no" }, dry).label === "Water", "verdict water shown");
+  const trace = [{ step: "searched", detail: "x" },
+    { step: "checked", detail: "Looked at 12 photos to check for mist; kept 3." }];
+  ok(T.checkedLine(trace) === "Looked at 12 photos to check for mist; kept 3.",
+    "checked line from trace");
+  ok(T.checkedLine([{ step: "checked", detail: "other" }]) === "", "checked line needs a look");
+  ok(T.questionPart("Which one?\n\n- a\n- b") === "Which one?", "clarify question split");
+  ok(T.dividerFor({ new: true, label: "markets" }, false).label === "markets", "divider label");
+  ok(T.dividerFor({ new: true, label: "m" }, true) === null, "no divider on first turn");
+  ok(T.dividerFor({ new: false }, false) === null, "no divider on refine");
+  ok(T.dayGroup("Today") === "Today", "day group today");
+  ok(T.dayGroup("Yesterday") === "Yesterday", "day group yesterday");
+  ok(T.dayGroup("2026-10-01") === "Earlier", "day group earlier");
 
   console.log("home.test.js: " + n + "/" + n + " checks passed");
 }

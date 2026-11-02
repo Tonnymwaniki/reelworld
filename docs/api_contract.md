@@ -230,7 +230,8 @@ expiry from the last update, cleaned lazily on every chats access.
   `DELETE /api/chats` removes every chat in this scope.
 - Each message stores role, text, kind, spec, result rows (ids plus
   verdicts, reasons, captions, credits), the real trace, photo
-  binding, topic and label, and time. Reasoning content is never
+  binding (about id + took note), topic and label, and time.
+  Reasoning content is never
   captured, so it can never be stored.
 - 404 unknown chat (also when it belongs to another visitor).
 
@@ -271,6 +272,32 @@ with credit, `focus_photo_id`, `spec`, `kind`, where `kind` is `ok` or
 `no_strong_match` or `need_tags`, plus `trace`). The trace holds `searched`,
 `rejected` (when any) and `answered` — never `understood`, since no
 message was parsed.
+
+Optional `chat_id` runs the search on that chat's engine session and
+records the turn (user text from optional `user_text`, else
+"Refine: filters changed"); 404 when the chat does not exist in this
+scope. UI buttons (chip removal, related, reject) pass it so saved
+chats keep every turn.
+
+## `POST /api/related`, `POST /api/reject` (direct tools, no router)
+
+The Reel action buttons call the same tools as the router without a
+router call, so they are instant and free:
+
+- `POST /api/related {"photo_id", "mode": "angle"|"similar"}`
+  runs the related tool on the session's engine ("Another angle" /
+  "More like this"). 400 on a bad mode, 404 on an unknown photo.
+  `kind` is `no_other_angle` with the honest fallback note when no
+  other view of the place exists.
+- `POST /api/reject {"photo_id"?}` drops the photo (default: the
+  focus photo) into the session's rejected ids and re-runs the
+  current search ("Not this one"). 400 when nothing is in focus.
+  Verification runs only when the spec has constraints; 429 with
+  the resting text when the budget is spent.
+
+Both take optional `session_id`, `chat_id` and `user_text` like
+`/api/search`, return the `/chat` shape, and never call the router
+(their traces hold `searched`/`rejected`/`answered`, never `routed`).
 
 - 400 invalid spec, 422 invalid body, 503 engine unavailable, 502 failed
 

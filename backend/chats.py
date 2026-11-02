@@ -83,9 +83,16 @@ def new_chat_id(scope):
 
 
 def auto_title(text):
-    """First user message squeezed to one short line (pure)."""
+    """First user message squeezed to one short title (pure)."""
     line = " ".join((text or "").split())
-    return line[:TITLE_LEN] if line else "New chat"
+    if not line:
+        return "New chat"
+    if len(line) > TITLE_LEN:
+        line = line[:TITLE_LEN].rsplit(" ", 1)[0] or line[:TITLE_LEN]
+    line = line.rstrip(" .?!,;:")
+    if not line:
+        return "New chat"
+    return line[:1].upper() + line[1:]
 
 
 def create_chat(scope, title=None):
@@ -261,6 +268,7 @@ def append_turn(scope, cid, user_text, payload, snap):
         "topic_label": topic.get("label", ""),
         "label": payload.get("label"),
         "options": payload.get("options"),
+        "took_to_mean": payload.get("took_to_mean"),
         "time": now_iso()})
     if chat.get("title_auto"):
         chat["title"] = auto_title(user_text)

@@ -1,5 +1,10 @@
 <!-- Reel home: landing hero + sections (before the first message), then the thread. -->
 <section id="landing">
+<div class="rw-mobile-chats rw-landing-chats">
+<button id="chats-menu-landing" type="button" class="rw-menubtn">
+<span class="material-symbols-outlined text-[18px]">menu</span><span>Chats</span>
+</button>
+</div>
 <div class="flex flex-col w-full">
 <!-- Top Atmospheric Header Clearance & Archival Masthead -->
 <section class="relative w-full pt-10 pb-16 px-margin-mobile md:px-margin-tablet lg:px-margin overflow-hidden">
@@ -486,7 +491,27 @@
 </div>
 </section>
 <section class="hidden" id="thread-wrap">
-<div class="flex flex-col w-full pb-32">
+<div id="chats-scrim" class="hidden"></div>
+<aside id="chats-sidebar" aria-label="Saved chats" class="rw-sidebar">
+<button id="chats-home" type="button" class="rw-side-home">
+<span class="material-symbols-outlined text-[16px]">home</span><span>Home</span>
+</button>
+<div class="rw-side-head">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant">Chats</span>
+<button id="chats-new" type="button" class="rw-side-new">
+<span class="material-symbols-outlined text-[16px]">add</span><span>New chat</span>
+</button>
+</div>
+<button id="chats-clear" type="button" class="rw-side-clear rw-side-clear-top">Clear all chats</button>
+<p id="chats-empty" class="hidden rw-side-empty">No chats yet — describe a photo to start one.</p>
+<ul id="chats-list" class="rw-side-list"></ul>
+<div class="rw-side-foot">
+<p id="chats-demo-note" class="hidden rw-side-note">Chats are saved in this browser for 7 days.</p>
+</div>
+</aside>
+<div class="rw-thread-shell">
+<div class="rw-thread-main">
+<div class="flex flex-col w-full flex-1 min-h-0">
 <!-- Conversation Stream Container -->
 <div class="w-full max-w-4xl mx-auto px-gutter-mobile sm:px-gutter py-space-lg flex flex-col space-y-space-xl">
 <template id="tpl-user">
@@ -694,10 +719,15 @@
 <span>✓ Selected</span>
 </div>
 </template>
-<div id="thread-xlist" class="contents"></div>
+<div class="rw-mobile-chats">
+<button id="chats-menu" type="button" class="rw-menubtn">
+<span class="material-symbols-outlined text-[18px]">menu</span><span>Chats</span>
+</button>
+</div>
+<div id="thread-xlist"></div>
 </div>
 <!-- Pinned Bottom Composer Bar -->
-<div class="fixed bottom-0 left-0 right-0 z-40 bg-surface/95 backdrop-blur-md px-gutter-mobile sm:px-gutter py-space-sm shadow-[0_-4px_24px_rgba(27,30,35,0.05)]">
+<div class="rw-composer flex-shrink-0 bg-surface/95 backdrop-blur-md px-gutter-mobile sm:px-gutter py-space-sm border-t border-outline-variant/40">
 <div class="w-full max-w-4xl mx-auto flex flex-col space-y-space-xs">
 <!-- Context Pill (Pinned Reference Image) -->
 <div id="thread-context" class="self-start hidden items-center gap-space-sm px-space-sm py-1 bg-surface-container-high rounded-full shadow-sm">
@@ -739,187 +769,23 @@
 </div>
 
 </div>
+</div>
+</div>
 </section>
 <template id="tpl-progress">
-<!-- Turn 2: Assistant In-Progress Working State -->
-<div class="flex items-start gap-space-md w-full pr-0 md:pr-12">
-<!-- Assistant Identity Glyph -->
+<!-- Compact working state: spinning reel + the live step, nothing else -->
+<div class="flex items-start gap-space-md w-full">
 <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary mt-1 shadow-sm">
 <span class="material-symbols-outlined text-[18px]">cc_attribution</span>
 </div>
-<!-- Assistant Working Canvas Body -->
-<div class="flex-1 flex flex-col gap-space-md bg-surface-container-low p-space-md md:p-space-lg rounded-xl shadow-sm">
-<!-- Pipeline Header Bar -->
-<div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-xs">
+<div class="flex-1 flex flex-col gap-space-xs bg-surface-container-low px-space-md py-space-sm rounded-xl shadow-sm">
 <div class="flex items-center gap-space-sm">
-<span class="relative flex h-2.5 w-2.5">
-<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-on-tertiary-container opacity-75"></span>
-<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-on-tertiary-container"></span>
-</span>
-<span class="font-headline-sm text-headline-sm text-primary tracking-tight font-semibold">
-                Analyzing archival indices...
-              </span>
+<svg class="rw-spin text-secondary" width="20" height="20" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="61 21" stroke-linecap="round"/><circle cx="16" cy="16" r="5" fill="currentColor" opacity=".35"/></svg>
+<span class="font-label-lg text-label-lg text-primary font-semibold" id="rw-step-label">Searching&hellip;</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono" id="elapsed-counter">0.0s</span>
+<button class="ml-auto font-label-sm text-label-sm text-on-surface-variant underline" id="rw-progress-stop" type="button">Stop</button>
 </div>
-<div class="flex items-center gap-space-xs px-space-sm py-1 bg-surface-container rounded-lg font-label-sm text-label-sm text-on-surface-variant">
-<span class="material-symbols-outlined text-[14px] text-on-tertiary-container">timelapse</span>
-<span class="font-semibold text-primary" id="elapsed-counter">18.4s</span>
-<span>elapsed</span>
-<span class="text-outline-variant">•</span>
-<span class="text-secondary">Est. 28s remaining</span>
-</div>
-</div>
-<!-- Calm Pipeline Progress Steps -->
-<div class="bg-surface-container p-space-md rounded-xl flex flex-col gap-space-sm">
-<!-- Step 1: Completed -->
-<div class="flex items-start gap-space-sm">
-<div class="w-5 h-5 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container mt-0.5 flex-shrink-0">
-<span class="material-symbols-outlined text-[14px] font-bold">check</span>
-</div>
-<div class="flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-x-space-md">
-<span class="font-label-lg text-label-lg text-primary">Understood your request</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">0.8s • Vector space aligned to East African transport corpus</span>
-</div>
-</div>
-<!-- Step 2: Completed -->
-<div class="flex items-start gap-space-sm">
-<div class="w-5 h-5 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container mt-0.5 flex-shrink-0">
-<span class="material-symbols-outlined text-[14px] font-bold">check</span>
-</div>
-<div class="flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-x-space-md">
-<span class="font-label-lg text-label-lg text-primary">Searching the world collection</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">4.2s • 1,420 regional archival nodes scanned</span>
-</div>
-</div>
-<!-- Step 3: Active Working -->
-<div class="flex items-start gap-space-sm bg-surface-container-high p-space-sm rounded-lg">
-<div class="w-5 h-5 rounded-full bg-on-tertiary-container/15 flex items-center justify-center mt-0.5 flex-shrink-0">
-<span class="w-2 h-2 rounded-full bg-on-tertiary-container animate-pulse"></span>
-</div>
-<div class="flex-1 flex flex-col">
-<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-x-space-md">
-<span class="font-label-lg text-label-lg text-primary font-semibold flex items-center gap-space-xs">
-                    Checking the closest photos
-                    <span class="px-1.5 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider bg-on-tertiary-container text-surface-bright">Active</span>
-</span>
-<span class="font-label-sm text-label-sm text-on-tertiary-container font-semibold">14 candidates under inspection</span>
-</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
-                  Triangulating spatial perspectives, turntable angles &amp; Class 59 Garratt locomotive silhouettes across vintage flight line runs...
-                </p>
-</div>
-</div>
-<!-- Step 4: Upcoming -->
-<div class="flex items-start gap-space-sm opacity-60">
-<div class="w-5 h-5 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant mt-0.5 flex-shrink-0">
-<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
-</div>
-<div class="flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-x-space-md">
-<span class="font-label-lg text-label-lg text-on-surface-variant">Writing the answer</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Awaiting visual corroboration synthesis</span>
-</div>
-</div>
-</div>
-<!-- Synthesizing Photo Layout Skeleton Mount -->
-<div class="flex flex-col gap-space-md pt-space-xs">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-space-xs font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
-<span class="material-symbols-outlined text-[15px]">photo_library</span>
-<span>Provisional Visual Mount (In Construction)</span>
-</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">16:9 • 4K Contact Sheet Matrix</span>
-</div>
-<!-- Primary Photo Inset Mat Board Skeleton -->
-<div class="relative w-full aspect-[16/9] md:aspect-[21/9] bg-surface-container-high rounded-xl overflow-hidden flex flex-col items-center justify-center p-space-md shadow-inner">
-<!-- Shimmer Background Overlay -->
-<div class="absolute inset-0 bg-gradient-to-r from-transparent via-surface-bright/40 to-transparent -translate-x-full animate-[shimmer_2s_infinite]"></div>
-<!-- Subtle Cartographic Grid Pattern In Skeleton -->
-<div class="absolute inset-0 opacity-10 flex items-center justify-center pointer-events-none">
-<svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<pattern height="32" id="archivalGrid" patternunits="userSpaceOnUse" width="32">
-<path d="M 32 0 L 0 0 0 32" fill="none" stroke="currentColor" stroke-width="1"></path>
-</pattern>
-</defs>
-<rect class="text-primary" fill="url(#archivalGrid)" height="100%" width="100%"></rect>
-</svg>
-</div>
-<!-- Reticle / Aperture Indicator in Center -->
-<div class="relative z-10 flex flex-col items-center gap-space-xs text-on-surface-variant text-center px-space-md">
-<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-primary shadow-sm">
-<span class="material-symbols-outlined text-[26px] animate-spin" style="animation-duration: 6s;">lens_blur</span>
-</div>
-<div class="h-3 w-44 bg-surface-container rounded-full mt-space-xs animate-pulse"></div>
-<div class="h-2 w-28 bg-surface-container rounded-full animate-pulse"></div>
-</div>
-<!-- Micro Bottom Calibration Stamp -->
-<div class="absolute bottom-3 left-4 right-4 flex items-center justify-between text-[10px] font-mono text-on-surface-variant tracking-wider uppercase">
-<span>Planimetric Calibration: Nairobi Central Yard</span>
-<span>Lat -1.2921° Lon 36.8219°</span>
-</div>
-</div>
-<!-- Companion Photo Skeleton Quad (4 items) -->
-<div class="grid grid-cols-2 md:grid-cols-4 gap-space-sm">
-<!-- Skeleton Card 1 -->
-<div class="bg-surface-container p-2.5 rounded-lg flex flex-col gap-2">
-<div class="w-full aspect-[4/3] bg-surface-container-high rounded relative overflow-hidden flex items-center justify-center">
-<div class="absolute inset-0 bg-gradient-to-r from-transparent via-surface-bright/30 to-transparent -translate-x-full animate-[shimmer_2s_infinite]"></div>
-<span class="material-symbols-outlined text-outline-variant text-[18px]">image</span>
-</div>
-<div class="flex flex-col gap-1 px-0.5">
-<div class="h-2.5 w-4/5 bg-surface-container-high rounded animate-pulse"></div>
-<div class="h-2 w-1/2 bg-surface-container-high rounded animate-pulse"></div>
-</div>
-</div>
-<!-- Skeleton Card 2 -->
-<div class="bg-surface-container p-2.5 rounded-lg flex flex-col gap-2">
-<div class="w-full aspect-[4/3] bg-surface-container-high rounded relative overflow-hidden flex items-center justify-center">
-<div class="absolute inset-0 bg-gradient-to-r from-transparent via-surface-bright/30 to-transparent -translate-x-full animate-[shimmer_2s_infinite]"></div>
-<span class="material-symbols-outlined text-outline-variant text-[18px]">image</span>
-</div>
-<div class="flex flex-col gap-1 px-0.5">
-<div class="h-2.5 w-3/4 bg-surface-container-high rounded animate-pulse"></div>
-<div class="h-2 w-3/5 bg-surface-container-high rounded animate-pulse"></div>
-</div>
-</div>
-<!-- Skeleton Card 3 -->
-<div class="bg-surface-container p-2.5 rounded-lg flex flex-col gap-2">
-<div class="w-full aspect-[4/3] bg-surface-container-high rounded relative overflow-hidden flex items-center justify-center">
-<div class="absolute inset-0 bg-gradient-to-r from-transparent via-surface-bright/30 to-transparent -translate-x-full animate-[shimmer_2s_infinite]"></div>
-<span class="material-symbols-outlined text-outline-variant text-[18px]">image</span>
-</div>
-<div class="flex flex-col gap-1 px-0.5">
-<div class="h-2.5 w-5/6 bg-surface-container-high rounded animate-pulse"></div>
-<div class="h-2 w-2/5 bg-surface-container-high rounded animate-pulse"></div>
-</div>
-</div>
-<!-- Skeleton Card 4 -->
-<div class="bg-surface-container p-2.5 rounded-lg flex flex-col gap-2">
-<div class="w-full aspect-[4/3] bg-surface-container-high rounded relative overflow-hidden flex items-center justify-center">
-<div class="absolute inset-0 bg-gradient-to-r from-transparent via-surface-bright/30 to-transparent -translate-x-full animate-[shimmer_2s_infinite]"></div>
-<span class="material-symbols-outlined text-outline-variant text-[18px]">image</span>
-</div>
-<div class="flex flex-col gap-1 px-0.5">
-<div class="h-2.5 w-2/3 bg-surface-container-high rounded animate-pulse"></div>
-<div class="h-2 w-1/2 bg-surface-container-high rounded animate-pulse"></div>
-</div>
-</div>
-</div>
-</div>
-<!-- Action Footer & Quiet Inference Attestation -->
-<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md pt-space-xs mt-space-xs">
-<!-- Stop Generating Accessible Button -->
-<button class="inline-flex items-center justify-center gap-space-xs min-h-[44px] px-space-md py-2 rounded bg-surface-container-high hover:bg-surface-variant text-primary font-label-md text-label-md transition-colors shadow-sm self-start" id="abort-btn" type="button">
-<span class="material-symbols-outlined text-[16px] text-on-tertiary-container">stop_circle</span>
-<span>Stop generating</span>
-</button>
-<!-- Honest Privacy & Inference Safeguard -->
-<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
-<span class="material-symbols-outlined text-[16px] text-secondary">verified_user</span>
-<span>Processing on local edge node. Photo matches are verified against cataloged archives.</span>
-</div>
-</div>
-</div>
-</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant" id="rw-step-detail"></p>
 </div>
 </div>
 </template>
@@ -1109,6 +975,32 @@
 <div class="absolute top-2 left-2 px-space-xs py-1 rounded bg-surface/90 text-on-secondary-container text-label-sm font-label-sm backdrop-blur-sm flex items-center gap-1 shadow-sm">
 <span class="material-symbols-outlined text-[13px]">visibility</span>
 <span>Looks similar</span>
+</div>
+</template>
+<template id="tpl-chatitem">
+<li class="rw-chatitem">
+<button type="button" class="rw-chatopen">
+<img class="rw-chatthumb" alt="" />
+<span class="rw-chatmeta"><span class="rw-chattitle"></span><span class="rw-chatday"></span></span>
+</button>
+<span class="rw-chatops">
+<button type="button" data-op="rename" aria-label="Rename chat"><span class="material-symbols-outlined text-[16px]">edit</span></button>
+<button type="button" data-op="delete" aria-label="Delete chat"><span class="material-symbols-outlined text-[16px]">delete</span></button>
+</span>
+</li>
+</template>
+<template id="tpl-divider">
+<div class="rw-divider" role="separator">
+<span class="rw-div-line" aria-hidden="true"></span>
+<span class="rw-div-label">New search: <strong></strong></span>
+<button type="button" class="rw-div-link">Not what I meant? Continue the previous search</button>
+</div>
+</template>
+<template id="tpl-msgactions">
+<div class="rw-msgactions">
+<button type="button" data-act="copy"><span class="material-symbols-outlined text-[14px]">content_copy</span><span>Copy</span></button>
+<button type="button" data-act="flag"><span class="material-symbols-outlined text-[14px]">flag</span><span>Flag this</span></button>
+<button type="button" data-act="retry"><span class="material-symbols-outlined text-[14px]">refresh</span><span>Retry</span></button>
 </div>
 </template>
 <template id="tpl-addprogress">

@@ -115,3 +115,235 @@ details[open] .how-chev { transform: rotate(180deg); }
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ---------- Step 6: chatbot sidebar, dividers, verdicts ---------- */
+.rw-thread-shell { display: block; }
+#chats-scrim {
+  position: fixed; inset: 0; z-index: 30;
+  background: rgba(27, 30, 35, 0.45);
+}
+#chats-sidebar {
+  position: fixed; top: 0; bottom: 0; left: 0; width: 264px; z-index: 40;
+  background: var(--color-surface-container-low);
+  border-right: 1px solid var(--color-outline-variant);
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 6rem 12px 12px;
+  transform: translateX(-105%);
+  transition: transform 0.2s ease;
+  overflow-y: auto;
+}
+#chats-sidebar.open { transform: none; }
+@media (min-width: 768px) {
+  #chats-sidebar { transform: none; }
+  #chats-scrim { display: none; }
+  .rw-thread-main { margin-left: 264px; }
+  .rw-mobile-chats { display: none; }
+}
+/* normal chatbot column: the thread list scrolls, the composer stays put */
+.rw-thread-main {
+  display: flex; flex-direction: column;
+  height: calc(100dvh - 290px); min-height: 380px;
+}
+#thread-xlist {
+  flex: 1 1 auto; min-height: 0;
+  overflow-y: auto; overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+@media (min-width: 768px) {
+  .rw-thread-main { height: calc(100dvh - 200px); min-height: 440px; }
+}
+.rw-mobile-chats { display: block; }
+.rw-landing-chats { padding: 12px 16px 0; }
+.rw-menubtn {
+  display: inline-flex; align-items: center; gap: 6px;
+  min-height: 44px; padding: 8px 14px;
+  background: var(--color-surface-container-high);
+  color: var(--color-on-surface);
+  border-radius: 10px; font-size: 14px; font-weight: 500;
+}
+.rw-side-head {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.rw-side-new {
+  display: inline-flex; align-items: center; gap: 4px;
+  min-height: 40px; padding: 6px 12px;
+  background: var(--color-primary-container);
+  color: var(--color-on-primary-container);
+  border-radius: 10px; font-size: 13px; font-weight: 500;
+}
+.rw-side-home {
+  display: inline-flex; align-items: center; gap: 4px;
+  min-height: 40px; padding: 6px 12px; align-self: flex-start;
+  background: var(--color-surface-container-high);
+  color: var(--color-on-surface);
+  border-radius: 10px; font-size: 13px; font-weight: 500;
+}
+.rw-side-empty, .rw-side-note {
+  font-size: 12px; color: var(--color-on-surface-variant);
+  line-height: 1.45;
+}
+.rw-side-list {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: 2px; flex: 1;
+}
+.rw-chatitem { display: flex; align-items: center; gap: 2px; }
+.rw-chatopen {
+  flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px;
+  padding: 8px; border-radius: 10px; text-align: left;
+  color: var(--color-on-surface);
+}
+.rw-chatopen:hover { background: var(--color-surface-container-high); }
+.rw-chatitem.active .rw-chatopen {
+  background: var(--color-surface-container-high);
+}
+.rw-chatthumb {
+  width: 40px; height: 40px; border-radius: 8px; object-fit: cover;
+  background: var(--color-surface-dim); flex-shrink: 0;
+}
+.rw-chatthumb.missing { visibility: hidden; }
+.rw-chatmeta { min-width: 0; display: flex; flex-direction: column; }
+.rw-chattitle {
+  font-size: 13px; font-weight: 500; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+}
+.rw-chatday { font-size: 11px; color: var(--color-on-surface-variant); }
+.rw-chatops { display: flex; flex-shrink: 0; }
+.rw-chatops button {
+  width: 32px; height: 32px; display: flex; align-items: center;
+  justify-content: center; color: var(--color-on-surface-variant);
+  border-radius: 8px;
+}
+.rw-chatops button:hover {
+  background: var(--color-surface-container-high);
+  color: var(--color-on-surface);
+}
+.rw-chatrename {
+  flex: 1; min-width: 0; font-size: 13px; padding: 6px 8px;
+  background: var(--color-surface-container-highest);
+  color: var(--color-on-surface);
+  border: 1px solid var(--color-outline-variant); border-radius: 8px;
+}
+.rw-side-foot { display: flex; flex-direction: column; gap: 8px; }
+.rw-side-clear {
+  align-self: flex-start; font-size: 12px;
+  color: var(--color-on-surface-variant); text-decoration: underline;
+  padding: 4px 0;
+}
+.rw-side-clear.armed { color: var(--color-error); font-weight: 600; }
+.rw-side-clear-top { margin: 2px 0 4px; }
+.rw-logo { flex-shrink: 0; }
+/* searching reel: spins while Reel works, still when reduced motion */
+.rw-spin { animation: rw-spin 1.4s linear infinite; flex-shrink: 0; }
+@keyframes rw-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .rw-spin { animation: none; }
+}
+/* chat history day headers */
+.rw-dayhead {
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--color-on-surface-variant);
+  padding: 10px 4px 2px; list-style: none;
+}
+/* topic divider */
+.rw-divider {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 4px 0;
+}
+.rw-div-line {
+  width: 100%; height: 1px; background: var(--color-outline-variant);
+}
+.rw-div-label {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em;
+  color: var(--color-on-surface-variant);
+}
+.rw-div-label strong { color: var(--color-on-surface); font-weight: 600; }
+.rw-div-link {
+  font-size: 12px; color: var(--color-primary); text-decoration: underline;
+}
+/* verdict marks (badge colourways: yes=Confirmed, unsure=Candidate, no=Partial) */
+.rw-verdict {
+  position: absolute; bottom: 8px; left: 8px;
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 8px; border-radius: 999px;
+  font-size: 11px; font-weight: 500;
+}
+.rw-v-yes {
+  background: var(--color-secondary-container);
+  color: var(--color-on-secondary-fixed-variant);
+}
+.rw-v-unsure {
+  background: var(--color-tertiary-fixed);
+  color: var(--color-on-tertiary-fixed);
+}
+.rw-v-no {
+  background: var(--color-surface-container-high);
+  color: var(--color-on-surface-variant);
+}
+.rw-v-reason {
+  font-size: 11px; color: var(--color-on-surface-variant);
+  display: block; margin-top: 2px;
+}
+/* message actions */
+.rw-msgactions { display: flex; gap: 4px; margin-top: 8px; }
+.rw-msgactions button {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 12px; color: var(--color-on-surface-variant);
+  padding: 6px 8px; border-radius: 8px; min-height: 32px;
+}
+.rw-msgactions button:hover {
+  background: var(--color-surface-container-high);
+  color: var(--color-on-surface);
+}
+/* user message photo thumb */
+.rw-usertumb {
+  width: 40px; height: 40px; border-radius: 8px; object-fit: cover;
+  flex-shrink: 0;
+}
+/* answer header + signs */
+.rw-abouthead {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 500; color: var(--color-on-surface);
+}
+.rw-took { font-size: 12px; color: var(--color-on-surface-variant); }
+.rw-took button {
+  color: var(--color-primary); text-decoration: underline; font-size: 12px;
+}
+.rw-signs { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
+.rw-signrow { display: flex; align-items: center; gap: 8px; }
+.rw-signtext {
+  font-family: ui-monospace, monospace; font-size: 13px;
+  color: var(--color-on-surface);
+}
+/* clarify options reuse the suggestion-button look via JS class names */
+.rw-clarify { display: flex; flex-direction: column; gap: 8px; }
+.rw-checkline {
+  font-size: 12px; color: var(--color-secondary);
+  margin-top: 4px;
+}
+/* reply label tag + answer header thumb + sign badges */
+.rw-labeltag {
+  display: inline-block;
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em;
+  color: var(--color-on-surface-variant);
+  background: var(--color-surface-container-high);
+  border-radius: 999px; padding: 3px 10px;
+  margin-bottom: 8px;
+}
+.rw-abouthead img {
+  width: 32px; height: 32px; border-radius: 8px; object-fit: cover;
+  background: var(--color-surface-dim); flex-shrink: 0;
+}
+.rw-signbadge {
+  font-size: 11px; font-weight: 500;
+  padding: 2px 8px; border-radius: 999px; white-space: nowrap;
+}
+.rw-sign-clear {
+  background: var(--color-secondary-container);
+  color: var(--color-on-secondary-fixed-variant);
+}
+.rw-sign-partial {
+  background: var(--color-surface-container-high);
+  color: var(--color-on-surface-variant);
+}

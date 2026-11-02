@@ -79,15 +79,25 @@ async function refreshShell() {
   paintDemo();
 }
 
+let demoOpen = false;
 function paintDemo() {
   const banner = $("#demo-banner");
   if (!banner) return;
   if (!rwConfig.demo_mode) banner.classList.add("hidden");
   else banner.classList.remove("hidden");
   const t = $("#demo-text", banner);
-  if (t) t.textContent = demoCode()
-    ? "Demo mode: a demo code is saved for this visit — writes are unlocked if it matches."
-    : "Demo mode: uploads, publishing, corrections, profile and tagging need the demo code.";
+  if (t) t.textContent = "Demo mode: uploads, publishing, corrections, profile and tagging need the demo code.";
+  const showFull = !demoCode() || demoOpen;
+  const full = $("#demo-full");
+  if (full) {
+    full.classList.toggle("hidden", !showFull);
+    full.classList.toggle("flex", showFull);
+  }
+  const slim = $("#demo-slim");
+  if (slim) {
+    slim.classList.toggle("hidden", showFull);
+    slim.classList.toggle("flex", !showFull);
+  }
   const main = $("#view");
   const header = document.querySelector("header");
   if (main && header) main.style.paddingTop = (header.offsetHeight + 16) + "px";
@@ -117,6 +127,8 @@ const KIND_BADGE = {
   need_tags: "No tagged photos yet",
   not_found: "Photo not found",
   question_answer: "Answer",
+  resting: "Reel is resting",
+  clarify: "Reel needs a choice",
 };
 
 /* ---------- Phase 1: Reel thread (rebuilt home view) ---------- */
@@ -147,7 +159,8 @@ const EX_ABOUT = [
     alt: "Wind turbines line green hills above a forested valley with scattered buildings and a waste pile under a hazy sky." },
 ];
 const STEP_LABEL = { understood: "Understood", searched: "Searched", checked: "Checked",
-  wrote: "Wrote", answered: "Answered", fallback: "Fallback", rejected: "Skipped rejected" };
+  wrote: "Wrote", answered: "Answered", fallback: "Fallback", rejected: "Skipped rejected",
+  routed: "Deciding", facts: "Reading facts", counted: "Counting", asked: "Answering" };
 const BRIDGE_LABELS = { same_place: "Same place", another_angle: "Another angle",
   taken_from_here: "Taken from here", similar_look: "Looks similar" };
 const LIC_SHORT = { "cc-by-sa": "CC BY-SA", "cc-by": "CC BY", cc0: "Public Domain", other: "Other" };
@@ -287,6 +300,63 @@ function constraintLabel(c) {
   const text = bits.join(" or ") || "Anything";
   if (c.op !== "is_not") return text;
   return "Not " + text.charAt(0).toLowerCase() + text.slice(1);
+}
+/* ---------- Step 6: chatbot helpers (pure, unit-tested) ---------- */
+function chatDay(iso, nowMs) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return "";
+  const now = new Date(nowMs === undefined ? Date.now() : nowMs);
+  const day = (x) => Date.UTC(x.getUTCFullYear(), x.getUTCMonth(), x.getUTCDate());
+  const diff = Math.round((day(now) - day(d)) / 86400000);
+  if (diff <= 0) return "Today";
+  if (diff === 1) return "Yesterday";
+  return d.toISOString().slice(0, 10);
+}
+function verdictMark(check, constraints) {
+  if (!check || !check.verdict) return null;
+  if (check.verdict === "unsure") {
+    return { icon: "help", label: "Not sure", tone: "rw-v-unsure",
+      reason: check.reason || "" };
+  }
+  const v = check.verdict;
+  const c = (constraints || [])[0];
+  let base = null;
+  if (c && Array.isArray(c.values) && c.values.length) {
+    base = constraintLabel({ attribute: c.attribute, op: "is", values: [c.values[0]] });
+  }
+  let label;
+  if (!base) label = v === "yes" ? "Yes" : "No";
+  else if (v === "yes") label = base;
+  else if (base.indexOf("No ") === 0) label = base.slice(3, 4).toUpperCase() + base.slice(4);
+  else label = "No " + base.charAt(0).toLowerCase() + base.slice(1);
+  return { icon: v === "yes" ? "check_circle" : "cancel",
+    label: label, tone: v === "yes" ? "rw-v-yes" : "rw-v-no",
+    reason: check.reason || "" };
+}
+function checkedLine(trace) {
+  const hits = (trace || []).filter((s) => s.step === "checked" && /looked at/i.test(s.detail || ""));
+  return hits.length ? hits[hits.length - 1].detail : "";
+}
+function questionPart(text) {
+  return String(text || "").split(/\n\n-/)[0];
+}
+function dividerFor(topic, isFirst) {
+  if (!topic || !topic.new || isFirst) return null;
+  return { label: topic.label || "Untitled" };
+}
+function dayGroup(day) {
+  return day === "Today" || day === "Yesterday" ? day : "Earlier";
+}
+const ACTIVE_CHAT_KEY = "rw.activeChat";
+function activeChatGet() {
+  try { return localStorage.getItem(ACTIVE_CHAT_KEY); } catch (e) { return null; }
+}
+function activeChatSet(id) {
+  try { localStorage.setItem(ACTIVE_CHAT_KEY, id); } catch (e) { /* private mode */ }
+}
+function activeChatClear() {
+  try { localStorage.removeItem(ACTIVE_CHAT_KEY); } catch (e) { /* private mode */ }
 }
 function specChips(spec) {
   const out = [];
@@ -443,13 +513,18 @@ const RWTEST = { fmtScore: fmtScore, shortReasons: shortReasons, creditText: cre
   chaptersWithPeople: chaptersWithPeople, buildStoryMarkdown: buildStoryMarkdown,
   fmtBytes: fmtBytes, gapText: gapText,
   voiceExamples: voiceExamples, tagSort: tagSort, tagPhotos: tagPhotos,
-  libSearch: libSearch };
+  reviewQueue: reviewQueue, groupDecisions: groupDecisions,
+  tagDoneVisible: tagDoneVisible,
+  libSearch: libSearch,
+  chatDay: chatDay, verdictMark: verdictMark, checkedLine: checkedLine,
+  questionPart: questionPart, dividerFor: dividerFor, dayGroup: dayGroup };
 
 const home = {
   view: null, xlist: null, loadingTimer: null, abort: null,
   sent: [], histIdx: -1, focusId: null, lastSpec: null, lastUserText: "",
   rowsById: {}, tourCache: {}, tourIdx: 1, tourWired: false,
   fileInput: null, replySeq: 0,
+  chatId: null, chatList: [], prevSpec: null,
 
   mount(view) {
     this.view = view;
@@ -462,6 +537,9 @@ const home = {
     this.tourCache = {};
     this.tourWired = false;
     this.replySeq = 0;
+    this.chatId = null;
+    this.chatList = [];
+    this.prevSpec = null;
     const input = $("#archival-prompt-input", view);
     const go = () => { const q = input.value.trim(); if (q) this.send(q); };
     $("#submit-prompt-btn", view).addEventListener("click", go);
@@ -515,10 +593,19 @@ const home = {
     });
     view.appendChild(this.fileInput);
     this.fillLanding();
+    this.initChats();
   },
 
-  scrollBottom() {
-    try { window.scrollTo(0, document.body.scrollHeight); } catch (e) { /* tests */ }
+  scrollBottom(force) {
+    const box = this.xlist;
+    try {
+      if (!force && box) {
+        const near = (box.scrollTop + box.clientHeight) >
+          (box.scrollHeight - 140);
+        if (!near) return;
+      }
+      if (box) box.scrollTop = box.scrollHeight;
+    } catch (e) { /* tests */ }
   },
 
   fillLanding() {
@@ -593,6 +680,8 @@ const home = {
 
   appendUser(text) {
     const node = cloneTpl(this.view, "tpl-user");
+    node.classList.add("rw-usernode");
+    node.dataset.usertext = text;
     const now = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
     const meta = node.querySelectorAll("span");
     if (meta[2]) meta[2].textContent = now;
@@ -603,23 +692,36 @@ const home = {
     return node;
   },
 
-  async send(text) {
+  async send(text, opts) {
+    const o = opts || {};
+    const shown = o.display || text;
     this.showThread();
     if (this.abort) { try { this.abort.abort(); } catch (e) { /* superseded */ } }
     const ctl = new AbortController();
     this.abort = ctl;
-    this.appendUser(text);
-    this.sent.push(text);
+    const chatId = await this.ensureChat();
+    this.prevSpec = this.lastSpec;
+    const userNode = this.appendUser(shown);
+    this.sent.push(shown);
     this.histIdx = this.sent.length;
     const ti = $("#thread-input", this.view);
     if (ti) ti.value = "";
     this.lastUserText = text;
     const prog = this.showProgress();
     try {
-      const data = await this.runStream(text, ctl.signal, prog);
+      const data = await this.runStream(text, ctl.signal, prog,
+        { chatId: chatId, baseSpec: o.baseSpec || null });
       this.stopProgress(prog);
       prog.remove();
-      await this.renderResult(data, text);
+      if (chatId && chatId !== this.chatId) return; // user switched chats mid-stream
+      await this.renderResult(data, shown);
+      if (data.about_photo_id && userNode) this.attachThumb(userNode, data.about_photo_id);
+      if (data.topic && data.topic.new) {
+        const users = this.xlist.querySelectorAll(".rw-usernode");
+        if (users.length > 1) this.maybeDivider(userNode, data.topic.label, this.prevSpec, shown);
+      }
+      if (chatId) this.loadChats();
+      this.scrollBottom(true);
     } catch (e) {
       this.stopProgress(prog);
       if (prog.parentElement) prog.remove();
@@ -630,34 +732,13 @@ const home = {
 
   showProgress() {
     const node = cloneTpl(this.view, "tpl-progress");
-    const est = byText(node, "span", "remaining");
-    if (est) {
-      const sep = est.previousElementSibling;
-      if (sep) sep.remove();
-      est.remove();
-    }
-    const stamp = node.querySelector("div.absolute.bottom-3");
-    if (stamp) {
-      const spans = stamp.querySelectorAll("span");
-      if (spans[0]) spans[0].textContent = "ReelWorld contact sheet";
-      if (spans[1]) spans[1].textContent = "";
-    }
-    const mono = node.querySelector(".font-mono");
-    if (mono) mono.textContent = "Contact sheet";
-    const priv = byText(node, "span", "local edge node");
-    if (priv) priv.textContent = "Photo matches are verified against cataloged archives.";
-    const box = node.querySelector("div.bg-surface-container.p-space-md");
-    node._doneTpl = box.children[0].cloneNode(true);
-    box.innerHTML = "";
-    node._steps = box;
     node._t0 = Date.now();
-    node._last = node._t0;
     const el = node.querySelector("#elapsed-counter");
     const tick = () => { if (el) el.textContent = ((Date.now() - node._t0) / 1000).toFixed(1) + "s"; };
     tick();
     node._timer = setInterval(tick, 100);
     this.loadingTimer = node._timer;
-    const stop = byText(node, "button", "Stop generating");
+    const stop = node.querySelector("#rw-progress-stop");
     if (stop) stop.addEventListener("click", () => { if (this.abort) this.abort.abort(); });
     this.xlist.appendChild(node);
     this.scrollBottom();
@@ -673,29 +754,26 @@ const home = {
   },
 
   progressStep(node, name, detail) {
-    if (!node || !node._steps) return;
-    const now = Date.now();
-    const dt = ((now - (node._last || now)) / 1000).toFixed(1) + "s";
-    node._last = now;
-    const row = node._doneTpl.cloneNode(true);
-    const content = row.children[1];
-    if (content) {
-      const spans = content.querySelectorAll("span");
-      if (spans[0]) spans[0].textContent = STEP_LABEL[name] || name;
-      if (spans[1]) spans[1].textContent = dt + " · " + detail;
-    }
-    node._steps.appendChild(row);
+    if (!node) return;
+    const label = node.querySelector("#rw-step-label");
+    if (label) label.textContent = (STEP_LABEL[name] || name) + "…";
+    const d = node.querySelector("#rw-step-detail");
+    if (d) d.textContent = detail || "";
     this.scrollBottom();
   },
 
-  async runStream(text, signal, prog) {
+  async runStream(text, signal, prog, extra) {
+    const o = extra || {};
     let code = "";
     try { code = sessionStorage.getItem("rw.demoCode") || ""; } catch (e) { /* private mode */ }
     const headers = { "Content-Type": "application/json" };
     if (code) headers["X-Demo-Code"] = code;
+    const body = { session_id: sessionId(), message: text };
+    if (o.chatId) body.chat_id = o.chatId;
+    if (o.baseSpec) body.base_spec = o.baseSpec;
     const res = await fetch("/chat/stream", {
       method: "POST", headers: headers, signal: signal,
-      body: JSON.stringify({ session_id: sessionId(), message: text }),
+      body: JSON.stringify(body),
     });
     if (!res.ok) {
       let msg = "Request failed (" + res.status + ")";
@@ -738,9 +816,10 @@ const home = {
     if (data.focus_photo_id) this.focusId = data.focus_photo_id;
     if (data.spec) this.lastSpec = data.spec;
     this.paintContext();
-    if (results.length) this.renderAssistant(data);
+    if (results.length) this.renderAssistant(data, userText);
     else if (data.kind === "question_answer") await this.renderAnswer(data, userText);
-    else this.renderText(data);
+    else if (data.kind === "clarify") this.renderClarify(data);
+    else this.renderText(data, userText);
     if (!results.length && (data.kind === "ok" || data.kind === "no_strong_match") &&
         !(data.spec && data.spec.owner_only)) {
       const node = cloneTpl(this.view, "tpl-nomatch");
@@ -778,7 +857,296 @@ const home = {
     hide($("#thread-context", this.view));
   },
 
-  fillPhotoMount(mount, row, isHero, badgeTpl) {
+  /* ---------- Step 6: saved chats sidebar + thread restore ---------- */
+  async initChats() {
+    const menu = $("#chats-menu", this.view);
+    if (menu) menu.addEventListener("click", () => this.toggleSidebar(true));
+    const menuLand = $("#chats-menu-landing", this.view);
+    if (menuLand) menuLand.addEventListener("click", () => {
+      this.showThread();
+      this.toggleSidebar(true);
+    });
+    const scrim = $("#chats-scrim", this.view);
+    if (scrim) scrim.addEventListener("click", () => this.toggleSidebar(false));
+    const nw = $("#chats-new", this.view);
+    if (nw) nw.addEventListener("click", () => this.newChat());
+    const hm = $("#chats-home", this.view);
+    if (hm) hm.addEventListener("click", () => this.goHome());
+    const clr = $("#chats-clear", this.view);
+    if (clr) clr.addEventListener("click", () => this.clearChats());
+    const note = $("#chats-demo-note", this.view);
+    if (note && rwConfig.demo_mode) show(note, "block");
+    await this.loadChats();
+    if (!homeSeen) {
+      // First mount of the session (page load): restore the thread
+      // and router state in the background, but stay on the landing
+      // page. Tapping Chats reveals the restored thread instantly.
+      homeSeen = true;
+      const saved = activeChatGet();
+      if (saved) {
+        try { await this.openChat(saved, true); }
+        catch (e) { activeChatClear(); }
+      }
+    }
+    this.consumePending();
+  },
+
+  consumePending() {
+    if (!pendingSearch) return;
+    const p = pendingSearch;
+    pendingSearch = null;
+    if (typeof p === "string") this.send(p);
+    else if (p.direct === "related") this.runRelated(p.arg, p.mode || "similar");
+    else if (p.direct === "reject") this.runReject(p.arg);
+  },
+
+  toggleSidebar(open) {
+    const bar = $("#chats-sidebar", this.view);
+    const scrim = $("#chats-scrim", this.view);
+    if (bar) bar.classList.toggle("open", !!open);
+    if (scrim) {
+      if (open) show(scrim, "block");
+      else hide(scrim);
+    }
+  },
+
+  async ensureChat() {
+    if (this.chatId) return this.chatId;
+    try {
+      const body = await api("/api/chats", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({}),
+      });
+      if (body && body.chat && body.chat.id) {
+        this.chatId = body.chat.id;
+        activeChatSet(this.chatId);
+        this.loadChats();
+        return this.chatId;
+      }
+    } catch (e) { /* offline: chat works, just not saved */ }
+    return null;
+  },
+
+  async loadChats() {
+    try {
+      const body = await api("/api/chats");
+      this.chatList = (body && body.chats) || [];
+    } catch (e) { this.chatList = this.chatList || []; }
+    this.paintChats();
+  },
+
+  paintChats() {
+    const list = $("#chats-list", this.view);
+    if (!list) return;
+    list.innerHTML = "";
+    const chats = this.chatList || [];
+    const empty = $("#chats-empty", this.view);
+    if (empty) empty.style.display = chats.length ? "none" : "";
+    const now = Date.now();
+    let lastHead = null;
+    for (const c of chats) {
+      const dayStr = chatDay(c.updated_at || c.created_at, now);
+      const head = dayGroup(dayStr);
+      if (head !== lastHead) {
+        lastHead = head;
+        const li = document.createElement("li");
+        li.className = "rw-dayhead";
+        li.textContent = head;
+        list.appendChild(li);
+      }
+      const node = cloneTpl(this.view, "tpl-chatitem");
+      node.dataset.chatid = c.id;
+      if (c.id === this.chatId) node.classList.add("active");
+      const thumb = node.querySelector(".rw-chatthumb");
+      if (thumb) {
+        if (c.thumb && (c.thumb.file || c.thumb.src)) thumb.src = srcOf(c.thumb);
+        else thumb.classList.add("missing");
+      }
+      const title = node.querySelector(".rw-chattitle");
+      if (title) title.textContent = c.title || "Untitled chat";
+      const day = node.querySelector(".rw-chatday");
+      if (day) day.textContent = dayStr;
+      const open = node.querySelector(".rw-chatopen");
+      if (open) open.addEventListener("click", () => this.openChat(c.id));
+      const ren = node.querySelector("[data-op='rename']");
+      if (ren) ren.addEventListener("click", (e) => {
+        e.stopPropagation();
+        this.renameChat(c.id, c.title || "", node);
+      });
+      const del = node.querySelector("[data-op='delete']");
+      if (del) del.addEventListener("click", (e) => {
+        e.stopPropagation();
+        this.deleteChat(c.id);
+      });
+      list.appendChild(node);
+    }
+  },
+
+  goHome() {
+    hide($("#thread-wrap", this.view));
+    show($("#landing", this.view), "block");
+    this.toggleSidebar(false);
+    try { window.scrollTo(0, 0); } catch (e) { /* tests */ }
+  },
+
+  newChat() {
+    this.chatId = null;
+    activeChatClear();
+    this.xlist.innerHTML = "";
+    this.rowsById = {};
+    this.focusId = null;
+    this.lastSpec = null;
+    this.prevSpec = null;
+    this.showThread();
+    this.paintChats();
+    this.toggleSidebar(false);
+  },
+
+  async openChat(id, background) {
+    let chat = null;
+    try {
+      const body = await api("/api/chats/" + id);
+      chat = body && body.chat;
+    } catch (e) { chat = null; }
+    if (!chat) {
+      activeChatClear();
+      if (this.chatId === id && !background) this.newChat();
+      else {
+        if (this.chatId === id) this.chatId = null;
+        this.loadChats();
+      }
+      return;
+    }
+    this.chatId = chat.id;
+    activeChatSet(chat.id);
+    await this.renderThread(chat.messages || []);
+    this.paintChats();
+    if (!background) {
+      this.showThread();
+      this.scrollBottom(true);
+    }
+    this.toggleSidebar(false);
+  },
+
+  async renderThread(messages) {
+    this.xlist.innerHTML = "";
+    this.rowsById = {};
+    this.focusId = null;
+    let prevSpec = null;
+    let lastUser = "";
+    let first = true;
+    for (let i = 0; i < (messages || []).length; i++) {
+      const m = messages[i] || {};
+      if (m.role === "user") {
+        const next = messages[i + 1] || {};
+        const un = this.appendUser(m.text || "");
+        if (next.about_photo_id) this.attachThumb(un, next.about_photo_id);
+        if (!first && next.topic_new) {
+          this.maybeDivider(un, next.topic_label, prevSpec, m.text || "");
+        }
+        first = false;
+        lastUser = m.text || "";
+      } else {
+        await this.renderResult(m, lastUser);
+        if (m.spec) prevSpec = m.spec;
+      }
+    }
+    this.prevSpec = prevSpec;
+    this.lastSpec = prevSpec;
+  },
+
+  maybeDivider(userNode, topicLabel, prevSpec, userText) {
+    const node = cloneTpl(this.view, "tpl-divider");
+    const strong = node.querySelector(".rw-div-label strong");
+    if (strong) strong.textContent = topicLabel || "Untitled";
+    const link = node.querySelector(".rw-div-link");
+    if (link) {
+      if (prevSpec && prevSpec.query && userText) {
+        link.addEventListener("click", () => {
+          this.send("refine: " + userText, { display: userText, baseSpec: prevSpec });
+        });
+      } else link.style.display = "none";
+    }
+    if (userNode && userNode.parentNode) userNode.parentNode.insertBefore(node, userNode);
+    else this.xlist.appendChild(node);
+    return node;
+  },
+
+  async attachThumb(userNode, photoId) {
+    if (!userNode || !photoId || userNode.querySelector(".rw-usertumb")) return;
+    let row = this.rowsById[photoId] || null;
+    if (!row) {
+      try { row = await photoDetail(photoId); } catch (e) { row = null; }
+    }
+    if (!row) return;
+    const img = document.createElement("img");
+    img.className = "rw-usertumb";
+    img.alt = "";
+    img.src = srcOf(row);
+    userNode.insertAdjacentElement("afterbegin", img);
+  },
+
+  renameChat(id, current, rowEl) {
+    const open = rowEl.querySelector(".rw-chatopen");
+    if (!open || rowEl.querySelector(".rw-chatrename")) return;
+    open.style.display = "none";
+    const input = document.createElement("input");
+    input.type = "text";
+    input.className = "rw-chatrename";
+    input.value = current || "";
+    input.setAttribute("aria-label", "Chat name");
+    open.parentNode.insertBefore(input, open);
+    input.focus();
+    try { input.select(); } catch (e) { /* keep */ }
+    let done = false;
+    const finish = async (save) => {
+      if (done) return;
+      done = true;
+      const v = input.value.trim();
+      if (save && v && v !== (current || "")) {
+        try {
+          await api("/api/chats/" + id, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ title: v }),
+          });
+        } catch (e) { /* keep the old title */ }
+      }
+      this.loadChats();
+    };
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") { e.preventDefault(); finish(true); }
+      else if (e.key === "Escape") finish(false);
+    });
+    input.addEventListener("blur", () => finish(true));
+  },
+
+  async deleteChat(id) {
+    try { await api("/api/chats/" + id, { method: "DELETE" }); } catch (e) { /* gone */ }
+    if (this.chatId === id) this.newChat();
+    else this.loadChats();
+  },
+
+  clearChats() {
+    const btn = $("#chats-clear", this.view);
+    if (!btn) return;
+    if (!btn.classList.contains("armed")) {
+      btn.classList.add("armed");
+      btn.dataset.label = btn.textContent;
+      btn.textContent = "Click again to clear all chats";
+      setTimeout(() => {
+        btn.classList.remove("armed");
+        if (btn.dataset.label) btn.textContent = btn.dataset.label;
+      }, 3000);
+      return;
+    }
+    btn.classList.remove("armed");
+    if (btn.dataset.label) btn.textContent = btn.dataset.label;
+    api("/api/chats", { method: "DELETE" }).catch(() => {}).then(() => this.newChat());
+  },
+
+  fillPhotoMount(mount, row, isHero, badgeTpl, spec) {
     const img = mount.querySelector("img");
     if (img) {
       img.src = srcOf(row);
@@ -826,6 +1194,31 @@ const home = {
         wrap.appendChild(badge);
       }
     }
+    const mark = verdictMark(row.check, (spec && spec.constraints) || []);
+    if (mark) {
+      const wrap = mount.querySelector(".relative");
+      if (wrap) {
+        const m = document.createElement("div");
+        m.className = "rw-verdict " + mark.tone;
+        const ic = document.createElement("span");
+        ic.className = "material-symbols-outlined text-[13px]";
+        ic.textContent = mark.icon;
+        const lb = document.createElement("span");
+        lb.textContent = mark.label;
+        m.appendChild(ic);
+        m.appendChild(lb);
+        wrap.appendChild(m);
+      }
+      if (mark.reason) {
+        const info = isHero ? mount.children[1] : mount.querySelector("div.mt-1");
+        if (info) {
+          const r = document.createElement("span");
+          r.className = "rw-v-reason";
+          r.textContent = mark.reason;
+          info.appendChild(r);
+        }
+      }
+    }
   },
 
   fillChips(node, spec) {
@@ -848,23 +1241,8 @@ const home = {
   async dropChip(key, label) {
     if (!this.lastSpec) return;
     const spec = applyChipRemove(this.lastSpec, key);
-    this.appendUser("Refine: drop \u201C" + label + "\u201D");
-    const prog = this.showProgress();
-    this.progressStep(prog, "searched", "Searching with updated filters…");
-    try {
-      const data = await api("/api/search", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ session_id: sessionId(), spec: spec }),
-      });
-      this.stopProgress(prog);
-      prog.remove();
-      await this.renderResult(data, label);
-    } catch (e) {
-      this.stopProgress(prog);
-      prog.remove();
-      this.renderError("Refine failed: " + ((e && e.message) || e));
-    }
+    return this.runDirect("Refine: drop \u201C" + label + "\u201D", "/api/search",
+      { spec: spec });
   },
 
   fillSuggestions(node, focusPlace) {
@@ -911,9 +1289,9 @@ const home = {
 
   wireActions(node, focusId) {
     const defs = [
-      ["Another angle", () => this.send("Show another angle of " + focusId)],
-      ["More like this", () => this.send("More like " + focusId)],
-      ["Not this one", () => this.send("Not this one")],
+      ["Another angle", () => this.runRelated(focusId, "angle")],
+      ["More like this", () => this.runRelated(focusId, "similar")],
+      ["Not this one", () => this.runReject(focusId)],
       ["Compare", () => this.enterCompare(node)],
     ];
     for (const [label, fn] of defs) {
@@ -922,7 +1300,45 @@ const home = {
     }
   },
 
-  renderAssistant(data) {
+  async runDirect(userText, path, reqBody) {
+    const chatId = await this.ensureChat();
+    this.showThread();
+    this.appendUser(userText);
+    const prog = this.showProgress();
+    this.progressStep(prog, "searched", "Searching with updated filters…");
+    try {
+      const body = Object.assign({ session_id: sessionId() }, reqBody);
+      if (chatId) { body.chat_id = chatId; body.user_text = userText; }
+      const data = await api(path, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      this.stopProgress(prog);
+      prog.remove();
+      if (chatId && chatId !== this.chatId) return; // user switched chats mid-call
+      await this.renderResult(data, userText);
+      if (chatId) this.loadChats();
+      this.scrollBottom(true);
+    } catch (e) {
+      this.stopProgress(prog);
+      prog.remove();
+      this.renderError("Refine failed: " + ((e && e.message) || e));
+    }
+  },
+
+  runRelated(photoId, mode) {
+    const word = mode === "angle" ? "another angle of " : "more like ";
+    return this.runDirect("Show " + word + photoId, "/api/related",
+      { photo_id: photoId, mode: mode });
+  },
+
+  runReject(photoId) {
+    return this.runDirect("Not this one", "/api/reject",
+      { photo_id: photoId || this.focusId || null });
+  },
+
+  renderAssistant(data, userText) {
     const results = (data.results || []).slice(0, 5);
     const node = cloneTpl(this.view, "tpl-assistant");
     const header = node.children[0];
@@ -935,6 +1351,12 @@ const home = {
     }
     const p = node.querySelector("p");
     if (p) p.textContent = data.text || "";
+    if (data.label && p) {
+      const tag = document.createElement("div");
+      tag.className = "rw-labeltag";
+      tag.textContent = data.label;
+      p.after(tag);
+    }
     this.fillChips(node, data.spec);
     const box = node.querySelector("div.w-full.bg-surface-container-low");
     const grid = box ? box.querySelector(".grid") : null;
@@ -946,12 +1368,21 @@ const home = {
     if (wantBadge) {
       try { badgeTpl = cloneTpl(this.view, "tpl-similarbadge"); } catch (e) { badgeTpl = null; }
     }
-    if (hero && results[0]) this.fillPhotoMount(hero, results[0], true, null);
+    if (hero && results[0]) this.fillPhotoMount(hero, results[0], true, null, data.spec);
+    if (box) {
+      const cl = checkedLine(data.trace || []);
+      if (cl) {
+        const line = document.createElement("p");
+        line.className = "rw-checkline";
+        line.textContent = cl;
+        box.after(line);
+      }
+    }
     if (subgrid) {
       subgrid.innerHTML = "";
       for (const r of results.slice(1)) {
         const m = subTpl.cloneNode(true);
-        this.fillPhotoMount(m, r, false, badgeTpl);
+        this.fillPhotoMount(m, r, false, badgeTpl, data.spec);
         subgrid.appendChild(m);
       }
       if (!results.slice(1).length) {
@@ -966,6 +1397,7 @@ const home = {
     this.fillTrace(node, data);
     node.dataset.reply = String(++this.replySeq);
     this.xlist.appendChild(node);
+    this.msgActions(node, data, userText || "");
     this.scrollBottom();
     return node;
   },
@@ -982,6 +1414,19 @@ const home = {
     answerP.textContent = data.text || "";
     const photoBlock = node.children[1];
     node.insertBefore(answerP, photoBlock);
+    if (data.took_to_mean) {
+      const took = document.createElement("p");
+      took.className = "rw-took";
+      const s = document.createElement("span");
+      s.textContent = data.took_to_mean + " ";
+      const ch = document.createElement("button");
+      ch.type = "button";
+      ch.textContent = "Change";
+      ch.addEventListener("click", () => this.send("I meant a different photo"));
+      took.appendChild(s);
+      took.appendChild(ch);
+      answerP.after(took);
+    }
     let detail = null;
     if (focus) {
       try { detail = await photoDetail(focus); } catch (e) { detail = null; }
@@ -996,25 +1441,49 @@ const home = {
       const plate = photoBlock.querySelector(".absolute");
       if (plate) plate.textContent = focus;
       const banner = photoBlock.querySelector(".text-on-secondary-container");
-      if (banner) hide(banner); // per-turn source is not verified; never claim a re-look
+      const reinspected = (data.trace || []).some((t) => t.step === "reinspected");
+      if (banner) {
+        if (reinspected) banner.textContent = "I looked at the photo again to answer this.";
+        else hide(banner);
+      }
     } else if (photoBlock) {
       hide(photoBlock);
     }
+    const about = data.about_photo_id || focus;
+    if (about) {
+      const head = document.createElement("div");
+      head.className = "rw-abouthead";
+      const aimg = document.createElement("img");
+      const arow = (detail && detail.photo_id) ? detail : row;
+      aimg.src = (arow && arow.photo_id) ? srcOf(arow) : "";
+      aimg.alt = "";
+      const aspan = document.createElement("span");
+      aspan.textContent = "Answering about " + about;
+      head.appendChild(aimg);
+      head.appendChild(aspan);
+      node.insertBefore(head, answerP);
+    }
     const ocr = node.querySelector("div.bg-surface-container-highest");
+    if (ocr) hide(ocr);
     const signs = (detail && detail.signs) || [];
-    if (ocr && SIGN_Q.test(userText || "") && signs.length) {
-      const s = signs[0];
-      const conf = ocr.querySelector("span.px-space-xs");
-      if (conf && conf.lastChild) {
-        conf.lastChild.textContent = " " + (s.legibility || "Unrated") +
-          ((s.confidence === null || s.confidence === undefined) ? "" : " (" + Math.round(s.confidence * 100) + "% confidence)");
+    if (signs.length) {
+      const wrap = document.createElement("div");
+      wrap.className = "rw-signs";
+      for (const s of signs.slice(0, 3)) {
+        const line = document.createElement("div");
+        line.className = "rw-signrow";
+        const code = document.createElement("span");
+        code.className = "rw-signtext";
+        code.textContent = "\u201C" + (s.text || "") + "\u201D";
+        const b = document.createElement("span");
+        const clear = String(s.legibility || "").toLowerCase() === "clear";
+        b.className = "rw-signbadge " + (clear ? "rw-sign-clear" : "rw-sign-partial");
+        b.textContent = clear ? "Clear" : "Partial";
+        line.appendChild(code);
+        line.appendChild(b);
+        wrap.appendChild(line);
       }
-      const txt = ocr.querySelector("p");
-      if (txt) txt.textContent = "\u201C" + (s.text || "") + "\u201D";
-      const loc = ocr.querySelector("span.font-label-sm.text-on-surface-variant");
-      if (loc) { if (s.where) loc.textContent = "Location: " + s.where; else loc.remove(); }
-    } else if (ocr) {
-      hide(ocr);
+      answerP.after(wrap);
     }
     const det = node.querySelector("details");
     if (det) {
@@ -1035,11 +1504,12 @@ const home = {
     if (focus) this.wireActions(node, focus);
     node.dataset.reply = String(++this.replySeq);
     this.xlist.appendChild(node);
+    this.msgActions(node, data, userText || "");
     this.scrollBottom();
     return node;
   },
 
-  renderText(data) {
+  renderText(data, userText) {
     const node = cloneTpl(this.view, "tpl-assistant");
     const header = node.children[0];
     const badgeDiv = header.querySelector("div.bg-surface-container-high");
@@ -1065,8 +1535,79 @@ const home = {
     this.fillTrace(node, data);
     node.dataset.reply = String(++this.replySeq);
     this.xlist.appendChild(node);
+    this.msgActions(node, data, userText || "");
     this.scrollBottom();
     return node;
+  },
+
+  renderClarify(data) {
+    const node = cloneTpl(this.view, "tpl-assistant");
+    const header = node.children[0];
+    const badgeDiv = header.querySelector("div.bg-surface-container-high");
+    if (badgeDiv && badgeDiv.children[1]) {
+      badgeDiv.children[1].textContent = KIND_BADGE.clarify || "Reel";
+    }
+    if (header.children[1]) header.children[1].textContent = "Needs a choice";
+    const p = node.querySelector("p");
+    if (p) p.textContent = questionPart(data.text || "");
+    const box = node.querySelector("div.w-full.bg-surface-container-low");
+    if (box) hide(box);
+    const lab = byText(node, "span", "Active Constraints:");
+    if (lab) hide(lab.parentElement);
+    this.fillOptions(node, data.options || []);
+    this.fillTrace(node, data);
+    node.dataset.reply = String(++this.replySeq);
+    this.xlist.appendChild(node);
+    this.msgActions(node, data, "", true);
+    this.scrollBottom();
+    return node;
+  },
+
+  fillOptions(node, options) {
+    const lab = byText(node, "span", "Suggestions:");
+    if (!lab) return;
+    const box = lab.parentElement;
+    const tpl = box.querySelector("button");
+    box.querySelectorAll("button").forEach((b) => b.remove());
+    lab.textContent = "Choose one:";
+    if (!options.length || !tpl) { hide(box); return; }
+    show(box);
+    for (const o of options) {
+      const b = tpl.cloneNode(true);
+      b.textContent = o.label || o.message;
+      b.addEventListener("click", () => this.send(o.message || o.label));
+      box.appendChild(b);
+    }
+  },
+
+  msgActions(node, data, userText, noRetry) {
+    const acts = cloneTpl(this.view, "tpl-msgactions");
+    const copy = acts.querySelector("[data-act='copy']");
+    if (copy) copy.addEventListener("click", async (e) => {
+      e.stopPropagation();
+      const label = copy.querySelector("span:last-child");
+      try {
+        await navigator.clipboard.writeText(data.text || "");
+        if (label) {
+          label.textContent = "Copied";
+          setTimeout(() => { label.textContent = "Copy"; }, 1500);
+        }
+      } catch (err) {
+        if (label) label.textContent = "Copy failed";
+      }
+    });
+    const flag = acts.querySelector("[data-act='flag']");
+    if (flag) {
+      flag.setAttribute("data-flag", "");
+      flag.setAttribute("data-target", data.label || data.kind || "this reply");
+    }
+    const retry = acts.querySelector("[data-act='retry']");
+    if (retry) {
+      if (!userText || noRetry) retry.style.display = "none";
+      else retry.addEventListener("click", (e) => { e.stopPropagation(); this.send(userText); });
+    }
+    node.appendChild(acts);
+    return acts;
   },
 
   renderError(text) {
@@ -2240,6 +2781,8 @@ function setBtnLoading(btn, on, text) {
 }
 
 function goHomeSearch(message) {
+  // string: send through the router; {direct} object: run the tool
+  // directly with no router call. Consumed by home.consumePending.
   pendingSearch = message;
   if ((location.hash || "#/") !== "#/") location.hash = "#/";
   else route();
@@ -2285,9 +2828,9 @@ const photo = {
     $("#btn-find", view).addEventListener("click", () => this.bridge("all"));
     $("#btn-angle", view).addEventListener("click", () => this.angle());
     $("#btn-more", view).addEventListener("click", () => {
-      goHomeSearch("Show me photos like " + this.id);
+      goHomeSearch({ direct: "related", arg: this.id, mode: "similar" });
     });
-    $("#btn-reject", view).addEventListener("click", () => goHomeSearch("not this one"));
+    $("#btn-reject", view).addEventListener("click", () => goHomeSearch({ direct: "reject", arg: this.id }));
     $("#btn-share", view).addEventListener("click", () => this.share());
     $("#share-confirm", view).addEventListener("click", () => this.enableSharing());
     $("#bridge-close", view).addEventListener("click", () => hide($("#bridge-panel", view)));
@@ -2949,19 +3492,20 @@ const photo = {
         $("#bridge-groups", this.view).appendChild(list);
         return;
       }
-      /* No true other view in the bridge: ask the agent so the reply
-         carries its honest message (kind no_other_angle). */
-      this.bridgeSay("Asking the search agent… (this can take 15–40 seconds)");
-      const chat = await api("/chat", {
+      /* No true other view in the bridge: use the related tool
+         directly so the reply carries its honest message
+         (kind no_other_angle), with no router call. */
+      const rel = await api("/api/related", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           session_id: sessionId(),
-          message: "Show me another angle of " + this.id,
+          photo_id: this.id,
+          mode: "angle",
         }),
       });
       if (!this.view.isConnected) return;
-      this.bridgeSay(chat.text || "No other angle found.");
+      this.bridgeSay(rel.text || "No other angle found.");
     } catch (e) {
       if (!this.view.isConnected) return;
       this.showBridgePanel("Another angle");
@@ -7065,6 +7609,7 @@ const showcase = {
 
 /* ---------- router ---------- */
 let pendingSearch = null;
+let homeSeen = false;
 const viewCache = new Map();
 async function loadView(name) {
   if (!viewCache.has(name)) {
@@ -7164,6 +7709,43 @@ function tagPhotos(byId) {
   const ids = Object.keys(byId || {});
   ids.forEach((pid) => { byId[pid].photo_id = pid; });
   return tagSort(ids.map((pid) => byId[pid]));
+}
+
+/* One-by-one review queue: face suggestions first (scan order), then the
+   rest of the unreviewed photos. Already-tagged photos are skipped. */
+function reviewQueue(scan, byId) {
+  const seen = {};
+  const out = [];
+  (scan || []).forEach((s) => {
+    const m = (byId || {})[s.photo_id];
+    if (!m || m.owner_present != null || seen[s.photo_id]) return;
+    seen[s.photo_id] = true;
+    out.push({ pid: s.photo_id, band: s.band || null, faces: s.faces || 0 });
+  });
+  tagPhotos(byId).forEach((m) => {
+    if (m.owner_present != null || seen[m.photo_id]) return;
+    seen[m.photo_id] = true;
+    out.push({ pid: m.photo_id, band: null, faces: m.people || 0 });
+  });
+  return out;
+}
+
+/* Done panel shows only when every photo is reviewed (and the user
+   has not asked to change tags). */
+function tagDoneVisible(c, showAll) {
+  return !!c && c.total > 0 && c.unreviewed === 0 && !showAll;
+}
+
+/* Group {pid: {present, position}} decisions for bulk owner-tag calls. */
+function groupDecisions(decisions) {
+  const groups = {};
+  Object.keys(decisions || {}).forEach((pid) => {
+    const d = decisions[pid];
+    const pos = d.present ? d.position || null : null;
+    const key = JSON.stringify([d.present, pos]);
+    (groups[key] = groups[key] || { present: d.present, position: pos, ids: [] }).ids.push(pid);
+  });
+  return Object.keys(groups).map((k) => groups[k]);
 }
 
 const profile = {
@@ -7303,7 +7885,7 @@ const profile = {
 const tag = {
   view: null, photos: [], byId: {}, sel: {}, lastOp: null,
   pending: null, profName: null, summary: null,
-  face: null, scan: null,
+  face: null, scan: null, review: null, showAll: false,
 
   mount(view) {
     this.view = view;
@@ -7313,6 +7895,8 @@ const tag = {
     this.busy = false;
     this.face = null;
     this.scan = null;
+    this.review = null;
+    this.showAll = false;
     $("#tg-bulk-yes", view).addEventListener("click", () => this.bulkYes());
     $("#tg-bulk-clear", view).addEventListener("click", () => {
       this.sel = {};
@@ -7324,11 +7908,35 @@ const tag = {
     $("#tg-face-file", view).addEventListener("change", (e) => this.saveFace(e.target));
     $("#tg-face-scan", view).addEventListener("click", () => this.scanFace());
     $("#tg-face-clear", view).addEventListener("click", () => this.clearFace());
-    $("#tg-face-list", view).addEventListener("click", (e) => {
-      const b = e.target.closest("button[data-pid]");
-      if (!b || this.busy) return;
-      this.confirmFace(b.dataset.pid, b.dataset.yes === "1");
+    // Review wiring is guarded: a stale cached tag.html keeps the old
+    // grid working instead of crashing the whole page.
+    const on = (id, fn) => {
+      const el = $("#" + id, view);
+      if (el) el.addEventListener("click", fn);
+    };
+    on("tg-face-review", () => this.startReview());
+    on("tg-review-exit", () => this.exitReview());
+    on("tg-review-prev", () => this.prevReview());
+    on("tg-review-yes", () => {
+      const item = this.review && this.review.queue[this.review.idx];
+      if (item) this.decide(item.pid, true, null);
     });
+    on("tg-review-no", () => {
+      const item = this.review && this.review.queue[this.review.idx];
+      if (item) this.decide(item.pid, false, null);
+    });
+    on("tg-review-skip", () => this.skipReview());
+    on("tg-review-save", () => this.saveReview());
+    on("tg-done-change", () => { this.showAll = true; this.paint(); });
+    on("tg-done-retake", () => {
+      this.showAll = true;
+      this.paint();
+      const panel = $("#tg-face", view);
+      if (panel) panel.scrollIntoView({ block: "start", behavior: "smooth" });
+      const f = $("#tg-face-file", view);
+      if (f) f.click();
+    });
+    on("tg-done-ask", () => goHomeSearch("show me photos of me"));
     this.load();
   },
 
@@ -7385,16 +7993,59 @@ const tag = {
     $("#tg-bar", view).style.width = (c.total ? Math.round((done / c.total) * 100) : 0) + "%";
     const selIds = Object.keys(this.sel).filter((pid) => this.sel[pid]);
     const bulk = $("#tg-bulk", view);
-    bulk.classList.toggle("hidden", !selIds.length);
-    bulk.classList.toggle("flex", !!selIds.length);
+    const allDone = tagDoneVisible(c, this.showAll);
+    bulk.classList.toggle("hidden", !selIds.length || allDone);
+    bulk.classList.toggle("flex", !!selIds.length && !allDone);
     $("#tg-bulk-count", view).textContent =
       selIds.length + (selIds.length === 1 ? " selected" : " selected");
     const grid = $("#tg-grid", view);
     grid.innerHTML = "";
     this.photos.forEach((m) => grid.appendChild(this.tile(m)));
+    grid.classList.toggle("hidden", allDone);
+    grid.classList.toggle("grid", !allDone);
+    const facePanel = $("#tg-face", view);
+    facePanel.classList.toggle("hidden", allDone);
+    facePanel.classList.toggle("flex", !allDone);
+    const donePanel = $("#tg-done", view);
+    if (donePanel) {
+      donePanel.classList.toggle("hidden", !allDone);
+      donePanel.classList.toggle("flex", allDone);
+    }
+    if (allDone) this.paintDone();
     $("#tg-undo", view).classList.toggle("hidden", !this.lastOp);
     this.paintFace();
     this.paintFaceList();
+    const qn = reviewQueue(this.scan, this.byId).length;
+    const rv = $("#tg-face-review", view);
+    if (!rv) return;
+    if (qn && !this.review) {
+      rv.classList.remove("hidden");
+      rv.textContent = "Review " + qn + (qn === 1 ? " photo" : " photos") + " one by one";
+    } else rv.classList.add("hidden");
+    if (this.review) this.paintReview();
+    else {
+      const card = $("#tg-review", view);
+      if (card) { card.classList.add("hidden"); card.classList.remove("flex"); }
+    }
+  },
+
+  paintDone() {
+    const view = this.view;
+    const title = $("#tg-done-title", view);
+    if (!title) return;
+    const c = this.counts();
+    title.textContent = "You're all tagged, " + (this.profName || "friend") + ".";
+    const img = $("#tg-done-face", view);
+    const has = !!(this.face && this.face.present && this.face.preview);
+    if (img) {
+      img.classList.toggle("hidden", !has);
+      if (has) img.src = this.face.preview;
+    }
+    const stats = $("#tg-done-stats", view);
+    if (stats) {
+      stats.textContent = c.total + (c.total === 1 ? " photo" : " photos") +
+        " reviewed · " + c.yes + " with you · " + c.no + " without you";
+    }
   },
 
   paintFace() {
@@ -7412,55 +8063,18 @@ const tag = {
     box.innerHTML = "";
     if (!this.scan) return;
     const scored = this.scan.filter((s) => s.band);
-    const pills = { strong: ["Strong match", "bg-secondary-container text-on-secondary-fixed"],
-      likely: ["Likely", "bg-primary-container text-surface"],
-      weak: ["Weak", "bg-surface-container-high text-on-surface-variant"] };
-    scored.forEach((s) => {
-      const m = this.byId[s.photo_id] || {};
-      const row = document.createElement("div");
-      row.className = "flex items-center gap-3 rounded-lg bg-surface-container-highest p-2";
-      const img = document.createElement("img");
-      img.src = s.src || m.src || "";
-      img.alt = s.caption || s.photo_id;
-      img.loading = "lazy";
-      img.className = "rw-photo w-14 h-14 rounded-lg object-cover flex-shrink-0 bg-surface-container-high";
-      const mid = document.createElement("div");
-      mid.className = "flex flex-col gap-1 flex-1 min-w-0";
-      const cap = document.createElement("span");
-      cap.className = "font-body-sm text-body-sm text-on-surface truncate";
-      cap.textContent = s.caption || s.photo_id;
-      const meta = document.createElement("span");
-      meta.className = "font-label-sm text-label-sm text-on-surface-variant";
-      const st = m.owner_present === true ? "tagged you" :
-        (m.owner_present === false ? "tagged not you" : "not reviewed");
-      meta.textContent = s.faces + (s.faces === 1 ? " face" : " faces") + " · " + st;
-      const pill = document.createElement("span");
-      const [txt, cls] = pills[s.band] || pills.weak;
-      pill.className = "px-2 py-0.5 rounded font-label-sm text-label-sm w-fit " + cls;
-      pill.textContent = txt;
-      mid.append(cap, meta, pill);
-      const yes = document.createElement("button");
-      yes.type = "button";
-      yes.dataset.pid = s.photo_id;
-      yes.dataset.yes = "1";
-      yes.className = "min-h-[44px] px-4 rounded-lg bg-primary-container text-surface hover:bg-primary font-label-md text-label-md flex-shrink-0";
-      yes.textContent = "Yes, me";
-      const no = document.createElement("button");
-      no.type = "button";
-      no.dataset.pid = s.photo_id;
-      no.dataset.yes = "0";
-      no.className = "min-h-[44px] px-4 rounded-lg bg-surface-container-high hover:bg-surface-dim text-on-surface font-label-md text-label-md flex-shrink-0";
-      no.textContent = "Not me";
-      row.append(img, mid, yes, no);
-      box.appendChild(row);
-    });
+    const p = document.createElement("p");
+    p.className = "font-body-sm text-body-sm text-on-surface";
+    p.textContent = scored.length + (scored.length === 1 ? " suggestion" : " suggestions") +
+      " ready — press “Review” above and confirm each photo one by one. Nothing is tagged yet.";
+    box.appendChild(p);
     const skipped = this.scan.length - scored.length;
     if (skipped > 0) {
-      const p = document.createElement("p");
-      p.className = "font-body-sm text-body-sm text-on-surface-variant";
-      p.textContent = skipped + (skipped === 1 ? " photo had" : " photos had") +
-        " no detectable face — tag " + (skipped === 1 ? "it" : "them") + " by hand below.";
-      box.appendChild(p);
+      const q = document.createElement("p");
+      q.className = "font-body-sm text-body-sm text-on-surface-variant";
+      q.textContent = skipped + (skipped === 1 ? " photo had" : " photos had") +
+        " no detectable face — it is still in the review queue to check by hand.";
+      box.appendChild(q);
     }
   },
 
@@ -7483,6 +8097,7 @@ const tag = {
     if (!dataUrl || !view.isConnected) return;
     this.busy = true;
     this.faceSay("Saving your reference face…");
+    let auto = false;
     try {
       const out = await api("/api/face-reference", {
         method: "POST",
@@ -7495,12 +8110,14 @@ const tag = {
       this.paintFace();
       this.paintFaceList();
       this.faceSay("Reference saved (" + out.faces + (out.faces === 1 ? " face" : " faces") +
-        " found). Now press “Find me in my photos”.");
+        " found). Scanning your photos…");
+      auto = true;
     } catch (e) {
       if (view.isConnected) this.faceSay(String((e && e.message) || e));
     } finally {
       this.busy = false;
     }
+    if (auto && view.isConnected) this.scanFace();
   },
 
   async scanFace() {
@@ -7521,10 +8138,13 @@ const tag = {
       this.faceSay("Found " + n + (n === 1 ? " suggestion" : " suggestions") +
         " in " + out.scanned + " photos. Confirm each one — nothing is tagged yet.");
     } catch (e) {
-      if (view.isConnected) this.faceSay(String((e && e.message) || e));
+      if (view.isConnected) return;
+      this.faceSay(String((e && e.message) || e));
+      return;
     } finally {
       this.busy = false;
     }
+    if (view.isConnected) this.startReview();
   },
 
   async clearFace() {
@@ -7546,12 +8166,180 @@ const tag = {
     }
   },
 
-  async confirmFace(pid, yes) {
-    await this.tagSome([pid], yes, null);
-    if (this.view.isConnected) {
-      this.paintFaceList();
-      this.faceSay(yes ? "Tagged — that's you." : "Tagged — not you.");
+  startReview() {
+    const view = this.view;
+    if (this.busy) return;
+    if (!$("#tg-review", view)) {
+      $("#tg-status", view).textContent = "Reload the page to enable one-by-one review.";
+      return;
     }
+    if (!this.profName) {
+      this.pending = { review: true };
+      const box = $("#tg-name-prompt", view);
+      box.classList.remove("hidden");
+      box.classList.add("flex");
+      $("#tg-name-status", view).textContent = "";
+      const inp = $("#tg-name", view);
+      if (inp) inp.focus();
+      return;
+    }
+    const queue = reviewQueue(this.scan, this.byId);
+    if (!queue.length) {
+      $("#tg-status", view).textContent = "Everything is reviewed already.";
+      return;
+    }
+    this.review = { queue: queue, idx: 0, decisions: {} };
+    $("#tg-review-status", view).textContent = "";
+    this.paint();
+    const card = $("#tg-review", view);
+    if (card) card.scrollIntoView({ block: "start", behavior: "smooth" });
+  },
+
+  exitReview() {
+    this.review = null;
+    this.paint();
+  },
+
+  prevReview() {
+    const r = this.review;
+    if (!r || r.idx === 0) return;
+    r.idx--;
+    this.paintReview();
+  },
+
+  skipReview() {
+    const r = this.review;
+    if (!r) return;
+    if (r.idx < r.queue.length - 1) r.idx++;
+    this.paintReview();
+  },
+
+  decide(pid, present, position) {
+    const r = this.review;
+    if (!r) return;
+    r.decisions[pid] = { present: present, position: present ? position || null : null };
+    if (r.idx < r.queue.length - 1) r.idx++;
+    this.paintReview();
+  },
+
+  paintReview() {
+    const view = this.view;
+    const r = this.review;
+    const card = $("#tg-review", view);
+    if (!r || !card) return;
+    card.classList.remove("hidden");
+    card.classList.add("flex");
+    const n = r.queue.length;
+    const item = r.queue[r.idx];
+    const m = this.byId[item.pid] || {};
+    const decided = Object.keys(r.decisions).length;
+    $("#tg-review-count", view).textContent = "Photo " + (r.idx + 1) + " of " + n +
+      " · " + decided + " decided";
+    $("#tg-review-bar", view).style.width = (n ? Math.round((decided / n) * 100) : 0) + "%";
+    const img = $("#tg-review-img", view);
+    img.src = m.src || "";
+    img.alt = m.caption || item.pid;
+    $("#tg-review-cap", view).textContent = (m.caption || item.pid) + " · " +
+      ((m.people || 0) + ((m.people || 0) === 1 ? " person" : " people"));
+    const meta = $("#tg-review-meta", view);
+    meta.innerHTML = "";
+    const pill = document.createElement("span");
+    const pills = { strong: ["Strong match", "bg-secondary-container text-on-secondary-fixed"],
+      likely: ["Likely", "bg-primary-container text-surface"],
+      weak: ["Weak", "bg-surface-container-high text-on-surface-variant"] };
+    if (item.band && pills[item.band]) {
+      pill.className = "px-2 py-0.5 rounded font-label-sm text-label-sm " + pills[item.band][1];
+      pill.textContent = pills[item.band][0];
+    } else {
+      pill.className = "px-2 py-0.5 rounded font-label-sm text-label-sm " +
+        "bg-surface-container-high text-on-surface-variant";
+      pill.textContent = "Check by hand";
+    }
+    meta.appendChild(pill);
+    const cur = r.decisions[item.pid];
+    if (cur) {
+      const d = document.createElement("span");
+      d.className = "font-label-sm text-label-sm text-on-surface-variant";
+      d.textContent = cur.present
+        ? "Your choice: Yes" + (cur.position ? " (" + cur.position + ")" : "")
+        : "Your choice: Not me";
+      meta.appendChild(d);
+    }
+    const pos = $("#tg-review-pos", view);
+    pos.innerHTML = "";
+    if ((m.people || 0) > 1) {
+      pos.classList.remove("hidden");
+      pos.classList.add("flex");
+      const lab = document.createElement("span");
+      lab.className = "font-label-sm text-label-sm text-on-surface-variant";
+      lab.textContent = "Where are you? (tapping one answers Yes)";
+      pos.appendChild(lab);
+      ["left", "centre", "right"].forEach((p) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        const on = cur && cur.present && cur.position === p;
+        b.className = "min-h-[44px] px-3 rounded-lg font-label-md text-label-md " +
+          (on ? "bg-secondary text-surface" : "bg-surface-container-high hover:bg-surface-dim text-on-surface");
+        b.textContent = p[0].toUpperCase() + p.slice(1);
+        b.addEventListener("click", () => this.decide(item.pid, true, p));
+        pos.appendChild(b);
+      });
+    } else {
+      pos.classList.add("hidden");
+      pos.classList.remove("flex");
+    }
+    const save = $("#tg-review-save", view);
+    save.textContent = "Save all (" + decided + " decided)";
+    save.classList.toggle("opacity-45", !decided);
+    $("#tg-review-prev", view).classList.toggle("opacity-45", r.idx === 0);
+  },
+
+  async saveReview() {
+    const r = this.review;
+    const view = this.view;
+    if (!r || this.busy) return;
+    const groups = groupDecisions(r.decisions);
+    if (!groups.length) {
+      $("#tg-review-status", view).textContent = "Decide Yes or Not me on at least one photo first.";
+      return;
+    }
+    this.busy = true;
+    const pids = Object.keys(r.decisions);
+    const st = $("#tg-status", view);
+    st.textContent = "Saving " + pids.length + (pids.length === 1 ? " photo…" : " photos…");
+    const prev = {};
+    pids.forEach((pid) => {
+      const m = this.byId[pid] || {};
+      prev[pid] = { present: m.owner_present == null ? null : !!m.owner_present,
+                    position: m.owner_position || null };
+    });
+    try {
+      for (const g of groups) {
+        const body = { photo_ids: g.ids, present: g.present };
+        if (g.present && g.position) body.position = g.position;
+        await api("/api/owner-tags", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+        if (!view.isConnected) return;
+      }
+      pids.forEach((pid) => {
+        if (this.byId[pid]) {
+          this.byId[pid].owner_present = r.decisions[pid].present;
+          this.byId[pid].owner_position = r.decisions[pid].position;
+        }
+      });
+      this.lastOp = { pids: pids, prev: prev };
+      this.summary = null;
+      this.review = null;
+      this.showAll = false;
+      this.paint();
+      st.textContent = "Saved " + pids.length + (pids.length === 1 ? " tag." : " tags.");
+    } catch (e) {
+      if (!view.isConnected) return;
+      st.textContent = String((e && e.message) || e);
+    }
+    this.busy = false;
   },
 
   statePill(m) {
@@ -7680,6 +8468,7 @@ const tag = {
       this.sel = {};
       this.lastOp = { pids: pids.slice(), prev: prev };
       this.summary = null;
+      this.showAll = false;
       this.paint();
       st.textContent = "Saved.";
     } catch (e) {
@@ -7714,7 +8503,8 @@ const tag = {
       box.classList.remove("flex");
       const pend = this.pending;
       this.pending = null;
-      if (pend) await this.tagSome(pend.pids, pend.present, pend.position);
+      if (pend && pend.review) this.startReview();
+      else if (pend) await this.tagSome(pend.pids, pend.present, pend.position);
     } catch (e) {
       if (!view.isConnected) return;
       st.textContent = String((e && e.message) || e);
@@ -7754,6 +8544,7 @@ const tag = {
       });
       this.lastOp = null;
       this.summary = null;
+      this.showAll = false;
       this.paint();
       st.textContent = "Undone.";
     } catch (e) {
@@ -8064,6 +8855,14 @@ document.addEventListener("keydown", (e) => {
     if (input) { e.preventDefault(); input.focus(); }
   }
 });
+document.querySelectorAll('a[data-tab="reel"], a[aria-label="ReelWorld home"]').forEach((a) => {
+  a.addEventListener("click", (e) => {
+    if ((location.hash || "#/") !== "#/") return; // navigate home via route()
+    e.preventDefault();
+    if (home.view && home.view.isConnected) home.goHome();
+    else route();
+  });
+});
 $("#demo-form").addEventListener("submit", (e) => {
   e.preventDefault();
   const v = $("#demo-code").value.trim();
@@ -8078,7 +8877,15 @@ $("#demo-form").addEventListener("submit", (e) => {
     btn.textContent = v ? "Saved ✓" : "Cleared";
     setTimeout(() => { btn.textContent = "Unlock"; }, 1600);
   }
+  demoOpen = false;
   paintDemo();
+});
+const demoChangeBtn = $("#demo-change");
+if (demoChangeBtn) demoChangeBtn.addEventListener("click", () => {
+  demoOpen = true;
+  paintDemo();
+  const inp = $("#demo-code");
+  if (inp) inp.focus();
 });
 let paintDemoT = null;
 window.addEventListener("resize", () => {

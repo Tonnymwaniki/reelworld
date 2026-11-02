@@ -7,7 +7,7 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 
 | Element | Endpoint | Fields |
 |---|---|---|
-| Header label + nav | static | "Built with Muse Spark Open" pill; Reel, Browse, Connected, Stories, About |
+| Header label + nav | static | "Built with Muse Spark Open" pill; Reel, Browse, Connected, Stories, About; reel-ring + photo SVG logo beside the wordmark (header, footer, favicon) |
 | API status pill | `GET /api/config` | reachable → "API: Online", else "API: unreachable" (never a fake latency) |
 | Demo banner + code field | `GET /api/config` → `demo_mode` | shown only when true; code kept in `sessionStorage`, sent as `X-Demo-Code` |
 | 404 card | `GET /api/config` → `counts.world` | requested path verbatim; "Public Cadastre (N photos)" with the real N |
@@ -17,22 +17,23 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 
 | Element | Endpoint | Fields |
 |---|---|---|
-| Chat bar | `POST /chat` `{session_id, message}` | send `message`; read `text`, `kind` |
+| Chat bar | `POST /chat/stream` `{session_id, message, chat_id?, base_spec?}` (SSE steps, then the `POST /chat` shape) | new chat auto-created per thread, id kept in localStorage; divider link re-sends with `base_spec` + "refine: " prefix |
 | Filter chips | `POST /chat` → `spec` | `viewpoints`, `max_people`, `collection`, `must_include`, `avoid_terms`, `owner_only` ("Photos of me"), `constraints` ("Mist", "Not crowded"); removing one sends the spec minus that filter to `POST /api/search` `{session_id, spec}` |
 | Results grid | `POST /chat` / `POST /api/search` → `results[]` | `photo_id`, `file` → `/photos/…` URL, `caption`, `reasons`, `score`, `check` (`verdict` yes/unsure/no + `reason`, constrained chat searches only) |
 | Card "why it matched" line | same row | `reasons` joined with " · " |
 | "How I found this" (under results, collapsed) | `POST /chat` / `POST /api/search` → `trace[]` | `step` (plain label) + `detail` verbatim, in order |
 | Compare toggle (each card) | local selection, max 2 (third replaces oldest) | `photo_id` per card |
 | Compare panel | `POST /api/compare` `{photo_a, photo_b}` | side-by-side `src` + `caption`, `answer`, `differences[]` (`aspect`, `a`, `b`); Close clears selection |
+| Reply action buttons | `POST /api/related` (angle/similar), `POST /api/reject`, compare select | direct tool calls with `chat_id` (recorded, no router); Compare opens the 2-photo select |
 | Photographer line on card | same row | `credit.author`, `credit.license` (null for personal photos) |
 | Card place name | same row | `place` text links to `#/place/<place_key>` when `place_key` is set |
 | Empty (no search yet) | — | static suggestions; no call |
 | `no_strong_match` | `kind` + `text` | show `text` verbatim above the closest-match grid, plus the "Add the first one" card; its button opens `#/add` and the `spec.query` is remembered for the note field |
 | `need_focus` / `not_found` | `kind` + `text` | show `text` verbatim, no grid |
 | `need_tags` (zero tagged photos) | `kind` + `text` | show `text` verbatim, no grid, plus a "Tag your photos" button linking `#/profile/tag`; "Photos of me" chip stays |
-| Router extras (step 6 renders) | `POST /chat` → `label`, `topic`, `options`, `about_photo_id`, `took_to_mean`, `differences` | currently ignored by the thread UI; text already carries clarify options inline |
-| Saved chats (step 6 sidebar) | `GET /api/chats` → summaries; `GET /api/chats/{id}` → thread + restored state | no UI yet; turns record only when `/chat` carries `chat_id` |
-| Loading | — | spinner + "Searching…"; replies take 15–40s |
+| Reply extras | `POST /chat` → `label`, `topic`, `options`, `about_photo_id`, `took_to_mean` | label tag above photos; `topic.new` → divider "New search: …" (+ continue-previous link); `options` → clarify card; answers show "Answering about" + took note with Change |
+| Saved chats sidebar | `GET /api/chats` → summaries; `GET /api/chats/{id}` → thread + restored router state | "New chat", rows (auto title, thumb, day), rename/delete, "Clear all chats" (two-click confirm), demo-only 7-day note; drawer on phones |
+| Message states | `kind`, `check`, `trace` | verdict mark per photo (`check.verdict` + `reason`), "checked N photos" line, Copy/Flag/Retry per reply, compact searching pill (spinning reel, live step, elapsed, Stop), "Reel is resting", honest nothing-found |
 | Error | HTTP status | `{"detail"}` message verbatim |
 
 ## 2. Photo detail (`GET /api/photo/{photo_id}`)
@@ -50,12 +51,12 @@ it. Base URL `http://127.0.0.1:8000`. See `api_contract.md` for shapes.
 | Credit line | `credit.author`, `credit.license`, `credit.source_url` (link), `credit.title`; null → hide |
 | Scene line | `scene.type`, `scene.time_of_day`, `scene.setting`, `viewpoint`, `people_count` |
 | Suggested questions (3) | `suggested_questions[]`; tapping one calls Ask with it |
-| Find in the world (personal only) | `POST /chat` "Show me photos in the world like {photo_id}" |
-| Compare with mine (world only) | `POST /chat` "Show me photos in my photos like {photo_id}" |
-| Another angle | `POST /chat` "Show me another angle of {photo_id}"; `kind: no_other_angle` → show `text` |
-| More like this | `POST /chat` "Show me photos like {photo_id}" |
+| Find in the world (personal only) | `GET /api/bridge/{photo_id}` → grouped matches panel | no router call |
+| Compare with mine (world only) | `GET /api/bridge/{photo_id}` → grouped matches panel | no router call |
+| Another angle | `GET /api/bridge/{id}` → `another_angle`; fallback `POST /api/related` `{photo_id, mode: angle}` | `kind: no_other_angle` → honest text; no router call |
+| More like this | home thread: `POST /api/related` `{photo_id, mode: similar}` | recorded into the active chat; no router call |
 | Ask about this photo | `POST /api/ask` `{photo_id, question}` → `answer`; `source: image` → show `note` ("looked at the photo again"); `trace[]` under the answer (collapsed) |
-| Not this one | `POST /chat` "not this one" (rejects focus, re-searches) |
+| Not this one | home thread: `POST /api/reject` `{photo_id}` (focus default) | drops + re-searches; recorded; no router call |
 | Share this finding | local canvas card, no endpoint | 1080×1350 PNG: `src` photo, `place.name` + Confirmed/Candidate badge, first 2 `place.evidence[]`, world `credit` line, ReelWorld + "Built with Muse Spark Open"; Web Share API when available, else PNG download; personal photos disabled + "private" note until explicit confirm, never when `people_count` > 0 |
 | Loading / error | skeleton panel; `{"detail"}` verbatim; 404 → "I could not find that photo." |
 
@@ -152,7 +153,9 @@ and mood surface in the player/exporter from step 7 on, and
 | Name prompt | `PUT /api/profile` | first present-tag without a profile asks for the name, then continues the pending tag |
 | "Are you in this photo?" | same two endpoints | library queue rows + `#/add` result pane after a job finishes: Yes / No / Skip, inline name prompt when needed |
 | "You are in this photo" badge | `owner_present` | library tiles + photo dossier (links to the tag page) + Reel result mounts (top-right) + Connected ring nodes (dot + title note); "Me" album in the library, with a tag-yourself empty state |
-| Match-my-face panel | `POST/GET/DELETE /api/face-reference`, `POST /api/face-scan` | reference upload + preview + remove; ranked suggestion rows (thumb, band pill, face count, tag state, Yes/No → `POST /api/owner-tags`); unscored count with hand-tag note; scan writes nothing |
+| Match-my-face panel | `POST/GET/DELETE /api/face-reference`, `POST /api/face-scan` | reference upload + preview + remove; upload auto-scans and auto-starts the review; summary + unscored count with hand-tag note; scan writes nothing |
+| One-by-one review | grouped `POST /api/owner-tags` on Save all | suggestions first, then unreviewed; big photo + band pill + Yes/Not me/Skip/Back; position chips when people > 1 (tap = Yes + position); decisions saved in one bulk call (undoable); review reopens while photos stay unreviewed |
+| All-tagged summary | local counts + `GET /api/profile`, face preview | replaces face panel + grid when 0 unreviewed: "You're all tagged, {name}", selfie thumb, reviewed/with/without stats; Ask Reel (sends "show me photos of me"), My Photos, Stories links; Change tags / Retake selfie reveal the page again |
 
 ## 10. Story studio narration (`#/stories`, `#/stories/<id>`)
 

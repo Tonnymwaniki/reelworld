@@ -858,3 +858,27 @@ the first unfinished phase.
   /chat/stream record turns when chat_id is given (404 unknown);
   6 /api/chats endpoints; replies/state restore on open. Tests:
   test_chats 23/23, test_routes 42/42. (commit id on push.)
+- Chat intelligence step 6 (chatbot interface): sidebar
+  (tpl-chatitem rows, rename/delete/clear-all, demo note, phone
+  drawer), thread restore with dividers, labels, verdict marks,
+  checked lines, clarify cards, photo dock, per-reply
+  Copy/Flag/Retry; direct /api/related + /api/reject and
+  chat-aware /api/search (buttons never touch the router);
+  photo-page buttons + pendingSearch wired direct. Tests:
+  home.test 70/70, test_routes 48/48. (commit id on push.)
+- Tag page one-by-one review: sidebar-in-thread fix, Home button,
+  Reel-nav landing fix, then the tag flow: selfie upload auto-scans
+  and opens a single-photo review card (Yes/Not me/Skip/Back,
+  position chips, bulk Save all, undoable); reviewQueue +
+  groupDecisions helpers. Tests: profile.test 107/107,
+  home.test 74/74. (commit id on push.)
+- Chat UX round: SVG reel-ring logo (header, footer, favicon);
+  demo banner collapses to a slim chip once a code is saved;
+  sidebar clear-all moved to the top; thread is a real chatbot
+  column (internal scroll + pinned composer, xlist scrolling).
+  Tests: home.test 87/87. (commit id on push.)
+- Chat polish: compact searching pill (spinning reel, live step,
+  elapsed, Stop; respects reduced motion); history grouped by
+  Today/Yesterday/Earlier; smarter auto titles (word cut,
+  punctuation stripped, capitalized). Tests: home.test 96/96,
+  test_chats 27/27. (commit id on push.)

@@ -396,6 +396,22 @@ finally:
     else:
         os_mod.environ["FORCE_TOOLCALL_FAIL"] = orig_flag
 
+check(router_mod.is_rejection("Not this one")
+      and router_mod.is_rejection("not this!")
+      and not router_mod.is_rejection("not this one, show markets")
+      and not router_mod.is_rejection("show me more"), "bare rejection match")
+
+# "not this one" drops the focus photo into rejected before searching
+eng = FakeEngine()
+eng.state["focus"] = {"photo_id": "mtn_001", "caption": "ridge"}
+llm_mod.ask_tools = Script([{"calls": [tool_call(
+    "search", {"query": "", "topic": "refine"})]}])
+try:
+    out, _ = run_turn(eng, "Not this one")
+    check(eng.state["rejected"] == {"mtn_001"}, "focus rejected on refine")
+finally:
+    llm_mod.ask_tools = orig_tools
+
 # reciprocal-rank fusion (pure)
 r1 = [{"photo_id": "a", "similarity": 0.9},
       {"photo_id": "b", "similarity": 0.8}]

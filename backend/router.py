@@ -135,7 +135,7 @@ TOOLS (call with exact arguments):
 - compare: compare TWO photos from their records.
 - clarify: ask the user to choose (2-3 options {label, message}). Topic options MUST be {label "Continue previous search", message "continue previous"} and {label "Start new search", message "new search"}. Photo options MUST be {label "<short caption>", message "photo <n>"} using the n from the state.
 
-REFERENCES: "the second one" / "open 3" = latest[n].id. "that mountain" / "the market photo" = the best caption match in the state. Pass the exact id, plus ref = the exact words you resolved ("the second one"), or null when they named the id. Never invent or guess an id: use only ids in the state (or from earlier tool results this turn, which the harness lists). If no photo fits, call clarify. "not this one" = search refine keeping the spec (the harness drops the focus photo).
+REFERENCES: "the second one" / "open 3" = latest[n].id. "that mountain" / "the market photo" = the best caption match in the state. A bare question with no photo reference ("what does the sign say?", "who is in it?") answers about the focus photo when one is set. Pass the exact id, plus ref = the exact words you resolved ("the second one"), or null when they named the id. Never invent or guess an id: use only ids in the state (or from earlier tool results this turn, which the harness lists). If no photo fits, call clarify. "not this one" = search refine keeping the spec (the harness drops the focus photo).
 
 TURNS: one round is usual. A 2nd/3rd round is allowed ONLY for tools that need earlier results (facts after a search, an answer after facts). After data tools return, answer SHORT from those results, naming photo ids. Answer DIRECTLY (no tools) ONLY for chitchat: greetings, thanks, goodbye, "what can you do". Never describe photos from memory; never write search results as text. Replies are built by code; your text is used only for chitchat and grounded answers."""
 
@@ -288,6 +288,14 @@ def _unknown_ids(text, seen):
     return sorted(set(ID_RE.findall(text or "")) - set(seen))
 
 
+def is_rejection(text):
+    """Bare 'not this one' (pure): the focus photo is dropped on refine."""
+    norm = re.sub(r"[^a-z ]", "", (text or "").lower()).strip()
+    norm = re.sub(r"\s+", " ", norm)
+    return norm in ("not this one", "not this", "not that one", "not that",
+                    "no not this one", "no not this")
+
+
 def _auto_clarify(ctx, offender=None):
     """Terminal 'which photo?' card from the latest reply (pure side)."""
     latest = ctx["cstate"].get("latest") or []
@@ -389,6 +397,12 @@ def _tool_search(engine, args, ctx):
         return ({"matched": [], "note": "need_tags"}, [],
                 {"text": chat_mod.NO_TAGS_TEXT, "results": [],
                  "kind": "need_tags"})
+    if is_rejection(ctx.get("message")):
+        focus = (st.get("focus") or {}).get("photo_id")
+        if focus:
+            rejected = set(st.get("rejected") or set())
+            rejected.add(focus)
+            st["rejected"] = rejected
     rows, note, sub = engine.search(spec, st.get("rejected") or set())
     ctx["trace"].extend(sub)
     ctx["seen"] |= {r["photo_id"] for r in rows if r.get("photo_id")}

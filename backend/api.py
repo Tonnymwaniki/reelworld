@@ -64,7 +64,7 @@ import owner_tags as owner_tags_mod
 import place_pass as place_pass_mod
 import studio_voice as studio_mod
 from chat import (ANSWER_PROMPT, EMPTY_SPEC, NO_TAGS_TEXT, Engine,
-                    extract_json)
+                    extract_json, rejected_step)
 from retrieval import is_specific, meta_for, score_against, search_text
 from story_engine import StoryError
 
@@ -132,7 +132,8 @@ def _chat_scope(request, response):
         visitor = uuid.uuid4().hex
         try:
             if response is not None:
-                response.set_cookie(VISITOR_COOKIE, visitor, samesite="lax")
+                response.set_cookie(VISITOR_COOKIE, visitor, samesite="lax",
+                                    max_age=7 * 24 * 3600)
         except Exception:
             pass
     return visitor
@@ -202,6 +203,7 @@ class ChatRequest(BaseModel):
     session_id: str = Field(default="default", min_length=1)
     message: str = Field(min_length=1)
     chat_id: Optional[str] = None
+    base_spec: Optional[dict] = None
 
 
 class ChatResponse(BaseModel):
@@ -716,6 +718,8 @@ def chat(req: ChatRequest, request: Request = None, response: Response = None):
         eng = get_engine(sid)
     except Exception as e:
         raise HTTPException(status_code=503, detail=f"engine unavailable: {e}")
+    if cid and isinstance(req.base_spec, dict):
+        eng.state["spec"] = clean_spec(req.base_spec)
     with _turn_lock:
         try:
             out = eng.turn(req.message)
@@ -807,6 +811,8 @@ def chat_stream(req: ChatRequest, request: Request = None,
         eng = get_engine(sid)
     except Exception as e:
         raise HTTPException(status_code=503, detail=f"engine unavailable: {e}")
+    if cid and isinstance(req.base_spec, dict):
+        eng.state["spec"] = clean_spec(req.base_spec)
 
     def gen():
         try:
@@ -1088,6 +1094,8 @@ VIEWPOINTS = ("ground_level", "elevated", "aerial", "interior", "water_level")
 class SearchRequest(BaseModel):
     session_id: str = Field(default="default", min_length=1)
     spec: Dict[str, Any]
+    chat_id: Optional[str] = None
+    user_text: Optional[str] = None
 
 
 def clean_spec(raw):
@@ -1126,30 +1134,33 @@ def clean_spec(raw):
 
 
 @app.post("/api/search", response_model=ChatResponse)
-def api_search(req: SearchRequest):
+def api_search(req: SearchRequest, request: Request = None,
+               response: Response = None):
     """Run a spec directly: no language-model call. Honours the session's
     rejected ids and stores the spec (powers instant chip removal)."""
     spec = clean_spec(req.spec)
-    sid = req.session_id.strip() or "default"
+    scope, cid = None, (req.chat_id or "").strip() or None
+    if cid:
+        scope = _chat_scope(request, response)
+        if chats_mod.load_chat(scope, cid) is None:
+            raise HTTPException(status_code=404, detail="I could not find that chat.")
+        sid = cid
+    else:
+        sid = req.session_id.strip() or "default"
     try:
         eng = get_engine(sid)
     except Exception as e:
         raise HTTPException(status_code=503, detail=f"engine unavailable: {e}")
     if spec.get("owner_only") and eng.tagged_count() == 0:
         eng.state["spec"] = spec
-        focus = eng.state.get("focus") or {}
-        return {
-            "session_id": sid,
-            "text": NO_TAGS_TEXT,
-            "results": [],
-            "focus_photo_id": focus.get("photo_id"),
-            "spec": {k: spec.get(k) for k in ("query", "collection", "viewpoints",
-                                              "max_people", "must_include", "avoid_terms",
-                                              "owner_only", "constraints")},
-            "kind": "need_tags",
-            "trace": [{"step": "answered",
-                       "detail": "No tagged photos yet, so I pointed at the tagging page."}],
-        }
+        out = {"text": NO_TAGS_TEXT, "results": [], "kind": "need_tags",
+               "trace": [{"step": "answered",
+                          "detail": "No tagged photos yet, so I pointed at the tagging page."}]}
+        payload = _chat_payload(sid, eng, out)
+        if cid:
+            _record_turn(cid, scope, req.user_text or "Refine: filters changed",
+                         payload, eng)
+        return payload
     with _turn_lock:
         try:
             rows, note, trace = eng.search(spec, eng.state["rejected"],
@@ -1157,27 +1168,121 @@ def api_search(req: SearchRequest):
         except Exception as e:
             raise HTTPException(status_code=502, detail=f"search failed: {e}")
         eng.state["spec"] = spec
-        if rows:
-            eng.state["last"] = rows
-            eng.state["focus"] = rows[0]
-            _push_reply(eng, rows)
-        focus = eng.state.get("focus") or {}
-    out_rows = [public_row(r) for r in rows]
-    attach_credits(out_rows)
     trace.append({"step": "answered", "detail":
                   (f"Nothing clearly matched; showing the {len(rows)} closest photos." if note
                    else f"Showing {len(rows)} photos.")})
-    return {
-        "session_id": sid,
-        "text": note or "Here is what I found:",
-        "results": out_rows,
-        "focus_photo_id": focus.get("photo_id"),
-        "spec": {k: spec.get(k) for k in ("query", "collection", "viewpoints",
-                                          "max_people", "must_include", "avoid_terms",
-                                          "owner_only", "constraints")},
-        "kind": "no_strong_match" if note else "ok",
-        "trace": trace,
-    }
+    out = {"text": note or "Here is what I found:", "results": rows,
+           "kind": "no_strong_match" if note else "ok", "trace": trace}
+    payload = _chat_payload(sid, eng, out)
+    if cid:
+        _record_turn(cid, scope, req.user_text or "Refine: filters changed",
+                     payload, eng)
+    return payload
+
+
+class RelatedRequest(BaseModel):
+    photo_id: str = Field(min_length=1)
+    mode: str = Field(default="similar")
+    session_id: str = Field(default="default", min_length=1)
+    chat_id: Optional[str] = None
+    user_text: Optional[str] = None
+
+
+@app.post("/api/related", response_model=ChatResponse)
+def api_related(req: RelatedRequest, request: Request = None,
+                response: Response = None):
+    """Another angle / more-like-this for one photo: direct tool call,
+    no router and no language-model call."""
+    if req.mode not in ("angle", "similar"):
+        raise HTTPException(status_code=400, detail="mode must be angle or similar")
+    pid = req.photo_id.strip()
+    scope, cid = None, (req.chat_id or "").strip() or None
+    if cid:
+        scope = _chat_scope(request, response)
+        if chats_mod.load_chat(scope, cid) is None:
+            raise HTTPException(status_code=404, detail="I could not find that chat.")
+        sid = cid
+    else:
+        sid = req.session_id.strip() or "default"
+    try:
+        eng = get_engine(sid)
+    except Exception as e:
+        raise HTTPException(status_code=503, detail=f"engine unavailable: {e}")
+    if not eng.fetch_photo(pid, "photo_id"):
+        raise HTTPException(status_code=404, detail=f"I could not find photo {pid}.")
+    spec = dict(eng.state.get("spec") or EMPTY_SPEC)
+    with _turn_lock:
+        try:
+            rows, note, sub = eng.related(
+                pid, spec, eng.state.get("rejected") or set(),
+                req.mode == "angle")
+        except Exception as e:
+            raise HTTPException(status_code=502, detail=f"related failed: {e}")
+    word = "other angles of" if req.mode == "angle" else "photos like"
+    out = {"text": note or f"Showing {word} {pid}:", "results": rows,
+           "kind": "no_other_angle" if note else "ok", "trace": sub,
+           "label": f"{word} {pid}"}
+    payload = _chat_payload(sid, eng, out)
+    if cid:
+        _record_turn(cid, scope, req.user_text or f"Show {word} {pid}",
+                     payload, eng)
+    return payload
+
+
+class RejectRequest(BaseModel):
+    photo_id: Optional[str] = None
+    session_id: str = Field(default="default", min_length=1)
+    chat_id: Optional[str] = None
+    user_text: Optional[str] = None
+
+
+@app.post("/api/reject", response_model=ChatResponse)
+def api_reject(req: RejectRequest, request: Request = None,
+               response: Response = None):
+    """Drop a photo from future results and re-run the current search:
+    direct tool call, no router call."""
+    scope, cid = None, (req.chat_id or "").strip() or None
+    if cid:
+        scope = _chat_scope(request, response)
+        if chats_mod.load_chat(scope, cid) is None:
+            raise HTTPException(status_code=404, detail="I could not find that chat.")
+        sid = cid
+    else:
+        sid = req.session_id.strip() or "default"
+    try:
+        eng = get_engine(sid)
+    except Exception as e:
+        raise HTTPException(status_code=503, detail=f"engine unavailable: {e}")
+    pid = (req.photo_id or "").strip() or (eng.state.get("focus") or {}).get("photo_id")
+    if not pid:
+        raise HTTPException(status_code=400,
+                            detail="Nothing to drop: no photo in focus.")
+    spec = eng.state.get("spec") or {}
+    with _turn_lock:
+        eng.state.setdefault("rejected", set()).add(pid)
+        trace = [rejected_step(eng.state["rejected"])]
+        if not (spec.get("query") or "").strip():
+            out = {"text": f"Noted — I dropped {pid} from future results.",
+                   "results": [], "kind": "ok", "trace": trace}
+        else:
+            try:
+                rows, note, sub = eng.search(
+                    spec, eng.state["rejected"],
+                    verify=bool(spec.get("constraints")))
+            except llm_mod.LLMBudgetSpent:
+                raise HTTPException(status_code=429, detail=RESTING_TEXT)
+            except Exception as e:
+                raise HTTPException(status_code=502, detail=f"search failed: {e}")
+            trace = sub + [{"step": "answered", "detail":
+                            (f"Nothing clearly matched; showing the {len(rows)} closest photos."
+                             if note else f"Showing {len(rows)} photos without {pid}.")}]
+            out = {"text": note or f"Dropped {pid}. Here is the search without it:",
+                   "results": rows,
+                   "kind": "no_strong_match" if note else "ok", "trace": trace}
+    payload = _chat_payload(sid, eng, out)
+    if cid:
+        _record_turn(cid, scope, req.user_text or "Not this one", payload, eng)
+    return payload
 
 
 @app.post("/sessions/{session_id}/reset")

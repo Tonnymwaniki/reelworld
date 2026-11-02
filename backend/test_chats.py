@@ -71,8 +71,13 @@ c2 = chats_mod.create_chat("local", "Mountains")
 check(c2["id"] != c1["id"] and c2["title"] == "Mountains"
       and c2["title_auto"] is False, "create with title")
 check(chats_mod.auto_title("  show me\n mountains  ")
-      == "show me mountains", "title squeezed")
-check(chats_mod.auto_title("x" * 100) == "x" * 48, "title truncated")
+      == "Show me mountains", "title squeezed")
+check(chats_mod.auto_title("show me photos of mountains with mist and fog rolling over the hills")
+      == "Show me photos of mountains with mist and fog", "title cuts at a word")
+check(chats_mod.auto_title("mountains?") == "Mountains", "title strips punctuation")
+check(chats_mod.auto_title("   ") == "New chat", "title blanks")
+check(len(chats_mod.auto_title("x" * 100)) == 48, "title caps length")
+check(chats_mod.auto_title("x" * 100) == "X" + "x" * 47, "title truncated")
 
 # append turns: records, verdicts, title, snapshot
 got = chats_mod.append_turn("local", c1["id"], "mountains with mist",
@@ -81,7 +86,7 @@ check(got is not None and len(got["messages"]) == 2
       and got["messages"][0] == {"role": "user",
                                  "text": "mountains with mist",
                                  "time": got["messages"][0]["time"]}
-      and got["title"] == "mountains with mist", "first turn recorded")
+      and got["title"] == "Mountains with mist", "first turn recorded")
 reel = got["messages"][1]
 check(reel["kind"] == "ok" and reel["topic_id"] == 1
       and reel["topic_new"] is True and reel["label"].startswith("Mountains")
@@ -92,7 +97,7 @@ check(got["state"]["topic"] == {"id": 1, "label": "mountains"}
       and got["state"]["replies"][0]["photos"][0]["id"] == "hills_022",
       "state snapshot stored")
 got = chats_mod.append_turn("local", c1["id"], "from above", PAYLOAD, SNAP)
-check(len(got["messages"]) == 4 and got["title"] == "mountains with mist",
+check(len(got["messages"]) == 4 and got["title"] == "Mountains with mist",
       "manual-era title sticks")
 check(chats_mod.append_turn("local", "chat_nope", "hi", PAYLOAD, SNAP)
       is None, "append to missing chat is None")

@@ -54,7 +54,9 @@ async function main() {
   ["mount", "load", "paint", "save", "saveVoice", "destroy"].forEach((m) =>
     ok(typeof app.profile[m] === "function", "profile." + m + " exists"));
   ["mount", "load", "paint", "tile", "tagSome", "bulkYes", "saveName",
-    "undo", "counts", "statePill"].forEach((m) =>
+    "undo", "counts", "statePill", "startReview", "exitReview",
+    "prevReview", "skipReview", "decide", "paintReview",
+    "saveReview"].forEach((m) =>
     ok(typeof app.tag[m] === "function", "tag." + m + " exists"));
   ["getProfile", "build"].forEach((m) =>
     ok(typeof app.ownerAsk[m] === "function", "ownerAsk." + m + " exists"));
@@ -86,6 +88,29 @@ async function main() {
   byId.p2.owner_present = true;
   ok(entries[0].owner_present === true, "tagPhotos shares refs (tiles repaint)");
 
+  const rq = app.RWTEST.reviewQueue(
+    [{ photo_id: "p9", band: "strong" }, { photo_id: "p1", band: "weak" }],
+    { p9: { people: 1, owner_present: true },
+      p1: { people: 1, owner_present: null },
+      p2: { people: 2, owner_present: null } });
+  ok(rq.map((q) => q.pid).join(",") === "p1,p2", "reviewQueue skips tagged, scan first");
+  ok(rq[0].band === "weak" && rq[1].band === null, "reviewQueue keeps bands");
+  ok(app.RWTEST.reviewQueue(null, {}).length === 0, "reviewQueue tolerates empty");
+  const groups = app.RWTEST.groupDecisions({
+    a: { present: true, position: "left" }, b: { present: true, position: "left" },
+    c: { present: true, position: null }, d: { present: false, position: null } });
+  ok(groups.length === 3, "groupDecisions groups by present+position");
+  const left = groups.filter((g) => g.position === "left")[0];
+  ok(left.ids.sort().join(",") === "a,b", "groupDecisions collects ids");
+  ok(app.RWTEST.tagDoneVisible({ total: 16, unreviewed: 0 }, false) === true,
+    "done panel shows when all reviewed");
+  ok(app.RWTEST.tagDoneVisible({ total: 16, unreviewed: 2 }, false) === false,
+    "done panel hides while photos remain");
+  ok(app.RWTEST.tagDoneVisible({ total: 16, unreviewed: 0 }, true) === false,
+    "done panel hides in change-tags mode");
+  ok(app.RWTEST.tagDoneVisible({ total: 0, unreviewed: 0 }, false) === false,
+    "done panel hides with no photos");
+
   const profileHtml = fs.readFileSync(path.join(__dirname, "views", "profile.html"), "utf8");
   ["pf-name", "pf-save", "pf-status", "pf-voice", "pf-ex-name", "pf-ex-you",
     "pf-ex-i", "pf-privacy", "pf-tag-link", "pf-export", "pf-del",
@@ -100,7 +125,13 @@ async function main() {
     "tg-bulk-count", "tg-name-prompt", "tg-name", "tg-name-save", "tg-name-status",
     "tg-undo", "tg-status", "tg-error", "tg-loading", "tg-main",
     "tg-face", "tg-face-img", "tg-face-file", "tg-face-pick", "tg-face-scan",
-    "tg-face-clear", "tg-face-status", "tg-face-list",
+    "tg-face-clear", "tg-face-status", "tg-face-list", "tg-face-review",
+    "tg-review", "tg-review-count", "tg-review-bar", "tg-review-img",
+    "tg-review-cap", "tg-review-meta", "tg-review-pos", "tg-review-prev",
+    "tg-review-no", "tg-review-yes", "tg-review-skip", "tg-review-save",
+    "tg-review-status", "tg-review-exit", "tg-done", "tg-done-title",
+    "tg-done-stats", "tg-done-face", "tg-done-ask", "tg-done-change",
+    "tg-done-retake",
   ].forEach((id) => ok(tagHtml.indexOf('id="' + id + '"') >= 0, "tag.html has " + id));
   ok(tagHtml.indexOf("I'm in all selected") >= 0, "bulk button label");
   ok(tagHtml.indexOf("Suggestions never tag anything by themselves") >= 0,
@@ -117,7 +148,25 @@ async function main() {
   ok(src.indexOf("photo tag") >= 0, "delete reports removed tags");
   ok(src.indexOf('"/api/face-scan"') >= 0, "tag page scans for suggestions");
   ok(src.indexOf('"/api/face-reference"') >= 0, "tag page manages the reference");
-  ok(src.indexOf("confirmFace") >= 0, "suggestions confirm through tagging");
+  ok(src.indexOf("saveReview") >= 0, "review saves decisions in bulk");
+
+  // ---- stale cached view: missing review ids must not crash mount ----
+  const reviewIds = new Set(["tg-face-review", "tg-review", "tg-review-count",
+    "tg-review-bar", "tg-review-img", "tg-review-cap", "tg-review-meta",
+    "tg-review-pos", "tg-review-prev", "tg-review-no", "tg-review-yes",
+    "tg-review-skip", "tg-review-save", "tg-review-status", "tg-review-exit"]);
+  const partialView = {
+    querySelector(sel) {
+      const id = String(sel).replace(/^#/, "");
+      return reviewIds.has(id) ? null : stubEl();
+    },
+    querySelectorAll: () => [],
+    addEventListener() {},
+    isConnected: true,
+  };
+  app.tag.mount(partialView);
+  await new Promise((r) => setTimeout(r, 150));
+  ok(app.tag.review === null, "stale view mounts without a review instead of crashing");
 
   console.log(`profile.test.js: ${n} checks passed`);
 }

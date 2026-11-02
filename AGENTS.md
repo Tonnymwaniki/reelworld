@@ -29,7 +29,13 @@ Hackathon (Indie track). Environment: Windows, PowerShell, Python 3.14.
   list, open, rename, delete one/all): git-ignored `data/chats/`,
   per-visitor + 7-day expiry in demo mode, full message records with
   verdicts and traces (never reasoning content), and router-state
-  restore on open. Turns record only when `/chat` carries `chat_id`.
+  restore on open. Turns record when `/chat`, `/api/search`,
+  `/api/related` or `/api/reject` carries `chat_id` (+ `user_text`).
+  The Reel thread (`frontend/views/home.html` + `frontend/app.js`
+  home controller) is a chatbot: sidebar with saved chats, labels,
+  verdict marks, topic dividers, clarify cards, photo dock, per-reply
+  Copy/Flag/Retry. UI buttons call `/api/related`, `/api/reject`,
+  `/api/search` directly — never the router.
 - `backend/attributes.py`: per-photo visual checklist (atmosphere, light,
   time_of_day, water, vegetation, crowd) judged from the image, cached in
   `data/attributes/*.json`, loaded into the Supabase `attributes` column
