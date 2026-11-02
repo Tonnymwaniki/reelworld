@@ -197,7 +197,12 @@ Response:
   parsed spec in plain words), `searched` (collection, filters, how
   many candidates), `rejected` (photos skipped as user-rejected, only
   when any), `excluded` (candidates dropped for mentioning an
-  avoided term, only when any), `checked` (the model's
+  avoided term, only when any), `required` (photos must mention
+  every `must_include` word: "Kept N mentioning …; dropped M",
+  or "Nothing mentions …; showing the closest" when none do;
+  the honest note then names only the missing words plus the
+  closest photos' real skies), `filtered` (candidates dropped against visual is_not
+  constraints, only when any), `checked` (the model's
   double-check of the top candidates, on constrained searches
   only; for visual constraints this is a vision pass ("Looked
   at N photos to check for …; kept M", plus a note when the

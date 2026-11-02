@@ -47,7 +47,8 @@ from supabase import create_client
 import llm as llm_mod
 import narration as narration_mod
 import owner_profile as owner_profile_mod
-from retrieval import get_model, lex_has, score_against, tokens
+from retrieval import (get_model, lex_has, matches_subject,
+                         score_against, tokens)
 
 ROOT = Path(__file__).resolve().parent.parent
 load_dotenv(ROOT / ".env")
@@ -342,6 +343,37 @@ def split_avoid(rows, avoid_terms):
     return kept, len(rows) - len(kept)
 
 
+def split_required(rows, must):
+    """(survivors, dropped): rows mentioning EVERY subject term (pure).
+
+    Synonym-aware (matches_subject): "mountain" keeps a record
+    that only says "hill". The caller falls back to all rows when
+    nothing matches, with an honest note.
+    """
+    terms = [t for t in must or [] if (t or "").strip()]
+    if not terms:
+        return list(rows), 0
+    kept = [r for r in rows
+            if all(matches_subject(r["lex"], [t]) for t in terms)]
+    return kept, len(rows) - len(kept)
+
+
+def missing_note(words, top):
+    """Honest note naming only the must words the top lacks (pure).
+
+    None when every word is shown. The closest photos' real
+    atmosphere conditions are appended from stored attributes.
+    """
+    from attributes import closest_conditions  # lazy: attributes imports chat
+    missing = [w for w in words or []
+               if not any(matches_subject(r["lex"], [w]) for r in top)]
+    if not missing:
+        return None
+    return ("I could not find a photo that clearly shows "
+            + ", ".join(missing) + ". Here are the closest matches:"
+            + closest_conditions(top))
+
+
 def only_matching(rows, toks, must):
     """Rows matching a query token or must term (pure).
 
@@ -595,7 +627,19 @@ class Engine:
             trace.append({"step": "excluded",
                           "detail": f"Nothing was fully without "
                           f"{', '.join(avoid_terms)}; showing the closest."})
-        if toks or must:
+        if must:
+            req, dropped = split_required(rows, must)
+            if req:
+                if dropped:
+                    trace.append({"step": "required",
+                                  "detail": f"Kept {len(req)} mentioning "
+                                  f"{', '.join(must)}; dropped {dropped}."})
+                rows = req
+            else:
+                trace.append({"step": "required",
+                              "detail": f"Nothing mentions "
+                              f"{', '.join(must)}; showing the closest."})
+        elif toks:
             pos = only_matching(rows, toks, must)
             if pos:
                 rows = pos
@@ -672,9 +716,8 @@ class Engine:
             else:
                 note = ("Nothing matches all of that. "
                         "Try dropping a detail.")
-        elif words and not any(any(w.lower() in r["lex"] for w in words) for r in top):
-            note = ("I could not find a photo that clearly shows " + ", ".join(words)
-                    + ". Here are the closest matches:")
+        elif words:
+            note = missing_note(words, top)
         else:
             note = None
         return top, note, trace

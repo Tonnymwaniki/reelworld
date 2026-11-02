@@ -12,7 +12,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import chat as chat_mod  # noqa: E402  (needs the sys.path line above)
-from retrieval import lex_has  # noqa: E402
+from retrieval import lex_has, matches_subject  # noqa: E402
 
 fails = 0
 total = 0
@@ -51,6 +51,38 @@ check([r["photo_id"] for r in pos] == ["mtn", "hut"],
 pos = chat_mod.only_matching(rows, [], ["tower"])
 check([r["photo_id"] for r in pos] == ["kicc"],
       "must terms match stem-tolerantly")
+
+check(matches_subject("a grassy hill slope", ["mountain"]),
+      "mountain keeps hill synonym")
+check(not matches_subject("a calm pond under a clear sky", ["mountain"]),
+      "mountain drops the pond")
+check(not matches_subject("anything", []), "no terms match nothing")
+
+subj = rows + [{"photo_id": "slope", "lex": "a grassy hill slope"},
+               {"photo_id": "pond", "lex": "a calm pond under clear sky"}]
+kept, dropped = chat_mod.split_required(subj, ["mountain"])
+check([r["photo_id"] for r in kept] == ["mtn", "hut", "slope"]
+      and dropped == 2, "strict subject drops tower + pond, keeps hill")
+kept, dropped = chat_mod.split_required(subj, [])
+check(len(kept) == 5 and dropped == 0, "no must terms keeps all")
+kept, dropped = chat_mod.split_required(subj, ["mountain", "houses"])
+check([r["photo_id"] for r in kept] == ["hut"] and dropped == 4,
+      "every must word must be mentioned")
+
+snowy = [{"photo_id": "mtn", "lex": "a misty mountain peak",
+          "attributes": {"atmosphere": {"value": "hazy"}}},
+         {"photo_id": "hut", "lex": "houses by hazy mountains",
+          "attributes": {"atmosphere": {"value": "misty_or_foggy"}}}]
+check(chat_mod.missing_note(["mountain", "snow"], snowy)
+      == "I could not find a photo that clearly shows snow. "
+      "Here are the closest matches: These show haze, mist.",
+      "honest note names snow plus real skies")
+check(chat_mod.missing_note(["mountain"], snowy) is None,
+      "no note when every word is shown")
+check(chat_mod.missing_note(["snow"], [{"photo_id": "x", "lex": "plain"}])
+      == "I could not find a photo that clearly shows snow. "
+      "Here are the closest matches:",
+      "no suffix without stored skies")
 
 prompt = chat_mod.build_verify_prompt(
     "just a mountain", "mountain", "buildings",

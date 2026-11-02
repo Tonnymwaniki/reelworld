@@ -534,6 +534,22 @@ def none_note(constraints, fails):
     return f"{base} These have {have}, not {constraint_display(cons[0])}."
 
 
+def closest_conditions(rows):
+    """Closest photos' real skies, from stored attributes (pure).
+
+    "" when no stored atmosphere is known.
+    """
+    vals = []
+    for r in rows or []:
+        v = ((r.get("attributes") or {}).get("atmosphere") or {}).get("value")
+        if v and v != "unknown":
+            vals.append(v)
+    if not vals:
+        return ""
+    uniq = sorted({_HAVE_WORDS.get(v, str(v)) for v in vals})
+    return " These show " + ", ".join(uniq) + "."
+
+
 def mixed_note(nclear, nmaybe, constraints):
     """Honest count line when some pass clearly, some might (pure)."""
     words = " and ".join(constraint_display(c)

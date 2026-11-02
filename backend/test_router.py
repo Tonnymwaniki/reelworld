@@ -141,6 +141,32 @@ check("{state}" not in router_mod.ROUTER_PROMPT.replace("{state}", "{}")
 check("second one" in router_mod.ROUTER_PROMPT
       and "never invent" in router_mod.ROUTER_PROMPT.lower(),
       "ref rules in prompt")
+check("two or more replies" in router_mod.ROUTER_PROMPT
+      and "two or more replies" in router_mod.JSON_FALLBACK_PROMPT,
+      "cross-reply matches clarify")
+check("must_include: ALWAYS the core subject" in router_mod.ROUTER_PROMPT
+      and "no constraint mapping (snow, rainbow, waterfall)"
+      in router_mod.ROUTER_PROMPT,
+      "subject must_include always set")
+cs2 = {"latest": [{"n": 1, "id": "mtn_002",
+                   "label": "A clear mountain lake."}],
+       "prev1": [{"n": 1, "id": "mtn_001",
+                  "label": "A misty mountain ridge."}],
+       "prev2": []}
+hit = router_mod._cross_reply_ref("tell me about that mountain", cs2)
+check(hit is not None and hit[0] == "mountain"
+      and [p["id"] for _, p in hit[1]] == ["mtn_002", "mtn_001"],
+      "cross-reply that-noun matches")
+check(router_mod._cross_reply_ref("tell me about the second one", cs2)
+      is None
+      and router_mod._cross_reply_ref("not that mountain", cs2) is None
+      and router_mod._cross_reply_ref(
+          "tell me about that mountain",
+          {"latest": cs2["latest"], "prev1": [], "prev2": []}) is None,
+      "ordinals, rejections, single reply left alone")
+check("Never ask the user a question in direct text" in router_mod.ROUTER_PROMPT
+      and "never a question" in router_mod.JSON_FALLBACK_PROMPT,
+      "questions use clarify, not text")
 
 # prefixes + pending (pure)
 t, a, m = router_mod._strip_prefixes("new search: markets")
@@ -239,6 +265,34 @@ try:
     finally:
         api_mod.ask = orig_api_ask
 
+    # cross-reply "that mountain": code clarify, no model call; tap resolves
+    eng = FakeEngine()
+    eng.state["replies"] = [
+        {"photos": [{"id": "mtn_001", "label": "A misty mountain ridge.",
+                     "verdict": "yes"}]},
+        {"photos": [{"id": "mtn_002", "label": "A clear mountain lake.",
+                     "verdict": None}]}]
+    eng.photos = {
+        "mtn_001": {"photo_id": "mtn_001", "collection": "world",
+                    "viewpoint": "ground_level", "people_count": 4,
+                    "record": {"observed": {"caption": "ridge"},
+                               "inferred": {}, "provided": {}}}}
+    script = Script([])
+    llm_mod.ask_tools = script
+    out, _ = run_turn(eng, "tell me about that mountain")
+    check(out["kind"] == "clarify" and len(out["options"]) == 2
+          and script.calls == 0
+          and out["text"].startswith("Which mountain do you mean?"),
+          "cross-reply clarify without a model call")
+    llm_mod.ask_tools = Script([
+        {"calls": [tool_call("get_photo_facts",
+                             {"photo_id": "mtn_001"})]},
+        {"text": "mtn_001 shows a ridge."}])
+    out, _ = run_turn(eng, "the one in previous")
+    check(out["kind"] == "question_answer"
+          and out["about_photo_id"] == "mtn_001",
+          "clarify tap reprocesses with the forced photo")
+
     # count text is built by code
     eng = FakeEngine()
     eng.sb_rows = [
@@ -293,6 +347,32 @@ try:
     out, _ = run_turn(eng, "which has the most people?")
     check("zzz_999" not in out["text"] and "mtn_001" in out["text"],
           "invented id falls back to code text")
+    check(out["kind"] == "question_answer"
+          and out.get("about_photo_id") == "mtn_001",
+          "facts fallback binds to the photo")
+
+    # facts with ref: grounded answer binds to the photo + notes the ref
+    llm_mod.ask_tools = Script([
+        {"calls": [tool_call("get_photo_facts", {"photo_id": "mtn_001",
+                                                 "ref": "the second one"})]},
+        {"text": "mtn_001 shows a ridge with four hikers."}])
+    out, _ = run_turn(eng, "tell me about the second one")
+    check(out["kind"] == "question_answer"
+          and out["about_photo_id"] == "mtn_001"
+          and out["took_to_mean"] == "I took 'the second one' to mean "
+          "this photo."
+          and out["text"] == "mtn_001 shows a ridge with four hikers.",
+          "facts answer binds to the photo")
+
+    # multi-facts: the answer binds to the first photo id it names
+    llm_mod.ask_tools = Script([
+        {"calls": [tool_call("get_photo_facts", {"photo_id": "mtn_001"}),
+                   tool_call("get_photo_facts", {"photo_id": "mtn_002"})]},
+        {"text": "mtn_002 shows a lake; mtn_001 shows a ridge."}])
+    out, _ = run_turn(eng, "tell me about those two")
+    check(out["kind"] == "question_answer"
+          and out["about_photo_id"] == "mtn_002",
+          "grounded answer binds to first-named photo")
 
     # malformed tool calls -> JSON fallback path, logged in trace
     eng = FakeEngine()

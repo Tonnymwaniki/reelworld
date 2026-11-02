@@ -170,6 +170,29 @@ def lex_has(lex, term):
     return any(f in lex for f in forms)
 
 
+SUBJECT_GROUPS = [
+    {"mountain", "mountains", "hill", "hills", "peak", "peaks",
+     "ridge", "ridges"},
+]
+
+
+def matches_subject(lex, terms):
+    """True when lex mentions a subject term or its synonym (pure).
+
+    One curated group (mountain/hill/peak/ridge) so a "mountain"
+    requirement keeps hill photos; everything else matches
+    stem-tolerantly via lex_has.
+    """
+    for term in terms or []:
+        if lex_has(lex, term):
+            return True
+        low = (term or "").lower().strip()
+        for group in SUBJECT_GROUPS:
+            if low in group and any(lex_has(lex, g) for g in group):
+                return True
+    return False
+
+
 def search(query, collection=None, top=5, vecs=None, meta=None, model=None):
     if vecs is None:
         vecs, meta = load_index()

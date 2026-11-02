@@ -20,6 +20,7 @@ import re
 
 import chat as chat_mod
 import llm as llm_mod
+from retrieval import matches_subject
 
 MAX_ROUNDS = 3
 ID_RE = re.compile(r"\b[a-z]+_\d+\b")
@@ -81,7 +82,8 @@ TOOL_SCHEMAS = [
         {"photo_id": {"type": "string"},
          "fields": {"type": "array",
                     "items": {"type": "string",
-                              "enum": list(FACT_FIELDS)}}},
+                              "enum": list(FACT_FIELDS)}},
+         "ref": {"type": ["string", "null"]}},
         ["photo_id"]),
     _fn("count", "Count photos from data (no model call). place_key is a "
         "place name or key fragment such as KICC.",
@@ -126,22 +128,22 @@ STATE (JSON: topic, current search, recent photos as {n, id, label, verdict}, fo
 {state}
 
 TOOLS (call with exact arguments):
-- search: find photos. topic "new" = fresh search (drops everything); "refine" = change the current search. Resend the COMPLETE intended filters every time (query, viewpoints, max_people, collection, owner_only, must_include, avoid_terms, constraints) — anything omitted is dropped on refine, except the query which is kept when you pass "". alt_queries: up to 2 short paraphrases. constraints use attribute/op/values with this vocabulary: atmosphere = clear|partly_cloudy|overcast|hazy|misty_or_foggy|rainy|dusty; light = golden_hour|harsh_midday|soft|night_lit|backlit; time_of_day = dawn|morning|midday|afternoon|dusk|night; water_visible = true|false; vegetation = none|sparse|lush; crowd = empty|few|many. Mappings: "misty", "foggy", "with mist" = atmosphere is [misty_or_foggy]; "without mist", "no fog", "not misty" = atmosphere is_not [misty_or_foggy]; "not hazy" = is_not [hazy]; "clear sky" = is [clear]; "cloudy" = is [overcast, partly_cloudy]; "rainy" = is [rainy]; "golden hour" = light is [golden_hour]; "at night" = time_of_day is [night]; "empty" = crowd is [empty]; "crowded" = crowd is [many]; "lush" = vegetation is [lush]; "dry" = vegetation is [none]; "with water" = water_visible is [true]. must_include/avoid_terms are single lowercase words for concrete things ("vegetables", "cars"). "photos of me" = owner_only true with collection personal.
+- search: find photos. topic "new" = fresh search (drops everything); "refine" = change the current search. Resend the COMPLETE intended filters every time (query, viewpoints, max_people, collection, owner_only, must_include, avoid_terms, constraints) — anything omitted is dropped on refine, except the query which is kept when you pass "". alt_queries: up to 2 short paraphrases. constraints use attribute/op/values with this vocabulary: atmosphere = clear|partly_cloudy|overcast|hazy|misty_or_foggy|rainy|dusty; light = golden_hour|harsh_midday|soft|night_lit|backlit; time_of_day = dawn|morning|midday|afternoon|dusk|night; water_visible = true|false; vegetation = none|sparse|lush; crowd = empty|few|many. Mappings: "misty", "foggy", "with mist" = atmosphere is [misty_or_foggy]; "without mist", "no fog", "not misty" = atmosphere is_not [misty_or_foggy]; "not hazy" = is_not [hazy]; "clear sky" = is [clear]; "cloudy" = is [overcast, partly_cloudy]; "rainy" = is [rainy]; "golden hour" = light is [golden_hour]; "at night" = time_of_day is [night]; "empty" = crowd is [empty]; "crowded" = crowd is [many]; "lush" = vegetation is [lush]; "dry" = vegetation is [none]; "with water" = water_visible is [true]. must_include: ALWAYS the core subject noun(s) as single lowercase words ("mountain" for any mountain query, "market" for market queries, "vegetables", "cars") — every word must be mentioned or the photo is dropped, so never leave it empty on a concrete search. Visible specifics with no constraint mapping (snow, rainbow, waterfall) go here as well. avoid_terms: single lowercase words for concrete things to exclude. "photos of me" = owner_only true with collection personal.
 - related: more photos from one anchor: mode "angle" (same place, different viewpoint) or "similar" (looks alike).
-- get_photo_facts: stored facts for one photo (caption, place, signs, people...). No model call. Use it to compare photos from data.
+- get_photo_facts: stored facts for one photo (caption, place, signs, people...). No model call. Use it to compare photos from data, or to answer "tell me about ..." questions. Pass ref = the exact words you resolved.
 - count: count photos from data (collection, place name fragment, owner_only, constraints).
 - verify: look at up to 12 photos and answer one yes/no question per photo ("which of these show mist?", "is the sign readable?"). Only for explicit check questions — search already verifies constraints by itself.
 - ask_photo: answer a question about ONE photo from its record (it re-looks at the image when the record cannot answer).
 - compare: compare TWO photos from their records.
 - clarify: ask the user to choose (2-3 options {label, message}). Topic options MUST be {label "Continue previous search", message "continue previous"} and {label "Start new search", message "new search"}. Photo options MUST be {label "<short caption>", message "photo <n>"} using the n from the state.
 
-REFERENCES: "the second one" / "open 3" = latest[n].id. "that mountain" / "the market photo" = the best caption match in the state. A bare question with no photo reference ("what does the sign say?", "who is in it?") answers about the focus photo when one is set. Pass the exact id, plus ref = the exact words you resolved ("the second one"), or null when they named the id. Never invent or guess an id: use only ids in the state (or from earlier tool results this turn, which the harness lists). If no photo fits, call clarify. "not this one" = search refine keeping the spec (the harness drops the focus photo).
+REFERENCES: "the second one" / "open 3" = latest[n].id. "that mountain" / "the market photo" = the best caption match, but ONLY when the matching photos sit in a single reply; when they sit in two or more replies, call clarify with photo options instead of guessing. A bare question with no photo reference ("what does the sign say?", "who is in it?") answers about the focus photo when one is set; never read the focus photo when the message names or describes another photo. Pass the exact id, plus ref = the exact words you resolved ("the second one"), or null when they named the id. Never invent or guess an id: use only ids in the state (or from earlier tool results this turn, which the harness lists). If no photo fits, call clarify. "not this one" = search refine keeping the spec (the harness drops the focus photo).
 
-TURNS: one round is usual. A 2nd/3rd round is allowed ONLY for tools that need earlier results (facts after a search, an answer after facts). After data tools return, answer SHORT from those results, naming photo ids. Answer DIRECTLY (no tools) ONLY for chitchat: greetings, thanks, goodbye, "what can you do". Never describe photos from memory; never write search results as text. Replies are built by code; your text is used only for chitchat and grounded answers."""
+TURNS: one round is usual. A 2nd/3rd round is allowed ONLY for tools that need earlier results (facts after a search, an answer after facts). After data tools return, answer SHORT from those results, naming photo ids. Answer DIRECTLY (no tools) ONLY for chitchat: greetings, thanks, goodbye, "what can you do". Never ask the user a question in direct text — if you need to ask anything (which photo, new search vs refine), call clarify with options. Never describe photos from memory; never write search results as text. Replies are built by code; your text is used only for chitchat and grounded answers."""
 
-JSON_FALLBACK_PROMPT = """You route one chat message for a photo assistant. Reply with ONE JSON object only: {"calls": [{"name": "...", "args": {...}}]} or {"text": "..."} for chitchat only (greetings, thanks, goodbye).
-Tools: search(query, alt_queries, constraints[{attribute, op, values}], viewpoints, max_people, must_include, avoid_terms, owner_only, topic new|refine, collection), related(photo_id, mode angle|similar), get_photo_facts(photo_id, fields), count(collection, place_key, owner_only, constraints), verify(photo_ids, question), ask_photo(photo_id, question), compare(photo_a, photo_b, question), clarify(question, options[{label, message}]).
-Rules: topic "new" drops everything, "refine" changes the current search (resend COMPLETE filters). Resolve "the second one" to latest[n].id and never invent ids (state ids only). Constraints vocab: atmosphere = clear|partly_cloudy|overcast|hazy|misty_or_foggy|rainy|dusty; light = golden_hour|harsh_midday|soft|night_lit|backlit; time_of_day = dawn|morning|midday|afternoon|dusk|night; water_visible = true|false; vegetation = none|sparse|lush; crowd = empty|few|many. "misty/with mist" = atmosphere is [misty_or_foggy]; "without mist/no fog" = is_not. Clarify (don't guess) when unsure: topic options are {Continue previous search / continue previous} and {Start new search / new search}; photo options are {<caption> / photo <n>}.
+JSON_FALLBACK_PROMPT = """You route one chat message for a photo assistant. Reply with ONE JSON object only: {"calls": [{"name": "...", "args": {...}}]} or {"text": "..."} for chitchat only (greetings, thanks, goodbye; never a question — questions use clarify).
+Tools: search(query, alt_queries, constraints[{attribute, op, values}], viewpoints, max_people, must_include, avoid_terms, owner_only, topic new|refine, collection), related(photo_id, mode angle|similar), get_photo_facts(photo_id, fields, ref), count(collection, place_key, owner_only, constraints), verify(photo_ids, question), ask_photo(photo_id, question), compare(photo_a, photo_b, question), clarify(question, options[{label, message}]).
+Rules: topic "new" drops everything, "refine" changes the current search (resend COMPLETE filters). Always set must_include to the core subject noun (mountain, market) plus visible specifics with no constraint mapping (snow); candidates missing any word are dropped. Resolve "the second one" to latest[n].id and never invent ids (state ids only). "that mountain" matching photos in two or more replies means clarify with photo options, never a guess. Constraints vocab: atmosphere = clear|partly_cloudy|overcast|hazy|misty_or_foggy|rainy|dusty; light = golden_hour|harsh_midday|soft|night_lit|backlit; time_of_day = dawn|morning|midday|afternoon|dusk|night; water_visible = true|false; vegetation = none|sparse|lush; crowd = empty|few|many. "misty/with mist" = atmosphere is [misty_or_foggy]; "without mist/no fog" = is_not. Clarify (don't guess) when unsure: topic options are {Continue previous search / continue previous} and {Start new search / new search}; photo options are {<caption> / photo <n>}.
 STATE:
 {state}
 USER:
@@ -288,12 +290,64 @@ def _unknown_ids(text, seen):
     return sorted(set(ID_RE.findall(text or "")) - set(seen))
 
 
+def _first_seen_id(text, seen):
+    """First validated photo id named in text, or None (pure)."""
+    allowed = set(seen)
+    for pid in ID_RE.findall(text or ""):
+        if pid in allowed:
+            return pid
+    return None
+
+
 def is_rejection(text):
     """Bare 'not this one' (pure): the focus photo is dropped on refine."""
     norm = re.sub(r"[^a-z ]", "", (text or "").lower()).strip()
     norm = re.sub(r"\s+", " ", norm)
     return norm in ("not this one", "not this", "not that one", "not that",
                     "no not this one", "no not this")
+
+
+THAT_NOUNS_SKIP = {"one", "ones", "photo", "photos", "picture",
+                   "same", "way", "place"}
+
+
+def _cross_reply_ref(message, cstate):
+    """Description noun matching photos in 2+ replies (pure).
+
+    "that mountain" / "the market photo" with matches in two or more
+    of latest/prev1/prev2 returns (phrase, [(slot, photo), ...]);
+    anything else returns None. Ordinals, "photo N", exact ids and
+    leading not/no are left for the model.
+    """
+    low = (message or "").lower()
+    if re.match(r"\s*(not|no)\b", low):
+        return None
+    if re.search(r"\b(first|second|third|fourth|fifth|photo \d+|"
+                 r"[a-z]+_\d+)\b", low):
+        return None
+    m = re.search(r"\bthat ([a-z]+)\b", low)
+    noun, phrase = None, None
+    if m and m.group(1) not in THAT_NOUNS_SKIP:
+        noun, phrase = m.group(1), m.group(1)
+    else:
+        m = re.search(r"\bthe ([a-z]+) photos?\b", low)
+        if m and m.group(1) not in THAT_NOUNS_SKIP \
+                and m.group(1) not in ORDINALS:
+            noun, phrase = m.group(1), f"{m.group(1)} photo"
+    if not noun:
+        return None
+    hits = []
+    for slot, rep in (("latest", cstate.get("latest") or []),
+                      ("previous", cstate.get("prev1") or []),
+                      ("earlier", cstate.get("prev2") or [])):
+        for p in rep:
+            if p.get("id") and matches_subject(p.get("label") or "",
+                                               [noun]):
+                hits.append((slot, p))
+                break
+    if len(hits) < 2:
+        return None
+    return phrase, hits[:3]
 
 
 def _auto_clarify(ctx, offender=None):
@@ -505,6 +559,10 @@ def _tool_facts(engine, args, ctx):
     facts = _record_facts(row["record"], row, fields)
     detail = f"Read the stored facts for {pid}."
     ctx["trace"].append({"step": "facts", "detail": detail})
+    ctx["about"] = pid
+    if isinstance(args.get("ref"), str) and args["ref"].strip():
+        ctx["took"] = (f"I took '{args['ref'].strip()[:60]}' to mean "
+                       "this photo.")
     return ({"photo_id": pid, "facts": facts}, [("facts", detail)], None)
 
 
@@ -795,7 +853,7 @@ def _code_summary(ctx, tool_data):
                               if v not in (None, "", {}, []))
             lines.append(f"- {f['photo_id']}: {known[:160]}")
         return {"text": "From the records:\n" + "\n".join(lines),
-                "results": [], "kind": "chat"}
+                "results": [], "kind": "question_answer"}
     if tool_data.get("verify"):
         return {"text": "I looked but could not put that together. "
                 "Try rephrasing.",
@@ -953,8 +1011,18 @@ def _grounded(ctx, text, tool_data):
     """Post-tool model text, validated against seen ids."""
     if not text or _unknown_ids(text, ctx["seen"]):
         return _code_summary(ctx, tool_data)
-    return {"text": text, "results": ctx.get("last_rows") or [],
-            "kind": "ok" if ctx.get("last_rows") else "chat"}
+    rows = ctx.get("last_rows") or []
+    facts = tool_data.get("get_photo_facts") or []
+    if rows:
+        kind = "ok"
+    elif any(f.get("facts") for f in facts):
+        kind = "question_answer"
+        first = _first_seen_id(text, ctx["seen"])
+        if first is not None:
+            ctx["about"] = first
+    else:
+        kind = "chat"
+    return {"text": text, "results": rows, "kind": kind}
 
 
 def _finish(ctx, out):
@@ -1040,6 +1108,37 @@ def route_stream(engine, message):
         return
     st["user_texts"] = (st.get("user_texts") or [])[-2:] + [message]
     cstate = build_compact_state(engine)
+    cross = _cross_reply_ref(message, cstate) \
+        if not forced_about and not forced_topic else None
+    if cross:
+        phrase, hits = cross
+        options, pending = [], []
+        for i, (slot, p) in enumerate(hits):
+            short = (p.get("label") or p["id"])[:32]
+            msg = f"the one in {slot}"
+            options.append({"label": f"{short} ({slot})",
+                            "message": msg})
+            keys = {msg, p["id"], (p.get("label") or "").lower(),
+                    str(i + 1), ORDINALS[i]}
+            pending.append({"keys": sorted(keys - {""}),
+                            "forced_topic": None,
+                            "forced_about": p["id"], "message": message})
+        st["pending"] = {"options": pending}
+        detail = ("That matches photos in more than one reply, "
+                  "so I asked which one.")
+        trace = [{"step": "understood", "detail": detail},
+                 {"step": "asked", "detail": detail},
+                 {"step": "routed",
+                  "detail": "tools: none in 0 rounds (auto-clarify)."},
+                 {"step": "answered", "detail": "Asked which was meant."}]
+        text = (f"Which {phrase} do you mean?\n\n" + "\n".join(
+            f"- {o['label']} (reply '{o['message']}')" for o in options))
+        yield ("step", "understood", detail)
+        yield ("step", "wrote", "Reply ready.")
+        yield ("result", {"text": text, "results": [], "kind": "clarify",
+                          "options": options, "trace": trace,
+                          "topic": dict(st["topic"], new=False)})
+        return
     notes = []
     if forced_topic:
         notes.append(f"(Harness note: topic={forced_topic} is forced; "

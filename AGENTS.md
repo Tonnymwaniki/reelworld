@@ -24,6 +24,9 @@ Hackathon (Indie track). Environment: Windows, PowerShell, Python 3.14.
   state + 8 code-run tools (search, related, get_photo_facts, count,
   verify, ask_photo, compare, clarify), topics new/refine, photo-id
   validation, and a JSON fallback when tool calling breaks.
+  Search requires every `must_include` word (synonym-aware), answers
+  bind to the first photo id they name, and "that X" matching photos
+  in 2+ replies clarifies in code with zero model calls.
   `Engine.parse()` is legacy (only `scripts/verify_meta.py` uses it).
 - Conversations persist via `backend/chats.py` + `/api/chats` (create,
   list, open, rename, delete one/all): git-ignored `data/chats/`,

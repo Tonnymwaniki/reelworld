@@ -857,7 +857,7 @@ the first unfinished phase.
   demo expiry with lazy cleanup, reasoning scan); /chat +
   /chat/stream record turns when chat_id is given (404 unknown);
   6 /api/chats endpoints; replies/state restore on open. Tests:
-  test_chats 23/23, test_routes 42/42. (commit id on push.)
+  test_chats 23/23, test_routes 42/42. Committed 16ee8c6.
 - Chat intelligence step 6 (chatbot interface): sidebar
   (tpl-chatitem rows, rename/delete/clear-all, demo note, phone
   drawer), thread restore with dividers, labels, verdict marks,
@@ -881,4 +881,14 @@ the first unfinished phase.
   elapsed, Stop; respects reduced motion); history grouped by
   Today/Yesterday/Earlier; smarter auto titles (word cut,
   punctuation stripped, capitalized). Tests: home.test 96/96,
-  test_chats 27/27. (commit id on push.)
+  test_chats 27/27. Committed 238572b (with steps 6 + tag UX).
+- Acceptance fixes (A-E live): facts answers bind (about+took,
+  question_answer kind); grounded text binds to the first photo
+  id it names; strict must_include (AND, mountain/hill/peak/
+  ridge synonyms, `required` trace step, honest missing-word
+  note with real skies); cross-reply "that X" clarifies in code
+  (0 model calls, slot options, tap reprocesses); snow-like
+  specifics go in must_include. Tests: test_router 40/40,
+  test_search_verify 27/27. Live: A misty/not-misty verified,
+  B new topic + refine, C ordinals bound, D code clarify ($0),
+  E compare/compound/count. (commit id on push.)
