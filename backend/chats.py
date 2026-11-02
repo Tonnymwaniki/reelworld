@@ -99,7 +99,7 @@ def create_chat(scope, title=None):
     """New empty chat, saved; title auto-fills from the first message."""
     cid = new_chat_id(scope)
     now = now_iso()
-    chat = {"id": cid, "title": (title or "").strip() or "New chat",
+    chat = {"id": cid, "title": (title or "").strip()[:80] or "New chat",
             "title_auto": not (title or "").strip(),
             "created_at": now, "updated_at": now, "messages": [],
             "state": {"spec": {}, "focus": None, "last": [],

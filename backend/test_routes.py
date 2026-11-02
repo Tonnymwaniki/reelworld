@@ -3,12 +3,15 @@
 Every endpoint the docs and tests promise must stay registered.
 Run from the project root:  python backend/test_routes.py
 """
+import asyncio
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import api  # noqa: E402
+from fastapi import HTTPException  # noqa: E402
+from pydantic import ValidationError  # noqa: E402
 
 fails = 0
 total = 0
@@ -57,6 +60,58 @@ for path, methods in (("/api/llm/status", ("GET",)),
                       ("/api/related", ("POST",)),
                       ("/api/reject", ("POST",))):
     check((path, methods) in routes, f"route {methods[0]} {path}")
+
+
+class FakeUploadReq:
+    def __init__(self, declared):
+        self.headers = {"content-type": "image/jpeg",
+                        "content-length": str(declared),
+                        "x-demo-code": "testcode"}
+
+    async def body(self):
+        return b"fake-bytes"
+
+
+try:
+    api.ExplainRequest(photo_a="", photo_b="market_001")
+    check(False, "explain rejects empty ids")
+except ValidationError:
+    check(True, "explain rejects empty ids")
+
+saved_mode = api.DEMO_MODE
+api.DEMO_MODE = False
+try:
+    api.story(api.StoryRequest(theme="markets", voice="garbage"))
+    check(False, "story rejects bad voice")
+except HTTPException as e:
+    check(e.status_code == 400, "story rejects bad voice")
+finally:
+    api.DEMO_MODE = saved_mode
+
+try:
+    api.clean_spec({"query": "x", "max_people": True})
+    check(False, "max_people rejects bool")
+except HTTPException as e:
+    check(e.status_code == 400, "max_people rejects bool")
+check(api.clean_spec({"query": "x", "max_people": 2})["max_people"] == 2,
+      "max_people keeps int")
+
+try:
+    api._coerce_embedding("{oops")
+    check(False, "corrupt embedding is 502")
+except HTTPException as e:
+    check(e.status_code == 502, "corrupt embedding is 502")
+check(api._coerce_embedding([1.0]) == [1.0], "coerce passes lists through")
+
+saved_mode, saved_code = api.DEMO_MODE, api.DEMO_CODE
+api.DEMO_MODE, api.DEMO_CODE = True, "testcode"
+try:
+    asyncio.run(api.upload(FakeUploadReq(api.MAX_UPLOAD + 1), None))
+    check(False, "oversized raw upload is 413")
+except HTTPException as e:
+    check(e.status_code == 413, "oversized raw upload is 413")
+finally:
+    api.DEMO_MODE, api.DEMO_CODE = saved_mode, saved_code
 
 import inspect  # noqa: E402
 

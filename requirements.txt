@@ -1,0 +1,16 @@
+# ReelWorld runtime dependencies (Python 3.14, Windows PowerShell).
+# Install:  pip install -r requirements.txt
+fastapi
+uvicorn
+pydantic
+python-multipart
+openai
+supabase
+fastembed
+numpy
+Pillow
+opencv-python-headless
+python-dotenv
+requests
+httpx
+# Deploy the studio voice only: pip install modal

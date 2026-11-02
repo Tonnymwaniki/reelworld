@@ -5,6 +5,7 @@ no model or database. Uses dummy keys only, never the real .env values.
 Run from the project root:  python backend/test_parser_env.py
 """
 import os
+import subprocess
 import sys
 from pathlib import Path
 
@@ -72,5 +73,16 @@ finally:
             os.environ.pop(k, None)
         else:
             os.environ[k] = saved[k]
-print(f"test_parser_env.py: {len(CASES) - fails}/{len(CASES)} checks passed")
+
+# Import must survive a keyless environment (fresh clone, no .env yet).
+bare = {k: v for k, v in os.environ.items()
+        if k not in ENV_KEYS + KEYS + ("MODAL_API_KEY",)}
+bare["PYTHONPATH"] = str(Path(__file__).resolve().parent)
+probe = subprocess.run([sys.executable, "-c", "import chat; print('import-ok')"],
+                       capture_output=True, text=True, env=bare, timeout=120)
+total = len(CASES) + 1
+if probe.returncode != 0 or "import-ok" not in probe.stdout:
+    fails += 1
+    print(f"FAIL keyless-import: rc={probe.returncode} err={probe.stderr[-200:]}")
+print(f"test_parser_env.py: {total - fails}/{total} checks passed")
 sys.exit(1 if fails else 0)

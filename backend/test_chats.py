@@ -78,6 +78,10 @@ check(chats_mod.auto_title("mountains?") == "Mountains", "title strips punctuati
 check(chats_mod.auto_title("   ") == "New chat", "title blanks")
 check(len(chats_mod.auto_title("x" * 100)) == 48, "title caps length")
 check(chats_mod.auto_title("x" * 100) == "X" + "x" * 47, "title truncated")
+c3 = chats_mod.create_chat("local", "y" * 100)
+check(len(c3["title"]) == 80 and c3["title_auto"] is False,
+      "create truncates long titles")
+chats_mod.delete_chat("local", c3["id"])  # keep later count/order checks exact
 
 # append turns: records, verdicts, title, snapshot
 got = chats_mod.append_turn("local", c1["id"], "mountains with mist",

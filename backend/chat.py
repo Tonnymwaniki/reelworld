@@ -93,7 +93,7 @@ def resolve_parser():
 
 
 PARSER_BASE_URL, _PARSER_KEY_ENV, PARSER_MODEL = resolve_parser()
-PARSER_KEY = os.environ[_PARSER_KEY_ENV]
+PARSER_KEY = os.environ.get(_PARSER_KEY_ENV, "")  # missing key must not break import
 
 
 def chat_kwargs():

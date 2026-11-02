@@ -891,4 +891,16 @@ the first unfinished phase.
   specifics go in must_include. Tests: test_router 40/40,
   test_search_verify 27/27. Live: A misty/not-misty verified,
   B new topic + refine, C ordinals bound, D code clarify ($0),
-  E compare/compound/count. (commit id on push.)
+  E compare/compound/count. Committed 2935c6b.
+- QA sweep (pre-submission): six-reviewer static pass written to
+  docs/qa_report.md (122 heads: 65 PASS, 24 FIXED, 33 OPEN).
+  Fixed: outline/refresh rate guards, story voice 400, explain
+  min_length, photo-id strip, max_people bool reject, corrupt
+  embedding 502, resting engine hardening, flag 503, raw-upload
+  Content-Length pre-check, reasoning_content never an answer,
+  chat title cap, keyless import (PARSER_KEY .get), CSS token
+  aliases, about/photo/credits/home honesty copy, img broken
+  guards, CLI usage guards, .env.example, requirements.txt,
+  manifest relativized (132/132 on disk), README setup + model
+  map. Node tests: home 96, photo 60, connected 102, stories
+  187, library 179, render 53, profile 119 — all green.

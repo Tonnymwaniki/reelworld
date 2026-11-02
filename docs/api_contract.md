@@ -643,7 +643,8 @@ Response is immediate; the work continues in the job:
 
 - 202: `{ "job_id": "9f2c…", "status": "queued", "stage": "uploaded" }`
 - 400 missing/empty file, unsupported type, unreadable image
-- 413 body larger than 10 MB
+- 413 body larger than 10 MB (raw uploads are also refused early
+  on the declared `Content-Length`, before the bytes are read)
 - 403 in demo mode without a matching `X-Demo-Code` header
 - 501 multipart used but `python-multipart` is not installed
   (`pip install python-multipart` enables it; raw-byte upload works without it)
@@ -898,10 +899,20 @@ With `DEMO_MODE=false` there are no limits.
   answers 200 with `kind: "resting"`, the calm message as
   `text`, empty results and a `rested` trace row.
 - `POST /api/ask`, `/api/compare`, `/api/explain`, `/api/story`,
-  `/api/audio` and `/api/llm/probe` answer 429 with the calm
+  `/api/audio`, `/api/llm/probe`, `POST /api/outline` and
+  `POST /api/stories/{id}/refresh` answer 429 with the calm
   message as `{"detail"}`.
 - Model-free endpoints (browse, place, credits, tour,
   Connected, photos, status) are never limited.
+
+## Validation notes (QA pass)
+- `POST /api/explain` needs two non-empty photo ids (422 otherwise).
+- Search `max_people` must be a real number; booleans are 400.
+- A corrupt stored embedding is 502 (bad upstream data), never 500.
+- `POST /api/flag` is 503 when the flag file cannot be written.
+- Chat titles from `POST /api/chats` are capped at 80 characters.
+- A model reply that carries only `reasoning_content` is treated as
+  empty (it triggers the fallback, never an answer).
 
 ## Answer cache
 

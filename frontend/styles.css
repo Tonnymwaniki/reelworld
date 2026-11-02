@@ -42,6 +42,23 @@
   --ochre-warm: #D9822B;
   --sage: #476E5B;
   --forest: #1e4732;
+  /* Aliases: components below address tokens as --color-*. */
+  --color-error: var(--error);
+  --color-on-primary-container: var(--on-primary);
+  --color-on-secondary-fixed-variant: var(--on-secondary-container);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-on-tertiary-fixed: var(--on-tertiary-fixed);
+  --color-outline-variant: var(--outline-variant);
+  --color-primary: var(--primary);
+  --color-primary-container: var(--primary-container);
+  --color-secondary: var(--secondary);
+  --color-secondary-container: var(--secondary-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-dim: var(--surface-dim);
+  --color-tertiary-fixed: var(--tertiary-fixed);
 }
 
 /* Desktop tab active / inactive states (toggled by JS, export classes). */

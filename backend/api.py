@@ -705,7 +705,11 @@ def chat(req: ChatRequest, request: Request = None, response: Response = None):
     limited = _guard_expensive(request, response)
     if limited is not None:
         _sid = req.session_id.strip() or "default"
-        return _resting_payload(_sid, get_engine(_sid), limited)
+        try:
+            _eng = get_engine(_sid)
+        except Exception:
+            _eng = None
+        return _resting_payload(_sid, _eng, limited)
     scope, cid = None, (req.chat_id or "").strip() or None
     if cid:
         scope = _chat_scope(request, response)
@@ -797,7 +801,11 @@ def chat_stream(req: ChatRequest, request: Request = None,
     if limited is not None:
         def gen_resting():
             _sid = req.session_id.strip() or "default"
-            yield _sse("result", _resting_payload(_sid, get_engine(_sid), limited))
+            try:
+                _eng = get_engine(_sid)
+            except Exception:
+                _eng = None
+            yield _sse("result", _resting_payload(_sid, _eng, limited))
         return StreamingResponse(gen_resting(), media_type="text/event-stream")
     scope, cid = None, (req.chat_id or "").strip() or None
     if cid:
@@ -1012,16 +1020,19 @@ def api_flag(req: FlagRequest):
         raise HTTPException(status_code=400,
                             detail=f"reason must be one of: {', '.join(FLAG_REASONS)}")
     p = ROOT / "data" / "flags.jsonl"
-    with _flags_lock:
-        seq = sum(1 for _ in open(p, encoding="utf-8")) if p.exists() else 0
-        fid = f"FLG-{datetime.now(timezone.utc):%Y%m%d}-{seq + 1:04d}"
-        with open(p, "a", encoding="utf-8") as f:
-            f.write(json.dumps({"id": fid, "ts": datetime.now(timezone.utc).isoformat(),
-                                "target": req.target.strip()[:200],
-                                "reason": req.reason,
-                                "note": (req.note or "").strip()[:140] or None,
-                                "route": (req.route or "").strip()[:120] or None},
-                               ensure_ascii=False) + "\n")
+    try:
+        with _flags_lock:
+            seq = sum(1 for _ in open(p, encoding="utf-8")) if p.exists() else 0
+            fid = f"FLG-{datetime.now(timezone.utc):%Y%m%d}-{seq + 1:04d}"
+            with open(p, "a", encoding="utf-8") as f:
+                f.write(json.dumps({"id": fid, "ts": datetime.now(timezone.utc).isoformat(),
+                                    "target": req.target.strip()[:200],
+                                    "reason": req.reason,
+                                    "note": (req.note or "").strip()[:140] or None,
+                                    "route": (req.route or "").strip()[:120] or None},
+                                   ensure_ascii=False) + "\n")
+    except OSError:
+        raise HTTPException(status_code=503, detail="flag store unavailable, try again soon.")
     return {"ok": True, "id": fid}
 
 
@@ -1031,11 +1042,10 @@ class OutlineRequest(BaseModel):
 
 
 @app.post("/api/outline")
-def api_outline(req: OutlineRequest):
+def api_outline(req: OutlineRequest, request: Request = None,
+                response: Response = None):
     """Subject outlines via SAM 3.1 (Meta Model API)."""
-
-
-
+    _guard_or_429(request, response)
     if not FEATURE_OUTLINES:
         raise HTTPException(status_code=501, detail="Outlines are not enabled (FEATURE_OUTLINES=false).")
     from sam import SAM_MODEL, meta_key, outline_request
@@ -1115,7 +1125,7 @@ def clean_spec(raw):
         raise HTTPException(status_code=400,
                             detail=f"spec.viewpoints must be a list of: {', '.join(VIEWPOINTS)}")
     if spec["max_people"] is not None and (
-            not isinstance(spec["max_people"], int) or spec["max_people"] < 0):
+            type(spec["max_people"]) is not int or spec["max_people"] < 0):
         raise HTTPException(status_code=400, detail="spec.max_people must be null or >= 0")
     for k in ("must_include", "avoid_terms"):
         if not isinstance(spec[k], list) or any(not isinstance(w, str) for w in spec[k]):
@@ -1401,7 +1411,7 @@ def photo_detail(photo_id: str):
     try:
         rows = (get_sb().table("photos")
                 .select("photo_id,collection,file,caption,viewpoint,place_name,record")
-                .eq("photo_id", photo_id).execute().data or [])
+                .eq("photo_id", photo_id.strip()).execute().data or [])
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"photo lookup failed: {e}")
     if not rows:
@@ -1886,6 +1896,8 @@ def story(req: StoryRequest, request: Request = None,
                             detail="collection must be 'world', 'personal' or 'both'.")
     if (req.lang or "en").lower() != "en":
         raise HTTPException(status_code=400, detail="only 'en' is supported.")
+    if req.voice is not None and req.voice not in ("name", "you", "i"):
+        raise HTTPException(status_code=400, detail="voice must be name, you or i.")
     try:
         eng = get_engine("story")
     except Exception as e:
@@ -2211,6 +2223,12 @@ async def upload(request: Request, background_tasks: BackgroundTasks,
         if form.get("note") or form.get("owner_note"):
             text = str(form.get("note") or form.get("owner_note"))
     elif ctype in RAW_IMAGE_TYPES:
+        try:
+            declared = int(request.headers.get("content-length") or 0)
+        except ValueError:
+            declared = 0
+        if declared > MAX_UPLOAD:
+            raise HTTPException(413, "photo is larger than 10 MB")
         data = await request.body()
     else:
         raise HTTPException(400, "send multipart/form-data with a 'photo' file, "
@@ -2420,7 +2438,7 @@ BRIDGE_COLS = ("photo_id,collection,file,caption,place_key,place_name,taken_from
 def _bridge_src(photo_id):
     try:
         rows = (get_sb().table("photos").select(BRIDGE_COLS)
-                .eq("photo_id", photo_id).execute().data or [])
+                .eq("photo_id", photo_id.strip()).execute().data or [])
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"photo lookup failed: {e}")
     if not rows:
@@ -2439,7 +2457,13 @@ def _bridge_candidates(src_emb, other, exclude_id):
 
 
 def _coerce_embedding(emb):
-    return json.loads(emb) if isinstance(emb, str) else emb
+    """Stored embedding as a list; 502 when the stored value is corrupt."""
+    if not isinstance(emb, str):
+        return emb
+    try:
+        return json.loads(emb)
+    except ValueError:
+        raise HTTPException(status_code=502, detail="a stored photo embedding is corrupt.")
 
 
 def _score_bridge(src, cands):
@@ -2841,8 +2865,8 @@ Record B ({photo_b}):
 
 
 class ExplainRequest(BaseModel):
-    photo_a: str
-    photo_b: str
+    photo_a: str = Field(min_length=1)
+    photo_b: str = Field(min_length=1)
 
 
 def _safe_compact(rec):
@@ -3113,9 +3137,11 @@ def story_update(story_id: str, req: StoryPatchRequest):
 
 
 @app.post("/api/stories/{story_id}/refresh")
-def story_refresh(story_id: str, req: StoryRefreshRequest, request: Request):
+def story_refresh(story_id: str, req: StoryRefreshRequest, request: Request,
+                    response: Response = None):
     """Rewrite a story's chapter texts with the current profile + tags."""
     _demo_guard(request)
+    _guard_or_429(request, response)
     from story_engine import load, update
     story = _story_err(load, story_id.strip())
     if req.voice is not None and req.voice not in ("name", "you", "i"):

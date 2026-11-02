@@ -129,7 +129,7 @@ def _call_one(base_url, key, model, content, temperature, max_tokens,
 
 
 def _extract_text(resp):
-    """Best-effort reply text (reasoning models may null the main slot)."""
+    """Best-effort reply text; reasoning content is never used."""
     try:
         msg = resp.choices[0].message
     except (AttributeError, IndexError, TypeError):
@@ -142,8 +142,10 @@ def _extract_text(resp):
                  if isinstance(b, dict) and b.get("type") in ("text", "output_text")]
         if "".join(parts).strip():
             return "".join(parts)
-    extra = getattr(msg, "reasoning_content", None)
-    return extra if isinstance(extra, str) else ""
+    # Never fall back to reasoning_content: reasoning text must not
+    # reach the browser or saved chats. llm.ask treats "" as failure
+    # and retries on the fallback provider.
+    return ""
 
 
 def _image_data_block(raw, mime):

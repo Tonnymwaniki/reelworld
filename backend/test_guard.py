@@ -119,6 +119,37 @@ api.llm_mod.tokens_today = lambda: 10 ** 9
 check(api._guard_expensive(None, None) == "budget", "direct call honors budget")
 api.llm_mod.tokens_today = lambda: 0
 
+api.llm_mod.tokens_today = lambda: 10 ** 9
+try:
+    api.api_outline(api.OutlineRequest(photo_id="cbd_001"),
+                    FakeReq(cookies={"rw_visitor": "outline-t"}), FakeResp())
+    check(False, "outline honors budget")
+except Exception as e:
+    check(getattr(e, "status_code", None) == 429, "outline honors budget")
+try:
+    api.story_refresh("st-20000101-0001", api.StoryRefreshRequest(),
+                      FakeReq(cookies={"rw_visitor": "refresh-t"},
+                              headers={"x-demo-code": "testcode"}),
+                      FakeResp())
+    check(False, "refresh honors budget")
+except Exception as e:
+    check(getattr(e, "status_code", None) == 429, "refresh honors budget")
+
+
+def _boom(sid):
+    raise RuntimeError("no engine")
+
+
+orig_engine = api.get_engine
+api.get_engine = _boom
+try:
+    out = api.chat(api.ChatRequest(session_id="rest-t", message="hi"),
+                   FakeReq(cookies={"rw_visitor": "rest-t2"}), FakeResp())
+    check(out["kind"] == "resting", "resting survives engine failure")
+finally:
+    api.get_engine = orig_engine
+api.llm_mod.tokens_today = lambda: 0
+
 api.DEMO_MODE, api.DEMO_CODE = saved_demo, saved_code
 api.llm_mod.tokens_today = orig_tokens
 

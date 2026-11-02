@@ -1084,6 +1084,7 @@ const home = {
     img.className = "rw-usertumb";
     img.alt = "";
     img.src = srcOf(row);
+    img.addEventListener("error", () => img.setAttribute("data-broken", "true"));
     userNode.insertAdjacentElement("afterbegin", img);
   },
 
@@ -1457,6 +1458,7 @@ const home = {
       const arow = (detail && detail.photo_id) ? detail : row;
       aimg.src = (arow && arow.photo_id) ? srcOf(arow) : "";
       aimg.alt = "";
+      aimg.addEventListener("error", () => aimg.setAttribute("data-broken", "true"));
       const aspan = document.createElement("span");
       aspan.textContent = "Answering about " + about;
       head.appendChild(aimg);
@@ -2292,6 +2294,14 @@ const credits = {
     if (line) line.textContent = msg;
     const empty = this.view.querySelector("#noResultsState");
     if (empty) { empty.textContent = msg; show(empty, "block"); }
+    const svg = this.view.querySelector("svg");
+    if (svg) Array.from(svg.querySelectorAll("circle")).slice(1)
+      .forEach((c) => c.setAttribute("stroke-dasharray", "0 88"));
+    const legend = this.view.querySelector("div.leading-tight");
+    if (legend) Array.from(legend.children).forEach((row) => {
+      row.childNodes.forEach((n) => { if (n.nodeType === 3) n.remove(); });
+      row.appendChild(document.createTextNode(" –"));
+    });
   },
 
   render(d) {
@@ -4363,6 +4373,7 @@ const connected = {
         const tag = document.createElement("span");
         tag.className = "absolute -bottom-2 left-1/2 -translate-x-1/2 px-1.5 rounded bg-primary-container text-surface font-label-sm text-[10px] font-bold";
         tag.textContent = ringLabel(ri, i);
+        img.addEventListener("error", () => img.setAttribute("data-broken", "true"));
         b.append(img, tag);
         if (m.owner_present === true) {
           const dot = document.createElement("span");
@@ -4404,6 +4415,7 @@ const connected = {
         img.alt = m.caption || m.photo_id;
         img.loading = "lazy";
         img.className = "rw-photo w-12 h-12 rounded-lg object-cover flex-shrink-0 bg-surface-container-high";
+        img.addEventListener("error", () => img.setAttribute("data-broken", "true"));
         const tx = document.createElement("span");
         tx.className = "flex flex-col min-w-0 flex-1";
         const c1 = document.createElement("span");
@@ -5015,6 +5027,7 @@ const library = {
       link.href = "#/photo/" + pid;
       const img = $("[data-slot=img]", node);
       img.src = m.src || "";
+      img.onerror = () => img.setAttribute("data-broken", "true");
       img.alt = m.caption || pid;
       if (m.owner_present === true) {
         const badge = document.createElement("span");
@@ -5052,6 +5065,7 @@ const library = {
       b.className = "w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 border-2 p-0";
       const img = document.createElement("img");
       img.src = (photos[pid] || {}).src || "";
+      img.addEventListener("error", () => img.setAttribute("data-broken", "true"));
       img.alt = "";
       img.loading = "lazy";
       img.className = "w-full h-full object-cover";
@@ -5083,6 +5097,7 @@ const library = {
     const m = ((this.data && this.data.photos) || {})[pid] || {};
     const img = $("#burst-main", view);
     img.src = m.src || "";
+    img.onerror = () => img.setAttribute("data-broken", "true");
     img.alt = m.caption || pid;
     const sets = (this.albumByKey("bursts") || {}).sets || [];
     const s = sets.find((x) => x.key === this.drill.key);
@@ -6063,6 +6078,7 @@ const player = {
       t.className = "w-12 h-16 rounded-lg overflow-hidden flex-shrink-0 border-2 border-transparent p-0";
       const ti = document.createElement("img");
       ti.src = c.src;
+      ti.addEventListener("error", () => ti.setAttribute("data-broken", "true"));
       ti.alt = "";
       ti.loading = "lazy";
       ti.className = "w-full h-full object-cover";
@@ -7110,6 +7126,7 @@ const builder = {
       img.alt = s.caption || s.photo_id;
       img.loading = "lazy";
       img.className = "rw-photo w-16 h-24 rounded-lg object-cover flex-shrink-0 bg-surface-container-high";
+      img.addEventListener("error", () => img.setAttribute("data-broken", "true"));
       const mid = document.createElement("div");
       mid.className = "flex flex-col gap-1 flex-1 min-w-0";
       const meta = document.createElement("span");
@@ -8238,6 +8255,7 @@ const tag = {
     $("#tg-review-bar", view).style.width = (n ? Math.round((decided / n) * 100) : 0) + "%";
     const img = $("#tg-review-img", view);
     img.src = m.src || "";
+    img.onerror = () => img.setAttribute("data-broken", "true");
     img.alt = m.caption || item.pid;
     $("#tg-review-cap", view).textContent = (m.caption || item.pid) + " · " +
       ((m.people || 0) + ((m.people || 0) === 1 ? " person" : " people"));
@@ -8369,6 +8387,7 @@ const tag = {
     pick.setAttribute("aria-label", "Select " + pid);
     const img = document.createElement("img");
     img.src = m.src || "";
+    img.addEventListener("error", () => img.setAttribute("data-broken", "true"));
     img.alt = m.caption || pid;
     img.loading = "lazy";
     img.className = "w-full h-full object-cover";

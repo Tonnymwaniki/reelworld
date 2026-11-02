@@ -266,5 +266,9 @@ for v, val in saved.items():
     if val is not None:
         os.environ[v] = val
 
+rc_only = SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(
+    content="", reasoning_content="secret chain of thought"))])
+check(llm._extract_text(rc_only) == "", "reasoning content is never an answer")
+
 print(f"test_llm.py: {total - fails}/{total} checks passed")
 sys.exit(1 if fails else 0)

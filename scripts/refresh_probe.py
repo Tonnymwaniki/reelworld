@@ -19,6 +19,8 @@ import api  # noqa: E402
 
 
 def main():
+    if len(sys.argv) < 2 or sys.argv[1].startswith("-"):
+        sys.exit("usage: refresh_probe.py <story-id> [voice]")
     sid = sys.argv[1]
     body = {}
     if len(sys.argv) > 2:
